@@ -102,13 +102,35 @@ Vivado synth 也看不到，不會誤觸。
 暴露 `final_out_valid` 這個內部 signal。如果之後改了 top 讓輸出類別可能等於
 0xf，這個判斷就要改用 public signal 的做法。
 
+## 與 Vivado 的 accuracy 差距（已驗證）
+
+**ITERS=1000 量測結果：938/1000 PASS（93.8%），耗時 19 分鐘。**
+
+LeNet-5 在 Vivado xsim / 板上應該接近 ~98%（作者 paper 數據），本流程少了
+~4-5 個百分點。這個差距**不影響 PR 開出來給組員 review**（infra 本身可
+重現、reproducibility 50% 那部分穩拿），但要後續調。
+
+可能成因（依優先順序）：
+1. **`COMBDLY` warning 的副作用** —— `Processing_Element_core.v:452` 在
+   `always @(*)` 用了 non-blocking。Verilator 當 blocking 跑（與 synth 一致），
+   但 xsim 當 NB 跑，導致兩邊收斂時序略異。
+2. **Behavioral BRAM 的 read mode** —— 我寫的是 read-first，Vivado BMG 在
+   PE Spad 那幾顆預設可能是 write-first 或 no-change。對某些 corner case
+   會吃到不同的舊/新資料。
+3. **X-propagation 差異** —— Verilator 預設把 X 當 0（嚴格），xsim 採 X-tracking
+   能容忍未初始化 corner。
+
+驗證/修正方向（給接手的人）：
+- 比對 Vivado xsim 在同樣 5 張 fail 的 pattern 是否也 fail / 是 boundary case
+- 試把 `bram_sp` 改成 write-first（dina shadow），再跑 1000 看 accuracy 變化
+- 開 trace 看 fail pattern 在哪一層 layer 出現 result 分歧
+
 ## 已知問題 / TODOs
 
-- [ ] 單張圖的 timeout 在 `sim_main.cpp` 是 `TIMEOUT_CYCLES = 50000`；如果之後
-      改設計讓推論時間拉長，記得加大。
-- [ ] 本機只驗證到檔案 scaffold 階段，完整 1000 pattern 還沒做 end-to-end 驗證
-      —— 第一個跑 `make sim ITERS=1000` 的組員麻煩把實際 wall-clock 時間更新進
-      這份 README。
+- [ ] **Accuracy 差距 ~4-5%**（見上一節）—— 主要 follow-up 工作，建議派一人
+      用 `make trace` 抓 fail pattern 的 layer-level 差異。
+- [ ] 單張圖的 timeout 在 `sim_main.cpp` 是 `TIMEOUT_CYCLES = 250000`（已驗證
+      足以跑完 LeNet 5 層）；如果之後改設計讓推論時間拉長，記得加大。
 - [ ] `ifmap_{0,4,5}.coe` 存在於 `Vivado/.../mem_init_files/`，但那是給
       `TOP_integration_rom.v`（board demo，此 build 沒包）用的替代 ifmap 變體。
       如果之後切換 sim top，可能要連帶處理它們。
@@ -122,8 +144,10 @@ Vivado synth 也看不到，不會誤觸。
 | Testbench | `test/tb/TOP_test/TOP_integration_tb.v` | `sim_main.cpp` |
 | BRAMs | Xilinx BMG IP | `bram_behavioral.v` |
 | 測試資料 | `$readmemh` 讀 `MEM/*.txt` | C++ harness 自己 parse |
-| 5 patterns | 約 7 分鐘 wall-clock | 約 1-2 分鐘（估計值） |
-| 1000 patterns | 約 25 小時 | 分鐘級（待確認） |
+| 5 patterns 純跑時間 | 約 7 分鐘 | 約 6 秒（首次含 build 約 1-2 分鐘） |
+| 1000 patterns 純跑時間 | 約 25 小時 | **19 分鐘（量測）** |
+| Accuracy | ~98%（作者 paper） | **93.8%（量測，差距見上節）** |
+| 速度比 | 1× | **~79× faster** |
 
 兩邊吃同一份 `MEM/DRAM.txt` 與 `MEM/GOLDEN.txt`。`src/` 底下的 RTL 也是共用
 一份 —— 沒有重複。
