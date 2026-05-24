@@ -47,18 +47,31 @@ docker run -it --rm -v $(pwd):/work -w /work/FPGA_design/sim/verilator \
 
 ## Build 時排除的檔案
 
-只屬於 board demo 的模組：UART RX/TX、七段顯示、`clock_gen` MMCM 計數器、
-`debouncing`、`interrupt_gen`，以及替代版的 top：`TOP_integration_uart.v` /
-`TOP_integration_rom.v`。模擬用的 top 是 `TOP_integration`（與 Vivado TB 用的同一個）。
+Makefile 的 `RTL_SRCS` 從 `find` 結果排掉以下幾類：
+
+- **Board demo 專用模組**：UART RX/TX、七段顯示、`clock_gen`（MMCM 計數器）、
+  `debouncing`、`interrupt_gen`
+- **替代版 top**：`TOP_integration_uart.v` / `TOP_integration_rom.v`（板上 demo 用）
+- **作者 dead-code stub**：`SCNN_shape_info_compiler.v`（沒被 instantiated；
+  line 123 有空的 `else if() begin`，Vivado 寬鬆放過，Verilator 拒絕）
+- **重複定義的 module**：`CSC_encoderr_FIFO.v`（內含 `module CSC_switch_FIFO`，
+  與 `CSC_switch_FIFO.v` 內容完全相同 —— 作者 copy-paste 殘留）
+
+模擬用的 top 是 `TOP_integration`（與 Vivado TB 用的同一個）。
 
 ## Behavioral BRAM / ROM 注意事項
 
 `bram_behavioral.v` 提供 Vivado Block Memory Generator IP 的 Verilog 替身：
 
-- **8 顆讀寫 BRAM** (`IP_*_BRAM`) —— 基於 generic `bram_sdp`（simple
-  dual-port）和 `bram_sp`（single-port）。讀延遲 1 cycle、輸出有暫存器，SP
-  採 read-first 模式。寬度與深度都從作者 RTL 每個 instantiation 的 port 寬度
-  反推出來。
+- **8 顆讀寫 BRAM** (`IP_*_BRAM`) —— 基於兩種 generic primitive：
+  - `bram_sp`（single port，shared addr 讀寫）—— `IP_ifmap_BRAM`、
+    `IP_Iact_DATA_Spad_BRAM`、`IP_Weight_DATA_Spad_BRAM`（PE 內 scratchpad
+    操作是分時讀寫，所以作者用 SP）
+  - `bram_sdp`（simple dual port，獨立 read/write port）—— 其餘 5 顆
+    （GLB 跟 Psum 系列，需要 producer-consumer overlap）
+
+  兩種都是讀延遲 1 cycle、輸出有暫存器；SP 採 read-first 模式。寬度與深度
+  都從作者 RTL 每個 instantiation 的 port 寬度反推出來。
 - **`ROM_sparse_weight`** —— LeNet 量化權重（33,722 × 16 bit）。Makefile 會
   把 `Vivado/.../ROM_sparse_COE.coe` 轉成 `rom_sparse_weight.mem`，模組在
   sim 開始時透過 `$readmemh` 載入。**少了這個 inference 會跑出垃圾值** ——
@@ -71,6 +84,15 @@ docker run -it --rm -v $(pwd):/work -w /work/FPGA_design/sim/verilator \
 
 整個檔案包在 `` `ifdef VERILATOR `` 內，所以即使不小心被加進 Vivado 專案，
 Vivado synth 也看不到，不會誤觸。
+
+## 為 Verilator 動到的 RTL
+
+原則上 `src/` 不動，但為了讓 Verilator 跑得起來有一處小例外：
+
+- `src/TOP/TOP.v` 跟 `src/TOP/TOP_interface.v`：把 `module TOP` 改名為
+  `module TOP_eyeriss`。原因是 Verilator 內部保留 `TOP` 作為 top-level
+  wrapper class 名，不允許 user module 使用。改名 Vivado 端不受影響
+  （Vivado 認的是 module 名字本身，兩邊改一致即可）。
 
 ## 推論完成的判斷方式
 

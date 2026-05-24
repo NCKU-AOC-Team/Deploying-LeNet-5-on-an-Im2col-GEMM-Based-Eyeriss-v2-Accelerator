@@ -131,36 +131,33 @@ module IP_Psum_Data_SRAM_BRAM (
         .clkb(clkb), .rstb(rstb), .addrb(addrb), .doutb(doutb));
 endmodule
 
-// 256 x 13b SDP (Iact data scratchpad in PE)
+// 256 x 13b SP (Iact data scratchpad in PE) — author's RTL instantiates
+// this as single-port (clka/rsta/wea/addra/dina/douta), not dual-port.
 module IP_Iact_DATA_Spad_BRAM (
     input  wire        clka,
+    input  wire        rsta,
     input  wire        wea,
     input  wire [7:0]  addra,
     input  wire [12:0] dina,
-    input  wire        clkb,
-    input  wire        rstb,
-    input  wire [7:0]  addrb,
-    output wire [12:0] doutb
+    output wire [12:0] douta
 );
-    bram_sdp #(.ADDR_W(8), .DATA_W(13)) u (
-        .clka(clka), .wea(wea), .addra(addra), .dina(dina),
-        .clkb(clkb), .rstb(rstb), .addrb(addrb), .doutb(doutb));
+    bram_sp #(.ADDR_W(8), .DATA_W(13)) u (
+        .clka(clka), .rsta(rsta), .wea(wea),
+        .addra(addra), .dina(dina), .douta(douta));
 endmodule
 
-// 128 x 12b SDP (weight data scratchpad in PE)
+// 128 x 12b SP (weight data scratchpad in PE) — single-port, see note above.
 module IP_Weight_DATA_Spad_BRAM (
     input  wire        clka,
+    input  wire        rsta,
     input  wire        wea,
     input  wire [6:0]  addra,
     input  wire [11:0] dina,
-    input  wire        clkb,
-    input  wire        rstb,
-    input  wire [6:0]  addrb,
-    output wire [11:0] doutb
+    output wire [11:0] douta
 );
-    bram_sdp #(.ADDR_W(7), .DATA_W(12)) u (
-        .clka(clka), .wea(wea), .addra(addra), .dina(dina),
-        .clkb(clkb), .rstb(rstb), .addrb(addrb), .doutb(doutb));
+    bram_sp #(.ADDR_W(7), .DATA_W(12)) u (
+        .clka(clka), .rsta(rsta), .wea(wea),
+        .addra(addra), .dina(dina), .douta(douta));
 endmodule
 
 // 32 x 21b SDP (Psum data scratchpad in PE)

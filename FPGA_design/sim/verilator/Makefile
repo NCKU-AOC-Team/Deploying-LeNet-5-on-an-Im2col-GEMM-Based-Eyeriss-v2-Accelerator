@@ -32,7 +32,8 @@ RTL_SRCS := $(shell find $(RTL_DIR) -name '*.v' \
             ! -name 'clock_gen.v' \
             ! -name 'debouncing.v' \
             ! -name 'interrupt_gen.v' \
-            ! -name 'SCNN_shape_info_compiler.v')
+            ! -name 'SCNN_shape_info_compiler.v' \
+            ! -name 'CSC_encoderr_FIFO.v')
 
 BEHAV_SRCS := bram_behavioral.v
 CPP_SRCS   := sim_main.cpp
@@ -47,7 +48,8 @@ VFLAGS := --cc --exe --build -j 0 \
           --trace \
           -Wno-WIDTH -Wno-UNOPTFLAT -Wno-CASEINCOMPLETE \
           -Wno-INITIALDLY -Wno-LATCH -Wno-UNUSED \
-          -Wno-MULTIDRIVEN -Wno-BLKANDNBLK
+          -Wno-MULTIDRIVEN -Wno-BLKANDNBLK \
+          -Wno-IMPLICIT -Wno-PINMISSING
 
 ITERS  ?= 5
 DRAM   ?= $(TEST_DIR)/DRAM.txt
