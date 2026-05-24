@@ -1,2 +1,8 @@
 sim/
+!FPGA_design/sim/
 ASIC_design/
+
+# Verilator build artifacts and generated mem from .coe
+FPGA_design/sim/verilator/obj_dir/
+FPGA_design/sim/verilator/*.vcd
+FPGA_design/sim/verilator/rom_sparse_weight.mem
