@@ -49,7 +49,8 @@ VFLAGS := --cc --exe --build -j 0 \
           -Wno-WIDTH -Wno-UNOPTFLAT -Wno-CASEINCOMPLETE \
           -Wno-INITIALDLY -Wno-LATCH -Wno-UNUSED \
           -Wno-MULTIDRIVEN -Wno-BLKANDNBLK \
-          -Wno-IMPLICIT -Wno-PINMISSING
+          -Wno-IMPLICIT -Wno-PINMISSING \
+          -Wno-WIDTHCONCAT -Wno-UNSIGNED -Wno-COMBDLY
 
 ITERS  ?= 5
 DRAM   ?= $(TEST_DIR)/DRAM.txt
