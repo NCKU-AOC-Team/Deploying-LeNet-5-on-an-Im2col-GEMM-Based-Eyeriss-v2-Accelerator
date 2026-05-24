@@ -31,7 +31,8 @@ RTL_SRCS := $(shell find $(RTL_DIR) -name '*.v' \
             ! -name 'TOP_integration_rom.v' \
             ! -name 'clock_gen.v' \
             ! -name 'debouncing.v' \
-            ! -name 'interrupt_gen.v')
+            ! -name 'interrupt_gen.v' \
+            ! -name 'SCNN_shape_info_compiler.v')
 
 BEHAV_SRCS := bram_behavioral.v
 CPP_SRCS   := sim_main.cpp
