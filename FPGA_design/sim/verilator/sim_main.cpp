@@ -114,7 +114,9 @@ int main(int argc, char** argv) {
         std::cout << "Tracing -> dump.vcd\n";
     }
 
-    constexpr int TIMEOUT_CYCLES = 50000;  // per-pattern wall (TB uses 200000 overall)
+    constexpr int TIMEOUT_CYCLES = 250000;  // per-pattern; original Vivado TB sets per-pattern
+                                             // END_CYCLE=200000 (CYCLES counter resets each iter),
+                                             // 250k gives 25% safety margin over author's choice.
     int errors = 0;
 
     for (int iter = 0; iter < iters; ++iter) {
