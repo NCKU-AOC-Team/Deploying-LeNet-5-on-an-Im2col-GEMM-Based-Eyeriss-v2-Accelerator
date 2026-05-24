@@ -1,4 +1,4 @@
-module TOP # (
+module TOP_eyeriss # (
 	parameter WEIGHT_DATA_3_END = 'd30619,
 	parameter WEIGHT_DATA_4_END = 'd39877,
 	parameter WEIGHT_DATA_5_END = 'd40762
