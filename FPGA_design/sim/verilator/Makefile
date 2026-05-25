@@ -11,13 +11,20 @@
 #   make sim                 build + run 5 patterns
 #   make sim ITERS=1000      build + run full test set
 #   make trace               build + run with VCD dump (open dump.vcd in gtkwave)
+#   make trace_public        same as trace, but builds with --public-flat-rw
 #   make build               build only
-#   make clean               nuke obj_dir + waveforms
+#   make clean               nuke obj_dir variants + waveforms
 # =============================================================================
 
 VERILATOR ?= verilator
 TOP       := TOP_integration
-BUILD_DIR := obj_dir
+
+# PUBLIC_FLAT_RW=1 enables Verilator's --public-flat-rw and uses a separate
+# build directory so the normal fast model and public-flat model do not mix.
+PUBLIC_FLAT_RW ?= 0
+PUBLIC_FLAT_RW_ON := $(filter 1 yes true on,$(PUBLIC_FLAT_RW))
+PUBLIC_FLAT_RW_FLAG := $(if $(PUBLIC_FLAT_RW_ON),--public-flat-rw,)
+BUILD_DIR := $(if $(PUBLIC_FLAT_RW_ON),obj_dir_public,obj_dir)
 
 RTL_DIR  := ../../src
 TEST_DIR := ../../test/tb/TOP_test/MEM
@@ -45,7 +52,9 @@ MEM_FILE := rom_sparse_weight.mem
 
 VFLAGS := --cc --exe --build -j 0 \
           --top-module $(TOP) \
+          --Mdir $(BUILD_DIR) \
           --trace \
+          $(PUBLIC_FLAT_RW_FLAG) \
           -Wno-WIDTH -Wno-UNOPTFLAT -Wno-CASEINCOMPLETE \
           -Wno-INITIALDLY -Wno-LATCH -Wno-UNUSED \
           -Wno-MULTIDRIVEN -Wno-BLKANDNBLK \
@@ -56,17 +65,21 @@ ITERS  ?= 5
 DRAM   ?= $(TEST_DIR)/DRAM.txt
 GOLDEN ?= $(TEST_DIR)/GOLDEN.txt
 
-.PHONY: all build sim trace clean help
+.PHONY: all build build_public sim sim_public trace trace_public clean help
 
 all: sim
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN{FS=":.*## "};{printf "  %-12s %s\n", $$1, $$2}'
 
-build: $(BUILD_DIR)/V$(TOP) ## Build only (verilator + g++)
+build: $(BUILD_DIR)/V$(TOP) ## Build only (normal fast mode by default)
 
-$(BUILD_DIR)/V$(TOP): $(RTL_SRCS) $(BEHAV_SRCS) $(CPP_SRCS) $(MEM_FILE)
+build_public: ## Build with --public-flat-rw enabled
+	$(MAKE) build PUBLIC_FLAT_RW=1
+
+$(BUILD_DIR)/V$(TOP): $(RTL_SRCS) $(BEHAV_SRCS) $(CPP_SRCS) $(MEM_FILE) Makefile
 	@echo "[verilator] $(words $(RTL_SRCS)) RTL files + $(words $(BEHAV_SRCS)) behavioral + $(words $(CPP_SRCS)) C++"
+	@echo "[mode] PUBLIC_FLAT_RW=$(PUBLIC_FLAT_RW) BUILD_DIR=$(BUILD_DIR)"
 	$(VERILATOR) $(VFLAGS) $(RTL_SRCS) $(BEHAV_SRCS) $(CPP_SRCS)
 
 # Strip COE header (lines 1-2) and trailing commas/semicolons, leaving one hex
@@ -79,9 +92,15 @@ $(MEM_FILE): $(COE_FILE)
 sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
 	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN)
 
+sim_public: ## Run sim with --public-flat-rw enabled
+	$(MAKE) sim PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN)
+
 trace: build ## Same as sim but dumps dump.vcd
 	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) --trace
 	@echo "Waveform: $(CURDIR)/dump.vcd"
 
-clean: ## Remove obj_dir/, *.vcd, generated .mem
-	rm -rf $(BUILD_DIR) *.vcd $(MEM_FILE)
+trace_public: ## Same as trace, but builds with --public-flat-rw enabled
+	$(MAKE) trace PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN)
+
+clean: ## Remove obj_dir variants, *.vcd, generated .mem
+	rm -rf obj_dir obj_dir_public *.vcd $(MEM_FILE)

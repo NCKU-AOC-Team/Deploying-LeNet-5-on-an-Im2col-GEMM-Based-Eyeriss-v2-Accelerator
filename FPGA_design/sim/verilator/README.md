@@ -11,9 +11,10 @@ Docker（Ubuntu 24.04 + Verilator 5.030）。
 
 ```bash
 cd FPGA_design/sim/verilator
-make sim                   # build + 跑 5 張 MNIST 圖（約 1-2 分鐘）
-make sim ITERS=100         # 跑 100 張
-make trace ITERS=2         # 跑 2 張並 dump 波形 (dump.vcd)
+make sim                   # normal fast mode: build + 跑 5 張 MNIST 圖
+make sim ITERS=100         # normal fast mode: 跑 100 張
+make trace ITERS=1         # normal fast mode: 跑 1 張並產生 dump.vcd
+make trace_public ITERS=1  # public-flat mode: 加 --public-flat-rw 後產生 dump.vcd
 make clean
 ```
 
@@ -24,6 +25,35 @@ Iter 1: result=2 golden=2 (xxxx cycles) OK
 ...
 === Summary: 5/5 passed (100%) ===
 ```
+
+## 波形檔操作指南
+
+本流程使用 Verilator 的 VCD tracing。執行 `make trace` 或 `make trace_public`
+後，波形檔會輸出在目前資料夾：
+
+```text
+FPGA_design/sim/verilator/dump.vcd
+```
+
+建議先用 `ITERS=1` 產生單張圖的波形，檔案比較小，也比較容易 debug：
+
+```bash
+make clean
+make trace ITERS=1
+```
+
+### normal mode 與 public-flat mode
+
+Makefile 提供兩種 Verilator build mode：
+
+| 目標 | Build directory | Verilator flag | 使用時機 |
+|---|---|---|---|
+| `make trace` | `obj_dir` | `--trace` | 一般看波形，速度較快 |
+| `make trace_public` | `obj_dir_public` | `--trace --public-flat-rw` | 需要在 C++ harness 直接讀寫 flattened internal signal 時 |
+
+`--public-flat-rw` 是讓 Verilator 產生的 C++ model 可以公開讀寫內部訊號。
+它通常會讓 build 或 simulation 變慢，只有要在 `sim_main.cpp` 裡直接觀察或
+強制修改 internal signal 時才需要。
 
 ## 在助教 Docker 環境跑
 
@@ -39,7 +69,7 @@ docker run -it --rm -v $(pwd):/work -w /work/FPGA_design/sim/verilator \
 
 | 檔案 | 用途 |
 |---|---|
-| `Makefile` | build + 執行驅動程式；自動掃描 `../../src/` 底下的 RTL |
+| `Makefile` | build + 執行驅動程式；自動掃描 `../../src/` 底下的 RTL，並提供 normal / public-flat 兩種 trace mode |
 | `sim_main.cpp` | C++ harness：clock 產生、reset、餵 ifmap、檢查結果 |
 | `bram_behavioral.v` | 8 顆 Xilinx BMG IP + `ROM_sparse_weight` 的行為級替代品 |
 | `rom_sparse_weight.mem` | build 時由 `ROM_sparse_COE.coe` 自動轉換（LeNet 權重） |
@@ -98,9 +128,10 @@ Vivado synth 也看不到，不會誤觸。
 
 `TOP_integration` 在 reset 時把 `result <= 4'hf`，等 `final_out_valid` pulse
 時才把 `result` latch 成 `final_out`（0–9，MNIST 類別索引）。Harness 用
-「`result != 0xf`」當作推論完成的訊號，避免要動到 `--public-flat-rw` 去
-暴露 `final_out_valid` 這個內部 signal。如果之後改了 top 讓輸出類別可能等於
-0xf，這個判斷就要改用 public signal 的做法。
+「`result != 0xf`」當作推論完成的訊號，因此 normal mode 不需要直接讀
+`final_out_valid` 這個內部 signal。如果之後改了 top 讓輸出類別可能等於 0xf，
+可以改用 `make build_public` / `make trace_public` 產生 public-flat model，
+再從 C++ harness 讀取對應的 internal signal。
 
 ## 與 Vivado 的 accuracy 差距（已驗證）
 
@@ -134,8 +165,9 @@ LeNet-5 在 Vivado xsim / 板上應該接近 ~98%（作者 paper 數據），本
 - [ ] `ifmap_{0,4,5}.coe` 存在於 `Vivado/.../mem_init_files/`，但那是給
       `TOP_integration_rom.v`（board demo，此 build 沒包）用的替代 ifmap 變體。
       如果之後切換 sim top，可能要連帶處理它們。
-- [ ] `dump.vcd` 目前只 trace top-level port，沒有 trace 內部 signal。如果需要
-      看內部，把 `--public-flat-rw` 加進 Makefile 的 VFLAGS。
+- [x] Makefile 已提供 `trace` 與 `trace_public` 兩種波形流程。一般看波形用
+      `make trace ITERS=1`；需要 C++ harness 直接讀寫 internal signal 時再用
+      `make trace_public ITERS=1`。
 
 ## 跟 Vivado 流程的關係
 
