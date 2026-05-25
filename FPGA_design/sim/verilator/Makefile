@@ -46,6 +46,7 @@ MEM_FILE := rom_sparse_weight.mem
 VFLAGS := --cc --exe --build -j 0 \
           --top-module $(TOP) \
           --trace \
+          --public-flat-rw \
           -Wno-WIDTH -Wno-UNOPTFLAT -Wno-CASEINCOMPLETE \
           -Wno-INITIALDLY -Wno-LATCH -Wno-UNUSED \
           -Wno-MULTIDRIVEN -Wno-BLKANDNBLK \
