@@ -217,58 +217,48 @@ def report_pe(cycles, pe_hist):
 
 
 def report_ctrl(cycles, ctrl_hist):
-    print("\n=== Q2: per-layer / per-phase cycles (TOP_controller) ===")
-    print("counted cycles: %d" % cycles)
+    """Per-layer breakdown: one block per layer, each state listed (cycles
+    high->low) with %-of-layer and a bar, plus a phase summary line."""
+    print("\n=== Q2: per-layer cycle breakdown (TOP_controller) ===")
+    print("total counted cycles: %d\n" % cycles)
     layers = sorted({k[0] for k in ctrl_hist}, key=lambda x: (x is None, x))
     states_seen = {k[1] for k in ctrl_hist}
-    cols = [s for s in CTRL_ORDER if s in states_seen]
-    cols += sorted(s for s in states_seen if s not in CTRL_ORDER and s is not None)
-    if None in states_seen:
-        cols.append(None)
+    first_layer = layers[0] if layers else None
+    BARW = 30  # bar width = 100%
 
     def sname(s):
         return "x" if s is None else CTRL_STATES.get(s, "S%d" % s)
 
-    hdr = "%-7s" % "layer" + "".join("%13s" % sname(s) for s in cols) + "%11s" % "TOTAL"
-    print("\n" + hdr)
-    coltot = defaultdict(int)
-    grand = 0
-    for ly in layers:
-        rt = sum(v for k, v in ctrl_hist.items() if k[0] == ly)
-        grand += rt
-        cells = ""
-        for s in cols:
-            v = ctrl_hist.get((ly, s), 0)
-            coltot[s] += v
-            cells += "%13d" % v
-        print("%-7s%s%11d" % ("x" if ly is None else ly, cells, rt))
-    print("-" * len(hdr))
-    print("%-7s" % "TOTAL" + "".join("%13d" % coltot[s] for s in cols) + "%11d" % grand)
+    def bar(p):
+        return "#" * int(round(p / 100.0 * BARW))
 
-    # compute vs load split (per layer + global)
-    print("\nper-layer split (compute = CAL+PSUM_ACC, load = IFMAP+GLB+PE):")
-    print("%-7s%11s%11s%11s%9s%9s%9s" %
-          ("layer", "total", "compute", "load", "output", "pool", "other"))
     gb = defaultdict(int)
     for ly in layers:
+        rows = [(s, ctrl_hist.get((ly, s), 0)) for s in states_seen]
+        rows = sorted([(s, v) for s, v in rows if v > 0], key=lambda x: -x[1])
+        ltot = sum(v for _, v in rows)
+        print("--- Layer %s : %d cycles (%.1f%% of run) ---"
+              % ("x" if ly is None else ly, ltot, pct(ltot, cycles)))
         b = defaultdict(int)
-        for s in states_seen:
-            b[CTRL_BUCKET.get(s, "other")] += ctrl_hist.get((ly, s), 0)
-        t = sum(b.values())
+        for s, v in rows:
+            p = pct(v, ltot)
+            note = "  <- startup (reset+image load)" if (s == 0 and ly == first_layer) else ""
+            print("  %-14s %9d  %5.1f%%  |%-*s|%s" % (sname(s), v, p, BARW, bar(p), note))
+            b[CTRL_BUCKET.get(s, "other")] += v
         for k, v in b.items():
             gb[k] += v
-        print("%-7s%11d%11d%11d%9d%9d%9d" %
-              ("x" if ly is None else ly, t, b["compute"], b["load"],
-               b["output"], b["pool"], b["other"]))
+        print("  phase:  compute %.1f%%   load %.1f%%   output %.1f%%   pool %.1f%%   other %.1f%%\n"
+              % (pct(b["compute"], ltot), pct(b["load"], ltot), pct(b["output"], ltot),
+                 pct(b["pool"], ltot), pct(b["other"], ltot)))
+
     gt = sum(gb.values())
-    print("-" * 67)
-    print("%-7s%11d%11d%11d%9d%9d%9d" %
-          ("ALL", gt, gb["compute"], gb["load"], gb["output"], gb["pool"], gb["other"]))
-    print("\n  >> global compute=%.1f%%  load=%.1f%%  output=%.1f%%  pool=%.1f%%  other=%.1f%%"
-          % (pct(gb["compute"], gt), pct(gb["load"], gt), pct(gb["output"], gt),
-             pct(gb["pool"], gt), pct(gb["other"], gt)))
-    print("  (note: 'IDLE in layer 0' ~= reset/image-load startup; exclude from"
-          " efficiency ratios — see Q3.)")
+    print("=== Global phase split (compute=CAL+PSUM_ACC, load=IFMAP+GLB+PE) ===")
+    for k in ("compute", "load", "output", "pool", "other"):
+        v = gb.get(k, 0)
+        p = pct(v, gt)
+        print("  %-8s %9d  %5.1f%%  |%-*s|" % (k, v, p, BARW, bar(p)))
+    print("\n  (note: IDLE in the first layer ~= reset/image-load startup;"
+          " exclude from efficiency ratios.)")
 
 
 def main():
