@@ -37,6 +37,10 @@ PE_BUCKET = {0: "idle",
              1: "fetch", 2: "fetch", 3: "fetch", 4: "fetch", 5: "fetch",
              6: "compute", 7: "writeback"}
 
+# Per-PE controller FSM (Processing_Element_Controller.PE_state, 2-bit)
+PE_CTRL_STATES = {0: "IDLE", 1: "LOAD", 2: "CAL"}
+PE_CTRL_ORDER = [0, 1, 2]
+
 CTRL_STATES = {0: "IDLE", 1: "LOAD_IFMAP", 2: "LOAD_GLB", 3: "LOAD_PE",
                4: "CAL", 5: "PSUM_ACC", 6: "READ_OUT_PSUM", 7: "POOLING",
                8: "LAYER_DONE", 63: "DONE"}
@@ -52,7 +56,7 @@ def parse_header(f):
     """Read $var declarations (tracking $scope nesting) up to $enddefinitions.
     Returns the vcd-id of each signal we care about, plus a discovery report."""
     scope = []
-    pe_ids = {}                 # label (pe00..) -> vcd id
+    pe_cands = defaultdict(list)  # label -> [(vid, low_path)]  (core + controller)
     layer_count_cands = []      # (vid, scope_tuple, fullpath)
     state_cands = []            # (vid, width, scope_tuple, fullpath)
     clock_cands = []            # (vid, depth, fullpath)
@@ -75,7 +79,7 @@ def parse_header(f):
             if name == "PE_state":
                 m = PE_RE.search(low)
                 label = "pe%s%s" % (m.group(1), m.group(2)) if m else full
-                pe_ids.setdefault(label, vid)
+                pe_cands[label].append((vid, low))
             elif name == "layer_count":
                 layer_count_cands.append((vid, tuple(scope), full))
             elif name == "state":
@@ -119,30 +123,48 @@ def parse_header(f):
         clock, clk_path = vid, full
         break
 
+    # Each ProcessingElement has TWO regs named PE_state: the datapath core
+    # (3-bit, 8 states incl DO_MAC) and the controller (2-bit IDLE/LOAD/CAL).
+    # Use the core for Q1 (real MAC detail); keep the controller for Q1b.
+    pe_core, pe_ctrl = {}, {}
+    for label, cands in pe_cands.items():
+        core = next((vid for vid, low in cands if "core" in low), None)
+        ctrl = next((vid for vid, low in cands if "controller" in low), None)
+        if core is None and ctrl is None and cands:
+            core = cands[0][0]  # fallback: whatever exists
+        if core is not None:
+            pe_core[label] = core
+        if ctrl is not None:
+            pe_ctrl[label] = ctrl
+
     report = {
         "clock": clk_path, "layer_count": lc_path, "ctrl_state": ctrl_path,
-        "pe_labels": sorted(pe_ids.keys()),
+        "pe_core": sorted(pe_core.keys()),
+        "pe_ctrl": sorted(pe_ctrl.keys()),
     }
-    return pe_ids, ctrl_state, layer_count, clock, report
+    return pe_core, pe_ctrl, ctrl_state, layer_count, clock, report
 
 
-def scan_values(f, pe_ids, ctrl_state, layer_count, clock):
+def scan_values(f, pe_core, pe_ctrl, ctrl_state, layer_count, clock):
     """Stream the value-change section, counting one sample per clock rising
-    edge. Returns (cycles, pe_hist, ctrl_hist)."""
-    tracked = set(pe_ids.values())
+    edge. Returns (cycles, pe_hist, pe_ctrl_hist, ctrl_hist)."""
+    tracked = set(pe_core.values()) | set(pe_ctrl.values())
     tracked.update(v for v in (ctrl_state, layer_count, clock) if v)
 
     cur = {}                                   # vid -> int value (None == x/z)
-    pe_hist = defaultdict(lambda: defaultdict(int))   # label -> state -> count
-    ctrl_hist = defaultdict(int)                      # (layer, state) -> count
+    pe_hist = defaultdict(lambda: defaultdict(int))       # core: label->state->cnt
+    pe_ctrl_hist = defaultdict(lambda: defaultdict(int))  # controller: label->cnt
+    ctrl_hist = defaultdict(int)                          # (layer, state) -> count
     cycles = 0
     clk_prev = 0
 
     def sample():
         nonlocal cycles
         cycles += 1
-        for label, vid in pe_ids.items():
+        for label, vid in pe_core.items():
             pe_hist[label][cur.get(vid)] += 1
+        for label, vid in pe_ctrl.items():
+            pe_ctrl_hist[label][cur.get(vid)] += 1
         ctrl_hist[(cur.get(layer_count), cur.get(ctrl_state))] += 1
 
     def edge_check():
@@ -173,7 +195,7 @@ def scan_values(f, pe_ids, ctrl_state, layer_count, clock):
                     cur[parts[1]] = None
         # ignore real (r...), $dumpvars/$end markers, comments
     edge_check()                         # close the final timestamp
-    return cycles, pe_hist, ctrl_hist
+    return cycles, pe_hist, pe_ctrl_hist, ctrl_hist
 
 
 def pct(n, d):
@@ -181,7 +203,7 @@ def pct(n, d):
 
 
 def report_pe(cycles, pe_hist):
-    print("\n=== Q1: PE activity (per clock cycle, %d PEs) ===" % len(pe_hist))
+    print("\n=== Q1: PE datapath activity — core FSM (per cycle, %d PEs) ===" % len(pe_hist))
     hdr = "%-6s" % "PE" + "".join("%12s" % PE_STATES[s] for s in PE_ORDER)
     hdr += "%9s%9s" % ("active%", "DO_MAC%")
     print(hdr)
@@ -214,6 +236,25 @@ def report_pe(cycles, pe_hist):
           % pct(agg.get(6, 0), tot))
     print("  >> PE active ratio (non-idle)                      = %.1f%%"
           % pct(tot - agg.get(0, 0), tot))
+
+
+def report_pe_ctrl(cycles, hist):
+    """Coarse PE phase from the per-PE controller FSM (IDLE/LOAD/CAL). LOAD
+    separates 'spad being loaded' from genuine idle, which the core FSM's
+    single IDLE state lumps together."""
+    print("\n=== Q1b: PE controller phase (per cycle, %d PEs) ===" % len(hist))
+    agg = defaultdict(int)
+    for label in hist:
+        for s, n in hist[label].items():
+            agg[s] += n
+    tot = sum(agg.values())
+    for s in PE_CTRL_ORDER:
+        v = agg.get(s, 0)
+        print("  %-6s %11d  (%5.1f%%)" % (PE_CTRL_STATES.get(s, "S%s" % s), v, pct(v, tot)))
+    other = tot - sum(agg.get(s, 0) for s in PE_CTRL_ORDER)
+    if other:
+        print("  %-6s %11d  (%5.1f%%)" % ("other", other, pct(other, tot)))
+    print("  >> PE busy (LOAD+CAL) = %.1f%%" % pct(tot - agg.get(0, 0), tot))
 
 
 def report_ctrl(cycles, ctrl_hist):
@@ -270,32 +311,36 @@ def main():
                  % (path, e))
 
     with f:
-        pe_ids, ctrl_state, layer_count, clock, rep = parse_header(f)
+        pe_core, pe_ctrl, ctrl_state, layer_count, clock, rep = parse_header(f)
 
         print("=== Signal discovery (sanity-check these) ===")
-        print("  clock       : %s" % rep["clock"])
-        print("  layer_count : %s" % rep["layer_count"])
-        print("  ctrl state  : %s" % rep["ctrl_state"])
-        print("  PE_state x%-2d : %s" % (len(rep["pe_labels"]),
-                                         ", ".join(rep["pe_labels"]) or "(none!)"))
+        print("  clock         : %s" % rep["clock"])
+        print("  layer_count   : %s" % rep["layer_count"])
+        print("  ctrl state    : %s" % rep["ctrl_state"])
+        print("  PE core    x%-2d: %s" % (len(rep["pe_core"]),
+                                          ", ".join(rep["pe_core"]) or "(none!)"))
+        print("  PE ctrl    x%-2d: %s" % (len(rep["pe_ctrl"]),
+                                          ", ".join(rep["pe_ctrl"]) or "(none)"))
         problems = []
         if not clock:
             problems.append("no clock signal found")
-        if len(rep["pe_labels"]) != 9:
-            problems.append("expected 9 PEs, found %d" % len(rep["pe_labels"]))
+        if len(rep["pe_core"]) != 9:
+            problems.append("expected 9 PE cores, found %d" % len(rep["pe_core"]))
         if not ctrl_state:
             problems.append("controller 'state' not found")
         if not layer_count:
             problems.append("'layer_count' not found")
         if problems:
             print("\n  !! WARNING: " + "; ".join(problems))
-            print("     (Q1/Q2 below may be partial — tell me and I'll adjust matching.)")
+            print("     (results below may be partial — tell me and I'll adjust matching.)")
 
-        cycles, pe_hist, ctrl_hist = scan_values(
-            f, pe_ids, ctrl_state, layer_count, clock)
+        cycles, pe_hist, pe_ctrl_hist, ctrl_hist = scan_values(
+            f, pe_core, pe_ctrl, ctrl_state, layer_count, clock)
 
     if pe_hist:
         report_pe(cycles, pe_hist)
+    if pe_ctrl_hist:
+        report_pe_ctrl(cycles, pe_ctrl_hist)
     if ctrl_hist:
         report_ctrl(cycles, ctrl_hist)
 
