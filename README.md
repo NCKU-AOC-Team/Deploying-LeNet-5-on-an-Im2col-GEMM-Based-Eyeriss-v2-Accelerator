@@ -44,7 +44,42 @@ Deep Neural Networks (DNN) have proven their exceptional performance in various 
 - **Systolic Array Design in NoC:** Introduced a systolic array at the network level, solving traditional design issues with combinational loops, ensuring high efficiency and stability in data transmission.
 
 ## System Hierarchy Diagram
-                                            
+
+The control spine is `TOP_controller.v`, a per-layer FSM hard-coded for LeNet-5
+(see [`docs/top_controller_fsm.md`](docs/top_controller_fsm.md) for the per-state
+walkthrough). It orchestrates the compute fabric (`Cluster_Group`, a 2×2 array on
+FPGA) plus the data-prep and post-processing paths around it.
+
+```
+TOP_integration_{uart,rom}.v        board / sim shell: UART image-in, weight ROM, seg7 display
+        │
+   TOP_interface.v  +  ROM_sparse_weight         external pins + compressed weight ROM
+        │
+   ┌────┴──────────────────────────────────────────────┐
+ TOP.v                       TOP_controller.v           ← brain: LeNet-5 per-layer FSM
+ datapath skeleton           IDLE→LOAD_IFMAP→LOAD_GLB→LOAD_PE→
+ (wires the blocks)          CAL→PSUM_ACC→READ_OUT→POOL→DONE
+        │
+   ┌────┼─────────────────────┬──────────────────────────┐
+ Cluster_Group              data prep                   post-process
+ = compute fabric (2×2)     im2col_converter            Quantizer / ReLU,Softmax
+   ├ PE_Cluster (3×3 PEs)    CSC_encoder (sparse)        Max_pooling
+   │   └ Processing_Element_core  (PE_state MAC FSM)     Psum_rearrange / Psum_SRAM_out_acc
+   ├ GLB_Cluster (iact/psum SRAM banks + LUT RFs)
+   └ Router_Cluster (HM-NoC: iact / weight / psum routers)
+```
+
+| Block | Module(s) | Role |
+|-------|-----------|------|
+| Brain | `TOP/TOP_controller.v` | LeNet-5 per-layer scheduling FSM |
+| Datapath top | `TOP/TOP.v`, `TOP/TOP_interface.v` | wires controller ↔ fabric ↔ I/O |
+| Compute fabric | `Cluster_Group/*` | 2×2 cluster array (PE + GLB + Router clusters) |
+| PE | `PE_Cluster/PE/Processing_Element_core.v` + `SPad/*` | per-PE MAC datapath + scratchpads |
+| On-chip memory | `GLB_Cluster/*` | iact / psum SRAM banks, CSC address LUTs |
+| NoC | `Router_Cluster/*` | iact / weight / psum routers |
+| Data prep | `im2col_converter/*`, `CSC_encoder/*` | im2col reshape + CSC sparse compression |
+| Post-process | `Quantizer/*`, `Activation/*`, `Pooling/*` | requantize, ReLU/Softmax, max-pool |
+| I/O | `UART/*`, `display/*`, `IO_processing/*` | UART image transfer, seg7 result, clocking |
 
 
 ## Implementation
