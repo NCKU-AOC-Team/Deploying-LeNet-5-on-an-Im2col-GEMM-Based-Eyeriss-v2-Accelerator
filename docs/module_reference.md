@@ -18,7 +18,7 @@ TOP_integration_{uart,rom}  →  TOP_interface  →  TOP_eyeriss (TOP.v)
                                                    │           ├ PE_Cluster → 9× ProcessingElement + PE_Cluster_controller + PE_Cluster_Connection
                                                    │           │     └ ProcessingElement → Processing_Element_core + _Controller + FIFO×6
                                                    │           │           └ core → Former/Later {addr,data} Spad + Psum_Spad
-                                                   │           ├ GLB_Cluster → 9× Iact_SRAM_Bank(→addr/data SRAM) + 4× Psum_SRAM_Bank
+                                                   │           ├ GLB_Cluster → 9× Iact_SRAM_Bank(→addr/data SRAM) + 3× Psum_SRAM_Bank
                                                    │           └ Router_Cluster → 9× Iact_Router + Weight_Router + Psum_Router
                                                    ├─ im2col_converter
                                                    ├─ CSC_Encoder ×2  (→ CSC_switch_FIFO)
@@ -66,7 +66,7 @@ TOP_integration_{uart,rom}  →  TOP_interface  →  TOP_eyeriss (TOP.v)
 
 | 模組 | 職責 | 上游 | 下游 | 工作包 |
 |---|---|---|---|---|
-| `GLB_Cluster` | GLB 外殼：9 個 iact bank + 4 個 psum bank | `ClusterGroup` | `Iact_SRAM_Bank`×9、`Psum_SRAM_Bank`×4 | A |
+| `GLB_Cluster` | GLB 外殼：9 個 iact bank + 3 個 psum bank | `ClusterGroup` | `Iact_SRAM_Bank`×9、`Psum_SRAM_Bank`×3 | A |
 | `Iact_SRAM_Bank` | 一組 iact bank：CSC 壓縮資料分址址表+資料兩塊 SRAM | `GLB_Cluster` | `iact_addr_SRAM`、`iact_data_SRAM` | A |
 | `iact_addr_SRAM` | 存 CSC 位址(LUT，記每組起訖位址) | `Iact_SRAM_Bank` | — | A |
 | `iact_data_SRAM` | 存 CSC 壓縮後的 iact 資料 | `Iact_SRAM_Bank` | — | A |
