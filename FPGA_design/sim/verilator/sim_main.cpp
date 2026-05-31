@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
 
     int iters = 5;
     std::string dram_path = "../../test/tb/TOP_test/MEM/Test/DRAM.txt";
-    std::string golden_path = "../../test/tb/TOP_test/MEM/Test/GOLDEN_INT8.txt";
+    std::string golden_path = "../../test/tb/TOP_test/MEM/Test/GOLDEN_INT4.txt";
     bool trace = false;
 
     for (int i = 1; i < argc; ++i) {
