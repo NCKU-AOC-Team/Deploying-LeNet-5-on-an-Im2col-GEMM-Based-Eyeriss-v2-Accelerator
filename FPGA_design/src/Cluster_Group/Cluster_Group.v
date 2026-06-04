@@ -640,10 +640,6 @@ wire [6:0]        GLBCluster_iact_address_in [0:2][0:2];
 wire              GLBCluster_iact_data_in_ready [0:2][0:2];
 wire              GLBCluster_iact_data_in_valid [0:2][0:2];
 wire [11:0]       GLBCluster_iact_data_in [0:2][0:2];
-wire              GLBCluster_iact_address_out_valid [0:2][0:2];
-wire [6:0]        GLBCluster_iact_address_out [0:2][0:2];
-wire              GLBCluster_iact_data_out_valid [0:2][0:2];
-wire [11:0]       GLBCluster_iact_data_out [0:2][0:2];
 wire              GLBCluster_iact_write_en [0:2][0:2];
 wire              GLBCluster_iact_write_done [0:2][0:2];
 wire              GLBCluster_iact_read_en [0:2][0:2];
@@ -866,11 +862,11 @@ GLB_Cluster GLB_Cluster_inst (
 	.iact_SRAM_Bank_data_in_valid(GLBCluster_iact_data_in_valid),
 	.iact_SRAM_Bank_data_in(GLBCluster_iact_data_in),
 	.iact_SRAM_Bank_address_out_ready(iact_GLB_address_in_ready),
-	.iact_SRAM_Bank_address_out_valid(GLBCluster_iact_address_out_valid),
-	.iact_SRAM_Bank_address_out(GLBCluster_iact_address_out),
+	.iact_SRAM_Bank_address_out_valid(iact_GLB_address_in_valid),
+	.iact_SRAM_Bank_address_out(iact_GLB_address_in_bits),
 	.iact_SRAM_Bank_data_out_ready(iact_GLB_data_in_ready),
-	.iact_SRAM_Bank_data_out_valid(GLBCluster_iact_data_out_valid),
-	.iact_SRAM_Bank_data_out(GLBCluster_iact_data_out),
+	.iact_SRAM_Bank_data_out_valid(iact_GLB_data_in_valid),
+	.iact_SRAM_Bank_data_out(iact_GLB_data_in_bits),
 	.iact_SRAM_Bank_write_en(GLBCluster_iact_write_en),
 	.iact_SRAM_Bank_write_done(GLBCluster_iact_write_done),
 	.iact_SRAM_Bank_read_en(GLBCluster_iact_read_en),
@@ -1623,24 +1619,6 @@ assign iact_horiz_data_out_ready[2][1] 		= router_iact_2_1_horiz_data_out_ready;
 assign iact_horiz_data_out_ready[2][2] 		= router_iact_2_2_horiz_data_out_ready;
 
 // iact_valid
-assign iact_GLB_address_in_valid[0][0]   		= GLBCluster_iact_address_out_valid[0][0]; 
-assign iact_GLB_address_in_valid[0][1] 		= GLBCluster_iact_address_out_valid[0][1];
-assign iact_GLB_address_in_valid[0][2] 		= GLBCluster_iact_address_out_valid[0][2]; 
-assign iact_GLB_data_in_valid[0][0]   		= GLBCluster_iact_data_out_valid[0][0]; 	
-assign iact_GLB_data_in_valid[0][1] 			= GLBCluster_iact_data_out_valid[0][1]; 
-assign iact_GLB_data_in_valid[0][2]   		= GLBCluster_iact_data_out_valid[0][2]; 
-assign iact_GLB_address_in_valid[1][0]   		= GLBCluster_iact_address_out_valid[1][0]; 
-assign iact_GLB_address_in_valid[1][1] 		= GLBCluster_iact_address_out_valid[1][1];
-assign iact_GLB_address_in_valid[1][2] 		= GLBCluster_iact_address_out_valid[1][2]; 
-assign iact_GLB_data_in_valid[1][0]   		= GLBCluster_iact_data_out_valid[1][0]; 	
-assign iact_GLB_data_in_valid[1][1] 			= GLBCluster_iact_data_out_valid[1][1]; 
-assign iact_GLB_data_in_valid[1][2]   		= GLBCluster_iact_data_out_valid[1][2]; 
-assign iact_GLB_address_in_valid[2][0]   		= GLBCluster_iact_address_out_valid[2][0]; 
-assign iact_GLB_address_in_valid[2][1] 		= GLBCluster_iact_address_out_valid[2][1];
-assign iact_GLB_address_in_valid[2][2] 		= GLBCluster_iact_address_out_valid[2][2]; 
-assign iact_GLB_data_in_valid[2][0]   		= GLBCluster_iact_data_out_valid[2][0]; 	
-assign iact_GLB_data_in_valid[2][1] 			= GLBCluster_iact_data_out_valid[2][1]; 
-assign iact_GLB_data_in_valid[2][2]   		= GLBCluster_iact_data_out_valid[2][2]; 
 	
 assign iact_north_address_in_valid[0][0] 		= router_iact_0_0_north_address_in_valid; 
 assign iact_north_address_in_valid[0][1] 		= router_iact_0_1_north_address_in_valid; 
@@ -1698,24 +1676,6 @@ assign iact_horiz_data_in_valid[2][1] 		= router_iact_2_1_horiz_data_in_valid;
 assign iact_horiz_data_in_valid[2][2] 		= router_iact_2_2_horiz_data_in_valid;
 	
 // iact_data	
-assign iact_GLB_address_in_bits[0][0]   		= GLBCluster_iact_address_out[0][0]; 
-assign iact_GLB_address_in_bits[0][1] 		= GLBCluster_iact_address_out[0][1]; 	
-assign iact_GLB_address_in_bits[0][2] 		= GLBCluster_iact_address_out[0][2]; 
-assign iact_GLB_data_in_bits[0][0] 	 		= GLBCluster_iact_data_out[0][0]; 
-assign iact_GLB_data_in_bits[0][1] 	 		= GLBCluster_iact_data_out[0][1]; 
-assign iact_GLB_data_in_bits[0][2] 	 		= GLBCluster_iact_data_out[0][2]; 
-assign iact_GLB_address_in_bits[1][0]   		= GLBCluster_iact_address_out[1][0]; 
-assign iact_GLB_address_in_bits[1][1] 		= GLBCluster_iact_address_out[1][1]; 	
-assign iact_GLB_address_in_bits[1][2] 		= GLBCluster_iact_address_out[1][2]; 
-assign iact_GLB_data_in_bits[1][0] 	 		= GLBCluster_iact_data_out[1][0]; 
-assign iact_GLB_data_in_bits[1][1] 	 		= GLBCluster_iact_data_out[1][1]; 
-assign iact_GLB_data_in_bits[1][2] 	 		= GLBCluster_iact_data_out[1][2]; 
-assign iact_GLB_address_in_bits[2][0]   		= GLBCluster_iact_address_out[2][0]; 
-assign iact_GLB_address_in_bits[2][1] 		= GLBCluster_iact_address_out[2][1]; 	
-assign iact_GLB_address_in_bits[2][2] 		= GLBCluster_iact_address_out[2][2]; 
-assign iact_GLB_data_in_bits[2][0] 	 		= GLBCluster_iact_data_out[2][0]; 
-assign iact_GLB_data_in_bits[2][1] 	 		= GLBCluster_iact_data_out[2][1]; 
-assign iact_GLB_data_in_bits[2][2] 	 		= GLBCluster_iact_data_out[2][2]; 
 	
 assign iact_north_address_in_bits[0][0] 		= router_iact_0_0_north_address_in; 
 assign iact_north_address_in_bits[0][1] 		= router_iact_0_1_north_address_in; 
