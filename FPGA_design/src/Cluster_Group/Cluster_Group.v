@@ -606,26 +606,12 @@ module ClusterGroup (
 // ====================================================================	//
 // 						 		Wires  									//
 // ====================================================================	//
-// PE Cluster connection
-wire                 PECluster_clock;
-wire                 PECluster_reset;
-// iact (per-row [0:2]) : addr[7:0] / data[12:0]
+// PE Cluster connection — 只剩「PE 輸出」+「控制(源頭還攤平)」的中繼線；輸入資料已直連 router 輸出(見實例化)
+// iact：ready 回手 (per-row [0:2])
 wire                 PECluster_iact_address_in_ready [0:2];
-wire                 PECluster_iact_address_in_valid [0:2];
-wire [7:0]           PECluster_iact_address_in       [0:2];
 wire                 PECluster_iact_data_in_ready    [0:2];
-wire                 PECluster_iact_data_in_valid    [0:2];
-wire [12:0]          PECluster_iact_data_in          [0:2];
-// weight (per-PE [0:2][0:2]) : addr[6:0] / data[11:0]
-wire                 PECluster_weight_address_in_valid [0:2][0:2];
-wire [6:0]           PECluster_weight_address_in       [0:2][0:2];
-wire                 PECluster_weight_data_in_valid    [0:2][0:2];
-wire [11:0]          PECluster_weight_data_in          [0:2][0:2];
-// psum (per-column [0:2]) : signed [20:0]
+// psum：輸出 + from_south 中繼 (per-column [0:2], signed [20:0])
 wire                 PECluster_psum_in_ready [0:2];
-wire                 PECluster_psum_in_valid [0:2];
-wire signed [20:0]   PECluster_psum_in       [0:2];
-wire                 PECluster_psum_out_ready [0:2];
 wire                 PECluster_psum_out_valid [0:2];
 wire signed [20:0]   PECluster_psum_out       [0:2];
 wire                 PECluster_psum_in_from_south_ready [0:2];
@@ -838,22 +824,24 @@ wire 					cg_ctrl_psum_acc_fin;
 // 						 		Instantiation  							//
 // ====================================================================	//
 PE_Cluster PE_Cluster_inst (
-	.clock                   (PECluster_clock),
-	.reset                   (PECluster_reset),
+	// NOTE: router<->PE 埠名交叉(CSC 命名)：PE 的 weight port 實際吃 iact router 輸出、
+	//       iact port 實際吃 weight router 輸出；下方直連即反映此交叉。
+	.clock                   (clock),
+	.reset                   (reset),
 	.iact_address_in_ready   (PECluster_iact_address_in_ready),
-	.iact_address_in_valid   (PECluster_iact_address_in_valid),
-	.iact_address_in         (PECluster_iact_address_in),
+	.iact_address_in_valid   (weight_PE_address_out_valid),
+	.iact_address_in         (weight_PE_address_out_bits),
 	.iact_data_in_ready      (PECluster_iact_data_in_ready),
-	.iact_data_in_valid      (PECluster_iact_data_in_valid),
-	.iact_data_in            (PECluster_iact_data_in),
-	.weight_address_in_valid (PECluster_weight_address_in_valid),
-	.weight_address_in       (PECluster_weight_address_in),
-	.weight_data_in_valid    (PECluster_weight_data_in_valid),
-	.weight_data_in          (PECluster_weight_data_in),
+	.iact_data_in_valid      (weight_PE_data_out_valid),
+	.iact_data_in            (weight_PE_data_out_bits),
+	.weight_address_in_valid (iact_PE_address_out_valid),
+	.weight_address_in       (iact_PE_address_out_bits),
+	.weight_data_in_valid    (iact_PE_data_out_valid),
+	.weight_data_in          (iact_PE_data_out_bits),
 	.psum_in_ready           (PECluster_psum_in_ready),
-	.psum_in_valid           (PECluster_psum_in_valid),
-	.psum_in                 (PECluster_psum_in),
-	.psum_out_ready          (PECluster_psum_out_ready),
+	.psum_in_valid           (psum_PE_out_valid),
+	.psum_in                 (psum_PE_out_bits),
+	.psum_out_ready          (psum_PE_in_ready),
 	.psum_out_valid          (PECluster_psum_out_valid),
 	.psum_out                (PECluster_psum_out),
 	.psum_in_from_south_ready(PECluster_psum_in_from_south_ready),
@@ -1398,67 +1386,8 @@ assign cg_north_psum_2_out 				= PECluster_psum_out[2];
 
 //=============== intra-connection ===============//
 // router cluster to PE cluster
-assign PECluster_clock 							= clock;
-assign PECluster_reset 							= reset;
-assign PECluster_weight_address_in_valid[0][0] 	= iact_PE_address_out_valid[0][0]; 	
-assign PECluster_weight_address_in_valid[0][1] 	= iact_PE_address_out_valid[0][1];
-assign PECluster_weight_address_in_valid[0][2] 	= iact_PE_address_out_valid[0][2]; 
-assign PECluster_weight_address_in[0][0] 			= iact_PE_address_out_bits[0][0]; 
-assign PECluster_weight_address_in[0][1] 			= iact_PE_address_out_bits[0][1]; 
-assign PECluster_weight_address_in[0][2] 			= iact_PE_address_out_bits[0][2]; 	
-assign PECluster_weight_data_in_valid[0][0] 		= iact_PE_data_out_valid[0][0];	
-assign PECluster_weight_data_in_valid[0][1] 		= iact_PE_data_out_valid[0][1];		
-assign PECluster_weight_data_in_valid[0][2] 		= iact_PE_data_out_valid[0][2];
-assign PECluster_weight_data_in[0][0] 			= iact_PE_data_out_bits[0][0]; 	
-assign PECluster_weight_data_in[0][1] 			= iact_PE_data_out_bits[0][1]; 	
-assign PECluster_weight_data_in[0][2] 			= iact_PE_data_out_bits[0][2];	
-assign PECluster_weight_address_in_valid[1][0] 	= iact_PE_address_out_valid[1][0]; 	
-assign PECluster_weight_address_in_valid[1][1] 	= iact_PE_address_out_valid[1][1];
-assign PECluster_weight_address_in_valid[1][2] 	= iact_PE_address_out_valid[1][2]; 
-assign PECluster_weight_address_in[1][0] 			= iact_PE_address_out_bits[1][0]; 
-assign PECluster_weight_address_in[1][1] 			= iact_PE_address_out_bits[1][1]; 
-assign PECluster_weight_address_in[1][2] 			= iact_PE_address_out_bits[1][2]; 	
-assign PECluster_weight_data_in_valid[1][0] 		= iact_PE_data_out_valid[1][0];	
-assign PECluster_weight_data_in_valid[1][1] 		= iact_PE_data_out_valid[1][1];		
-assign PECluster_weight_data_in_valid[1][2] 		= iact_PE_data_out_valid[1][2];
-assign PECluster_weight_data_in[1][0] 			= iact_PE_data_out_bits[1][0]; 	
-assign PECluster_weight_data_in[1][1] 			= iact_PE_data_out_bits[1][1]; 	
-assign PECluster_weight_data_in[1][2] 			= iact_PE_data_out_bits[1][2];
-assign PECluster_weight_address_in_valid[2][0] 	= iact_PE_address_out_valid[2][0]; 	
-assign PECluster_weight_address_in_valid[2][1] 	= iact_PE_address_out_valid[2][1];
-assign PECluster_weight_address_in_valid[2][2] 	= iact_PE_address_out_valid[2][2]; 
-assign PECluster_weight_address_in[2][0] 			= iact_PE_address_out_bits[2][0]; 
-assign PECluster_weight_address_in[2][1] 			= iact_PE_address_out_bits[2][1]; 
-assign PECluster_weight_address_in[2][2] 			= iact_PE_address_out_bits[2][2]; 	
-assign PECluster_weight_data_in_valid[2][0] 		= iact_PE_data_out_valid[2][0];	
-assign PECluster_weight_data_in_valid[2][1] 		= iact_PE_data_out_valid[2][1];		
-assign PECluster_weight_data_in_valid[2][2] 		= iact_PE_data_out_valid[2][2];
-assign PECluster_weight_data_in[2][0] 			= iact_PE_data_out_bits[2][0]; 	
-assign PECluster_weight_data_in[2][1] 			= iact_PE_data_out_bits[2][1]; 	
-assign PECluster_weight_data_in[2][2] 			= iact_PE_data_out_bits[2][2];		
 
-assign PECluster_iact_address_in_valid[0] 		= weight_PE_address_out_valid[0]; 
-assign PECluster_iact_address_in_valid[1] 		= weight_PE_address_out_valid[1]; 
-assign PECluster_iact_address_in_valid[2] 		= weight_PE_address_out_valid[2];
-assign PECluster_iact_address_in[0] 				= weight_PE_address_out_bits[0];		
-assign PECluster_iact_address_in[1] 				= weight_PE_address_out_bits[1];	
-assign PECluster_iact_address_in[2] 				= weight_PE_address_out_bits[2]; 
-assign PECluster_iact_data_in_valid[0] 			= weight_PE_data_out_valid[0]; 	 		
-assign PECluster_iact_data_in_valid[1] 			= weight_PE_data_out_valid[1]; 		
-assign PECluster_iact_data_in_valid[2] 			= weight_PE_data_out_valid[2]; 
-assign PECluster_iact_data_in[0] 				= weight_PE_data_out_bits[0];  
-assign PECluster_iact_data_in[1] 				= weight_PE_data_out_bits[1]; 	
-assign PECluster_iact_data_in[2] 				= weight_PE_data_out_bits[2]; 
 
-assign PECluster_psum_in_valid[0] 				= psum_PE_out_valid[0]; 
-assign PECluster_psum_in_valid[1] 				= psum_PE_out_valid[1]; 
-assign PECluster_psum_in_valid[2] 				= psum_PE_out_valid[2]; 
-assign PECluster_psum_in[0] 						= psum_PE_out_bits[0]; 
-assign PECluster_psum_in[1] 						= psum_PE_out_bits[1]; 
-assign PECluster_psum_in[2] 						= psum_PE_out_bits[2]; 
-assign PECluster_psum_out_ready[0] 				= psum_PE_in_ready[0]; 
-assign PECluster_psum_out_ready[1] 				= psum_PE_in_ready[1]; 
-assign PECluster_psum_out_ready[2] 				= psum_PE_in_ready[2]; 
 
 // psum accumulate from south cluster group
 assign PECluster_psum_in_from_south_valid[0] 	= cg_south_psum_0_in_valid; 
