@@ -6,136 +6,60 @@
 // disable signals is used to disable selected PE for physical mapping.
 // If disable signals are high, the utilization of PE will be decrease.
 // ------------------------------------------------------------------------------------------------------ //
-// [Refactor] 內部接線已由「手動展開」改為 generate/array，行為與原攤平版等價。
-//   - 規律塊 (PE 實例化 / 控制廣播 / always reg / reduction) 用 genvar 迴圈生成。
-//   - 特例「邏輯」原封照搬，只把線接到 array：
-//       * psum 縱向 systolic chain 的上下邊界 (gr==0 吐外部 / gr==2 吃 router|south 的 mux)
-//       * iact controller 的攤平 port 連接 (含原作者 typo: .iact_from_router_2_data_in_vaild)
-//   - module port 介面完全未動，上層 Cluster_Group.v 無需修改。
-//   - 注意：PE 實例層次名由 pe00..pe22 變為 PE_INST_R[r].PE_INST_C[c].pe。
+// [Refactor] 兩階段重構，行為與原攤平版等價（diff 50 張驗證）：
+//   階段1（內部接線）：手動展開改為 generate/array —— PE 實例化 / 控制廣播 / always reg /
+//                      reduction 用 genvar 迴圈；特例邏輯原封照搬，只改接 array：
+//                        * psum 縱向 systolic chain 上下邊界 (gr==0 吐外部 / gr==2 吃 router|south mux)
+//                        * iact controller 的 port 連接 (含原作者 typo: .iact_from_router_2_data_in_vaild)
+//   階段2（port 介面）：module port 也 array 化（iact [0:2]、weight / PE_disable [0:2][0:2]、psum [0:2] signed）；
+//                      攤平 → 內部 array 的 adapter 收成 generate 迴圈（見下方 *_ADAPT）。
+//                      ★ 此層 port 一改，上層 Cluster_Group.v 的 PE_Cluster_inst 必須一起改（已同步）。
+//   - PE 實例層次名：PE_INST_R[r].PE_INST_C[c].pe。
 // ====================================================================================================== //
 
 
 module PE_Cluster(
-	input  			       	clock,
-	input  			       	reset,
-	// data signals
-	output 			       	iact_0_address_in_ready,
-	input  			       	iact_0_address_in_valid,
-	input  			[7:0]  	iact_0_address_in,
-	output 			       	iact_0_data_in_ready,
-	input  			       	iact_0_data_in_valid,
-	input  			[12:0] 	iact_0_data_in,
-	output 			       	iact_1_address_in_ready,
-	input  			       	iact_1_address_in_valid,
-	input  			[7:0]  	iact_1_address_in,
-	output 			       	iact_1_data_in_ready,
-	input  			       	iact_1_data_in_valid,
-	input  			[12:0] 	iact_1_data_in,
-	output 			       	iact_2_address_in_ready,
-	input  			       	iact_2_address_in_valid,
-	input  			[7:0]  	iact_2_address_in,
-	output 			       	iact_2_data_in_ready,
-	input  			       	iact_2_data_in_valid,
-	input  			[12:0] 	iact_2_data_in,
+	input  clock,
+	input  reset,
 
-	input  			       	weight_0_0_address_in_valid,
-	input  			[6:0]  	weight_0_0_address_in,
-	input  			       	weight_0_0_data_in_valid,
-	input  			[11:0] 	weight_0_0_data_in,
-	input  			       	weight_0_1_address_in_valid,
-	input  			[6:0]  	weight_0_1_address_in,
-	input  			       	weight_0_1_data_in_valid,
-	input  			[11:0] 	weight_0_1_data_in,
-	input  			       	weight_0_2_address_in_valid,
-	input  			[6:0]  	weight_0_2_address_in,
-	input  			       	weight_0_2_data_in_valid,
-	input  			[11:0] 	weight_0_2_data_in,
+	// ----- iact : per-row [0:2], addr[7:0] / data[12:0] -----
+	output               iact_address_in_ready [0:2],
+	input                iact_address_in_valid [0:2],
+	input        [7:0]   iact_address_in       [0:2],
+	output               iact_data_in_ready    [0:2],
+	input                iact_data_in_valid    [0:2],
+	input        [12:0]  iact_data_in          [0:2],
 
-	input  			       	weight_1_0_address_in_valid,
-	input  			[6:0]  	weight_1_0_address_in,
-	input  			       	weight_1_0_data_in_valid,
-	input  			[11:0] 	weight_1_0_data_in,
-	input  			       	weight_1_1_address_in_valid,
-	input  			[6:0]  	weight_1_1_address_in,
-	input  			       	weight_1_1_data_in_valid,
-	input  			[11:0] 	weight_1_1_data_in,
-	input  			       	weight_1_2_address_in_valid,
-	input  			[6:0]  	weight_1_2_address_in,
-	input  			       	weight_1_2_data_in_valid,
-	input  			[11:0] 	weight_1_2_data_in,
+	// ----- weight : per-PE [0:2][0:2], addr[6:0] / data[11:0] (no ready) -----
+	input                weight_address_in_valid [0:2][0:2],
+	input        [6:0]   weight_address_in       [0:2][0:2],
+	input                weight_data_in_valid    [0:2][0:2],
+	input        [11:0]  weight_data_in          [0:2][0:2],
 
-	input  			       	weight_2_0_address_in_valid,
-	input  			[6:0]  	weight_2_0_address_in,
-	input  			       	weight_2_0_data_in_valid,
-	input  			[11:0] 	weight_2_0_data_in,
-	input  			       	weight_2_1_address_in_valid,
-	input  			[6:0]  	weight_2_1_address_in,
-	input  			       	weight_2_1_data_in_valid,
-	input  			[11:0] 	weight_2_1_data_in,
-	input  			       	weight_2_2_address_in_valid,
-	input  			[6:0]  	weight_2_2_address_in,
-	input  			       	weight_2_2_data_in_valid,
-	input  			[11:0] 	weight_2_2_data_in,
+	// ----- psum : per-column [0:2], signed [20:0] -----
+	output               psum_in_ready            [0:2],
+	input                psum_in_valid            [0:2],
+	input  signed [20:0] psum_in                  [0:2],
+	input                psum_out_ready           [0:2],
+	output               psum_out_valid           [0:2],
+	output signed [20:0] psum_out                 [0:2],
+	output               psum_in_from_south_ready [0:2],
+	input                psum_in_from_south_valid [0:2],
+	input  signed [20:0] psum_in_from_south       [0:2],
 
-	output        			psum_0_in_ready,
-	input         			psum_0_in_valid,
-	input 	signed 	[20:0] 	psum_0_in,
-	output        			psum_1_in_ready,
-	input         			psum_1_in_valid,
-	input 	signed 	[20:0] 	psum_1_in,
-	output       		 	psum_2_in_ready,
-	input         			psum_2_in_valid,
-	input 	signed 	[20:0] 	psum_2_in,
-
-	input         			psum_0_out_ready,
-	output        			psum_0_out_valid,
-	output 	signed 	[20:0] 	psum_0_out,
-	input         			psum_1_out_ready,
-	output        			psum_1_out_valid,
-	output 	signed 	[20:0] 	psum_1_out,
-	input        			psum_2_out_ready,
-	output        			psum_2_out_valid,
-	output 	signed 	[20:0] 	psum_2_out,
-
-	output        			psum_0_in_from_south_ready,
-	input         			psum_0_in_from_south_valid,
-	input 	signed 	[20:0] 	psum_0_in_from_south,
-	output       	 		psum_1_in_from_south_ready,
-	input        	 		psum_1_in_from_south_valid,
-	input 	signed 	[20:0] 	psum_1_in_from_south,
-	output       	 		psum_2_in_from_south_ready,
-	input        			psum_2_in_from_south_valid,
-	input 	signed 	[20:0] 	psum_2_in_from_south,
-
-	// control signals
-	input					PE_0_0_disable,
-	input					PE_0_1_disable,
-	input					PE_0_2_disable,
-	input					PE_1_0_disable,
-	input					PE_1_1_disable,
-	input					PE_1_2_disable,
-	input					PE_2_0_disable,
-	input					PE_2_1_disable,
-	input					PE_2_2_disable,
-
-	input         			psum_load_en,
-
-	input         			iact_data_in_sel,
-	input  			[1:0]  	iact_data_out_sel,
-
-	input         			psum_data_in_sel, // true for GLB psum, false for south psum
-
-	input         			do_en,
-
-	input					iact_write_fin_clear,
-	input					weight_write_fin_clear,
-	output					all_write_fin,
-
-	output        			all_cal_fin,
-
-	input 			[4:0]	PSUM_DEPTH,
-	input					psum_spad_clear
+	// ----- control -----
+	input                PE_disable [0:2][0:2],
+	input         psum_load_en,
+	input         iact_data_in_sel,
+	input  [1:0]  iact_data_out_sel,
+	input         psum_data_in_sel, // true for GLB psum, false for south psum
+	input         do_en,
+	input         iact_write_fin_clear,
+	input         weight_write_fin_clear,
+	output        all_write_fin,
+	output        all_cal_fin,
+	input  [4:0]  PSUM_DEPTH,
+	input         psum_spad_clear
 );
 
 // ====================================================================	//
@@ -175,77 +99,33 @@ wire               pe_disable              [0:2][0:2];
 reg                pe_cal_fin_reg          [0:2][0:2];
 reg                pe_write_fin_reg        [0:2][0:2];
 
-// per-column 外部 psum 介面 (攤平 port 收進 array，供下方 generate 索引)
+// per-column psum 中繼線：systolic 邊界要用，下方 adapter 從 array port 填入
 wire               psum_in_v_ext   [0:2];
 wire signed [20:0] psum_in_d_ext   [0:2];
 wire               psum_in_south_v [0:2];
 wire signed [20:0] psum_in_south_d [0:2];
 wire               psum_out_rdy_ext[0:2];
 
-assign psum_in_v_ext[0]    = psum_0_in_valid;
-assign psum_in_v_ext[1]    = psum_1_in_valid;
-assign psum_in_v_ext[2]    = psum_2_in_valid;
-assign psum_in_d_ext[0]    = psum_0_in;
-assign psum_in_d_ext[1]    = psum_1_in;
-assign psum_in_d_ext[2]    = psum_2_in;
-assign psum_in_south_v[0]  = psum_0_in_from_south_valid;
-assign psum_in_south_v[1]  = psum_1_in_from_south_valid;
-assign psum_in_south_v[2]  = psum_2_in_from_south_valid;
-assign psum_in_south_d[0]  = psum_0_in_from_south;
-assign psum_in_south_d[1]  = psum_1_in_from_south;
-assign psum_in_south_d[2]  = psum_2_in_from_south;
-assign psum_out_rdy_ext[0] = psum_0_out_ready;
-assign psum_out_rdy_ext[1] = psum_1_out_ready;
-assign psum_out_rdy_ext[2] = psum_2_out_ready;
-
-// weight 攤平 input port 收進 array (介面橋接，等價於原 weight assign)
-assign pe_weight_addr_in_valid[0][0] = weight_0_0_address_in_valid;
-assign pe_weight_addr_in      [0][0] = weight_0_0_address_in;
-assign pe_weight_data_in_valid[0][0] = weight_0_0_data_in_valid;
-assign pe_weight_data_in      [0][0] = weight_0_0_data_in;
-assign pe_weight_addr_in_valid[0][1] = weight_0_1_address_in_valid;
-assign pe_weight_addr_in      [0][1] = weight_0_1_address_in;
-assign pe_weight_data_in_valid[0][1] = weight_0_1_data_in_valid;
-assign pe_weight_data_in      [0][1] = weight_0_1_data_in;
-assign pe_weight_addr_in_valid[0][2] = weight_0_2_address_in_valid;
-assign pe_weight_addr_in      [0][2] = weight_0_2_address_in;
-assign pe_weight_data_in_valid[0][2] = weight_0_2_data_in_valid;
-assign pe_weight_data_in      [0][2] = weight_0_2_data_in;
-assign pe_weight_addr_in_valid[1][0] = weight_1_0_address_in_valid;
-assign pe_weight_addr_in      [1][0] = weight_1_0_address_in;
-assign pe_weight_data_in_valid[1][0] = weight_1_0_data_in_valid;
-assign pe_weight_data_in      [1][0] = weight_1_0_data_in;
-assign pe_weight_addr_in_valid[1][1] = weight_1_1_address_in_valid;
-assign pe_weight_addr_in      [1][1] = weight_1_1_address_in;
-assign pe_weight_data_in_valid[1][1] = weight_1_1_data_in_valid;
-assign pe_weight_data_in      [1][1] = weight_1_1_data_in;
-assign pe_weight_addr_in_valid[1][2] = weight_1_2_address_in_valid;
-assign pe_weight_addr_in      [1][2] = weight_1_2_address_in;
-assign pe_weight_data_in_valid[1][2] = weight_1_2_data_in_valid;
-assign pe_weight_data_in      [1][2] = weight_1_2_data_in;
-assign pe_weight_addr_in_valid[2][0] = weight_2_0_address_in_valid;
-assign pe_weight_addr_in      [2][0] = weight_2_0_address_in;
-assign pe_weight_data_in_valid[2][0] = weight_2_0_data_in_valid;
-assign pe_weight_data_in      [2][0] = weight_2_0_data_in;
-assign pe_weight_addr_in_valid[2][1] = weight_2_1_address_in_valid;
-assign pe_weight_addr_in      [2][1] = weight_2_1_address_in;
-assign pe_weight_data_in_valid[2][1] = weight_2_1_data_in_valid;
-assign pe_weight_data_in      [2][1] = weight_2_1_data_in;
-assign pe_weight_addr_in_valid[2][2] = weight_2_2_address_in_valid;
-assign pe_weight_addr_in      [2][2] = weight_2_2_address_in;
-assign pe_weight_data_in_valid[2][2] = weight_2_2_data_in_valid;
-assign pe_weight_data_in      [2][2] = weight_2_2_data_in;
-
-// disable 攤平 input port 收進 array
-assign pe_disable[0][0] = PE_0_0_disable;
-assign pe_disable[0][1] = PE_0_1_disable;
-assign pe_disable[0][2] = PE_0_2_disable;
-assign pe_disable[1][0] = PE_1_0_disable;
-assign pe_disable[1][1] = PE_1_1_disable;
-assign pe_disable[1][2] = PE_1_2_disable;
-assign pe_disable[2][0] = PE_2_0_disable;
-assign pe_disable[2][1] = PE_2_1_disable;
-assign pe_disable[2][2] = PE_2_2_disable;
+// adapter：array port → 內部 array（psum 中繼線 / weight / disable），等價於原攤平 assign
+genvar ai, aj;
+generate
+	for (aj = 0; aj < 3; aj = aj + 1) begin: PSUM_EXT_ADAPT
+		assign psum_in_v_ext   [aj] = psum_in_valid           [aj];
+		assign psum_in_d_ext   [aj] = psum_in                 [aj];
+		assign psum_in_south_v [aj] = psum_in_from_south_valid[aj];
+		assign psum_in_south_d [aj] = psum_in_from_south      [aj];
+		assign psum_out_rdy_ext[aj] = psum_out_ready          [aj];
+	end
+	for (ai = 0; ai < 3; ai = ai + 1) begin: WEIGHT_DISABLE_ADAPT_R
+		for (aj = 0; aj < 3; aj = aj + 1) begin: WEIGHT_DISABLE_ADAPT_C
+			assign pe_weight_addr_in_valid[ai][aj] = weight_address_in_valid[ai][aj];
+			assign pe_weight_addr_in      [ai][aj] = weight_address_in      [ai][aj];
+			assign pe_weight_data_in_valid[ai][aj] = weight_data_in_valid   [ai][aj];
+			assign pe_weight_data_in      [ai][aj] = weight_data_in         [ai][aj];
+			assign pe_disable             [ai][aj] = PE_disable             [ai][aj];
+		end
+	end
+endgenerate
 
 // ====================================================================	//
 // 				PE array (3x3) 實例化 + 規律控制廣播 (generate)			//
@@ -322,23 +202,16 @@ generate
 endgenerate
 
 // ====================================================================	//
-// 				外部 psum 輸出 (攤平 output port，照搬)					//
+// 				外部 psum 輸出：array output port ← PE array (per-column 迴圈)					//
 // ====================================================================	//
-assign psum_0_in_ready = (psum_data_in_sel == PSUM_FROM_ROUTER) & pe_psum_in_ready[2][0];
-assign psum_1_in_ready = (psum_data_in_sel == PSUM_FROM_ROUTER) & pe_psum_in_ready[2][1];
-assign psum_2_in_ready = (psum_data_in_sel == PSUM_FROM_ROUTER) & pe_psum_in_ready[2][2];
-
-assign psum_0_out_valid = pe_psum_out_valid[0][0];
-assign psum_1_out_valid = pe_psum_out_valid[0][1];
-assign psum_2_out_valid = pe_psum_out_valid[0][2];
-
-assign psum_0_out = pe_psum_out[0][0];
-assign psum_1_out = pe_psum_out[0][1];
-assign psum_2_out = pe_psum_out[0][2];
-
-assign psum_0_in_from_south_ready = (psum_data_in_sel == PSUM_FROM_ROUTER) ? 1'b0 : pe_psum_in_ready[2][0];
-assign psum_1_in_from_south_ready = (psum_data_in_sel == PSUM_FROM_ROUTER) ? 1'b0 : pe_psum_in_ready[2][1];
-assign psum_2_in_from_south_ready = (psum_data_in_sel == PSUM_FROM_ROUTER) ? 1'b0 : pe_psum_in_ready[2][2];
+generate
+	for (aj = 0; aj < 3; aj = aj + 1) begin: PSUM_OUT_ADAPT
+		assign psum_in_ready[aj]            = (psum_data_in_sel == PSUM_FROM_ROUTER) & pe_psum_in_ready[2][aj];
+		assign psum_out_valid[aj]           = pe_psum_out_valid[0][aj];
+		assign psum_out[aj]                 = pe_psum_out[0][aj];
+		assign psum_in_from_south_ready[aj] = (psum_data_in_sel == PSUM_FROM_ROUTER) ? 1'b0 : pe_psum_in_ready[2][aj];
+	end
+endgenerate
 
 // ====================================================================	//
 // 					reduction：全 PE 完成才拉高							//
@@ -398,26 +271,26 @@ PE_Cluster_controller PE_Cluster_controller_inst (
 	.iact_to_PE_2_1_data_out_bits       (pe_iact_data_in[2][1]       ),
 	.iact_to_PE_2_2_data_out_bits       (pe_iact_data_in[2][2]       ),
 
-	.iact_from_router_0_address_in_ready(iact_0_address_in_ready	),
-	.iact_from_router_0_address_in_valid(iact_0_address_in_valid	),
-	.iact_from_router_0_address_in      (iact_0_address_in      	),
-	.iact_from_router_0_data_in_ready   (iact_0_data_in_ready  	 	),
-	.iact_from_router_0_data_in_valid   (iact_0_data_in_valid   	),
-	.iact_from_router_0_data_in         (iact_0_data_in        		),
+	.iact_from_router_0_address_in_ready(iact_address_in_ready[0]	),
+	.iact_from_router_0_address_in_valid(iact_address_in_valid[0]	),
+	.iact_from_router_0_address_in      (iact_address_in[0]      	),
+	.iact_from_router_0_data_in_ready   (iact_data_in_ready[0]  	 	),
+	.iact_from_router_0_data_in_valid   (iact_data_in_valid[0]   	),
+	.iact_from_router_0_data_in         (iact_data_in[0]        		),
 
-	.iact_from_router_1_address_in_ready(iact_1_address_in_ready	),
-	.iact_from_router_1_address_in_valid(iact_1_address_in_valid	),
-	.iact_from_router_1_address_in      (iact_1_address_in      	),
-	.iact_from_router_1_data_in_ready   (iact_1_data_in_ready   	),
-	.iact_from_router_1_data_in_valid   (iact_1_data_in_valid   	),
-	.iact_from_router_1_data_in         (iact_1_data_in         	),
+	.iact_from_router_1_address_in_ready(iact_address_in_ready[1]	),
+	.iact_from_router_1_address_in_valid(iact_address_in_valid[1]	),
+	.iact_from_router_1_address_in      (iact_address_in[1]      	),
+	.iact_from_router_1_data_in_ready   (iact_data_in_ready[1]   	),
+	.iact_from_router_1_data_in_valid   (iact_data_in_valid[1]   	),
+	.iact_from_router_1_data_in         (iact_data_in[1]         	),
 
-	.iact_from_router_2_address_in_ready(iact_2_address_in_ready),
-	.iact_from_router_2_address_in_valid(iact_2_address_in_valid	),
-	.iact_from_router_2_address_in      (iact_2_address_in      	),
-	.iact_from_router_2_data_in_ready   (iact_2_data_in_ready  	 	),
-	.iact_from_router_2_data_in_vaild   (iact_2_data_in_valid    	),
-	.iact_from_router_2_data_in         (iact_2_data_in          	)
+	.iact_from_router_2_address_in_ready(iact_address_in_ready[2]),
+	.iact_from_router_2_address_in_valid(iact_address_in_valid[2]	),
+	.iact_from_router_2_address_in      (iact_address_in[2]      	),
+	.iact_from_router_2_data_in_ready   (iact_data_in_ready[2]  	 	),
+	.iact_from_router_2_data_in_vaild   (iact_data_in_valid[2]    	),
+	.iact_from_router_2_data_in         (iact_data_in[2]          	)
 );
 
 // ====================================================================	//

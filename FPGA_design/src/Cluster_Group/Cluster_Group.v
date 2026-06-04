@@ -607,110 +607,41 @@ module ClusterGroup (
 // 						 		Wires  									//
 // ====================================================================	//
 // PE Cluster connection
-wire			 		PECluster_clock;                                     
-wire			 		PECluster_reset;                                     
-wire			 		PECluster_iact_0_address_in_ready;                   
-wire			 		PECluster_iact_0_address_in_valid;                   
-wire			[7:0] 	PECluster_iact_0_address_in;                    
-wire			 		PECluster_iact_0_data_in_ready;                      
-wire			 		PECluster_iact_0_data_in_valid;                      
-wire			[12:0] 	PECluster_iact_0_data_in;                      
-wire			 		PECluster_iact_1_address_in_ready;                   
-wire			 		PECluster_iact_1_address_in_valid;                   
-wire			[7:0] 	PECluster_iact_1_address_in;                    
-wire			 		PECluster_iact_1_data_in_ready;                      
-wire			 		PECluster_iact_1_data_in_valid;                      
-wire			[12:0] 	PECluster_iact_1_data_in;                      
-wire			 		PECluster_iact_2_address_in_ready;                   
-wire			 		PECluster_iact_2_address_in_valid;                   
-wire			[7:0] 	PECluster_iact_2_address_in;                    
-wire			 		PECluster_iact_2_data_in_ready;                      
-wire			 		PECluster_iact_2_data_in_valid;                      
-wire			[12:0] 	PECluster_iact_2_data_in;        
-						
-wire			 		PECluster_weight_0_0_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_0_0_address_in;                  
-wire			 		PECluster_weight_0_0_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_0_0_data_in;                    
-wire			 		PECluster_weight_0_1_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_0_1_address_in;                  
-wire			 		PECluster_weight_0_1_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_0_1_data_in;                    
-wire			 		PECluster_weight_0_2_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_0_2_address_in;                  
-wire			 		PECluster_weight_0_2_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_0_2_data_in;           
-wire			 		PECluster_weight_1_0_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_1_0_address_in;                  
-wire			 		PECluster_weight_1_0_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_1_0_data_in;                    
-wire			 		PECluster_weight_1_1_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_1_1_address_in;                  
-wire			 		PECluster_weight_1_1_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_1_1_data_in;                    
-wire			 		PECluster_weight_1_2_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_1_2_address_in;                  
-wire			 		PECluster_weight_1_2_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_1_2_data_in;    
-wire			 		PECluster_weight_2_0_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_2_0_address_in;                  
-wire			 		PECluster_weight_2_0_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_2_0_data_in;                    
-wire			 		PECluster_weight_2_1_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_2_1_address_in;                  
-wire			 		PECluster_weight_2_1_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_2_1_data_in;                    
-wire			 		PECluster_weight_2_2_address_in_valid;                 
-wire			[6:0] 	PECluster_weight_2_2_address_in;                  
-wire			 		PECluster_weight_2_2_data_in_valid;                    
-wire			[11:0] 	PECluster_weight_2_2_data_in;      
-
-wire  					PECluster_psum_0_in_ready;                           
-wire  					PECluster_psum_0_in_valid;                           
-wire	signed	[20:0] 	PECluster_psum_0_in;                           
-wire  					PECluster_psum_1_in_ready;                           
-wire  					PECluster_psum_1_in_valid;                           
-wire	signed	[20:0] 	PECluster_psum_1_in;                           
-wire  					PECluster_psum_2_in_ready;                           
-wire  					PECluster_psum_2_in_valid;                           
-wire	signed	[20:0] 	PECluster_psum_2_in;                                   
-wire  					PECluster_psum_0_out_ready;                          
-wire  					PECluster_psum_0_out_valid;                          
-wire	signed	[20:0] 	PECluster_psum_0_out;                          
-wire  					PECluster_psum_1_out_ready;                          
-wire  					PECluster_psum_1_out_valid;                          
-wire	signed	[20:0] 	PECluster_psum_1_out;                          
-wire  					PECluster_psum_2_out_ready;                          
-wire  					PECluster_psum_2_out_valid;                          
-wire	signed	[20:0] 	PECluster_psum_2_out;             
-wire  					PECluster_psum_0_in_from_south_ready;                
-wire  					PECluster_psum_0_in_from_south_valid;                
-wire	signed	[20:0] 	PECluster_psum_0_in_from_south;                
-wire  					PECluster_psum_1_in_from_south_ready;                
-wire  					PECluster_psum_1_in_from_south_valid;                
-wire	signed	[20:0] 	PECluster_psum_1_in_from_south;                
-wire  					PECluster_psum_2_in_from_south_ready;                
-wire  					PECluster_psum_2_in_from_south_valid;                
-wire	signed	[20:0] 	PECluster_psum_2_in_from_south;    
-wire					PECluster_PE_0_0_disable;
-wire					PECluster_PE_0_1_disable;
-wire					PECluster_PE_0_2_disable;
-wire					PECluster_PE_1_0_disable;
-wire					PECluster_PE_1_1_disable;
-wire					PECluster_PE_1_2_disable;
-wire					PECluster_PE_2_0_disable;
-wire					PECluster_PE_2_1_disable;
-wire					PECluster_PE_2_2_disable;
-
-wire 			 		PECluster_psum_load_en;                              
-wire 			 		PECluster_iact_data_in_sel;                          
-wire 			[1:0] 	PECluster_iact_data_out_sel;                    
-wire 			 		PECluster_psum_data_in_sel;                          
-wire 			 		PECluster_do_en;  
-wire					PECluster_iact_write_fin_clear;
-wire					PECluster_weight_write_fin_clear;
-wire					PECluster_all_write_fin;                                 
-wire 			 		PECluster_all_cal_fin;                               
+wire                 PECluster_clock;
+wire                 PECluster_reset;
+// iact (per-row [0:2]) : addr[7:0] / data[12:0]
+wire                 PECluster_iact_address_in_ready [0:2];
+wire                 PECluster_iact_address_in_valid [0:2];
+wire [7:0]           PECluster_iact_address_in       [0:2];
+wire                 PECluster_iact_data_in_ready    [0:2];
+wire                 PECluster_iact_data_in_valid    [0:2];
+wire [12:0]          PECluster_iact_data_in          [0:2];
+// weight (per-PE [0:2][0:2]) : addr[6:0] / data[11:0]
+wire                 PECluster_weight_address_in_valid [0:2][0:2];
+wire [6:0]           PECluster_weight_address_in       [0:2][0:2];
+wire                 PECluster_weight_data_in_valid    [0:2][0:2];
+wire [11:0]          PECluster_weight_data_in          [0:2][0:2];
+// psum (per-column [0:2]) : signed [20:0]
+wire                 PECluster_psum_in_ready [0:2];
+wire                 PECluster_psum_in_valid [0:2];
+wire signed [20:0]   PECluster_psum_in       [0:2];
+wire                 PECluster_psum_out_ready [0:2];
+wire                 PECluster_psum_out_valid [0:2];
+wire signed [20:0]   PECluster_psum_out       [0:2];
+wire                 PECluster_psum_in_from_south_ready [0:2];
+wire                 PECluster_psum_in_from_south_valid [0:2];
+wire signed [20:0]   PECluster_psum_in_from_south       [0:2];
+// control
+wire                 PECluster_PE_disable [0:2][0:2];
+wire                 PECluster_psum_load_en;
+wire                 PECluster_iact_data_in_sel;
+wire [1:0]           PECluster_iact_data_out_sel;
+wire                 PECluster_psum_data_in_sel;
+wire                 PECluster_do_en;
+wire                 PECluster_iact_write_fin_clear;
+wire                 PECluster_weight_write_fin_clear;
+wire                 PECluster_all_write_fin;
+wire                 PECluster_all_cal_fin;                               
 
 // GLB Cluster connection
 
@@ -906,110 +837,40 @@ wire 					cg_ctrl_psum_acc_fin;
 // ====================================================================	//
 // 						 		Instantiation  							//
 // ====================================================================	//
-PE_Cluster PE_Cluster_inst ( 
-	.clock                      	(PECluster_clock                       	),
-	.reset                      	(PECluster_reset                       	),
-	.iact_0_address_in_ready    	(PECluster_iact_0_address_in_ready     	),
-	.iact_0_address_in_valid    	(PECluster_iact_0_address_in_valid     	),
-	.iact_0_address_in          	(PECluster_iact_0_address_in           	),
-	.iact_0_data_in_ready       	(PECluster_iact_0_data_in_ready        	),
-	.iact_0_data_in_valid       	(PECluster_iact_0_data_in_valid        	),
-	.iact_0_data_in             	(PECluster_iact_0_data_in              	),
-	.iact_1_address_in_ready    	(PECluster_iact_1_address_in_ready     	),
-	.iact_1_address_in_valid    	(PECluster_iact_1_address_in_valid     	),
-	.iact_1_address_in          	(PECluster_iact_1_address_in           	),
-	.iact_1_data_in_ready       	(PECluster_iact_1_data_in_ready        	),
-	.iact_1_data_in_valid       	(PECluster_iact_1_data_in_valid        	),
-	.iact_1_data_in             	(PECluster_iact_1_data_in              	),
-	.iact_2_address_in_ready    	(PECluster_iact_2_address_in_ready     	),
-	.iact_2_address_in_valid    	(PECluster_iact_2_address_in_valid     	),
-	.iact_2_address_in          	(PECluster_iact_2_address_in           	),
-	.iact_2_data_in_ready       	(PECluster_iact_2_data_in_ready        	),
-	.iact_2_data_in_valid       	(PECluster_iact_2_data_in_valid        	),
-	.iact_2_data_in             	(PECluster_iact_2_data_in              	),
-	.weight_0_0_address_in_valid  	(PECluster_weight_0_0_address_in_valid	),
-	.weight_0_0_address_in        	(PECluster_weight_0_0_address_in      	),
-	.weight_0_0_data_in_valid     	(PECluster_weight_0_0_data_in_valid   	),
-	.weight_0_0_data_in           	(PECluster_weight_0_0_data_in         	),
-	.weight_0_1_address_in_valid  	(PECluster_weight_0_1_address_in_valid	),
-	.weight_0_1_address_in        	(PECluster_weight_0_1_address_in      	),
-	.weight_0_1_data_in_valid     	(PECluster_weight_0_1_data_in_valid   	),
-	.weight_0_1_data_in           	(PECluster_weight_0_1_data_in         	),
-	.weight_0_2_address_in_valid  	(PECluster_weight_0_2_address_in_valid	),
-	.weight_0_2_address_in        	(PECluster_weight_0_2_address_in      	),
-	.weight_0_2_data_in_valid     	(PECluster_weight_0_2_data_in_valid   	),
-	.weight_0_2_data_in           	(PECluster_weight_0_2_data_in         	),
-	.weight_1_0_address_in_valid  	(PECluster_weight_1_0_address_in_valid	),
-	.weight_1_0_address_in        	(PECluster_weight_1_0_address_in      	),
-	.weight_1_0_data_in_valid     	(PECluster_weight_1_0_data_in_valid   	),
-	.weight_1_0_data_in           	(PECluster_weight_1_0_data_in         	),
-	.weight_1_1_address_in_valid  	(PECluster_weight_1_1_address_in_valid	),
-	.weight_1_1_address_in        	(PECluster_weight_1_1_address_in      	),
-	.weight_1_1_data_in_valid     	(PECluster_weight_1_1_data_in_valid   	),
-	.weight_1_1_data_in           	(PECluster_weight_1_1_data_in         	),
-	.weight_1_2_address_in_valid  	(PECluster_weight_1_2_address_in_valid	),
-	.weight_1_2_address_in        	(PECluster_weight_1_2_address_in      	),
-	.weight_1_2_data_in_valid     	(PECluster_weight_1_2_data_in_valid   	),
-	.weight_1_2_data_in           	(PECluster_weight_1_2_data_in         	),
-	.weight_2_0_address_in_valid  	(PECluster_weight_2_0_address_in_valid	),
-	.weight_2_0_address_in        	(PECluster_weight_2_0_address_in      	),
-	.weight_2_0_data_in_valid     	(PECluster_weight_2_0_data_in_valid   	),
-	.weight_2_0_data_in           	(PECluster_weight_2_0_data_in         	),
-	.weight_2_1_address_in_valid  	(PECluster_weight_2_1_address_in_valid	),
-	.weight_2_1_address_in        	(PECluster_weight_2_1_address_in      	),
-	.weight_2_1_data_in_valid     	(PECluster_weight_2_1_data_in_valid   	),
-	.weight_2_1_data_in           	(PECluster_weight_2_1_data_in         	),
-	.weight_2_2_address_in_valid  	(PECluster_weight_2_2_address_in_valid	),
-	.weight_2_2_address_in        	(PECluster_weight_2_2_address_in      	),
-	.weight_2_2_data_in_valid     	(PECluster_weight_2_2_data_in_valid   	),
-	.weight_2_2_data_in           	(PECluster_weight_2_2_data_in         	),
-	.psum_0_in_ready            	(PECluster_psum_0_in_ready             	),
-	.psum_0_in_valid            	(PECluster_psum_0_in_valid             	),
-	.psum_0_in                  	(PECluster_psum_0_in                   	),
-	.psum_1_in_ready            	(PECluster_psum_1_in_ready             	),
-	.psum_1_in_valid            	(PECluster_psum_1_in_valid             	),
-	.psum_1_in                  	(PECluster_psum_1_in                   	),
-	.psum_2_in_ready            	(PECluster_psum_2_in_ready             	),
-	.psum_2_in_valid            	(PECluster_psum_2_in_valid             	),
-	.psum_2_in                  	(PECluster_psum_2_in                   	),
-	.psum_0_out_ready           	(PECluster_psum_0_out_ready            	),
-	.psum_0_out_valid           	(PECluster_psum_0_out_valid            	),
-	.psum_0_out                 	(PECluster_psum_0_out                  	),
-	.psum_1_out_ready           	(PECluster_psum_1_out_ready            	),
-	.psum_1_out_valid           	(PECluster_psum_1_out_valid            	),
-	.psum_1_out                 	(PECluster_psum_1_out                  	),
-	.psum_2_out_ready           	(PECluster_psum_2_out_ready            	),
-	.psum_2_out_valid           	(PECluster_psum_2_out_valid            	),
-	.psum_2_out                 	(PECluster_psum_2_out                  	),
-	.psum_0_in_from_south_ready 	(PECluster_psum_0_in_from_south_ready  	),
-	.psum_0_in_from_south_valid 	(PECluster_psum_0_in_from_south_valid  	),
-	.psum_0_in_from_south       	(PECluster_psum_0_in_from_south        	),
-	.psum_1_in_from_south_ready 	(PECluster_psum_1_in_from_south_ready  	),
-	.psum_1_in_from_south_valid 	(PECluster_psum_1_in_from_south_valid  	),
-	.psum_1_in_from_south       	(PECluster_psum_1_in_from_south        	),
-	.psum_2_in_from_south_ready 	(PECluster_psum_2_in_from_south_ready  	),
-	.psum_2_in_from_south_valid 	(PECluster_psum_2_in_from_south_valid  	),
-	.psum_2_in_from_south       	(PECluster_psum_2_in_from_south        	),
-	.PE_0_0_disable					(PECluster_PE_0_0_disable				),
-	.PE_0_1_disable					(PECluster_PE_0_1_disable				),
-	.PE_0_2_disable					(PECluster_PE_0_2_disable				),
-	.PE_1_0_disable					(PECluster_PE_1_0_disable				),
-	.PE_1_1_disable					(PECluster_PE_1_1_disable				),
-	.PE_1_2_disable					(PECluster_PE_1_2_disable				),
-	.PE_2_0_disable					(PECluster_PE_2_0_disable				),
-	.PE_2_1_disable					(PECluster_PE_2_1_disable				),
-	.PE_2_2_disable					(PECluster_PE_2_2_disable				),
-	.psum_load_en               	(PECluster_psum_load_en                	),
-	.iact_data_in_sel           	(PECluster_iact_data_in_sel            	),
-	.iact_data_out_sel          	(PECluster_iact_data_out_sel           	),
-	.psum_data_in_sel           	(PECluster_psum_data_in_sel            	),
-	.do_en                      	(PECluster_do_en                       	),
-	.iact_write_fin_clear			(PECluster_iact_write_fin_clear		   	),
-	.weight_write_fin_clear			(PECluster_weight_write_fin_clear	   	),
-	.all_write_fin					(PECluster_all_write_fin			   	),
-	.all_cal_fin                	(PECluster_all_cal_fin                 	),
-	.PSUM_DEPTH						(PSUM_DEPTH							   	),
-	.psum_spad_clear				(psum_spad_clear					   	)
+PE_Cluster PE_Cluster_inst (
+	.clock                   (PECluster_clock),
+	.reset                   (PECluster_reset),
+	.iact_address_in_ready   (PECluster_iact_address_in_ready),
+	.iact_address_in_valid   (PECluster_iact_address_in_valid),
+	.iact_address_in         (PECluster_iact_address_in),
+	.iact_data_in_ready      (PECluster_iact_data_in_ready),
+	.iact_data_in_valid      (PECluster_iact_data_in_valid),
+	.iact_data_in            (PECluster_iact_data_in),
+	.weight_address_in_valid (PECluster_weight_address_in_valid),
+	.weight_address_in       (PECluster_weight_address_in),
+	.weight_data_in_valid    (PECluster_weight_data_in_valid),
+	.weight_data_in          (PECluster_weight_data_in),
+	.psum_in_ready           (PECluster_psum_in_ready),
+	.psum_in_valid           (PECluster_psum_in_valid),
+	.psum_in                 (PECluster_psum_in),
+	.psum_out_ready          (PECluster_psum_out_ready),
+	.psum_out_valid          (PECluster_psum_out_valid),
+	.psum_out                (PECluster_psum_out),
+	.psum_in_from_south_ready(PECluster_psum_in_from_south_ready),
+	.psum_in_from_south_valid(PECluster_psum_in_from_south_valid),
+	.psum_in_from_south      (PECluster_psum_in_from_south),
+	.PE_disable              (PECluster_PE_disable),
+	.psum_load_en            (PECluster_psum_load_en),
+	.iact_data_in_sel        (PECluster_iact_data_in_sel),
+	.iact_data_out_sel       (PECluster_iact_data_out_sel),
+	.psum_data_in_sel        (PECluster_psum_data_in_sel),
+	.do_en                   (PECluster_do_en),
+	.iact_write_fin_clear    (PECluster_iact_write_fin_clear),
+	.weight_write_fin_clear  (PECluster_weight_write_fin_clear),
+	.all_write_fin           (PECluster_all_write_fin),
+	.all_cal_fin             (PECluster_all_cal_fin),
+	.PSUM_DEPTH              (PSUM_DEPTH),
+	.psum_spad_clear         (psum_spad_clear)
 );
 
 GLB_Cluster GLB_Cluster_inst (
@@ -1523,99 +1384,99 @@ assign router_psum_1_south_out 			= psum_south_out_bits[1];
 assign router_psum_2_south_out 			= psum_south_out_bits[2];	 
 
 // interconnect with vertical cluster group
-assign cg_south_psum_0_in_ready 		= PECluster_psum_0_in_from_south_ready; 
-assign cg_south_psum_1_in_ready 		= PECluster_psum_1_in_from_south_ready; 
-assign cg_south_psum_2_in_ready 		= PECluster_psum_2_in_from_south_ready; 
+assign cg_south_psum_0_in_ready 		= PECluster_psum_in_from_south_ready[0]; 
+assign cg_south_psum_1_in_ready 		= PECluster_psum_in_from_south_ready[1]; 
+assign cg_south_psum_2_in_ready 		= PECluster_psum_in_from_south_ready[2]; 
 
-assign cg_north_psum_0_out_valid 		= PECluster_psum_0_out_valid; 
-assign cg_north_psum_1_out_valid 		= PECluster_psum_1_out_valid; 	
-assign cg_north_psum_2_out_valid 		= PECluster_psum_2_out_valid;
+assign cg_north_psum_0_out_valid 		= PECluster_psum_out_valid[0]; 
+assign cg_north_psum_1_out_valid 		= PECluster_psum_out_valid[1]; 	
+assign cg_north_psum_2_out_valid 		= PECluster_psum_out_valid[2];
 
-assign cg_north_psum_0_out 				= PECluster_psum_0_out; 			
-assign cg_north_psum_1_out 				= PECluster_psum_1_out; 			
-assign cg_north_psum_2_out 				= PECluster_psum_2_out; 			
+assign cg_north_psum_0_out 				= PECluster_psum_out[0]; 			
+assign cg_north_psum_1_out 				= PECluster_psum_out[1]; 			
+assign cg_north_psum_2_out 				= PECluster_psum_out[2]; 			
 
 //=============== intra-connection ===============//
 // router cluster to PE cluster
 assign PECluster_clock 							= clock;
 assign PECluster_reset 							= reset;
-assign PECluster_weight_0_0_address_in_valid 	= iact_PE_address_out_valid[0][0]; 	
-assign PECluster_weight_0_1_address_in_valid 	= iact_PE_address_out_valid[0][1];
-assign PECluster_weight_0_2_address_in_valid 	= iact_PE_address_out_valid[0][2]; 
-assign PECluster_weight_0_0_address_in 			= iact_PE_address_out_bits[0][0]; 
-assign PECluster_weight_0_1_address_in 			= iact_PE_address_out_bits[0][1]; 
-assign PECluster_weight_0_2_address_in 			= iact_PE_address_out_bits[0][2]; 	
-assign PECluster_weight_0_0_data_in_valid 		= iact_PE_data_out_valid[0][0];	
-assign PECluster_weight_0_1_data_in_valid 		= iact_PE_data_out_valid[0][1];		
-assign PECluster_weight_0_2_data_in_valid 		= iact_PE_data_out_valid[0][2];
-assign PECluster_weight_0_0_data_in 			= iact_PE_data_out_bits[0][0]; 	
-assign PECluster_weight_0_1_data_in 			= iact_PE_data_out_bits[0][1]; 	
-assign PECluster_weight_0_2_data_in 			= iact_PE_data_out_bits[0][2];	
-assign PECluster_weight_1_0_address_in_valid 	= iact_PE_address_out_valid[1][0]; 	
-assign PECluster_weight_1_1_address_in_valid 	= iact_PE_address_out_valid[1][1];
-assign PECluster_weight_1_2_address_in_valid 	= iact_PE_address_out_valid[1][2]; 
-assign PECluster_weight_1_0_address_in 			= iact_PE_address_out_bits[1][0]; 
-assign PECluster_weight_1_1_address_in 			= iact_PE_address_out_bits[1][1]; 
-assign PECluster_weight_1_2_address_in 			= iact_PE_address_out_bits[1][2]; 	
-assign PECluster_weight_1_0_data_in_valid 		= iact_PE_data_out_valid[1][0];	
-assign PECluster_weight_1_1_data_in_valid 		= iact_PE_data_out_valid[1][1];		
-assign PECluster_weight_1_2_data_in_valid 		= iact_PE_data_out_valid[1][2];
-assign PECluster_weight_1_0_data_in 			= iact_PE_data_out_bits[1][0]; 	
-assign PECluster_weight_1_1_data_in 			= iact_PE_data_out_bits[1][1]; 	
-assign PECluster_weight_1_2_data_in 			= iact_PE_data_out_bits[1][2];
-assign PECluster_weight_2_0_address_in_valid 	= iact_PE_address_out_valid[2][0]; 	
-assign PECluster_weight_2_1_address_in_valid 	= iact_PE_address_out_valid[2][1];
-assign PECluster_weight_2_2_address_in_valid 	= iact_PE_address_out_valid[2][2]; 
-assign PECluster_weight_2_0_address_in 			= iact_PE_address_out_bits[2][0]; 
-assign PECluster_weight_2_1_address_in 			= iact_PE_address_out_bits[2][1]; 
-assign PECluster_weight_2_2_address_in 			= iact_PE_address_out_bits[2][2]; 	
-assign PECluster_weight_2_0_data_in_valid 		= iact_PE_data_out_valid[2][0];	
-assign PECluster_weight_2_1_data_in_valid 		= iact_PE_data_out_valid[2][1];		
-assign PECluster_weight_2_2_data_in_valid 		= iact_PE_data_out_valid[2][2];
-assign PECluster_weight_2_0_data_in 			= iact_PE_data_out_bits[2][0]; 	
-assign PECluster_weight_2_1_data_in 			= iact_PE_data_out_bits[2][1]; 	
-assign PECluster_weight_2_2_data_in 			= iact_PE_data_out_bits[2][2];		
+assign PECluster_weight_address_in_valid[0][0] 	= iact_PE_address_out_valid[0][0]; 	
+assign PECluster_weight_address_in_valid[0][1] 	= iact_PE_address_out_valid[0][1];
+assign PECluster_weight_address_in_valid[0][2] 	= iact_PE_address_out_valid[0][2]; 
+assign PECluster_weight_address_in[0][0] 			= iact_PE_address_out_bits[0][0]; 
+assign PECluster_weight_address_in[0][1] 			= iact_PE_address_out_bits[0][1]; 
+assign PECluster_weight_address_in[0][2] 			= iact_PE_address_out_bits[0][2]; 	
+assign PECluster_weight_data_in_valid[0][0] 		= iact_PE_data_out_valid[0][0];	
+assign PECluster_weight_data_in_valid[0][1] 		= iact_PE_data_out_valid[0][1];		
+assign PECluster_weight_data_in_valid[0][2] 		= iact_PE_data_out_valid[0][2];
+assign PECluster_weight_data_in[0][0] 			= iact_PE_data_out_bits[0][0]; 	
+assign PECluster_weight_data_in[0][1] 			= iact_PE_data_out_bits[0][1]; 	
+assign PECluster_weight_data_in[0][2] 			= iact_PE_data_out_bits[0][2];	
+assign PECluster_weight_address_in_valid[1][0] 	= iact_PE_address_out_valid[1][0]; 	
+assign PECluster_weight_address_in_valid[1][1] 	= iact_PE_address_out_valid[1][1];
+assign PECluster_weight_address_in_valid[1][2] 	= iact_PE_address_out_valid[1][2]; 
+assign PECluster_weight_address_in[1][0] 			= iact_PE_address_out_bits[1][0]; 
+assign PECluster_weight_address_in[1][1] 			= iact_PE_address_out_bits[1][1]; 
+assign PECluster_weight_address_in[1][2] 			= iact_PE_address_out_bits[1][2]; 	
+assign PECluster_weight_data_in_valid[1][0] 		= iact_PE_data_out_valid[1][0];	
+assign PECluster_weight_data_in_valid[1][1] 		= iact_PE_data_out_valid[1][1];		
+assign PECluster_weight_data_in_valid[1][2] 		= iact_PE_data_out_valid[1][2];
+assign PECluster_weight_data_in[1][0] 			= iact_PE_data_out_bits[1][0]; 	
+assign PECluster_weight_data_in[1][1] 			= iact_PE_data_out_bits[1][1]; 	
+assign PECluster_weight_data_in[1][2] 			= iact_PE_data_out_bits[1][2];
+assign PECluster_weight_address_in_valid[2][0] 	= iact_PE_address_out_valid[2][0]; 	
+assign PECluster_weight_address_in_valid[2][1] 	= iact_PE_address_out_valid[2][1];
+assign PECluster_weight_address_in_valid[2][2] 	= iact_PE_address_out_valid[2][2]; 
+assign PECluster_weight_address_in[2][0] 			= iact_PE_address_out_bits[2][0]; 
+assign PECluster_weight_address_in[2][1] 			= iact_PE_address_out_bits[2][1]; 
+assign PECluster_weight_address_in[2][2] 			= iact_PE_address_out_bits[2][2]; 	
+assign PECluster_weight_data_in_valid[2][0] 		= iact_PE_data_out_valid[2][0];	
+assign PECluster_weight_data_in_valid[2][1] 		= iact_PE_data_out_valid[2][1];		
+assign PECluster_weight_data_in_valid[2][2] 		= iact_PE_data_out_valid[2][2];
+assign PECluster_weight_data_in[2][0] 			= iact_PE_data_out_bits[2][0]; 	
+assign PECluster_weight_data_in[2][1] 			= iact_PE_data_out_bits[2][1]; 	
+assign PECluster_weight_data_in[2][2] 			= iact_PE_data_out_bits[2][2];		
 
-assign PECluster_iact_0_address_in_valid 		= weight_PE_address_out_valid[0]; 
-assign PECluster_iact_1_address_in_valid 		= weight_PE_address_out_valid[1]; 
-assign PECluster_iact_2_address_in_valid 		= weight_PE_address_out_valid[2];
-assign PECluster_iact_0_address_in 				= weight_PE_address_out_bits[0];		
-assign PECluster_iact_1_address_in 				= weight_PE_address_out_bits[1];	
-assign PECluster_iact_2_address_in 				= weight_PE_address_out_bits[2]; 
-assign PECluster_iact_0_data_in_valid 			= weight_PE_data_out_valid[0]; 	 		
-assign PECluster_iact_1_data_in_valid 			= weight_PE_data_out_valid[1]; 		
-assign PECluster_iact_2_data_in_valid 			= weight_PE_data_out_valid[2]; 
-assign PECluster_iact_0_data_in 				= weight_PE_data_out_bits[0];  
-assign PECluster_iact_1_data_in 				= weight_PE_data_out_bits[1]; 	
-assign PECluster_iact_2_data_in 				= weight_PE_data_out_bits[2]; 
+assign PECluster_iact_address_in_valid[0] 		= weight_PE_address_out_valid[0]; 
+assign PECluster_iact_address_in_valid[1] 		= weight_PE_address_out_valid[1]; 
+assign PECluster_iact_address_in_valid[2] 		= weight_PE_address_out_valid[2];
+assign PECluster_iact_address_in[0] 				= weight_PE_address_out_bits[0];		
+assign PECluster_iact_address_in[1] 				= weight_PE_address_out_bits[1];	
+assign PECluster_iact_address_in[2] 				= weight_PE_address_out_bits[2]; 
+assign PECluster_iact_data_in_valid[0] 			= weight_PE_data_out_valid[0]; 	 		
+assign PECluster_iact_data_in_valid[1] 			= weight_PE_data_out_valid[1]; 		
+assign PECluster_iact_data_in_valid[2] 			= weight_PE_data_out_valid[2]; 
+assign PECluster_iact_data_in[0] 				= weight_PE_data_out_bits[0];  
+assign PECluster_iact_data_in[1] 				= weight_PE_data_out_bits[1]; 	
+assign PECluster_iact_data_in[2] 				= weight_PE_data_out_bits[2]; 
 
-assign PECluster_psum_0_in_valid 				= psum_PE_out_valid[0]; 
-assign PECluster_psum_1_in_valid 				= psum_PE_out_valid[1]; 
-assign PECluster_psum_2_in_valid 				= psum_PE_out_valid[2]; 
-assign PECluster_psum_0_in 						= psum_PE_out_bits[0]; 
-assign PECluster_psum_1_in 						= psum_PE_out_bits[1]; 
-assign PECluster_psum_2_in 						= psum_PE_out_bits[2]; 
-assign PECluster_psum_0_out_ready 				= psum_PE_in_ready[0]; 
-assign PECluster_psum_1_out_ready 				= psum_PE_in_ready[1]; 
-assign PECluster_psum_2_out_ready 				= psum_PE_in_ready[2]; 
+assign PECluster_psum_in_valid[0] 				= psum_PE_out_valid[0]; 
+assign PECluster_psum_in_valid[1] 				= psum_PE_out_valid[1]; 
+assign PECluster_psum_in_valid[2] 				= psum_PE_out_valid[2]; 
+assign PECluster_psum_in[0] 						= psum_PE_out_bits[0]; 
+assign PECluster_psum_in[1] 						= psum_PE_out_bits[1]; 
+assign PECluster_psum_in[2] 						= psum_PE_out_bits[2]; 
+assign PECluster_psum_out_ready[0] 				= psum_PE_in_ready[0]; 
+assign PECluster_psum_out_ready[1] 				= psum_PE_in_ready[1]; 
+assign PECluster_psum_out_ready[2] 				= psum_PE_in_ready[2]; 
 
 // psum accumulate from south cluster group
-assign PECluster_psum_0_in_from_south_valid 	= cg_south_psum_0_in_valid; 
-assign PECluster_psum_1_in_from_south_valid 	= cg_south_psum_1_in_valid; 
-assign PECluster_psum_2_in_from_south_valid 	= cg_south_psum_2_in_valid; 
-assign PECluster_psum_0_in_from_south 			= cg_south_psum_0_in; 	
-assign PECluster_psum_1_in_from_south 			= cg_south_psum_1_in; 	
-assign PECluster_psum_2_in_from_south 			= cg_south_psum_2_in; 	
+assign PECluster_psum_in_from_south_valid[0] 	= cg_south_psum_0_in_valid; 
+assign PECluster_psum_in_from_south_valid[1] 	= cg_south_psum_1_in_valid; 
+assign PECluster_psum_in_from_south_valid[2] 	= cg_south_psum_2_in_valid; 
+assign PECluster_psum_in_from_south[0] 			= cg_south_psum_0_in; 	
+assign PECluster_psum_in_from_south[1] 			= cg_south_psum_1_in; 	
+assign PECluster_psum_in_from_south[2] 			= cg_south_psum_2_in; 	
 
-assign PECluster_PE_0_0_disable					= PE_0_0_disable;
-assign PECluster_PE_0_1_disable					= PE_0_1_disable;
-assign PECluster_PE_0_2_disable					= PE_0_2_disable;
-assign PECluster_PE_1_0_disable					= PE_1_0_disable;
-assign PECluster_PE_1_1_disable					= PE_1_1_disable;
-assign PECluster_PE_1_2_disable					= PE_1_2_disable;
-assign PECluster_PE_2_0_disable					= PE_2_0_disable;
-assign PECluster_PE_2_1_disable					= PE_2_1_disable;
-assign PECluster_PE_2_2_disable					= PE_2_2_disable;
+assign PECluster_PE_disable[0][0]					= PE_0_0_disable;
+assign PECluster_PE_disable[0][1]					= PE_0_1_disable;
+assign PECluster_PE_disable[0][2]					= PE_0_2_disable;
+assign PECluster_PE_disable[1][0]					= PE_1_0_disable;
+assign PECluster_PE_disable[1][1]					= PE_1_1_disable;
+assign PECluster_PE_disable[1][2]					= PE_1_2_disable;
+assign PECluster_PE_disable[2][0]					= PE_2_0_disable;
+assign PECluster_PE_disable[2][1]					= PE_2_1_disable;
+assign PECluster_PE_disable[2][2]					= PE_2_2_disable;
 
 assign PECluster_psum_load_en 					= cg_ctrl_psum_load_en; 
 assign PECluster_iact_data_in_sel 				= PE_cluster_iact_data_in_sel;
@@ -1789,15 +1650,15 @@ assign GLBCluster_psum_write_addr[2]	= GLB_psum_2_write_addr;
 
 //============= other cluster group inter-connection =============//
 // iact_ready
-assign iact_PE_address_out_ready[0][0]    	= PECluster_iact_0_address_in_ready; 
-assign iact_PE_address_out_ready[0][2] 	  	= PECluster_iact_0_address_in_ready; 
-assign iact_PE_address_out_ready[0][1] 	 	= PECluster_iact_0_address_in_ready; 
-assign iact_PE_address_out_ready[1][0]    	= PECluster_iact_1_address_in_ready;
-assign iact_PE_address_out_ready[1][2] 	  	= PECluster_iact_1_address_in_ready;
-assign iact_PE_address_out_ready[1][1] 	 	= PECluster_iact_1_address_in_ready;
-assign iact_PE_address_out_ready[2][0]    	= PECluster_iact_2_address_in_ready;
-assign iact_PE_address_out_ready[2][2] 	  	= PECluster_iact_2_address_in_ready;
-assign iact_PE_address_out_ready[2][1] 	 	= PECluster_iact_2_address_in_ready;
+assign iact_PE_address_out_ready[0][0]    	= PECluster_iact_address_in_ready[0]; 
+assign iact_PE_address_out_ready[0][2] 	  	= PECluster_iact_address_in_ready[0]; 
+assign iact_PE_address_out_ready[0][1] 	 	= PECluster_iact_address_in_ready[0]; 
+assign iact_PE_address_out_ready[1][0]    	= PECluster_iact_address_in_ready[1];
+assign iact_PE_address_out_ready[1][2] 	  	= PECluster_iact_address_in_ready[1];
+assign iact_PE_address_out_ready[1][1] 	 	= PECluster_iact_address_in_ready[1];
+assign iact_PE_address_out_ready[2][0]    	= PECluster_iact_address_in_ready[2];
+assign iact_PE_address_out_ready[2][2] 	  	= PECluster_iact_address_in_ready[2];
+assign iact_PE_address_out_ready[2][1] 	 	= PECluster_iact_address_in_ready[2];
 
 assign iact_north_address_out_ready[0][0] 	= router_iact_0_0_north_address_out_ready; 	
 assign iact_north_address_out_ready[0][1] 	= router_iact_0_1_north_address_out_ready; 
@@ -1827,15 +1688,15 @@ assign iact_horiz_address_out_ready[2][0] 	= router_iact_2_0_horiz_address_out_r
 assign iact_horiz_address_out_ready[2][1] 	= router_iact_2_1_horiz_address_out_ready; 
 assign iact_horiz_address_out_ready[2][2] 	= router_iact_2_2_horiz_address_out_ready; 
 
-assign iact_PE_data_out_ready[0][0]    		= PECluster_iact_0_data_in_ready;
-assign iact_PE_data_out_ready[0][1] 			= PECluster_iact_0_data_in_ready;
-assign iact_PE_data_out_ready[0][2] 			= PECluster_iact_0_data_in_ready;
-assign iact_PE_data_out_ready[1][0]    		= PECluster_iact_1_data_in_ready;
-assign iact_PE_data_out_ready[1][1] 			= PECluster_iact_1_data_in_ready;
-assign iact_PE_data_out_ready[1][2] 			= PECluster_iact_1_data_in_ready;
-assign iact_PE_data_out_ready[2][0]    		= PECluster_iact_2_data_in_ready;
-assign iact_PE_data_out_ready[2][1] 			= PECluster_iact_2_data_in_ready;
-assign iact_PE_data_out_ready[2][2] 			= PECluster_iact_2_data_in_ready;
+assign iact_PE_data_out_ready[0][0]    		= PECluster_iact_data_in_ready[0];
+assign iact_PE_data_out_ready[0][1] 			= PECluster_iact_data_in_ready[0];
+assign iact_PE_data_out_ready[0][2] 			= PECluster_iact_data_in_ready[0];
+assign iact_PE_data_out_ready[1][0]    		= PECluster_iact_data_in_ready[1];
+assign iact_PE_data_out_ready[1][1] 			= PECluster_iact_data_in_ready[1];
+assign iact_PE_data_out_ready[1][2] 			= PECluster_iact_data_in_ready[1];
+assign iact_PE_data_out_ready[2][0]    		= PECluster_iact_data_in_ready[2];
+assign iact_PE_data_out_ready[2][1] 			= PECluster_iact_data_in_ready[2];
+assign iact_PE_data_out_ready[2][2] 			= PECluster_iact_data_in_ready[2];
 
 assign iact_north_data_out_ready[0][0] 		= router_iact_0_0_north_data_out_ready; 	
 assign iact_north_data_out_ready[0][1] 		= router_iact_0_1_north_data_out_ready; 
@@ -2055,9 +1916,9 @@ assign weight_horiz_data_in_bits[1] 			= router_weight_1_horiz_data_in;
 assign weight_horiz_data_in_bits[2] 			= router_weight_2_horiz_data_in;
 
 // psum router inter-connection
-assign psum_PE_out_ready[0] 					= PECluster_psum_0_in_ready; 
-assign psum_PE_out_ready[1] 					= PECluster_psum_1_in_ready; 
-assign psum_PE_out_ready[2] 					= PECluster_psum_2_in_ready;  	
+assign psum_PE_out_ready[0] 					= PECluster_psum_in_ready[0]; 
+assign psum_PE_out_ready[1] 					= PECluster_psum_in_ready[1]; 
+assign psum_PE_out_ready[2] 					= PECluster_psum_in_ready[2];  	
 assign psum_GLB_out_ready[0] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[0]; 
 assign psum_GLB_out_ready[1] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[1];
 assign psum_GLB_out_ready[2] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[2];
@@ -2065,9 +1926,9 @@ assign psum_south_out_ready[0] 				= router_psum_0_south_out_ready;
 assign psum_south_out_ready[1] 				= router_psum_1_south_out_ready; 
 assign psum_south_out_ready[2] 				= router_psum_2_south_out_ready; 
 			
-assign psum_PE_in_valid[0] 					= PECluster_psum_0_out_valid; 
-assign psum_PE_in_valid[1] 					= PECluster_psum_1_out_valid; 
-assign psum_PE_in_valid[2] 					= PECluster_psum_2_out_valid; 
+assign psum_PE_in_valid[0] 					= PECluster_psum_out_valid[0]; 
+assign psum_PE_in_valid[1] 					= PECluster_psum_out_valid[1]; 
+assign psum_PE_in_valid[2] 					= PECluster_psum_out_valid[2]; 
 assign psum_GLB_in_valid[0] 					= GLBCluster_psum_data_out_valid[0] & cg_ctrl_psum_add; 	
 assign psum_GLB_in_valid[1] 					= GLBCluster_psum_data_out_valid[1] & cg_ctrl_psum_add; 
 assign psum_GLB_in_valid[2] 					= GLBCluster_psum_data_out_valid[2] & cg_ctrl_psum_add; 
@@ -2075,9 +1936,9 @@ assign psum_north_in_valid[0] 				= router_psum_0_north_in_valid;
 assign psum_north_in_valid[1] 				= router_psum_1_north_in_valid; 
 assign psum_north_in_valid[2] 				= router_psum_2_north_in_valid;
 			
-assign psum_PE_in_bits[0] 					= PECluster_psum_0_out; 
-assign psum_PE_in_bits[1] 					= PECluster_psum_1_out; 
-assign psum_PE_in_bits[2] 					= PECluster_psum_2_out; 
+assign psum_PE_in_bits[0] 					= PECluster_psum_out[0]; 
+assign psum_PE_in_bits[1] 					= PECluster_psum_out[1]; 
+assign psum_PE_in_bits[2] 					= PECluster_psum_out[2]; 
 assign psum_GLB_in_bits[0] 					= GLBCluster_psum_data_out[0]; 
 assign psum_GLB_in_bits[1] 					= GLBCluster_psum_data_out[1];
 assign psum_GLB_in_bits[2] 					= GLBCluster_psum_data_out[2]; 
