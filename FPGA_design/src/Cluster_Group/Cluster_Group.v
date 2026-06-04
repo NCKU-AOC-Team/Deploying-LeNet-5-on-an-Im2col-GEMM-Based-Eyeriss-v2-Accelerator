@@ -58,15 +58,7 @@ module ClusterGroup (
 	input					PE_2_1_disable,
 	input					PE_2_2_disable,
 				
-	input			[9:0]	GLB_iact_0_0_read_addr,
-	input			[9:0]	GLB_iact_0_1_read_addr,
-	input			[9:0]	GLB_iact_0_2_read_addr,
-	input			[9:0]	GLB_iact_1_0_read_addr,
-	input			[9:0]	GLB_iact_1_1_read_addr,
-	input			[9:0]	GLB_iact_1_2_read_addr,
-	input			[9:0]	GLB_iact_2_0_read_addr,
-	input			[9:0]	GLB_iact_2_1_read_addr,
-	input			[9:0]	GLB_iact_2_2_read_addr,
+	input			[9:0]	GLB_iact_read_addr [0:2][0:2],
 				
 	input			[9:0]	GLB_psum_0_write_addr,
 	input			[9:0]	GLB_psum_1_write_addr,
@@ -1523,15 +1515,15 @@ assign GLBCluster_psum_read_out_en[1]	= psum_SRAM_Bank_1_read_out_en;
 assign GLBCluster_psum_read_out_en[2]	= psum_SRAM_Bank_2_read_out_en;
 
 
-assign GLBCluster_iact_read_addr[0][0]	= GLB_iact_0_0_read_addr; 
-assign GLBCluster_iact_read_addr[0][1]	= GLB_iact_0_1_read_addr;
-assign GLBCluster_iact_read_addr[0][2]	= GLB_iact_0_2_read_addr;
-assign GLBCluster_iact_read_addr[1][0]	= GLB_iact_1_0_read_addr; 
-assign GLBCluster_iact_read_addr[1][1]	= GLB_iact_1_1_read_addr;
-assign GLBCluster_iact_read_addr[1][2]	= GLB_iact_1_2_read_addr;
-assign GLBCluster_iact_read_addr[2][0]	= GLB_iact_2_0_read_addr; 
-assign GLBCluster_iact_read_addr[2][1]	= GLB_iact_2_1_read_addr;
-assign GLBCluster_iact_read_addr[2][2]	= GLB_iact_2_2_read_addr;
+assign GLBCluster_iact_read_addr[0][0]	= GLB_iact_read_addr[0][0]; 
+assign GLBCluster_iact_read_addr[0][1]	= GLB_iact_read_addr[0][1];
+assign GLBCluster_iact_read_addr[0][2]	= GLB_iact_read_addr[0][2];
+assign GLBCluster_iact_read_addr[1][0]	= GLB_iact_read_addr[1][0]; 
+assign GLBCluster_iact_read_addr[1][1]	= GLB_iact_read_addr[1][1];
+assign GLBCluster_iact_read_addr[1][2]	= GLB_iact_read_addr[1][2];
+assign GLBCluster_iact_read_addr[2][0]	= GLB_iact_read_addr[2][0]; 
+assign GLBCluster_iact_read_addr[2][1]	= GLB_iact_read_addr[2][1];
+assign GLBCluster_iact_read_addr[2][2]	= GLB_iact_read_addr[2][2];
 
 assign GLBCluster_psum_read_addr[0]	= GLB_psum_0_read_addr; 
 assign GLBCluster_psum_read_addr[1]	= GLB_psum_1_read_addr; 
