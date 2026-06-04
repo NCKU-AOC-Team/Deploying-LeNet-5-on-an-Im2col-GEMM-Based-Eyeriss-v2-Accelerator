@@ -782,542 +782,99 @@ wire				 	psum_1_data_out_sel;
 wire				 	psum_2_data_in_sel;             
 wire				 	psum_2_data_out_sel;    
     
-wire			 		iact_0_0_GLB_address_in_ready;    
-wire			 		iact_0_0_GLB_address_in_valid;    
-wire			[6:0] 	iact_0_0_GLB_address_in_bits;     
-wire			  		iact_0_0_GLB_data_in_ready;       
-wire			  		iact_0_0_GLB_data_in_valid;       
-wire			[11:0] 	iact_0_0_GLB_data_in_bits;        
-wire			  		iact_0_0_north_address_in_ready;  
-wire			  		iact_0_0_north_address_in_valid;  
-wire			[6:0] 	iact_0_0_north_address_in_bits;   
-wire			  		iact_0_0_north_data_in_ready;     
-wire			  		iact_0_0_north_data_in_valid;     
-wire			[11:0] 	iact_0_0_north_data_in_bits;      
-wire			  		iact_0_0_south_address_in_ready;  
-wire			  		iact_0_0_south_address_in_valid;  
-wire			[6:0] 	iact_0_0_south_address_in_bits;   
-wire			  		iact_0_0_south_data_in_ready;     
-wire			  		iact_0_0_south_data_in_valid;     
-wire			[11:0] 	iact_0_0_south_data_in_bits;      
-wire			  		iact_0_0_horiz_address_in_ready;  
-wire			  		iact_0_0_horiz_address_in_valid;  
-wire			[6:0] 	iact_0_0_horiz_address_in_bits;   
-wire			  		iact_0_0_horiz_data_in_ready;   
-wire			  		iact_0_0_horiz_data_in_valid;     
-wire			[11:0] 	iact_0_0_horiz_data_in_bits;      
-wire			  		iact_0_0_PE_address_out_ready;    
-wire			  		iact_0_0_PE_address_out_valid;     
-wire			[6:0] 	iact_0_0_PE_address_out_bits;    
-wire			  		iact_0_0_PE_data_out_ready;       
-wire			  		iact_0_0_PE_data_out_valid;       
-wire			[11:0] 	iact_0_0_PE_data_out_bits;        
-wire			 		iact_0_0_north_address_out_valid; 
-wire			[6:0] 	iact_0_0_north_address_out_bits;  
-wire			 		iact_0_0_north_data_out_valid;    
-wire			[11:0] 	iact_0_0_north_data_out_bits;     
-wire			  		iact_0_0_south_address_out_ready; 
-wire			  		iact_0_0_south_address_out_valid;  
-wire			[6:0] 	iact_0_0_south_address_out_bits; 
-wire			  		iact_0_0_south_data_out_ready;    
-wire			  		iact_0_0_south_data_out_valid;    
-wire			[11:0] 	iact_0_0_south_data_out_bits;     
-wire			  		iact_0_0_horiz_address_out_ready; 
-wire			  		iact_0_0_horiz_address_out_valid;  
-wire			[6:0] 	iact_0_0_horiz_address_out_bits; 
-wire			  		iact_0_0_horiz_data_out_ready;    
-wire			  		iact_0_0_horiz_data_out_valid;    
-wire			[11:0] 	iact_0_0_horiz_data_out_bits;  
-wire			  		iact_0_1_GLB_address_in_ready;    
-wire			  		iact_0_1_GLB_address_in_valid;    
-wire			[6:0] 	iact_0_1_GLB_address_in_bits;     
-wire			  		iact_0_1_GLB_data_in_ready;       
-wire			  		iact_0_1_GLB_data_in_valid;       
-wire			[11:0] 	iact_0_1_GLB_data_in_bits;        
-wire			  		iact_0_1_north_address_in_ready;  
-wire			  		iact_0_1_north_address_in_valid;  
-wire			[6:0] 	iact_0_1_north_address_in_bits;   
-wire			  		iact_0_1_north_data_in_ready;     
-wire			  		iact_0_1_north_data_in_valid;     
-wire			[11:0] 	iact_0_1_north_data_in_bits;      
-wire			  		iact_0_1_south_address_in_ready;  
-wire			  		iact_0_1_south_address_in_valid;  
-wire			[6:0] 	iact_0_1_south_address_in_bits;   
-wire			  		iact_0_1_south_data_in_ready;     
-wire			  		iact_0_1_south_data_in_valid;     
-wire			[11:0] 	iact_0_1_south_data_in_bits;      
-wire			  		iact_0_1_horiz_address_in_ready;  
-wire			  		iact_0_1_horiz_address_in_valid;  
-wire			[6:0] 	iact_0_1_horiz_address_in_bits;   
-wire			  		iact_0_1_horiz_data_in_ready;     
-wire			  		iact_0_1_horiz_data_in_valid;     
-wire			[11:0] 	iact_0_1_horiz_data_in_bits;      
-wire			  		iact_0_1_PE_address_out_ready;    
-wire			  		iact_0_1_PE_address_out_valid;     
-wire			[6:0] 	iact_0_1_PE_address_out_bits;    
-wire			  		iact_0_1_PE_data_out_ready;       
-wire			  		iact_0_1_PE_data_out_valid;       
-wire			[11:0] 	iact_0_1_PE_data_out_bits;        
-wire			 		iact_0_1_north_address_out_valid; 
-wire			[6:0] 	iact_0_1_north_address_out_bits;  
-wire			 		iact_0_1_north_data_out_valid;    
-wire			[11:0] 	iact_0_1_north_data_out_bits;     
-wire			  		iact_0_1_south_address_out_ready; 
-wire			  		iact_0_1_south_address_out_valid;  
-wire			[6:0] 	iact_0_1_south_address_out_bits; 
-wire			  		iact_0_1_south_data_out_ready;    
-wire			  		iact_0_1_south_data_out_valid;    
-wire			[11:0] 	iact_0_1_south_data_out_bits;     
-wire			  		iact_0_1_horiz_address_out_ready; 
-wire			  		iact_0_1_horiz_address_out_valid;  
-wire			[6:0] 	iact_0_1_horiz_address_out_bits; 
-wire			  		iact_0_1_horiz_data_out_ready;    
-wire			  		iact_0_1_horiz_data_out_valid;    
-wire			[11:0] 	iact_0_1_horiz_data_out_bits;   
-wire			  		iact_0_2_GLB_address_in_ready;    
-wire			  		iact_0_2_GLB_address_in_valid;    
-wire			[6:0] 	iact_0_2_GLB_address_in_bits;     
-wire			  		iact_0_2_GLB_data_in_ready;       
-wire			  		iact_0_2_GLB_data_in_valid;       
-wire			[11:0] 	iact_0_2_GLB_data_in_bits;        
-wire			  		iact_0_2_north_address_in_ready;  
-wire			  		iact_0_2_north_address_in_valid;  
-wire			[6:0] 	iact_0_2_north_address_in_bits;   
-wire			  		iact_0_2_north_data_in_ready;     
-wire			  		iact_0_2_north_data_in_valid;     
-wire			[11:0] 	iact_0_2_north_data_in_bits;      
-wire			  		iact_0_2_south_address_in_ready;  
-wire			  		iact_0_2_south_address_in_valid;  
-wire			[6:0] 	iact_0_2_south_address_in_bits;   
-wire			  		iact_0_2_south_data_in_ready;     
-wire			  		iact_0_2_south_data_in_valid;     
-wire			[11:0] 	iact_0_2_south_data_in_bits;      
-wire			  		iact_0_2_horiz_address_in_ready;  
-wire			  		iact_0_2_horiz_address_in_valid;  
-wire			[6:0] 	iact_0_2_horiz_address_in_bits;   
-wire			  		iact_0_2_horiz_data_in_ready;     
-wire			  		iact_0_2_horiz_data_in_valid;     
-wire			[11:0] 	iact_0_2_horiz_data_in_bits;      
-wire			  		iact_0_2_PE_address_out_ready;    
-wire			  		iact_0_2_PE_address_out_valid;     
-wire			[6:0] 	iact_0_2_PE_address_out_bits;    
-wire			  		iact_0_2_PE_data_out_ready;       
-wire			  		iact_0_2_PE_data_out_valid;       
-wire			[11:0] 	iact_0_2_PE_data_out_bits;        
-wire			 		iact_0_2_north_address_out_valid; 
-wire			[6:0] 	iact_0_2_north_address_out_bits;  
-wire			 		iact_0_2_north_data_out_valid;    
-wire			[11:0] 	iact_0_2_north_data_out_bits;     
-wire			  		iact_0_2_south_address_out_ready; 
-wire			  		iact_0_2_south_address_out_valid;  
-wire			[6:0] 	iact_0_2_south_address_out_bits; 
-wire			  		iact_0_2_south_data_out_ready;    
-wire			  		iact_0_2_south_data_out_valid;    
-wire			[11:0] 	iact_0_2_south_data_out_bits;     
-wire			  		iact_0_2_horiz_address_out_ready; 
-wire			  		iact_0_2_horiz_address_out_valid;  
-wire			[6:0] 	iact_0_2_horiz_address_out_bits; 
-wire			  		iact_0_2_horiz_data_out_ready;    
-wire			  		iact_0_2_horiz_data_out_valid;    
-wire			[11:0] 	iact_0_2_horiz_data_out_bits;  
-wire			 		iact_1_0_GLB_address_in_ready;    
-wire			 		iact_1_0_GLB_address_in_valid;    
-wire			[6:0] 	iact_1_0_GLB_address_in_bits;     
-wire			  		iact_1_0_GLB_data_in_ready;       
-wire			  		iact_1_0_GLB_data_in_valid;       
-wire			[11:0] 	iact_1_0_GLB_data_in_bits;        
-wire			  		iact_1_0_north_address_in_ready;  
-wire			  		iact_1_0_north_address_in_valid;  
-wire			[6:0] 	iact_1_0_north_address_in_bits;   
-wire			  		iact_1_0_north_data_in_ready;     
-wire			  		iact_1_0_north_data_in_valid;     
-wire			[11:0] 	iact_1_0_north_data_in_bits;      
-wire			  		iact_1_0_south_address_in_ready;  
-wire			  		iact_1_0_south_address_in_valid;  
-wire			[6:0] 	iact_1_0_south_address_in_bits;   
-wire			  		iact_1_0_south_data_in_ready;     
-wire			  		iact_1_0_south_data_in_valid;     
-wire			[11:0] 	iact_1_0_south_data_in_bits;      
-wire			  		iact_1_0_horiz_address_in_ready;  
-wire			  		iact_1_0_horiz_address_in_valid;  
-wire			[6:0] 	iact_1_0_horiz_address_in_bits;   
-wire			  		iact_1_0_horiz_data_in_ready;   
-wire			  		iact_1_0_horiz_data_in_valid;     
-wire			[11:0] 	iact_1_0_horiz_data_in_bits;      
-wire			  		iact_1_0_PE_address_out_ready;    
-wire			  		iact_1_0_PE_address_out_valid;     
-wire			[6:0] 	iact_1_0_PE_address_out_bits;    
-wire			  		iact_1_0_PE_data_out_ready;       
-wire			  		iact_1_0_PE_data_out_valid;       
-wire			[11:0] 	iact_1_0_PE_data_out_bits;        
-wire			 		iact_1_0_north_address_out_valid; 
-wire			[6:0] 	iact_1_0_north_address_out_bits;  
-wire			 		iact_1_0_north_data_out_valid;    
-wire			[11:0] 	iact_1_0_north_data_out_bits;     
-wire			  		iact_1_0_south_address_out_ready; 
-wire			  		iact_1_0_south_address_out_valid;  
-wire			[6:0] 	iact_1_0_south_address_out_bits; 
-wire			  		iact_1_0_south_data_out_ready;    
-wire			  		iact_1_0_south_data_out_valid;    
-wire			[11:0] 	iact_1_0_south_data_out_bits;     
-wire			  		iact_1_0_horiz_address_out_ready; 
-wire			  		iact_1_0_horiz_address_out_valid;  
-wire			[6:0] 	iact_1_0_horiz_address_out_bits; 
-wire			  		iact_1_0_horiz_data_out_ready;    
-wire			  		iact_1_0_horiz_data_out_valid;    
-wire			[11:0] 	iact_1_0_horiz_data_out_bits;  
-wire			  		iact_1_1_GLB_address_in_ready;    
-wire			  		iact_1_1_GLB_address_in_valid;    
-wire			[6:0] 	iact_1_1_GLB_address_in_bits;     
-wire			  		iact_1_1_GLB_data_in_ready;       
-wire			  		iact_1_1_GLB_data_in_valid;       
-wire			[11:0] 	iact_1_1_GLB_data_in_bits;        
-wire			  		iact_1_1_north_address_in_ready;  
-wire			  		iact_1_1_north_address_in_valid;  
-wire			[6:0] 	iact_1_1_north_address_in_bits;   
-wire			  		iact_1_1_north_data_in_ready;     
-wire			  		iact_1_1_north_data_in_valid;     
-wire			[11:0] 	iact_1_1_north_data_in_bits;      
-wire			  		iact_1_1_south_address_in_ready;  
-wire			  		iact_1_1_south_address_in_valid;  
-wire			[6:0] 	iact_1_1_south_address_in_bits;   
-wire			  		iact_1_1_south_data_in_ready;     
-wire			  		iact_1_1_south_data_in_valid;     
-wire			[11:0] 	iact_1_1_south_data_in_bits;      
-wire			  		iact_1_1_horiz_address_in_ready;  
-wire			  		iact_1_1_horiz_address_in_valid;  
-wire			[6:0] 	iact_1_1_horiz_address_in_bits;   
-wire			  		iact_1_1_horiz_data_in_ready;     
-wire			  		iact_1_1_horiz_data_in_valid;     
-wire			[11:0] 	iact_1_1_horiz_data_in_bits;      
-wire			  		iact_1_1_PE_address_out_ready;    
-wire			  		iact_1_1_PE_address_out_valid;     
-wire			[6:0] 	iact_1_1_PE_address_out_bits;    
-wire			  		iact_1_1_PE_data_out_ready;       
-wire			  		iact_1_1_PE_data_out_valid;       
-wire			[11:0] 	iact_1_1_PE_data_out_bits;        
-wire			 		iact_1_1_north_address_out_valid; 
-wire			[6:0] 	iact_1_1_north_address_out_bits;  
-wire			 		iact_1_1_north_data_out_valid;    
-wire			[11:0] 	iact_1_1_north_data_out_bits;     
-wire			  		iact_1_1_south_address_out_ready; 
-wire			  		iact_1_1_south_address_out_valid;  
-wire			[6:0] 	iact_1_1_south_address_out_bits; 
-wire			  		iact_1_1_south_data_out_ready;    
-wire			  		iact_1_1_south_data_out_valid;    
-wire			[11:0] 	iact_1_1_south_data_out_bits;     
-wire			  		iact_1_1_horiz_address_out_ready; 
-wire			  		iact_1_1_horiz_address_out_valid;  
-wire			[6:0] 	iact_1_1_horiz_address_out_bits; 
-wire			  		iact_1_1_horiz_data_out_ready;    
-wire			  		iact_1_1_horiz_data_out_valid;    
-wire			[11:0] 	iact_1_1_horiz_data_out_bits;   
-wire			  		iact_1_2_GLB_address_in_ready;    
-wire			  		iact_1_2_GLB_address_in_valid;    
-wire			[6:0] 	iact_1_2_GLB_address_in_bits;     
-wire			  		iact_1_2_GLB_data_in_ready;       
-wire			  		iact_1_2_GLB_data_in_valid;       
-wire			[11:0] 	iact_1_2_GLB_data_in_bits;        
-wire			  		iact_1_2_north_address_in_ready;  
-wire			  		iact_1_2_north_address_in_valid;  
-wire			[6:0] 	iact_1_2_north_address_in_bits;   
-wire			  		iact_1_2_north_data_in_ready;     
-wire			  		iact_1_2_north_data_in_valid;     
-wire			[11:0] 	iact_1_2_north_data_in_bits;      
-wire			  		iact_1_2_south_address_in_ready;  
-wire			  		iact_1_2_south_address_in_valid;  
-wire			[6:0] 	iact_1_2_south_address_in_bits;   
-wire			  		iact_1_2_south_data_in_ready;     
-wire			  		iact_1_2_south_data_in_valid;     
-wire			[11:0] 	iact_1_2_south_data_in_bits;      
-wire			  		iact_1_2_horiz_address_in_ready;  
-wire			  		iact_1_2_horiz_address_in_valid;  
-wire			[6:0] 	iact_1_2_horiz_address_in_bits;   
-wire			  		iact_1_2_horiz_data_in_ready;     
-wire			  		iact_1_2_horiz_data_in_valid;     
-wire			[11:0] 	iact_1_2_horiz_data_in_bits;      
-wire			  		iact_1_2_PE_address_out_ready;    
-wire			  		iact_1_2_PE_address_out_valid;     
-wire			[6:0] 	iact_1_2_PE_address_out_bits;    
-wire			  		iact_1_2_PE_data_out_ready;       
-wire			  		iact_1_2_PE_data_out_valid;       
-wire			[11:0] 	iact_1_2_PE_data_out_bits;        
-wire			 		iact_1_2_north_address_out_valid; 
-wire			[6:0] 	iact_1_2_north_address_out_bits;  
-wire			 		iact_1_2_north_data_out_valid;    
-wire			[11:0] 	iact_1_2_north_data_out_bits;     
-wire			  		iact_1_2_south_address_out_ready; 
-wire			  		iact_1_2_south_address_out_valid;  
-wire			[6:0] 	iact_1_2_south_address_out_bits; 
-wire			  		iact_1_2_south_data_out_ready;    
-wire			  		iact_1_2_south_data_out_valid;    
-wire			[11:0] 	iact_1_2_south_data_out_bits;     
-wire			  		iact_1_2_horiz_address_out_ready; 
-wire			  		iact_1_2_horiz_address_out_valid;  
-wire			[6:0] 	iact_1_2_horiz_address_out_bits; 
-wire			  		iact_1_2_horiz_data_out_ready;    
-wire			  		iact_1_2_horiz_data_out_valid;    
-wire			[11:0] 	iact_1_2_horiz_data_out_bits;  
-wire			 		iact_2_0_GLB_address_in_ready;    
-wire			 		iact_2_0_GLB_address_in_valid;    
-wire			[6:0] 	iact_2_0_GLB_address_in_bits;     
-wire			  		iact_2_0_GLB_data_in_ready;       
-wire			  		iact_2_0_GLB_data_in_valid;       
-wire			[11:0] 	iact_2_0_GLB_data_in_bits;        
-wire			  		iact_2_0_north_address_in_ready;  
-wire			  		iact_2_0_north_address_in_valid;  
-wire			[6:0] 	iact_2_0_north_address_in_bits;   
-wire			  		iact_2_0_north_data_in_ready;     
-wire			  		iact_2_0_north_data_in_valid;     
-wire			[11:0] 	iact_2_0_north_data_in_bits;      
-wire			  		iact_2_0_south_address_in_ready;  
-wire			  		iact_2_0_south_address_in_valid;  
-wire			[6:0] 	iact_2_0_south_address_in_bits;   
-wire			  		iact_2_0_south_data_in_ready;     
-wire			  		iact_2_0_south_data_in_valid;     
-wire			[11:0] 	iact_2_0_south_data_in_bits;      
-wire			  		iact_2_0_horiz_address_in_ready;  
-wire			  		iact_2_0_horiz_address_in_valid;  
-wire			[6:0] 	iact_2_0_horiz_address_in_bits;   
-wire			  		iact_2_0_horiz_data_in_ready;   
-wire			  		iact_2_0_horiz_data_in_valid;     
-wire			[11:0] 	iact_2_0_horiz_data_in_bits;      
-wire			  		iact_2_0_PE_address_out_ready;    
-wire			  		iact_2_0_PE_address_out_valid;     
-wire			[6:0] 	iact_2_0_PE_address_out_bits;    
-wire			  		iact_2_0_PE_data_out_ready;       
-wire			  		iact_2_0_PE_data_out_valid;       
-wire			[11:0] 	iact_2_0_PE_data_out_bits;        
-wire			 		iact_2_0_north_address_out_valid; 
-wire			[6:0] 	iact_2_0_north_address_out_bits;  
-wire			 		iact_2_0_north_data_out_valid;    
-wire			[11:0] 	iact_2_0_north_data_out_bits;     
-wire			  		iact_2_0_south_address_out_ready; 
-wire			  		iact_2_0_south_address_out_valid;  
-wire			[6:0] 	iact_2_0_south_address_out_bits; 
-wire			  		iact_2_0_south_data_out_ready;    
-wire			  		iact_2_0_south_data_out_valid;    
-wire			[11:0] 	iact_2_0_south_data_out_bits;     
-wire			  		iact_2_0_horiz_address_out_ready; 
-wire			  		iact_2_0_horiz_address_out_valid;  
-wire			[6:0] 	iact_2_0_horiz_address_out_bits; 
-wire			  		iact_2_0_horiz_data_out_ready;    
-wire			  		iact_2_0_horiz_data_out_valid;    
-wire			[11:0] 	iact_2_0_horiz_data_out_bits;  
-wire			  		iact_2_1_GLB_address_in_ready;    
-wire			  		iact_2_1_GLB_address_in_valid;    
-wire			[6:0] 	iact_2_1_GLB_address_in_bits;     
-wire			  		iact_2_1_GLB_data_in_ready;       
-wire			  		iact_2_1_GLB_data_in_valid;       
-wire			[11:0] 	iact_2_1_GLB_data_in_bits;        
-wire			  		iact_2_1_north_address_in_ready;  
-wire			  		iact_2_1_north_address_in_valid;  
-wire			[6:0] 	iact_2_1_north_address_in_bits;   
-wire			  		iact_2_1_north_data_in_ready;     
-wire			  		iact_2_1_north_data_in_valid;     
-wire			[11:0] 	iact_2_1_north_data_in_bits;      
-wire			  		iact_2_1_south_address_in_ready;  
-wire			  		iact_2_1_south_address_in_valid;  
-wire			[6:0] 	iact_2_1_south_address_in_bits;   
-wire			  		iact_2_1_south_data_in_ready;     
-wire			  		iact_2_1_south_data_in_valid;     
-wire			[11:0] 	iact_2_1_south_data_in_bits;      
-wire			  		iact_2_1_horiz_address_in_ready;  
-wire			  		iact_2_1_horiz_address_in_valid;  
-wire			[6:0] 	iact_2_1_horiz_address_in_bits;   
-wire			  		iact_2_1_horiz_data_in_ready;     
-wire			  		iact_2_1_horiz_data_in_valid;     
-wire			[11:0] 	iact_2_1_horiz_data_in_bits;      
-wire			  		iact_2_1_PE_address_out_ready;    
-wire			  		iact_2_1_PE_address_out_valid;     
-wire			[6:0] 	iact_2_1_PE_address_out_bits;    
-wire			  		iact_2_1_PE_data_out_ready;       
-wire			  		iact_2_1_PE_data_out_valid;       
-wire			[11:0] 	iact_2_1_PE_data_out_bits;        
-wire			 		iact_2_1_north_address_out_valid; 
-wire			[6:0] 	iact_2_1_north_address_out_bits;  
-wire			 		iact_2_1_north_data_out_valid;    
-wire			[11:0] 	iact_2_1_north_data_out_bits;     
-wire			  		iact_2_1_south_address_out_ready; 
-wire			  		iact_2_1_south_address_out_valid;  
-wire			[6:0] 	iact_2_1_south_address_out_bits; 
-wire			  		iact_2_1_south_data_out_ready;    
-wire			  		iact_2_1_south_data_out_valid;    
-wire			[11:0] 	iact_2_1_south_data_out_bits;     
-wire			  		iact_2_1_horiz_address_out_ready; 
-wire			  		iact_2_1_horiz_address_out_valid;  
-wire			[6:0] 	iact_2_1_horiz_address_out_bits; 
-wire			  		iact_2_1_horiz_data_out_ready;    
-wire			  		iact_2_1_horiz_data_out_valid;    
-wire			[11:0] 	iact_2_1_horiz_data_out_bits;   
-wire			  		iact_2_2_GLB_address_in_ready;    
-wire			  		iact_2_2_GLB_address_in_valid;    
-wire			[6:0] 	iact_2_2_GLB_address_in_bits;     
-wire			  		iact_2_2_GLB_data_in_ready;       
-wire			  		iact_2_2_GLB_data_in_valid;       
-wire			[11:0] 	iact_2_2_GLB_data_in_bits;        
-wire			  		iact_2_2_north_address_in_ready;  
-wire			  		iact_2_2_north_address_in_valid;  
-wire			[6:0] 	iact_2_2_north_address_in_bits;   
-wire			  		iact_2_2_north_data_in_ready;     
-wire			  		iact_2_2_north_data_in_valid;     
-wire			[11:0] 	iact_2_2_north_data_in_bits;      
-wire			  		iact_2_2_south_address_in_ready;  
-wire			  		iact_2_2_south_address_in_valid;  
-wire			[6:0] 	iact_2_2_south_address_in_bits;   
-wire			  		iact_2_2_south_data_in_ready;     
-wire			  		iact_2_2_south_data_in_valid;     
-wire			[11:0] 	iact_2_2_south_data_in_bits;      
-wire			  		iact_2_2_horiz_address_in_ready;  
-wire			  		iact_2_2_horiz_address_in_valid;  
-wire			[6:0] 	iact_2_2_horiz_address_in_bits;   
-wire			  		iact_2_2_horiz_data_in_ready;     
-wire			  		iact_2_2_horiz_data_in_valid;     
-wire			[11:0] 	iact_2_2_horiz_data_in_bits;      
-wire			  		iact_2_2_PE_address_out_ready;    
-wire			  		iact_2_2_PE_address_out_valid;     
-wire			[6:0] 	iact_2_2_PE_address_out_bits;    
-wire			  		iact_2_2_PE_data_out_ready;       
-wire			  		iact_2_2_PE_data_out_valid;       
-wire			[11:0] 	iact_2_2_PE_data_out_bits;        
-wire			 		iact_2_2_north_address_out_valid; 
-wire			[6:0] 	iact_2_2_north_address_out_bits;  
-wire			 		iact_2_2_north_data_out_valid;    
-wire			[11:0] 	iact_2_2_north_data_out_bits;     
-wire			  		iact_2_2_south_address_out_ready; 
-wire			  		iact_2_2_south_address_out_valid;  
-wire			[6:0] 	iact_2_2_south_address_out_bits; 
-wire			  		iact_2_2_south_data_out_ready;    
-wire			  		iact_2_2_south_data_out_valid;    
-wire			[11:0] 	iact_2_2_south_data_out_bits;     
-wire			  		iact_2_2_horiz_address_out_ready; 
-wire			  		iact_2_2_horiz_address_out_valid;  
-wire			[6:0] 	iact_2_2_horiz_address_out_bits; 
-wire			  		iact_2_2_horiz_data_out_ready;    
-wire			  		iact_2_2_horiz_data_out_valid;    
-wire			[11:0] 	iact_2_2_horiz_data_out_bits;      
-				
-wire			  		weight_0_GLB_address_in_ready;  
-wire			  		weight_0_GLB_address_in_valid;  
-wire			[7:0] 	weight_0_GLB_address_in_bits;   
-wire			  		weight_0_GLB_data_in_ready;     
-wire			  		weight_0_GLB_data_in_valid;     
-wire			[12:0] 	weight_0_GLB_data_in_bits;      
-wire			  		weight_0_horiz_address_in_ready;
-wire			  		weight_0_horiz_address_in_valid;
-wire			[7:0] 	weight_0_horiz_address_in_bits; 
-wire			  		weight_0_horiz_data_in_ready;   
-wire			  		weight_0_horiz_data_in_valid;   
-wire			[12:0] 	weight_0_horiz_data_in_bits;    
-wire			 		weight_0_PE_address_out_valid;  
-wire			[7:0] 	weight_0_PE_address_out_bits;   
-wire			 		weight_0_PE_data_out_valid;     
-wire			[12:0] 	weight_0_PE_data_out_bits;      
-wire			  		weight_0_horiz_address_out_ready;  
-wire			  		weight_0_horiz_address_out_valid;  
-wire			[7:0] 	weight_0_horiz_address_out_bits;  
-wire			  		weight_0_horiz_data_out_ready;    
-wire			  		weight_0_horiz_data_out_valid;    
-wire			[12:0] 	weight_0_horiz_data_out_bits;     
-wire			  		weight_1_GLB_address_in_ready;    
-wire			  		weight_1_GLB_address_in_valid;    
-wire			[7:0] 	weight_1_GLB_address_in_bits;     
-wire			  		weight_1_GLB_data_in_ready;       
-wire			  		weight_1_GLB_data_in_valid;       
-wire			[12:0] 	weight_1_GLB_data_in_bits;        
-wire			  		weight_1_horiz_address_in_ready;   
-wire			  		weight_1_horiz_address_in_valid;   
-wire			[7:0] 	weight_1_horiz_address_in_bits;   
-wire			  		weight_1_horiz_data_in_ready;     
-wire			  		weight_1_horiz_data_in_valid;     
-wire			[12:0] 	weight_1_horiz_data_in_bits;      
-wire			 		weight_1_PE_address_out_valid;    
-wire			[7:0] 	weight_1_PE_address_out_bits;     
-wire			 		weight_1_PE_data_out_valid;       
-wire			[12:0] 	weight_1_PE_data_out_bits;        
-wire			  		weight_1_horiz_address_out_ready;  
-wire			  		weight_1_horiz_address_out_valid;  
-wire			[7:0] 	weight_1_horiz_address_out_bits;  
-wire			  		weight_1_horiz_data_out_ready;    
-wire			  		weight_1_horiz_data_out_valid;    
-wire			[12:0] 	weight_1_horiz_data_out_bits;     
-wire			  		weight_2_GLB_address_in_ready;    
-wire			  		weight_2_GLB_address_in_valid;    
-wire			[7:0] 	weight_2_GLB_address_in_bits;     
-wire			  		weight_2_GLB_data_in_ready;       
-wire			  		weight_2_GLB_data_in_valid;       
-wire			[12:0] 	weight_2_GLB_data_in_bits;        
-wire			  		weight_2_horiz_address_in_ready;  
-wire			  		weight_2_horiz_address_in_valid;  
-wire			[7:0] 	weight_2_horiz_address_in_bits;   
-wire			  		weight_2_horiz_data_in_ready;     
-wire			  		weight_2_horiz_data_in_valid;     
-wire			[12:0] 	weight_2_horiz_data_in_bits;      
-wire			 		weight_2_PE_address_out_valid;    
-wire			[7:0] 	weight_2_PE_address_out_bits;     
-wire			 		weight_2_PE_data_out_valid;       
-wire			[12:0] 	weight_2_PE_data_out_bits;        
-wire			  		weight_2_horiz_address_out_ready; 
-wire			  		weight_2_horiz_address_out_valid; 
-wire			[7:0] 	weight_2_horiz_address_out_bits;  
-wire			  		weight_2_horiz_data_out_ready;    
-wire			  		weight_2_horiz_data_out_valid;    
-wire			[12:0] 	weight_2_horiz_data_out_bits;    
 
-wire   					psum_0_PE_in_ready;               
-wire   					psum_0_PE_in_valid;               
-wire	signed	[20:0] 	psum_0_PE_in_bits;                
-wire   					psum_0_GLB_in_ready;              
-wire   					psum_0_GLB_in_valid;              
-wire	signed	[20:0] 	psum_0_GLB_in_bits;               
-wire   					psum_0_north_in_ready;            
-wire   					psum_0_north_in_valid;            
-wire	signed	[20:0] 	psum_0_north_in_bits;             
-wire   					psum_0_PE_out_ready;              
-wire   					psum_0_PE_out_valid;              
-wire	signed	[20:0] 	psum_0_PE_out_bits;               
-wire   					psum_0_GLB_out_ready;             
-wire   					psum_0_GLB_out_valid;             
-wire	signed	[20:0] 	psum_0_GLB_out_bits;              
-wire   					psum_0_south_out_ready;           
-wire   					psum_0_south_out_valid;           
-wire	signed	[20:0] 	psum_0_south_out_bits;       
-wire   					psum_1_PE_in_ready;               
-wire   					psum_1_PE_in_valid;               
-wire	signed	[20:0] 	psum_1_PE_in_bits;                
-wire   					psum_1_GLB_in_ready;              
-wire   					psum_1_GLB_in_valid;              
-wire	signed	[20:0] 	psum_1_GLB_in_bits;               
-wire   					psum_1_north_in_ready;            
-wire   					psum_1_north_in_valid;            
-wire	signed	[20:0] 	psum_1_north_in_bits;             
-wire   					psum_1_PE_out_ready;              
-wire   					psum_1_PE_out_valid;              
-wire	signed	[20:0] 	psum_1_PE_out_bits;               
-wire   					psum_1_GLB_out_ready;             
-wire   					psum_1_GLB_out_valid;             
-wire	signed	[20:0] 	psum_1_GLB_out_bits;              
-wire   					psum_1_south_out_ready;           
-wire   					psum_1_south_out_valid;           
-wire	signed	[20:0] 	psum_1_south_out_bits;         
-wire   					psum_2_PE_in_ready;               
-wire   					psum_2_PE_in_valid;               
-wire	signed	[20:0] 	psum_2_PE_in_bits;                
-wire   					psum_2_GLB_in_ready;              
-wire   					psum_2_GLB_in_valid;              
-wire	signed	[20:0] 	psum_2_GLB_in_bits;               
-wire   					psum_2_north_in_ready;            
-wire   					psum_2_north_in_valid;            
-wire	signed	[20:0] 	psum_2_north_in_bits;             
-wire   					psum_2_PE_out_ready;              
-wire   					psum_2_PE_out_valid;              
-wire	signed	[20:0] 	psum_2_PE_out_bits;               
-wire   					psum_2_GLB_out_ready;             
-wire   					psum_2_GLB_out_valid;             
-wire	signed	[20:0] 	psum_2_GLB_out_bits;              
-wire   					psum_2_south_out_ready;           
-wire   					psum_2_south_out_valid;           
-wire	signed	[20:0] 	psum_2_south_out_bits;    
+// [Refactor 2nd-stage] router interface array-ified (script-gen, equiv to flat wires)
+wire               iact_GLB_address_in_ready [0:2][0:2];
+wire               iact_GLB_address_in_valid [0:2][0:2];
+wire [6:0]         iact_GLB_address_in_bits [0:2][0:2];
+wire               iact_GLB_data_in_ready [0:2][0:2];
+wire               iact_GLB_data_in_valid [0:2][0:2];
+wire [11:0]        iact_GLB_data_in_bits [0:2][0:2];
+wire               iact_north_address_in_ready [0:2][0:2];
+wire               iact_north_address_in_valid [0:2][0:2];
+wire [6:0]         iact_north_address_in_bits [0:2][0:2];
+wire               iact_north_data_in_ready [0:2][0:2];
+wire               iact_north_data_in_valid [0:2][0:2];
+wire [11:0]        iact_north_data_in_bits [0:2][0:2];
+wire               iact_south_address_in_ready [0:2][0:2];
+wire               iact_south_address_in_valid [0:2][0:2];
+wire [6:0]         iact_south_address_in_bits [0:2][0:2];
+wire               iact_south_data_in_ready [0:2][0:2];
+wire               iact_south_data_in_valid [0:2][0:2];
+wire [11:0]        iact_south_data_in_bits [0:2][0:2];
+wire               iact_horiz_address_in_ready [0:2][0:2];
+wire               iact_horiz_address_in_valid [0:2][0:2];
+wire [6:0]         iact_horiz_address_in_bits [0:2][0:2];
+wire               iact_horiz_data_in_ready [0:2][0:2];
+wire               iact_horiz_data_in_valid [0:2][0:2];
+wire [11:0]        iact_horiz_data_in_bits [0:2][0:2];
+wire               iact_PE_address_out_ready [0:2][0:2];
+wire               iact_PE_address_out_valid [0:2][0:2];
+wire [6:0]         iact_PE_address_out_bits [0:2][0:2];
+wire               iact_PE_data_out_ready [0:2][0:2];
+wire               iact_PE_data_out_valid [0:2][0:2];
+wire [11:0]        iact_PE_data_out_bits [0:2][0:2];
+wire               iact_north_address_out_ready [0:2][0:2];
+wire               iact_north_address_out_valid [0:2][0:2];
+wire [6:0]         iact_north_address_out_bits [0:2][0:2];
+wire               iact_north_data_out_ready [0:2][0:2];
+wire               iact_north_data_out_valid [0:2][0:2];
+wire [11:0]        iact_north_data_out_bits [0:2][0:2];
+wire               iact_south_address_out_ready [0:2][0:2];
+wire               iact_south_address_out_valid [0:2][0:2];
+wire [6:0]         iact_south_address_out_bits [0:2][0:2];
+wire               iact_south_data_out_ready [0:2][0:2];
+wire               iact_south_data_out_valid [0:2][0:2];
+wire [11:0]        iact_south_data_out_bits [0:2][0:2];
+wire               iact_horiz_address_out_ready [0:2][0:2];
+wire               iact_horiz_address_out_valid [0:2][0:2];
+wire [6:0]         iact_horiz_address_out_bits [0:2][0:2];
+wire               iact_horiz_data_out_ready [0:2][0:2];
+wire               iact_horiz_data_out_valid [0:2][0:2];
+wire [11:0]        iact_horiz_data_out_bits [0:2][0:2];
+wire               weight_GLB_address_in_ready [0:2];
+wire               weight_GLB_address_in_valid [0:2];
+wire [7:0]         weight_GLB_address_in_bits [0:2];
+wire               weight_GLB_data_in_ready [0:2];
+wire               weight_GLB_data_in_valid [0:2];
+wire [12:0]        weight_GLB_data_in_bits [0:2];
+wire               weight_horiz_address_in_ready [0:2];
+wire               weight_horiz_address_in_valid [0:2];
+wire [7:0]         weight_horiz_address_in_bits [0:2];
+wire               weight_horiz_data_in_ready [0:2];
+wire               weight_horiz_data_in_valid [0:2];
+wire [12:0]        weight_horiz_data_in_bits [0:2];
+wire               weight_PE_address_out_valid [0:2];
+wire [7:0]         weight_PE_address_out_bits [0:2];
+wire               weight_PE_data_out_valid [0:2];
+wire [12:0]        weight_PE_data_out_bits [0:2];
+wire               weight_horiz_address_out_ready [0:2];
+wire               weight_horiz_address_out_valid [0:2];
+wire [7:0]         weight_horiz_address_out_bits [0:2];
+wire               weight_horiz_data_out_ready [0:2];
+wire               weight_horiz_data_out_valid [0:2];
+wire [12:0]        weight_horiz_data_out_bits [0:2];
+wire               psum_PE_in_ready [0:2];
+wire               psum_PE_in_valid [0:2];
+wire signed [20:0] psum_PE_in_bits [0:2];
+wire               psum_GLB_in_ready [0:2];
+wire               psum_GLB_in_valid [0:2];
+wire signed [20:0] psum_GLB_in_bits [0:2];
+wire               psum_north_in_ready [0:2];
+wire               psum_north_in_valid [0:2];
+wire signed [20:0] psum_north_in_bits [0:2];
+wire               psum_PE_out_ready [0:2];
+wire               psum_PE_out_valid [0:2];
+wire signed [20:0] psum_PE_out_bits [0:2];
+wire               psum_GLB_out_ready [0:2];
+wire               psum_GLB_out_valid [0:2];
+wire signed [20:0] psum_GLB_out_bits [0:2];
+wire               psum_south_out_ready [0:2];
+wire               psum_south_out_valid [0:2];
+wire signed [20:0] psum_south_out_bits [0:2];
+
+				
+
 
 
 // cluster group controller connection
@@ -1502,577 +1059,113 @@ GLB_Cluster GLB_Cluster_inst (
 	.PSUM_DEPTH(PSUM_DEPTH)
 );
 
-Router_Cluster Router_Cluster_inst ( 
-	.iact_0_data_in_sel             	(iact_0_data_in_sel             	),
-	.iact_0_data_out_sel            	(iact_0_data_out_sel            	),
-	.iact_1_data_in_sel             	(iact_1_data_in_sel             	),
-	.iact_1_data_out_sel            	(iact_1_data_out_sel            	),
-	.iact_2_data_in_sel             	(iact_2_data_in_sel             	),
-	.iact_2_data_out_sel   				(iact_2_data_out_sel   				),	
-	.weight_0_data_in_sel           	(weight_0_data_in_sel           	),
-	.weight_0_data_out_sel          	(weight_0_data_out_sel          	),
-	.weight_1_data_in_sel           	(weight_1_data_in_sel           	),
-	.weight_1_data_out_sel          	(weight_1_data_out_sel          	),
-	.weight_2_data_in_sel           	(weight_2_data_in_sel           	),
-	.weight_2_data_out_sel 				(weight_2_data_out_sel 				),
-	.psum_0_data_in_sel             	(psum_0_data_in_sel             	),
-	.psum_0_data_out_sel            	(psum_0_data_out_sel            	),
-	.psum_1_data_in_sel             	(psum_1_data_in_sel             	),
-	.psum_1_data_out_sel            	(psum_1_data_out_sel            	),
-	.psum_2_data_in_sel             	(psum_2_data_in_sel             	),
-	.psum_2_data_out_sel            	(psum_2_data_out_sel            	),
-	.iact_0_0_GLB_address_in_ready    	(iact_0_0_GLB_address_in_ready    	),
-	.iact_0_0_GLB_address_in_valid    	(iact_0_0_GLB_address_in_valid    	),
-	.iact_0_0_GLB_address_in_bits     	(iact_0_0_GLB_address_in_bits     	),
-	.iact_0_0_GLB_data_in_ready       	(iact_0_0_GLB_data_in_ready       	),
-	.iact_0_0_GLB_data_in_valid       	(iact_0_0_GLB_data_in_valid       	),
-	.iact_0_0_GLB_data_in_bits        	(iact_0_0_GLB_data_in_bits        	),
-	.iact_0_0_north_address_in_ready  	(iact_0_0_north_address_in_ready  	),
-	.iact_0_0_north_address_in_valid  	(iact_0_0_north_address_in_valid  	),
-	.iact_0_0_north_address_in_bits   	(iact_0_0_north_address_in_bits   	),
-	.iact_0_0_north_data_in_ready     	(iact_0_0_north_data_in_ready     	),
-	.iact_0_0_north_data_in_valid     	(iact_0_0_north_data_in_valid     	),
-	.iact_0_0_north_data_in_bits      	(iact_0_0_north_data_in_bits      	),
-	.iact_0_0_south_address_in_ready  	(iact_0_0_south_address_in_ready  	),
-	.iact_0_0_south_address_in_valid  	(iact_0_0_south_address_in_valid  	),
-	.iact_0_0_south_address_in_bits   	(iact_0_0_south_address_in_bits   	),
-	.iact_0_0_south_data_in_ready     	(iact_0_0_south_data_in_ready     	),
-	.iact_0_0_south_data_in_valid     	(iact_0_0_south_data_in_valid     	),
-	.iact_0_0_south_data_in_bits      	(iact_0_0_south_data_in_bits      	),
-	.iact_0_0_horiz_address_in_ready  	(iact_0_0_horiz_address_in_ready  	),
-	.iact_0_0_horiz_address_in_valid  	(iact_0_0_horiz_address_in_valid  	),
-	.iact_0_0_horiz_address_in_bits   	(iact_0_0_horiz_address_in_bits   	),
-	.iact_0_0_horiz_data_in_ready   	(iact_0_0_horiz_data_in_ready   	),
-	.iact_0_0_horiz_data_in_valid     	(iact_0_0_horiz_data_in_valid     	),
-	.iact_0_0_horiz_data_in_bits      	(iact_0_0_horiz_data_in_bits      	),
-	.iact_0_0_PE_address_out_ready    	(iact_0_0_PE_address_out_ready    	),
-	.iact_0_0_PE_address_out_bits     	(iact_0_0_PE_address_out_bits     	),
-	.iact_0_0_PE_address_out_valid    	(iact_0_0_PE_address_out_valid    	),
-	.iact_0_0_PE_data_out_ready       	(iact_0_0_PE_data_out_ready       	),
-	.iact_0_0_PE_data_out_valid       	(iact_0_0_PE_data_out_valid       	),
-	.iact_0_0_PE_data_out_bits        	(iact_0_0_PE_data_out_bits        	),
-	.iact_0_0_north_address_out_ready	(iact_0_0_north_address_out_ready	),
-	.iact_0_0_north_address_out_valid 	(iact_0_0_north_address_out_valid 	),
-	.iact_0_0_north_address_out_bits  	(iact_0_0_north_address_out_bits  	),
-	.iact_0_0_north_data_out_ready		(iact_0_0_north_data_out_ready		),
-	.iact_0_0_north_data_out_valid    	(iact_0_0_north_data_out_valid    	),
-	.iact_0_0_north_data_out_bits     	(iact_0_0_north_data_out_bits     	),
-	.iact_0_0_south_address_out_ready 	(iact_0_0_south_address_out_ready 	),
-	.iact_0_0_south_address_out_bits  	(iact_0_0_south_address_out_bits  	),
-	.iact_0_0_south_address_out_valid 	(iact_0_0_south_address_out_valid 	),
-	.iact_0_0_south_data_out_ready    	(iact_0_0_south_data_out_ready    	),
-	.iact_0_0_south_data_out_valid    	(iact_0_0_south_data_out_valid    	),
-	.iact_0_0_south_data_out_bits     	(iact_0_0_south_data_out_bits     	),
-	.iact_0_0_horiz_address_out_ready 	(iact_0_0_horiz_address_out_ready 	),
-	.iact_0_0_horiz_address_out_bits  	(iact_0_0_horiz_address_out_bits  	),
-	.iact_0_0_horiz_address_out_valid 	(iact_0_0_horiz_address_out_valid 	),
-	.iact_0_0_horiz_data_out_ready    	(iact_0_0_horiz_data_out_ready    	),
-	.iact_0_0_horiz_data_out_valid    	(iact_0_0_horiz_data_out_valid    	),
-	.iact_0_0_horiz_data_out_bits  		(iact_0_0_horiz_data_out_bits  		),
-	.iact_0_1_GLB_address_in_ready    	(iact_0_1_GLB_address_in_ready    	),
-	.iact_0_1_GLB_address_in_valid    	(iact_0_1_GLB_address_in_valid    	),
-	.iact_0_1_GLB_address_in_bits     	(iact_0_1_GLB_address_in_bits     	),
-	.iact_0_1_GLB_data_in_ready       	(iact_0_1_GLB_data_in_ready       	),
-	.iact_0_1_GLB_data_in_valid       	(iact_0_1_GLB_data_in_valid       	),
-	.iact_0_1_GLB_data_in_bits        	(iact_0_1_GLB_data_in_bits        	),
-	.iact_0_1_north_address_in_ready  	(iact_0_1_north_address_in_ready  	),
-	.iact_0_1_north_address_in_valid  	(iact_0_1_north_address_in_valid  	),
-	.iact_0_1_north_address_in_bits   	(iact_0_1_north_address_in_bits   	),
-	.iact_0_1_north_data_in_ready     	(iact_0_1_north_data_in_ready     	),
-	.iact_0_1_north_data_in_valid     	(iact_0_1_north_data_in_valid     	),
-	.iact_0_1_north_data_in_bits      	(iact_0_1_north_data_in_bits      	),
-	.iact_0_1_south_address_in_ready  	(iact_0_1_south_address_in_ready  	),
-	.iact_0_1_south_address_in_valid  	(iact_0_1_south_address_in_valid  	),
-	.iact_0_1_south_address_in_bits   	(iact_0_1_south_address_in_bits   	),
-	.iact_0_1_south_data_in_ready     	(iact_0_1_south_data_in_ready     	),
-	.iact_0_1_south_data_in_valid     	(iact_0_1_south_data_in_valid     	),
-	.iact_0_1_south_data_in_bits      	(iact_0_1_south_data_in_bits      	),
-	.iact_0_1_horiz_address_in_ready  	(iact_0_1_horiz_address_in_ready  	),
-	.iact_0_1_horiz_address_in_valid  	(iact_0_1_horiz_address_in_valid  	),
-	.iact_0_1_horiz_address_in_bits   	(iact_0_1_horiz_address_in_bits   	),
-	.iact_0_1_horiz_data_in_ready     	(iact_0_1_horiz_data_in_ready     	),
-	.iact_0_1_horiz_data_in_valid     	(iact_0_1_horiz_data_in_valid     	),
-	.iact_0_1_horiz_data_in_bits      	(iact_0_1_horiz_data_in_bits      	),
-	.iact_0_1_PE_address_out_ready    	(iact_0_1_PE_address_out_ready    	),
-	.iact_0_1_PE_address_out_bits     	(iact_0_1_PE_address_out_bits     	),
-	.iact_0_1_PE_address_out_valid    	(iact_0_1_PE_address_out_valid    	),
-	.iact_0_1_PE_data_out_ready       	(iact_0_1_PE_data_out_ready       	),
-	.iact_0_1_PE_data_out_valid       	(iact_0_1_PE_data_out_valid       	),
-	.iact_0_1_PE_data_out_bits        	(iact_0_1_PE_data_out_bits        	),
-	.iact_0_1_north_address_out_ready	(iact_0_1_north_address_out_ready	),
-	.iact_0_1_north_address_out_valid 	(iact_0_1_north_address_out_valid 	),
-	.iact_0_1_north_address_out_bits  	(iact_0_1_north_address_out_bits  	),
-	.iact_0_1_north_data_out_ready		(iact_0_1_north_data_out_ready		),
-	.iact_0_1_north_data_out_valid    	(iact_0_1_north_data_out_valid    	),
-	.iact_0_1_north_data_out_bits     	(iact_0_1_north_data_out_bits     	),
-	.iact_0_1_south_address_out_ready 	(iact_0_1_south_address_out_ready 	),
-	.iact_0_1_south_address_out_bits  	(iact_0_1_south_address_out_bits  	),
-	.iact_0_1_south_address_out_valid 	(iact_0_1_south_address_out_valid 	),
-	.iact_0_1_south_data_out_ready    	(iact_0_1_south_data_out_ready    	),
-	.iact_0_1_south_data_out_valid    	(iact_0_1_south_data_out_valid    	),
-	.iact_0_1_south_data_out_bits     	(iact_0_1_south_data_out_bits     	),
-	.iact_0_1_horiz_address_out_ready 	(iact_0_1_horiz_address_out_ready 	),
-	.iact_0_1_horiz_address_out_bits  	(iact_0_1_horiz_address_out_bits  	),
-	.iact_0_1_horiz_address_out_valid 	(iact_0_1_horiz_address_out_valid 	),
-	.iact_0_1_horiz_data_out_ready    	(iact_0_1_horiz_data_out_ready    	),
-	.iact_0_1_horiz_data_out_valid    	(iact_0_1_horiz_data_out_valid    	),
-	.iact_0_1_horiz_data_out_bits   	(iact_0_1_horiz_data_out_bits   	),
-	.iact_0_2_GLB_address_in_ready    	(iact_0_2_GLB_address_in_ready    	),
-	.iact_0_2_GLB_address_in_valid    	(iact_0_2_GLB_address_in_valid    	),
-	.iact_0_2_GLB_address_in_bits     	(iact_0_2_GLB_address_in_bits     	),
-	.iact_0_2_GLB_data_in_ready       	(iact_0_2_GLB_data_in_ready       	),
-	.iact_0_2_GLB_data_in_valid       	(iact_0_2_GLB_data_in_valid       	),
-	.iact_0_2_GLB_data_in_bits        	(iact_0_2_GLB_data_in_bits        	),
-	.iact_0_2_north_address_in_ready  	(iact_0_2_north_address_in_ready  	),
-	.iact_0_2_north_address_in_valid  	(iact_0_2_north_address_in_valid  	),
-	.iact_0_2_north_address_in_bits   	(iact_0_2_north_address_in_bits   	),
-	.iact_0_2_north_data_in_ready     	(iact_0_2_north_data_in_ready     	),
-	.iact_0_2_north_data_in_valid     	(iact_0_2_north_data_in_valid     	),
-	.iact_0_2_north_data_in_bits      	(iact_0_2_north_data_in_bits      	),
-	.iact_0_2_south_address_in_ready  	(iact_0_2_south_address_in_ready  	),
-	.iact_0_2_south_address_in_valid  	(iact_0_2_south_address_in_valid  	),
-	.iact_0_2_south_address_in_bits   	(iact_0_2_south_address_in_bits   	),
-	.iact_0_2_south_data_in_ready     	(iact_0_2_south_data_in_ready     	),
-	.iact_0_2_south_data_in_valid     	(iact_0_2_south_data_in_valid     	),
-	.iact_0_2_south_data_in_bits      	(iact_0_2_south_data_in_bits      	),
-	.iact_0_2_horiz_address_in_ready  	(iact_0_2_horiz_address_in_ready  	),
-	.iact_0_2_horiz_address_in_valid  	(iact_0_2_horiz_address_in_valid  	),
-	.iact_0_2_horiz_address_in_bits   	(iact_0_2_horiz_address_in_bits   	),
-	.iact_0_2_horiz_data_in_ready     	(iact_0_2_horiz_data_in_ready     	),
-	.iact_0_2_horiz_data_in_valid     	(iact_0_2_horiz_data_in_valid     	),
-	.iact_0_2_horiz_data_in_bits      	(iact_0_2_horiz_data_in_bits      	),
-	.iact_0_2_PE_address_out_ready    	(iact_0_2_PE_address_out_ready    	),
-	.iact_0_2_PE_address_out_bits     	(iact_0_2_PE_address_out_bits     	),
-	.iact_0_2_PE_address_out_valid    	(iact_0_2_PE_address_out_valid    	),
-	.iact_0_2_PE_data_out_ready       	(iact_0_2_PE_data_out_ready       	),
-	.iact_0_2_PE_data_out_valid       	(iact_0_2_PE_data_out_valid       	),
-	.iact_0_2_PE_data_out_bits        	(iact_0_2_PE_data_out_bits        	),
-	.iact_0_2_north_address_out_ready	(iact_0_2_north_address_out_ready	),
-	.iact_0_2_north_address_out_valid 	(iact_0_2_north_address_out_valid 	),
-	.iact_0_2_north_address_out_bits  	(iact_0_2_north_address_out_bits  	),
-	.iact_0_2_north_data_out_ready		(iact_0_2_north_data_out_ready		),
-	.iact_0_2_north_data_out_valid    	(iact_0_2_north_data_out_valid    	),
-	.iact_0_2_north_data_out_bits     	(iact_0_2_north_data_out_bits     	),
-	.iact_0_2_south_address_out_ready 	(iact_0_2_south_address_out_ready 	),
-	.iact_0_2_south_address_out_bits  	(iact_0_2_south_address_out_bits  	),
-	.iact_0_2_south_address_out_valid 	(iact_0_2_south_address_out_valid 	),
-	.iact_0_2_south_data_out_ready    	(iact_0_2_south_data_out_ready    	),
-	.iact_0_2_south_data_out_valid    	(iact_0_2_south_data_out_valid    	),
-	.iact_0_2_south_data_out_bits     	(iact_0_2_south_data_out_bits     	),
-	.iact_0_2_horiz_address_out_ready 	(iact_0_2_horiz_address_out_ready 	),
-	.iact_0_2_horiz_address_out_bits  	(iact_0_2_horiz_address_out_bits  	),
-	.iact_0_2_horiz_address_out_valid 	(iact_0_2_horiz_address_out_valid 	),
-	.iact_0_2_horiz_data_out_ready    	(iact_0_2_horiz_data_out_ready    	),
-	.iact_0_2_horiz_data_out_valid    	(iact_0_2_horiz_data_out_valid    	),
-	.iact_0_2_horiz_data_out_bits     	(iact_0_2_horiz_data_out_bits     	),
-	.iact_1_0_GLB_address_in_ready    	(iact_1_0_GLB_address_in_ready    	),
-	.iact_1_0_GLB_address_in_valid    	(iact_1_0_GLB_address_in_valid    	),
-	.iact_1_0_GLB_address_in_bits     	(iact_1_0_GLB_address_in_bits     	),
-	.iact_1_0_GLB_data_in_ready       	(iact_1_0_GLB_data_in_ready       	),
-	.iact_1_0_GLB_data_in_valid       	(iact_1_0_GLB_data_in_valid       	),
-	.iact_1_0_GLB_data_in_bits        	(iact_1_0_GLB_data_in_bits        	),
-	.iact_1_0_north_address_in_ready  	(iact_1_0_north_address_in_ready  	),
-	.iact_1_0_north_address_in_valid  	(iact_1_0_north_address_in_valid  	),
-	.iact_1_0_north_address_in_bits   	(iact_1_0_north_address_in_bits   	),
-	.iact_1_0_north_data_in_ready     	(iact_1_0_north_data_in_ready     	),
-	.iact_1_0_north_data_in_valid     	(iact_1_0_north_data_in_valid     	),
-	.iact_1_0_north_data_in_bits      	(iact_1_0_north_data_in_bits      	),
-	.iact_1_0_south_address_in_ready  	(iact_1_0_south_address_in_ready  	),
-	.iact_1_0_south_address_in_valid  	(iact_1_0_south_address_in_valid  	),
-	.iact_1_0_south_address_in_bits   	(iact_1_0_south_address_in_bits   	),
-	.iact_1_0_south_data_in_ready     	(iact_1_0_south_data_in_ready     	),
-	.iact_1_0_south_data_in_valid     	(iact_1_0_south_data_in_valid     	),
-	.iact_1_0_south_data_in_bits      	(iact_1_0_south_data_in_bits      	),
-	.iact_1_0_horiz_address_in_ready  	(iact_1_0_horiz_address_in_ready  	),
-	.iact_1_0_horiz_address_in_valid  	(iact_1_0_horiz_address_in_valid  	),
-	.iact_1_0_horiz_address_in_bits   	(iact_1_0_horiz_address_in_bits   	),
-	.iact_1_0_horiz_data_in_ready   	(iact_1_0_horiz_data_in_ready   	),
-	.iact_1_0_horiz_data_in_valid     	(iact_1_0_horiz_data_in_valid     	),
-	.iact_1_0_horiz_data_in_bits      	(iact_1_0_horiz_data_in_bits      	),
-	.iact_1_0_PE_address_out_ready    	(iact_1_0_PE_address_out_ready    	),
-	.iact_1_0_PE_address_out_bits     	(iact_1_0_PE_address_out_bits     	),
-	.iact_1_0_PE_address_out_valid    	(iact_1_0_PE_address_out_valid    	),
-	.iact_1_0_PE_data_out_ready       	(iact_1_0_PE_data_out_ready       	),
-	.iact_1_0_PE_data_out_valid       	(iact_1_0_PE_data_out_valid       	),
-	.iact_1_0_PE_data_out_bits        	(iact_1_0_PE_data_out_bits        	),
-	.iact_1_0_north_address_out_ready	(iact_1_0_north_address_out_ready	),
-	.iact_1_0_north_address_out_valid 	(iact_1_0_north_address_out_valid 	),
-	.iact_1_0_north_address_out_bits  	(iact_1_0_north_address_out_bits  	),
-	.iact_1_0_north_data_out_ready		(iact_1_0_north_data_out_ready		),
-	.iact_1_0_north_data_out_valid    	(iact_1_0_north_data_out_valid    	),
-	.iact_1_0_north_data_out_bits     	(iact_1_0_north_data_out_bits     	),
-	.iact_1_0_south_address_out_ready 	(iact_1_0_south_address_out_ready 	),
-	.iact_1_0_south_address_out_bits  	(iact_1_0_south_address_out_bits  	),
-	.iact_1_0_south_address_out_valid 	(iact_1_0_south_address_out_valid 	),
-	.iact_1_0_south_data_out_ready    	(iact_1_0_south_data_out_ready    	),
-	.iact_1_0_south_data_out_valid    	(iact_1_0_south_data_out_valid    	),
-	.iact_1_0_south_data_out_bits     	(iact_1_0_south_data_out_bits     	),
-	.iact_1_0_horiz_address_out_ready 	(iact_1_0_horiz_address_out_ready 	),
-	.iact_1_0_horiz_address_out_bits  	(iact_1_0_horiz_address_out_bits  	),
-	.iact_1_0_horiz_address_out_valid 	(iact_1_0_horiz_address_out_valid 	),
-	.iact_1_0_horiz_data_out_ready    	(iact_1_0_horiz_data_out_ready    	),
-	.iact_1_0_horiz_data_out_valid    	(iact_1_0_horiz_data_out_valid    	),
-	.iact_1_0_horiz_data_out_bits  		(iact_1_0_horiz_data_out_bits  		),
-	.iact_1_1_GLB_address_in_ready    	(iact_1_1_GLB_address_in_ready    	),
-	.iact_1_1_GLB_address_in_valid    	(iact_1_1_GLB_address_in_valid    	),
-	.iact_1_1_GLB_address_in_bits     	(iact_1_1_GLB_address_in_bits     	),
-	.iact_1_1_GLB_data_in_ready       	(iact_1_1_GLB_data_in_ready       	),
-	.iact_1_1_GLB_data_in_valid       	(iact_1_1_GLB_data_in_valid       	),
-	.iact_1_1_GLB_data_in_bits        	(iact_1_1_GLB_data_in_bits        	),
-	.iact_1_1_north_address_in_ready  	(iact_1_1_north_address_in_ready  	),
-	.iact_1_1_north_address_in_valid  	(iact_1_1_north_address_in_valid  	),
-	.iact_1_1_north_address_in_bits   	(iact_1_1_north_address_in_bits   	),
-	.iact_1_1_north_data_in_ready     	(iact_1_1_north_data_in_ready     	),
-	.iact_1_1_north_data_in_valid     	(iact_1_1_north_data_in_valid     	),
-	.iact_1_1_north_data_in_bits      	(iact_1_1_north_data_in_bits      	),
-	.iact_1_1_south_address_in_ready  	(iact_1_1_south_address_in_ready  	),
-	.iact_1_1_south_address_in_valid  	(iact_1_1_south_address_in_valid  	),
-	.iact_1_1_south_address_in_bits   	(iact_1_1_south_address_in_bits   	),
-	.iact_1_1_south_data_in_ready     	(iact_1_1_south_data_in_ready     	),
-	.iact_1_1_south_data_in_valid     	(iact_1_1_south_data_in_valid     	),
-	.iact_1_1_south_data_in_bits      	(iact_1_1_south_data_in_bits      	),
-	.iact_1_1_horiz_address_in_ready  	(iact_1_1_horiz_address_in_ready  	),
-	.iact_1_1_horiz_address_in_valid  	(iact_1_1_horiz_address_in_valid  	),
-	.iact_1_1_horiz_address_in_bits   	(iact_1_1_horiz_address_in_bits   	),
-	.iact_1_1_horiz_data_in_ready     	(iact_1_1_horiz_data_in_ready     	),
-	.iact_1_1_horiz_data_in_valid     	(iact_1_1_horiz_data_in_valid     	),
-	.iact_1_1_horiz_data_in_bits      	(iact_1_1_horiz_data_in_bits      	),
-	.iact_1_1_PE_address_out_ready    	(iact_1_1_PE_address_out_ready    	),
-	.iact_1_1_PE_address_out_bits     	(iact_1_1_PE_address_out_bits     	),
-	.iact_1_1_PE_address_out_valid    	(iact_1_1_PE_address_out_valid    	),
-	.iact_1_1_PE_data_out_ready       	(iact_1_1_PE_data_out_ready       	),
-	.iact_1_1_PE_data_out_valid       	(iact_1_1_PE_data_out_valid       	),
-	.iact_1_1_PE_data_out_bits        	(iact_1_1_PE_data_out_bits        	),
-	.iact_1_1_north_address_out_ready	(iact_1_1_north_address_out_ready	),
-	.iact_1_1_north_address_out_valid 	(iact_1_1_north_address_out_valid 	),
-	.iact_1_1_north_address_out_bits  	(iact_1_1_north_address_out_bits  	),
-	.iact_1_1_north_data_out_ready		(iact_1_1_north_data_out_ready		),
-	.iact_1_1_north_data_out_valid    	(iact_1_1_north_data_out_valid    	),
-	.iact_1_1_north_data_out_bits     	(iact_1_1_north_data_out_bits     	),
-	.iact_1_1_south_address_out_ready 	(iact_1_1_south_address_out_ready 	),
-	.iact_1_1_south_address_out_bits  	(iact_1_1_south_address_out_bits  	),
-	.iact_1_1_south_address_out_valid 	(iact_1_1_south_address_out_valid 	),
-	.iact_1_1_south_data_out_ready    	(iact_1_1_south_data_out_ready    	),
-	.iact_1_1_south_data_out_valid    	(iact_1_1_south_data_out_valid    	),
-	.iact_1_1_south_data_out_bits     	(iact_1_1_south_data_out_bits     	),
-	.iact_1_1_horiz_address_out_ready 	(iact_1_1_horiz_address_out_ready 	),
-	.iact_1_1_horiz_address_out_bits  	(iact_1_1_horiz_address_out_bits  	),
-	.iact_1_1_horiz_address_out_valid 	(iact_1_1_horiz_address_out_valid 	),
-	.iact_1_1_horiz_data_out_ready    	(iact_1_1_horiz_data_out_ready    	),
-	.iact_1_1_horiz_data_out_valid    	(iact_1_1_horiz_data_out_valid    	),
-	.iact_1_1_horiz_data_out_bits   	(iact_1_1_horiz_data_out_bits   	),
-	.iact_1_2_GLB_address_in_ready    	(iact_1_2_GLB_address_in_ready    	),
-	.iact_1_2_GLB_address_in_valid    	(iact_1_2_GLB_address_in_valid    	),
-	.iact_1_2_GLB_address_in_bits     	(iact_1_2_GLB_address_in_bits     	),
-	.iact_1_2_GLB_data_in_ready       	(iact_1_2_GLB_data_in_ready       	),
-	.iact_1_2_GLB_data_in_valid       	(iact_1_2_GLB_data_in_valid       	),
-	.iact_1_2_GLB_data_in_bits        	(iact_1_2_GLB_data_in_bits        	),
-	.iact_1_2_north_address_in_ready  	(iact_1_2_north_address_in_ready  	),
-	.iact_1_2_north_address_in_valid  	(iact_1_2_north_address_in_valid  	),
-	.iact_1_2_north_address_in_bits   	(iact_1_2_north_address_in_bits   	),
-	.iact_1_2_north_data_in_ready     	(iact_1_2_north_data_in_ready     	),
-	.iact_1_2_north_data_in_valid     	(iact_1_2_north_data_in_valid     	),
-	.iact_1_2_north_data_in_bits      	(iact_1_2_north_data_in_bits      	),
-	.iact_1_2_south_address_in_ready  	(iact_1_2_south_address_in_ready  	),
-	.iact_1_2_south_address_in_valid  	(iact_1_2_south_address_in_valid  	),
-	.iact_1_2_south_address_in_bits   	(iact_1_2_south_address_in_bits   	),
-	.iact_1_2_south_data_in_ready     	(iact_1_2_south_data_in_ready     	),
-	.iact_1_2_south_data_in_valid     	(iact_1_2_south_data_in_valid     	),
-	.iact_1_2_south_data_in_bits      	(iact_1_2_south_data_in_bits      	),
-	.iact_1_2_horiz_address_in_ready  	(iact_1_2_horiz_address_in_ready  	),
-	.iact_1_2_horiz_address_in_valid  	(iact_1_2_horiz_address_in_valid  	),
-	.iact_1_2_horiz_address_in_bits   	(iact_1_2_horiz_address_in_bits   	),
-	.iact_1_2_horiz_data_in_ready     	(iact_1_2_horiz_data_in_ready     	),
-	.iact_1_2_horiz_data_in_valid     	(iact_1_2_horiz_data_in_valid     	),
-	.iact_1_2_horiz_data_in_bits      	(iact_1_2_horiz_data_in_bits      	),
-	.iact_1_2_PE_address_out_ready    	(iact_1_2_PE_address_out_ready    	),
-	.iact_1_2_PE_address_out_bits     	(iact_1_2_PE_address_out_bits     	),
-	.iact_1_2_PE_address_out_valid    	(iact_1_2_PE_address_out_valid    	),
-	.iact_1_2_PE_data_out_ready       	(iact_1_2_PE_data_out_ready       	),
-	.iact_1_2_PE_data_out_valid       	(iact_1_2_PE_data_out_valid       	),
-	.iact_1_2_PE_data_out_bits        	(iact_1_2_PE_data_out_bits        	),
-	.iact_1_2_north_address_out_ready	(iact_1_2_north_address_out_ready	),
-	.iact_1_2_north_address_out_valid 	(iact_1_2_north_address_out_valid 	),
-	.iact_1_2_north_address_out_bits  	(iact_1_2_north_address_out_bits  	),
-	.iact_1_2_north_data_out_ready		(iact_1_2_north_data_out_ready		),
-	.iact_1_2_north_data_out_valid    	(iact_1_2_north_data_out_valid    	),
-	.iact_1_2_north_data_out_bits     	(iact_1_2_north_data_out_bits     	),
-	.iact_1_2_south_address_out_ready 	(iact_1_2_south_address_out_ready 	),
-	.iact_1_2_south_address_out_bits  	(iact_1_2_south_address_out_bits  	),
-	.iact_1_2_south_address_out_valid 	(iact_1_2_south_address_out_valid 	),
-	.iact_1_2_south_data_out_ready    	(iact_1_2_south_data_out_ready    	),
-	.iact_1_2_south_data_out_valid    	(iact_1_2_south_data_out_valid    	),
-	.iact_1_2_south_data_out_bits     	(iact_1_2_south_data_out_bits     	),
-	.iact_1_2_horiz_address_out_ready 	(iact_1_2_horiz_address_out_ready 	),
-	.iact_1_2_horiz_address_out_bits  	(iact_1_2_horiz_address_out_bits  	),
-	.iact_1_2_horiz_address_out_valid 	(iact_1_2_horiz_address_out_valid 	),
-	.iact_1_2_horiz_data_out_ready    	(iact_1_2_horiz_data_out_ready    	),
-	.iact_1_2_horiz_data_out_valid    	(iact_1_2_horiz_data_out_valid    	),
-	.iact_1_2_horiz_data_out_bits     	(iact_1_2_horiz_data_out_bits     	),
-	.iact_2_0_GLB_address_in_ready    	(iact_2_0_GLB_address_in_ready    	),
-	.iact_2_0_GLB_address_in_valid    	(iact_2_0_GLB_address_in_valid    	),
-	.iact_2_0_GLB_address_in_bits     	(iact_2_0_GLB_address_in_bits     	),
-	.iact_2_0_GLB_data_in_ready       	(iact_2_0_GLB_data_in_ready       	),
-	.iact_2_0_GLB_data_in_valid       	(iact_2_0_GLB_data_in_valid       	),
-	.iact_2_0_GLB_data_in_bits        	(iact_2_0_GLB_data_in_bits        	),
-	.iact_2_0_north_address_in_ready  	(iact_2_0_north_address_in_ready  	),
-	.iact_2_0_north_address_in_valid  	(iact_2_0_north_address_in_valid  	),
-	.iact_2_0_north_address_in_bits   	(iact_2_0_north_address_in_bits   	),
-	.iact_2_0_north_data_in_ready     	(iact_2_0_north_data_in_ready     	),
-	.iact_2_0_north_data_in_valid     	(iact_2_0_north_data_in_valid     	),
-	.iact_2_0_north_data_in_bits      	(iact_2_0_north_data_in_bits      	),
-	.iact_2_0_south_address_in_ready  	(iact_2_0_south_address_in_ready  	),
-	.iact_2_0_south_address_in_valid  	(iact_2_0_south_address_in_valid  	),
-	.iact_2_0_south_address_in_bits   	(iact_2_0_south_address_in_bits   	),
-	.iact_2_0_south_data_in_ready     	(iact_2_0_south_data_in_ready     	),
-	.iact_2_0_south_data_in_valid     	(iact_2_0_south_data_in_valid     	),
-	.iact_2_0_south_data_in_bits      	(iact_2_0_south_data_in_bits      	),
-	.iact_2_0_horiz_address_in_ready  	(iact_2_0_horiz_address_in_ready  	),
-	.iact_2_0_horiz_address_in_valid  	(iact_2_0_horiz_address_in_valid  	),
-	.iact_2_0_horiz_address_in_bits   	(iact_2_0_horiz_address_in_bits   	),
-	.iact_2_0_horiz_data_in_ready   	(iact_2_0_horiz_data_in_ready   	),
-	.iact_2_0_horiz_data_in_valid     	(iact_2_0_horiz_data_in_valid     	),
-	.iact_2_0_horiz_data_in_bits      	(iact_2_0_horiz_data_in_bits      	),
-	.iact_2_0_PE_address_out_ready    	(iact_2_0_PE_address_out_ready    	),
-	.iact_2_0_PE_address_out_bits     	(iact_2_0_PE_address_out_bits     	),
-	.iact_2_0_PE_address_out_valid    	(iact_2_0_PE_address_out_valid    	),
-	.iact_2_0_PE_data_out_ready       	(iact_2_0_PE_data_out_ready       	),
-	.iact_2_0_PE_data_out_valid       	(iact_2_0_PE_data_out_valid       	),
-	.iact_2_0_PE_data_out_bits        	(iact_2_0_PE_data_out_bits        	),
-	.iact_2_0_north_address_out_ready	(iact_2_0_north_address_out_ready	),
-	.iact_2_0_north_address_out_valid 	(iact_2_0_north_address_out_valid 	),
-	.iact_2_0_north_address_out_bits  	(iact_2_0_north_address_out_bits  	),
-	.iact_2_0_north_data_out_ready		(iact_2_0_north_data_out_ready		),
-	.iact_2_0_north_data_out_valid    	(iact_2_0_north_data_out_valid    	),
-	.iact_2_0_north_data_out_bits     	(iact_2_0_north_data_out_bits     	),
-	.iact_2_0_south_address_out_ready 	(iact_2_0_south_address_out_ready 	),
-	.iact_2_0_south_address_out_bits  	(iact_2_0_south_address_out_bits  	),
-	.iact_2_0_south_address_out_valid 	(iact_2_0_south_address_out_valid 	),
-	.iact_2_0_south_data_out_ready    	(iact_2_0_south_data_out_ready    	),
-	.iact_2_0_south_data_out_valid    	(iact_2_0_south_data_out_valid    	),
-	.iact_2_0_south_data_out_bits     	(iact_2_0_south_data_out_bits     	),
-	.iact_2_0_horiz_address_out_ready 	(iact_2_0_horiz_address_out_ready 	),
-	.iact_2_0_horiz_address_out_bits  	(iact_2_0_horiz_address_out_bits  	),
-	.iact_2_0_horiz_address_out_valid 	(iact_2_0_horiz_address_out_valid 	),
-	.iact_2_0_horiz_data_out_ready    	(iact_2_0_horiz_data_out_ready    	),
-	.iact_2_0_horiz_data_out_valid    	(iact_2_0_horiz_data_out_valid    	),
-	.iact_2_0_horiz_data_out_bits  		(iact_2_0_horiz_data_out_bits  		),
-	.iact_2_1_GLB_address_in_ready    	(iact_2_1_GLB_address_in_ready    	),
-	.iact_2_1_GLB_address_in_valid    	(iact_2_1_GLB_address_in_valid    	),
-	.iact_2_1_GLB_address_in_bits     	(iact_2_1_GLB_address_in_bits     	),
-	.iact_2_1_GLB_data_in_ready       	(iact_2_1_GLB_data_in_ready       	),
-	.iact_2_1_GLB_data_in_valid       	(iact_2_1_GLB_data_in_valid       	),
-	.iact_2_1_GLB_data_in_bits        	(iact_2_1_GLB_data_in_bits        	),
-	.iact_2_1_north_address_in_ready  	(iact_2_1_north_address_in_ready  	),
-	.iact_2_1_north_address_in_valid  	(iact_2_1_north_address_in_valid  	),
-	.iact_2_1_north_address_in_bits   	(iact_2_1_north_address_in_bits   	),
-	.iact_2_1_north_data_in_ready     	(iact_2_1_north_data_in_ready     	),
-	.iact_2_1_north_data_in_valid     	(iact_2_1_north_data_in_valid     	),
-	.iact_2_1_north_data_in_bits      	(iact_2_1_north_data_in_bits      	),
-	.iact_2_1_south_address_in_ready  	(iact_2_1_south_address_in_ready  	),
-	.iact_2_1_south_address_in_valid  	(iact_2_1_south_address_in_valid  	),
-	.iact_2_1_south_address_in_bits   	(iact_2_1_south_address_in_bits   	),
-	.iact_2_1_south_data_in_ready     	(iact_2_1_south_data_in_ready     	),
-	.iact_2_1_south_data_in_valid     	(iact_2_1_south_data_in_valid     	),
-	.iact_2_1_south_data_in_bits      	(iact_2_1_south_data_in_bits      	),
-	.iact_2_1_horiz_address_in_ready  	(iact_2_1_horiz_address_in_ready  	),
-	.iact_2_1_horiz_address_in_valid  	(iact_2_1_horiz_address_in_valid  	),
-	.iact_2_1_horiz_address_in_bits   	(iact_2_1_horiz_address_in_bits   	),
-	.iact_2_1_horiz_data_in_ready     	(iact_2_1_horiz_data_in_ready     	),
-	.iact_2_1_horiz_data_in_valid     	(iact_2_1_horiz_data_in_valid     	),
-	.iact_2_1_horiz_data_in_bits      	(iact_2_1_horiz_data_in_bits      	),
-	.iact_2_1_PE_address_out_ready    	(iact_2_1_PE_address_out_ready    	),
-	.iact_2_1_PE_address_out_bits     	(iact_2_1_PE_address_out_bits     	),
-	.iact_2_1_PE_address_out_valid    	(iact_2_1_PE_address_out_valid    	),
-	.iact_2_1_PE_data_out_ready       	(iact_2_1_PE_data_out_ready       	),
-	.iact_2_1_PE_data_out_valid       	(iact_2_1_PE_data_out_valid       	),
-	.iact_2_1_PE_data_out_bits        	(iact_2_1_PE_data_out_bits        	),
-	.iact_2_1_north_address_out_ready	(iact_2_1_north_address_out_ready	),
-	.iact_2_1_north_address_out_valid 	(iact_2_1_north_address_out_valid 	),
-	.iact_2_1_north_address_out_bits  	(iact_2_1_north_address_out_bits  	),
-	.iact_2_1_north_data_out_ready		(iact_2_1_north_data_out_ready		),
-	.iact_2_1_north_data_out_valid    	(iact_2_1_north_data_out_valid    	),
-	.iact_2_1_north_data_out_bits     	(iact_2_1_north_data_out_bits     	),
-	.iact_2_1_south_address_out_ready 	(iact_2_1_south_address_out_ready 	),
-	.iact_2_1_south_address_out_bits  	(iact_2_1_south_address_out_bits  	),
-	.iact_2_1_south_address_out_valid 	(iact_2_1_south_address_out_valid 	),
-	.iact_2_1_south_data_out_ready    	(iact_2_1_south_data_out_ready    	),
-	.iact_2_1_south_data_out_valid    	(iact_2_1_south_data_out_valid    	),
-	.iact_2_1_south_data_out_bits     	(iact_2_1_south_data_out_bits     	),
-	.iact_2_1_horiz_address_out_ready 	(iact_2_1_horiz_address_out_ready 	),
-	.iact_2_1_horiz_address_out_bits  	(iact_2_1_horiz_address_out_bits  	),
-	.iact_2_1_horiz_address_out_valid 	(iact_2_1_horiz_address_out_valid 	),
-	.iact_2_1_horiz_data_out_ready    	(iact_2_1_horiz_data_out_ready    	),
-	.iact_2_1_horiz_data_out_valid    	(iact_2_1_horiz_data_out_valid    	),
-	.iact_2_1_horiz_data_out_bits   	(iact_2_1_horiz_data_out_bits   	),
-	.iact_2_2_GLB_address_in_ready    	(iact_2_2_GLB_address_in_ready    	),
-	.iact_2_2_GLB_address_in_valid    	(iact_2_2_GLB_address_in_valid    	),
-	.iact_2_2_GLB_address_in_bits     	(iact_2_2_GLB_address_in_bits     	),
-	.iact_2_2_GLB_data_in_ready       	(iact_2_2_GLB_data_in_ready       	),
-	.iact_2_2_GLB_data_in_valid       	(iact_2_2_GLB_data_in_valid       	),
-	.iact_2_2_GLB_data_in_bits        	(iact_2_2_GLB_data_in_bits        	),
-	.iact_2_2_north_address_in_ready  	(iact_2_2_north_address_in_ready  	),
-	.iact_2_2_north_address_in_valid  	(iact_2_2_north_address_in_valid  	),
-	.iact_2_2_north_address_in_bits   	(iact_2_2_north_address_in_bits   	),
-	.iact_2_2_north_data_in_ready     	(iact_2_2_north_data_in_ready     	),
-	.iact_2_2_north_data_in_valid     	(iact_2_2_north_data_in_valid     	),
-	.iact_2_2_north_data_in_bits      	(iact_2_2_north_data_in_bits      	),
-	.iact_2_2_south_address_in_ready  	(iact_2_2_south_address_in_ready  	),
-	.iact_2_2_south_address_in_valid  	(iact_2_2_south_address_in_valid  	),
-	.iact_2_2_south_address_in_bits   	(iact_2_2_south_address_in_bits   	),
-	.iact_2_2_south_data_in_ready     	(iact_2_2_south_data_in_ready     	),
-	.iact_2_2_south_data_in_valid     	(iact_2_2_south_data_in_valid     	),
-	.iact_2_2_south_data_in_bits      	(iact_2_2_south_data_in_bits      	),
-	.iact_2_2_horiz_address_in_ready  	(iact_2_2_horiz_address_in_ready  	),
-	.iact_2_2_horiz_address_in_valid  	(iact_2_2_horiz_address_in_valid  	),
-	.iact_2_2_horiz_address_in_bits   	(iact_2_2_horiz_address_in_bits   	),
-	.iact_2_2_horiz_data_in_ready     	(iact_2_2_horiz_data_in_ready     	),
-	.iact_2_2_horiz_data_in_valid     	(iact_2_2_horiz_data_in_valid     	),
-	.iact_2_2_horiz_data_in_bits      	(iact_2_2_horiz_data_in_bits      	),
-	.iact_2_2_PE_address_out_ready    	(iact_2_2_PE_address_out_ready    	),
-	.iact_2_2_PE_address_out_bits     	(iact_2_2_PE_address_out_bits     	),
-	.iact_2_2_PE_address_out_valid    	(iact_2_2_PE_address_out_valid    	),
-	.iact_2_2_PE_data_out_ready       	(iact_2_2_PE_data_out_ready       	),
-	.iact_2_2_PE_data_out_valid       	(iact_2_2_PE_data_out_valid       	),
-	.iact_2_2_PE_data_out_bits        	(iact_2_2_PE_data_out_bits        	),
-	.iact_2_2_north_address_out_ready	(iact_2_2_north_address_out_ready	),
-	.iact_2_2_north_address_out_valid 	(iact_2_2_north_address_out_valid 	),
-	.iact_2_2_north_address_out_bits  	(iact_2_2_north_address_out_bits  	),
-	.iact_2_2_north_data_out_ready		(iact_2_2_north_data_out_ready		),
-	.iact_2_2_north_data_out_valid    	(iact_2_2_north_data_out_valid    	),
-	.iact_2_2_north_data_out_bits     	(iact_2_2_north_data_out_bits     	),
-	.iact_2_2_south_address_out_ready 	(iact_2_2_south_address_out_ready 	),
-	.iact_2_2_south_address_out_bits  	(iact_2_2_south_address_out_bits  	),
-	.iact_2_2_south_address_out_valid 	(iact_2_2_south_address_out_valid 	),
-	.iact_2_2_south_data_out_ready    	(iact_2_2_south_data_out_ready    	),
-	.iact_2_2_south_data_out_valid    	(iact_2_2_south_data_out_valid    	),
-	.iact_2_2_south_data_out_bits     	(iact_2_2_south_data_out_bits     	),
-	.iact_2_2_horiz_address_out_ready 	(iact_2_2_horiz_address_out_ready 	),
-	.iact_2_2_horiz_address_out_bits  	(iact_2_2_horiz_address_out_bits  	),
-	.iact_2_2_horiz_address_out_valid 	(iact_2_2_horiz_address_out_valid 	),
-	.iact_2_2_horiz_data_out_ready    	(iact_2_2_horiz_data_out_ready    	),
-	.iact_2_2_horiz_data_out_valid    	(iact_2_2_horiz_data_out_valid    	),
-	.iact_2_2_horiz_data_out_bits     	(iact_2_2_horiz_data_out_bits     	),
-	.weight_0_GLB_address_in_ready  	(weight_0_GLB_address_in_ready  	),
-	.weight_0_GLB_address_in_valid  	(weight_0_GLB_address_in_valid  	),
-	.weight_0_GLB_address_in_bits   	(weight_0_GLB_address_in_bits   	),
-	.weight_0_GLB_data_in_ready     	(weight_0_GLB_data_in_ready     	),
-	.weight_0_GLB_data_in_valid     	(weight_0_GLB_data_in_valid     	),
-	.weight_0_GLB_data_in_bits      	(weight_0_GLB_data_in_bits      	),
-	.weight_0_horiz_address_in_ready	(weight_0_horiz_address_in_ready	),
-	.weight_0_horiz_address_in_valid	(weight_0_horiz_address_in_valid	),
-	.weight_0_horiz_address_in_bits 	(weight_0_horiz_address_in_bits 	),
-	.weight_0_horiz_data_in_ready   	(weight_0_horiz_data_in_ready   	),
-	.weight_0_horiz_data_in_valid   	(weight_0_horiz_data_in_valid   	),
-	.weight_0_horiz_data_in_bits    	(weight_0_horiz_data_in_bits    	),
-	.weight_0_PE_address_out_valid  	(weight_0_PE_address_out_valid  	),
-	.weight_0_PE_address_out_bits   	(weight_0_PE_address_out_bits   	),
-	.weight_0_PE_data_out_valid     	(weight_0_PE_data_out_valid     	),
-	.weight_0_PE_data_out_bits      	(weight_0_PE_data_out_bits      	),
-	.weight_0_horiz_address_out_ready 	(weight_0_horiz_address_out_ready 	),
-	.weight_0_horiz_address_out_valid 	(weight_0_horiz_address_out_valid 	),
-	.weight_0_horiz_address_out_bits  	(weight_0_horiz_address_out_bits  	),
-	.weight_0_horiz_data_out_ready    	(weight_0_horiz_data_out_ready    	),
-	.weight_0_horiz_data_out_valid    	(weight_0_horiz_data_out_valid    	),
-	.weight_0_horiz_data_out_bits     	(weight_0_horiz_data_out_bits     	),
-	.weight_1_GLB_address_in_ready    	(weight_1_GLB_address_in_ready    	),
-	.weight_1_GLB_address_in_valid    	(weight_1_GLB_address_in_valid    	),
-	.weight_1_GLB_address_in_bits     	(weight_1_GLB_address_in_bits     	),
-	.weight_1_GLB_data_in_ready       	(weight_1_GLB_data_in_ready       	),
-	.weight_1_GLB_data_in_valid       	(weight_1_GLB_data_in_valid       	),
-	.weight_1_GLB_data_in_bits        	(weight_1_GLB_data_in_bits        	),
-	.weight_1_horiz_address_in_ready  	(weight_1_horiz_address_in_ready  	),
-	.weight_1_horiz_address_in_valid  	(weight_1_horiz_address_in_valid  	),
-	.weight_1_horiz_address_in_bits   	(weight_1_horiz_address_in_bits   	),
-	.weight_1_horiz_data_in_ready     	(weight_1_horiz_data_in_ready     	),
-	.weight_1_horiz_data_in_valid     	(weight_1_horiz_data_in_valid     	),
-	.weight_1_horiz_data_in_bits      	(weight_1_horiz_data_in_bits      	),
-	.weight_1_PE_address_out_valid    	(weight_1_PE_address_out_valid    	),
-	.weight_1_PE_address_out_bits     	(weight_1_PE_address_out_bits     	),
-	.weight_1_PE_data_out_valid       	(weight_1_PE_data_out_valid       	),
-	.weight_1_PE_data_out_bits        	(weight_1_PE_data_out_bits        	),
-	.weight_1_horiz_address_out_ready 	(weight_1_horiz_address_out_ready 	),
-	.weight_1_horiz_address_out_valid 	(weight_1_horiz_address_out_valid 	),
-	.weight_1_horiz_address_out_bits  	(weight_1_horiz_address_out_bits  	),
-	.weight_1_horiz_data_out_ready    	(weight_1_horiz_data_out_ready    	),
-	.weight_1_horiz_data_out_valid    	(weight_1_horiz_data_out_valid    	),
-	.weight_1_horiz_data_out_bits     	(weight_1_horiz_data_out_bits     	),
-	.weight_2_GLB_address_in_ready    	(weight_2_GLB_address_in_ready    	),
-	.weight_2_GLB_address_in_valid    	(weight_2_GLB_address_in_valid    	),
-	.weight_2_GLB_address_in_bits     	(weight_2_GLB_address_in_bits     	),
-	.weight_2_GLB_data_in_ready       	(weight_2_GLB_data_in_ready       	),
-	.weight_2_GLB_data_in_valid       	(weight_2_GLB_data_in_valid       	),
-	.weight_2_GLB_data_in_bits        	(weight_2_GLB_data_in_bits        	),
-	.weight_2_horiz_address_in_ready  	(weight_2_horiz_address_in_ready  	),
-	.weight_2_horiz_address_in_valid  	(weight_2_horiz_address_in_valid  	),
-	.weight_2_horiz_address_in_bits   	(weight_2_horiz_address_in_bits   	),
-	.weight_2_horiz_data_in_ready     	(weight_2_horiz_data_in_ready     	),
-	.weight_2_horiz_data_in_valid     	(weight_2_horiz_data_in_valid     	),
-	.weight_2_horiz_data_in_bits      	(weight_2_horiz_data_in_bits      	),
-	.weight_2_PE_address_out_valid    	(weight_2_PE_address_out_valid    	),
-	.weight_2_PE_address_out_bits     	(weight_2_PE_address_out_bits     	),
-	.weight_2_PE_data_out_valid       	(weight_2_PE_data_out_valid       	),
-	.weight_2_PE_data_out_bits        	(weight_2_PE_data_out_bits        	),
-	.weight_2_horiz_address_out_ready 	(weight_2_horiz_address_out_ready 	),
-	.weight_2_horiz_address_out_valid 	(weight_2_horiz_address_out_valid 	),
-	.weight_2_horiz_address_out_bits  	(weight_2_horiz_address_out_bits  	),
-	.weight_2_horiz_data_out_ready    	(weight_2_horiz_data_out_ready    	),
-	.weight_2_horiz_data_out_valid    	(weight_2_horiz_data_out_valid    	),
-	.weight_2_horiz_data_out_bits    	(weight_2_horiz_data_out_bits    	),
-	.psum_0_PE_in_ready               	(psum_0_PE_in_ready               	),
-	.psum_0_PE_in_valid               	(psum_0_PE_in_valid               	),
-	.psum_0_PE_in_bits                	(psum_0_PE_in_bits                	),
-	.psum_0_GLB_in_ready              	(psum_0_GLB_in_ready              	),
-	.psum_0_GLB_in_valid              	(psum_0_GLB_in_valid              	),
-	.psum_0_GLB_in_bits               	(psum_0_GLB_in_bits               	),
-	.psum_0_north_in_ready            	(psum_0_north_in_ready            	),
-	.psum_0_north_in_valid            	(psum_0_north_in_valid            	),
-	.psum_0_north_in_bits             	(psum_0_north_in_bits             	),
-	.psum_0_PE_out_ready              	(psum_0_PE_out_ready              	),
-	.psum_0_PE_out_valid              	(psum_0_PE_out_valid              	),
-	.psum_0_PE_out_bits               	(psum_0_PE_out_bits               	),
-	.psum_0_GLB_out_ready             	(psum_0_GLB_out_ready             	),
-	.psum_0_GLB_out_valid             	(psum_0_GLB_out_valid             	),
-	.psum_0_GLB_out_bits              	(psum_0_GLB_out_bits              	),
-	.psum_0_south_out_ready           	(psum_0_south_out_ready           	),
-	.psum_0_south_out_valid           	(psum_0_south_out_valid           	),
-	.psum_0_south_out_bits       		(psum_0_south_out_bits       		),
-	.psum_1_PE_in_ready               	(psum_1_PE_in_ready               	),
-	.psum_1_PE_in_valid               	(psum_1_PE_in_valid               	),
-	.psum_1_PE_in_bits                	(psum_1_PE_in_bits                	),
-	.psum_1_GLB_in_ready              	(psum_1_GLB_in_ready              	),
-	.psum_1_GLB_in_valid              	(psum_1_GLB_in_valid              	),
-	.psum_1_GLB_in_bits               	(psum_1_GLB_in_bits               	),
-	.psum_1_north_in_ready            	(psum_1_north_in_ready            	),
-	.psum_1_north_in_valid            	(psum_1_north_in_valid            	),
-	.psum_1_north_in_bits             	(psum_1_north_in_bits             	),
-	.psum_1_PE_out_ready              	(psum_1_PE_out_ready              	),
-	.psum_1_PE_out_valid              	(psum_1_PE_out_valid              	),
-	.psum_1_PE_out_bits               	(psum_1_PE_out_bits               	),
-	.psum_1_GLB_out_ready             	(psum_1_GLB_out_ready             	),
-	.psum_1_GLB_out_valid             	(psum_1_GLB_out_valid             	),
-	.psum_1_GLB_out_bits              	(psum_1_GLB_out_bits              	),
-	.psum_1_south_out_ready           	(psum_1_south_out_ready           	),
-	.psum_1_south_out_valid           	(psum_1_south_out_valid           	),
-	.psum_1_south_out_bits         		(psum_1_south_out_bits         		),
-	.psum_2_PE_in_ready               	(psum_2_PE_in_ready               	),
-	.psum_2_PE_in_valid               	(psum_2_PE_in_valid               	),
-	.psum_2_PE_in_bits                	(psum_2_PE_in_bits                	),
-	.psum_2_GLB_in_ready              	(psum_2_GLB_in_ready              	),
-	.psum_2_GLB_in_valid              	(psum_2_GLB_in_valid              	),
-	.psum_2_GLB_in_bits               	(psum_2_GLB_in_bits               	),
-	.psum_2_north_in_ready            	(psum_2_north_in_ready            	),
-	.psum_2_north_in_valid            	(psum_2_north_in_valid            	),
-	.psum_2_north_in_bits             	(psum_2_north_in_bits             	),
-	.psum_2_PE_out_ready              	(psum_2_PE_out_ready              	),
-	.psum_2_PE_out_valid              	(psum_2_PE_out_valid              	),
-	.psum_2_PE_out_bits               	(psum_2_PE_out_bits               	),
-	.psum_2_GLB_out_ready             	(psum_2_GLB_out_ready             	),
-	.psum_2_GLB_out_valid             	(psum_2_GLB_out_valid             	),
-	.psum_2_GLB_out_bits              	(psum_2_GLB_out_bits              	),
-	.psum_2_south_out_ready           	(psum_2_south_out_ready           	),
-	.psum_2_south_out_valid           	(psum_2_south_out_valid           	),
-	.psum_2_south_out_bits       		(psum_2_south_out_bits       		)
+Router_Cluster Router_Cluster_inst (
+	.iact_0_data_in_sel(iact_0_data_in_sel),
+	.iact_0_data_out_sel(iact_0_data_out_sel),
+	.iact_1_data_in_sel(iact_1_data_in_sel),
+	.iact_1_data_out_sel(iact_1_data_out_sel),
+	.iact_2_data_in_sel(iact_2_data_in_sel),
+	.iact_2_data_out_sel(iact_2_data_out_sel),
+	.weight_0_data_in_sel(weight_0_data_in_sel),
+	.weight_0_data_out_sel(weight_0_data_out_sel),
+	.weight_1_data_in_sel(weight_1_data_in_sel),
+	.weight_1_data_out_sel(weight_1_data_out_sel),
+	.weight_2_data_in_sel(weight_2_data_in_sel),
+	.weight_2_data_out_sel(weight_2_data_out_sel),
+	.psum_0_data_in_sel(psum_0_data_in_sel),
+	.psum_0_data_out_sel(psum_0_data_out_sel),
+	.psum_1_data_in_sel(psum_1_data_in_sel),
+	.psum_1_data_out_sel(psum_1_data_out_sel),
+	.psum_2_data_in_sel(psum_2_data_in_sel),
+	.psum_2_data_out_sel(psum_2_data_out_sel),
+	.iact_GLB_address_in_ready(iact_GLB_address_in_ready),
+	.iact_GLB_address_in_valid(iact_GLB_address_in_valid),
+	.iact_GLB_address_in_bits(iact_GLB_address_in_bits),
+	.iact_GLB_data_in_ready(iact_GLB_data_in_ready),
+	.iact_GLB_data_in_valid(iact_GLB_data_in_valid),
+	.iact_GLB_data_in_bits(iact_GLB_data_in_bits),
+	.iact_north_address_in_ready(iact_north_address_in_ready),
+	.iact_north_address_in_valid(iact_north_address_in_valid),
+	.iact_north_address_in_bits(iact_north_address_in_bits),
+	.iact_north_data_in_ready(iact_north_data_in_ready),
+	.iact_north_data_in_valid(iact_north_data_in_valid),
+	.iact_north_data_in_bits(iact_north_data_in_bits),
+	.iact_south_address_in_ready(iact_south_address_in_ready),
+	.iact_south_address_in_valid(iact_south_address_in_valid),
+	.iact_south_address_in_bits(iact_south_address_in_bits),
+	.iact_south_data_in_ready(iact_south_data_in_ready),
+	.iact_south_data_in_valid(iact_south_data_in_valid),
+	.iact_south_data_in_bits(iact_south_data_in_bits),
+	.iact_horiz_address_in_ready(iact_horiz_address_in_ready),
+	.iact_horiz_address_in_valid(iact_horiz_address_in_valid),
+	.iact_horiz_address_in_bits(iact_horiz_address_in_bits),
+	.iact_horiz_data_in_ready(iact_horiz_data_in_ready),
+	.iact_horiz_data_in_valid(iact_horiz_data_in_valid),
+	.iact_horiz_data_in_bits(iact_horiz_data_in_bits),
+	.iact_PE_address_out_ready(iact_PE_address_out_ready),
+	.iact_PE_address_out_valid(iact_PE_address_out_valid),
+	.iact_PE_address_out_bits(iact_PE_address_out_bits),
+	.iact_PE_data_out_ready(iact_PE_data_out_ready),
+	.iact_PE_data_out_valid(iact_PE_data_out_valid),
+	.iact_PE_data_out_bits(iact_PE_data_out_bits),
+	.iact_north_address_out_ready(iact_north_address_out_ready),
+	.iact_north_address_out_valid(iact_north_address_out_valid),
+	.iact_north_address_out_bits(iact_north_address_out_bits),
+	.iact_north_data_out_ready(iact_north_data_out_ready),
+	.iact_north_data_out_valid(iact_north_data_out_valid),
+	.iact_north_data_out_bits(iact_north_data_out_bits),
+	.iact_south_address_out_ready(iact_south_address_out_ready),
+	.iact_south_address_out_valid(iact_south_address_out_valid),
+	.iact_south_address_out_bits(iact_south_address_out_bits),
+	.iact_south_data_out_ready(iact_south_data_out_ready),
+	.iact_south_data_out_valid(iact_south_data_out_valid),
+	.iact_south_data_out_bits(iact_south_data_out_bits),
+	.iact_horiz_address_out_ready(iact_horiz_address_out_ready),
+	.iact_horiz_address_out_valid(iact_horiz_address_out_valid),
+	.iact_horiz_address_out_bits(iact_horiz_address_out_bits),
+	.iact_horiz_data_out_ready(iact_horiz_data_out_ready),
+	.iact_horiz_data_out_valid(iact_horiz_data_out_valid),
+	.iact_horiz_data_out_bits(iact_horiz_data_out_bits),
+	.weight_GLB_address_in_ready(weight_GLB_address_in_ready),
+	.weight_GLB_address_in_valid(weight_GLB_address_in_valid),
+	.weight_GLB_address_in_bits(weight_GLB_address_in_bits),
+	.weight_GLB_data_in_ready(weight_GLB_data_in_ready),
+	.weight_GLB_data_in_valid(weight_GLB_data_in_valid),
+	.weight_GLB_data_in_bits(weight_GLB_data_in_bits),
+	.weight_horiz_address_in_ready(weight_horiz_address_in_ready),
+	.weight_horiz_address_in_valid(weight_horiz_address_in_valid),
+	.weight_horiz_address_in_bits(weight_horiz_address_in_bits),
+	.weight_horiz_data_in_ready(weight_horiz_data_in_ready),
+	.weight_horiz_data_in_valid(weight_horiz_data_in_valid),
+	.weight_horiz_data_in_bits(weight_horiz_data_in_bits),
+	.weight_PE_address_out_valid(weight_PE_address_out_valid),
+	.weight_PE_address_out_bits(weight_PE_address_out_bits),
+	.weight_PE_data_out_valid(weight_PE_data_out_valid),
+	.weight_PE_data_out_bits(weight_PE_data_out_bits),
+	.weight_horiz_address_out_ready(weight_horiz_address_out_ready),
+	.weight_horiz_address_out_valid(weight_horiz_address_out_valid),
+	.weight_horiz_address_out_bits(weight_horiz_address_out_bits),
+	.weight_horiz_data_out_ready(weight_horiz_data_out_ready),
+	.weight_horiz_data_out_valid(weight_horiz_data_out_valid),
+	.weight_horiz_data_out_bits(weight_horiz_data_out_bits),
+	.psum_PE_in_ready(psum_PE_in_ready),
+	.psum_PE_in_valid(psum_PE_in_valid),
+	.psum_PE_in_bits(psum_PE_in_bits),
+	.psum_GLB_in_ready(psum_GLB_in_ready),
+	.psum_GLB_in_valid(psum_GLB_in_valid),
+	.psum_GLB_in_bits(psum_GLB_in_bits),
+	.psum_north_in_ready(psum_north_in_ready),
+	.psum_north_in_valid(psum_north_in_valid),
+	.psum_north_in_bits(psum_north_in_bits),
+	.psum_PE_out_ready(psum_PE_out_ready),
+	.psum_PE_out_valid(psum_PE_out_valid),
+	.psum_PE_out_bits(psum_PE_out_bits),
+	.psum_GLB_out_ready(psum_GLB_out_ready),
+	.psum_GLB_out_valid(psum_GLB_out_valid),
+	.psum_GLB_out_bits(psum_GLB_out_bits),
+	.psum_south_out_ready(psum_south_out_ready),
+	.psum_south_out_valid(psum_south_out_valid),
+	.psum_south_out_bits(psum_south_out_bits)
 );
 
 Cluster_Group_Controller Cluster_Group_Controller_inst ( 
@@ -2206,228 +1299,228 @@ assign GLB_psum_1_data_out 				= GLBCluster_psum_data_out[1];
 assign GLB_psum_2_data_out 				= GLBCluster_psum_data_out[2]; 
 
 // iact router ready connection
-assign router_iact_0_0_north_address_in_ready 	= iact_0_0_north_address_in_ready; 	
-assign router_iact_0_0_south_address_in_ready 	= iact_0_0_south_address_in_ready; 	
-assign router_iact_0_0_horiz_address_in_ready 	= iact_0_0_horiz_address_in_ready; 
-assign router_iact_0_1_north_address_in_ready 	= iact_0_1_north_address_in_ready; 
-assign router_iact_0_1_south_address_in_ready 	= iact_0_1_south_address_in_ready; 
-assign router_iact_0_1_horiz_address_in_ready 	= iact_0_1_horiz_address_in_ready; 
-assign router_iact_0_2_north_address_in_ready 	= iact_0_2_north_address_in_ready; 
-assign router_iact_0_2_south_address_in_ready 	= iact_0_2_south_address_in_ready; 
-assign router_iact_0_2_horiz_address_in_ready 	= iact_0_2_horiz_address_in_ready; 
+assign router_iact_0_0_north_address_in_ready 	= iact_north_address_in_ready[0][0]; 	
+assign router_iact_0_0_south_address_in_ready 	= iact_south_address_in_ready[0][0]; 	
+assign router_iact_0_0_horiz_address_in_ready 	= iact_horiz_address_in_ready[0][0]; 
+assign router_iact_0_1_north_address_in_ready 	= iact_north_address_in_ready[0][1]; 
+assign router_iact_0_1_south_address_in_ready 	= iact_south_address_in_ready[0][1]; 
+assign router_iact_0_1_horiz_address_in_ready 	= iact_horiz_address_in_ready[0][1]; 
+assign router_iact_0_2_north_address_in_ready 	= iact_north_address_in_ready[0][2]; 
+assign router_iact_0_2_south_address_in_ready 	= iact_south_address_in_ready[0][2]; 
+assign router_iact_0_2_horiz_address_in_ready 	= iact_horiz_address_in_ready[0][2]; 
 													   
-assign router_iact_0_0_north_data_in_ready 		= iact_0_0_north_data_in_ready; 			
-assign router_iact_0_0_south_data_in_ready 		= iact_0_0_south_data_in_ready; 				
-assign router_iact_0_0_horiz_data_in_ready 		= iact_0_0_horiz_data_in_ready; 
-assign router_iact_0_1_north_data_in_ready 		= iact_0_1_north_data_in_ready;
-assign router_iact_0_1_south_data_in_ready 		= iact_0_1_south_data_in_ready;
-assign router_iact_0_1_horiz_data_in_ready 		= iact_0_1_horiz_data_in_ready;
-assign router_iact_0_2_north_data_in_ready 		= iact_0_2_north_data_in_ready;
-assign router_iact_0_2_south_data_in_ready 		= iact_0_2_south_data_in_ready;
-assign router_iact_0_2_horiz_data_in_ready 		= iact_0_2_horiz_data_in_ready;
+assign router_iact_0_0_north_data_in_ready 		= iact_north_data_in_ready[0][0]; 			
+assign router_iact_0_0_south_data_in_ready 		= iact_south_data_in_ready[0][0]; 				
+assign router_iact_0_0_horiz_data_in_ready 		= iact_horiz_data_in_ready[0][0]; 
+assign router_iact_0_1_north_data_in_ready 		= iact_north_data_in_ready[0][1];
+assign router_iact_0_1_south_data_in_ready 		= iact_south_data_in_ready[0][1];
+assign router_iact_0_1_horiz_data_in_ready 		= iact_horiz_data_in_ready[0][1];
+assign router_iact_0_2_north_data_in_ready 		= iact_north_data_in_ready[0][2];
+assign router_iact_0_2_south_data_in_ready 		= iact_south_data_in_ready[0][2];
+assign router_iact_0_2_horiz_data_in_ready 		= iact_horiz_data_in_ready[0][2];
 
-assign router_iact_1_0_north_address_in_ready 	= iact_1_0_north_address_in_ready; 	
-assign router_iact_1_0_south_address_in_ready 	= iact_1_0_south_address_in_ready; 	
-assign router_iact_1_0_horiz_address_in_ready 	= iact_1_0_horiz_address_in_ready; 
-assign router_iact_1_1_north_address_in_ready 	= iact_1_1_north_address_in_ready; 
-assign router_iact_1_1_south_address_in_ready 	= iact_1_1_south_address_in_ready; 
-assign router_iact_1_1_horiz_address_in_ready 	= iact_1_1_horiz_address_in_ready; 
-assign router_iact_1_2_north_address_in_ready 	= iact_1_2_north_address_in_ready; 
-assign router_iact_1_2_south_address_in_ready 	= iact_1_2_south_address_in_ready; 
-assign router_iact_1_2_horiz_address_in_ready 	= iact_1_2_horiz_address_in_ready; 
+assign router_iact_1_0_north_address_in_ready 	= iact_north_address_in_ready[1][0]; 	
+assign router_iact_1_0_south_address_in_ready 	= iact_south_address_in_ready[1][0]; 	
+assign router_iact_1_0_horiz_address_in_ready 	= iact_horiz_address_in_ready[1][0]; 
+assign router_iact_1_1_north_address_in_ready 	= iact_north_address_in_ready[1][1]; 
+assign router_iact_1_1_south_address_in_ready 	= iact_south_address_in_ready[1][1]; 
+assign router_iact_1_1_horiz_address_in_ready 	= iact_horiz_address_in_ready[1][1]; 
+assign router_iact_1_2_north_address_in_ready 	= iact_north_address_in_ready[1][2]; 
+assign router_iact_1_2_south_address_in_ready 	= iact_south_address_in_ready[1][2]; 
+assign router_iact_1_2_horiz_address_in_ready 	= iact_horiz_address_in_ready[1][2]; 
 											  
-assign router_iact_1_0_north_data_in_ready 		= iact_1_0_north_data_in_ready; 			
-assign router_iact_1_0_south_data_in_ready 		= iact_1_0_south_data_in_ready; 				
-assign router_iact_1_0_horiz_data_in_ready 		= iact_1_0_horiz_data_in_ready; 
-assign router_iact_1_1_north_data_in_ready 		= iact_1_1_north_data_in_ready;
-assign router_iact_1_1_south_data_in_ready 		= iact_1_1_south_data_in_ready;
-assign router_iact_1_1_horiz_data_in_ready 		= iact_1_1_horiz_data_in_ready;
-assign router_iact_1_2_north_data_in_ready 		= iact_1_2_north_data_in_ready;
-assign router_iact_1_2_south_data_in_ready 		= iact_1_2_south_data_in_ready;
-assign router_iact_1_2_horiz_data_in_ready 		= iact_1_2_horiz_data_in_ready;
+assign router_iact_1_0_north_data_in_ready 		= iact_north_data_in_ready[1][0]; 			
+assign router_iact_1_0_south_data_in_ready 		= iact_south_data_in_ready[1][0]; 				
+assign router_iact_1_0_horiz_data_in_ready 		= iact_horiz_data_in_ready[1][0]; 
+assign router_iact_1_1_north_data_in_ready 		= iact_north_data_in_ready[1][1];
+assign router_iact_1_1_south_data_in_ready 		= iact_south_data_in_ready[1][1];
+assign router_iact_1_1_horiz_data_in_ready 		= iact_horiz_data_in_ready[1][1];
+assign router_iact_1_2_north_data_in_ready 		= iact_north_data_in_ready[1][2];
+assign router_iact_1_2_south_data_in_ready 		= iact_south_data_in_ready[1][2];
+assign router_iact_1_2_horiz_data_in_ready 		= iact_horiz_data_in_ready[1][2];
 
-assign router_iact_2_0_north_address_in_ready 	= iact_2_0_north_address_in_ready; 	
-assign router_iact_2_0_south_address_in_ready 	= iact_2_0_south_address_in_ready; 	
-assign router_iact_2_0_horiz_address_in_ready 	= iact_2_0_horiz_address_in_ready; 
-assign router_iact_2_1_north_address_in_ready 	= iact_2_1_north_address_in_ready; 
-assign router_iact_2_1_south_address_in_ready 	= iact_2_1_south_address_in_ready; 
-assign router_iact_2_1_horiz_address_in_ready 	= iact_2_1_horiz_address_in_ready; 
-assign router_iact_2_2_north_address_in_ready 	= iact_2_2_north_address_in_ready; 
-assign router_iact_2_2_south_address_in_ready 	= iact_2_2_south_address_in_ready; 
-assign router_iact_2_2_horiz_address_in_ready 	= iact_2_2_horiz_address_in_ready; 
+assign router_iact_2_0_north_address_in_ready 	= iact_north_address_in_ready[2][0]; 	
+assign router_iact_2_0_south_address_in_ready 	= iact_south_address_in_ready[2][0]; 	
+assign router_iact_2_0_horiz_address_in_ready 	= iact_horiz_address_in_ready[2][0]; 
+assign router_iact_2_1_north_address_in_ready 	= iact_north_address_in_ready[2][1]; 
+assign router_iact_2_1_south_address_in_ready 	= iact_south_address_in_ready[2][1]; 
+assign router_iact_2_1_horiz_address_in_ready 	= iact_horiz_address_in_ready[2][1]; 
+assign router_iact_2_2_north_address_in_ready 	= iact_north_address_in_ready[2][2]; 
+assign router_iact_2_2_south_address_in_ready 	= iact_south_address_in_ready[2][2]; 
+assign router_iact_2_2_horiz_address_in_ready 	= iact_horiz_address_in_ready[2][2]; 
 											   
-assign router_iact_2_0_north_data_in_ready 		= iact_2_0_north_data_in_ready; 			
-assign router_iact_2_0_south_data_in_ready 		= iact_2_0_south_data_in_ready; 				
-assign router_iact_2_0_horiz_data_in_ready 		= iact_2_0_horiz_data_in_ready; 
-assign router_iact_2_1_north_data_in_ready 		= iact_2_1_north_data_in_ready;
-assign router_iact_2_1_south_data_in_ready 		= iact_2_1_south_data_in_ready;
-assign router_iact_2_1_horiz_data_in_ready 		= iact_2_1_horiz_data_in_ready;
-assign router_iact_2_2_north_data_in_ready 		= iact_2_2_north_data_in_ready;
-assign router_iact_2_2_south_data_in_ready 		= iact_2_2_south_data_in_ready;
-assign router_iact_2_2_horiz_data_in_ready 		= iact_2_2_horiz_data_in_ready;
+assign router_iact_2_0_north_data_in_ready 		= iact_north_data_in_ready[2][0]; 			
+assign router_iact_2_0_south_data_in_ready 		= iact_south_data_in_ready[2][0]; 				
+assign router_iact_2_0_horiz_data_in_ready 		= iact_horiz_data_in_ready[2][0]; 
+assign router_iact_2_1_north_data_in_ready 		= iact_north_data_in_ready[2][1];
+assign router_iact_2_1_south_data_in_ready 		= iact_south_data_in_ready[2][1];
+assign router_iact_2_1_horiz_data_in_ready 		= iact_horiz_data_in_ready[2][1];
+assign router_iact_2_2_north_data_in_ready 		= iact_north_data_in_ready[2][2];
+assign router_iact_2_2_south_data_in_ready 		= iact_south_data_in_ready[2][2];
+assign router_iact_2_2_horiz_data_in_ready 		= iact_horiz_data_in_ready[2][2];
 
 // iact router valid connection
-assign router_iact_0_0_north_address_out_valid 	= iact_0_0_north_address_out_valid; 
-assign router_iact_0_0_south_address_out_valid 	= iact_0_0_south_address_out_valid; 
-assign router_iact_0_0_horiz_address_out_valid 	= iact_0_0_horiz_address_out_valid; 
-assign router_iact_0_1_north_address_out_valid 	= iact_0_1_north_address_out_valid; 
-assign router_iact_0_1_south_address_out_valid 	= iact_0_1_south_address_out_valid; 
-assign router_iact_0_1_horiz_address_out_valid 	= iact_0_1_horiz_address_out_valid; 
-assign router_iact_0_2_north_address_out_valid 	= iact_0_2_north_address_out_valid; 
-assign router_iact_0_2_south_address_out_valid 	= iact_0_2_south_address_out_valid; 
-assign router_iact_0_2_horiz_address_out_valid 	= iact_0_2_horiz_address_out_valid; 
+assign router_iact_0_0_north_address_out_valid 	= iact_north_address_out_valid[0][0]; 
+assign router_iact_0_0_south_address_out_valid 	= iact_south_address_out_valid[0][0]; 
+assign router_iact_0_0_horiz_address_out_valid 	= iact_horiz_address_out_valid[0][0]; 
+assign router_iact_0_1_north_address_out_valid 	= iact_north_address_out_valid[0][1]; 
+assign router_iact_0_1_south_address_out_valid 	= iact_south_address_out_valid[0][1]; 
+assign router_iact_0_1_horiz_address_out_valid 	= iact_horiz_address_out_valid[0][1]; 
+assign router_iact_0_2_north_address_out_valid 	= iact_north_address_out_valid[0][2]; 
+assign router_iact_0_2_south_address_out_valid 	= iact_south_address_out_valid[0][2]; 
+assign router_iact_0_2_horiz_address_out_valid 	= iact_horiz_address_out_valid[0][2]; 
 													   
-assign router_iact_0_0_north_data_out_valid 	= iact_0_0_north_data_out_valid;
-assign router_iact_0_0_south_data_out_valid 	= iact_0_0_south_data_out_valid;
-assign router_iact_0_0_horiz_data_out_valid 	= iact_0_0_horiz_data_out_valid;
-assign router_iact_0_1_north_data_out_valid 	= iact_0_1_north_data_out_valid; 
-assign router_iact_0_1_south_data_out_valid 	= iact_0_1_south_data_out_valid; 
-assign router_iact_0_1_horiz_data_out_valid 	= iact_0_1_horiz_data_out_valid; 
-assign router_iact_0_2_north_data_out_valid 	= iact_0_2_north_data_out_valid;
-assign router_iact_0_2_south_data_out_valid 	= iact_0_2_south_data_out_valid;
-assign router_iact_0_2_horiz_data_out_valid 	= iact_0_2_horiz_data_out_valid;
+assign router_iact_0_0_north_data_out_valid 	= iact_north_data_out_valid[0][0];
+assign router_iact_0_0_south_data_out_valid 	= iact_south_data_out_valid[0][0];
+assign router_iact_0_0_horiz_data_out_valid 	= iact_horiz_data_out_valid[0][0];
+assign router_iact_0_1_north_data_out_valid 	= iact_north_data_out_valid[0][1]; 
+assign router_iact_0_1_south_data_out_valid 	= iact_south_data_out_valid[0][1]; 
+assign router_iact_0_1_horiz_data_out_valid 	= iact_horiz_data_out_valid[0][1]; 
+assign router_iact_0_2_north_data_out_valid 	= iact_north_data_out_valid[0][2];
+assign router_iact_0_2_south_data_out_valid 	= iact_south_data_out_valid[0][2];
+assign router_iact_0_2_horiz_data_out_valid 	= iact_horiz_data_out_valid[0][2];
 
-assign router_iact_1_0_north_address_out_valid 	= iact_1_0_north_address_out_valid; 
-assign router_iact_1_0_south_address_out_valid 	= iact_1_0_south_address_out_valid; 
-assign router_iact_1_0_horiz_address_out_valid 	= iact_1_0_horiz_address_out_valid; 
-assign router_iact_1_1_north_address_out_valid 	= iact_1_1_north_address_out_valid; 
-assign router_iact_1_1_south_address_out_valid 	= iact_1_1_south_address_out_valid; 
-assign router_iact_1_1_horiz_address_out_valid 	= iact_1_1_horiz_address_out_valid; 
-assign router_iact_1_2_north_address_out_valid 	= iact_1_2_north_address_out_valid; 
-assign router_iact_1_2_south_address_out_valid 	= iact_1_2_south_address_out_valid; 
-assign router_iact_1_2_horiz_address_out_valid 	= iact_1_2_horiz_address_out_valid; 
+assign router_iact_1_0_north_address_out_valid 	= iact_north_address_out_valid[1][0]; 
+assign router_iact_1_0_south_address_out_valid 	= iact_south_address_out_valid[1][0]; 
+assign router_iact_1_0_horiz_address_out_valid 	= iact_horiz_address_out_valid[1][0]; 
+assign router_iact_1_1_north_address_out_valid 	= iact_north_address_out_valid[1][1]; 
+assign router_iact_1_1_south_address_out_valid 	= iact_south_address_out_valid[1][1]; 
+assign router_iact_1_1_horiz_address_out_valid 	= iact_horiz_address_out_valid[1][1]; 
+assign router_iact_1_2_north_address_out_valid 	= iact_north_address_out_valid[1][2]; 
+assign router_iact_1_2_south_address_out_valid 	= iact_south_address_out_valid[1][2]; 
+assign router_iact_1_2_horiz_address_out_valid 	= iact_horiz_address_out_valid[1][2]; 
 												  
-assign router_iact_1_0_north_data_out_valid 	= iact_1_0_north_data_out_valid;
-assign router_iact_1_0_south_data_out_valid 	= iact_1_0_south_data_out_valid;
-assign router_iact_1_0_horiz_data_out_valid 	= iact_1_0_horiz_data_out_valid;
-assign router_iact_1_1_north_data_out_valid 	= iact_1_1_north_data_out_valid; 
-assign router_iact_1_1_south_data_out_valid 	= iact_1_1_south_data_out_valid; 
-assign router_iact_1_1_horiz_data_out_valid 	= iact_1_1_horiz_data_out_valid; 
-assign router_iact_1_2_north_data_out_valid 	= iact_1_2_north_data_out_valid;
-assign router_iact_1_2_south_data_out_valid 	= iact_1_2_south_data_out_valid;
-assign router_iact_1_2_horiz_data_out_valid 	= iact_1_2_horiz_data_out_valid;
+assign router_iact_1_0_north_data_out_valid 	= iact_north_data_out_valid[1][0];
+assign router_iact_1_0_south_data_out_valid 	= iact_south_data_out_valid[1][0];
+assign router_iact_1_0_horiz_data_out_valid 	= iact_horiz_data_out_valid[1][0];
+assign router_iact_1_1_north_data_out_valid 	= iact_north_data_out_valid[1][1]; 
+assign router_iact_1_1_south_data_out_valid 	= iact_south_data_out_valid[1][1]; 
+assign router_iact_1_1_horiz_data_out_valid 	= iact_horiz_data_out_valid[1][1]; 
+assign router_iact_1_2_north_data_out_valid 	= iact_north_data_out_valid[1][2];
+assign router_iact_1_2_south_data_out_valid 	= iact_south_data_out_valid[1][2];
+assign router_iact_1_2_horiz_data_out_valid 	= iact_horiz_data_out_valid[1][2];
 
-assign router_iact_2_0_north_address_out_valid 	= iact_2_0_north_address_out_valid; 
-assign router_iact_2_0_south_address_out_valid 	= iact_2_0_south_address_out_valid; 
-assign router_iact_2_0_horiz_address_out_valid 	= iact_2_0_horiz_address_out_valid; 
-assign router_iact_2_1_north_address_out_valid 	= iact_2_1_north_address_out_valid; 
-assign router_iact_2_1_south_address_out_valid 	= iact_2_1_south_address_out_valid; 
-assign router_iact_2_1_horiz_address_out_valid 	= iact_2_1_horiz_address_out_valid; 
-assign router_iact_2_2_north_address_out_valid 	= iact_2_2_north_address_out_valid; 
-assign router_iact_2_2_south_address_out_valid 	= iact_2_2_south_address_out_valid; 
-assign router_iact_2_2_horiz_address_out_valid 	= iact_2_2_horiz_address_out_valid; 
+assign router_iact_2_0_north_address_out_valid 	= iact_north_address_out_valid[2][0]; 
+assign router_iact_2_0_south_address_out_valid 	= iact_south_address_out_valid[2][0]; 
+assign router_iact_2_0_horiz_address_out_valid 	= iact_horiz_address_out_valid[2][0]; 
+assign router_iact_2_1_north_address_out_valid 	= iact_north_address_out_valid[2][1]; 
+assign router_iact_2_1_south_address_out_valid 	= iact_south_address_out_valid[2][1]; 
+assign router_iact_2_1_horiz_address_out_valid 	= iact_horiz_address_out_valid[2][1]; 
+assign router_iact_2_2_north_address_out_valid 	= iact_north_address_out_valid[2][2]; 
+assign router_iact_2_2_south_address_out_valid 	= iact_south_address_out_valid[2][2]; 
+assign router_iact_2_2_horiz_address_out_valid 	= iact_horiz_address_out_valid[2][2]; 
 											   
-assign router_iact_2_0_north_data_out_valid 	= iact_2_0_north_data_out_valid;
-assign router_iact_2_0_south_data_out_valid 	= iact_2_0_south_data_out_valid;
-assign router_iact_2_0_horiz_data_out_valid 	= iact_2_0_horiz_data_out_valid;
-assign router_iact_2_1_north_data_out_valid 	= iact_2_1_north_data_out_valid; 
-assign router_iact_2_1_south_data_out_valid 	= iact_2_1_south_data_out_valid; 
-assign router_iact_2_1_horiz_data_out_valid 	= iact_2_1_horiz_data_out_valid; 
-assign router_iact_2_2_north_data_out_valid 	= iact_2_2_north_data_out_valid;
-assign router_iact_2_2_south_data_out_valid 	= iact_2_2_south_data_out_valid;
-assign router_iact_2_2_horiz_data_out_valid 	= iact_2_2_horiz_data_out_valid;
+assign router_iact_2_0_north_data_out_valid 	= iact_north_data_out_valid[2][0];
+assign router_iact_2_0_south_data_out_valid 	= iact_south_data_out_valid[2][0];
+assign router_iact_2_0_horiz_data_out_valid 	= iact_horiz_data_out_valid[2][0];
+assign router_iact_2_1_north_data_out_valid 	= iact_north_data_out_valid[2][1]; 
+assign router_iact_2_1_south_data_out_valid 	= iact_south_data_out_valid[2][1]; 
+assign router_iact_2_1_horiz_data_out_valid 	= iact_horiz_data_out_valid[2][1]; 
+assign router_iact_2_2_north_data_out_valid 	= iact_north_data_out_valid[2][2];
+assign router_iact_2_2_south_data_out_valid 	= iact_south_data_out_valid[2][2];
+assign router_iact_2_2_horiz_data_out_valid 	= iact_horiz_data_out_valid[2][2];
 
 
 // iact router data connection
-assign router_iact_0_0_north_address_out 		= iact_0_0_north_address_out_bits; 
-assign router_iact_0_0_south_address_out 		= iact_0_0_south_address_out_bits;
-assign router_iact_0_0_horiz_address_out 		= iact_0_0_horiz_address_out_bits; 
-assign router_iact_0_1_north_address_out 		= iact_0_1_north_address_out_bits; 
-assign router_iact_0_1_south_address_out 		= iact_0_1_south_address_out_bits; 
-assign router_iact_0_1_horiz_address_out 		= iact_0_1_horiz_address_out_bits; 
-assign router_iact_0_2_north_address_out 		= iact_0_2_north_address_out_bits; 
-assign router_iact_0_2_south_address_out 		= iact_0_2_south_address_out_bits; 
-assign router_iact_0_2_horiz_address_out 		= iact_0_2_horiz_address_out_bits; 
+assign router_iact_0_0_north_address_out 		= iact_north_address_out_bits[0][0]; 
+assign router_iact_0_0_south_address_out 		= iact_south_address_out_bits[0][0];
+assign router_iact_0_0_horiz_address_out 		= iact_horiz_address_out_bits[0][0]; 
+assign router_iact_0_1_north_address_out 		= iact_north_address_out_bits[0][1]; 
+assign router_iact_0_1_south_address_out 		= iact_south_address_out_bits[0][1]; 
+assign router_iact_0_1_horiz_address_out 		= iact_horiz_address_out_bits[0][1]; 
+assign router_iact_0_2_north_address_out 		= iact_north_address_out_bits[0][2]; 
+assign router_iact_0_2_south_address_out 		= iact_south_address_out_bits[0][2]; 
+assign router_iact_0_2_horiz_address_out 		= iact_horiz_address_out_bits[0][2]; 
 													
-assign router_iact_0_0_north_data_out 			= iact_0_0_north_data_out_bits;  
-assign router_iact_0_0_south_data_out 			= iact_0_0_south_data_out_bits; 
-assign router_iact_0_0_horiz_data_out 			= iact_0_0_horiz_data_out_bits; 
-assign router_iact_0_1_north_data_out 			= iact_0_1_north_data_out_bits; 
-assign router_iact_0_1_south_data_out 			= iact_0_1_south_data_out_bits; 
-assign router_iact_0_1_horiz_data_out 			= iact_0_1_horiz_data_out_bits; 
-assign router_iact_0_2_north_data_out 			= iact_0_2_north_data_out_bits; 
-assign router_iact_0_2_south_data_out 			= iact_0_2_south_data_out_bits; 
-assign router_iact_0_2_horiz_data_out 			= iact_0_2_horiz_data_out_bits; 
+assign router_iact_0_0_north_data_out 			= iact_north_data_out_bits[0][0];  
+assign router_iact_0_0_south_data_out 			= iact_south_data_out_bits[0][0]; 
+assign router_iact_0_0_horiz_data_out 			= iact_horiz_data_out_bits[0][0]; 
+assign router_iact_0_1_north_data_out 			= iact_north_data_out_bits[0][1]; 
+assign router_iact_0_1_south_data_out 			= iact_south_data_out_bits[0][1]; 
+assign router_iact_0_1_horiz_data_out 			= iact_horiz_data_out_bits[0][1]; 
+assign router_iact_0_2_north_data_out 			= iact_north_data_out_bits[0][2]; 
+assign router_iact_0_2_south_data_out 			= iact_south_data_out_bits[0][2]; 
+assign router_iact_0_2_horiz_data_out 			= iact_horiz_data_out_bits[0][2]; 
 	
-assign router_iact_1_0_north_address_out 		= iact_1_0_north_address_out_bits; 
-assign router_iact_1_0_south_address_out 		= iact_1_0_south_address_out_bits;
-assign router_iact_1_0_horiz_address_out 		= iact_1_0_horiz_address_out_bits; 
-assign router_iact_1_1_north_address_out 		= iact_1_1_north_address_out_bits; 
-assign router_iact_1_1_south_address_out 		= iact_1_1_south_address_out_bits; 
-assign router_iact_1_1_horiz_address_out 		= iact_1_1_horiz_address_out_bits; 
-assign router_iact_1_2_north_address_out 		= iact_1_2_north_address_out_bits; 
-assign router_iact_1_2_south_address_out 		= iact_1_2_south_address_out_bits; 
-assign router_iact_1_2_horiz_address_out 		= iact_1_2_horiz_address_out_bits; 
+assign router_iact_1_0_north_address_out 		= iact_north_address_out_bits[1][0]; 
+assign router_iact_1_0_south_address_out 		= iact_south_address_out_bits[1][0];
+assign router_iact_1_0_horiz_address_out 		= iact_horiz_address_out_bits[1][0]; 
+assign router_iact_1_1_north_address_out 		= iact_north_address_out_bits[1][1]; 
+assign router_iact_1_1_south_address_out 		= iact_south_address_out_bits[1][1]; 
+assign router_iact_1_1_horiz_address_out 		= iact_horiz_address_out_bits[1][1]; 
+assign router_iact_1_2_north_address_out 		= iact_north_address_out_bits[1][2]; 
+assign router_iact_1_2_south_address_out 		= iact_south_address_out_bits[1][2]; 
+assign router_iact_1_2_horiz_address_out 		= iact_horiz_address_out_bits[1][2]; 
 												
-assign router_iact_1_0_north_data_out 			= iact_1_0_north_data_out_bits;  
-assign router_iact_1_0_south_data_out 			= iact_1_0_south_data_out_bits; 
-assign router_iact_1_0_horiz_data_out 			= iact_1_0_horiz_data_out_bits; 
-assign router_iact_1_1_north_data_out 			= iact_1_1_north_data_out_bits; 
-assign router_iact_1_1_south_data_out 			= iact_1_1_south_data_out_bits; 
-assign router_iact_1_1_horiz_data_out 			= iact_1_1_horiz_data_out_bits; 
-assign router_iact_1_2_north_data_out 			= iact_1_2_north_data_out_bits; 
-assign router_iact_1_2_south_data_out 			= iact_1_2_south_data_out_bits; 
-assign router_iact_1_2_horiz_data_out 			= iact_1_2_horiz_data_out_bits; 
+assign router_iact_1_0_north_data_out 			= iact_north_data_out_bits[1][0];  
+assign router_iact_1_0_south_data_out 			= iact_south_data_out_bits[1][0]; 
+assign router_iact_1_0_horiz_data_out 			= iact_horiz_data_out_bits[1][0]; 
+assign router_iact_1_1_north_data_out 			= iact_north_data_out_bits[1][1]; 
+assign router_iact_1_1_south_data_out 			= iact_south_data_out_bits[1][1]; 
+assign router_iact_1_1_horiz_data_out 			= iact_horiz_data_out_bits[1][1]; 
+assign router_iact_1_2_north_data_out 			= iact_north_data_out_bits[1][2]; 
+assign router_iact_1_2_south_data_out 			= iact_south_data_out_bits[1][2]; 
+assign router_iact_1_2_horiz_data_out 			= iact_horiz_data_out_bits[1][2]; 
 	
-assign router_iact_2_0_north_address_out 		= iact_2_0_north_address_out_bits; 
-assign router_iact_2_0_south_address_out 		= iact_2_0_south_address_out_bits;
-assign router_iact_2_0_horiz_address_out 		= iact_2_0_horiz_address_out_bits; 
-assign router_iact_2_1_north_address_out 		= iact_2_1_north_address_out_bits; 
-assign router_iact_2_1_south_address_out 		= iact_2_1_south_address_out_bits; 
-assign router_iact_2_1_horiz_address_out 		= iact_2_1_horiz_address_out_bits; 
-assign router_iact_2_2_north_address_out 		= iact_2_2_north_address_out_bits; 
-assign router_iact_2_2_south_address_out 		= iact_2_2_south_address_out_bits; 
-assign router_iact_2_2_horiz_address_out 		= iact_2_2_horiz_address_out_bits; 
+assign router_iact_2_0_north_address_out 		= iact_north_address_out_bits[2][0]; 
+assign router_iact_2_0_south_address_out 		= iact_south_address_out_bits[2][0];
+assign router_iact_2_0_horiz_address_out 		= iact_horiz_address_out_bits[2][0]; 
+assign router_iact_2_1_north_address_out 		= iact_north_address_out_bits[2][1]; 
+assign router_iact_2_1_south_address_out 		= iact_south_address_out_bits[2][1]; 
+assign router_iact_2_1_horiz_address_out 		= iact_horiz_address_out_bits[2][1]; 
+assign router_iact_2_2_north_address_out 		= iact_north_address_out_bits[2][2]; 
+assign router_iact_2_2_south_address_out 		= iact_south_address_out_bits[2][2]; 
+assign router_iact_2_2_horiz_address_out 		= iact_horiz_address_out_bits[2][2]; 
 			
-assign router_iact_2_0_north_data_out 			= iact_2_0_north_data_out_bits;  
-assign router_iact_2_0_south_data_out 			= iact_2_0_south_data_out_bits; 
-assign router_iact_2_0_horiz_data_out 			= iact_2_0_horiz_data_out_bits; 
-assign router_iact_2_1_north_data_out 			= iact_2_1_north_data_out_bits; 
-assign router_iact_2_1_south_data_out 			= iact_2_1_south_data_out_bits; 
-assign router_iact_2_1_horiz_data_out 			= iact_2_1_horiz_data_out_bits; 
-assign router_iact_2_2_north_data_out 			= iact_2_2_north_data_out_bits; 
-assign router_iact_2_2_south_data_out 			= iact_2_2_south_data_out_bits; 
-assign router_iact_2_2_horiz_data_out 			= iact_2_2_horiz_data_out_bits; 
+assign router_iact_2_0_north_data_out 			= iact_north_data_out_bits[2][0];  
+assign router_iact_2_0_south_data_out 			= iact_south_data_out_bits[2][0]; 
+assign router_iact_2_0_horiz_data_out 			= iact_horiz_data_out_bits[2][0]; 
+assign router_iact_2_1_north_data_out 			= iact_north_data_out_bits[2][1]; 
+assign router_iact_2_1_south_data_out 			= iact_south_data_out_bits[2][1]; 
+assign router_iact_2_1_horiz_data_out 			= iact_horiz_data_out_bits[2][1]; 
+assign router_iact_2_2_north_data_out 			= iact_north_data_out_bits[2][2]; 
+assign router_iact_2_2_south_data_out 			= iact_south_data_out_bits[2][2]; 
+assign router_iact_2_2_horiz_data_out 			= iact_horiz_data_out_bits[2][2]; 
 
 // weight router ready connection
-assign router_weight_0_horiz_address_in_ready	= weight_0_horiz_address_in_ready; 
-assign router_weight_1_horiz_address_in_ready	= weight_1_horiz_address_in_ready; 
-assign router_weight_2_horiz_address_in_ready	= weight_2_horiz_address_in_ready; 
+assign router_weight_0_horiz_address_in_ready	= weight_horiz_address_in_ready[0]; 
+assign router_weight_1_horiz_address_in_ready	= weight_horiz_address_in_ready[1]; 
+assign router_weight_2_horiz_address_in_ready	= weight_horiz_address_in_ready[2]; 
 
-assign router_weight_0_horiz_data_in_ready 		= weight_0_horiz_data_in_ready;
-assign router_weight_1_horiz_data_in_ready 		= weight_1_horiz_data_in_ready; 
-assign router_weight_2_horiz_data_in_ready 		= weight_2_horiz_data_in_ready; 
+assign router_weight_0_horiz_data_in_ready 		= weight_horiz_data_in_ready[0];
+assign router_weight_1_horiz_data_in_ready 		= weight_horiz_data_in_ready[1]; 
+assign router_weight_2_horiz_data_in_ready 		= weight_horiz_data_in_ready[2]; 
 
 // weight router valid connection
-assign router_weight_0_horiz_address_out_valid 	= weight_0_horiz_address_out_valid; 
-assign router_weight_1_horiz_address_out_valid 	= weight_1_horiz_address_out_valid; 
-assign router_weight_2_horiz_address_out_valid 	= weight_2_horiz_address_out_valid; 
-assign router_weight_0_horiz_data_out_valid		= weight_0_horiz_data_out_valid;
-assign router_weight_1_horiz_data_out_valid		= weight_1_horiz_data_out_valid;
-assign router_weight_2_horiz_data_out_valid		= weight_2_horiz_data_out_valid;
+assign router_weight_0_horiz_address_out_valid 	= weight_horiz_address_out_valid[0]; 
+assign router_weight_1_horiz_address_out_valid 	= weight_horiz_address_out_valid[1]; 
+assign router_weight_2_horiz_address_out_valid 	= weight_horiz_address_out_valid[2]; 
+assign router_weight_0_horiz_data_out_valid		= weight_horiz_data_out_valid[0];
+assign router_weight_1_horiz_data_out_valid		= weight_horiz_data_out_valid[1];
+assign router_weight_2_horiz_data_out_valid		= weight_horiz_data_out_valid[2];
 
 // weight router data connection
-assign router_weight_0_horiz_address_out 		= weight_0_horiz_address_out_bits; 
-assign router_weight_1_horiz_address_out 		= weight_1_horiz_address_out_bits; 
-assign router_weight_2_horiz_address_out 		= weight_2_horiz_address_out_bits; 
-assign router_weight_0_horiz_data_out 			= weight_0_horiz_data_out_bits; 
-assign router_weight_1_horiz_data_out 			= weight_1_horiz_data_out_bits; 
-assign router_weight_2_horiz_data_out 			= weight_2_horiz_data_out_bits; 
+assign router_weight_0_horiz_address_out 		= weight_horiz_address_out_bits[0]; 
+assign router_weight_1_horiz_address_out 		= weight_horiz_address_out_bits[1]; 
+assign router_weight_2_horiz_address_out 		= weight_horiz_address_out_bits[2]; 
+assign router_weight_0_horiz_data_out 			= weight_horiz_data_out_bits[0]; 
+assign router_weight_1_horiz_data_out 			= weight_horiz_data_out_bits[1]; 
+assign router_weight_2_horiz_data_out 			= weight_horiz_data_out_bits[2]; 
 
 // psum router ready connection
-assign router_psum_0_north_in_ready 	= psum_0_north_in_ready; 
-assign router_psum_1_north_in_ready 	= psum_1_north_in_ready; 
-assign router_psum_2_north_in_ready 	= psum_2_north_in_ready; 	
+assign router_psum_0_north_in_ready 	= psum_north_in_ready[0]; 
+assign router_psum_1_north_in_ready 	= psum_north_in_ready[1]; 
+assign router_psum_2_north_in_ready 	= psum_north_in_ready[2]; 	
 
 // psum router valid connection
-assign router_psum_0_south_out_valid 	= psum_0_south_out_valid; 
-assign router_psum_1_south_out_valid 	= psum_1_south_out_valid;
-assign router_psum_2_south_out_valid 	= psum_2_south_out_valid; 
+assign router_psum_0_south_out_valid 	= psum_south_out_valid[0]; 
+assign router_psum_1_south_out_valid 	= psum_south_out_valid[1];
+assign router_psum_2_south_out_valid 	= psum_south_out_valid[2]; 
 
 // psum router data connection
-assign router_psum_0_south_out 			= psum_0_south_out_bits; 	
-assign router_psum_1_south_out 			= psum_1_south_out_bits; 	
-assign router_psum_2_south_out 			= psum_2_south_out_bits;	 
+assign router_psum_0_south_out 			= psum_south_out_bits[0]; 	
+assign router_psum_1_south_out 			= psum_south_out_bits[1]; 	
+assign router_psum_2_south_out 			= psum_south_out_bits[2];	 
 
 // interconnect with vertical cluster group
 assign cg_south_psum_0_in_ready 		= PECluster_psum_0_in_from_south_ready; 
@@ -2446,65 +1539,65 @@ assign cg_north_psum_2_out 				= PECluster_psum_2_out;
 // router cluster to PE cluster
 assign PECluster_clock 							= clock;
 assign PECluster_reset 							= reset;
-assign PECluster_weight_0_0_address_in_valid 	= iact_0_0_PE_address_out_valid; 	
-assign PECluster_weight_0_1_address_in_valid 	= iact_0_1_PE_address_out_valid;
-assign PECluster_weight_0_2_address_in_valid 	= iact_0_2_PE_address_out_valid; 
-assign PECluster_weight_0_0_address_in 			= iact_0_0_PE_address_out_bits; 
-assign PECluster_weight_0_1_address_in 			= iact_0_1_PE_address_out_bits; 
-assign PECluster_weight_0_2_address_in 			= iact_0_2_PE_address_out_bits; 	
-assign PECluster_weight_0_0_data_in_valid 		= iact_0_0_PE_data_out_valid;	
-assign PECluster_weight_0_1_data_in_valid 		= iact_0_1_PE_data_out_valid;		
-assign PECluster_weight_0_2_data_in_valid 		= iact_0_2_PE_data_out_valid;
-assign PECluster_weight_0_0_data_in 			= iact_0_0_PE_data_out_bits; 	
-assign PECluster_weight_0_1_data_in 			= iact_0_1_PE_data_out_bits; 	
-assign PECluster_weight_0_2_data_in 			= iact_0_2_PE_data_out_bits;	
-assign PECluster_weight_1_0_address_in_valid 	= iact_1_0_PE_address_out_valid; 	
-assign PECluster_weight_1_1_address_in_valid 	= iact_1_1_PE_address_out_valid;
-assign PECluster_weight_1_2_address_in_valid 	= iact_1_2_PE_address_out_valid; 
-assign PECluster_weight_1_0_address_in 			= iact_1_0_PE_address_out_bits; 
-assign PECluster_weight_1_1_address_in 			= iact_1_1_PE_address_out_bits; 
-assign PECluster_weight_1_2_address_in 			= iact_1_2_PE_address_out_bits; 	
-assign PECluster_weight_1_0_data_in_valid 		= iact_1_0_PE_data_out_valid;	
-assign PECluster_weight_1_1_data_in_valid 		= iact_1_1_PE_data_out_valid;		
-assign PECluster_weight_1_2_data_in_valid 		= iact_1_2_PE_data_out_valid;
-assign PECluster_weight_1_0_data_in 			= iact_1_0_PE_data_out_bits; 	
-assign PECluster_weight_1_1_data_in 			= iact_1_1_PE_data_out_bits; 	
-assign PECluster_weight_1_2_data_in 			= iact_1_2_PE_data_out_bits;
-assign PECluster_weight_2_0_address_in_valid 	= iact_2_0_PE_address_out_valid; 	
-assign PECluster_weight_2_1_address_in_valid 	= iact_2_1_PE_address_out_valid;
-assign PECluster_weight_2_2_address_in_valid 	= iact_2_2_PE_address_out_valid; 
-assign PECluster_weight_2_0_address_in 			= iact_2_0_PE_address_out_bits; 
-assign PECluster_weight_2_1_address_in 			= iact_2_1_PE_address_out_bits; 
-assign PECluster_weight_2_2_address_in 			= iact_2_2_PE_address_out_bits; 	
-assign PECluster_weight_2_0_data_in_valid 		= iact_2_0_PE_data_out_valid;	
-assign PECluster_weight_2_1_data_in_valid 		= iact_2_1_PE_data_out_valid;		
-assign PECluster_weight_2_2_data_in_valid 		= iact_2_2_PE_data_out_valid;
-assign PECluster_weight_2_0_data_in 			= iact_2_0_PE_data_out_bits; 	
-assign PECluster_weight_2_1_data_in 			= iact_2_1_PE_data_out_bits; 	
-assign PECluster_weight_2_2_data_in 			= iact_2_2_PE_data_out_bits;		
+assign PECluster_weight_0_0_address_in_valid 	= iact_PE_address_out_valid[0][0]; 	
+assign PECluster_weight_0_1_address_in_valid 	= iact_PE_address_out_valid[0][1];
+assign PECluster_weight_0_2_address_in_valid 	= iact_PE_address_out_valid[0][2]; 
+assign PECluster_weight_0_0_address_in 			= iact_PE_address_out_bits[0][0]; 
+assign PECluster_weight_0_1_address_in 			= iact_PE_address_out_bits[0][1]; 
+assign PECluster_weight_0_2_address_in 			= iact_PE_address_out_bits[0][2]; 	
+assign PECluster_weight_0_0_data_in_valid 		= iact_PE_data_out_valid[0][0];	
+assign PECluster_weight_0_1_data_in_valid 		= iact_PE_data_out_valid[0][1];		
+assign PECluster_weight_0_2_data_in_valid 		= iact_PE_data_out_valid[0][2];
+assign PECluster_weight_0_0_data_in 			= iact_PE_data_out_bits[0][0]; 	
+assign PECluster_weight_0_1_data_in 			= iact_PE_data_out_bits[0][1]; 	
+assign PECluster_weight_0_2_data_in 			= iact_PE_data_out_bits[0][2];	
+assign PECluster_weight_1_0_address_in_valid 	= iact_PE_address_out_valid[1][0]; 	
+assign PECluster_weight_1_1_address_in_valid 	= iact_PE_address_out_valid[1][1];
+assign PECluster_weight_1_2_address_in_valid 	= iact_PE_address_out_valid[1][2]; 
+assign PECluster_weight_1_0_address_in 			= iact_PE_address_out_bits[1][0]; 
+assign PECluster_weight_1_1_address_in 			= iact_PE_address_out_bits[1][1]; 
+assign PECluster_weight_1_2_address_in 			= iact_PE_address_out_bits[1][2]; 	
+assign PECluster_weight_1_0_data_in_valid 		= iact_PE_data_out_valid[1][0];	
+assign PECluster_weight_1_1_data_in_valid 		= iact_PE_data_out_valid[1][1];		
+assign PECluster_weight_1_2_data_in_valid 		= iact_PE_data_out_valid[1][2];
+assign PECluster_weight_1_0_data_in 			= iact_PE_data_out_bits[1][0]; 	
+assign PECluster_weight_1_1_data_in 			= iact_PE_data_out_bits[1][1]; 	
+assign PECluster_weight_1_2_data_in 			= iact_PE_data_out_bits[1][2];
+assign PECluster_weight_2_0_address_in_valid 	= iact_PE_address_out_valid[2][0]; 	
+assign PECluster_weight_2_1_address_in_valid 	= iact_PE_address_out_valid[2][1];
+assign PECluster_weight_2_2_address_in_valid 	= iact_PE_address_out_valid[2][2]; 
+assign PECluster_weight_2_0_address_in 			= iact_PE_address_out_bits[2][0]; 
+assign PECluster_weight_2_1_address_in 			= iact_PE_address_out_bits[2][1]; 
+assign PECluster_weight_2_2_address_in 			= iact_PE_address_out_bits[2][2]; 	
+assign PECluster_weight_2_0_data_in_valid 		= iact_PE_data_out_valid[2][0];	
+assign PECluster_weight_2_1_data_in_valid 		= iact_PE_data_out_valid[2][1];		
+assign PECluster_weight_2_2_data_in_valid 		= iact_PE_data_out_valid[2][2];
+assign PECluster_weight_2_0_data_in 			= iact_PE_data_out_bits[2][0]; 	
+assign PECluster_weight_2_1_data_in 			= iact_PE_data_out_bits[2][1]; 	
+assign PECluster_weight_2_2_data_in 			= iact_PE_data_out_bits[2][2];		
 
-assign PECluster_iact_0_address_in_valid 		= weight_0_PE_address_out_valid; 
-assign PECluster_iact_1_address_in_valid 		= weight_1_PE_address_out_valid; 
-assign PECluster_iact_2_address_in_valid 		= weight_2_PE_address_out_valid;
-assign PECluster_iact_0_address_in 				= weight_0_PE_address_out_bits;		
-assign PECluster_iact_1_address_in 				= weight_1_PE_address_out_bits;	
-assign PECluster_iact_2_address_in 				= weight_2_PE_address_out_bits; 
-assign PECluster_iact_0_data_in_valid 			= weight_0_PE_data_out_valid; 	 		
-assign PECluster_iact_1_data_in_valid 			= weight_1_PE_data_out_valid; 		
-assign PECluster_iact_2_data_in_valid 			= weight_2_PE_data_out_valid; 
-assign PECluster_iact_0_data_in 				= weight_0_PE_data_out_bits;  
-assign PECluster_iact_1_data_in 				= weight_1_PE_data_out_bits; 	
-assign PECluster_iact_2_data_in 				= weight_2_PE_data_out_bits; 
+assign PECluster_iact_0_address_in_valid 		= weight_PE_address_out_valid[0]; 
+assign PECluster_iact_1_address_in_valid 		= weight_PE_address_out_valid[1]; 
+assign PECluster_iact_2_address_in_valid 		= weight_PE_address_out_valid[2];
+assign PECluster_iact_0_address_in 				= weight_PE_address_out_bits[0];		
+assign PECluster_iact_1_address_in 				= weight_PE_address_out_bits[1];	
+assign PECluster_iact_2_address_in 				= weight_PE_address_out_bits[2]; 
+assign PECluster_iact_0_data_in_valid 			= weight_PE_data_out_valid[0]; 	 		
+assign PECluster_iact_1_data_in_valid 			= weight_PE_data_out_valid[1]; 		
+assign PECluster_iact_2_data_in_valid 			= weight_PE_data_out_valid[2]; 
+assign PECluster_iact_0_data_in 				= weight_PE_data_out_bits[0];  
+assign PECluster_iact_1_data_in 				= weight_PE_data_out_bits[1]; 	
+assign PECluster_iact_2_data_in 				= weight_PE_data_out_bits[2]; 
 
-assign PECluster_psum_0_in_valid 				= psum_0_PE_out_valid; 
-assign PECluster_psum_1_in_valid 				= psum_1_PE_out_valid; 
-assign PECluster_psum_2_in_valid 				= psum_2_PE_out_valid; 
-assign PECluster_psum_0_in 						= psum_0_PE_out_bits; 
-assign PECluster_psum_1_in 						= psum_1_PE_out_bits; 
-assign PECluster_psum_2_in 						= psum_2_PE_out_bits; 
-assign PECluster_psum_0_out_ready 				= psum_0_PE_in_ready; 
-assign PECluster_psum_1_out_ready 				= psum_1_PE_in_ready; 
-assign PECluster_psum_2_out_ready 				= psum_2_PE_in_ready; 
+assign PECluster_psum_0_in_valid 				= psum_PE_out_valid[0]; 
+assign PECluster_psum_1_in_valid 				= psum_PE_out_valid[1]; 
+assign PECluster_psum_2_in_valid 				= psum_PE_out_valid[2]; 
+assign PECluster_psum_0_in 						= psum_PE_out_bits[0]; 
+assign PECluster_psum_1_in 						= psum_PE_out_bits[1]; 
+assign PECluster_psum_2_in 						= psum_PE_out_bits[2]; 
+assign PECluster_psum_0_out_ready 				= psum_PE_in_ready[0]; 
+assign PECluster_psum_1_out_ready 				= psum_PE_in_ready[1]; 
+assign PECluster_psum_2_out_ready 				= psum_PE_in_ready[2]; 
 
 // psum accumulate from south cluster group
 assign PECluster_psum_0_in_from_south_valid 	= cg_south_psum_0_in_valid; 
@@ -2608,43 +1701,43 @@ assign psum_1_data_out_sel 		= router_cluster_psum_data_out_sel;
 assign psum_2_data_out_sel 		= router_cluster_psum_data_out_sel; 
 
 // GLB cluster to router cluster
-assign GLBCluster_iact_address_out_ready[0][0] 	= iact_0_0_GLB_address_in_ready;
-assign GLBCluster_iact_address_out_ready[0][1] 	= iact_0_1_GLB_address_in_ready; 
-assign GLBCluster_iact_address_out_ready[0][2] 	= iact_0_2_GLB_address_in_ready;  
-assign GLBCluster_iact_data_out_ready[0][0] 	= iact_0_0_GLB_data_in_ready; 
-assign GLBCluster_iact_data_out_ready[0][1] 	= iact_0_1_GLB_data_in_ready; 
-assign GLBCluster_iact_data_out_ready[0][2] 	= iact_0_2_GLB_data_in_ready; 
-assign GLBCluster_iact_address_out_ready[1][0] 	= iact_1_0_GLB_address_in_ready;
-assign GLBCluster_iact_address_out_ready[1][1] 	= iact_1_1_GLB_address_in_ready; 
-assign GLBCluster_iact_address_out_ready[1][2] 	= iact_1_2_GLB_address_in_ready;  
-assign GLBCluster_iact_data_out_ready[1][0] 	= iact_1_0_GLB_data_in_ready; 
-assign GLBCluster_iact_data_out_ready[1][1] 	= iact_1_1_GLB_data_in_ready; 
-assign GLBCluster_iact_data_out_ready[1][2] 	= iact_1_2_GLB_data_in_ready; 
-assign GLBCluster_iact_address_out_ready[2][0] 	= iact_2_0_GLB_address_in_ready;
-assign GLBCluster_iact_address_out_ready[2][1] 	= iact_2_1_GLB_address_in_ready; 
-assign GLBCluster_iact_address_out_ready[2][2] 	= iact_2_2_GLB_address_in_ready;  
-assign GLBCluster_iact_data_out_ready[2][0] 	= iact_2_0_GLB_data_in_ready; 
-assign GLBCluster_iact_data_out_ready[2][1] 	= iact_2_1_GLB_data_in_ready; 
-assign GLBCluster_iact_data_out_ready[2][2] 	= iact_2_2_GLB_data_in_ready; 
+assign GLBCluster_iact_address_out_ready[0][0] 	= iact_GLB_address_in_ready[0][0];
+assign GLBCluster_iact_address_out_ready[0][1] 	= iact_GLB_address_in_ready[0][1]; 
+assign GLBCluster_iact_address_out_ready[0][2] 	= iact_GLB_address_in_ready[0][2];  
+assign GLBCluster_iact_data_out_ready[0][0] 	= iact_GLB_data_in_ready[0][0]; 
+assign GLBCluster_iact_data_out_ready[0][1] 	= iact_GLB_data_in_ready[0][1]; 
+assign GLBCluster_iact_data_out_ready[0][2] 	= iact_GLB_data_in_ready[0][2]; 
+assign GLBCluster_iact_address_out_ready[1][0] 	= iact_GLB_address_in_ready[1][0];
+assign GLBCluster_iact_address_out_ready[1][1] 	= iact_GLB_address_in_ready[1][1]; 
+assign GLBCluster_iact_address_out_ready[1][2] 	= iact_GLB_address_in_ready[1][2];  
+assign GLBCluster_iact_data_out_ready[1][0] 	= iact_GLB_data_in_ready[1][0]; 
+assign GLBCluster_iact_data_out_ready[1][1] 	= iact_GLB_data_in_ready[1][1]; 
+assign GLBCluster_iact_data_out_ready[1][2] 	= iact_GLB_data_in_ready[1][2]; 
+assign GLBCluster_iact_address_out_ready[2][0] 	= iact_GLB_address_in_ready[2][0];
+assign GLBCluster_iact_address_out_ready[2][1] 	= iact_GLB_address_in_ready[2][1]; 
+assign GLBCluster_iact_address_out_ready[2][2] 	= iact_GLB_address_in_ready[2][2];  
+assign GLBCluster_iact_data_out_ready[2][0] 	= iact_GLB_data_in_ready[2][0]; 
+assign GLBCluster_iact_data_out_ready[2][1] 	= iact_GLB_data_in_ready[2][1]; 
+assign GLBCluster_iact_data_out_ready[2][2] 	= iact_GLB_data_in_ready[2][2]; 
 
-assign GLBCluster_weight_address_out_ready[0] 	= weight_0_GLB_address_in_ready; 
-assign GLBCluster_weight_address_out_ready[1] 	= weight_1_GLB_address_in_ready; 
-assign GLBCluster_weight_address_out_ready[2] 	= weight_2_GLB_address_in_ready; 
-assign GLBCluster_weight_data_out_ready[0] 	= weight_0_GLB_data_in_ready;
-assign GLBCluster_weight_data_out_ready[1] 	= weight_1_GLB_data_in_ready;
-assign GLBCluster_weight_data_out_ready[2] 	= weight_2_GLB_data_in_ready;
+assign GLBCluster_weight_address_out_ready[0] 	= weight_GLB_address_in_ready[0]; 
+assign GLBCluster_weight_address_out_ready[1] 	= weight_GLB_address_in_ready[1]; 
+assign GLBCluster_weight_address_out_ready[2] 	= weight_GLB_address_in_ready[2]; 
+assign GLBCluster_weight_data_out_ready[0] 	= weight_GLB_data_in_ready[0];
+assign GLBCluster_weight_data_out_ready[1] 	= weight_GLB_data_in_ready[1];
+assign GLBCluster_weight_data_out_ready[2] 	= weight_GLB_data_in_ready[2];
 
 // psum 
-assign GLBCluster_psum_data_in_valid[0]  		= psum_0_GLB_out_valid; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_0_GLB_out_valid : GLB_psum_0_data_in_valid;
-assign GLBCluster_psum_data_in_valid[1]  		= psum_1_GLB_out_valid; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_1_GLB_out_valid : GLB_psum_1_data_in_valid;
-assign GLBCluster_psum_data_in_valid[2]  		= psum_2_GLB_out_valid; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_2_GLB_out_valid : GLB_psum_2_data_in_valid;
-assign GLBCluster_psum_data_in[0] 		  		= psum_0_GLB_out_bits; 	// (router_cluster_psum_data_out_sel == TO_PE) ? psum_0_GLB_out_bits  : GLB_psum_0_data_in; 
-assign GLBCluster_psum_data_in[1] 		  		= psum_1_GLB_out_bits; 	// (router_cluster_psum_data_out_sel == TO_PE) ? psum_1_GLB_out_bits  : GLB_psum_1_data_in; 
-assign GLBCluster_psum_data_in[2] 		  		= psum_2_GLB_out_bits; 	// (router_cluster_psum_data_out_sel == TO_PE) ? psum_2_GLB_out_bits  : GLB_psum_2_data_in; 
+assign GLBCluster_psum_data_in_valid[0]  		= psum_GLB_out_valid[0]; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_valid[0] : GLB_psum_0_data_in_valid;
+assign GLBCluster_psum_data_in_valid[1]  		= psum_GLB_out_valid[1]; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_valid[1] : GLB_psum_1_data_in_valid;
+assign GLBCluster_psum_data_in_valid[2]  		= psum_GLB_out_valid[2]; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_valid[2] : GLB_psum_2_data_in_valid;
+assign GLBCluster_psum_data_in[0] 		  		= psum_GLB_out_bits[0]; 	// (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_bits[0]  : GLB_psum_0_data_in; 
+assign GLBCluster_psum_data_in[1] 		  		= psum_GLB_out_bits[1]; 	// (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_bits[1]  : GLB_psum_1_data_in; 
+assign GLBCluster_psum_data_in[2] 		  		= psum_GLB_out_bits[2]; 	// (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_bits[2]  : GLB_psum_2_data_in; 
 		
-assign GLBCluster_psum_data_out_ready[0] 		= (psum_0_GLB_in_ready & cg_ctrl_psum_add) | (GLB_psum_0_data_out_ready & (read_psum_en | psum_SRAM_Bank_0_read_out_en)); 
-assign GLBCluster_psum_data_out_ready[1] 		= (psum_1_GLB_in_ready & cg_ctrl_psum_add) | (GLB_psum_1_data_out_ready & (read_psum_en | psum_SRAM_Bank_1_read_out_en)); 
-assign GLBCluster_psum_data_out_ready[2] 		= (psum_2_GLB_in_ready & cg_ctrl_psum_add) | (GLB_psum_2_data_out_ready & (read_psum_en | psum_SRAM_Bank_2_read_out_en)); 
+assign GLBCluster_psum_data_out_ready[0] 		= (psum_GLB_in_ready[0] & cg_ctrl_psum_add) | (GLB_psum_0_data_out_ready & (read_psum_en | psum_SRAM_Bank_0_read_out_en)); 
+assign GLBCluster_psum_data_out_ready[1] 		= (psum_GLB_in_ready[1] & cg_ctrl_psum_add) | (GLB_psum_1_data_out_ready & (read_psum_en | psum_SRAM_Bank_1_read_out_en)); 
+assign GLBCluster_psum_data_out_ready[2] 		= (psum_GLB_in_ready[2] & cg_ctrl_psum_add) | (GLB_psum_2_data_out_ready & (read_psum_en | psum_SRAM_Bank_2_read_out_en)); 
 
 // cluster group control
 assign GLBCluster_iact_write_en[0][0]	= cg_ctrl_GLB_iact_0_0_write_en; 
@@ -2696,301 +1789,301 @@ assign GLBCluster_psum_write_addr[2]	= GLB_psum_2_write_addr;
 
 //============= other cluster group inter-connection =============//
 // iact_ready
-assign iact_0_0_PE_address_out_ready    	= PECluster_iact_0_address_in_ready; 
-assign iact_0_2_PE_address_out_ready 	  	= PECluster_iact_0_address_in_ready; 
-assign iact_0_1_PE_address_out_ready 	 	= PECluster_iact_0_address_in_ready; 
-assign iact_1_0_PE_address_out_ready    	= PECluster_iact_1_address_in_ready;
-assign iact_1_2_PE_address_out_ready 	  	= PECluster_iact_1_address_in_ready;
-assign iact_1_1_PE_address_out_ready 	 	= PECluster_iact_1_address_in_ready;
-assign iact_2_0_PE_address_out_ready    	= PECluster_iact_2_address_in_ready;
-assign iact_2_2_PE_address_out_ready 	  	= PECluster_iact_2_address_in_ready;
-assign iact_2_1_PE_address_out_ready 	 	= PECluster_iact_2_address_in_ready;
+assign iact_PE_address_out_ready[0][0]    	= PECluster_iact_0_address_in_ready; 
+assign iact_PE_address_out_ready[0][2] 	  	= PECluster_iact_0_address_in_ready; 
+assign iact_PE_address_out_ready[0][1] 	 	= PECluster_iact_0_address_in_ready; 
+assign iact_PE_address_out_ready[1][0]    	= PECluster_iact_1_address_in_ready;
+assign iact_PE_address_out_ready[1][2] 	  	= PECluster_iact_1_address_in_ready;
+assign iact_PE_address_out_ready[1][1] 	 	= PECluster_iact_1_address_in_ready;
+assign iact_PE_address_out_ready[2][0]    	= PECluster_iact_2_address_in_ready;
+assign iact_PE_address_out_ready[2][2] 	  	= PECluster_iact_2_address_in_ready;
+assign iact_PE_address_out_ready[2][1] 	 	= PECluster_iact_2_address_in_ready;
 
-assign iact_0_0_north_address_out_ready 	= router_iact_0_0_north_address_out_ready; 	
-assign iact_0_1_north_address_out_ready 	= router_iact_0_1_north_address_out_ready; 
-assign iact_0_2_north_address_out_ready 	= router_iact_0_2_north_address_out_ready; 
-assign iact_0_0_south_address_out_ready 	= router_iact_0_0_south_address_out_ready; 	
-assign iact_0_1_south_address_out_ready 	= router_iact_0_1_south_address_out_ready; 
-assign iact_0_2_south_address_out_ready 	= router_iact_0_2_south_address_out_ready; 
-assign iact_0_0_horiz_address_out_ready 	= router_iact_0_0_horiz_address_out_ready; 	
-assign iact_0_1_horiz_address_out_ready 	= router_iact_0_1_horiz_address_out_ready; 
-assign iact_0_2_horiz_address_out_ready 	= router_iact_0_2_horiz_address_out_ready; 
-assign iact_1_0_north_address_out_ready 	= router_iact_1_0_north_address_out_ready; 	
-assign iact_1_1_north_address_out_ready 	= router_iact_1_1_north_address_out_ready; 
-assign iact_1_2_north_address_out_ready 	= router_iact_1_2_north_address_out_ready; 
-assign iact_1_0_south_address_out_ready 	= router_iact_1_0_south_address_out_ready; 	
-assign iact_1_1_south_address_out_ready 	= router_iact_1_1_south_address_out_ready; 
-assign iact_1_2_south_address_out_ready 	= router_iact_1_2_south_address_out_ready; 
-assign iact_1_0_horiz_address_out_ready 	= router_iact_1_0_horiz_address_out_ready; 	
-assign iact_1_1_horiz_address_out_ready 	= router_iact_1_1_horiz_address_out_ready; 
-assign iact_1_2_horiz_address_out_ready 	= router_iact_1_2_horiz_address_out_ready; 
-assign iact_2_0_north_address_out_ready 	= router_iact_2_0_north_address_out_ready; 	
-assign iact_2_1_north_address_out_ready 	= router_iact_2_1_north_address_out_ready; 
-assign iact_2_2_north_address_out_ready 	= router_iact_2_2_north_address_out_ready; 
-assign iact_2_0_south_address_out_ready 	= router_iact_2_0_south_address_out_ready; 	
-assign iact_2_1_south_address_out_ready 	= router_iact_2_1_south_address_out_ready; 
-assign iact_2_2_south_address_out_ready 	= router_iact_2_2_south_address_out_ready; 
-assign iact_2_0_horiz_address_out_ready 	= router_iact_2_0_horiz_address_out_ready; 	
-assign iact_2_1_horiz_address_out_ready 	= router_iact_2_1_horiz_address_out_ready; 
-assign iact_2_2_horiz_address_out_ready 	= router_iact_2_2_horiz_address_out_ready; 
+assign iact_north_address_out_ready[0][0] 	= router_iact_0_0_north_address_out_ready; 	
+assign iact_north_address_out_ready[0][1] 	= router_iact_0_1_north_address_out_ready; 
+assign iact_north_address_out_ready[0][2] 	= router_iact_0_2_north_address_out_ready; 
+assign iact_south_address_out_ready[0][0] 	= router_iact_0_0_south_address_out_ready; 	
+assign iact_south_address_out_ready[0][1] 	= router_iact_0_1_south_address_out_ready; 
+assign iact_south_address_out_ready[0][2] 	= router_iact_0_2_south_address_out_ready; 
+assign iact_horiz_address_out_ready[0][0] 	= router_iact_0_0_horiz_address_out_ready; 	
+assign iact_horiz_address_out_ready[0][1] 	= router_iact_0_1_horiz_address_out_ready; 
+assign iact_horiz_address_out_ready[0][2] 	= router_iact_0_2_horiz_address_out_ready; 
+assign iact_north_address_out_ready[1][0] 	= router_iact_1_0_north_address_out_ready; 	
+assign iact_north_address_out_ready[1][1] 	= router_iact_1_1_north_address_out_ready; 
+assign iact_north_address_out_ready[1][2] 	= router_iact_1_2_north_address_out_ready; 
+assign iact_south_address_out_ready[1][0] 	= router_iact_1_0_south_address_out_ready; 	
+assign iact_south_address_out_ready[1][1] 	= router_iact_1_1_south_address_out_ready; 
+assign iact_south_address_out_ready[1][2] 	= router_iact_1_2_south_address_out_ready; 
+assign iact_horiz_address_out_ready[1][0] 	= router_iact_1_0_horiz_address_out_ready; 	
+assign iact_horiz_address_out_ready[1][1] 	= router_iact_1_1_horiz_address_out_ready; 
+assign iact_horiz_address_out_ready[1][2] 	= router_iact_1_2_horiz_address_out_ready; 
+assign iact_north_address_out_ready[2][0] 	= router_iact_2_0_north_address_out_ready; 	
+assign iact_north_address_out_ready[2][1] 	= router_iact_2_1_north_address_out_ready; 
+assign iact_north_address_out_ready[2][2] 	= router_iact_2_2_north_address_out_ready; 
+assign iact_south_address_out_ready[2][0] 	= router_iact_2_0_south_address_out_ready; 	
+assign iact_south_address_out_ready[2][1] 	= router_iact_2_1_south_address_out_ready; 
+assign iact_south_address_out_ready[2][2] 	= router_iact_2_2_south_address_out_ready; 
+assign iact_horiz_address_out_ready[2][0] 	= router_iact_2_0_horiz_address_out_ready; 	
+assign iact_horiz_address_out_ready[2][1] 	= router_iact_2_1_horiz_address_out_ready; 
+assign iact_horiz_address_out_ready[2][2] 	= router_iact_2_2_horiz_address_out_ready; 
 
-assign iact_0_0_PE_data_out_ready    		= PECluster_iact_0_data_in_ready;
-assign iact_0_1_PE_data_out_ready 			= PECluster_iact_0_data_in_ready;
-assign iact_0_2_PE_data_out_ready 			= PECluster_iact_0_data_in_ready;
-assign iact_1_0_PE_data_out_ready    		= PECluster_iact_1_data_in_ready;
-assign iact_1_1_PE_data_out_ready 			= PECluster_iact_1_data_in_ready;
-assign iact_1_2_PE_data_out_ready 			= PECluster_iact_1_data_in_ready;
-assign iact_2_0_PE_data_out_ready    		= PECluster_iact_2_data_in_ready;
-assign iact_2_1_PE_data_out_ready 			= PECluster_iact_2_data_in_ready;
-assign iact_2_2_PE_data_out_ready 			= PECluster_iact_2_data_in_ready;
+assign iact_PE_data_out_ready[0][0]    		= PECluster_iact_0_data_in_ready;
+assign iact_PE_data_out_ready[0][1] 			= PECluster_iact_0_data_in_ready;
+assign iact_PE_data_out_ready[0][2] 			= PECluster_iact_0_data_in_ready;
+assign iact_PE_data_out_ready[1][0]    		= PECluster_iact_1_data_in_ready;
+assign iact_PE_data_out_ready[1][1] 			= PECluster_iact_1_data_in_ready;
+assign iact_PE_data_out_ready[1][2] 			= PECluster_iact_1_data_in_ready;
+assign iact_PE_data_out_ready[2][0]    		= PECluster_iact_2_data_in_ready;
+assign iact_PE_data_out_ready[2][1] 			= PECluster_iact_2_data_in_ready;
+assign iact_PE_data_out_ready[2][2] 			= PECluster_iact_2_data_in_ready;
 
-assign iact_0_0_north_data_out_ready 		= router_iact_0_0_north_data_out_ready; 	
-assign iact_0_1_north_data_out_ready 		= router_iact_0_1_north_data_out_ready; 
-assign iact_0_2_north_data_out_ready 		= router_iact_0_2_north_data_out_ready; 
-assign iact_0_0_south_data_out_ready 		= router_iact_0_0_south_data_out_ready; 
-assign iact_0_1_south_data_out_ready 		= router_iact_0_1_south_data_out_ready; 
-assign iact_0_2_south_data_out_ready 		= router_iact_0_2_south_data_out_ready; 
-assign iact_0_0_horiz_data_out_ready 		= router_iact_0_0_horiz_data_out_ready; 
-assign iact_0_1_horiz_data_out_ready 		= router_iact_0_1_horiz_data_out_ready; 
-assign iact_0_2_horiz_data_out_ready 		= router_iact_0_2_horiz_data_out_ready; 
-assign iact_1_0_north_data_out_ready 		= router_iact_1_0_north_data_out_ready; 	
-assign iact_1_1_north_data_out_ready 		= router_iact_1_1_north_data_out_ready; 
-assign iact_1_2_north_data_out_ready 		= router_iact_1_2_north_data_out_ready; 
-assign iact_1_0_south_data_out_ready 		= router_iact_1_0_south_data_out_ready; 
-assign iact_1_1_south_data_out_ready 		= router_iact_1_1_south_data_out_ready; 
-assign iact_1_2_south_data_out_ready 		= router_iact_1_2_south_data_out_ready; 
-assign iact_1_0_horiz_data_out_ready 		= router_iact_1_0_horiz_data_out_ready; 
-assign iact_1_1_horiz_data_out_ready 		= router_iact_1_1_horiz_data_out_ready; 
-assign iact_1_2_horiz_data_out_ready 		= router_iact_1_2_horiz_data_out_ready;
-assign iact_2_0_north_data_out_ready 		= router_iact_2_0_north_data_out_ready; 	
-assign iact_2_1_north_data_out_ready 		= router_iact_2_1_north_data_out_ready; 
-assign iact_2_2_north_data_out_ready 		= router_iact_2_2_north_data_out_ready; 
-assign iact_2_0_south_data_out_ready 		= router_iact_2_0_south_data_out_ready; 
-assign iact_2_1_south_data_out_ready 		= router_iact_2_1_south_data_out_ready; 
-assign iact_2_2_south_data_out_ready 		= router_iact_2_2_south_data_out_ready; 
-assign iact_2_0_horiz_data_out_ready 		= router_iact_2_0_horiz_data_out_ready; 
-assign iact_2_1_horiz_data_out_ready 		= router_iact_2_1_horiz_data_out_ready; 
-assign iact_2_2_horiz_data_out_ready 		= router_iact_2_2_horiz_data_out_ready;
+assign iact_north_data_out_ready[0][0] 		= router_iact_0_0_north_data_out_ready; 	
+assign iact_north_data_out_ready[0][1] 		= router_iact_0_1_north_data_out_ready; 
+assign iact_north_data_out_ready[0][2] 		= router_iact_0_2_north_data_out_ready; 
+assign iact_south_data_out_ready[0][0] 		= router_iact_0_0_south_data_out_ready; 
+assign iact_south_data_out_ready[0][1] 		= router_iact_0_1_south_data_out_ready; 
+assign iact_south_data_out_ready[0][2] 		= router_iact_0_2_south_data_out_ready; 
+assign iact_horiz_data_out_ready[0][0] 		= router_iact_0_0_horiz_data_out_ready; 
+assign iact_horiz_data_out_ready[0][1] 		= router_iact_0_1_horiz_data_out_ready; 
+assign iact_horiz_data_out_ready[0][2] 		= router_iact_0_2_horiz_data_out_ready; 
+assign iact_north_data_out_ready[1][0] 		= router_iact_1_0_north_data_out_ready; 	
+assign iact_north_data_out_ready[1][1] 		= router_iact_1_1_north_data_out_ready; 
+assign iact_north_data_out_ready[1][2] 		= router_iact_1_2_north_data_out_ready; 
+assign iact_south_data_out_ready[1][0] 		= router_iact_1_0_south_data_out_ready; 
+assign iact_south_data_out_ready[1][1] 		= router_iact_1_1_south_data_out_ready; 
+assign iact_south_data_out_ready[1][2] 		= router_iact_1_2_south_data_out_ready; 
+assign iact_horiz_data_out_ready[1][0] 		= router_iact_1_0_horiz_data_out_ready; 
+assign iact_horiz_data_out_ready[1][1] 		= router_iact_1_1_horiz_data_out_ready; 
+assign iact_horiz_data_out_ready[1][2] 		= router_iact_1_2_horiz_data_out_ready;
+assign iact_north_data_out_ready[2][0] 		= router_iact_2_0_north_data_out_ready; 	
+assign iact_north_data_out_ready[2][1] 		= router_iact_2_1_north_data_out_ready; 
+assign iact_north_data_out_ready[2][2] 		= router_iact_2_2_north_data_out_ready; 
+assign iact_south_data_out_ready[2][0] 		= router_iact_2_0_south_data_out_ready; 
+assign iact_south_data_out_ready[2][1] 		= router_iact_2_1_south_data_out_ready; 
+assign iact_south_data_out_ready[2][2] 		= router_iact_2_2_south_data_out_ready; 
+assign iact_horiz_data_out_ready[2][0] 		= router_iact_2_0_horiz_data_out_ready; 
+assign iact_horiz_data_out_ready[2][1] 		= router_iact_2_1_horiz_data_out_ready; 
+assign iact_horiz_data_out_ready[2][2] 		= router_iact_2_2_horiz_data_out_ready;
 
 // iact_valid
-assign iact_0_0_GLB_address_in_valid   		= GLBCluster_iact_address_out_valid[0][0]; 
-assign iact_0_1_GLB_address_in_valid 		= GLBCluster_iact_address_out_valid[0][1];
-assign iact_0_2_GLB_address_in_valid 		= GLBCluster_iact_address_out_valid[0][2]; 
-assign iact_0_0_GLB_data_in_valid   		= GLBCluster_iact_data_out_valid[0][0]; 	
-assign iact_0_1_GLB_data_in_valid 			= GLBCluster_iact_data_out_valid[0][1]; 
-assign iact_0_2_GLB_data_in_valid   		= GLBCluster_iact_data_out_valid[0][2]; 
-assign iact_1_0_GLB_address_in_valid   		= GLBCluster_iact_address_out_valid[1][0]; 
-assign iact_1_1_GLB_address_in_valid 		= GLBCluster_iact_address_out_valid[1][1];
-assign iact_1_2_GLB_address_in_valid 		= GLBCluster_iact_address_out_valid[1][2]; 
-assign iact_1_0_GLB_data_in_valid   		= GLBCluster_iact_data_out_valid[1][0]; 	
-assign iact_1_1_GLB_data_in_valid 			= GLBCluster_iact_data_out_valid[1][1]; 
-assign iact_1_2_GLB_data_in_valid   		= GLBCluster_iact_data_out_valid[1][2]; 
-assign iact_2_0_GLB_address_in_valid   		= GLBCluster_iact_address_out_valid[2][0]; 
-assign iact_2_1_GLB_address_in_valid 		= GLBCluster_iact_address_out_valid[2][1];
-assign iact_2_2_GLB_address_in_valid 		= GLBCluster_iact_address_out_valid[2][2]; 
-assign iact_2_0_GLB_data_in_valid   		= GLBCluster_iact_data_out_valid[2][0]; 	
-assign iact_2_1_GLB_data_in_valid 			= GLBCluster_iact_data_out_valid[2][1]; 
-assign iact_2_2_GLB_data_in_valid   		= GLBCluster_iact_data_out_valid[2][2]; 
+assign iact_GLB_address_in_valid[0][0]   		= GLBCluster_iact_address_out_valid[0][0]; 
+assign iact_GLB_address_in_valid[0][1] 		= GLBCluster_iact_address_out_valid[0][1];
+assign iact_GLB_address_in_valid[0][2] 		= GLBCluster_iact_address_out_valid[0][2]; 
+assign iact_GLB_data_in_valid[0][0]   		= GLBCluster_iact_data_out_valid[0][0]; 	
+assign iact_GLB_data_in_valid[0][1] 			= GLBCluster_iact_data_out_valid[0][1]; 
+assign iact_GLB_data_in_valid[0][2]   		= GLBCluster_iact_data_out_valid[0][2]; 
+assign iact_GLB_address_in_valid[1][0]   		= GLBCluster_iact_address_out_valid[1][0]; 
+assign iact_GLB_address_in_valid[1][1] 		= GLBCluster_iact_address_out_valid[1][1];
+assign iact_GLB_address_in_valid[1][2] 		= GLBCluster_iact_address_out_valid[1][2]; 
+assign iact_GLB_data_in_valid[1][0]   		= GLBCluster_iact_data_out_valid[1][0]; 	
+assign iact_GLB_data_in_valid[1][1] 			= GLBCluster_iact_data_out_valid[1][1]; 
+assign iact_GLB_data_in_valid[1][2]   		= GLBCluster_iact_data_out_valid[1][2]; 
+assign iact_GLB_address_in_valid[2][0]   		= GLBCluster_iact_address_out_valid[2][0]; 
+assign iact_GLB_address_in_valid[2][1] 		= GLBCluster_iact_address_out_valid[2][1];
+assign iact_GLB_address_in_valid[2][2] 		= GLBCluster_iact_address_out_valid[2][2]; 
+assign iact_GLB_data_in_valid[2][0]   		= GLBCluster_iact_data_out_valid[2][0]; 	
+assign iact_GLB_data_in_valid[2][1] 			= GLBCluster_iact_data_out_valid[2][1]; 
+assign iact_GLB_data_in_valid[2][2]   		= GLBCluster_iact_data_out_valid[2][2]; 
 	
-assign iact_0_0_north_address_in_valid 		= router_iact_0_0_north_address_in_valid; 
-assign iact_0_1_north_address_in_valid 		= router_iact_0_1_north_address_in_valid; 
-assign iact_0_2_north_address_in_valid 		= router_iact_0_2_north_address_in_valid;	
-assign iact_0_0_south_address_in_valid 		= router_iact_0_0_south_address_in_valid;
-assign iact_0_1_south_address_in_valid 		= router_iact_0_1_south_address_in_valid; 	
-assign iact_0_2_south_address_in_valid 		= router_iact_0_2_south_address_in_valid;
-assign iact_0_0_horiz_address_in_valid 		= router_iact_0_0_horiz_address_in_valid;
-assign iact_0_1_horiz_address_in_valid 		= router_iact_0_1_horiz_address_in_valid;
-assign iact_0_2_horiz_address_in_valid 		= router_iact_0_2_horiz_address_in_valid;
-assign iact_0_0_north_data_in_valid 		= router_iact_0_0_north_data_in_valid; 	
-assign iact_0_1_north_data_in_valid 		= router_iact_0_1_north_data_in_valid;	
-assign iact_0_2_north_data_in_valid 		= router_iact_0_2_north_data_in_valid; 
-assign iact_0_0_south_data_in_valid 		= router_iact_0_0_south_data_in_valid; 
-assign iact_0_1_south_data_in_valid 		= router_iact_0_1_south_data_in_valid; 	
-assign iact_0_2_south_data_in_valid 		= router_iact_0_2_south_data_in_valid; 
-assign iact_0_0_horiz_data_in_valid 		= router_iact_0_0_horiz_data_in_valid; 
-assign iact_0_1_horiz_data_in_valid 		= router_iact_0_1_horiz_data_in_valid; 
-assign iact_0_2_horiz_data_in_valid 		= router_iact_0_2_horiz_data_in_valid; 
-assign iact_1_0_north_address_in_valid 		= router_iact_1_0_north_address_in_valid; 
-assign iact_1_1_north_address_in_valid 		= router_iact_1_1_north_address_in_valid; 
-assign iact_1_2_north_address_in_valid 		= router_iact_1_2_north_address_in_valid;	
-assign iact_1_0_south_address_in_valid 		= router_iact_1_0_south_address_in_valid;
-assign iact_1_1_south_address_in_valid 		= router_iact_1_1_south_address_in_valid; 	
-assign iact_1_2_south_address_in_valid 		= router_iact_1_2_south_address_in_valid;
-assign iact_1_0_horiz_address_in_valid 		= router_iact_1_0_horiz_address_in_valid;
-assign iact_1_1_horiz_address_in_valid 		= router_iact_1_1_horiz_address_in_valid;
-assign iact_1_2_horiz_address_in_valid 		= router_iact_1_2_horiz_address_in_valid;
-assign iact_1_0_north_data_in_valid 		= router_iact_1_0_north_data_in_valid; 	
-assign iact_1_1_north_data_in_valid 		= router_iact_1_1_north_data_in_valid;	
-assign iact_1_2_north_data_in_valid 		= router_iact_1_2_north_data_in_valid; 
-assign iact_1_0_south_data_in_valid 		= router_iact_1_0_south_data_in_valid; 
-assign iact_1_1_south_data_in_valid 		= router_iact_1_1_south_data_in_valid; 	
-assign iact_1_2_south_data_in_valid 		= router_iact_1_2_south_data_in_valid; 
-assign iact_1_0_horiz_data_in_valid 		= router_iact_1_0_horiz_data_in_valid; 
-assign iact_1_1_horiz_data_in_valid 		= router_iact_1_1_horiz_data_in_valid; 
-assign iact_1_2_horiz_data_in_valid 		= router_iact_1_2_horiz_data_in_valid;
-assign iact_2_0_north_address_in_valid 		= router_iact_2_0_north_address_in_valid; 
-assign iact_2_1_north_address_in_valid 		= router_iact_2_1_north_address_in_valid; 
-assign iact_2_2_north_address_in_valid 		= router_iact_2_2_north_address_in_valid;	
-assign iact_2_0_south_address_in_valid 		= router_iact_2_0_south_address_in_valid;
-assign iact_2_1_south_address_in_valid 		= router_iact_2_1_south_address_in_valid; 	
-assign iact_2_2_south_address_in_valid 		= router_iact_2_2_south_address_in_valid;
-assign iact_2_0_horiz_address_in_valid 		= router_iact_2_0_horiz_address_in_valid;
-assign iact_2_1_horiz_address_in_valid 		= router_iact_2_1_horiz_address_in_valid;
-assign iact_2_2_horiz_address_in_valid 		= router_iact_2_2_horiz_address_in_valid;
-assign iact_2_0_north_data_in_valid 		= router_iact_2_0_north_data_in_valid; 	
-assign iact_2_1_north_data_in_valid 		= router_iact_2_1_north_data_in_valid;	
-assign iact_2_2_north_data_in_valid 		= router_iact_2_2_north_data_in_valid; 
-assign iact_2_0_south_data_in_valid 		= router_iact_2_0_south_data_in_valid; 
-assign iact_2_1_south_data_in_valid 		= router_iact_2_1_south_data_in_valid; 	
-assign iact_2_2_south_data_in_valid 		= router_iact_2_2_south_data_in_valid; 
-assign iact_2_0_horiz_data_in_valid 		= router_iact_2_0_horiz_data_in_valid; 
-assign iact_2_1_horiz_data_in_valid 		= router_iact_2_1_horiz_data_in_valid; 
-assign iact_2_2_horiz_data_in_valid 		= router_iact_2_2_horiz_data_in_valid;
+assign iact_north_address_in_valid[0][0] 		= router_iact_0_0_north_address_in_valid; 
+assign iact_north_address_in_valid[0][1] 		= router_iact_0_1_north_address_in_valid; 
+assign iact_north_address_in_valid[0][2] 		= router_iact_0_2_north_address_in_valid;	
+assign iact_south_address_in_valid[0][0] 		= router_iact_0_0_south_address_in_valid;
+assign iact_south_address_in_valid[0][1] 		= router_iact_0_1_south_address_in_valid; 	
+assign iact_south_address_in_valid[0][2] 		= router_iact_0_2_south_address_in_valid;
+assign iact_horiz_address_in_valid[0][0] 		= router_iact_0_0_horiz_address_in_valid;
+assign iact_horiz_address_in_valid[0][1] 		= router_iact_0_1_horiz_address_in_valid;
+assign iact_horiz_address_in_valid[0][2] 		= router_iact_0_2_horiz_address_in_valid;
+assign iact_north_data_in_valid[0][0] 		= router_iact_0_0_north_data_in_valid; 	
+assign iact_north_data_in_valid[0][1] 		= router_iact_0_1_north_data_in_valid;	
+assign iact_north_data_in_valid[0][2] 		= router_iact_0_2_north_data_in_valid; 
+assign iact_south_data_in_valid[0][0] 		= router_iact_0_0_south_data_in_valid; 
+assign iact_south_data_in_valid[0][1] 		= router_iact_0_1_south_data_in_valid; 	
+assign iact_south_data_in_valid[0][2] 		= router_iact_0_2_south_data_in_valid; 
+assign iact_horiz_data_in_valid[0][0] 		= router_iact_0_0_horiz_data_in_valid; 
+assign iact_horiz_data_in_valid[0][1] 		= router_iact_0_1_horiz_data_in_valid; 
+assign iact_horiz_data_in_valid[0][2] 		= router_iact_0_2_horiz_data_in_valid; 
+assign iact_north_address_in_valid[1][0] 		= router_iact_1_0_north_address_in_valid; 
+assign iact_north_address_in_valid[1][1] 		= router_iact_1_1_north_address_in_valid; 
+assign iact_north_address_in_valid[1][2] 		= router_iact_1_2_north_address_in_valid;	
+assign iact_south_address_in_valid[1][0] 		= router_iact_1_0_south_address_in_valid;
+assign iact_south_address_in_valid[1][1] 		= router_iact_1_1_south_address_in_valid; 	
+assign iact_south_address_in_valid[1][2] 		= router_iact_1_2_south_address_in_valid;
+assign iact_horiz_address_in_valid[1][0] 		= router_iact_1_0_horiz_address_in_valid;
+assign iact_horiz_address_in_valid[1][1] 		= router_iact_1_1_horiz_address_in_valid;
+assign iact_horiz_address_in_valid[1][2] 		= router_iact_1_2_horiz_address_in_valid;
+assign iact_north_data_in_valid[1][0] 		= router_iact_1_0_north_data_in_valid; 	
+assign iact_north_data_in_valid[1][1] 		= router_iact_1_1_north_data_in_valid;	
+assign iact_north_data_in_valid[1][2] 		= router_iact_1_2_north_data_in_valid; 
+assign iact_south_data_in_valid[1][0] 		= router_iact_1_0_south_data_in_valid; 
+assign iact_south_data_in_valid[1][1] 		= router_iact_1_1_south_data_in_valid; 	
+assign iact_south_data_in_valid[1][2] 		= router_iact_1_2_south_data_in_valid; 
+assign iact_horiz_data_in_valid[1][0] 		= router_iact_1_0_horiz_data_in_valid; 
+assign iact_horiz_data_in_valid[1][1] 		= router_iact_1_1_horiz_data_in_valid; 
+assign iact_horiz_data_in_valid[1][2] 		= router_iact_1_2_horiz_data_in_valid;
+assign iact_north_address_in_valid[2][0] 		= router_iact_2_0_north_address_in_valid; 
+assign iact_north_address_in_valid[2][1] 		= router_iact_2_1_north_address_in_valid; 
+assign iact_north_address_in_valid[2][2] 		= router_iact_2_2_north_address_in_valid;	
+assign iact_south_address_in_valid[2][0] 		= router_iact_2_0_south_address_in_valid;
+assign iact_south_address_in_valid[2][1] 		= router_iact_2_1_south_address_in_valid; 	
+assign iact_south_address_in_valid[2][2] 		= router_iact_2_2_south_address_in_valid;
+assign iact_horiz_address_in_valid[2][0] 		= router_iact_2_0_horiz_address_in_valid;
+assign iact_horiz_address_in_valid[2][1] 		= router_iact_2_1_horiz_address_in_valid;
+assign iact_horiz_address_in_valid[2][2] 		= router_iact_2_2_horiz_address_in_valid;
+assign iact_north_data_in_valid[2][0] 		= router_iact_2_0_north_data_in_valid; 	
+assign iact_north_data_in_valid[2][1] 		= router_iact_2_1_north_data_in_valid;	
+assign iact_north_data_in_valid[2][2] 		= router_iact_2_2_north_data_in_valid; 
+assign iact_south_data_in_valid[2][0] 		= router_iact_2_0_south_data_in_valid; 
+assign iact_south_data_in_valid[2][1] 		= router_iact_2_1_south_data_in_valid; 	
+assign iact_south_data_in_valid[2][2] 		= router_iact_2_2_south_data_in_valid; 
+assign iact_horiz_data_in_valid[2][0] 		= router_iact_2_0_horiz_data_in_valid; 
+assign iact_horiz_data_in_valid[2][1] 		= router_iact_2_1_horiz_data_in_valid; 
+assign iact_horiz_data_in_valid[2][2] 		= router_iact_2_2_horiz_data_in_valid;
 	
 // iact_data	
-assign iact_0_0_GLB_address_in_bits   		= GLBCluster_iact_address_out[0][0]; 
-assign iact_0_1_GLB_address_in_bits 		= GLBCluster_iact_address_out[0][1]; 	
-assign iact_0_2_GLB_address_in_bits 		= GLBCluster_iact_address_out[0][2]; 
-assign iact_0_0_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[0][0]; 
-assign iact_0_1_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[0][1]; 
-assign iact_0_2_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[0][2]; 
-assign iact_1_0_GLB_address_in_bits   		= GLBCluster_iact_address_out[1][0]; 
-assign iact_1_1_GLB_address_in_bits 		= GLBCluster_iact_address_out[1][1]; 	
-assign iact_1_2_GLB_address_in_bits 		= GLBCluster_iact_address_out[1][2]; 
-assign iact_1_0_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[1][0]; 
-assign iact_1_1_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[1][1]; 
-assign iact_1_2_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[1][2]; 
-assign iact_2_0_GLB_address_in_bits   		= GLBCluster_iact_address_out[2][0]; 
-assign iact_2_1_GLB_address_in_bits 		= GLBCluster_iact_address_out[2][1]; 	
-assign iact_2_2_GLB_address_in_bits 		= GLBCluster_iact_address_out[2][2]; 
-assign iact_2_0_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[2][0]; 
-assign iact_2_1_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[2][1]; 
-assign iact_2_2_GLB_data_in_bits 	 		= GLBCluster_iact_data_out[2][2]; 
+assign iact_GLB_address_in_bits[0][0]   		= GLBCluster_iact_address_out[0][0]; 
+assign iact_GLB_address_in_bits[0][1] 		= GLBCluster_iact_address_out[0][1]; 	
+assign iact_GLB_address_in_bits[0][2] 		= GLBCluster_iact_address_out[0][2]; 
+assign iact_GLB_data_in_bits[0][0] 	 		= GLBCluster_iact_data_out[0][0]; 
+assign iact_GLB_data_in_bits[0][1] 	 		= GLBCluster_iact_data_out[0][1]; 
+assign iact_GLB_data_in_bits[0][2] 	 		= GLBCluster_iact_data_out[0][2]; 
+assign iact_GLB_address_in_bits[1][0]   		= GLBCluster_iact_address_out[1][0]; 
+assign iact_GLB_address_in_bits[1][1] 		= GLBCluster_iact_address_out[1][1]; 	
+assign iact_GLB_address_in_bits[1][2] 		= GLBCluster_iact_address_out[1][2]; 
+assign iact_GLB_data_in_bits[1][0] 	 		= GLBCluster_iact_data_out[1][0]; 
+assign iact_GLB_data_in_bits[1][1] 	 		= GLBCluster_iact_data_out[1][1]; 
+assign iact_GLB_data_in_bits[1][2] 	 		= GLBCluster_iact_data_out[1][2]; 
+assign iact_GLB_address_in_bits[2][0]   		= GLBCluster_iact_address_out[2][0]; 
+assign iact_GLB_address_in_bits[2][1] 		= GLBCluster_iact_address_out[2][1]; 	
+assign iact_GLB_address_in_bits[2][2] 		= GLBCluster_iact_address_out[2][2]; 
+assign iact_GLB_data_in_bits[2][0] 	 		= GLBCluster_iact_data_out[2][0]; 
+assign iact_GLB_data_in_bits[2][1] 	 		= GLBCluster_iact_data_out[2][1]; 
+assign iact_GLB_data_in_bits[2][2] 	 		= GLBCluster_iact_data_out[2][2]; 
 	
-assign iact_0_0_north_address_in_bits 		= router_iact_0_0_north_address_in; 
-assign iact_0_1_north_address_in_bits 		= router_iact_0_1_north_address_in; 
-assign iact_0_2_north_address_in_bits 		= router_iact_0_2_north_address_in;
-assign iact_0_0_south_address_in_bits 		= router_iact_0_0_south_address_in; 
-assign iact_0_1_south_address_in_bits 		= router_iact_0_1_south_address_in;
-assign iact_0_2_south_address_in_bits 		= router_iact_0_2_south_address_in; 
-assign iact_0_0_horiz_address_in_bits 		= router_iact_0_0_horiz_address_in; 	
-assign iact_0_1_horiz_address_in_bits 		= router_iact_0_1_horiz_address_in; 
-assign iact_0_2_horiz_address_in_bits 		= router_iact_0_2_horiz_address_in;
-assign iact_0_0_north_data_in_bits 			= router_iact_0_0_north_data_in; 	
-assign iact_0_1_north_data_in_bits 			= router_iact_0_1_north_data_in; 	
-assign iact_0_2_north_data_in_bits 			= router_iact_0_2_north_data_in; 	
-assign iact_0_0_south_data_in_bits 			= router_iact_0_0_south_data_in; 	 
-assign iact_0_1_south_data_in_bits 			= router_iact_0_1_south_data_in; 	
-assign iact_0_2_south_data_in_bits 			= router_iact_0_2_south_data_in;		
-assign iact_0_0_horiz_data_in_bits 			= router_iact_0_0_horiz_data_in; 
-assign iact_0_1_horiz_data_in_bits 			= router_iact_0_1_horiz_data_in;
-assign iact_0_2_horiz_data_in_bits 			= router_iact_0_2_horiz_data_in;
-assign iact_1_0_north_address_in_bits 		= router_iact_1_0_north_address_in; 
-assign iact_1_1_north_address_in_bits 		= router_iact_1_1_north_address_in; 
-assign iact_1_2_north_address_in_bits 		= router_iact_1_2_north_address_in;
-assign iact_1_0_south_address_in_bits 		= router_iact_1_0_south_address_in; 
-assign iact_1_1_south_address_in_bits 		= router_iact_1_1_south_address_in;
-assign iact_1_2_south_address_in_bits 		= router_iact_1_2_south_address_in; 
-assign iact_1_0_horiz_address_in_bits 		= router_iact_1_0_horiz_address_in; 	
-assign iact_1_1_horiz_address_in_bits 		= router_iact_1_1_horiz_address_in; 
-assign iact_1_2_horiz_address_in_bits 		= router_iact_1_2_horiz_address_in;
-assign iact_1_0_north_data_in_bits 			= router_iact_1_0_north_data_in; 	
-assign iact_1_1_north_data_in_bits 			= router_iact_1_1_north_data_in; 	
-assign iact_1_2_north_data_in_bits 			= router_iact_1_2_north_data_in; 	
-assign iact_1_0_south_data_in_bits 			= router_iact_1_0_south_data_in; 	 
-assign iact_1_1_south_data_in_bits 			= router_iact_1_1_south_data_in; 	
-assign iact_1_2_south_data_in_bits 			= router_iact_1_2_south_data_in;		
-assign iact_1_0_horiz_data_in_bits 			= router_iact_1_0_horiz_data_in; 
-assign iact_1_1_horiz_data_in_bits 			= router_iact_1_1_horiz_data_in;
-assign iact_1_2_horiz_data_in_bits 			= router_iact_1_2_horiz_data_in;
-assign iact_2_0_north_address_in_bits 		= router_iact_2_0_north_address_in; 
-assign iact_2_1_north_address_in_bits 		= router_iact_2_1_north_address_in; 
-assign iact_2_2_north_address_in_bits 		= router_iact_2_2_north_address_in;
-assign iact_2_0_south_address_in_bits 		= router_iact_2_0_south_address_in; 
-assign iact_2_1_south_address_in_bits 		= router_iact_2_1_south_address_in;
-assign iact_2_2_south_address_in_bits 		= router_iact_2_2_south_address_in; 
-assign iact_2_0_horiz_address_in_bits 		= router_iact_2_0_horiz_address_in; 	
-assign iact_2_1_horiz_address_in_bits 		= router_iact_2_1_horiz_address_in; 
-assign iact_2_2_horiz_address_in_bits 		= router_iact_2_2_horiz_address_in;
-assign iact_2_0_north_data_in_bits 			= router_iact_2_0_north_data_in; 	
-assign iact_2_1_north_data_in_bits 			= router_iact_2_1_north_data_in; 	
-assign iact_2_2_north_data_in_bits 			= router_iact_2_2_north_data_in; 	
-assign iact_2_0_south_data_in_bits 			= router_iact_2_0_south_data_in; 	 
-assign iact_2_1_south_data_in_bits 			= router_iact_2_1_south_data_in; 	
-assign iact_2_2_south_data_in_bits 			= router_iact_2_2_south_data_in;		
-assign iact_2_0_horiz_data_in_bits 			= router_iact_2_0_horiz_data_in; 
-assign iact_2_1_horiz_data_in_bits 			= router_iact_2_1_horiz_data_in;
-assign iact_2_2_horiz_data_in_bits 			= router_iact_2_2_horiz_data_in;
+assign iact_north_address_in_bits[0][0] 		= router_iact_0_0_north_address_in; 
+assign iact_north_address_in_bits[0][1] 		= router_iact_0_1_north_address_in; 
+assign iact_north_address_in_bits[0][2] 		= router_iact_0_2_north_address_in;
+assign iact_south_address_in_bits[0][0] 		= router_iact_0_0_south_address_in; 
+assign iact_south_address_in_bits[0][1] 		= router_iact_0_1_south_address_in;
+assign iact_south_address_in_bits[0][2] 		= router_iact_0_2_south_address_in; 
+assign iact_horiz_address_in_bits[0][0] 		= router_iact_0_0_horiz_address_in; 	
+assign iact_horiz_address_in_bits[0][1] 		= router_iact_0_1_horiz_address_in; 
+assign iact_horiz_address_in_bits[0][2] 		= router_iact_0_2_horiz_address_in;
+assign iact_north_data_in_bits[0][0] 			= router_iact_0_0_north_data_in; 	
+assign iact_north_data_in_bits[0][1] 			= router_iact_0_1_north_data_in; 	
+assign iact_north_data_in_bits[0][2] 			= router_iact_0_2_north_data_in; 	
+assign iact_south_data_in_bits[0][0] 			= router_iact_0_0_south_data_in; 	 
+assign iact_south_data_in_bits[0][1] 			= router_iact_0_1_south_data_in; 	
+assign iact_south_data_in_bits[0][2] 			= router_iact_0_2_south_data_in;		
+assign iact_horiz_data_in_bits[0][0] 			= router_iact_0_0_horiz_data_in; 
+assign iact_horiz_data_in_bits[0][1] 			= router_iact_0_1_horiz_data_in;
+assign iact_horiz_data_in_bits[0][2] 			= router_iact_0_2_horiz_data_in;
+assign iact_north_address_in_bits[1][0] 		= router_iact_1_0_north_address_in; 
+assign iact_north_address_in_bits[1][1] 		= router_iact_1_1_north_address_in; 
+assign iact_north_address_in_bits[1][2] 		= router_iact_1_2_north_address_in;
+assign iact_south_address_in_bits[1][0] 		= router_iact_1_0_south_address_in; 
+assign iact_south_address_in_bits[1][1] 		= router_iact_1_1_south_address_in;
+assign iact_south_address_in_bits[1][2] 		= router_iact_1_2_south_address_in; 
+assign iact_horiz_address_in_bits[1][0] 		= router_iact_1_0_horiz_address_in; 	
+assign iact_horiz_address_in_bits[1][1] 		= router_iact_1_1_horiz_address_in; 
+assign iact_horiz_address_in_bits[1][2] 		= router_iact_1_2_horiz_address_in;
+assign iact_north_data_in_bits[1][0] 			= router_iact_1_0_north_data_in; 	
+assign iact_north_data_in_bits[1][1] 			= router_iact_1_1_north_data_in; 	
+assign iact_north_data_in_bits[1][2] 			= router_iact_1_2_north_data_in; 	
+assign iact_south_data_in_bits[1][0] 			= router_iact_1_0_south_data_in; 	 
+assign iact_south_data_in_bits[1][1] 			= router_iact_1_1_south_data_in; 	
+assign iact_south_data_in_bits[1][2] 			= router_iact_1_2_south_data_in;		
+assign iact_horiz_data_in_bits[1][0] 			= router_iact_1_0_horiz_data_in; 
+assign iact_horiz_data_in_bits[1][1] 			= router_iact_1_1_horiz_data_in;
+assign iact_horiz_data_in_bits[1][2] 			= router_iact_1_2_horiz_data_in;
+assign iact_north_address_in_bits[2][0] 		= router_iact_2_0_north_address_in; 
+assign iact_north_address_in_bits[2][1] 		= router_iact_2_1_north_address_in; 
+assign iact_north_address_in_bits[2][2] 		= router_iact_2_2_north_address_in;
+assign iact_south_address_in_bits[2][0] 		= router_iact_2_0_south_address_in; 
+assign iact_south_address_in_bits[2][1] 		= router_iact_2_1_south_address_in;
+assign iact_south_address_in_bits[2][2] 		= router_iact_2_2_south_address_in; 
+assign iact_horiz_address_in_bits[2][0] 		= router_iact_2_0_horiz_address_in; 	
+assign iact_horiz_address_in_bits[2][1] 		= router_iact_2_1_horiz_address_in; 
+assign iact_horiz_address_in_bits[2][2] 		= router_iact_2_2_horiz_address_in;
+assign iact_north_data_in_bits[2][0] 			= router_iact_2_0_north_data_in; 	
+assign iact_north_data_in_bits[2][1] 			= router_iact_2_1_north_data_in; 	
+assign iact_north_data_in_bits[2][2] 			= router_iact_2_2_north_data_in; 	
+assign iact_south_data_in_bits[2][0] 			= router_iact_2_0_south_data_in; 	 
+assign iact_south_data_in_bits[2][1] 			= router_iact_2_1_south_data_in; 	
+assign iact_south_data_in_bits[2][2] 			= router_iact_2_2_south_data_in;		
+assign iact_horiz_data_in_bits[2][0] 			= router_iact_2_0_horiz_data_in; 
+assign iact_horiz_data_in_bits[2][1] 			= router_iact_2_1_horiz_data_in;
+assign iact_horiz_data_in_bits[2][2] 			= router_iact_2_2_horiz_data_in;
 	
 	
 // weight_ready (weight GLBs are just li	ke weight router)
-assign weight_0_horiz_address_out_ready 	= router_weight_0_horiz_address_out_ready; 
-assign weight_1_horiz_address_out_ready 	= router_weight_1_horiz_address_out_ready;
-assign weight_2_horiz_address_out_ready 	= router_weight_2_horiz_address_out_ready; 
-assign weight_0_horiz_data_out_ready 		= router_weight_0_horiz_data_out_ready; 
-assign weight_1_horiz_data_out_ready 		= router_weight_1_horiz_data_out_ready; 
-assign weight_2_horiz_data_out_ready 		= router_weight_2_horiz_data_out_ready; 
+assign weight_horiz_address_out_ready[0] 	= router_weight_0_horiz_address_out_ready; 
+assign weight_horiz_address_out_ready[1] 	= router_weight_1_horiz_address_out_ready;
+assign weight_horiz_address_out_ready[2] 	= router_weight_2_horiz_address_out_ready; 
+assign weight_horiz_data_out_ready[0] 		= router_weight_0_horiz_data_out_ready; 
+assign weight_horiz_data_out_ready[1] 		= router_weight_1_horiz_data_out_ready; 
+assign weight_horiz_data_out_ready[2] 		= router_weight_2_horiz_data_out_ready; 
 	
 // weight_valid	
-assign weight_0_GLB_address_in_valid 		= GLBCluster_weight_address_out_valid[0]; 
-assign weight_1_GLB_address_in_valid 		= GLBCluster_weight_address_out_valid[1]; 
-assign weight_2_GLB_address_in_valid 		= GLBCluster_weight_address_out_valid[2]; 
-assign weight_0_horiz_address_in_valid 		= router_weight_0_horiz_address_in_valid;
-assign weight_1_horiz_address_in_valid 		= router_weight_1_horiz_address_in_valid;
-assign weight_2_horiz_address_in_valid 		= router_weight_2_horiz_address_in_valid;
+assign weight_GLB_address_in_valid[0] 		= GLBCluster_weight_address_out_valid[0]; 
+assign weight_GLB_address_in_valid[1] 		= GLBCluster_weight_address_out_valid[1]; 
+assign weight_GLB_address_in_valid[2] 		= GLBCluster_weight_address_out_valid[2]; 
+assign weight_horiz_address_in_valid[0] 		= router_weight_0_horiz_address_in_valid;
+assign weight_horiz_address_in_valid[1] 		= router_weight_1_horiz_address_in_valid;
+assign weight_horiz_address_in_valid[2] 		= router_weight_2_horiz_address_in_valid;
 	
-assign weight_0_GLB_data_in_valid 			= GLBCluster_weight_data_out_valid[0];
-assign weight_1_GLB_data_in_valid 			= GLBCluster_weight_data_out_valid[1];
-assign weight_2_GLB_data_in_valid 			= GLBCluster_weight_data_out_valid[2];
-assign weight_0_horiz_data_in_valid 		= router_weight_0_horiz_data_in_valid; 
-assign weight_1_horiz_data_in_valid 		= router_weight_1_horiz_data_in_valid;
-assign weight_2_horiz_data_in_valid 		= router_weight_2_horiz_data_in_valid; 
+assign weight_GLB_data_in_valid[0] 			= GLBCluster_weight_data_out_valid[0];
+assign weight_GLB_data_in_valid[1] 			= GLBCluster_weight_data_out_valid[1];
+assign weight_GLB_data_in_valid[2] 			= GLBCluster_weight_data_out_valid[2];
+assign weight_horiz_data_in_valid[0] 		= router_weight_0_horiz_data_in_valid; 
+assign weight_horiz_data_in_valid[1] 		= router_weight_1_horiz_data_in_valid;
+assign weight_horiz_data_in_valid[2] 		= router_weight_2_horiz_data_in_valid; 
 	
 // weight_data	
-assign weight_0_GLB_address_in_bits 		= GLBCluster_weight_address_out[0];
-assign weight_1_GLB_address_in_bits 		= GLBCluster_weight_address_out[1]; 
-assign weight_2_GLB_address_in_bits 		= GLBCluster_weight_address_out[2];
-assign weight_0_horiz_address_in_bits 		= router_weight_0_horiz_address_in; 
-assign weight_1_horiz_address_in_bits 		= router_weight_1_horiz_address_in; 
-assign weight_2_horiz_address_in_bits 		= router_weight_2_horiz_address_in; 
+assign weight_GLB_address_in_bits[0] 		= GLBCluster_weight_address_out[0];
+assign weight_GLB_address_in_bits[1] 		= GLBCluster_weight_address_out[1]; 
+assign weight_GLB_address_in_bits[2] 		= GLBCluster_weight_address_out[2];
+assign weight_horiz_address_in_bits[0] 		= router_weight_0_horiz_address_in; 
+assign weight_horiz_address_in_bits[1] 		= router_weight_1_horiz_address_in; 
+assign weight_horiz_address_in_bits[2] 		= router_weight_2_horiz_address_in; 
 	
-assign weight_0_GLB_data_in_bits 			= GLBCluster_weight_data_out[0]; 
-assign weight_1_GLB_data_in_bits 			= GLBCluster_weight_data_out[1]; 
-assign weight_2_GLB_data_in_bits 			= GLBCluster_weight_data_out[2]; 
-assign weight_0_horiz_data_in_bits 			= router_weight_0_horiz_data_in;
-assign weight_1_horiz_data_in_bits 			= router_weight_1_horiz_data_in;
-assign weight_2_horiz_data_in_bits 			= router_weight_2_horiz_data_in;
+assign weight_GLB_data_in_bits[0] 			= GLBCluster_weight_data_out[0]; 
+assign weight_GLB_data_in_bits[1] 			= GLBCluster_weight_data_out[1]; 
+assign weight_GLB_data_in_bits[2] 			= GLBCluster_weight_data_out[2]; 
+assign weight_horiz_data_in_bits[0] 			= router_weight_0_horiz_data_in;
+assign weight_horiz_data_in_bits[1] 			= router_weight_1_horiz_data_in;
+assign weight_horiz_data_in_bits[2] 			= router_weight_2_horiz_data_in;
 
 // psum router inter-connection
-assign psum_0_PE_out_ready 					= PECluster_psum_0_in_ready; 
-assign psum_1_PE_out_ready 					= PECluster_psum_1_in_ready; 
-assign psum_2_PE_out_ready 					= PECluster_psum_2_in_ready;  	
-assign psum_0_GLB_out_ready 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[0]; 
-assign psum_1_GLB_out_ready 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[1];
-assign psum_2_GLB_out_ready 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[2];
-assign psum_0_south_out_ready 				= router_psum_0_south_out_ready; 
-assign psum_1_south_out_ready 				= router_psum_1_south_out_ready; 
-assign psum_2_south_out_ready 				= router_psum_2_south_out_ready; 
+assign psum_PE_out_ready[0] 					= PECluster_psum_0_in_ready; 
+assign psum_PE_out_ready[1] 					= PECluster_psum_1_in_ready; 
+assign psum_PE_out_ready[2] 					= PECluster_psum_2_in_ready;  	
+assign psum_GLB_out_ready[0] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[0]; 
+assign psum_GLB_out_ready[1] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[1];
+assign psum_GLB_out_ready[2] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[2];
+assign psum_south_out_ready[0] 				= router_psum_0_south_out_ready; 
+assign psum_south_out_ready[1] 				= router_psum_1_south_out_ready; 
+assign psum_south_out_ready[2] 				= router_psum_2_south_out_ready; 
 			
-assign psum_0_PE_in_valid 					= PECluster_psum_0_out_valid; 
-assign psum_1_PE_in_valid 					= PECluster_psum_1_out_valid; 
-assign psum_2_PE_in_valid 					= PECluster_psum_2_out_valid; 
-assign psum_0_GLB_in_valid 					= GLBCluster_psum_data_out_valid[0] & cg_ctrl_psum_add; 	
-assign psum_1_GLB_in_valid 					= GLBCluster_psum_data_out_valid[1] & cg_ctrl_psum_add; 
-assign psum_2_GLB_in_valid 					= GLBCluster_psum_data_out_valid[2] & cg_ctrl_psum_add; 
-assign psum_0_north_in_valid 				= router_psum_0_north_in_valid; 
-assign psum_1_north_in_valid 				= router_psum_1_north_in_valid; 
-assign psum_2_north_in_valid 				= router_psum_2_north_in_valid;
+assign psum_PE_in_valid[0] 					= PECluster_psum_0_out_valid; 
+assign psum_PE_in_valid[1] 					= PECluster_psum_1_out_valid; 
+assign psum_PE_in_valid[2] 					= PECluster_psum_2_out_valid; 
+assign psum_GLB_in_valid[0] 					= GLBCluster_psum_data_out_valid[0] & cg_ctrl_psum_add; 	
+assign psum_GLB_in_valid[1] 					= GLBCluster_psum_data_out_valid[1] & cg_ctrl_psum_add; 
+assign psum_GLB_in_valid[2] 					= GLBCluster_psum_data_out_valid[2] & cg_ctrl_psum_add; 
+assign psum_north_in_valid[0] 				= router_psum_0_north_in_valid; 
+assign psum_north_in_valid[1] 				= router_psum_1_north_in_valid; 
+assign psum_north_in_valid[2] 				= router_psum_2_north_in_valid;
 			
-assign psum_0_PE_in_bits 					= PECluster_psum_0_out; 
-assign psum_1_PE_in_bits 					= PECluster_psum_1_out; 
-assign psum_2_PE_in_bits 					= PECluster_psum_2_out; 
-assign psum_0_GLB_in_bits 					= GLBCluster_psum_data_out[0]; 
-assign psum_1_GLB_in_bits 					= GLBCluster_psum_data_out[1];
-assign psum_2_GLB_in_bits 					= GLBCluster_psum_data_out[2]; 
-assign psum_0_north_in_bits 				= router_psum_0_north_in;	
-assign psum_1_north_in_bits 				= router_psum_1_north_in; 	
-assign psum_2_north_in_bits 				= router_psum_2_north_in; 
+assign psum_PE_in_bits[0] 					= PECluster_psum_0_out; 
+assign psum_PE_in_bits[1] 					= PECluster_psum_1_out; 
+assign psum_PE_in_bits[2] 					= PECluster_psum_2_out; 
+assign psum_GLB_in_bits[0] 					= GLBCluster_psum_data_out[0]; 
+assign psum_GLB_in_bits[1] 					= GLBCluster_psum_data_out[1];
+assign psum_GLB_in_bits[2] 					= GLBCluster_psum_data_out[2]; 
+assign psum_north_in_bits[0] 				= router_psum_0_north_in;	
+assign psum_north_in_bits[1] 				= router_psum_1_north_in; 	
+assign psum_north_in_bits[2] 				= router_psum_2_north_in; 
 
 // cluster group control
 assign cg_ctrl_clock = clock;
