@@ -39,12 +39,8 @@ module ClusterGroup_array(
 	input			[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
 				
 	input					CG_0_0_GLB_psum_write_en,
-	input			[9:0]	CG_0_0_GLB_psum_0_write_addr,
-	input			[9:0]	CG_0_0_GLB_psum_1_write_addr,
-	input			[9:0]	CG_0_0_GLB_psum_2_write_addr,
-	input			[9:0]	CG_0_0_GLB_psum_0_read_addr,
-	input			[9:0]	CG_0_0_GLB_psum_1_read_addr,
-	input			[9:0]	CG_0_0_GLB_psum_2_read_addr,
+	input			[9:0]	CG_0_0_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_0_0_GLB_psum_read_addr [0:2],
 				
 	output			      	CG_0_0_GLB_iact_address_in_ready [0:2][0:2],
 	input 			      	CG_0_0_GLB_iact_address_in_valid [0:2][0:2],
@@ -121,12 +117,8 @@ module ClusterGroup_array(
 	input			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
 	
 	input					CG_0_1_GLB_psum_write_en,
-	input			[9:0]	CG_0_1_GLB_psum_0_write_addr,
-	input			[9:0]	CG_0_1_GLB_psum_1_write_addr,
-	input			[9:0]	CG_0_1_GLB_psum_2_write_addr,
-	input			[9:0]	CG_0_1_GLB_psum_0_read_addr,
-	input			[9:0]	CG_0_1_GLB_psum_1_read_addr,
-	input			[9:0]	CG_0_1_GLB_psum_2_read_addr,
+	input			[9:0]	CG_0_1_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_0_1_GLB_psum_read_addr [0:2],
 								 
 	output			      	CG_0_1_GLB_iact_address_in_ready [0:2][0:2],
 	input 			      	CG_0_1_GLB_iact_address_in_valid [0:2][0:2],
@@ -202,12 +194,8 @@ module ClusterGroup_array(
 	input			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
 	
 	input					CG_1_0_GLB_psum_write_en,
-	input			[9:0]	CG_1_0_GLB_psum_0_write_addr,
-	input			[9:0]	CG_1_0_GLB_psum_1_write_addr,
-	input			[9:0]	CG_1_0_GLB_psum_2_write_addr,
-	input			[9:0]	CG_1_0_GLB_psum_0_read_addr,
-	input			[9:0]	CG_1_0_GLB_psum_1_read_addr,
-	input			[9:0]	CG_1_0_GLB_psum_2_read_addr,
+	input			[9:0]	CG_1_0_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_1_0_GLB_psum_read_addr [0:2],
 							   
 	output			      	CG_1_0_GLB_iact_address_in_ready [0:2][0:2],
 	input 			      	CG_1_0_GLB_iact_address_in_valid [0:2][0:2],
@@ -284,12 +272,8 @@ module ClusterGroup_array(
 	input			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
 	
 	input					CG_1_1_GLB_psum_write_en,
-	input			[9:0]	CG_1_1_GLB_psum_0_write_addr,
-	input			[9:0]	CG_1_1_GLB_psum_1_write_addr,
-	input			[9:0]	CG_1_1_GLB_psum_2_write_addr,
-	input			[9:0]	CG_1_1_GLB_psum_0_read_addr,
-	input			[9:0]	CG_1_1_GLB_psum_1_read_addr,
-	input			[9:0]	CG_1_1_GLB_psum_2_read_addr,
+	input			[9:0]	CG_1_1_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_1_1_GLB_psum_read_addr [0:2],
 								
 	output			      	CG_1_1_GLB_iact_address_in_ready [0:2][0:2],
 	input 			      	CG_1_1_GLB_iact_address_in_valid [0:2][0:2],
@@ -2011,12 +1995,8 @@ ClusterGroup ClusterGroup_0_0 (
 			                   
 	.GLB_iact_read_addr(CG_0_0_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_0_0_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_0_0_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_0_0_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_0_0_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_0_0_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_0_0_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_0_0_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_0_0_GLB_psum_read_addr),
 								               
 	.GLB_iact_address_in_ready(CG_0_0_GLB_iact_address_in_ready),
 	.GLB_iact_address_in_valid(CG_0_0_GLB_iact_address_in_valid),
@@ -2501,12 +2481,8 @@ ClusterGroup ClusterGroup_0_1 (
 							                   
 	.GLB_iact_read_addr(CG_0_1_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_0_1_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_0_1_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_0_1_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_0_1_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_0_1_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_0_1_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_0_1_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_0_1_GLB_psum_read_addr),
 								               
 	.GLB_iact_address_in_ready(CG_0_1_GLB_iact_address_in_ready),
 	.GLB_iact_address_in_valid(CG_0_1_GLB_iact_address_in_valid),
@@ -2991,12 +2967,8 @@ ClusterGroup ClusterGroup_1_0 (
 							                   
 	.GLB_iact_read_addr(CG_1_0_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_1_0_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_1_0_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_1_0_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_1_0_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_1_0_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_1_0_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_1_0_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_1_0_GLB_psum_read_addr),
 								               
 	.GLB_iact_address_in_ready(CG_1_0_GLB_iact_address_in_ready),
 	.GLB_iact_address_in_valid(CG_1_0_GLB_iact_address_in_valid),
@@ -3481,12 +3453,8 @@ ClusterGroup ClusterGroup_1_1 (
 							                   
 	.GLB_iact_read_addr(CG_1_1_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_1_1_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_1_1_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_1_1_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_1_1_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_1_1_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_1_1_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_1_1_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_1_1_GLB_psum_read_addr),
 								               
 	.GLB_iact_address_in_ready(CG_1_1_GLB_iact_address_in_ready),
 	.GLB_iact_address_in_valid(CG_1_1_GLB_iact_address_in_valid),

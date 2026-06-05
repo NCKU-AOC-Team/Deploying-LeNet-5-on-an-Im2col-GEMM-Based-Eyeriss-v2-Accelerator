@@ -60,12 +60,8 @@ module ClusterGroup (
 				
 	input			[9:0]	GLB_iact_read_addr [0:2][0:2],
 				
-	input			[9:0]	GLB_psum_0_write_addr,
-	input			[9:0]	GLB_psum_1_write_addr,
-	input			[9:0]	GLB_psum_2_write_addr,
-	input			[9:0]	GLB_psum_0_read_addr,
-	input			[9:0]	GLB_psum_1_read_addr,
-	input			[9:0]	GLB_psum_2_read_addr,
+	input			[9:0]	GLB_psum_write_addr [0:2],
+	input			[9:0]	GLB_psum_read_addr [0:2],
 				
 	// ================= GLB IO ================== //
 	// GLB iact SRAM Bank 0_0
@@ -1465,12 +1461,12 @@ assign GLBCluster_iact_read_addr[2][0]	= GLB_iact_read_addr[2][0];
 assign GLBCluster_iact_read_addr[2][1]	= GLB_iact_read_addr[2][1];
 assign GLBCluster_iact_read_addr[2][2]	= GLB_iact_read_addr[2][2];
 
-assign GLBCluster_psum_read_addr[0]	= GLB_psum_0_read_addr; 
-assign GLBCluster_psum_read_addr[1]	= GLB_psum_1_read_addr; 
-assign GLBCluster_psum_read_addr[2]	= GLB_psum_2_read_addr;  
-assign GLBCluster_psum_write_addr[0]	= GLB_psum_0_write_addr; 
-assign GLBCluster_psum_write_addr[1]	= GLB_psum_1_write_addr; 
-assign GLBCluster_psum_write_addr[2]	= GLB_psum_2_write_addr; 
+assign GLBCluster_psum_read_addr[0]	= GLB_psum_read_addr[0]; 
+assign GLBCluster_psum_read_addr[1]	= GLB_psum_read_addr[1]; 
+assign GLBCluster_psum_read_addr[2]	= GLB_psum_read_addr[2];  
+assign GLBCluster_psum_write_addr[0]	= GLB_psum_write_addr[0]; 
+assign GLBCluster_psum_write_addr[1]	= GLB_psum_write_addr[1]; 
+assign GLBCluster_psum_write_addr[2]	= GLB_psum_write_addr[2]; 
 
 //============= other cluster group inter-connection =============//
 // iact_ready
