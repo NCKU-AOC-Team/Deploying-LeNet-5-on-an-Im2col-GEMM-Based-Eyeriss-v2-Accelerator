@@ -26,15 +26,7 @@ module ClusterGroup_array(
 	input					CG_0_0_psum_SRAM_Bank_1_read_out_en,
 	input					CG_0_0_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_0_0_PE_0_0_disable,
-	input					CG_0_0_PE_0_1_disable,
-	input					CG_0_0_PE_0_2_disable,
-	input					CG_0_0_PE_1_0_disable,
-	input					CG_0_0_PE_1_1_disable,
-	input					CG_0_0_PE_1_2_disable,
-	input					CG_0_0_PE_2_0_disable,
-	input					CG_0_0_PE_2_1_disable,
-	input					CG_0_0_PE_2_2_disable,	
+	input					CG_0_0_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
 				
@@ -104,15 +96,7 @@ module ClusterGroup_array(
 	input					CG_0_1_psum_SRAM_Bank_1_read_out_en,
 	input					CG_0_1_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_0_1_PE_0_0_disable,
-	input					CG_0_1_PE_0_1_disable,
-	input					CG_0_1_PE_0_2_disable,
-	input					CG_0_1_PE_1_0_disable,
-	input					CG_0_1_PE_1_1_disable,
-	input					CG_0_1_PE_1_2_disable,
-	input					CG_0_1_PE_2_0_disable,
-	input					CG_0_1_PE_2_1_disable,
-	input					CG_0_1_PE_2_2_disable,
+	input					CG_0_1_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
 	
@@ -181,15 +165,7 @@ module ClusterGroup_array(
 	input					CG_1_0_psum_SRAM_Bank_1_read_out_en,
 	input					CG_1_0_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_1_0_PE_0_0_disable,
-	input					CG_1_0_PE_0_1_disable,
-	input					CG_1_0_PE_0_2_disable,
-	input					CG_1_0_PE_1_0_disable,
-	input					CG_1_0_PE_1_1_disable,
-	input					CG_1_0_PE_1_2_disable,
-	input					CG_1_0_PE_2_0_disable,
-	input					CG_1_0_PE_2_1_disable,
-	input					CG_1_0_PE_2_2_disable,
+	input					CG_1_0_PE_disable [0:2][0:2],
 							   
 	input			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
 	
@@ -259,15 +235,7 @@ module ClusterGroup_array(
 	input					CG_1_1_psum_SRAM_Bank_1_read_out_en,
 	input					CG_1_1_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_1_1_PE_0_0_disable,
-	input					CG_1_1_PE_0_1_disable,
-	input					CG_1_1_PE_0_2_disable,
-	input					CG_1_1_PE_1_0_disable,
-	input					CG_1_1_PE_1_1_disable,
-	input					CG_1_1_PE_1_2_disable,
-	input					CG_1_1_PE_2_0_disable,
-	input					CG_1_1_PE_2_1_disable,
-	input					CG_1_1_PE_2_2_disable,
+	input					CG_1_1_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
 	
@@ -1983,15 +1951,7 @@ ClusterGroup ClusterGroup_0_0 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_0_0_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_0_0_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_0_0_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_0_0_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_0_0_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_0_0_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_0_0_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_0_0_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_0_0_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_0_0_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_0_0_PE_2_2_disable							),
+	.PE_disable(CG_0_0_PE_disable),
 			                   
 	.GLB_iact_read_addr(CG_0_0_GLB_iact_read_addr),
 							                    
@@ -2469,15 +2429,7 @@ ClusterGroup ClusterGroup_0_1 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_0_1_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_0_1_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_0_1_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_0_1_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_0_1_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_0_1_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_0_1_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_0_1_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_0_1_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_0_1_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_0_1_PE_2_2_disable							),
+	.PE_disable(CG_0_1_PE_disable),
 							                   
 	.GLB_iact_read_addr(CG_0_1_GLB_iact_read_addr),
 							                    
@@ -2955,15 +2907,7 @@ ClusterGroup ClusterGroup_1_0 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_1_0_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_1_0_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_1_0_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_1_0_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_1_0_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_1_0_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_1_0_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_1_0_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_1_0_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_1_0_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_1_0_PE_2_2_disable							),
+	.PE_disable(CG_1_0_PE_disable),
 							                   
 	.GLB_iact_read_addr(CG_1_0_GLB_iact_read_addr),
 							                    
@@ -3441,15 +3385,7 @@ ClusterGroup ClusterGroup_1_1 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_1_1_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_1_1_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_1_1_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_1_1_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_1_1_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_1_1_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_1_1_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_1_1_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_1_1_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_1_1_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_1_1_PE_2_2_disable							),
+	.PE_disable(CG_1_1_PE_disable),
 							                   
 	.GLB_iact_read_addr(CG_1_1_GLB_iact_read_addr),
 							                    

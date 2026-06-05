@@ -48,15 +48,7 @@ module ClusterGroup (
 	
 	// These control signals  are used to disable some PE in PE cluster.
 	// It is for physical mapping issue, which causes the decreasing of PE utilization.
-	input					PE_0_0_disable,
-	input					PE_0_1_disable,
-	input					PE_0_2_disable,
-	input					PE_1_0_disable,
-	input					PE_1_1_disable,
-	input					PE_1_2_disable,
-	input					PE_2_0_disable,
-	input					PE_2_1_disable,
-	input					PE_2_2_disable,
+	input					PE_disable [0:2][0:2],
 				
 	input			[9:0]	GLB_iact_read_addr [0:2][0:2],
 				
@@ -1314,15 +1306,15 @@ assign PECluster_psum_in_from_south[0] 			= cg_south_psum_0_in;
 assign PECluster_psum_in_from_south[1] 			= cg_south_psum_1_in; 	
 assign PECluster_psum_in_from_south[2] 			= cg_south_psum_2_in; 	
 
-assign PECluster_PE_disable[0][0]					= PE_0_0_disable;
-assign PECluster_PE_disable[0][1]					= PE_0_1_disable;
-assign PECluster_PE_disable[0][2]					= PE_0_2_disable;
-assign PECluster_PE_disable[1][0]					= PE_1_0_disable;
-assign PECluster_PE_disable[1][1]					= PE_1_1_disable;
-assign PECluster_PE_disable[1][2]					= PE_1_2_disable;
-assign PECluster_PE_disable[2][0]					= PE_2_0_disable;
-assign PECluster_PE_disable[2][1]					= PE_2_1_disable;
-assign PECluster_PE_disable[2][2]					= PE_2_2_disable;
+assign PECluster_PE_disable[0][0]					= PE_disable[0][0];
+assign PECluster_PE_disable[0][1]					= PE_disable[0][1];
+assign PECluster_PE_disable[0][2]					= PE_disable[0][2];
+assign PECluster_PE_disable[1][0]					= PE_disable[1][0];
+assign PECluster_PE_disable[1][1]					= PE_disable[1][1];
+assign PECluster_PE_disable[1][2]					= PE_disable[1][2];
+assign PECluster_PE_disable[2][0]					= PE_disable[2][0];
+assign PECluster_PE_disable[2][1]					= PE_disable[2][1];
+assign PECluster_PE_disable[2][2]					= PE_disable[2][2];
 
 assign PECluster_psum_load_en 					= cg_ctrl_psum_load_en; 
 assign PECluster_iact_data_in_sel 				= PE_cluster_iact_data_in_sel;
