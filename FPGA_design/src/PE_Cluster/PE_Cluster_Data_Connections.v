@@ -65,57 +65,24 @@ module PE_Cluster_Connection (
 	output 	[12:0] 	iact_to_PE_2_2_data_out_bits
 );
 
+// address_out_valid：router row r 廣播到 PE[r][0..2]
+assign {iact_to_PE_0_0_address_out_valid, iact_to_PE_0_1_address_out_valid, iact_to_PE_0_2_address_out_valid} = {3{iact_form_router_0_address_in_valid}};
+assign {iact_to_PE_1_0_address_out_valid, iact_to_PE_1_1_address_out_valid, iact_to_PE_1_2_address_out_valid} = {3{iact_form_router_1_address_in_valid}};
+assign {iact_to_PE_2_0_address_out_valid, iact_to_PE_2_1_address_out_valid, iact_to_PE_2_2_address_out_valid} = {3{iact_form_router_2_address_in_valid}};
 
-assign iact_to_PE_0_0_address_out_valid	= iact_form_router_0_address_in_valid;	
-assign iact_to_PE_0_1_address_out_valid	= iact_form_router_0_address_in_valid;	
-assign iact_to_PE_0_2_address_out_valid	= iact_form_router_0_address_in_valid;	
+// address_out_bits（[7:0]：{3{bus}} 會複製整條匯流排，也成立）
+assign {iact_to_PE_0_0_address_out_bits, iact_to_PE_0_1_address_out_bits, iact_to_PE_0_2_address_out_bits} = {3{iact_form_router_0_address_in_bits}};
+assign {iact_to_PE_1_0_address_out_bits, iact_to_PE_1_1_address_out_bits, iact_to_PE_1_2_address_out_bits} = {3{iact_form_router_1_address_in_bits}};
+assign {iact_to_PE_2_0_address_out_bits, iact_to_PE_2_1_address_out_bits, iact_to_PE_2_2_address_out_bits} = {3{iact_form_router_2_address_in_bits}};
 
-assign iact_to_PE_1_0_address_out_valid	= iact_form_router_1_address_in_valid;	
-assign iact_to_PE_1_1_address_out_valid	= iact_form_router_1_address_in_valid;	
-assign iact_to_PE_1_2_address_out_valid	= iact_form_router_1_address_in_valid;	
+// data_out_valid
+assign {iact_to_PE_0_0_data_out_valid, iact_to_PE_0_1_data_out_valid, iact_to_PE_0_2_data_out_valid} = {3{iact_form_router_0_data_in_valid}};
+assign {iact_to_PE_1_0_data_out_valid, iact_to_PE_1_1_data_out_valid, iact_to_PE_1_2_data_out_valid} = {3{iact_form_router_1_data_in_valid}};
+assign {iact_to_PE_2_0_data_out_valid, iact_to_PE_2_1_data_out_valid, iact_to_PE_2_2_data_out_valid} = {3{iact_form_router_2_data_in_valid}};
 
-assign iact_to_PE_2_0_address_out_valid	= iact_form_router_2_address_in_valid;	
-assign iact_to_PE_2_1_address_out_valid	= iact_form_router_2_address_in_valid;	
-assign iact_to_PE_2_2_address_out_valid	= iact_form_router_2_address_in_valid;	
-
-					
-assign iact_to_PE_0_0_address_out_bits	= iact_form_router_0_address_in_bits;	
-assign iact_to_PE_0_1_address_out_bits	= iact_form_router_0_address_in_bits;	
-assign iact_to_PE_0_2_address_out_bits	= iact_form_router_0_address_in_bits;	
-                  
-assign iact_to_PE_1_0_address_out_bits	= iact_form_router_1_address_in_bits;	
-assign iact_to_PE_1_1_address_out_bits	= iact_form_router_1_address_in_bits;	
-assign iact_to_PE_1_2_address_out_bits	= iact_form_router_1_address_in_bits;
-                  
-assign iact_to_PE_2_0_address_out_bits	= iact_form_router_2_address_in_bits;	
-assign iact_to_PE_2_1_address_out_bits	= iact_form_router_2_address_in_bits;	
-assign iact_to_PE_2_2_address_out_bits	= iact_form_router_2_address_in_bits;	
-
-					
-assign iact_to_PE_0_0_data_out_valid	= iact_form_router_0_data_in_valid;	
-assign iact_to_PE_0_1_data_out_valid	= iact_form_router_0_data_in_valid;	
-assign iact_to_PE_0_2_data_out_valid	= iact_form_router_0_data_in_valid;	
-                                                     
-assign iact_to_PE_1_0_data_out_valid	= iact_form_router_1_data_in_valid;	
-assign iact_to_PE_1_1_data_out_valid	= iact_form_router_1_data_in_valid;	
-assign iact_to_PE_1_2_data_out_valid	= iact_form_router_1_data_in_valid;	
-                                                     
-assign iact_to_PE_2_0_data_out_valid	= iact_form_router_2_data_in_valid;		
-assign iact_to_PE_2_1_data_out_valid	= iact_form_router_2_data_in_valid;		
-assign iact_to_PE_2_2_data_out_valid	= iact_form_router_2_data_in_valid;		
-
-
-assign iact_to_PE_0_0_data_out_bits		= iact_form_router_0_data_in_bits;	
-assign iact_to_PE_0_1_data_out_bits		= iact_form_router_0_data_in_bits;							
-assign iact_to_PE_0_2_data_out_bits		= iact_form_router_0_data_in_bits;	
-					                                     
-assign iact_to_PE_1_0_data_out_bits		= iact_form_router_1_data_in_bits;			
-assign iact_to_PE_1_1_data_out_bits		= iact_form_router_1_data_in_bits;		
-assign iact_to_PE_1_2_data_out_bits		= iact_form_router_1_data_in_bits;	
-                                                     
-assign iact_to_PE_2_0_data_out_bits		= iact_form_router_2_data_in_bits;	
-assign iact_to_PE_2_1_data_out_bits		= iact_form_router_2_data_in_bits;	
-assign iact_to_PE_2_2_data_out_bits		= iact_form_router_2_data_in_bits;	
-
+// data_out_bits（[12:0]）
+assign {iact_to_PE_0_0_data_out_bits, iact_to_PE_0_1_data_out_bits, iact_to_PE_0_2_data_out_bits} = {3{iact_form_router_0_data_in_bits}};
+assign {iact_to_PE_1_0_data_out_bits, iact_to_PE_1_1_data_out_bits, iact_to_PE_1_2_data_out_bits} = {3{iact_form_router_1_data_in_bits}};
+assign {iact_to_PE_2_0_data_out_bits, iact_to_PE_2_1_data_out_bits, iact_to_PE_2_2_data_out_bits} = {3{iact_form_router_2_data_in_bits}};
 
 endmodule                               
