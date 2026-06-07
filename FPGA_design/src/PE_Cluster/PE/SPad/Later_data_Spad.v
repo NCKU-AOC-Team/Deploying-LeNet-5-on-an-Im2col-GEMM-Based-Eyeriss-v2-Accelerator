@@ -20,6 +20,7 @@ module Later_Data_Spad(
 	input         		data_in_valid,
 	input  		[11:0] 	data_in,
 	output 		[11:0] 	data_out,		// 8b for data, 4b for count, there are 2^4 rows in a Spad at most.
+	output 		[11:0] 	data_out_next,
 	output reg 	[6:0]  	column_num,		// use the count to determine whether the later data read done.
 	// control signals
 	input         		write_en,
@@ -27,6 +28,7 @@ module Later_Data_Spad(
 	input         		read_en,
 	input  		[6:0]  	read_idx,
 	input         		index_inc,
+	input         		index_inc_by_2,
 	input         		read_idx_en
 );
 
@@ -48,10 +50,12 @@ reg [6:0] spad_read_addr;
 // 					 	Wires  						//
 // ================================================	//
 wire  data_in_shake = data_in_ready & data_in_valid & write_en;
-wire  read_fin   	= (data_out == 'd0) & index_inc;
+wire  index_advance = index_inc | index_inc_by_2;
+wire  read_fin   	= (data_out == 'd0) & index_advance;
 
 // RAM read delay 1 cycle for BRAM
 wire [6:0] next_data_read_addr = read_en ? column_num : spad_read_addr;
+wire [6:0] next_data_read_addr_lane1 = next_data_read_addr + 7'd1;
 
 
 // ================================================	//
@@ -94,12 +98,12 @@ always @(posedge clock) begin
 	else if (read_idx_en) begin
 		column_num <= read_idx;
 	end 
-	else if (index_inc) begin
+	else if (index_advance) begin
 		if (read_fin) begin
 			column_num <= 'd0;
 		end 
 		else begin
-			column_num <= column_num + 'd1;
+			column_num <= column_num + (index_inc_by_2 ? 7'd2 : 7'd1);
 		end
 	end
 end
@@ -112,26 +116,31 @@ wire 			IP_BRAM_write_en	= data_in_shake;
 wire			IP_BRAM_read_en		= 'd1;
 wire 	[6:0]	IP_BRAM_write_addr	= spad_write_addr;
 wire 	[6:0]	IP_BRAM_read_addr	= next_data_read_addr;
+wire 	[6:0]	IP_BRAM_read_addr_lane1 = next_data_read_addr_lane1;
 wire	[11:0]	IP_BRAM_data_in		= data_in;
 wire	[11:0]	IP_BRAM_data_out;
+wire	[11:0]	IP_BRAM_data_out_lane1;
 
 assign data_out	= IP_BRAM_data_out;
+assign data_out_next = IP_BRAM_data_out_lane1;
 	
-Weight_DATA_Spad_BRAM Weight_DATA_Spad_BRAM_inst (
+Weight_DATA_Spad_TDP_BRAM Weight_DATA_Spad_BRAM_inst (
     .clk			(clock					),
 	.reset			(reset					),
 	.write_en       (IP_BRAM_write_en       ),
 	.read_en        (IP_BRAM_read_en        ),
 	.write_addr     (IP_BRAM_write_addr     ),
 	.read_addr      (IP_BRAM_read_addr      ),
+	.read_addr_lane1(IP_BRAM_read_addr_lane1),
 	.data_in        (IP_BRAM_data_in        ),
-	.data_out       (IP_BRAM_data_out       )
+	.data_out       (IP_BRAM_data_out       ),
+	.data_out_lane1 (IP_BRAM_data_out_lane1 )
 );
 
 endmodule
 
 
-module Weight_DATA_Spad_BRAM (
+module Weight_DATA_Spad_TDP_BRAM (
     input 			clk,
 	input			reset,
 	input 			write_en,
@@ -139,34 +148,36 @@ module Weight_DATA_Spad_BRAM (
 	
 	input 	[6:0]	write_addr,
 	input 	[6:0]	read_addr,
+	input 	[6:0]	read_addr_lane1,
 	
 	input	[11:0]	data_in,
 	
-	output	[11:0]	data_out
+	output	[11:0]	data_out,
+	output	[11:0]	data_out_lane1
 );
+
+localparam SPAD_DEPTH = 128;
+localparam SPAD_WIDTH = 12;
+localparam [6:0] SPAD_LAST_ADDR = 7'd127;
 
 wire		wr;
-wire [6:0] 	addra;
+wire [6:0] 	port_a_addr;
+wire [6:0] 	port_b_addr;
 wire [11:0] dina;
-wire [11:0] douta;
+reg  [11:0] douta;
+reg  [11:0] doutb;
 
-IP_Weight_DATA_Spad_BRAM u0 (   	
-  .clka		(clk	),    	
-  .rsta		(reset	),
-  .wea		(wr		),      	
-  .addra	(addra	),  	
-  .dina		(dina	),    	
-  .douta	(douta	)  	
-);
+(* ram_style = "block" *) reg [SPAD_WIDTH-1:0] mem [0:SPAD_DEPTH-1];
 
-// need 100 cycles to clear spad data
+// Clear the full physical BRAM depth. SIMD lane1 can peek at read_addr + 1,
+// so stale values above the logical 100-entry payload can become visible.
 reg	[6:0]	clear_count;
 reg 		clear_flag;
 always @(posedge clk) begin
 	if (reset) begin
 		clear_flag <= 'd1; 
 	end
-	else if(clear_count == 'd99) begin
+	else if(clear_count == SPAD_LAST_ADDR) begin
 		clear_flag <= 'd0; 
 	end
 end
@@ -176,15 +187,31 @@ always @(posedge clk) begin
 		clear_count <= 'd0; 
 	end
 	else if(clear_flag) begin
-		clear_count <= (clear_count == 'd99) ? 'd0 : (clear_count + 'd1); 
+		clear_count <= (clear_count == SPAD_LAST_ADDR) ? 'd0 : (clear_count + 'd1); 
 	end
 end
 
 assign wr		= write_en | clear_flag;
-assign addra 	= wr ? (clear_flag ? clear_count : write_addr) : read_addr;
+assign port_a_addr = wr ? (clear_flag ? clear_count : write_addr) : read_addr;
+assign port_b_addr = read_addr_lane1;
 assign dina 	= clear_flag ? 'd0 : data_in;
 
+always @(posedge clk) begin
+	if (reset) begin
+		douta <= 'd0;
+		doutb <= 'd0;
+	end
+	else if (read_en) begin
+		if (wr) begin
+			mem[port_a_addr] <= dina;
+		end
+		douta <= mem[port_a_addr];
+		doutb <= mem[port_b_addr];
+	end
+end
+
 assign data_out = douta;
+assign data_out_lane1 = doutb;
 
 
 endmodule
