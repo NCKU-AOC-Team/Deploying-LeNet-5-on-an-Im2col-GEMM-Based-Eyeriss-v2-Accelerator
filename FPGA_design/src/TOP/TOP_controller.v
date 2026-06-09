@@ -124,15 +124,7 @@ module TOP_controller # (
 	output				CG_0_0_psum_SRAM_Bank_1_read_out_en,
 	output				CG_0_0_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_0_0_PE_0_0_disable,					
-	output				CG_0_0_PE_0_1_disable,					
-	output				CG_0_0_PE_0_2_disable,					
-	output				CG_0_0_PE_1_0_disable,					
-	output				CG_0_0_PE_1_1_disable,					
-	output				CG_0_0_PE_1_2_disable,					
-	output				CG_0_0_PE_2_0_disable,					
-	output				CG_0_0_PE_2_1_disable,					
-	output				CG_0_0_PE_2_2_disable,
+	output				CG_0_0_PE_disable [0:2][0:2],
 		
 	output		[9:0]	CG_0_0_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_0_0_GLB_iact_0_1_read_addr,
@@ -180,15 +172,7 @@ module TOP_controller # (
 	output				CG_0_1_psum_SRAM_Bank_1_read_out_en,
 	output				CG_0_1_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_0_1_PE_0_0_disable,					
-	output				CG_0_1_PE_0_1_disable,					
-	output				CG_0_1_PE_0_2_disable,					
-	output				CG_0_1_PE_1_0_disable,					
-	output				CG_0_1_PE_1_1_disable,					
-	output				CG_0_1_PE_1_2_disable,					
-	output				CG_0_1_PE_2_0_disable,					
-	output				CG_0_1_PE_2_1_disable,					
-	output				CG_0_1_PE_2_2_disable,
+	output				CG_0_1_PE_disable [0:2][0:2],
 							 
 	output		[9:0]	CG_0_1_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_0_1_GLB_iact_0_1_read_addr,
@@ -237,15 +221,7 @@ module TOP_controller # (
 	output				CG_1_0_psum_SRAM_Bank_1_read_out_en,
 	output				CG_1_0_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_1_0_PE_0_0_disable,					
-	output				CG_1_0_PE_0_1_disable,					
-	output				CG_1_0_PE_0_2_disable,					
-	output				CG_1_0_PE_1_0_disable,					
-	output				CG_1_0_PE_1_1_disable,					
-	output				CG_1_0_PE_1_2_disable,					
-	output				CG_1_0_PE_2_0_disable,					
-	output				CG_1_0_PE_2_1_disable,					
-	output				CG_1_0_PE_2_2_disable,
+	output				CG_1_0_PE_disable [0:2][0:2],
 						
 	output		[9:0]	CG_1_0_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_1_0_GLB_iact_0_1_read_addr,
@@ -293,15 +269,7 @@ module TOP_controller # (
 	output				CG_1_1_psum_SRAM_Bank_1_read_out_en,
 	output				CG_1_1_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_1_1_PE_0_0_disable,					
-	output				CG_1_1_PE_0_1_disable,					
-	output				CG_1_1_PE_0_2_disable,					
-	output				CG_1_1_PE_1_0_disable,					
-	output				CG_1_1_PE_1_1_disable,					
-	output				CG_1_1_PE_1_2_disable,					
-	output				CG_1_1_PE_2_0_disable,					
-	output				CG_1_1_PE_2_1_disable,					
-	output				CG_1_1_PE_2_2_disable,
+	output				CG_1_1_PE_disable [0:2][0:2],
 							
 	output		[9:0]	CG_1_1_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_1_1_GLB_iact_0_1_read_addr,
@@ -618,42 +586,42 @@ wire read_out_psum_en_fc 	= LAYER_READ_OUT_PSUM_wire & fc_flag;
 // ====================================================================	//
 // 						 		Combination  							//
 // ====================================================================	//
-assign  CG_0_0_PE_0_0_disable = 'd0;
-assign  CG_0_0_PE_0_1_disable = 'd0;
-assign  CG_0_0_PE_0_2_disable = 'd0;
-assign  CG_0_0_PE_1_0_disable = 'd0;
-assign  CG_0_0_PE_1_1_disable = 'd0;
-assign  CG_0_0_PE_1_2_disable = 'd0;
-assign  CG_0_0_PE_2_0_disable = 'd0;
-assign  CG_0_0_PE_2_1_disable = 'd0;
-assign  CG_0_0_PE_2_2_disable = 'd0;
-assign  CG_0_1_PE_0_0_disable = layer4_flag;
-assign  CG_0_1_PE_0_1_disable = layer4_flag;
-assign  CG_0_1_PE_0_2_disable = layer4_flag;
-assign  CG_0_1_PE_1_0_disable = layer4_flag;
-assign  CG_0_1_PE_1_1_disable = layer4_flag;
-assign  CG_0_1_PE_1_2_disable = layer4_flag;
-assign  CG_0_1_PE_2_0_disable = layer4_flag;
-assign  CG_0_1_PE_2_1_disable = layer4_flag;
-assign  CG_0_1_PE_2_2_disable = layer4_flag;
-assign  CG_1_0_PE_0_0_disable = 'd0;
-assign  CG_1_0_PE_0_1_disable = 'd0;
-assign  CG_1_0_PE_0_2_disable = 'd0;
-assign  CG_1_0_PE_1_0_disable = layer4_flag;
-assign  CG_1_0_PE_1_1_disable = layer4_flag;
-assign  CG_1_0_PE_1_2_disable = layer4_flag;
-assign  CG_1_0_PE_2_0_disable = layer4_flag;
-assign  CG_1_0_PE_2_1_disable = layer4_flag;
-assign  CG_1_0_PE_2_2_disable = layer4_flag;
-assign  CG_1_1_PE_0_0_disable = layer4_flag;
-assign  CG_1_1_PE_0_1_disable = layer4_flag;
-assign  CG_1_1_PE_0_2_disable = layer4_flag;
-assign  CG_1_1_PE_1_0_disable = layer4_flag;
-assign  CG_1_1_PE_1_1_disable = layer4_flag;
-assign  CG_1_1_PE_1_2_disable = layer4_flag;
-assign  CG_1_1_PE_2_0_disable = layer4_flag;
-assign  CG_1_1_PE_2_1_disable = layer4_flag;
-assign  CG_1_1_PE_2_2_disable = layer4_flag;
+assign  CG_0_0_PE_disable[0][0] = 'd0;
+assign  CG_0_0_PE_disable[0][1] = 'd0;
+assign  CG_0_0_PE_disable[0][2] = 'd0;
+assign  CG_0_0_PE_disable[1][0] = 'd0;
+assign  CG_0_0_PE_disable[1][1] = 'd0;
+assign  CG_0_0_PE_disable[1][2] = 'd0;
+assign  CG_0_0_PE_disable[2][0] = 'd0;
+assign  CG_0_0_PE_disable[2][1] = 'd0;
+assign  CG_0_0_PE_disable[2][2] = 'd0;
+assign  CG_0_1_PE_disable[0][0] = layer4_flag;
+assign  CG_0_1_PE_disable[0][1] = layer4_flag;
+assign  CG_0_1_PE_disable[0][2] = layer4_flag;
+assign  CG_0_1_PE_disable[1][0] = layer4_flag;
+assign  CG_0_1_PE_disable[1][1] = layer4_flag;
+assign  CG_0_1_PE_disable[1][2] = layer4_flag;
+assign  CG_0_1_PE_disable[2][0] = layer4_flag;
+assign  CG_0_1_PE_disable[2][1] = layer4_flag;
+assign  CG_0_1_PE_disable[2][2] = layer4_flag;
+assign  CG_1_0_PE_disable[0][0] = 'd0;
+assign  CG_1_0_PE_disable[0][1] = 'd0;
+assign  CG_1_0_PE_disable[0][2] = 'd0;
+assign  CG_1_0_PE_disable[1][0] = layer4_flag;
+assign  CG_1_0_PE_disable[1][1] = layer4_flag;
+assign  CG_1_0_PE_disable[1][2] = layer4_flag;
+assign  CG_1_0_PE_disable[2][0] = layer4_flag;
+assign  CG_1_0_PE_disable[2][1] = layer4_flag;
+assign  CG_1_0_PE_disable[2][2] = layer4_flag;
+assign  CG_1_1_PE_disable[0][0] = layer4_flag;
+assign  CG_1_1_PE_disable[0][1] = layer4_flag;
+assign  CG_1_1_PE_disable[0][2] = layer4_flag;
+assign  CG_1_1_PE_disable[1][0] = layer4_flag;
+assign  CG_1_1_PE_disable[1][1] = layer4_flag;
+assign  CG_1_1_PE_disable[1][2] = layer4_flag;
+assign  CG_1_1_PE_disable[2][0] = layer4_flag;
+assign  CG_1_1_PE_disable[2][1] = layer4_flag;
+assign  CG_1_1_PE_disable[2][2] = layer4_flag;
 
 
 assign psum_SRAM_out_acc_en			= 	(LAYER2_READ_OUT_PSUM_wire | LAYER2_READ_OUT_PSUM_reg) | (LAYER3_READ_OUT_PSUM_wire | LAYER3_READ_OUT_PSUM_reg) | (LAYER4_READ_OUT_PSUM_wire | LAYER4_READ_OUT_PSUM_reg);
