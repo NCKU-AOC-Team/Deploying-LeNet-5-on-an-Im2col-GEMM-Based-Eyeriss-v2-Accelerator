@@ -42,15 +42,15 @@ localparam	POOL_STRIDE 			= 2;
 
 wire					psum_acc_fin;
 
-wire 			     	CG_0_0_PE_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_0_0_PE_cluster_iact_data_out_sel;
-wire 			     	CG_0_0_PE_cluster_psum_data_in_sel;
-wire 			[1:0]	CG_0_0_router_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_0_0_router_cluster_iact_data_out_sel;
-wire 			     	CG_0_0_router_cluster_weight_data_in_sel;
-wire 			     	CG_0_0_router_cluster_weight_data_out_sel;
-wire 			     	CG_0_0_router_cluster_psum_data_in_sel;
-wire 			     	CG_0_0_router_cluster_psum_data_out_sel;
+wire	ctrl_CG_PE_cluster_iact_data_in_sel [0:1][0:1];
+wire	[1:0]	ctrl_CG_PE_cluster_iact_data_out_sel [0:1][0:1];
+wire	ctrl_CG_PE_cluster_psum_data_in_sel [0:1][0:1];
+wire	[1:0]	ctrl_CG_router_cluster_iact_data_in_sel [0:1][0:1];
+wire	[1:0]	ctrl_CG_router_cluster_iact_data_out_sel [0:1][0:1];
+wire	ctrl_CG_router_cluster_weight_data_in_sel [0:1][0:1];
+wire	ctrl_CG_router_cluster_weight_data_out_sel [0:1][0:1];
+wire	ctrl_CG_router_cluster_psum_data_in_sel [0:1][0:1];
+wire	ctrl_CG_router_cluster_psum_data_out_sel [0:1][0:1];
 wire 			     	CG_0_0_read_psum_en;
 wire			     	CG_0_0_cal_fin;
 wire 			     	CG_0_0_cg_en;
@@ -99,15 +99,6 @@ wire			[4:0]	CG_0_0_PSUM_DEPTH;
 wire					CG_0_0_psum_spad_clear;
 wire					CG_0_0_iact_write_fin_clear;
 wire					CG_0_0_weight_write_fin_clear;
-wire 			     	CG_0_1_PE_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_0_1_PE_cluster_iact_data_out_sel;
-wire 			     	CG_0_1_PE_cluster_psum_data_in_sel;
-wire 			[1:0]	CG_0_1_router_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_0_1_router_cluster_iact_data_out_sel;
-wire 			     	CG_0_1_router_cluster_weight_data_in_sel;
-wire 			     	CG_0_1_router_cluster_weight_data_out_sel;
-wire 			     	CG_0_1_router_cluster_psum_data_in_sel;
-wire 			     	CG_0_1_router_cluster_psum_data_out_sel;
 wire 			     	CG_0_1_read_psum_en;
 wire			     	CG_0_1_cal_fin;
 wire 			     	CG_0_1_cg_en;
@@ -156,15 +147,6 @@ wire			[4:0]	CG_0_1_PSUM_DEPTH;
 wire					CG_0_1_psum_spad_clear;
 wire					CG_0_1_iact_write_fin_clear;
 wire					CG_0_1_weight_write_fin_clear;
-wire 			     	CG_1_0_PE_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_1_0_PE_cluster_iact_data_out_sel;
-wire 			     	CG_1_0_PE_cluster_psum_data_in_sel;
-wire 			[1:0]	CG_1_0_router_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_1_0_router_cluster_iact_data_out_sel;
-wire 			     	CG_1_0_router_cluster_weight_data_in_sel;
-wire 			     	CG_1_0_router_cluster_weight_data_out_sel;
-wire 			     	CG_1_0_router_cluster_psum_data_in_sel;
-wire 			     	CG_1_0_router_cluster_psum_data_out_sel;
 wire 			     	CG_1_0_read_psum_en;
 wire			     	CG_1_0_cal_fin;
 wire 			     	CG_1_0_cg_en;
@@ -213,15 +195,6 @@ wire			[4:0]	CG_1_0_PSUM_DEPTH;
 wire					CG_1_0_psum_spad_clear;
 wire					CG_1_0_iact_write_fin_clear;
 wire					CG_1_0_weight_write_fin_clear;
-wire 			     	CG_1_1_PE_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_1_1_PE_cluster_iact_data_out_sel;
-wire 			     	CG_1_1_PE_cluster_psum_data_in_sel;
-wire 			[1:0]	CG_1_1_router_cluster_iact_data_in_sel;
-wire 			[1:0]	CG_1_1_router_cluster_iact_data_out_sel;
-wire 			     	CG_1_1_router_cluster_weight_data_in_sel;
-wire 			     	CG_1_1_router_cluster_weight_data_out_sel;
-wire 			     	CG_1_1_router_cluster_psum_data_in_sel;
-wire 			     	CG_1_1_router_cluster_psum_data_out_sel;
 wire 			     	CG_1_1_read_psum_en;
 wire			     	CG_1_1_cal_fin;
 wire 			     	CG_1_1_cg_en;
@@ -430,15 +403,6 @@ wire			ctrl_CG_1_0_GLB_weight_2_in_en;
 wire			ctrl_CG_1_1_GLB_weight_0_in_en;
 wire			ctrl_CG_1_1_GLB_weight_1_in_en;
 wire			ctrl_CG_1_1_GLB_weight_2_in_en;
-wire	     	ctrl_CG_0_0_PE_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_0_0_PE_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_0_0_PE_cluster_psum_data_in_sel;
-wire	[1:0]	ctrl_CG_0_0_router_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_0_0_router_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_0_0_router_cluster_weight_data_in_sel;
-wire	     	ctrl_CG_0_0_router_cluster_weight_data_out_sel;
-wire	     	ctrl_CG_0_0_router_cluster_psum_data_in_sel;
-wire	     	ctrl_CG_0_0_router_cluster_psum_data_out_sel;
 wire			ctrl_CG_0_0_src_GLB_load_fin;
 wire			ctrl_CG_0_0_GLB_iact_load_en;
 wire			ctrl_CG_0_0_PE_weight_load_en;
@@ -468,15 +432,6 @@ wire	[4:0]	ctrl_CG_0_0_PSUM_DEPTH;
 wire			ctrl_CG_0_0_psum_spad_clear;
 wire			ctrl_CG_0_0_iact_write_fin_clear;
 wire			ctrl_CG_0_0_weight_write_fin_clear;
-wire	     	ctrl_CG_0_1_PE_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_0_1_PE_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_0_1_PE_cluster_psum_data_in_sel;
-wire	[1:0]	ctrl_CG_0_1_router_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_0_1_router_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_0_1_router_cluster_weight_data_in_sel;
-wire	     	ctrl_CG_0_1_router_cluster_weight_data_out_sel;
-wire	     	ctrl_CG_0_1_router_cluster_psum_data_in_sel;
-wire	     	ctrl_CG_0_1_router_cluster_psum_data_out_sel;
 wire			ctrl_CG_0_1_src_GLB_load_fin;
 wire			ctrl_CG_0_1_GLB_iact_load_en;
 wire			ctrl_CG_0_1_PE_weight_load_en;
@@ -506,15 +461,6 @@ wire	[4:0]	ctrl_CG_0_1_PSUM_DEPTH;
 wire			ctrl_CG_0_1_psum_spad_clear;
 wire			ctrl_CG_0_1_iact_write_fin_clear;
 wire			ctrl_CG_0_1_weight_write_fin_clear;
-wire	     	ctrl_CG_1_0_PE_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_1_0_PE_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_1_0_PE_cluster_psum_data_in_sel;
-wire	[1:0]	ctrl_CG_1_0_router_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_1_0_router_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_1_0_router_cluster_weight_data_in_sel;
-wire	     	ctrl_CG_1_0_router_cluster_weight_data_out_sel;
-wire	     	ctrl_CG_1_0_router_cluster_psum_data_in_sel;
-wire	     	ctrl_CG_1_0_router_cluster_psum_data_out_sel;
 wire			ctrl_CG_1_0_src_GLB_load_fin;
 wire			ctrl_CG_1_0_GLB_iact_load_en;
 wire			ctrl_CG_1_0_PE_weight_load_en;
@@ -544,15 +490,6 @@ wire	[4:0]	ctrl_CG_1_0_PSUM_DEPTH;
 wire			ctrl_CG_1_0_psum_spad_clear;
 wire			ctrl_CG_1_0_iact_write_fin_clear;
 wire			ctrl_CG_1_0_weight_write_fin_clear;
-wire	     	ctrl_CG_1_1_PE_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_1_1_PE_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_1_1_PE_cluster_psum_data_in_sel;
-wire	[1:0]	ctrl_CG_1_1_router_cluster_iact_data_in_sel;
-wire	[1:0]	ctrl_CG_1_1_router_cluster_iact_data_out_sel;
-wire	     	ctrl_CG_1_1_router_cluster_weight_data_in_sel;
-wire	     	ctrl_CG_1_1_router_cluster_weight_data_out_sel;
-wire	     	ctrl_CG_1_1_router_cluster_psum_data_in_sel;
-wire	     	ctrl_CG_1_1_router_cluster_psum_data_out_sel;
 wire			ctrl_CG_1_1_src_GLB_load_fin;
 wire			ctrl_CG_1_1_GLB_iact_load_en;
 wire			ctrl_CG_1_1_PE_weight_load_en;
@@ -611,15 +548,15 @@ ClusterGroup_array ClusterGroup_array(
 	.clock										(clock										),
 	.reset                                      (reset                                      ),	
 	.psum_acc_fin								(psum_acc_fin								),
-	.CG_0_0_PE_cluster_iact_data_in_sel         (CG_0_0_PE_cluster_iact_data_in_sel         ),
-	.CG_0_0_PE_cluster_iact_data_out_sel        (CG_0_0_PE_cluster_iact_data_out_sel        ),
-	.CG_0_0_PE_cluster_psum_data_in_sel         (CG_0_0_PE_cluster_psum_data_in_sel         ),								
-	.CG_0_0_router_cluster_iact_data_in_sel     (CG_0_0_router_cluster_iact_data_in_sel     ),
-	.CG_0_0_router_cluster_iact_data_out_sel    (CG_0_0_router_cluster_iact_data_out_sel    ),
-	.CG_0_0_router_cluster_weight_data_in_sel   (CG_0_0_router_cluster_weight_data_in_sel   ),
-	.CG_0_0_router_cluster_weight_data_out_sel  (CG_0_0_router_cluster_weight_data_out_sel  ),
-	.CG_0_0_router_cluster_psum_data_in_sel     (CG_0_0_router_cluster_psum_data_in_sel     ),
-	.CG_0_0_router_cluster_psum_data_out_sel    (CG_0_0_router_cluster_psum_data_out_sel    ),							
+	.CG_PE_cluster_iact_data_in_sel		(ctrl_CG_PE_cluster_iact_data_in_sel		),
+	.CG_PE_cluster_iact_data_out_sel		(ctrl_CG_PE_cluster_iact_data_out_sel		),
+	.CG_PE_cluster_psum_data_in_sel		(ctrl_CG_PE_cluster_psum_data_in_sel		),
+	.CG_router_cluster_iact_data_in_sel		(ctrl_CG_router_cluster_iact_data_in_sel		),
+	.CG_router_cluster_iact_data_out_sel		(ctrl_CG_router_cluster_iact_data_out_sel		),
+	.CG_router_cluster_weight_data_in_sel		(ctrl_CG_router_cluster_weight_data_in_sel		),
+	.CG_router_cluster_weight_data_out_sel		(ctrl_CG_router_cluster_weight_data_out_sel		),
+	.CG_router_cluster_psum_data_in_sel		(ctrl_CG_router_cluster_psum_data_in_sel		),
+	.CG_router_cluster_psum_data_out_sel		(ctrl_CG_router_cluster_psum_data_out_sel		),
 	.CG_0_0_read_psum_en                        (CG_0_0_read_psum_en                        ),
 	.CG_0_0_cal_fin                             (CG_0_0_cal_fin                             ),
 	.CG_0_0_cg_en                               (CG_0_0_cg_en                               ),
@@ -669,15 +606,6 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_0_0_iact_write_fin_clear                (CG_0_0_iact_write_fin_clear                ),
 	.CG_0_0_weight_write_fin_clear              (CG_0_0_weight_write_fin_clear              ),
 	
-	.CG_0_1_PE_cluster_iact_data_in_sel         (CG_0_1_PE_cluster_iact_data_in_sel         ),
-	.CG_0_1_PE_cluster_iact_data_out_sel        (CG_0_1_PE_cluster_iact_data_out_sel        ),
-	.CG_0_1_PE_cluster_psum_data_in_sel         (CG_0_1_PE_cluster_psum_data_in_sel         ),
-	.CG_0_1_router_cluster_iact_data_in_sel     (CG_0_1_router_cluster_iact_data_in_sel     ),
-	.CG_0_1_router_cluster_iact_data_out_sel    (CG_0_1_router_cluster_iact_data_out_sel    ),
-	.CG_0_1_router_cluster_weight_data_in_sel   (CG_0_1_router_cluster_weight_data_in_sel   ),
-	.CG_0_1_router_cluster_weight_data_out_sel  (CG_0_1_router_cluster_weight_data_out_sel  ),
-	.CG_0_1_router_cluster_psum_data_in_sel     (CG_0_1_router_cluster_psum_data_in_sel     ),
-	.CG_0_1_router_cluster_psum_data_out_sel    (CG_0_1_router_cluster_psum_data_out_sel    ),
 	.CG_0_1_read_psum_en                        (CG_0_1_read_psum_en                        ),
 	.CG_0_1_cal_fin                             (CG_0_1_cal_fin                             ),
 	.CG_0_1_cg_en                               (CG_0_1_cg_en                               ),
@@ -727,15 +655,6 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_0_1_iact_write_fin_clear                (CG_0_1_iact_write_fin_clear                ),
 	.CG_0_1_weight_write_fin_clear              (CG_0_1_weight_write_fin_clear              ),
 	
-	.CG_1_0_PE_cluster_iact_data_in_sel         (CG_1_0_PE_cluster_iact_data_in_sel         ),
-	.CG_1_0_PE_cluster_iact_data_out_sel        (CG_1_0_PE_cluster_iact_data_out_sel        ),
-	.CG_1_0_PE_cluster_psum_data_in_sel         (CG_1_0_PE_cluster_psum_data_in_sel         ),
-	.CG_1_0_router_cluster_iact_data_in_sel     (CG_1_0_router_cluster_iact_data_in_sel     ),
-	.CG_1_0_router_cluster_iact_data_out_sel    (CG_1_0_router_cluster_iact_data_out_sel    ),
-	.CG_1_0_router_cluster_weight_data_in_sel   (CG_1_0_router_cluster_weight_data_in_sel   ),
-	.CG_1_0_router_cluster_weight_data_out_sel  (CG_1_0_router_cluster_weight_data_out_sel  ),
-	.CG_1_0_router_cluster_psum_data_in_sel     (CG_1_0_router_cluster_psum_data_in_sel     ),
-	.CG_1_0_router_cluster_psum_data_out_sel    (CG_1_0_router_cluster_psum_data_out_sel    ),
 	.CG_1_0_read_psum_en                        (CG_1_0_read_psum_en                        ),
 	.CG_1_0_cal_fin                             (CG_1_0_cal_fin                             ),
 	.CG_1_0_cg_en                               (CG_1_0_cg_en                               ),
@@ -785,15 +704,6 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_1_0_iact_write_fin_clear                (CG_1_0_iact_write_fin_clear                ),
 	.CG_1_0_weight_write_fin_clear              (CG_1_0_weight_write_fin_clear              ),
 	
-	.CG_1_1_PE_cluster_iact_data_in_sel         (CG_1_1_PE_cluster_iact_data_in_sel         ),
-	.CG_1_1_PE_cluster_iact_data_out_sel        (CG_1_1_PE_cluster_iact_data_out_sel        ),
-	.CG_1_1_PE_cluster_psum_data_in_sel         (CG_1_1_PE_cluster_psum_data_in_sel         ),
-	.CG_1_1_router_cluster_iact_data_in_sel     (CG_1_1_router_cluster_iact_data_in_sel     ),
-	.CG_1_1_router_cluster_iact_data_out_sel    (CG_1_1_router_cluster_iact_data_out_sel    ),
-	.CG_1_1_router_cluster_weight_data_in_sel   (CG_1_1_router_cluster_weight_data_in_sel   ),
-	.CG_1_1_router_cluster_weight_data_out_sel  (CG_1_1_router_cluster_weight_data_out_sel  ),
-	.CG_1_1_router_cluster_psum_data_in_sel     (CG_1_1_router_cluster_psum_data_in_sel     ),
-	.CG_1_1_router_cluster_psum_data_out_sel    (CG_1_1_router_cluster_psum_data_out_sel    ),
 	.CG_1_1_read_psum_en                        (CG_1_1_read_psum_en                        ),
 	.CG_1_1_cal_fin                             (CG_1_1_cal_fin                             ),
 	.CG_1_1_cg_en                               (CG_1_1_cg_en                               ),
@@ -1083,15 +993,15 @@ TOP_controller (
 	.CG_1_1_GLB_weight_1_in_en                  (ctrl_CG_1_1_GLB_weight_1_in_en					),
 	.CG_1_1_GLB_weight_2_in_en                  (ctrl_CG_1_1_GLB_weight_2_in_en					),
 	
-	.CG_0_0_PE_cluster_iact_data_in_sel         (ctrl_CG_0_0_PE_cluster_iact_data_in_sel        ),
-	.CG_0_0_PE_cluster_iact_data_out_sel        (ctrl_CG_0_0_PE_cluster_iact_data_out_sel       ),
-	.CG_0_0_PE_cluster_psum_data_in_sel         (ctrl_CG_0_0_PE_cluster_psum_data_in_sel        ),
-	.CG_0_0_router_cluster_iact_data_in_sel     (ctrl_CG_0_0_router_cluster_iact_data_in_sel    ),
-	.CG_0_0_router_cluster_iact_data_out_sel    (ctrl_CG_0_0_router_cluster_iact_data_out_sel   ),
-	.CG_0_0_router_cluster_weight_data_in_sel   (ctrl_CG_0_0_router_cluster_weight_data_in_sel  ),
-	.CG_0_0_router_cluster_weight_data_out_sel  (ctrl_CG_0_0_router_cluster_weight_data_out_sel ),
-	.CG_0_0_router_cluster_psum_data_in_sel     (ctrl_CG_0_0_router_cluster_psum_data_in_sel    ),
-	.CG_0_0_router_cluster_psum_data_out_sel    (ctrl_CG_0_0_router_cluster_psum_data_out_sel   ),
+	.CG_PE_cluster_iact_data_in_sel		(ctrl_CG_PE_cluster_iact_data_in_sel		),
+	.CG_PE_cluster_iact_data_out_sel		(ctrl_CG_PE_cluster_iact_data_out_sel		),
+	.CG_PE_cluster_psum_data_in_sel		(ctrl_CG_PE_cluster_psum_data_in_sel		),
+	.CG_router_cluster_iact_data_in_sel		(ctrl_CG_router_cluster_iact_data_in_sel		),
+	.CG_router_cluster_iact_data_out_sel		(ctrl_CG_router_cluster_iact_data_out_sel		),
+	.CG_router_cluster_weight_data_in_sel		(ctrl_CG_router_cluster_weight_data_in_sel		),
+	.CG_router_cluster_weight_data_out_sel		(ctrl_CG_router_cluster_weight_data_out_sel		),
+	.CG_router_cluster_psum_data_in_sel		(ctrl_CG_router_cluster_psum_data_in_sel		),
+	.CG_router_cluster_psum_data_out_sel		(ctrl_CG_router_cluster_psum_data_out_sel		),
 	.CG_0_0_src_GLB_load_fin                    (ctrl_CG_0_0_src_GLB_load_fin                   ),
 	.CG_0_0_GLB_iact_load_en                    (ctrl_CG_0_0_GLB_iact_load_en                   ),
 	.CG_0_0_PE_weight_load_en                   (ctrl_CG_0_0_PE_weight_load_en                  ),
@@ -1122,15 +1032,6 @@ TOP_controller (
 	.CG_0_0_psum_spad_clear                     (ctrl_CG_0_0_psum_spad_clear                    ),
 	.CG_0_0_iact_write_fin_clear                (ctrl_CG_0_0_iact_write_fin_clear               ),
 	.CG_0_0_weight_write_fin_clear              (ctrl_CG_0_0_weight_write_fin_clear             ),
-	.CG_0_1_PE_cluster_iact_data_in_sel         (ctrl_CG_0_1_PE_cluster_iact_data_in_sel        ),
-	.CG_0_1_PE_cluster_iact_data_out_sel        (ctrl_CG_0_1_PE_cluster_iact_data_out_sel       ),
-	.CG_0_1_PE_cluster_psum_data_in_sel         (ctrl_CG_0_1_PE_cluster_psum_data_in_sel        ),
-	.CG_0_1_router_cluster_iact_data_in_sel     (ctrl_CG_0_1_router_cluster_iact_data_in_sel    ),
-	.CG_0_1_router_cluster_iact_data_out_sel    (ctrl_CG_0_1_router_cluster_iact_data_out_sel   ),
-	.CG_0_1_router_cluster_weight_data_in_sel   (ctrl_CG_0_1_router_cluster_weight_data_in_sel  ),
-	.CG_0_1_router_cluster_weight_data_out_sel  (ctrl_CG_0_1_router_cluster_weight_data_out_sel ),
-	.CG_0_1_router_cluster_psum_data_in_sel     (ctrl_CG_0_1_router_cluster_psum_data_in_sel    ),
-	.CG_0_1_router_cluster_psum_data_out_sel    (ctrl_CG_0_1_router_cluster_psum_data_out_sel   ),
 	.CG_0_1_src_GLB_load_fin                    (ctrl_CG_0_1_src_GLB_load_fin                   ),
 	.CG_0_1_GLB_iact_load_en                    (ctrl_CG_0_1_GLB_iact_load_en                   ),
 	.CG_0_1_PE_weight_load_en                   (ctrl_CG_0_1_PE_weight_load_en                  ),
@@ -1161,15 +1062,6 @@ TOP_controller (
 	.CG_0_1_psum_spad_clear                     (ctrl_CG_0_1_psum_spad_clear                    ),
 	.CG_0_1_iact_write_fin_clear                (ctrl_CG_0_1_iact_write_fin_clear               ),
 	.CG_0_1_weight_write_fin_clear              (ctrl_CG_0_1_weight_write_fin_clear             ),
-	.CG_1_0_PE_cluster_iact_data_in_sel         (ctrl_CG_1_0_PE_cluster_iact_data_in_sel        ),
-	.CG_1_0_PE_cluster_iact_data_out_sel        (ctrl_CG_1_0_PE_cluster_iact_data_out_sel       ),
-	.CG_1_0_PE_cluster_psum_data_in_sel         (ctrl_CG_1_0_PE_cluster_psum_data_in_sel        ),
-	.CG_1_0_router_cluster_iact_data_in_sel     (ctrl_CG_1_0_router_cluster_iact_data_in_sel    ),
-	.CG_1_0_router_cluster_iact_data_out_sel    (ctrl_CG_1_0_router_cluster_iact_data_out_sel   ),
-	.CG_1_0_router_cluster_weight_data_in_sel   (ctrl_CG_1_0_router_cluster_weight_data_in_sel  ),
-	.CG_1_0_router_cluster_weight_data_out_sel  (ctrl_CG_1_0_router_cluster_weight_data_out_sel ),
-	.CG_1_0_router_cluster_psum_data_in_sel     (ctrl_CG_1_0_router_cluster_psum_data_in_sel    ),
-	.CG_1_0_router_cluster_psum_data_out_sel    (ctrl_CG_1_0_router_cluster_psum_data_out_sel   ),
 	.CG_1_0_src_GLB_load_fin                    (ctrl_CG_1_0_src_GLB_load_fin                   ),
 	.CG_1_0_GLB_iact_load_en                    (ctrl_CG_1_0_GLB_iact_load_en                   ),
 	.CG_1_0_PE_weight_load_en                   (ctrl_CG_1_0_PE_weight_load_en                  ),
@@ -1200,15 +1092,6 @@ TOP_controller (
 	.CG_1_0_psum_spad_clear                     (ctrl_CG_1_0_psum_spad_clear                    ),
 	.CG_1_0_iact_write_fin_clear                (ctrl_CG_1_0_iact_write_fin_clear               ),
 	.CG_1_0_weight_write_fin_clear              (ctrl_CG_1_0_weight_write_fin_clear             ),
-	.CG_1_1_PE_cluster_iact_data_in_sel         (ctrl_CG_1_1_PE_cluster_iact_data_in_sel        ),
-	.CG_1_1_PE_cluster_iact_data_out_sel        (ctrl_CG_1_1_PE_cluster_iact_data_out_sel       ),
-	.CG_1_1_PE_cluster_psum_data_in_sel         (ctrl_CG_1_1_PE_cluster_psum_data_in_sel        ),
-	.CG_1_1_router_cluster_iact_data_in_sel     (ctrl_CG_1_1_router_cluster_iact_data_in_sel    ),
-	.CG_1_1_router_cluster_iact_data_out_sel    (ctrl_CG_1_1_router_cluster_iact_data_out_sel   ),
-	.CG_1_1_router_cluster_weight_data_in_sel   (ctrl_CG_1_1_router_cluster_weight_data_in_sel  ),
-	.CG_1_1_router_cluster_weight_data_out_sel  (ctrl_CG_1_1_router_cluster_weight_data_out_sel ),
-	.CG_1_1_router_cluster_psum_data_in_sel     (ctrl_CG_1_1_router_cluster_psum_data_in_sel    ),
-	.CG_1_1_router_cluster_psum_data_out_sel    (ctrl_CG_1_1_router_cluster_psum_data_out_sel   ),
 	.CG_1_1_src_GLB_load_fin                    (ctrl_CG_1_1_src_GLB_load_fin                   ),
 	.CG_1_1_GLB_iact_load_en                    (ctrl_CG_1_1_GLB_iact_load_en                   ),
 	.CG_1_1_PE_weight_load_en                   (ctrl_CG_1_1_PE_weight_load_en                  ),
@@ -1263,15 +1146,6 @@ TOP_controller (
 	
 	
 assign	psum_acc_fin 									= ctrl_psum_acc_fin;
-assign	CG_0_0_PE_cluster_iact_data_in_sel     		   	= ctrl_CG_0_0_PE_cluster_iact_data_in_sel; 
-assign	CG_0_0_PE_cluster_iact_data_out_sel            	= ctrl_CG_0_0_PE_cluster_iact_data_out_sel;
-assign	CG_0_0_PE_cluster_psum_data_in_sel             	= ctrl_CG_0_0_PE_cluster_psum_data_in_sel;
-assign	CG_0_0_router_cluster_iact_data_in_sel         	= ctrl_CG_0_0_router_cluster_iact_data_in_sel;
-assign	CG_0_0_router_cluster_iact_data_out_sel        	= ctrl_CG_0_0_router_cluster_iact_data_out_sel;
-assign	CG_0_0_router_cluster_weight_data_in_sel       	= ctrl_CG_0_0_router_cluster_weight_data_in_sel;
-assign	CG_0_0_router_cluster_weight_data_out_sel      	= ctrl_CG_0_0_router_cluster_weight_data_out_sel;
-assign	CG_0_0_router_cluster_psum_data_in_sel         	= ctrl_CG_0_0_router_cluster_psum_data_in_sel;
-assign	CG_0_0_router_cluster_psum_data_out_sel        	= ctrl_CG_0_0_router_cluster_psum_data_out_sel;
 assign	CG_0_0_read_psum_en								= ctrl_CG_0_0_read_psum_en;
 assign	CG_0_0_cg_en                                  	= ctrl_CG_0_0_cg_en;
 assign	CG_0_0_src_GLB_load_fin                         = ctrl_CG_0_0_src_GLB_load_fin;
@@ -1358,15 +1232,6 @@ assign	CG_0_0_iact_write_fin_clear                     = ctrl_CG_0_0_iact_write_
 assign	CG_0_0_weight_write_fin_clear                   = ctrl_CG_0_0_weight_write_fin_clear; 
 
 
-assign	CG_0_1_PE_cluster_iact_data_in_sel     		   	= ctrl_CG_0_1_PE_cluster_iact_data_in_sel; 
-assign	CG_0_1_PE_cluster_iact_data_out_sel            	= ctrl_CG_0_1_PE_cluster_iact_data_out_sel;
-assign	CG_0_1_PE_cluster_psum_data_in_sel             	= ctrl_CG_0_1_PE_cluster_psum_data_in_sel;
-assign	CG_0_1_router_cluster_iact_data_in_sel         	= ctrl_CG_0_1_router_cluster_iact_data_in_sel;
-assign	CG_0_1_router_cluster_iact_data_out_sel        	= ctrl_CG_0_1_router_cluster_iact_data_out_sel;
-assign	CG_0_1_router_cluster_weight_data_in_sel       	= ctrl_CG_0_1_router_cluster_weight_data_in_sel;
-assign	CG_0_1_router_cluster_weight_data_out_sel      	= ctrl_CG_0_1_router_cluster_weight_data_out_sel;
-assign	CG_0_1_router_cluster_psum_data_in_sel         	= ctrl_CG_0_1_router_cluster_psum_data_in_sel;
-assign	CG_0_1_router_cluster_psum_data_out_sel        	= ctrl_CG_0_1_router_cluster_psum_data_out_sel;
 assign	CG_0_1_read_psum_en								= ctrl_CG_0_1_read_psum_en;
 assign	CG_0_1_cg_en                                  	= ctrl_CG_0_1_cg_en;
 assign	CG_0_1_src_GLB_load_fin                         = ctrl_CG_0_1_src_GLB_load_fin;
@@ -1452,15 +1317,6 @@ assign	CG_0_1_iact_write_fin_clear                     = ctrl_CG_0_1_iact_write_
 assign	CG_0_1_weight_write_fin_clear                   = ctrl_CG_0_1_weight_write_fin_clear; 
 
 
-assign	CG_1_0_PE_cluster_iact_data_in_sel     		   	= ctrl_CG_1_0_PE_cluster_iact_data_in_sel; 
-assign	CG_1_0_PE_cluster_iact_data_out_sel            	= ctrl_CG_1_0_PE_cluster_iact_data_out_sel;
-assign	CG_1_0_PE_cluster_psum_data_in_sel             	= ctrl_CG_1_0_PE_cluster_psum_data_in_sel;
-assign	CG_1_0_router_cluster_iact_data_in_sel         	= ctrl_CG_1_0_router_cluster_iact_data_in_sel;
-assign	CG_1_0_router_cluster_iact_data_out_sel        	= ctrl_CG_1_0_router_cluster_iact_data_out_sel;
-assign	CG_1_0_router_cluster_weight_data_in_sel       	= ctrl_CG_1_0_router_cluster_weight_data_in_sel;
-assign	CG_1_0_router_cluster_weight_data_out_sel      	= ctrl_CG_1_0_router_cluster_weight_data_out_sel;
-assign	CG_1_0_router_cluster_psum_data_in_sel         	= ctrl_CG_1_0_router_cluster_psum_data_in_sel;
-assign	CG_1_0_router_cluster_psum_data_out_sel        	= ctrl_CG_1_0_router_cluster_psum_data_out_sel;
 assign	CG_1_0_read_psum_en								= ctrl_CG_1_0_read_psum_en;
 assign	CG_1_0_cg_en                                  	= ctrl_CG_1_0_cg_en;
 assign	CG_1_0_src_GLB_load_fin                         = ctrl_CG_1_0_src_GLB_load_fin;
@@ -1546,15 +1402,6 @@ assign	CG_1_0_iact_write_fin_clear                     = ctrl_CG_1_0_iact_write_
 assign	CG_1_0_weight_write_fin_clear                   = ctrl_CG_1_0_weight_write_fin_clear; 
 
 
-assign	CG_1_1_PE_cluster_iact_data_in_sel     		   	= ctrl_CG_1_1_PE_cluster_iact_data_in_sel; 
-assign	CG_1_1_PE_cluster_iact_data_out_sel            	= ctrl_CG_1_1_PE_cluster_iact_data_out_sel;
-assign	CG_1_1_PE_cluster_psum_data_in_sel             	= ctrl_CG_1_1_PE_cluster_psum_data_in_sel;
-assign	CG_1_1_router_cluster_iact_data_in_sel         	= ctrl_CG_1_1_router_cluster_iact_data_in_sel;
-assign	CG_1_1_router_cluster_iact_data_out_sel        	= ctrl_CG_1_1_router_cluster_iact_data_out_sel;
-assign	CG_1_1_router_cluster_weight_data_in_sel       	= ctrl_CG_1_1_router_cluster_weight_data_in_sel;
-assign	CG_1_1_router_cluster_weight_data_out_sel      	= ctrl_CG_1_1_router_cluster_weight_data_out_sel;
-assign	CG_1_1_router_cluster_psum_data_in_sel         	= ctrl_CG_1_1_router_cluster_psum_data_in_sel;
-assign	CG_1_1_router_cluster_psum_data_out_sel        	= ctrl_CG_1_1_router_cluster_psum_data_out_sel;
 assign	CG_1_1_read_psum_en								= ctrl_CG_1_1_read_psum_en;
 assign	CG_1_1_cg_en                                  	= ctrl_CG_1_1_cg_en;
 assign	CG_1_1_src_GLB_load_fin                         = ctrl_CG_1_1_src_GLB_load_fin;

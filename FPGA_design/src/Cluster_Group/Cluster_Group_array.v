@@ -5,16 +5,16 @@ module ClusterGroup_array(
 	
 	input					psum_acc_fin,
 	// -------------------- CG_0_0 -------------------- //
-	input 			     	CG_0_0_PE_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_0_0_PE_cluster_iact_data_out_sel,
-	input 			     	CG_0_0_PE_cluster_psum_data_in_sel,
+	input		CG_PE_cluster_iact_data_in_sel [0:1][0:1],
+	input		[1:0]	CG_PE_cluster_iact_data_out_sel [0:1][0:1],
+	input		CG_PE_cluster_psum_data_in_sel [0:1][0:1],
 						
-	input 			[1:0]	CG_0_0_router_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_0_0_router_cluster_iact_data_out_sel,
-	input 			     	CG_0_0_router_cluster_weight_data_in_sel,
-	input 			     	CG_0_0_router_cluster_weight_data_out_sel,
-	input 			     	CG_0_0_router_cluster_psum_data_in_sel,
-	input 			     	CG_0_0_router_cluster_psum_data_out_sel,
+	input		[1:0]	CG_router_cluster_iact_data_in_sel [0:1][0:1],
+	input		[1:0]	CG_router_cluster_iact_data_out_sel [0:1][0:1],
+	input		CG_router_cluster_weight_data_in_sel [0:1][0:1],
+	input		CG_router_cluster_weight_data_out_sel [0:1][0:1],
+	input		CG_router_cluster_psum_data_in_sel [0:1][0:1],
+	input		CG_router_cluster_psum_data_out_sel [0:1][0:1],
 						
 	input 			     	CG_0_0_read_psum_en,
 	output			     	CG_0_0_cal_fin,
@@ -75,16 +75,7 @@ module ClusterGroup_array(
 	
 	
 	// -------------------- CG_0_1 -------------------- //
-	input 			     	CG_0_1_PE_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_0_1_PE_cluster_iact_data_out_sel,
-	input 			     	CG_0_1_PE_cluster_psum_data_in_sel,
 								 
-	input 			[1:0]	CG_0_1_router_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_0_1_router_cluster_iact_data_out_sel,
-	input 			     	CG_0_1_router_cluster_weight_data_in_sel,
-	input 			     	CG_0_1_router_cluster_weight_data_out_sel,
-	input 			     	CG_0_1_router_cluster_psum_data_in_sel,
-	input 			     	CG_0_1_router_cluster_psum_data_out_sel,
 								 
 	input 			     	CG_0_1_read_psum_en,
 	output			     	CG_0_1_cal_fin,
@@ -144,16 +135,7 @@ module ClusterGroup_array(
 	input					CG_0_1_weight_write_fin_clear,
 	
 	// -------------------- CG_1_0 -------------------- //
-	input 			     	CG_1_0_PE_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_1_0_PE_cluster_iact_data_out_sel,
-	input 			     	CG_1_0_PE_cluster_psum_data_in_sel,
 							   
-	input 			[1:0]	CG_1_0_router_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_1_0_router_cluster_iact_data_out_sel,
-	input 			     	CG_1_0_router_cluster_weight_data_in_sel,
-	input 			     	CG_1_0_router_cluster_weight_data_out_sel,
-	input 			     	CG_1_0_router_cluster_psum_data_in_sel,
-	input 			     	CG_1_0_router_cluster_psum_data_out_sel,
 							   
 	input 			     	CG_1_0_read_psum_en,
 	output			     	CG_1_0_cal_fin,
@@ -214,16 +196,7 @@ module ClusterGroup_array(
 							   
 							   
 	// -------------------- CG_1_1 -------------------- //
-	input 			     	CG_1_1_PE_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_1_1_PE_cluster_iact_data_out_sel,
-	input 			     	CG_1_1_PE_cluster_psum_data_in_sel,
 								
-	input 			[1:0]	CG_1_1_router_cluster_iact_data_in_sel,
-	input 			[1:0]	CG_1_1_router_cluster_iact_data_out_sel,
-	input 			     	CG_1_1_router_cluster_weight_data_in_sel,
-	input 			     	CG_1_1_router_cluster_weight_data_out_sel,
-	input 			     	CG_1_1_router_cluster_psum_data_in_sel,
-	input 			     	CG_1_1_router_cluster_psum_data_out_sel,
 
 	input 			     	CG_1_1_read_psum_en,
 	output			     	CG_1_1_cal_fin,
@@ -1926,16 +1899,16 @@ ClusterGroup ClusterGroup_0_0 (
 	.clock										(CG_0_0_clock									),
 	.reset										(CG_0_0_reset									),
 											   					
-	.PE_cluster_iact_data_in_sel                (CG_0_0_PE_cluster_iact_data_in_sel             ),
-	.PE_cluster_iact_data_out_sel               (CG_0_0_PE_cluster_iact_data_out_sel            ),
-	.PE_cluster_psum_data_in_sel                (CG_0_0_PE_cluster_psum_data_in_sel             ),
+	.PE_cluster_iact_data_in_sel                (CG_PE_cluster_iact_data_in_sel[0][0]             ),
+	.PE_cluster_iact_data_out_sel               (CG_PE_cluster_iact_data_out_sel[0][0]            ),
+	.PE_cluster_psum_data_in_sel                (CG_PE_cluster_psum_data_in_sel[0][0]             ),
 									            			
-	.router_cluster_iact_data_in_sel            (CG_0_0_router_cluster_iact_data_in_sel         ),
-	.router_cluster_iact_data_out_sel           (CG_0_0_router_cluster_iact_data_out_sel        ),
-	.router_cluster_weight_data_in_sel          (CG_0_0_router_cluster_weight_data_in_sel       ),
-	.router_cluster_weight_data_out_sel         (CG_0_0_router_cluster_weight_data_out_sel      ),
-	.router_cluster_psum_data_in_sel            (CG_0_0_router_cluster_psum_data_in_sel         ),
-	.router_cluster_psum_data_out_sel           (CG_0_0_router_cluster_psum_data_out_sel        ),
+	.router_cluster_iact_data_in_sel            (CG_router_cluster_iact_data_in_sel[0][0]         ),
+	.router_cluster_iact_data_out_sel           (CG_router_cluster_iact_data_out_sel[0][0]        ),
+	.router_cluster_weight_data_in_sel          (CG_router_cluster_weight_data_in_sel[0][0]       ),
+	.router_cluster_weight_data_out_sel         (CG_router_cluster_weight_data_out_sel[0][0]      ),
+	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[0][0]         ),
+	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[0][0]        ),
 							                    
 	.read_psum_en                               (CG_0_0_read_psum_en                            ),
 	.cal_fin                                    (CG_0_0_cal_fin                                 ),
@@ -2404,16 +2377,16 @@ ClusterGroup ClusterGroup_0_1 (
 	.clock										(CG_0_1_clock									),
 	.reset										(CG_0_1_reset									),
 											   					
-	.PE_cluster_iact_data_in_sel                (CG_0_1_PE_cluster_iact_data_in_sel             ),
-	.PE_cluster_iact_data_out_sel               (CG_0_1_PE_cluster_iact_data_out_sel            ),
-	.PE_cluster_psum_data_in_sel                (CG_0_1_PE_cluster_psum_data_in_sel             ),
+	.PE_cluster_iact_data_in_sel                (CG_PE_cluster_iact_data_in_sel[0][1]             ),
+	.PE_cluster_iact_data_out_sel               (CG_PE_cluster_iact_data_out_sel[0][1]            ),
+	.PE_cluster_psum_data_in_sel                (CG_PE_cluster_psum_data_in_sel[0][1]             ),
 									            			
-	.router_cluster_iact_data_in_sel            (CG_0_1_router_cluster_iact_data_in_sel         ),
-	.router_cluster_iact_data_out_sel           (CG_0_1_router_cluster_iact_data_out_sel        ),
-	.router_cluster_weight_data_in_sel          (CG_0_1_router_cluster_weight_data_in_sel       ),
-	.router_cluster_weight_data_out_sel         (CG_0_1_router_cluster_weight_data_out_sel      ),
-	.router_cluster_psum_data_in_sel            (CG_0_1_router_cluster_psum_data_in_sel         ),
-	.router_cluster_psum_data_out_sel           (CG_0_1_router_cluster_psum_data_out_sel        ),
+	.router_cluster_iact_data_in_sel            (CG_router_cluster_iact_data_in_sel[0][1]         ),
+	.router_cluster_iact_data_out_sel           (CG_router_cluster_iact_data_out_sel[0][1]        ),
+	.router_cluster_weight_data_in_sel          (CG_router_cluster_weight_data_in_sel[0][1]       ),
+	.router_cluster_weight_data_out_sel         (CG_router_cluster_weight_data_out_sel[0][1]      ),
+	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[0][1]         ),
+	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[0][1]        ),
 							                    
 	.read_psum_en                               (CG_0_1_read_psum_en                            ),
 	.cal_fin                                    (CG_0_1_cal_fin                                 ),
@@ -2882,16 +2855,16 @@ ClusterGroup ClusterGroup_1_0 (
 	.clock										(CG_1_0_clock									),
 	.reset										(CG_1_0_reset									),
 											   					
-	.PE_cluster_iact_data_in_sel                (CG_1_0_PE_cluster_iact_data_in_sel             ),
-	.PE_cluster_iact_data_out_sel               (CG_1_0_PE_cluster_iact_data_out_sel            ),
-	.PE_cluster_psum_data_in_sel                (CG_1_0_PE_cluster_psum_data_in_sel             ),
+	.PE_cluster_iact_data_in_sel                (CG_PE_cluster_iact_data_in_sel[1][0]             ),
+	.PE_cluster_iact_data_out_sel               (CG_PE_cluster_iact_data_out_sel[1][0]            ),
+	.PE_cluster_psum_data_in_sel                (CG_PE_cluster_psum_data_in_sel[1][0]             ),
 									            			
-	.router_cluster_iact_data_in_sel            (CG_1_0_router_cluster_iact_data_in_sel         ),
-	.router_cluster_iact_data_out_sel           (CG_1_0_router_cluster_iact_data_out_sel        ),
-	.router_cluster_weight_data_in_sel          (CG_1_0_router_cluster_weight_data_in_sel       ),
-	.router_cluster_weight_data_out_sel         (CG_1_0_router_cluster_weight_data_out_sel      ),
-	.router_cluster_psum_data_in_sel            (CG_1_0_router_cluster_psum_data_in_sel         ),
-	.router_cluster_psum_data_out_sel           (CG_1_0_router_cluster_psum_data_out_sel        ),
+	.router_cluster_iact_data_in_sel            (CG_router_cluster_iact_data_in_sel[1][0]         ),
+	.router_cluster_iact_data_out_sel           (CG_router_cluster_iact_data_out_sel[1][0]        ),
+	.router_cluster_weight_data_in_sel          (CG_router_cluster_weight_data_in_sel[1][0]       ),
+	.router_cluster_weight_data_out_sel         (CG_router_cluster_weight_data_out_sel[1][0]      ),
+	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[1][0]         ),
+	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[1][0]        ),
 							                    
 	.read_psum_en                               (CG_1_0_read_psum_en                            ),
 	.cal_fin                                    (CG_1_0_cal_fin                                 ),
@@ -3360,16 +3333,16 @@ ClusterGroup ClusterGroup_1_1 (
 	.clock										(CG_1_1_clock									),
 	.reset										(CG_1_1_reset									),
 											   					
-	.PE_cluster_iact_data_in_sel                (CG_1_1_PE_cluster_iact_data_in_sel             ),
-	.PE_cluster_iact_data_out_sel               (CG_1_1_PE_cluster_iact_data_out_sel            ),
-	.PE_cluster_psum_data_in_sel                (CG_1_1_PE_cluster_psum_data_in_sel             ),
+	.PE_cluster_iact_data_in_sel                (CG_PE_cluster_iact_data_in_sel[1][1]             ),
+	.PE_cluster_iact_data_out_sel               (CG_PE_cluster_iact_data_out_sel[1][1]            ),
+	.PE_cluster_psum_data_in_sel                (CG_PE_cluster_psum_data_in_sel[1][1]             ),
 									            			
-	.router_cluster_iact_data_in_sel            (CG_1_1_router_cluster_iact_data_in_sel         ),
-	.router_cluster_iact_data_out_sel           (CG_1_1_router_cluster_iact_data_out_sel        ),
-	.router_cluster_weight_data_in_sel          (CG_1_1_router_cluster_weight_data_in_sel       ),
-	.router_cluster_weight_data_out_sel         (CG_1_1_router_cluster_weight_data_out_sel      ),
-	.router_cluster_psum_data_in_sel            (CG_1_1_router_cluster_psum_data_in_sel         ),
-	.router_cluster_psum_data_out_sel           (CG_1_1_router_cluster_psum_data_out_sel        ),
+	.router_cluster_iact_data_in_sel            (CG_router_cluster_iact_data_in_sel[1][1]         ),
+	.router_cluster_iact_data_out_sel           (CG_router_cluster_iact_data_out_sel[1][1]        ),
+	.router_cluster_weight_data_in_sel          (CG_router_cluster_weight_data_in_sel[1][1]       ),
+	.router_cluster_weight_data_out_sel         (CG_router_cluster_weight_data_out_sel[1][1]      ),
+	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[1][1]         ),
+	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[1][1]        ),
 							                    
 	.read_psum_en                               (CG_1_1_read_psum_en                            ),
 	.cal_fin                                    (CG_1_1_cal_fin                                 ),
