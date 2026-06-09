@@ -93,6 +93,7 @@ wire 			 		later_address_spad_read_idx_en;
 // later data spad module
 wire 			[6:0] 	later_data_spad_col_num;
 wire 			[11:0] 	later_data_spad_data_out;
+wire 			[11:0] 	later_data_spad_data_out_next;
 wire 			 		later_data_spad_data_in_ready; 
 wire 			 		later_data_spad_data_in_valid; 
 wire 			[11:0] 	later_data_spad_data_in; 
@@ -101,6 +102,7 @@ wire 			 		later_data_spad_write_fin;
 wire 			 		later_data_spad_read_en; 
 wire 			[6:0] 	later_data_spad_read_idx; 
 wire 			 		later_data_spad_read_idx_inc;
+wire 			 		later_data_spad_read_idx_inc_by_2;
 wire 			 		later_data_spad_read_idx_en;
 
 Psum_Spad Psum_Spad_inst ( 
@@ -161,6 +163,7 @@ Later_Data_Spad Later_Data_Spad_inst (
 	.reset			(reset							),
 	.column_num		(later_data_spad_col_num		),
 	.data_out		(later_data_spad_data_out		),
+	.data_out_next	(later_data_spad_data_out_next	),
 	.data_in_ready	(later_data_spad_data_in_ready	),
 	.data_in_valid	(later_data_spad_data_in_valid	),
 	.data_in		(later_data_spad_data_in		),
@@ -169,6 +172,7 @@ Later_Data_Spad Later_Data_Spad_inst (
 	.read_en		(later_data_spad_read_en		),
 	.read_idx		(later_data_spad_read_idx		),
 	.index_inc		(later_data_spad_read_idx_inc	),
+	.index_inc_by_2(later_data_spad_read_idx_inc_by_2),
 	.read_idx_en	(later_data_spad_read_idx_en	)
 );
 
@@ -176,29 +180,32 @@ Later_Data_Spad Later_Data_Spad_inst (
 // 						 		Parameters  							//
 // ====================================================================	//
 parameter WEIGHT_MATRIX_ROW = 4;
+parameter SIMD_LANE2_ENABLE = 1;
 
 // state parameters
-localparam IDLE 				= 3'd0;			// the pad is idle, and if received mac_en signal from controller, then start 5 stage pipeline
-localparam READ_FORMER_ADDRESS 	= 3'd1;			// read the former address
-localparam READ_FORMER_DATA 	= 3'd2;			// read the former data
-localparam READ_LATER_ADDRESS 	= 3'd3;			// read the later address
-localparam READ_LATER_DATA_1 	= 3'd4;			// read the later data
-localparam READ_LATER_DATA_2 	= 3'd5;			// wait one cycle as SRAM
-localparam DO_MAC 				= 3'd6;			// wait for mac computation
-localparam WRITE_BACK 			= 3'd7;			// write the partial sum back					
+localparam IDLE 				= 4'd0;			// the pad is idle, and if received mac_en signal from controller, then start 5 stage pipeline
+localparam READ_FORMER_ADDRESS 	= 4'd1;			// read the former address
+localparam READ_FORMER_DATA 	= 4'd2;			// read the former data
+localparam READ_LATER_ADDRESS 	= 4'd3;			// read the later address
+localparam READ_LATER_DATA_1 	= 4'd4;			// read the later data
+localparam READ_LATER_DATA_2 	= 4'd5;			// wait one cycle as SRAM
+localparam DO_MAC 				= 4'd6;			// wait for mac computation
+localparam WRITE_BACK 			= 4'd7;			// write lane 0 partial sum back
+localparam WRITE_BACK_LANE1 	= 4'd8;			// write lane 1 partial sum back
 
 
 // ====================================================================	//
 // 						 		Registers  								//
 // ====================================================================	//
-reg 		[2:0]	PE_state, next_PE_state;	// state FSM signals
+reg 		[3:0]	PE_state, next_PE_state;	// state FSM signals
 
 reg 		[3:0] 	former_matrix_col_reg; 
 reg 				former_matrix_inc_reg;
 reg  				former_data_first_read_reg; 
 reg 				later_data_first_read_reg; 
 
-reg signed 	[20:0]	product_reg;    						// iact * weight                     							
+reg signed 	[20:0]	product_reg;    						// SIMD lane 0 iact * weight
+reg signed 	[20:0]	product_lane1_reg;						// SIMD lane 1 iact * weight
 reg signed 	[20:0] 	psum_load_reg;							// psum load from psum spad       
 reg  				psum_load_state;						// determine psum accumulation is for psum spad or psum_in form PE ouside 
 reg 		[4:0] 	psum_read_idx_reg, next_psum_read_idx;	// PSUM SPad read idx FSM signals
@@ -215,7 +222,8 @@ wire READ_LATER_ADDRESS_wire 	= PE_state == READ_LATER_ADDRESS;
 wire READ_LATER_DATA_1_wire 	= PE_state == READ_LATER_DATA_1;
 wire READ_LATER_DATA_2_wire 	= PE_state == READ_LATER_DATA_2;
 wire DO_MAC_wire 				= PE_state == DO_MAC;			
-wire WRITE_BACK_wire 			= PE_state == WRITE_BACK;		
+wire WRITE_BACK_wire 			= PE_state == WRITE_BACK;
+wire WRITE_BACK_LANE1_wire 	= PE_state == WRITE_BACK_LANE1;		
 
 
 // data coun vector decoding				       			
@@ -223,6 +231,8 @@ wire 		[4:0] 	former_matrix_row_wire	= former_data_spad_data_out	[4:0];
 wire signed [7:0] 	former_matrix_data_wire	= former_data_spad_data_out	[12:5];
 wire 		[3:0] 	later_matrix_row_wire	= later_data_spad_data_out	[3:0];  
 wire signed [7:0] 	later_matrix_data_wire	= later_data_spad_data_out	[11:4];
+wire 		[3:0] 	later_matrix_row_lane1_wire = later_data_spad_data_out_next[3:0];
+wire signed [7:0] 	later_matrix_data_lane1_wire = later_data_spad_data_out_next[11:4];
 
 
 // use the maximum value of the address to stand for current column is all zero to skip this column
@@ -234,12 +244,15 @@ wire later_matrix_read_first_col_wire 		= former_matrix_row_wire == 5'd0;
 
 
 // SPad control
-wire signed [20:0]	product_wire 			= (later_matrix_row_wire == 'd15) ? 'sd0 : (later_matrix_data_wire * former_matrix_data_wire);  // TODO 
-wire signed [20:0] 	psum_load_wire 		 	= Psum_Spad_psum_out;
-wire signed [20:0] 	psum_acc_result_wire 	= psum_load_state ? (psum_load_wire + psum_in) : (psum_load_reg + product_reg);
-wire 		[4:0]  	psum_write_idx_wire  	= later_matrix_row_wire + (former_matrix_col_reg-1) * WEIGHT_MATRIX_ROW; 
+wire signed [20:0]	product_wire 			= (later_matrix_row_wire == 'd15) ? 'sd0 : (later_matrix_data_wire * former_matrix_data_wire);
+wire signed [20:0]	product_lane1_wire 	= (later_matrix_row_lane1_wire == 'd15) ? 'sd0 : (later_matrix_data_lane1_wire * former_matrix_data_wire);
+wire signed [20:0] 	psum_load_wire 		  	= Psum_Spad_psum_out;
+wire 		[4:0]  	psum_write_idx_lane0_wire = later_matrix_row_wire + (former_matrix_col_reg-1) * WEIGHT_MATRIX_ROW;
+wire 		[4:0]  	psum_write_idx_lane1_wire = later_matrix_row_lane1_wire + (former_matrix_col_reg-1) * WEIGHT_MATRIX_ROW;
+wire 		[4:0]  	psum_write_idx_wire = WRITE_BACK_LANE1_wire ? psum_write_idx_lane1_wire : psum_write_idx_lane0_wire;
+wire signed [20:0]	active_product_wire = WRITE_BACK_LANE1_wire ? product_lane1_reg : product_reg;
+wire signed [20:0] 	psum_acc_result_wire 	= psum_load_state ? (psum_load_wire + psum_in) : (psum_load_reg + active_product_wire);
 wire				psum_read_fin_wire		= psum_read_idx_reg == PSUM_DEPTH;
-
 
 wire former_data_spad_idx_inc_wire 			= former_address_spad_data_out == (former_data_spad_col_num + 'd1);
 wire Iact_Data_Spad_read_fin_wire			= (former_matrix_data_wire == 'd0) & (~former_data_first_read_reg);
@@ -247,11 +260,19 @@ wire Iact_Data_Spad_read_fin_wire			= (former_matrix_data_wire == 'd0) & (~forme
 wire later_data_spad_read_fin_wire   		= (later_matrix_data_wire == 'd0); 
 wire later_data_spad_idx_inc_wire   		= (later_address_spad_data_out == (later_data_spad_col_num + 'd1)) | later_data_spad_read_fin_wire;
 wire later_address_spad_read_fin_wire 		= (later_address_spad_data_out == 'd0) ? 1'b1 : 1'b0;
+wire later_data_spad_read_fin_lane1_wire = later_matrix_data_lane1_wire == 8'sd0;
+wire simd_lane1_valid_wire = SIMD_LANE2_ENABLE & ~psum_load_state & ~later_zero_col_wire &
+								~later_address_spad_read_fin_wire & ~later_data_spad_idx_inc_wire &
+								~later_data_spad_read_fin_lane1_wire;
+wire later_data_spad_pair_idx_inc_wire = (later_address_spad_data_out == (later_data_spad_col_num + 'd2)) |
+										 later_data_spad_read_fin_lane1_wire;
+wire active_later_data_done_wire = WRITE_BACK_LANE1_wire ? later_data_spad_pair_idx_inc_wire : later_data_spad_idx_inc_wire;
+wire writeback_complete_wire = (WRITE_BACK_wire & ~simd_lane1_valid_wire) | WRITE_BACK_LANE1_wire;
 	
 wire Psum_Spad_read_valid_wire 				= psum_in_valid & psum_load_state;
 wire Psum_Spad_read_idx_inc_wire 			= psum_out_ready & psum_out_valid;
 wire Psum_Spad_read_fin_wire 				= (READ_FORMER_DATA_wire 	& Iact_Data_Spad_read_fin_wire)	|
-											  (WRITE_BACK_wire 			& Iact_Data_Spad_read_fin_wire) | 
+											  (writeback_complete_wire & Iact_Data_Spad_read_fin_wire) | 
 											  (psum_read_fin_wire 		& Psum_Spad_read_idx_inc_wire);
 
 
@@ -274,8 +295,8 @@ assign later_data_write_fin 		= later_data_spad_write_fin;
 
 
 // instantiated module connection
-assign Psum_Spad_psum_in_valid 				= WRITE_BACK_wire;
-assign Psum_Spad_psum_in 					= WRITE_BACK_wire ? psum_acc_result_wire : 21'sd0;
+assign Psum_Spad_psum_in_valid 				= WRITE_BACK_wire | WRITE_BACK_LANE1_wire;
+assign Psum_Spad_psum_in 					= (WRITE_BACK_wire | WRITE_BACK_LANE1_wire) ? psum_acc_result_wire : 21'sd0;
 assign Psum_Spad_psum_out_ready 			= DO_MAC_wire | Psum_Spad_read_valid_wire;
 assign Psum_Spad_read_idx 					= next_psum_read_idx;
 assign Psum_Spad_write_idx 					= psum_write_idx_wire;
@@ -285,7 +306,7 @@ assign former_address_spad_data_in 			= former_address_in;
 assign former_address_spad_write_en 		= load_en;
 assign former_address_spad_idx_inc 			= (READ_FORMER_ADDRESS_wire && former_zero_col_wire) 												|| 
 											  (READ_LATER_ADDRESS_wire 	&& former_data_spad_idx_inc_wire	&& later_zero_col_wire) 			|| 
-											  (WRITE_BACK_wire 			&& former_data_spad_idx_inc_wire	&& later_data_spad_idx_inc_wire) 	|| 
+											  (writeback_complete_wire && former_data_spad_idx_inc_wire	&& active_later_data_done_wire) 	|| 
 											  (~IDLE_wire 				&& cal_fin);
 
 assign former_data_spad_data_in_valid 		= former_data_in_valid;
@@ -293,7 +314,7 @@ assign former_data_spad_data_in 			= former_data_in;
 assign former_data_spad_write_en 			= load_en;	
 assign former_data_spad_idx_inc 			= (READ_FORMER_ADDRESS_wire && (~former_zero_col_wire | ~former_data_spad_idx_inc_wire) && (~former_data_first_read_reg)) 	|| 
 											  (READ_LATER_ADDRESS_wire 	&& later_zero_col_wire && (~former_data_spad_idx_inc_wire)) 									|| 
-											  (WRITE_BACK_wire 			&& later_data_spad_idx_inc_wire && (~former_data_spad_idx_inc_wire)) 							|| 
+											  (writeback_complete_wire && active_later_data_done_wire && (~former_data_spad_idx_inc_wire)) 						|| 
 											  (~IDLE_wire 				&& Iact_Data_Spad_read_fin_wire);
 
 assign later_address_spad_data_in_valid		= later_address_in_valid;
@@ -310,12 +331,13 @@ assign later_data_spad_read_en 				= READ_LATER_DATA_1_wire;
 assign later_data_spad_read_idx 			= later_matrix_read_first_col_wire ? 'd0 : later_address_spad_data_out;
 assign later_data_spad_read_idx_en 			= (READ_LATER_ADDRESS_wire) & later_data_first_read_reg 	& (~later_zero_col_wire);
 assign later_data_spad_read_idx_inc 		= (READ_LATER_ADDRESS_wire 	& (~later_zero_col_wire) 		& (~later_data_first_read_reg)) | 
-											  (WRITE_BACK_wire 			& (~later_data_spad_idx_inc_wire));
+										  (WRITE_BACK_wire 			& (~simd_lane1_valid_wire) & (~later_data_spad_idx_inc_wire));
+assign later_data_spad_read_idx_inc_by_2 = WRITE_BACK_LANE1_wire & (~later_data_spad_pair_idx_inc_wire);
 
 // state converted signals
 wire former_address_read_done_wire	= ~(former_data_spad_idx_inc_wire & former_zero_col_wire);
 wire former_data_read_done_wire 	= Iact_Data_Spad_read_fin_wire;
-wire later_data_read_done 			= later_data_spad_idx_inc_wire 	| later_address_spad_read_fin_wire;
+wire later_data_read_done 			= active_later_data_done_wire 	| later_address_spad_read_fin_wire;
 wire former_one_col_read_done		= former_data_spad_idx_inc_wire | later_address_spad_read_fin_wire;
 
 // next state logic
@@ -329,9 +351,13 @@ always@(*) begin
 		READ_LATER_DATA_1 	: next_PE_state = READ_LATER_DATA_2;
 		READ_LATER_DATA_2 	: next_PE_state = DO_MAC;
 		DO_MAC 				: next_PE_state = WRITE_BACK;
-		WRITE_BACK 	        : next_PE_state = former_data_read_done_wire 	? IDLE 					: 
-											  ~later_data_read_done 		? READ_LATER_DATA_1 	: 
-											  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
+		WRITE_BACK 	        : next_PE_state = simd_lane1_valid_wire 		? WRITE_BACK_LANE1 	:
+										  former_data_read_done_wire 	? IDLE 					: 
+										  ~later_data_read_done 		? READ_LATER_DATA_1 	: 
+										  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
+		WRITE_BACK_LANE1	: next_PE_state = former_data_read_done_wire 	? IDLE 					: 
+										  ~later_data_read_done 		? READ_LATER_DATA_1 	: 
+										  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
 		default				: next_PE_state = IDLE;
 	endcase
 end
@@ -377,7 +403,7 @@ always@(posedge clock) begin
 		former_data_first_read_reg <= 1'b1;
 	end 
 	else begin
-		if(READ_FORMER_DATA_wire | WRITE_BACK_wire) begin
+		if(READ_FORMER_DATA_wire | writeback_complete_wire) begin
 			former_data_first_read_reg <= Iact_Data_Spad_read_fin_wire | former_data_first_read_reg;
 		end
 		else if(READ_LATER_ADDRESS_wire) begin
@@ -391,14 +417,14 @@ always@(posedge clock) begin
 		later_data_first_read_reg <= 1'b1;
 	end 
 	else begin
-	    if(IDLE_wire) begin
+		if(IDLE_wire) begin
 			later_data_first_read_reg <= mac_en | later_data_first_read_reg;
 		end
 		else if(READ_LATER_ADDRESS_wire) begin
 			later_data_first_read_reg <= later_zero_col_wire | later_data_first_read_reg;
 		end
-		else if(WRITE_BACK_wire && !Iact_Data_Spad_read_fin_wire) begin
-			later_data_first_read_reg <= later_data_spad_idx_inc_wire | later_address_spad_read_fin_wire;
+		else if(writeback_complete_wire && !Iact_Data_Spad_read_fin_wire) begin
+			later_data_first_read_reg <= active_later_data_done_wire | later_address_spad_read_fin_wire;
 		end
 	end
 end
@@ -406,10 +432,12 @@ end
 always@(posedge clock) begin	
 	if(reset) begin
 		product_reg <= 21'sd0;
+		product_lane1_reg <= 21'sd0;
 	end 
 	else begin
 		if(DO_MAC_wire) begin
-			product_reg <= product_wire;	// TODO
+			product_reg <= product_wire;
+			product_lane1_reg <= product_lane1_wire;
 		end
 	end
 end
@@ -449,7 +477,10 @@ end
 // next psum read index logic
 always@(*) begin	
 	if(READ_LATER_DATA_2_wire) begin 
-		next_psum_read_idx <= Psum_Spad_write_idx;
+		next_psum_read_idx <= psum_write_idx_lane0_wire;
+	end 
+	else if(DO_MAC_wire & simd_lane1_valid_wire) begin
+		next_psum_read_idx <= psum_write_idx_lane1_wire;
 	end 
 	else if (Psum_Spad_read_fin_wire) begin 
 		next_psum_read_idx <= 5'd0;

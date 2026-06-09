@@ -1,0 +1,10 @@
+1ffffa
+000000
+1ffffd
+000000
+1ffffd
+1ffffa
+1ffff6
+000014
+1ffffd
+000003
