@@ -103,16 +103,16 @@ module TOP_controller # (
 	output 				CG_1_1_GLB_weight_2_in_en,
 	
 	// ------------- CG_0_0 ------------- //
-	output		     	CG_0_0_PE_cluster_iact_data_in_sel,
-	output		[1:0]	CG_0_0_PE_cluster_iact_data_out_sel,
-	output		     	CG_0_0_PE_cluster_psum_data_in_sel,
+	output		CG_PE_cluster_iact_data_in_sel [0:1][0:1],
+	output		[1:0]	CG_PE_cluster_iact_data_out_sel [0:1][0:1],
+	output		CG_PE_cluster_psum_data_in_sel [0:1][0:1],
 	
-	output		[1:0]	CG_0_0_router_cluster_iact_data_in_sel,
-	output		[1:0]	CG_0_0_router_cluster_iact_data_out_sel,
-	output		     	CG_0_0_router_cluster_weight_data_in_sel,
-	output		     	CG_0_0_router_cluster_weight_data_out_sel,
-	output		     	CG_0_0_router_cluster_psum_data_in_sel,
-	output		     	CG_0_0_router_cluster_psum_data_out_sel,
+	output		[1:0]	CG_router_cluster_iact_data_in_sel [0:1][0:1],
+	output		[1:0]	CG_router_cluster_iact_data_out_sel [0:1][0:1],
+	output		CG_router_cluster_weight_data_in_sel [0:1][0:1],
+	output		CG_router_cluster_weight_data_out_sel [0:1][0:1],
+	output		CG_router_cluster_psum_data_in_sel [0:1][0:1],
+	output		CG_router_cluster_psum_data_out_sel [0:1][0:1],
 			
 	input				CG_0_0_GLB_iact_load_en,
 	input				CG_0_0_PE_weight_load_en,
@@ -124,15 +124,7 @@ module TOP_controller # (
 	output				CG_0_0_psum_SRAM_Bank_1_read_out_en,
 	output				CG_0_0_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_0_0_PE_0_0_disable,					
-	output				CG_0_0_PE_0_1_disable,					
-	output				CG_0_0_PE_0_2_disable,					
-	output				CG_0_0_PE_1_0_disable,					
-	output				CG_0_0_PE_1_1_disable,					
-	output				CG_0_0_PE_1_2_disable,					
-	output				CG_0_0_PE_2_0_disable,					
-	output				CG_0_0_PE_2_1_disable,					
-	output				CG_0_0_PE_2_2_disable,
+	output				CG_0_0_PE_disable [0:2][0:2],
 		
 	output		[9:0]	CG_0_0_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_0_0_GLB_iact_0_1_read_addr,
@@ -159,16 +151,7 @@ module TOP_controller # (
 	output				CG_0_0_weight_write_fin_clear,
 	
 	// ------------- CG_0_1 ------------- //
-	output		     	CG_0_1_PE_cluster_iact_data_in_sel,
-	output		[1:0]	CG_0_1_PE_cluster_iact_data_out_sel,
-	output		     	CG_0_1_PE_cluster_psum_data_in_sel,
 	
-	output		[1:0]	CG_0_1_router_cluster_iact_data_in_sel,
-	output		[1:0]	CG_0_1_router_cluster_iact_data_out_sel,
-	output		     	CG_0_1_router_cluster_weight_data_in_sel,
-	output		     	CG_0_1_router_cluster_weight_data_out_sel,
-	output		     	CG_0_1_router_cluster_psum_data_in_sel,
-	output		     	CG_0_1_router_cluster_psum_data_out_sel,
 							
 	input				CG_0_1_GLB_iact_load_en,
 	input				CG_0_1_PE_weight_load_en,
@@ -180,15 +163,7 @@ module TOP_controller # (
 	output				CG_0_1_psum_SRAM_Bank_1_read_out_en,
 	output				CG_0_1_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_0_1_PE_0_0_disable,					
-	output				CG_0_1_PE_0_1_disable,					
-	output				CG_0_1_PE_0_2_disable,					
-	output				CG_0_1_PE_1_0_disable,					
-	output				CG_0_1_PE_1_1_disable,					
-	output				CG_0_1_PE_1_2_disable,					
-	output				CG_0_1_PE_2_0_disable,					
-	output				CG_0_1_PE_2_1_disable,					
-	output				CG_0_1_PE_2_2_disable,
+	output				CG_0_1_PE_disable [0:2][0:2],
 							 
 	output		[9:0]	CG_0_1_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_0_1_GLB_iact_0_1_read_addr,
@@ -216,16 +191,7 @@ module TOP_controller # (
 	
 	
 	// ------------- CG_1_0 ------------- //
-	output		     	CG_1_0_PE_cluster_iact_data_in_sel,
-	output		[1:0]	CG_1_0_PE_cluster_iact_data_out_sel,
-	output		     	CG_1_0_PE_cluster_psum_data_in_sel,
 						
-	output		[1:0]	CG_1_0_router_cluster_iact_data_in_sel,
-	output		[1:0]	CG_1_0_router_cluster_iact_data_out_sel,
-	output		     	CG_1_0_router_cluster_weight_data_in_sel,
-	output		     	CG_1_0_router_cluster_weight_data_out_sel,
-	output		     	CG_1_0_router_cluster_psum_data_in_sel,
-	output		     	CG_1_0_router_cluster_psum_data_out_sel,
 						
 	input				CG_1_0_GLB_iact_load_en,
 	input				CG_1_0_PE_weight_load_en,
@@ -237,15 +203,7 @@ module TOP_controller # (
 	output				CG_1_0_psum_SRAM_Bank_1_read_out_en,
 	output				CG_1_0_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_1_0_PE_0_0_disable,					
-	output				CG_1_0_PE_0_1_disable,					
-	output				CG_1_0_PE_0_2_disable,					
-	output				CG_1_0_PE_1_0_disable,					
-	output				CG_1_0_PE_1_1_disable,					
-	output				CG_1_0_PE_1_2_disable,					
-	output				CG_1_0_PE_2_0_disable,					
-	output				CG_1_0_PE_2_1_disable,					
-	output				CG_1_0_PE_2_2_disable,
+	output				CG_1_0_PE_disable [0:2][0:2],
 						
 	output		[9:0]	CG_1_0_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_1_0_GLB_iact_0_1_read_addr,
@@ -272,16 +230,7 @@ module TOP_controller # (
 	output				CG_1_0_weight_write_fin_clear,
 						
 	// ------------- CG_1_1 ------------- //
-	output		     	CG_1_1_PE_cluster_iact_data_in_sel,
-	output		[1:0]	CG_1_1_PE_cluster_iact_data_out_sel,
-	output		     	CG_1_1_PE_cluster_psum_data_in_sel,
 	
-	output		[1:0]	CG_1_1_router_cluster_iact_data_in_sel,
-	output		[1:0]	CG_1_1_router_cluster_iact_data_out_sel,
-	output		     	CG_1_1_router_cluster_weight_data_in_sel,
-	output		     	CG_1_1_router_cluster_weight_data_out_sel,
-	output		     	CG_1_1_router_cluster_psum_data_in_sel,
-	output		     	CG_1_1_router_cluster_psum_data_out_sel,
 	
 	input				CG_1_1_GLB_iact_load_en,
 	input				CG_1_1_PE_weight_load_en,
@@ -293,15 +242,7 @@ module TOP_controller # (
 	output				CG_1_1_psum_SRAM_Bank_1_read_out_en,
 	output				CG_1_1_psum_SRAM_Bank_2_read_out_en,
 	
-	output				CG_1_1_PE_0_0_disable,					
-	output				CG_1_1_PE_0_1_disable,					
-	output				CG_1_1_PE_0_2_disable,					
-	output				CG_1_1_PE_1_0_disable,					
-	output				CG_1_1_PE_1_1_disable,					
-	output				CG_1_1_PE_1_2_disable,					
-	output				CG_1_1_PE_2_0_disable,					
-	output				CG_1_1_PE_2_1_disable,					
-	output				CG_1_1_PE_2_2_disable,
+	output				CG_1_1_PE_disable [0:2][0:2],
 							
 	output		[9:0]	CG_1_1_GLB_iact_0_0_read_addr,
 	output		[9:0]	CG_1_1_GLB_iact_0_1_read_addr,
@@ -618,42 +559,42 @@ wire read_out_psum_en_fc 	= LAYER_READ_OUT_PSUM_wire & fc_flag;
 // ====================================================================	//
 // 						 		Combination  							//
 // ====================================================================	//
-assign  CG_0_0_PE_0_0_disable = 'd0;
-assign  CG_0_0_PE_0_1_disable = 'd0;
-assign  CG_0_0_PE_0_2_disable = 'd0;
-assign  CG_0_0_PE_1_0_disable = 'd0;
-assign  CG_0_0_PE_1_1_disable = 'd0;
-assign  CG_0_0_PE_1_2_disable = 'd0;
-assign  CG_0_0_PE_2_0_disable = 'd0;
-assign  CG_0_0_PE_2_1_disable = 'd0;
-assign  CG_0_0_PE_2_2_disable = 'd0;
-assign  CG_0_1_PE_0_0_disable = layer4_flag;
-assign  CG_0_1_PE_0_1_disable = layer4_flag;
-assign  CG_0_1_PE_0_2_disable = layer4_flag;
-assign  CG_0_1_PE_1_0_disable = layer4_flag;
-assign  CG_0_1_PE_1_1_disable = layer4_flag;
-assign  CG_0_1_PE_1_2_disable = layer4_flag;
-assign  CG_0_1_PE_2_0_disable = layer4_flag;
-assign  CG_0_1_PE_2_1_disable = layer4_flag;
-assign  CG_0_1_PE_2_2_disable = layer4_flag;
-assign  CG_1_0_PE_0_0_disable = 'd0;
-assign  CG_1_0_PE_0_1_disable = 'd0;
-assign  CG_1_0_PE_0_2_disable = 'd0;
-assign  CG_1_0_PE_1_0_disable = layer4_flag;
-assign  CG_1_0_PE_1_1_disable = layer4_flag;
-assign  CG_1_0_PE_1_2_disable = layer4_flag;
-assign  CG_1_0_PE_2_0_disable = layer4_flag;
-assign  CG_1_0_PE_2_1_disable = layer4_flag;
-assign  CG_1_0_PE_2_2_disable = layer4_flag;
-assign  CG_1_1_PE_0_0_disable = layer4_flag;
-assign  CG_1_1_PE_0_1_disable = layer4_flag;
-assign  CG_1_1_PE_0_2_disable = layer4_flag;
-assign  CG_1_1_PE_1_0_disable = layer4_flag;
-assign  CG_1_1_PE_1_1_disable = layer4_flag;
-assign  CG_1_1_PE_1_2_disable = layer4_flag;
-assign  CG_1_1_PE_2_0_disable = layer4_flag;
-assign  CG_1_1_PE_2_1_disable = layer4_flag;
-assign  CG_1_1_PE_2_2_disable = layer4_flag;
+assign  CG_0_0_PE_disable[0][0] = 'd0;
+assign  CG_0_0_PE_disable[0][1] = 'd0;
+assign  CG_0_0_PE_disable[0][2] = 'd0;
+assign  CG_0_0_PE_disable[1][0] = 'd0;
+assign  CG_0_0_PE_disable[1][1] = 'd0;
+assign  CG_0_0_PE_disable[1][2] = 'd0;
+assign  CG_0_0_PE_disable[2][0] = 'd0;
+assign  CG_0_0_PE_disable[2][1] = 'd0;
+assign  CG_0_0_PE_disable[2][2] = 'd0;
+assign  CG_0_1_PE_disable[0][0] = layer4_flag;
+assign  CG_0_1_PE_disable[0][1] = layer4_flag;
+assign  CG_0_1_PE_disable[0][2] = layer4_flag;
+assign  CG_0_1_PE_disable[1][0] = layer4_flag;
+assign  CG_0_1_PE_disable[1][1] = layer4_flag;
+assign  CG_0_1_PE_disable[1][2] = layer4_flag;
+assign  CG_0_1_PE_disable[2][0] = layer4_flag;
+assign  CG_0_1_PE_disable[2][1] = layer4_flag;
+assign  CG_0_1_PE_disable[2][2] = layer4_flag;
+assign  CG_1_0_PE_disable[0][0] = 'd0;
+assign  CG_1_0_PE_disable[0][1] = 'd0;
+assign  CG_1_0_PE_disable[0][2] = 'd0;
+assign  CG_1_0_PE_disable[1][0] = layer4_flag;
+assign  CG_1_0_PE_disable[1][1] = layer4_flag;
+assign  CG_1_0_PE_disable[1][2] = layer4_flag;
+assign  CG_1_0_PE_disable[2][0] = layer4_flag;
+assign  CG_1_0_PE_disable[2][1] = layer4_flag;
+assign  CG_1_0_PE_disable[2][2] = layer4_flag;
+assign  CG_1_1_PE_disable[0][0] = layer4_flag;
+assign  CG_1_1_PE_disable[0][1] = layer4_flag;
+assign  CG_1_1_PE_disable[0][2] = layer4_flag;
+assign  CG_1_1_PE_disable[1][0] = layer4_flag;
+assign  CG_1_1_PE_disable[1][1] = layer4_flag;
+assign  CG_1_1_PE_disable[1][2] = layer4_flag;
+assign  CG_1_1_PE_disable[2][0] = layer4_flag;
+assign  CG_1_1_PE_disable[2][1] = layer4_flag;
+assign  CG_1_1_PE_disable[2][2] = layer4_flag;
 
 
 assign psum_SRAM_out_acc_en			= 	(LAYER2_READ_OUT_PSUM_wire | LAYER2_READ_OUT_PSUM_reg) | (LAYER3_READ_OUT_PSUM_wire | LAYER3_READ_OUT_PSUM_reg) | (LAYER4_READ_OUT_PSUM_wire | LAYER4_READ_OUT_PSUM_reg);
@@ -928,50 +869,50 @@ assign CG_1_1_GLB_psum_2_out_en = (conv_flag & read_out_psum_sel == 'd11)	| (fc_
 
 
 // router control
-assign CG_0_0_PE_cluster_iact_data_in_sel		= ~PE_IACT_BROADCAST;
-assign CG_0_1_PE_cluster_iact_data_in_sel		= ~PE_IACT_BROADCAST;
-assign CG_1_0_PE_cluster_iact_data_in_sel		= ~PE_IACT_BROADCAST;
-assign CG_1_1_PE_cluster_iact_data_in_sel		= ~PE_IACT_BROADCAST;
+assign CG_PE_cluster_iact_data_in_sel[0][0]		= ~PE_IACT_BROADCAST;
+assign CG_PE_cluster_iact_data_in_sel[0][1]		= ~PE_IACT_BROADCAST;
+assign CG_PE_cluster_iact_data_in_sel[1][0]		= ~PE_IACT_BROADCAST;
+assign CG_PE_cluster_iact_data_in_sel[1][1]		= ~PE_IACT_BROADCAST;
 
-assign CG_0_0_PE_cluster_iact_data_out_sel		= PE_IACT_ROUTER_0;
-assign CG_0_1_PE_cluster_iact_data_out_sel		= PE_IACT_ROUTER_0;
-assign CG_1_0_PE_cluster_iact_data_out_sel		= PE_IACT_ROUTER_0;
-assign CG_1_1_PE_cluster_iact_data_out_sel		= PE_IACT_ROUTER_0;
+assign CG_PE_cluster_iact_data_out_sel[0][0]		= PE_IACT_ROUTER_0;
+assign CG_PE_cluster_iact_data_out_sel[0][1]		= PE_IACT_ROUTER_0;
+assign CG_PE_cluster_iact_data_out_sel[1][0]		= PE_IACT_ROUTER_0;
+assign CG_PE_cluster_iact_data_out_sel[1][1]		= PE_IACT_ROUTER_0;
 
-assign CG_0_0_PE_cluster_psum_data_in_sel		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
-assign CG_0_1_PE_cluster_psum_data_in_sel		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
-assign CG_1_0_PE_cluster_psum_data_in_sel		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
-assign CG_1_1_PE_cluster_psum_data_in_sel		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
+assign CG_PE_cluster_psum_data_in_sel[0][0]		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
+assign CG_PE_cluster_psum_data_in_sel[0][1]		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
+assign CG_PE_cluster_psum_data_in_sel[1][0]		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
+assign CG_PE_cluster_psum_data_in_sel[1][1]		= weight_broadcast ? PE_PSUM_FROM_ROUTER : (layer1_flag ? PE_PSUM_FROM_SOU : PE_PSUM_FROM_SOU);
 
-assign CG_0_0_router_cluster_iact_data_in_sel	= IACT_GLB;
-assign CG_0_1_router_cluster_iact_data_in_sel	= IACT_GLB;
-assign CG_1_0_router_cluster_iact_data_in_sel	= IACT_GLB;
-assign CG_1_1_router_cluster_iact_data_in_sel	= IACT_GLB;
+assign CG_router_cluster_iact_data_in_sel[0][0]	= IACT_GLB;
+assign CG_router_cluster_iact_data_in_sel[0][1]	= IACT_GLB;
+assign CG_router_cluster_iact_data_in_sel[1][0]	= IACT_GLB;
+assign CG_router_cluster_iact_data_in_sel[1][1]	= IACT_GLB;
           
-assign CG_0_0_router_cluster_iact_data_out_sel	= IACT_UNICAST;
-assign CG_0_1_router_cluster_iact_data_out_sel	= IACT_UNICAST;
-assign CG_1_0_router_cluster_iact_data_out_sel	= IACT_UNICAST;
-assign CG_1_1_router_cluster_iact_data_out_sel	= IACT_UNICAST;
+assign CG_router_cluster_iact_data_out_sel[0][0]	= IACT_UNICAST;
+assign CG_router_cluster_iact_data_out_sel[0][1]	= IACT_UNICAST;
+assign CG_router_cluster_iact_data_out_sel[1][0]	= IACT_UNICAST;
+assign CG_router_cluster_iact_data_out_sel[1][1]	= IACT_UNICAST;
           
-assign CG_0_0_router_cluster_weight_data_in_sel	= WEIGHT_GLB;
-assign CG_0_1_router_cluster_weight_data_in_sel	= WEIGHT_HORIZ;
-assign CG_1_0_router_cluster_weight_data_in_sel	= WEIGHT_GLB;
-assign CG_1_1_router_cluster_weight_data_in_sel	= WEIGHT_HORIZ;
+assign CG_router_cluster_weight_data_in_sel[0][0]	= WEIGHT_GLB;
+assign CG_router_cluster_weight_data_in_sel[0][1]	= WEIGHT_HORIZ;
+assign CG_router_cluster_weight_data_in_sel[1][0]	= WEIGHT_GLB;
+assign CG_router_cluster_weight_data_in_sel[1][1]	= WEIGHT_HORIZ;
 
-assign CG_0_0_router_cluster_weight_data_out_sel= WEIGHT_HOR_MULTICAST;
-assign CG_0_1_router_cluster_weight_data_out_sel= WEIGHT_UNICAST;
-assign CG_1_0_router_cluster_weight_data_out_sel= WEIGHT_HOR_MULTICAST;
-assign CG_1_1_router_cluster_weight_data_out_sel= WEIGHT_UNICAST;
+assign CG_router_cluster_weight_data_out_sel[0][0]= WEIGHT_HOR_MULTICAST;
+assign CG_router_cluster_weight_data_out_sel[0][1]= WEIGHT_UNICAST;
+assign CG_router_cluster_weight_data_out_sel[1][0]= WEIGHT_HOR_MULTICAST;
+assign CG_router_cluster_weight_data_out_sel[1][1]= WEIGHT_UNICAST;
           
-assign CG_0_0_router_cluster_psum_data_in_sel	= PSUM_FROM_GLB;
-assign CG_0_1_router_cluster_psum_data_in_sel	= PSUM_FROM_GLB;
-assign CG_1_0_router_cluster_psum_data_in_sel	= PSUM_FROM_GLB;
-assign CG_1_1_router_cluster_psum_data_in_sel	= PSUM_FROM_GLB;
+assign CG_router_cluster_psum_data_in_sel[0][0]	= PSUM_FROM_GLB;
+assign CG_router_cluster_psum_data_in_sel[0][1]	= PSUM_FROM_GLB;
+assign CG_router_cluster_psum_data_in_sel[1][0]	= PSUM_FROM_GLB;
+assign CG_router_cluster_psum_data_in_sel[1][1]	= PSUM_FROM_GLB;
           
-assign CG_0_0_router_cluster_psum_data_out_sel	= PSUM_TO_PE;
-assign CG_0_1_router_cluster_psum_data_out_sel	= PSUM_TO_PE;
-assign CG_1_0_router_cluster_psum_data_out_sel	= PSUM_TO_PE;
-assign CG_1_1_router_cluster_psum_data_out_sel	= PSUM_TO_PE;
+assign CG_router_cluster_psum_data_out_sel[0][0]	= PSUM_TO_PE;
+assign CG_router_cluster_psum_data_out_sel[0][1]	= PSUM_TO_PE;
+assign CG_router_cluster_psum_data_out_sel[1][0]	= PSUM_TO_PE;
+assign CG_router_cluster_psum_data_out_sel[1][1]	= PSUM_TO_PE;
 
 assign CG_0_0_psum_SRAM_Bank_0_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd0);
 assign CG_0_0_psum_SRAM_Bank_1_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd1);

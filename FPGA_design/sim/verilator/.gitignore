@@ -1,0 +1,5 @@
+*.log
+*.iters
+_old_logs/
+obj_dir*/
+*.vcd
