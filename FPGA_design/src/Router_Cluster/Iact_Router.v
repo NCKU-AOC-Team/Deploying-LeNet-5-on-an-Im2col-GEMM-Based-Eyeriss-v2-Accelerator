@@ -58,24 +58,24 @@ module Iact_Router (
 	output 	 	[11:0] 	PE_data_out,
 	
 	input				north_address_out_ready,
-	output 	reg        	north_address_out_valid,
+	output 	        	north_address_out_valid,
 	output 	 	[6:0]  	north_address_out,
 	input				north_data_out_ready,
-	output 	reg        	north_data_out_valid,
+	output 	        	north_data_out_valid,
 	output 	 	[11:0] 	north_data_out,
 	
 	input         		south_address_out_ready,
-	output 	reg        	south_address_out_valid,
+	output 	        	south_address_out_valid,
 	output 	 	[6:0]  	south_address_out,
 	input         		south_data_out_ready,
-	output 	reg        	south_data_out_valid,
+	output 	        	south_data_out_valid,
 	output 	 	[11:0] 	south_data_out,
 	
 	input         		horiz_address_out_ready,
-	output 	reg        	horiz_address_out_valid,
+	output 	        	horiz_address_out_valid,
 	output 	 	[6:0]  	horiz_address_out,
 	input         		horiz_data_out_ready,
-	output	reg	       	horiz_data_out_valid,
+	output		       	horiz_data_out_valid,
 	output 	 	[11:0]	horiz_data_out,
 	
 	// control
@@ -110,22 +110,31 @@ reg  		internal_data_valid;
 reg [6:0] 	internal_address;
 reg [11:0]	internal_data;
 
+wire route_hor_cast_wire  = data_out_sel == HOR_CAST;
+wire route_ver_cast_wire  = data_out_sel == VER_CAST;
+wire route_broadcast_wire = data_out_sel == BROADCAST;
+
+wire select_glb_wire   = data_in_sel == GLB;
+wire select_north_wire = data_in_sel == NORTH;
+wire select_south_wire = data_in_sel == SOUTH;
+wire select_horiz_wire = data_in_sel == HORIZ;
+
 
 // ====================================================================	//
 // 						 		Combination  							//
 // ====================================================================	//
 // output in_ready signals
-assign GLB_address_in_ready 	= (data_in_sel == GLB) 	 & internal_address_ready;
-assign GLB_data_in_ready 		= (data_in_sel == GLB) 	 & internal_data_ready; 
+assign GLB_address_in_ready 	= select_glb_wire 	 & internal_address_ready;
+assign GLB_data_in_ready 		= select_glb_wire 	 & internal_data_ready; 
 														 
-assign north_address_in_ready 	= (data_in_sel == NORTH) & internal_address_ready;
-assign north_data_in_ready 		= (data_in_sel == NORTH) & internal_data_ready;
+assign north_address_in_ready 	= select_north_wire & internal_address_ready;
+assign north_data_in_ready 		= select_north_wire & internal_data_ready;
 														 
-assign south_address_in_ready 	= (data_in_sel == SOUTH) & internal_address_ready;
-assign south_data_in_ready 		= (data_in_sel == SOUTH) & internal_data_ready;
+assign south_address_in_ready 	= select_south_wire & internal_address_ready;
+assign south_data_in_ready 		= select_south_wire & internal_data_ready;
 														 
-assign horiz_address_in_ready	= (data_in_sel == HORIZ) & internal_address_ready;
-assign horiz_data_in_ready 		= (data_in_sel == HORIZ) & internal_data_ready;
+assign horiz_address_in_ready	= select_horiz_wire & internal_address_ready;
+assign horiz_data_in_ready 		= select_horiz_wire & internal_data_ready;
 
 // data and address are always sent to PE
 assign PE_address_out_valid = internal_address_valid;
@@ -141,51 +150,13 @@ assign north_data_out 		= internal_data;
 assign south_data_out 		= internal_data;
 assign horiz_data_out 		= internal_data;
 
-// use vvalid signal to determine routing mode
-always@(*) begin
-	case(data_out_sel)
-		UNICAST : begin
-			north_address_out_valid = 1'b0;
-			south_address_out_valid	= 1'b0;
-			horiz_address_out_valid = 1'b0;
-			north_data_out_valid 	= 1'b0;
-			south_data_out_valid 	= 1'b0;
-			horiz_data_out_valid 	= 1'b0;
-		end	
-		HOR_CAST : begin
-			north_address_out_valid = 1'b0;
-			south_address_out_valid = 1'b0;
-			horiz_address_out_valid = internal_address_valid;
-			north_data_out_valid 	= 1'b0;
-			south_data_out_valid 	= 1'b0;
-			horiz_data_out_valid 	= internal_data_valid;
-		end	
-		VER_CAST : begin
-			north_address_out_valid = internal_address_valid; 
-			south_address_out_valid = internal_address_valid; 
-			horiz_address_out_valid = 1'b0;
-			north_data_out_valid 	= internal_data_valid; 
-			south_data_out_valid 	= internal_data_valid; 
-			horiz_data_out_valid 	= 1'b0;
-		end	
-		BROADCAST : begin
-			north_address_out_valid = internal_address_valid; 
-			south_address_out_valid = internal_address_valid; 
-			horiz_address_out_valid = internal_address_valid;
-			north_data_out_valid 	= internal_data_valid; 
-			south_data_out_valid 	= internal_data_valid; 
-			horiz_data_out_valid 	= internal_data_valid;
-		end	
-		default : begin
-			north_address_out_valid = 'd0;
-			south_address_out_valid = 'd0;
-			horiz_address_out_valid = 'd0;
-			north_data_out_valid 	= 'd0;
-			south_data_out_valid 	= 'd0;
-			horiz_data_out_valid 	= 'd0;
-		end	                        
-	endcase                         
-end
+// use valid signal to determine routing mode
+assign north_address_out_valid = (route_ver_cast_wire | route_broadcast_wire) & internal_address_valid;
+assign south_address_out_valid = (route_ver_cast_wire | route_broadcast_wire) & internal_address_valid;
+assign horiz_address_out_valid = (route_hor_cast_wire | route_broadcast_wire) & internal_address_valid;
+assign north_data_out_valid 	= (route_ver_cast_wire | route_broadcast_wire) & internal_data_valid;
+assign south_data_out_valid 	= (route_ver_cast_wire | route_broadcast_wire) & internal_data_valid;
+assign horiz_data_out_valid 	= (route_hor_cast_wire | route_broadcast_wire) & internal_data_valid;
 
 
 // internal signals

@@ -21,10 +21,23 @@ TOP       := TOP_integration
 
 # PUBLIC_FLAT_RW=1 enables Verilator's --public-flat-rw and uses a separate
 # build directory so the normal fast model and public-flat model do not mix.
+# TRACE=1 enables VCD tracing. Keep normal sim trace-free for faster builds.
+# OCC=1 prints Verilator-only BRAM occupancy counters at simulation final.
 PUBLIC_FLAT_RW ?= 0
 PUBLIC_FLAT_RW_ON := $(filter 1 yes true on,$(PUBLIC_FLAT_RW))
 PUBLIC_FLAT_RW_FLAG := $(if $(PUBLIC_FLAT_RW_ON),--public-flat-rw,)
-BUILD_DIR := $(if $(PUBLIC_FLAT_RW_ON),obj_dir_public,obj_dir)
+TRACE ?= 0
+TRACE_ON := $(filter 1 yes true on,$(TRACE))
+TRACE_FLAG := $(if $(TRACE_ON),--trace,)
+OCC ?= 0
+OCC_ON := $(filter 1 yes true on,$(OCC))
+OCC_FLAG := $(if $(OCC_ON),+define+BRAM_OCCUPANCY,)
+INT4_REGEN ?= 0
+INT4_REGEN_ON := $(filter 1 yes true on,$(INT4_REGEN))
+INT4_REGEN_FLAG := $(if $(INT4_REGEN_ON),+define+INT4_AS_INT8_REGEN,)
+INT4_REQUANT ?= 14_7
+INT4_REQUANT_FLAG := $(if $(INT4_REGEN_ON),+define+INT4_REQUANT_$(INT4_REQUANT),)
+BUILD_DIR := obj_dir$(if $(PUBLIC_FLAT_RW_ON),_public,)$(if $(TRACE_ON),_trace,)$(if $(OCC_ON),_occ,)$(if $(INT4_REGEN_ON),_int4_$(INT4_REQUANT),)
 
 RTL_DIR  := ../../src
 TEST_DIR := ../../test/tb/TOP_test/MEM
@@ -47,14 +60,17 @@ CPP_SRCS   := sim_main.cpp
 
 # LeNet weight ROM: convert Vivado COE to $readmemh format at build time.
 # The behavioral ROM_sparse_weight module reads this on sim start.
-COE_FILE := ../../Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe
+COE_FILE ?= $(if $(INT4_REGEN_ON),../../test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe,../../Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe)
 MEM_FILE := rom_sparse_weight.mem
 
 VFLAGS := --cc --exe --build -j 0 \
           --top-module $(TOP) \
           --Mdir $(BUILD_DIR) \
-          --trace \
+          $(TRACE_FLAG) \
           $(PUBLIC_FLAT_RW_FLAG) \
+          $(OCC_FLAG) \
+          $(INT4_REGEN_FLAG) \
+          $(INT4_REQUANT_FLAG) \
           -Wno-WIDTH -Wno-UNOPTFLAT -Wno-CASEINCOMPLETE \
           -Wno-INITIALDLY -Wno-LATCH -Wno-UNUSED \
           -Wno-MULTIDRIVEN -Wno-BLKANDNBLK \
@@ -65,7 +81,7 @@ ITERS  ?= 5
 DRAM   ?= $(TEST_DIR)/DRAM.txt
 GOLDEN ?= $(TEST_DIR)/GOLDEN.txt
 
-.PHONY: all build build_public sim sim_public trace trace_public clean help
+.PHONY: all build build_public sim sim_public trace run_trace trace_public clean help
 
 all: sim
 
@@ -79,7 +95,7 @@ build_public: ## Build with --public-flat-rw enabled
 
 $(BUILD_DIR)/V$(TOP): $(RTL_SRCS) $(BEHAV_SRCS) $(CPP_SRCS) $(MEM_FILE) Makefile
 	@echo "[verilator] $(words $(RTL_SRCS)) RTL files + $(words $(BEHAV_SRCS)) behavioral + $(words $(CPP_SRCS)) C++"
-	@echo "[mode] PUBLIC_FLAT_RW=$(PUBLIC_FLAT_RW) BUILD_DIR=$(BUILD_DIR)"
+	@echo "[mode] PUBLIC_FLAT_RW=$(PUBLIC_FLAT_RW) TRACE=$(TRACE) BUILD_DIR=$(BUILD_DIR)"
 	$(VERILATOR) $(VFLAGS) $(RTL_SRCS) $(BEHAV_SRCS) $(CPP_SRCS)
 
 # Strip COE header (lines 1-2) and trailing commas/semicolons, leaving one hex
@@ -93,9 +109,12 @@ sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
 	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN)
 
 sim_public: ## Run sim with --public-flat-rw enabled
-	$(MAKE) sim PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN)
+	$(MAKE) sim PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN) OCC=$(OCC)
 
-trace: build ## Same as sim but dumps dump.vcd
+trace: ## Same as sim but dumps dump.vcd
+	$(MAKE) run_trace TRACE=1 PUBLIC_FLAT_RW=$(PUBLIC_FLAT_RW) ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN) OCC=$(OCC)
+
+run_trace: build
 	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) --trace
 	@echo "Waveform: $(CURDIR)/dump.vcd"
 
@@ -103,4 +122,4 @@ trace_public: ## Same as trace, but builds with --public-flat-rw enabled
 	$(MAKE) trace PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN)
 
 clean: ## Remove obj_dir variants, *.vcd, generated .mem
-	rm -rf obj_dir obj_dir_public *.vcd $(MEM_FILE)
+	rm -rf obj_dir obj_dir_trace obj_dir_public obj_dir_public_trace obj_dir_occ obj_dir_trace_occ obj_dir_public_occ obj_dir_public_trace_occ obj_dir_int4* *.vcd $(MEM_FILE)

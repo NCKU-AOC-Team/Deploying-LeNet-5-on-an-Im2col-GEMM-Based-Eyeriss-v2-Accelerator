@@ -15,7 +15,9 @@
 // =============================================================================
 #include "VTOP_integration.h"
 #include <verilated.h>
+#if VM_TRACE
 #include <verilated_vcd_c.h>
+#endif
 
 #include <cstdint>
 #include <cstdlib>
@@ -29,15 +31,25 @@
 namespace {
 
 vluint64_t g_sim_time = 0;
+#if VM_TRACE
 VerilatedVcdC* g_tfp = nullptr;
+#endif
 
 void tick(VTOP_integration* dut) {
     dut->clock = 0;
     dut->eval();
+#if VM_TRACE
     if (g_tfp) g_tfp->dump(g_sim_time++);
+#else
+    ++g_sim_time;
+#endif
     dut->clock = 1;
     dut->eval();
+#if VM_TRACE
     if (g_tfp) g_tfp->dump(g_sim_time++);
+#else
+    ++g_sim_time;
+#endif
 }
 
 // Parse $readmemh-style file: hex tokens separated by whitespace, with //
@@ -107,11 +119,17 @@ int main(int argc, char** argv) {
     auto* dut = new VTOP_integration;
 
     if (trace) {
+#if VM_TRACE
         Verilated::traceEverOn(true);
         g_tfp = new VerilatedVcdC;
         dut->trace(g_tfp, 99);
         g_tfp->open("dump.vcd");
         std::cout << "Tracing -> dump.vcd\n";
+#else
+        std::cerr << "ERROR: this binary was built without trace support; use `make trace`.\n";
+        delete dut;
+        return 2;
+#endif
     }
 
     constexpr int TIMEOUT_CYCLES = 250000;  // per-pattern; original Vivado TB sets per-pattern
@@ -167,7 +185,10 @@ int main(int argc, char** argv) {
     std::cout << "\n=== Summary: " << (iters - errors) << "/" << iters
               << " passed (" << acc << "%) ===\n";
 
+#if VM_TRACE
     if (g_tfp) { g_tfp->close(); delete g_tfp; }
+#endif
+    dut->final();
     delete dut;
     return errors ? 1 : 0;
 }

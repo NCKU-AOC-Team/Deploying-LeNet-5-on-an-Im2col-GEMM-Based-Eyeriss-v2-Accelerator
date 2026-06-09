@@ -13,10 +13,13 @@ Docker（Ubuntu 24.04 + Verilator 5.030）。
 cd FPGA_design/sim/verilator
 make sim                   # normal fast mode: build + 跑 5 張 MNIST 圖
 make sim ITERS=100         # normal fast mode: 跑 100 張
-make trace ITERS=1         # normal fast mode: 跑 1 張並產生 dump.vcd
+make trace ITERS=1         # trace mode: 跑 1 張並產生 dump.vcd
 make trace_public ITERS=1  # public-flat mode: 加 --public-flat-rw 後產生 dump.vcd
 make clean
 ```
+
+`make sim` 預設不編 VCD trace，build 速度較快；只有 `make trace` /
+`make trace_public` 會啟用 Verilator `--trace`。
 
 預期輸出：
 ```
@@ -25,6 +28,53 @@ Iter 1: result=2 golden=2 (xxxx cycles) OK
 ...
 === Summary: 5/5 passed (100%) ===
 ```
+
+## 重構後等價驗證（PR 必跑）
+
+> 用途：修剪重複接線、`generate` 化、port array 化這類**純結構重構**後，證明
+> 「行為跟重構前 byte-for-byte 完全一樣」。這是 **equivalence（行為沒變）**，
+> 不是 correctness（準不準是另一回事）。
+
+### 核心觀念：`baseline.log` 鎖的是「目前的行為」
+
+`baseline.log` 是在 **main** 上跑滿 1000 張、**只留判定行**的輸出，裡面**包含目前
+已知的 62 個 FAIL**（938/1000）。所以「等價」的定義是：這 1000 筆的
+`result / golden / cycles` 全部一字不差 —— **不是**全部 pass。準確率 93.8%→~98%
+的缺口是另一條 TODO（見下方〈與 Vivado 的 accuracy 差距〉一節），別跟等價驗證混在一起。
+
+### 重構 PR：reviewer / 作者跑這個就好
+
+```bash
+cd FPGA_design/sim/verilator
+
+# 在你的重構 branch 上，從乾淨狀態重 build 再跑 1000 張，只留 deterministic 判定行
+make clean && make sim ITERS=1000 2>&1 | grep -E '^(Iter|=== Summary)' > /tmp/after_1000.log
+
+# 跟 repo 裡的 golden 比對：diff 全空才算等價
+diff baseline.log /tmp/after_1000.log && echo "✅ 等價：行為未變" || echo "❌ 行為改變，需 review"
+```
+
+- 約 19 分鐘（首次含 build）。想先 smoke test 用 `ITERS=5` 或 `100`，但**合 PR 前必跑 1000**。
+- **一定要 `make clean`**：否則可能拿 main 舊 build 的 binary 跑你的 branch，驗到的是舊 RTL。
+- `diff` 全空 = 通過；把那行 `=== Summary: 938/1000 ...` 貼進 PR 描述當證據。
+- 結果輸出寫到 `/tmp`，不會污染 repo，也不用加 `.gitignore`。
+- 若你**故意**動了時序但 result 應不變，可只比 result 欄、忽略 cycle 數：
+  ```bash
+  diff <(sed -E 's/ \([0-9]+ cycles\)//' baseline.log) \
+       <(sed -E 's/ \([0-9]+ cycles\)//' /tmp/after_1000.log)
+  ```
+
+### `baseline.log` 什麼時候更新
+
+只有「**故意改功能**」（不是純重構）的 PR 才重生，並在 PR 說明為什麼行為要變：
+
+```bash
+git checkout main && make clean
+make sim ITERS=1000 2>&1 | grep -E '^(Iter|=== Summary)' > baseline.log
+# 連同功能修改一起 commit，reviewer 會審 baseline.log 的 diff
+```
+
+**純重構 PR 不可以動到 `baseline.log`。**
 
 ## 波形檔操作指南
 
@@ -48,8 +98,9 @@ Makefile 提供兩種 Verilator build mode：
 
 | 目標 | Build directory | Verilator flag | 使用時機 |
 |---|---|---|---|
-| `make trace` | `obj_dir` | `--trace` | 一般看波形，速度較快 |
-| `make trace_public` | `obj_dir_public` | `--trace --public-flat-rw` | 需要在 C++ harness 直接讀寫 flattened internal signal 時 |
+| `make sim` | `obj_dir` | 無 `--trace` | 一般快速 regression |
+| `make trace` | `obj_dir_trace` | `--trace` | 一般看波形 |
+| `make trace_public` | `obj_dir_public_trace` | `--trace --public-flat-rw` | 需要在 C++ harness 直接讀寫 flattened internal signal 時 |
 
 `--public-flat-rw` 是讓 Verilator 產生的 C++ model 可以公開讀寫內部訊號。
 它通常會讓 build 或 simulation 變慢，只有要在 `sim_main.cpp` 裡直接觀察或

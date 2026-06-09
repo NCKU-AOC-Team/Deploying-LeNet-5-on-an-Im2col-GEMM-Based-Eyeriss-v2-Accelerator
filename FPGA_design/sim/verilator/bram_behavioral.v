@@ -29,13 +29,32 @@ module bram_sdp #(
 );
     reg [DATA_W-1:0] mem [0:(1<<ADDR_W)-1];
 
+    integer write_count;
+    reg [ADDR_W-1:0] max_write_addr;
+
     always @(posedge clka) begin
-        if (wea) mem[addra] <= dina;
+        if (wea) begin
+            mem[addra] <= dina;
+            write_count <= write_count + 1;
+            if (addra > max_write_addr) max_write_addr <= addra;
+        end
     end
     always @(posedge clkb) begin
         if (rstb) doutb <= {DATA_W{1'b0}};
         else     doutb <= mem[addrb];
     end
+
+    initial begin
+        write_count = 0;
+        max_write_addr = {ADDR_W{1'b0}};
+    end
+
+`ifdef BRAM_OCCUPANCY
+    final begin
+        $display("[occ] %m writes=%0d max_write_addr=%0d depth=%0d width=%0d",
+                 write_count, max_write_addr, (1 << ADDR_W), DATA_W);
+    end
+`endif
 endmodule
 
 // ----------------------------------------------------------------------------
@@ -55,13 +74,32 @@ module bram_sp #(
 );
     reg [DATA_W-1:0] mem [0:(1<<ADDR_W)-1];
 
+    integer write_count;
+    reg [ADDR_W-1:0] max_write_addr;
+
     always @(posedge clka) begin
         if (rsta) douta <= {DATA_W{1'b0}};
         else begin
-            if (wea) mem[addra] <= dina;
+            if (wea) begin
+                mem[addra] <= dina;
+                write_count <= write_count + 1;
+                if (addra > max_write_addr) max_write_addr <= addra;
+            end
             douta <= mem[addra];
         end
     end
+
+    initial begin
+        write_count = 0;
+        max_write_addr = {ADDR_W{1'b0}};
+    end
+
+`ifdef BRAM_OCCUPANCY
+    final begin
+        $display("[occ] %m writes=%0d max_write_addr=%0d depth=%0d width=%0d",
+                 write_count, max_write_addr, (1 << ADDR_W), DATA_W);
+    end
+`endif
 endmodule
 
 // =============================================================================

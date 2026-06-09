@@ -234,10 +234,13 @@ wire later_matrix_read_first_col_wire 		= former_matrix_row_wire == 5'd0;
 
 
 // SPad control
-wire signed [20:0]	product_wire 			= (later_matrix_row_wire == 'd15) ? 'sd0 : (later_matrix_data_wire * former_matrix_data_wire);  // TODO 
+(* use_dsp = "yes" *) wire signed [20:0] product_mul_wire = later_matrix_data_wire * former_matrix_data_wire;
+wire signed [20:0]	product_wire 			= (later_matrix_row_wire == 'd15) ? 'sd0 : product_mul_wire;  // TODO 
 wire signed [20:0] 	psum_load_wire 		 	= Psum_Spad_psum_out;
 wire signed [20:0] 	psum_acc_result_wire 	= psum_load_state ? (psum_load_wire + psum_in) : (psum_load_reg + product_reg);
-wire 		[4:0]  	psum_write_idx_wire  	= later_matrix_row_wire + (former_matrix_col_reg-1) * WEIGHT_MATRIX_ROW; 
+wire 		[3:0]  	former_matrix_col_minus_one_wire = former_matrix_col_reg - 4'd1;
+wire 		[4:0]  	psum_write_base_wire	= {former_matrix_col_minus_one_wire[2:0], 2'b00};
+wire 		[4:0]  	psum_write_idx_wire  	= psum_write_base_wire + later_matrix_row_wire[2:0]; 
 wire				psum_read_fin_wire		= psum_read_idx_reg == PSUM_DEPTH;
 
 

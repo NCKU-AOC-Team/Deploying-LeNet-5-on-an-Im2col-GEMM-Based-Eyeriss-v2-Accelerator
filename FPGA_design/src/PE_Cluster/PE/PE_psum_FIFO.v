@@ -29,7 +29,7 @@ localparam BUFFER_DEPTH = 4;
 // ================================================	//
 // 					 Registers  					//
 // ================================================	//
-reg signed [20:0] buffer [0:BUFFER_DEPTH-1];
+(* ram_style = "distributed" *) reg signed [20:0] buffer [0:BUFFER_DEPTH-1];
 
 reg [1:0] buffer_read_addr;
 reg [1:0] buffer_write_addr;

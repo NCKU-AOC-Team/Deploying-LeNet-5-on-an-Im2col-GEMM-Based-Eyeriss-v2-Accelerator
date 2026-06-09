@@ -31,6 +31,20 @@ wire			[15:0]	ROM_read_addr;	// ~40000
 // weight end addr LUT
 parameter IACT_DATA_END 				= 'd784;
 
+`ifdef INT4_AS_INT8_REGEN
+parameter ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
+parameter ROM_WEIGHT_DATA_1_END 		 = 'd149 	;
+parameter ROM_WEIGHT_ADDR_2_FORMER_END 	 = 'd203 	;
+parameter ROM_WEIGHT_DATA_2_FORMER_END 	 = 'd1300 	;
+parameter ROM_WEIGHT_ADDR_2_LATER_END 	 = 'd1354 	;
+parameter ROM_WEIGHT_DATA_2_LATER_END 	 = 'd2428 	;
+parameter ROM_WEIGHT_ADDR_3_END 		 = 'd10588 	;
+parameter ROM_WEIGHT_DATA_3_END 		 = 'd38449 	;
+parameter ROM_WEIGHT_ADDR_4_END 		 = 'd41095 	;
+parameter ROM_WEIGHT_DATA_4_END 		 = 'd50204 	;
+parameter ROM_WEIGHT_ADDR_5_END 		 = 'd50468 	;
+parameter ROM_WEIGHT_DATA_5_END 		 = 'd51263 	;
+`else
 parameter ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
 parameter ROM_WEIGHT_DATA_1_END 		 = 'd97 	;
 parameter ROM_WEIGHT_ADDR_2_FORMER_END 	 = 'd151 	;
@@ -43,6 +57,7 @@ parameter ROM_WEIGHT_ADDR_4_END 		 = 'd27736 	;
 parameter ROM_WEIGHT_DATA_4_END 		 = 'd32974 	;
 parameter ROM_WEIGHT_ADDR_5_END 		 = 'd33238 	;
 parameter ROM_WEIGHT_DATA_5_END 		 = 'd33722 	;
+`endif
 
 
 TOP_eyeriss # (
