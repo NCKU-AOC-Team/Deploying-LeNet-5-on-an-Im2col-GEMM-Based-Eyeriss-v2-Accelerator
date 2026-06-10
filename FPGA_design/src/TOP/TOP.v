@@ -364,69 +364,9 @@ wire			ctrl_CG_1_0_GLB_weight_2_in_en;
 wire			ctrl_CG_1_1_GLB_weight_0_in_en;
 wire			ctrl_CG_1_1_GLB_weight_1_in_en;
 wire			ctrl_CG_1_1_GLB_weight_2_in_en;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_2_2_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_0_0_PSUM_DEPTH;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_2_2_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_0_1_PSUM_DEPTH;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_2_2_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_1_0_PSUM_DEPTH;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_2_2_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_1_1_PSUM_DEPTH;
 wire  	[4:0]  	ctrl_CSC_encoder_iact_matrix_height;
 wire  	[4:0]  	ctrl_CSC_encoder_iact_matrix_width;
@@ -886,72 +826,24 @@ TOP_controller (
 	.CG_PE_weight_load_en                       (CG_PE_weight_load_en                       ),
 	.CG_cal_fin                                 (CG_cal_fin                                 ),
 	.CG_0_0_PE_disable						(ctrl_CG_0_0_PE_disable						),
-	.CG_0_0_GLB_iact_0_0_read_addr              (ctrl_CG_0_0_GLB_iact_0_0_read_addr             ),
-	.CG_0_0_GLB_iact_0_1_read_addr              (ctrl_CG_0_0_GLB_iact_0_1_read_addr             ),
-	.CG_0_0_GLB_iact_0_2_read_addr              (ctrl_CG_0_0_GLB_iact_0_2_read_addr             ),
-	.CG_0_0_GLB_iact_1_0_read_addr              (ctrl_CG_0_0_GLB_iact_1_0_read_addr             ),
-	.CG_0_0_GLB_iact_1_1_read_addr              (ctrl_CG_0_0_GLB_iact_1_1_read_addr             ),
-	.CG_0_0_GLB_iact_1_2_read_addr              (ctrl_CG_0_0_GLB_iact_1_2_read_addr             ),
-	.CG_0_0_GLB_iact_2_0_read_addr              (ctrl_CG_0_0_GLB_iact_2_0_read_addr             ),
-	.CG_0_0_GLB_iact_2_1_read_addr              (ctrl_CG_0_0_GLB_iact_2_1_read_addr             ),
-	.CG_0_0_GLB_iact_2_2_read_addr              (ctrl_CG_0_0_GLB_iact_2_2_read_addr             ),
-	.CG_0_0_GLB_psum_0_write_addr               (ctrl_CG_0_0_GLB_psum_0_write_addr              ),
-	.CG_0_0_GLB_psum_1_write_addr               (ctrl_CG_0_0_GLB_psum_1_write_addr              ),
-	.CG_0_0_GLB_psum_2_write_addr               (ctrl_CG_0_0_GLB_psum_2_write_addr              ),
-	.CG_0_0_GLB_psum_0_read_addr                (ctrl_CG_0_0_GLB_psum_0_read_addr               ),
-	.CG_0_0_GLB_psum_1_read_addr                (ctrl_CG_0_0_GLB_psum_1_read_addr               ),
-	.CG_0_0_GLB_psum_2_read_addr                (ctrl_CG_0_0_GLB_psum_2_read_addr               ),
+	.CG_0_0_GLB_iact_read_addr                  (CG_0_0_GLB_iact_read_addr                      ),
+	.CG_0_0_GLB_psum_write_addr                 (CG_0_0_GLB_psum_write_addr                     ),
+	.CG_0_0_GLB_psum_read_addr                  (CG_0_0_GLB_psum_read_addr                      ),
 	.CG_0_0_PSUM_DEPTH                          (ctrl_CG_0_0_PSUM_DEPTH                         ),
 	.CG_0_1_PE_disable						(ctrl_CG_0_1_PE_disable						),
-	.CG_0_1_GLB_iact_0_0_read_addr              (ctrl_CG_0_1_GLB_iact_0_0_read_addr             ),
-	.CG_0_1_GLB_iact_0_1_read_addr              (ctrl_CG_0_1_GLB_iact_0_1_read_addr             ),
-	.CG_0_1_GLB_iact_0_2_read_addr              (ctrl_CG_0_1_GLB_iact_0_2_read_addr             ),
-	.CG_0_1_GLB_iact_1_0_read_addr              (ctrl_CG_0_1_GLB_iact_1_0_read_addr             ),
-	.CG_0_1_GLB_iact_1_1_read_addr              (ctrl_CG_0_1_GLB_iact_1_1_read_addr             ),
-	.CG_0_1_GLB_iact_1_2_read_addr              (ctrl_CG_0_1_GLB_iact_1_2_read_addr             ),
-	.CG_0_1_GLB_iact_2_0_read_addr              (ctrl_CG_0_1_GLB_iact_2_0_read_addr             ),
-	.CG_0_1_GLB_iact_2_1_read_addr              (ctrl_CG_0_1_GLB_iact_2_1_read_addr             ),
-	.CG_0_1_GLB_iact_2_2_read_addr              (ctrl_CG_0_1_GLB_iact_2_2_read_addr             ),
-	.CG_0_1_GLB_psum_0_write_addr               (ctrl_CG_0_1_GLB_psum_0_write_addr              ),
-	.CG_0_1_GLB_psum_1_write_addr               (ctrl_CG_0_1_GLB_psum_1_write_addr              ),
-	.CG_0_1_GLB_psum_2_write_addr               (ctrl_CG_0_1_GLB_psum_2_write_addr              ),
-	.CG_0_1_GLB_psum_0_read_addr                (ctrl_CG_0_1_GLB_psum_0_read_addr               ),
-	.CG_0_1_GLB_psum_1_read_addr                (ctrl_CG_0_1_GLB_psum_1_read_addr               ),
-	.CG_0_1_GLB_psum_2_read_addr                (ctrl_CG_0_1_GLB_psum_2_read_addr               ),
+	.CG_0_1_GLB_iact_read_addr                  (CG_0_1_GLB_iact_read_addr                      ),
+	.CG_0_1_GLB_psum_write_addr                 (CG_0_1_GLB_psum_write_addr                     ),
+	.CG_0_1_GLB_psum_read_addr                  (CG_0_1_GLB_psum_read_addr                      ),
 	.CG_0_1_PSUM_DEPTH                          (ctrl_CG_0_1_PSUM_DEPTH                         ),
 	.CG_1_0_PE_disable						(ctrl_CG_1_0_PE_disable						),
-	.CG_1_0_GLB_iact_0_0_read_addr              (ctrl_CG_1_0_GLB_iact_0_0_read_addr             ),
-	.CG_1_0_GLB_iact_0_1_read_addr              (ctrl_CG_1_0_GLB_iact_0_1_read_addr             ),
-	.CG_1_0_GLB_iact_0_2_read_addr              (ctrl_CG_1_0_GLB_iact_0_2_read_addr             ),
-	.CG_1_0_GLB_iact_1_0_read_addr              (ctrl_CG_1_0_GLB_iact_1_0_read_addr             ),
-	.CG_1_0_GLB_iact_1_1_read_addr              (ctrl_CG_1_0_GLB_iact_1_1_read_addr             ),
-	.CG_1_0_GLB_iact_1_2_read_addr              (ctrl_CG_1_0_GLB_iact_1_2_read_addr             ),
-	.CG_1_0_GLB_iact_2_0_read_addr              (ctrl_CG_1_0_GLB_iact_2_0_read_addr             ),
-	.CG_1_0_GLB_iact_2_1_read_addr              (ctrl_CG_1_0_GLB_iact_2_1_read_addr             ),
-	.CG_1_0_GLB_iact_2_2_read_addr              (ctrl_CG_1_0_GLB_iact_2_2_read_addr             ),
-	.CG_1_0_GLB_psum_0_write_addr               (ctrl_CG_1_0_GLB_psum_0_write_addr              ),
-	.CG_1_0_GLB_psum_1_write_addr               (ctrl_CG_1_0_GLB_psum_1_write_addr              ),
-	.CG_1_0_GLB_psum_2_write_addr               (ctrl_CG_1_0_GLB_psum_2_write_addr              ),
-	.CG_1_0_GLB_psum_0_read_addr                (ctrl_CG_1_0_GLB_psum_0_read_addr               ),
-	.CG_1_0_GLB_psum_1_read_addr                (ctrl_CG_1_0_GLB_psum_1_read_addr               ),
-	.CG_1_0_GLB_psum_2_read_addr                (ctrl_CG_1_0_GLB_psum_2_read_addr               ),
+	.CG_1_0_GLB_iact_read_addr                  (CG_1_0_GLB_iact_read_addr                      ),
+	.CG_1_0_GLB_psum_write_addr                 (CG_1_0_GLB_psum_write_addr                     ),
+	.CG_1_0_GLB_psum_read_addr                  (CG_1_0_GLB_psum_read_addr                      ),
 	.CG_1_0_PSUM_DEPTH                          (ctrl_CG_1_0_PSUM_DEPTH                         ),
 	.CG_1_1_PE_disable						(ctrl_CG_1_1_PE_disable						),
-	.CG_1_1_GLB_iact_0_0_read_addr              (ctrl_CG_1_1_GLB_iact_0_0_read_addr             ),
-	.CG_1_1_GLB_iact_0_1_read_addr              (ctrl_CG_1_1_GLB_iact_0_1_read_addr             ),
-	.CG_1_1_GLB_iact_0_2_read_addr              (ctrl_CG_1_1_GLB_iact_0_2_read_addr             ),
-	.CG_1_1_GLB_iact_1_0_read_addr              (ctrl_CG_1_1_GLB_iact_1_0_read_addr             ),
-	.CG_1_1_GLB_iact_1_1_read_addr              (ctrl_CG_1_1_GLB_iact_1_1_read_addr             ),
-	.CG_1_1_GLB_iact_1_2_read_addr              (ctrl_CG_1_1_GLB_iact_1_2_read_addr             ),
-	.CG_1_1_GLB_iact_2_0_read_addr              (ctrl_CG_1_1_GLB_iact_2_0_read_addr             ),
-	.CG_1_1_GLB_iact_2_1_read_addr              (ctrl_CG_1_1_GLB_iact_2_1_read_addr             ),
-	.CG_1_1_GLB_iact_2_2_read_addr              (ctrl_CG_1_1_GLB_iact_2_2_read_addr             ),
-	.CG_1_1_GLB_psum_0_write_addr               (ctrl_CG_1_1_GLB_psum_0_write_addr              ),
-	.CG_1_1_GLB_psum_1_write_addr               (ctrl_CG_1_1_GLB_psum_1_write_addr              ),
-	.CG_1_1_GLB_psum_2_write_addr               (ctrl_CG_1_1_GLB_psum_2_write_addr              ),
-	.CG_1_1_GLB_psum_0_read_addr                (ctrl_CG_1_1_GLB_psum_0_read_addr               ),
-	.CG_1_1_GLB_psum_1_read_addr                (ctrl_CG_1_1_GLB_psum_1_read_addr               ),
-	.CG_1_1_GLB_psum_2_read_addr                (ctrl_CG_1_1_GLB_psum_2_read_addr               ),
+	.CG_1_1_GLB_iact_read_addr                  (CG_1_1_GLB_iact_read_addr                      ),
+	.CG_1_1_GLB_psum_write_addr                 (CG_1_1_GLB_psum_write_addr                     ),
+	.CG_1_1_GLB_psum_read_addr                  (CG_1_1_GLB_psum_read_addr                      ),
 	.CG_1_1_PSUM_DEPTH                          (ctrl_CG_1_1_PSUM_DEPTH                         ),
 	.CSC_encoder_iact_matrix_height				(ctrl_CSC_encoder_iact_matrix_height            ),
 	.CSC_encoder_iact_matrix_width				(ctrl_CSC_encoder_iact_matrix_width     		),
@@ -978,21 +870,6 @@ TOP_controller (
 	
 assign	psum_acc_fin 									= ctrl_psum_acc_fin;
 
-assign	CG_0_0_GLB_iact_read_addr[0][0]              		= ctrl_CG_0_0_GLB_iact_0_0_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[0][1]                   = ctrl_CG_0_0_GLB_iact_0_1_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[0][2]                   = ctrl_CG_0_0_GLB_iact_0_2_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[1][0]                   = ctrl_CG_0_0_GLB_iact_1_0_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[1][1]                   = ctrl_CG_0_0_GLB_iact_1_1_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[1][2]                   = ctrl_CG_0_0_GLB_iact_1_2_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[2][0]                   = ctrl_CG_0_0_GLB_iact_2_0_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[2][1]                   = ctrl_CG_0_0_GLB_iact_2_1_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[2][2]                   = ctrl_CG_0_0_GLB_iact_2_2_read_addr;            
-assign	CG_0_0_GLB_psum_write_addr[0]                    = ctrl_CG_0_0_GLB_psum_0_write_addr;              
-assign	CG_0_0_GLB_psum_write_addr[1]                    = ctrl_CG_0_0_GLB_psum_1_write_addr;              
-assign	CG_0_0_GLB_psum_write_addr[2]                    = ctrl_CG_0_0_GLB_psum_2_write_addr;              
-assign	CG_0_0_GLB_psum_read_addr[0]                     = ctrl_CG_0_0_GLB_psum_0_read_addr;               
-assign	CG_0_0_GLB_psum_read_addr[1]                     = ctrl_CG_0_0_GLB_psum_1_read_addr;               
-assign	CG_0_0_GLB_psum_read_addr[2]                     = ctrl_CG_0_0_GLB_psum_2_read_addr;               
 assign	CG_0_0_GLB_iact_address_in_valid[0][0]            = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
 assign	CG_0_0_GLB_iact_address_in[0][0]                  = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
 assign	CG_0_0_GLB_iact_data_in_valid[0][0]               = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
@@ -1053,21 +930,6 @@ assign	CG_0_0_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_0_0_PSUM_DEPTH                               = ctrl_CG_0_0_PSUM_DEPTH;
 
 
-assign	CG_0_1_GLB_iact_read_addr[0][0]              		= ctrl_CG_0_1_GLB_iact_0_0_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[0][1]                   = ctrl_CG_0_1_GLB_iact_0_1_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[0][2]                   = ctrl_CG_0_1_GLB_iact_0_2_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[1][0]                   = ctrl_CG_0_1_GLB_iact_1_0_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[1][1]                   = ctrl_CG_0_1_GLB_iact_1_1_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[1][2]                   = ctrl_CG_0_1_GLB_iact_1_2_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[2][0]                   = ctrl_CG_0_1_GLB_iact_2_0_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[2][1]                   = ctrl_CG_0_1_GLB_iact_2_1_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[2][2]                   = ctrl_CG_0_1_GLB_iact_2_2_read_addr;            
-assign	CG_0_1_GLB_psum_write_addr[0]                    = ctrl_CG_0_1_GLB_psum_0_write_addr;              
-assign	CG_0_1_GLB_psum_write_addr[1]                    = ctrl_CG_0_1_GLB_psum_1_write_addr;              
-assign	CG_0_1_GLB_psum_write_addr[2]                    = ctrl_CG_0_1_GLB_psum_2_write_addr;              
-assign	CG_0_1_GLB_psum_read_addr[0]                     = ctrl_CG_0_1_GLB_psum_0_read_addr;               
-assign	CG_0_1_GLB_psum_read_addr[1]                     = ctrl_CG_0_1_GLB_psum_1_read_addr;               
-assign	CG_0_1_GLB_psum_read_addr[2]                     = ctrl_CG_0_1_GLB_psum_2_read_addr;               
 assign	CG_0_1_GLB_iact_address_in_valid[0][0]            = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
 assign	CG_0_1_GLB_iact_address_in[0][0]                  = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
 assign	CG_0_1_GLB_iact_data_in_valid[0][0]               = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
@@ -1128,21 +990,6 @@ assign	CG_0_1_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_0_1_PSUM_DEPTH                               = ctrl_CG_0_1_PSUM_DEPTH;
 
 
-assign	CG_1_0_GLB_iact_read_addr[0][0]              		= ctrl_CG_1_0_GLB_iact_0_0_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[0][1]                   = ctrl_CG_1_0_GLB_iact_0_1_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[0][2]                   = ctrl_CG_1_0_GLB_iact_0_2_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[1][0]                   = ctrl_CG_1_0_GLB_iact_1_0_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[1][1]                   = ctrl_CG_1_0_GLB_iact_1_1_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[1][2]                   = ctrl_CG_1_0_GLB_iact_1_2_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[2][0]                   = ctrl_CG_1_0_GLB_iact_2_0_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[2][1]                   = ctrl_CG_1_0_GLB_iact_2_1_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[2][2]                   = ctrl_CG_1_0_GLB_iact_2_2_read_addr;            
-assign	CG_1_0_GLB_psum_write_addr[0]                    = ctrl_CG_1_0_GLB_psum_0_write_addr;              
-assign	CG_1_0_GLB_psum_write_addr[1]                    = ctrl_CG_1_0_GLB_psum_1_write_addr;              
-assign	CG_1_0_GLB_psum_write_addr[2]                    = ctrl_CG_1_0_GLB_psum_2_write_addr;              
-assign	CG_1_0_GLB_psum_read_addr[0]                     = ctrl_CG_1_0_GLB_psum_0_read_addr;               
-assign	CG_1_0_GLB_psum_read_addr[1]                     = ctrl_CG_1_0_GLB_psum_1_read_addr;               
-assign	CG_1_0_GLB_psum_read_addr[2]                     = ctrl_CG_1_0_GLB_psum_2_read_addr;               
 assign	CG_1_0_GLB_iact_address_in_valid[0][0]            = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
 assign	CG_1_0_GLB_iact_address_in[0][0]                  = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
 assign	CG_1_0_GLB_iact_data_in_valid[0][0]               = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
@@ -1203,21 +1050,6 @@ assign	CG_1_0_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_1_0_PSUM_DEPTH                               = ctrl_CG_1_0_PSUM_DEPTH;
 
 
-assign	CG_1_1_GLB_iact_read_addr[0][0]              		= ctrl_CG_1_1_GLB_iact_0_0_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[0][1]                   = ctrl_CG_1_1_GLB_iact_0_1_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[0][2]                   = ctrl_CG_1_1_GLB_iact_0_2_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[1][0]                   = ctrl_CG_1_1_GLB_iact_1_0_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[1][1]                   = ctrl_CG_1_1_GLB_iact_1_1_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[1][2]                   = ctrl_CG_1_1_GLB_iact_1_2_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[2][0]                   = ctrl_CG_1_1_GLB_iact_2_0_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[2][1]                   = ctrl_CG_1_1_GLB_iact_2_1_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[2][2]                   = ctrl_CG_1_1_GLB_iact_2_2_read_addr;            
-assign	CG_1_1_GLB_psum_write_addr[0]                    = ctrl_CG_1_1_GLB_psum_0_write_addr;              
-assign	CG_1_1_GLB_psum_write_addr[1]                    = ctrl_CG_1_1_GLB_psum_1_write_addr;              
-assign	CG_1_1_GLB_psum_write_addr[2]                    = ctrl_CG_1_1_GLB_psum_2_write_addr;              
-assign	CG_1_1_GLB_psum_read_addr[0]                     = ctrl_CG_1_1_GLB_psum_0_read_addr;               
-assign	CG_1_1_GLB_psum_read_addr[1]                     = ctrl_CG_1_1_GLB_psum_1_read_addr;               
-assign	CG_1_1_GLB_psum_read_addr[2]                     = ctrl_CG_1_1_GLB_psum_2_read_addr;               
 assign	CG_1_1_GLB_iact_address_in_valid[0][0]            = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
 assign	CG_1_1_GLB_iact_address_in[0][0]                  = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
 assign	CG_1_1_GLB_iact_data_in_valid[0][0]               = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;

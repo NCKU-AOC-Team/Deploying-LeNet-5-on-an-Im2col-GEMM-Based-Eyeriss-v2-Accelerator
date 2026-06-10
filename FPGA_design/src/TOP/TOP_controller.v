@@ -130,22 +130,10 @@ module TOP_controller # (
 	
 	output				CG_0_0_PE_disable [0:2][0:2],
 		
-	output		[9:0]	CG_0_0_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
 		
-	output	reg	[9:0]	CG_0_0_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_0_0_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_0_0_GLB_psum_2_write_addr,
-	output		[9:0]	CG_0_0_GLB_psum_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_psum_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_0_0_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_0_0_GLB_psum_read_addr [0:2],
 		   
 	output		[4:0]	CG_0_0_PSUM_DEPTH,
 				
@@ -156,22 +144,10 @@ module TOP_controller # (
 	
 	output				CG_0_1_PE_disable [0:2][0:2],
 							 
-	output		[9:0]	CG_0_1_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
 							
-	output	reg	[9:0]	CG_0_1_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_0_1_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_0_1_GLB_psum_2_write_addr,
-	output		[9:0]	CG_0_1_GLB_psum_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_psum_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_0_1_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_0_1_GLB_psum_read_addr [0:2],
 							
 	output		[4:0]	CG_0_1_PSUM_DEPTH,
 							
@@ -183,22 +159,10 @@ module TOP_controller # (
 	
 	output				CG_1_0_PE_disable [0:2][0:2],
 						
-	output		[9:0]	CG_1_0_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
 						
-	output	reg	[9:0]	CG_1_0_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_1_0_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_1_0_GLB_psum_2_write_addr,
-	output		[9:0]	CG_1_0_GLB_psum_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_psum_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_1_0_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_1_0_GLB_psum_read_addr [0:2],
 						
 	output		[4:0]	CG_1_0_PSUM_DEPTH,
 						
@@ -209,22 +173,10 @@ module TOP_controller # (
 	
 	output				CG_1_1_PE_disable [0:2][0:2],
 							
-	output		[9:0]	CG_1_1_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
 							
-	output	reg	[9:0]	CG_1_1_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_1_1_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_1_1_GLB_psum_2_write_addr,
-	output		[9:0]	CG_1_1_GLB_psum_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_psum_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_1_1_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_1_1_GLB_psum_read_addr [0:2],
 							
 	output		[4:0]	CG_1_1_PSUM_DEPTH,
 							
@@ -568,7 +520,7 @@ assign fc_flag						= 	layer2_flag | layer3_flag | layer4_flag;
 assign 	layer_iter_fin_pulse 		= 	layer_iter_fin 	& (~layer_iter_fin_reg);
 
 // state machine control
-assign	ifmap_load_fin				= 	MEM_read_addr >= 'd783 & CG_0_0_GLB_psum_0_write_addr < 'd289;
+assign	ifmap_load_fin				= 	MEM_read_addr >= 'd783 & CG_0_0_GLB_psum_write_addr[0] < 'd289;
 assign	all_GLB_load_en 			= 	(CG_GLB_iact_load_en[0][0] | CG_GLB_iact_load_en[0][1] | CG_GLB_iact_load_en[1][0] | CG_GLB_iact_load_en[1][1]) & (~load_PE_start);
 assign	all_PE_weight_load_en 		= 	CG_PE_weight_load_en[0][0]| CG_PE_weight_load_en[0][1] | CG_PE_weight_load_en[1][0]| CG_PE_weight_load_en[1][1];
 assign	all_cal_fin					= 	CG_cal_fin[0][0] & CG_cal_fin[0][1] & CG_cal_fin[1][0] & CG_cal_fin[1][1];
@@ -601,11 +553,11 @@ assign 	psum_rearrange_write_en 	= 	(LAYER_LOAD_IFMAP_wire) 	|
 										(LAYER4_READ_OUT_PSUM_reg)	| 
 										(LAYER_POOLING_wire & ~pool_pulse & ~pool_pulse_reg & ~pool_col_done & ~pool_row_done); 
 
-assign	psum_acc_fin				= 	(CG_0_0_GLB_psum_0_write_addr % 'd24 == 'd23 & layer0_flag)	| 
-										(CG_0_0_GLB_psum_0_write_addr % 'd32 == 'd31 & layer1_flag) | 
-										(CG_0_0_GLB_psum_0_write_addr % 'd4  == 'd3  & layer2_flag) | 
-										(CG_0_0_GLB_psum_0_write_addr % 'd4  == 'd3  & layer3_flag) | 
-										(CG_0_0_GLB_psum_0_write_addr % 'd4  == 'd3  & layer4_flag) | CG_0_0_GLB_psum_0_write_addr == 'd289;	// need to be optimized
+assign	psum_acc_fin				= 	(CG_0_0_GLB_psum_write_addr[0] % 'd24 == 'd23 & layer0_flag)	| 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd32 == 'd31 & layer1_flag) | 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd4  == 'd3  & layer2_flag) | 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd4  == 'd3  & layer3_flag) | 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd4  == 'd3  & layer4_flag) | CG_0_0_GLB_psum_write_addr[0] == 'd289;	// need to be optimized
 
 
 // pool control
@@ -706,42 +658,42 @@ wire GLB_iact_en_sel_10	= GLB_iact_en_sel == 'd10;
 wire GLB_iact_en_sel_11	= GLB_iact_en_sel == 'd11;
 
 
-assign CG_0_0_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
 
 assign CG_0_0_GLB_iact_0_0_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_0);
 assign CG_0_0_GLB_iact_0_1_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_1);
@@ -892,19 +844,19 @@ assign ReLU_en		=	(LAYER_READ_OUT_PSUM_wire & conv_flag) | fc_flag;
 assign pool_enable	=	LAYER_POOLING_wire & ~pool_pulse;
 assign softmax_en	= 	LAYER4_READ_OUT_PSUM_reg;
 
-assign	CG_0_0_GLB_psum_0_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd0) ? (CG_0_0_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_0_GLB_psum_1_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd1) ? (CG_0_0_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_0_GLB_psum_2_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd2) ? (CG_0_0_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_1_GLB_psum_0_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd3) ? (CG_0_1_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_1_GLB_psum_1_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd4) ? (CG_0_1_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_1_GLB_psum_2_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd5) ? (CG_0_1_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_0_GLB_psum_read_addr[0] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd0) ? (CG_0_0_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_0_GLB_psum_read_addr[1] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd1) ? (CG_0_0_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_0_GLB_psum_read_addr[2] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd2) ? (CG_0_0_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_1_GLB_psum_read_addr[0] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd3) ? (CG_0_1_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_1_GLB_psum_read_addr[1] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd4) ? (CG_0_1_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_1_GLB_psum_read_addr[2] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd5) ? (CG_0_1_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
 
-assign	CG_1_0_GLB_psum_0_read_addr = CG_1_0_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_0_GLB_psum_1_read_addr = CG_1_0_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_0_GLB_psum_2_read_addr = CG_1_0_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_1_GLB_psum_0_read_addr = CG_1_1_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_1_GLB_psum_1_read_addr = CG_1_1_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_1_GLB_psum_2_read_addr = CG_1_1_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_0_GLB_psum_read_addr[0] = CG_1_0_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_0_GLB_psum_read_addr[1] = CG_1_0_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_0_GLB_psum_read_addr[2] = CG_1_0_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_1_GLB_psum_read_addr[0] = CG_1_1_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_1_GLB_psum_read_addr[1] = CG_1_1_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_1_GLB_psum_read_addr[2] = CG_1_1_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
 
 
 // next state logic
@@ -1686,46 +1638,46 @@ end
 
 always@(posedge clock) begin
 	if(reset) begin
-		CG_0_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_2_write_addr	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[2]	<= 'd0;
 	end
 	else if(LAYER_PSUM_ACC_wire) begin
-		CG_0_0_GLB_psum_0_write_addr	<= CG_0_0_GLB_psum_0_write_addr	+ 'd1;
-		CG_0_0_GLB_psum_1_write_addr	<= CG_0_0_GLB_psum_1_write_addr + 'd1;
-		CG_0_0_GLB_psum_2_write_addr	<= CG_0_0_GLB_psum_2_write_addr + 'd1;
-		CG_0_1_GLB_psum_0_write_addr	<= CG_0_1_GLB_psum_0_write_addr + 'd1;
-		CG_0_1_GLB_psum_1_write_addr	<= CG_0_1_GLB_psum_1_write_addr + 'd1;
-		CG_0_1_GLB_psum_2_write_addr	<= CG_0_1_GLB_psum_2_write_addr + 'd1;
-		CG_1_0_GLB_psum_0_write_addr	<= CG_1_0_GLB_psum_0_write_addr + 'd1;
-		CG_1_0_GLB_psum_1_write_addr	<= CG_1_0_GLB_psum_1_write_addr + 'd1;
-		CG_1_0_GLB_psum_2_write_addr	<= CG_1_0_GLB_psum_2_write_addr + 'd1;
-		CG_1_1_GLB_psum_0_write_addr	<= CG_1_1_GLB_psum_0_write_addr + 'd1;
-		CG_1_1_GLB_psum_1_write_addr	<= CG_1_1_GLB_psum_1_write_addr + 'd1;
-		CG_1_1_GLB_psum_2_write_addr	<= CG_1_1_GLB_psum_2_write_addr + 'd1;
+		CG_0_0_GLB_psum_write_addr[0]	<= CG_0_0_GLB_psum_write_addr[0]	+ 'd1;
+		CG_0_0_GLB_psum_write_addr[1]	<= CG_0_0_GLB_psum_write_addr[1] + 'd1;
+		CG_0_0_GLB_psum_write_addr[2]	<= CG_0_0_GLB_psum_write_addr[2] + 'd1;
+		CG_0_1_GLB_psum_write_addr[0]	<= CG_0_1_GLB_psum_write_addr[0] + 'd1;
+		CG_0_1_GLB_psum_write_addr[1]	<= CG_0_1_GLB_psum_write_addr[1] + 'd1;
+		CG_0_1_GLB_psum_write_addr[2]	<= CG_0_1_GLB_psum_write_addr[2] + 'd1;
+		CG_1_0_GLB_psum_write_addr[0]	<= CG_1_0_GLB_psum_write_addr[0] + 'd1;
+		CG_1_0_GLB_psum_write_addr[1]	<= CG_1_0_GLB_psum_write_addr[1] + 'd1;
+		CG_1_0_GLB_psum_write_addr[2]	<= CG_1_0_GLB_psum_write_addr[2] + 'd1;
+		CG_1_1_GLB_psum_write_addr[0]	<= CG_1_1_GLB_psum_write_addr[0] + 'd1;
+		CG_1_1_GLB_psum_write_addr[1]	<= CG_1_1_GLB_psum_write_addr[1] + 'd1;
+		CG_1_1_GLB_psum_write_addr[2]	<= CG_1_1_GLB_psum_write_addr[2] + 'd1;
 	end
 	else if(LAYER_DONE_wire | (fc_weight_read_batch == 'd4 & psum_acc_pulse)) begin
-		CG_0_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_2_write_addr	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[2]	<= 'd0;
 	end
 end
 
