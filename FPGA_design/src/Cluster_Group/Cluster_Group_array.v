@@ -15,22 +15,25 @@ module ClusterGroup_array(
 	input		CG_router_cluster_weight_data_out_sel [0:1][0:1],
 	input		CG_router_cluster_psum_data_in_sel [0:1][0:1],
 	input		CG_router_cluster_psum_data_out_sel [0:1][0:1],
+	input			CG_src_GLB_load_fin [0:1][0:1],
+	input			CG_cg_en [0:1][0:1],
+	input			CG_read_psum_en [0:1][0:1],
+	input			CG_psum_SRAM_Bank_0_read_out_en [0:1][0:1],
+	input			CG_psum_SRAM_Bank_1_read_out_en [0:1][0:1],
+	input			CG_psum_SRAM_Bank_2_read_out_en [0:1][0:1],
+	input			CG_GLB_psum_write_en [0:1][0:1],
+	input			CG_psum_spad_clear [0:1][0:1],
+	input			CG_iact_write_fin_clear [0:1][0:1],
+	input			CG_weight_write_fin_clear [0:1][0:1],
 						
-	input 			     	CG_0_0_read_psum_en,
 	output			     	CG_0_0_cal_fin,
-	input 			     	CG_0_0_cg_en,
 	output			     	CG_0_0_PE_weight_load_en,
 	output			     	CG_0_0_GLB_iact_load_en,
-	input					CG_0_0_src_GLB_load_fin,
-	input					CG_0_0_psum_SRAM_Bank_0_read_out_en,
-	input					CG_0_0_psum_SRAM_Bank_1_read_out_en,
-	input					CG_0_0_psum_SRAM_Bank_2_read_out_en,
 	
 	input					CG_0_0_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
 				
-	input					CG_0_0_GLB_psum_write_en,
 	input			[9:0]	CG_0_0_GLB_psum_write_addr [0:2],
 	input			[9:0]	CG_0_0_GLB_psum_read_addr [0:2],
 				
@@ -68,30 +71,20 @@ module ClusterGroup_array(
 	output 	signed 	[20:0] 	CG_0_0_GLB_psum_2_data_out,
 	
 	input			[4:0]	CG_0_0_PSUM_DEPTH,
-	input					CG_0_0_psum_spad_clear,
 							
-	input					CG_0_0_iact_write_fin_clear,
-	input					CG_0_0_weight_write_fin_clear,
 	
 	
 	// -------------------- CG_0_1 -------------------- //
 								 
 								 
-	input 			     	CG_0_1_read_psum_en,
 	output			     	CG_0_1_cal_fin,
-	input 			     	CG_0_1_cg_en,
 	output			     	CG_0_1_PE_weight_load_en,
 	output			     	CG_0_1_GLB_iact_load_en,
-	input					CG_0_1_src_GLB_load_fin,
-	input					CG_0_1_psum_SRAM_Bank_0_read_out_en,
-	input					CG_0_1_psum_SRAM_Bank_1_read_out_en,
-	input					CG_0_1_psum_SRAM_Bank_2_read_out_en,
 	
 	input					CG_0_1_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
 	
-	input					CG_0_1_GLB_psum_write_en,
 	input			[9:0]	CG_0_1_GLB_psum_write_addr [0:2],
 	input			[9:0]	CG_0_1_GLB_psum_read_addr [0:2],
 								 
@@ -129,29 +122,19 @@ module ClusterGroup_array(
 	output 	signed 	[20:0] 	CG_0_1_GLB_psum_2_data_out,
 								 
 	input			[4:0]	CG_0_1_PSUM_DEPTH,
-	input					CG_0_1_psum_spad_clear,
 								 
-	input					CG_0_1_iact_write_fin_clear,
-	input					CG_0_1_weight_write_fin_clear,
 	
 	// -------------------- CG_1_0 -------------------- //
 							   
 							   
-	input 			     	CG_1_0_read_psum_en,
 	output			     	CG_1_0_cal_fin,
-	input 			     	CG_1_0_cg_en,
 	output			     	CG_1_0_PE_weight_load_en,
 	output			     	CG_1_0_GLB_iact_load_en,
-	input					CG_1_0_src_GLB_load_fin,
-	input					CG_1_0_psum_SRAM_Bank_0_read_out_en,
-	input					CG_1_0_psum_SRAM_Bank_1_read_out_en,
-	input					CG_1_0_psum_SRAM_Bank_2_read_out_en,
 	
 	input					CG_1_0_PE_disable [0:2][0:2],
 							   
 	input			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
 	
-	input					CG_1_0_GLB_psum_write_en,
 	input			[9:0]	CG_1_0_GLB_psum_write_addr [0:2],
 	input			[9:0]	CG_1_0_GLB_psum_read_addr [0:2],
 							   
@@ -189,30 +172,20 @@ module ClusterGroup_array(
 	output 	signed 	[20:0] 	CG_1_0_GLB_psum_2_data_out,
 							   
 	input			[4:0]	CG_1_0_PSUM_DEPTH,
-	input					CG_1_0_psum_spad_clear,
 							   
-	input					CG_1_0_iact_write_fin_clear,
-	input					CG_1_0_weight_write_fin_clear,
 							   
 							   
 	// -------------------- CG_1_1 -------------------- //
 								
 
-	input 			     	CG_1_1_read_psum_en,
 	output			     	CG_1_1_cal_fin,
-	input 			     	CG_1_1_cg_en,
 	output			     	CG_1_1_PE_weight_load_en,
 	output			     	CG_1_1_GLB_iact_load_en,
-	input					CG_1_1_src_GLB_load_fin,
-	input					CG_1_1_psum_SRAM_Bank_0_read_out_en,
-	input					CG_1_1_psum_SRAM_Bank_1_read_out_en,
-	input					CG_1_1_psum_SRAM_Bank_2_read_out_en,
 	
 	input					CG_1_1_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
 	
-	input					CG_1_1_GLB_psum_write_en,
 	input			[9:0]	CG_1_1_GLB_psum_write_addr [0:2],
 	input			[9:0]	CG_1_1_GLB_psum_read_addr [0:2],
 								
@@ -249,11 +222,8 @@ module ClusterGroup_array(
 	output        			CG_1_1_GLB_psum_2_data_out_valid,
 	output 	signed 	[20:0] 	CG_1_1_GLB_psum_2_data_out,
 								
-	input			[4:0]	CG_1_1_PSUM_DEPTH,
-	input					CG_1_1_psum_spad_clear,
+	input			[4:0]	CG_1_1_PSUM_DEPTH
 								
-	input					CG_1_1_iact_write_fin_clear,
-	input					CG_1_1_weight_write_fin_clear
 	
 );
 
@@ -1910,19 +1880,19 @@ ClusterGroup ClusterGroup_0_0 (
 	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[0][0]         ),
 	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[0][0]        ),
 							                    
-	.read_psum_en                               (CG_0_0_read_psum_en                            ),
+	.read_psum_en                               (CG_read_psum_en[0][0]                            ),
 	.cal_fin                                    (CG_0_0_cal_fin                                 ),
-	.cg_en                                      (CG_0_0_cg_en                                   ),
+	.cg_en                                      (CG_cg_en[0][0]                                   ),
 	.PE_weight_load_en                          (CG_0_0_PE_weight_load_en                       ),
 	.GLB_iact_load_en                           (CG_0_0_GLB_iact_load_en                        ),
-	.src_GLB_load_fin							(CG_0_0_src_GLB_load_fin						),
+	.src_GLB_load_fin							(CG_src_GLB_load_fin[0][0]						),
 	.all_cal_fin								(CG_0_0_all_cal_fin								),
 	.psum_acc_en								(CG_0_0_psum_acc_en								),
 	.psum_acc_fin								(CG_0_0_psum_acc_fin							),
-	.GLB_psum_write_en							(CG_0_0_GLB_psum_write_en						),
-	.psum_SRAM_Bank_0_read_out_en				(CG_0_0_psum_SRAM_Bank_0_read_out_en			),
-	.psum_SRAM_Bank_1_read_out_en				(CG_0_0_psum_SRAM_Bank_1_read_out_en			),
-	.psum_SRAM_Bank_2_read_out_en				(CG_0_0_psum_SRAM_Bank_2_read_out_en			),
+	.GLB_psum_write_en							(CG_GLB_psum_write_en[0][0]						),
+	.psum_SRAM_Bank_0_read_out_en				(CG_psum_SRAM_Bank_0_read_out_en[0][0]			),
+	.psum_SRAM_Bank_1_read_out_en				(CG_psum_SRAM_Bank_1_read_out_en[0][0]			),
+	.psum_SRAM_Bank_2_read_out_en				(CG_psum_SRAM_Bank_2_read_out_en[0][0]			),
 	
 	.PE_disable(CG_0_0_PE_disable),
 			                   
@@ -2365,10 +2335,10 @@ ClusterGroup ClusterGroup_0_0 (
 	.cg_north_psum_2_out                        (CG_0_0_cg_north_psum_2_out                     ),
 									         
 	.PSUM_DEPTH                                 (CG_0_0_PSUM_DEPTH                              ),
-	.psum_spad_clear                            (CG_0_0_psum_spad_clear                         ),
+	.psum_spad_clear                            (CG_psum_spad_clear[0][0]                         ),
 											
-	.iact_write_fin_clear                       (CG_0_0_iact_write_fin_clear                	),
-	.weight_write_fin_clear						(CG_0_0_weight_write_fin_clear					)
+	.iact_write_fin_clear                       (CG_iact_write_fin_clear[0][0]                	),
+	.weight_write_fin_clear						(CG_weight_write_fin_clear[0][0]					)
 );
 
 
@@ -2388,19 +2358,19 @@ ClusterGroup ClusterGroup_0_1 (
 	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[0][1]         ),
 	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[0][1]        ),
 							                    
-	.read_psum_en                               (CG_0_1_read_psum_en                            ),
+	.read_psum_en                               (CG_read_psum_en[0][1]                            ),
 	.cal_fin                                    (CG_0_1_cal_fin                                 ),
-	.cg_en                                      (CG_0_1_cg_en                                   ),
+	.cg_en                                      (CG_cg_en[0][1]                                   ),
 	.PE_weight_load_en                          (CG_0_1_PE_weight_load_en                       ),
 	.GLB_iact_load_en                           (CG_0_1_GLB_iact_load_en                        ),
-	.src_GLB_load_fin							(CG_0_1_src_GLB_load_fin						),
+	.src_GLB_load_fin							(CG_src_GLB_load_fin[0][1]						),
 	.all_cal_fin								(CG_0_1_all_cal_fin								),
 	.psum_acc_en								(CG_0_1_psum_acc_en								),
 	.psum_acc_fin								(CG_0_1_psum_acc_fin							),
-	.GLB_psum_write_en							(CG_0_1_GLB_psum_write_en						),
-	.psum_SRAM_Bank_0_read_out_en				(CG_0_1_psum_SRAM_Bank_0_read_out_en			),
-	.psum_SRAM_Bank_1_read_out_en				(CG_0_1_psum_SRAM_Bank_1_read_out_en			),
-	.psum_SRAM_Bank_2_read_out_en				(CG_0_1_psum_SRAM_Bank_2_read_out_en			),
+	.GLB_psum_write_en							(CG_GLB_psum_write_en[0][1]						),
+	.psum_SRAM_Bank_0_read_out_en				(CG_psum_SRAM_Bank_0_read_out_en[0][1]			),
+	.psum_SRAM_Bank_1_read_out_en				(CG_psum_SRAM_Bank_1_read_out_en[0][1]			),
+	.psum_SRAM_Bank_2_read_out_en				(CG_psum_SRAM_Bank_2_read_out_en[0][1]			),
 	
 	.PE_disable(CG_0_1_PE_disable),
 							                   
@@ -2843,10 +2813,10 @@ ClusterGroup ClusterGroup_0_1 (
 	.cg_north_psum_2_out                        (CG_0_1_cg_north_psum_2_out                     ),
 									         
 	.PSUM_DEPTH                                 (CG_0_1_PSUM_DEPTH                              ),
-	.psum_spad_clear                            (CG_0_1_psum_spad_clear                         ),
+	.psum_spad_clear                            (CG_psum_spad_clear[0][1]                         ),
 											
-	.iact_write_fin_clear                       (CG_0_1_iact_write_fin_clear                	),
-	.weight_write_fin_clear						(CG_0_1_weight_write_fin_clear					)
+	.iact_write_fin_clear                       (CG_iact_write_fin_clear[0][1]                	),
+	.weight_write_fin_clear						(CG_weight_write_fin_clear[0][1]					)
 );
 
 
@@ -2866,19 +2836,19 @@ ClusterGroup ClusterGroup_1_0 (
 	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[1][0]         ),
 	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[1][0]        ),
 							                    
-	.read_psum_en                               (CG_1_0_read_psum_en                            ),
+	.read_psum_en                               (CG_read_psum_en[1][0]                            ),
 	.cal_fin                                    (CG_1_0_cal_fin                                 ),
-	.cg_en                                      (CG_1_0_cg_en                                   ),
+	.cg_en                                      (CG_cg_en[1][0]                                   ),
 	.PE_weight_load_en                          (CG_1_0_PE_weight_load_en                       ),
 	.GLB_iact_load_en                           (CG_1_0_GLB_iact_load_en                        ),
-	.src_GLB_load_fin							(CG_1_0_src_GLB_load_fin						),
+	.src_GLB_load_fin							(CG_src_GLB_load_fin[1][0]						),
 	.all_cal_fin								(CG_1_0_all_cal_fin								),
 	.psum_acc_en								(CG_1_0_psum_acc_en								),
 	.psum_acc_fin								(CG_1_0_psum_acc_fin							),
-	.GLB_psum_write_en							(CG_1_0_GLB_psum_write_en						),
-	.psum_SRAM_Bank_0_read_out_en				(CG_1_0_psum_SRAM_Bank_0_read_out_en			),
-	.psum_SRAM_Bank_1_read_out_en				(CG_1_0_psum_SRAM_Bank_1_read_out_en			),
-	.psum_SRAM_Bank_2_read_out_en				(CG_1_0_psum_SRAM_Bank_2_read_out_en			),
+	.GLB_psum_write_en							(CG_GLB_psum_write_en[1][0]						),
+	.psum_SRAM_Bank_0_read_out_en				(CG_psum_SRAM_Bank_0_read_out_en[1][0]			),
+	.psum_SRAM_Bank_1_read_out_en				(CG_psum_SRAM_Bank_1_read_out_en[1][0]			),
+	.psum_SRAM_Bank_2_read_out_en				(CG_psum_SRAM_Bank_2_read_out_en[1][0]			),
 	
 	.PE_disable(CG_1_0_PE_disable),
 							                   
@@ -3321,10 +3291,10 @@ ClusterGroup ClusterGroup_1_0 (
 	.cg_north_psum_2_out                        (CG_1_0_cg_north_psum_2_out                     ),
 									         
 	.PSUM_DEPTH                                 (CG_1_0_PSUM_DEPTH                              ),
-	.psum_spad_clear                            (CG_1_0_psum_spad_clear                         ),
+	.psum_spad_clear                            (CG_psum_spad_clear[1][0]                         ),
 											
-	.iact_write_fin_clear                       (CG_1_0_iact_write_fin_clear                	),
-	.weight_write_fin_clear						(CG_1_0_weight_write_fin_clear					)
+	.iact_write_fin_clear                       (CG_iact_write_fin_clear[1][0]                	),
+	.weight_write_fin_clear						(CG_weight_write_fin_clear[1][0]					)
 );
 
 
@@ -3344,19 +3314,19 @@ ClusterGroup ClusterGroup_1_1 (
 	.router_cluster_psum_data_in_sel            (CG_router_cluster_psum_data_in_sel[1][1]         ),
 	.router_cluster_psum_data_out_sel           (CG_router_cluster_psum_data_out_sel[1][1]        ),
 							                    
-	.read_psum_en                               (CG_1_1_read_psum_en                            ),
+	.read_psum_en                               (CG_read_psum_en[1][1]                            ),
 	.cal_fin                                    (CG_1_1_cal_fin                                 ),
-	.cg_en                                      (CG_1_1_cg_en                                   ),
+	.cg_en                                      (CG_cg_en[1][1]                                   ),
 	.PE_weight_load_en                          (CG_1_1_PE_weight_load_en                       ),
 	.GLB_iact_load_en                           (CG_1_1_GLB_iact_load_en                        ),
-	.src_GLB_load_fin							(CG_1_1_src_GLB_load_fin						),
+	.src_GLB_load_fin							(CG_src_GLB_load_fin[1][1]						),
 	.all_cal_fin								(CG_1_1_all_cal_fin								),
 	.psum_acc_en								(CG_1_1_psum_acc_en								),
 	.psum_acc_fin								(CG_1_1_psum_acc_fin							),
-	.GLB_psum_write_en							(CG_1_1_GLB_psum_write_en						),
-	.psum_SRAM_Bank_0_read_out_en				(CG_1_1_psum_SRAM_Bank_0_read_out_en			),
-	.psum_SRAM_Bank_1_read_out_en				(CG_1_1_psum_SRAM_Bank_1_read_out_en			),
-	.psum_SRAM_Bank_2_read_out_en				(CG_1_1_psum_SRAM_Bank_2_read_out_en			),
+	.GLB_psum_write_en							(CG_GLB_psum_write_en[1][1]						),
+	.psum_SRAM_Bank_0_read_out_en				(CG_psum_SRAM_Bank_0_read_out_en[1][1]			),
+	.psum_SRAM_Bank_1_read_out_en				(CG_psum_SRAM_Bank_1_read_out_en[1][1]			),
+	.psum_SRAM_Bank_2_read_out_en				(CG_psum_SRAM_Bank_2_read_out_en[1][1]			),
 	
 	.PE_disable(CG_1_1_PE_disable),
 							                   
@@ -3799,10 +3769,10 @@ ClusterGroup ClusterGroup_1_1 (
 	.cg_north_psum_2_out                        (CG_1_1_cg_north_psum_2_out                     ),
 									         
 	.PSUM_DEPTH                                 (CG_1_1_PSUM_DEPTH                              ),
-	.psum_spad_clear                            (CG_1_1_psum_spad_clear                         ),
+	.psum_spad_clear                            (CG_psum_spad_clear[1][1]                         ),
 											
-	.iact_write_fin_clear                       (CG_1_1_iact_write_fin_clear                	),
-	.weight_write_fin_clear						(CG_1_1_weight_write_fin_clear					)
+	.iact_write_fin_clear                       (CG_iact_write_fin_clear[1][1]                	),
+	.weight_write_fin_clear						(CG_weight_write_fin_clear[1][1]					)
 );
 
 
