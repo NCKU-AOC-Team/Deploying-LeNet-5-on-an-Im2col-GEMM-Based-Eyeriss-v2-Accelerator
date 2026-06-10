@@ -61,9 +61,9 @@ wire	ctrl_CG_GLB_psum_write_en [0:1][0:1];
 wire	ctrl_CG_psum_spad_clear [0:1][0:1];
 wire	ctrl_CG_iact_write_fin_clear [0:1][0:1];
 wire	ctrl_CG_weight_write_fin_clear [0:1][0:1];
-wire			     	CG_0_0_cal_fin;
-wire			     	CG_0_0_PE_weight_load_en;
-wire			     	CG_0_0_GLB_iact_load_en;
+wire	CG_cal_fin [0:1][0:1];
+wire	CG_PE_weight_load_en [0:1][0:1];
+wire	CG_GLB_iact_load_en [0:1][0:1];
 wire					ctrl_CG_0_0_PE_disable [0:2][0:2];
 wire			[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2];
 wire			[9:0]	CG_0_0_GLB_psum_write_addr [0:2];
@@ -99,9 +99,6 @@ wire         			CG_0_0_GLB_psum_2_data_out_ready;
 wire        			CG_0_0_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_0_0_GLB_psum_2_data_out;
 wire			[4:0]	CG_0_0_PSUM_DEPTH;
-wire			     	CG_0_1_cal_fin;
-wire			     	CG_0_1_PE_weight_load_en;
-wire			     	CG_0_1_GLB_iact_load_en;
 wire					ctrl_CG_0_1_PE_disable [0:2][0:2];
 wire			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2];
 wire			[9:0]	CG_0_1_GLB_psum_write_addr [0:2];
@@ -137,9 +134,6 @@ wire         			CG_0_1_GLB_psum_2_data_out_ready;
 wire        			CG_0_1_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_0_1_GLB_psum_2_data_out;
 wire			[4:0]	CG_0_1_PSUM_DEPTH;
-wire			     	CG_1_0_cal_fin;
-wire			     	CG_1_0_PE_weight_load_en;
-wire			     	CG_1_0_GLB_iact_load_en;
 wire					ctrl_CG_1_0_PE_disable [0:2][0:2];
 wire			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2];
 wire			[9:0]	CG_1_0_GLB_psum_write_addr [0:2];
@@ -175,9 +169,6 @@ wire         			CG_1_0_GLB_psum_2_data_out_ready;
 wire        			CG_1_0_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_1_0_GLB_psum_2_data_out;
 wire			[4:0]	CG_1_0_PSUM_DEPTH;
-wire			     	CG_1_1_cal_fin;
-wire			     	CG_1_1_PE_weight_load_en;
-wire			     	CG_1_1_GLB_iact_load_en;
 wire					ctrl_CG_1_1_PE_disable [0:2][0:2];
 wire			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2];
 wire			[9:0]	CG_1_1_GLB_psum_write_addr [0:2];
@@ -373,9 +364,6 @@ wire			ctrl_CG_1_0_GLB_weight_2_in_en;
 wire			ctrl_CG_1_1_GLB_weight_0_in_en;
 wire			ctrl_CG_1_1_GLB_weight_1_in_en;
 wire			ctrl_CG_1_1_GLB_weight_2_in_en;
-wire			ctrl_CG_0_0_GLB_iact_load_en;
-wire			ctrl_CG_0_0_PE_weight_load_en;
-wire			ctrl_CG_0_0_cal_fin;
 wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_0_read_addr;
 wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_1_read_addr;
 wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_2_read_addr;
@@ -392,9 +380,6 @@ wire	[9:0]	ctrl_CG_0_0_GLB_psum_0_read_addr;
 wire	[9:0]	ctrl_CG_0_0_GLB_psum_1_read_addr;
 wire	[9:0]	ctrl_CG_0_0_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_0_0_PSUM_DEPTH;
-wire			ctrl_CG_0_1_GLB_iact_load_en;
-wire			ctrl_CG_0_1_PE_weight_load_en;
-wire			ctrl_CG_0_1_cal_fin;
 wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_0_read_addr;
 wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_1_read_addr;
 wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_2_read_addr;
@@ -411,9 +396,6 @@ wire	[9:0]	ctrl_CG_0_1_GLB_psum_0_read_addr;
 wire	[9:0]	ctrl_CG_0_1_GLB_psum_1_read_addr;
 wire	[9:0]	ctrl_CG_0_1_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_0_1_PSUM_DEPTH;
-wire			ctrl_CG_1_0_GLB_iact_load_en;
-wire			ctrl_CG_1_0_PE_weight_load_en;
-wire			ctrl_CG_1_0_cal_fin;
 wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_0_read_addr;
 wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_1_read_addr;
 wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_2_read_addr;
@@ -430,9 +412,6 @@ wire	[9:0]	ctrl_CG_1_0_GLB_psum_0_read_addr;
 wire	[9:0]	ctrl_CG_1_0_GLB_psum_1_read_addr;
 wire	[9:0]	ctrl_CG_1_0_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_1_0_PSUM_DEPTH;
-wire			ctrl_CG_1_1_GLB_iact_load_en;
-wire			ctrl_CG_1_1_PE_weight_load_en;
-wire			ctrl_CG_1_1_cal_fin;
 wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_0_read_addr;
 wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_1_read_addr;
 wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_2_read_addr;
@@ -497,9 +476,9 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_psum_spad_clear                          (ctrl_CG_psum_spad_clear                     ),
 	.CG_iact_write_fin_clear                     (ctrl_CG_iact_write_fin_clear                ),
 	.CG_weight_write_fin_clear                   (ctrl_CG_weight_write_fin_clear              ),
-	.CG_0_0_cal_fin                             (CG_0_0_cal_fin                             ),
-	.CG_0_0_PE_weight_load_en                   (CG_0_0_PE_weight_load_en                   ),
-	.CG_0_0_GLB_iact_load_en                    (CG_0_0_GLB_iact_load_en                    ),
+	.CG_cal_fin                                 (CG_cal_fin                                 ),
+	.CG_PE_weight_load_en                       (CG_PE_weight_load_en                       ),
+	.CG_GLB_iact_load_en                        (CG_GLB_iact_load_en                        ),
 	.CG_0_0_PE_disable(ctrl_CG_0_0_PE_disable),
 	.CG_0_0_GLB_iact_read_addr(CG_0_0_GLB_iact_read_addr),
 	.CG_0_0_GLB_psum_write_addr(CG_0_0_GLB_psum_write_addr),
@@ -536,9 +515,6 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_0_0_GLB_psum_2_data_out                 (CG_0_0_GLB_psum_2_data_out                 ),
 	.CG_0_0_PSUM_DEPTH                          (CG_0_0_PSUM_DEPTH                          ),
 	
-	.CG_0_1_cal_fin                             (CG_0_1_cal_fin                             ),
-	.CG_0_1_PE_weight_load_en                   (CG_0_1_PE_weight_load_en                   ),
-	.CG_0_1_GLB_iact_load_en                    (CG_0_1_GLB_iact_load_en                    ),
 	.CG_0_1_PE_disable(ctrl_CG_0_1_PE_disable),
 	.CG_0_1_GLB_iact_read_addr(CG_0_1_GLB_iact_read_addr),
 	.CG_0_1_GLB_psum_write_addr(CG_0_1_GLB_psum_write_addr),
@@ -575,9 +551,6 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_0_1_GLB_psum_2_data_out                 (CG_0_1_GLB_psum_2_data_out                 ),
 	.CG_0_1_PSUM_DEPTH                          (CG_0_1_PSUM_DEPTH                          ),
 	
-	.CG_1_0_cal_fin                             (CG_1_0_cal_fin                             ),
-	.CG_1_0_PE_weight_load_en                   (CG_1_0_PE_weight_load_en                   ),
-	.CG_1_0_GLB_iact_load_en                    (CG_1_0_GLB_iact_load_en                    ),
 	.CG_1_0_PE_disable(ctrl_CG_1_0_PE_disable),
 	.CG_1_0_GLB_iact_read_addr(CG_1_0_GLB_iact_read_addr),
 	.CG_1_0_GLB_psum_write_addr(CG_1_0_GLB_psum_write_addr),
@@ -614,9 +587,6 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_1_0_GLB_psum_2_data_out                 (CG_1_0_GLB_psum_2_data_out                 ),
 	.CG_1_0_PSUM_DEPTH                          (CG_1_0_PSUM_DEPTH                          ),
 	
-	.CG_1_1_cal_fin                             (CG_1_1_cal_fin                             ),
-	.CG_1_1_PE_weight_load_en                   (CG_1_1_PE_weight_load_en                   ),
-	.CG_1_1_GLB_iact_load_en                    (CG_1_1_GLB_iact_load_en                    ),
 	.CG_1_1_PE_disable(ctrl_CG_1_1_PE_disable),
 	.CG_1_1_GLB_iact_read_addr(CG_1_1_GLB_iact_read_addr),
 	.CG_1_1_GLB_psum_write_addr(CG_1_1_GLB_psum_write_addr),
@@ -912,9 +882,9 @@ TOP_controller (
 	.CG_psum_spad_clear                          (ctrl_CG_psum_spad_clear                     ),
 	.CG_iact_write_fin_clear                     (ctrl_CG_iact_write_fin_clear                ),
 	.CG_weight_write_fin_clear                   (ctrl_CG_weight_write_fin_clear              ),
-	.CG_0_0_GLB_iact_load_en                    (ctrl_CG_0_0_GLB_iact_load_en                   ),
-	.CG_0_0_PE_weight_load_en                   (ctrl_CG_0_0_PE_weight_load_en                  ),
-	.CG_0_0_cal_fin                             (ctrl_CG_0_0_cal_fin                            ),
+	.CG_GLB_iact_load_en                        (CG_GLB_iact_load_en                        ),
+	.CG_PE_weight_load_en                       (CG_PE_weight_load_en                       ),
+	.CG_cal_fin                                 (CG_cal_fin                                 ),
 	.CG_0_0_PE_disable						(ctrl_CG_0_0_PE_disable						),
 	.CG_0_0_GLB_iact_0_0_read_addr              (ctrl_CG_0_0_GLB_iact_0_0_read_addr             ),
 	.CG_0_0_GLB_iact_0_1_read_addr              (ctrl_CG_0_0_GLB_iact_0_1_read_addr             ),
@@ -932,9 +902,6 @@ TOP_controller (
 	.CG_0_0_GLB_psum_1_read_addr                (ctrl_CG_0_0_GLB_psum_1_read_addr               ),
 	.CG_0_0_GLB_psum_2_read_addr                (ctrl_CG_0_0_GLB_psum_2_read_addr               ),
 	.CG_0_0_PSUM_DEPTH                          (ctrl_CG_0_0_PSUM_DEPTH                         ),
-	.CG_0_1_GLB_iact_load_en                    (ctrl_CG_0_1_GLB_iact_load_en                   ),
-	.CG_0_1_PE_weight_load_en                   (ctrl_CG_0_1_PE_weight_load_en                  ),
-	.CG_0_1_cal_fin                             (ctrl_CG_0_1_cal_fin                            ),
 	.CG_0_1_PE_disable						(ctrl_CG_0_1_PE_disable						),
 	.CG_0_1_GLB_iact_0_0_read_addr              (ctrl_CG_0_1_GLB_iact_0_0_read_addr             ),
 	.CG_0_1_GLB_iact_0_1_read_addr              (ctrl_CG_0_1_GLB_iact_0_1_read_addr             ),
@@ -952,9 +919,6 @@ TOP_controller (
 	.CG_0_1_GLB_psum_1_read_addr                (ctrl_CG_0_1_GLB_psum_1_read_addr               ),
 	.CG_0_1_GLB_psum_2_read_addr                (ctrl_CG_0_1_GLB_psum_2_read_addr               ),
 	.CG_0_1_PSUM_DEPTH                          (ctrl_CG_0_1_PSUM_DEPTH                         ),
-	.CG_1_0_GLB_iact_load_en                    (ctrl_CG_1_0_GLB_iact_load_en                   ),
-	.CG_1_0_PE_weight_load_en                   (ctrl_CG_1_0_PE_weight_load_en                  ),
-	.CG_1_0_cal_fin                             (ctrl_CG_1_0_cal_fin                            ),
 	.CG_1_0_PE_disable						(ctrl_CG_1_0_PE_disable						),
 	.CG_1_0_GLB_iact_0_0_read_addr              (ctrl_CG_1_0_GLB_iact_0_0_read_addr             ),
 	.CG_1_0_GLB_iact_0_1_read_addr              (ctrl_CG_1_0_GLB_iact_0_1_read_addr             ),
@@ -972,9 +936,6 @@ TOP_controller (
 	.CG_1_0_GLB_psum_1_read_addr                (ctrl_CG_1_0_GLB_psum_1_read_addr               ),
 	.CG_1_0_GLB_psum_2_read_addr                (ctrl_CG_1_0_GLB_psum_2_read_addr               ),
 	.CG_1_0_PSUM_DEPTH                          (ctrl_CG_1_0_PSUM_DEPTH                         ),
-	.CG_1_1_GLB_iact_load_en                    (ctrl_CG_1_1_GLB_iact_load_en                   ),
-	.CG_1_1_PE_weight_load_en                   (ctrl_CG_1_1_PE_weight_load_en                  ),
-	.CG_1_1_cal_fin                             (ctrl_CG_1_1_cal_fin                            ),
 	.CG_1_1_PE_disable						(ctrl_CG_1_1_PE_disable						),
 	.CG_1_1_GLB_iact_0_0_read_addr              (ctrl_CG_1_1_GLB_iact_0_0_read_addr             ),
 	.CG_1_1_GLB_iact_0_1_read_addr              (ctrl_CG_1_1_GLB_iact_0_1_read_addr             ),
@@ -1401,18 +1362,6 @@ assign	pool_enable						= ctrl_pool_enable;
 assign	pool_data_in                    = ctrl_pool_enable ? rearrange_data_out : 'sd0;
 assign	pool_data_in_valid              = ctrl_pool_enable ? 'd1 : 'sd0;
 
-assign	ctrl_CG_0_0_GLB_iact_load_en    = CG_0_0_GLB_iact_load_en;    
-assign	ctrl_CG_0_0_PE_weight_load_en   = CG_0_0_PE_weight_load_en;   
-assign	ctrl_CG_0_0_cal_fin             = CG_0_0_cal_fin;           
-assign	ctrl_CG_0_1_GLB_iact_load_en    = CG_0_1_GLB_iact_load_en;    
-assign	ctrl_CG_0_1_PE_weight_load_en   = CG_0_1_PE_weight_load_en;   
-assign	ctrl_CG_0_1_cal_fin             = CG_0_1_cal_fin;            
-assign	ctrl_CG_1_0_GLB_iact_load_en    = CG_1_0_GLB_iact_load_en;    
-assign	ctrl_CG_1_0_PE_weight_load_en   = CG_1_0_PE_weight_load_en;   
-assign	ctrl_CG_1_0_cal_fin             = CG_1_0_cal_fin;              
-assign	ctrl_CG_1_1_GLB_iact_load_en    = CG_1_1_GLB_iact_load_en;    
-assign	ctrl_CG_1_1_PE_weight_load_en   = CG_1_1_PE_weight_load_en;   
-assign	ctrl_CG_1_1_cal_fin             = CG_1_1_cal_fin;             
 assign	ctrl_CSC_encoder_iact_one_vector_done 	= csc_iact_one_vector_done;
 assign	ctrl_CSC_encoder_weight_one_vector_done = csc_weight_one_vector_done;
 

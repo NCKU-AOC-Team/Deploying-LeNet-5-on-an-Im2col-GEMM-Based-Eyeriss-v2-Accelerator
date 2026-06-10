@@ -124,9 +124,9 @@ module TOP_controller # (
 	output			CG_iact_write_fin_clear [0:1][0:1],
 	output			CG_weight_write_fin_clear [0:1][0:1],
 			
-	input				CG_0_0_GLB_iact_load_en,
-	input				CG_0_0_PE_weight_load_en,
-	input				CG_0_0_cal_fin,
+	input				CG_GLB_iact_load_en [0:1][0:1],
+	input				CG_PE_weight_load_en [0:1][0:1],
+	input				CG_cal_fin [0:1][0:1],
 	
 	output				CG_0_0_PE_disable [0:2][0:2],
 		
@@ -153,9 +153,6 @@ module TOP_controller # (
 	// ------------- CG_0_1 ------------- //
 	
 							
-	input				CG_0_1_GLB_iact_load_en,
-	input				CG_0_1_PE_weight_load_en,
-	input				CG_0_1_cal_fin,
 	
 	output				CG_0_1_PE_disable [0:2][0:2],
 							 
@@ -183,9 +180,6 @@ module TOP_controller # (
 	// ------------- CG_1_0 ------------- //
 						
 						
-	input				CG_1_0_GLB_iact_load_en,
-	input				CG_1_0_PE_weight_load_en,
-	input				CG_1_0_cal_fin,
 	
 	output				CG_1_0_PE_disable [0:2][0:2],
 						
@@ -212,9 +206,6 @@ module TOP_controller # (
 	// ------------- CG_1_1 ------------- //
 	
 	
-	input				CG_1_1_GLB_iact_load_en,
-	input				CG_1_1_PE_weight_load_en,
-	input				CG_1_1_cal_fin,
 	
 	output				CG_1_1_PE_disable [0:2][0:2],
 							
@@ -578,9 +569,9 @@ assign 	layer_iter_fin_pulse 		= 	layer_iter_fin 	& (~layer_iter_fin_reg);
 
 // state machine control
 assign	ifmap_load_fin				= 	MEM_read_addr >= 'd783 & CG_0_0_GLB_psum_0_write_addr < 'd289;
-assign	all_GLB_load_en 			= 	(CG_0_0_GLB_iact_load_en | CG_0_1_GLB_iact_load_en | CG_1_0_GLB_iact_load_en | CG_1_1_GLB_iact_load_en) & (~load_PE_start);
-assign	all_PE_weight_load_en 		= 	CG_0_0_PE_weight_load_en| CG_0_1_PE_weight_load_en | CG_1_0_PE_weight_load_en| CG_1_1_PE_weight_load_en;
-assign	all_cal_fin					= 	CG_0_0_cal_fin & CG_0_1_cal_fin & CG_1_0_cal_fin & CG_1_1_cal_fin;
+assign	all_GLB_load_en 			= 	(CG_GLB_iact_load_en[0][0] | CG_GLB_iact_load_en[0][1] | CG_GLB_iact_load_en[1][0] | CG_GLB_iact_load_en[1][1]) & (~load_PE_start);
+assign	all_PE_weight_load_en 		= 	CG_PE_weight_load_en[0][0]| CG_PE_weight_load_en[0][1] | CG_PE_weight_load_en[1][0]| CG_PE_weight_load_en[1][1];
+assign	all_cal_fin					= 	CG_cal_fin[0][0] & CG_cal_fin[0][1] & CG_cal_fin[1][0] & CG_cal_fin[1][1];
 
 // read ifmap control
 assign	ifmap_in_en 				= 	LAYER_LOAD_IFMAP_wire;
