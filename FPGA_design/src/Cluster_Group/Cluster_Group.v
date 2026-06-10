@@ -538,7 +538,6 @@ wire                 PECluster_psum_in_from_south_ready [0:2];
 wire                 PECluster_psum_in_from_south_valid [0:2];
 wire signed [20:0]   PECluster_psum_in_from_south       [0:2];
 // control
-wire                 PECluster_PE_disable [0:2][0:2];
 wire                 PECluster_psum_load_en;
 wire                 PECluster_iact_data_in_sel;
 wire [1:0]           PECluster_iact_data_out_sel;
@@ -554,23 +553,10 @@ wire                 PECluster_all_cal_fin;
 // [Refactor 2nd-stage] GLB interface array-ified (script-gen, equiv to flat wires)
 wire GLBCluster_clock;
 wire GLBCluster_reset;
-wire              GLBCluster_iact_address_in_ready [0:2][0:2];
-wire              GLBCluster_iact_address_in_valid [0:2][0:2];
-wire [6:0]        GLBCluster_iact_address_in [0:2][0:2];
-wire              GLBCluster_iact_data_in_ready [0:2][0:2];
-wire              GLBCluster_iact_data_in_valid [0:2][0:2];
-wire [11:0]       GLBCluster_iact_data_in [0:2][0:2];
 wire              GLBCluster_iact_write_en [0:2][0:2];
 wire              GLBCluster_iact_write_done [0:2][0:2];
 wire              GLBCluster_iact_read_en [0:2][0:2];
-wire [9:0]        GLBCluster_iact_read_addr [0:2][0:2];
 wire              GLBCluster_iact_read_done [0:2][0:2];
-wire              GLBCluster_weight_address_in_ready [0:2];
-wire              GLBCluster_weight_address_in_valid [0:2];
-wire [7:0]        GLBCluster_weight_address_in [0:2];
-wire              GLBCluster_weight_data_in_ready [0:2];
-wire              GLBCluster_weight_data_in_valid [0:2];
-wire [12:0]       GLBCluster_weight_data_in [0:2];
 wire              GLBCluster_weight_address_out_valid [0:2];
 wire [7:0]        GLBCluster_weight_address_out [0:2];
 wire              GLBCluster_weight_data_out_valid [0:2];
@@ -582,11 +568,9 @@ wire              GLBCluster_psum_data_out_ready [0:2];
 wire              GLBCluster_psum_data_out_valid [0:2];
 wire signed [20:0]       GLBCluster_psum_data_out [0:2];
 wire              GLBCluster_psum_write_en [0:2];
-wire [9:0]        GLBCluster_psum_write_addr [0:2];
 wire              GLBCluster_psum_write_done [0:2];
 wire              GLBCluster_psum_read_out_en [0:2];
 wire              GLBCluster_psum_read_en [0:2];
-wire [9:0]        GLBCluster_psum_read_addr [0:2];
 
 			
    	
@@ -758,7 +742,7 @@ PE_Cluster PE_Cluster_inst (
 	.psum_in_from_south_ready(PECluster_psum_in_from_south_ready),
 	.psum_in_from_south_valid(PECluster_psum_in_from_south_valid),
 	.psum_in_from_south      (PECluster_psum_in_from_south),
-	.PE_disable              (PECluster_PE_disable),
+	.PE_disable              (PE_disable),
 	.psum_load_en            (PECluster_psum_load_en),
 	.iact_data_in_sel        (PECluster_iact_data_in_sel),
 	.iact_data_out_sel       (PECluster_iact_data_out_sel),
@@ -775,12 +759,12 @@ PE_Cluster PE_Cluster_inst (
 GLB_Cluster GLB_Cluster_inst (
 	.clock(GLBCluster_clock),
 	.reset(GLBCluster_reset),
-	.iact_SRAM_Bank_address_in_ready(GLBCluster_iact_address_in_ready),
-	.iact_SRAM_Bank_address_in_valid(GLBCluster_iact_address_in_valid),
-	.iact_SRAM_Bank_address_in(GLBCluster_iact_address_in),
-	.iact_SRAM_Bank_data_in_ready(GLBCluster_iact_data_in_ready),
-	.iact_SRAM_Bank_data_in_valid(GLBCluster_iact_data_in_valid),
-	.iact_SRAM_Bank_data_in(GLBCluster_iact_data_in),
+	.iact_SRAM_Bank_address_in_ready(GLB_iact_address_in_ready),
+	.iact_SRAM_Bank_address_in_valid(GLB_iact_address_in_valid),
+	.iact_SRAM_Bank_address_in(GLB_iact_address_in),
+	.iact_SRAM_Bank_data_in_ready(GLB_iact_data_in_ready),
+	.iact_SRAM_Bank_data_in_valid(GLB_iact_data_in_valid),
+	.iact_SRAM_Bank_data_in(GLB_iact_data_in),
 	.iact_SRAM_Bank_address_out_ready(iact_GLB_address_in_ready),
 	.iact_SRAM_Bank_address_out_valid(iact_GLB_address_in_valid),
 	.iact_SRAM_Bank_address_out(iact_GLB_address_in_bits),
@@ -790,14 +774,14 @@ GLB_Cluster GLB_Cluster_inst (
 	.iact_SRAM_Bank_write_en(GLBCluster_iact_write_en),
 	.iact_SRAM_Bank_write_done(GLBCluster_iact_write_done),
 	.iact_SRAM_Bank_read_en(GLBCluster_iact_read_en),
-	.iact_SRAM_Bank_read_addr(GLBCluster_iact_read_addr),
+	.iact_SRAM_Bank_read_addr(GLB_iact_read_addr),
 	.iact_SRAM_Bank_read_done(GLBCluster_iact_read_done),
-	.weight_address_in_ready(GLBCluster_weight_address_in_ready),
-	.weight_address_in_valid(GLBCluster_weight_address_in_valid),
-	.weight_address_in(GLBCluster_weight_address_in),
-	.weight_data_in_ready(GLBCluster_weight_data_in_ready),
-	.weight_data_in_valid(GLBCluster_weight_data_in_valid),
-	.weight_data_in(GLBCluster_weight_data_in),
+	.weight_address_in_ready(GLB_weight_address_in_ready),
+	.weight_address_in_valid(GLB_weight_address_in_valid),
+	.weight_address_in(GLB_weight_address_in),
+	.weight_data_in_ready(GLB_weight_data_in_ready),
+	.weight_data_in_valid(GLB_weight_data_in_valid),
+	.weight_data_in(GLB_weight_data_in),
 	.weight_address_out_ready(weight_GLB_address_in_ready),
 	.weight_address_out_valid(GLBCluster_weight_address_out_valid),
 	.weight_address_out(GLBCluster_weight_address_out),
@@ -811,11 +795,11 @@ GLB_Cluster GLB_Cluster_inst (
 	.psum_SRAM_Bank_data_out_valid(GLBCluster_psum_data_out_valid),
 	.psum_SRAM_Bank_data_out(GLBCluster_psum_data_out),
 	.psum_SRAM_Bank_write_en(GLBCluster_psum_write_en),
-	.psum_SRAM_Bank_write_addr(GLBCluster_psum_write_addr),
+	.psum_SRAM_Bank_write_addr(GLB_psum_write_addr),
 	.psum_SRAM_Bank_write_done(GLBCluster_psum_write_done),
 	.psum_SRAM_Bank_read_out_en(GLBCluster_psum_read_out_en),
 	.psum_SRAM_Bank_read_en(GLBCluster_psum_read_en),
-	.psum_SRAM_Bank_read_addr(GLBCluster_psum_read_addr),
+	.psum_SRAM_Bank_read_addr(GLB_psum_read_addr),
 	.PSUM_DEPTH(PSUM_DEPTH)
 );
 
@@ -1015,35 +999,6 @@ assign GLB_iact_load_en 				= cg_ctrl_GLB_load_en;
 assign idle_wire						= cg_ctrl_idle_wire;
 assign all_cal_fin 						= all_cal_fin_reg;
 
-// GLB iact SRAM Bank output connection
-assign GLB_iact_address_in_ready[0][0] 	= GLBCluster_iact_address_in_ready[0][0]; 
-assign GLB_iact_address_in_ready[0][1] 	= GLBCluster_iact_address_in_ready[0][1]; 
-assign GLB_iact_address_in_ready[0][2] 	= GLBCluster_iact_address_in_ready[0][2];		
-assign GLB_iact_data_in_ready[0][0] 		= GLBCluster_iact_data_in_ready[0][0]; 	
-assign GLB_iact_data_in_ready[0][1] 		= GLBCluster_iact_data_in_ready[0][1]; 
-assign GLB_iact_data_in_ready[0][2] 		= GLBCluster_iact_data_in_ready[0][2]; 
-
-assign GLB_iact_address_in_ready[1][0] 	= GLBCluster_iact_address_in_ready[1][0]; 
-assign GLB_iact_address_in_ready[1][1] 	= GLBCluster_iact_address_in_ready[1][1]; 
-assign GLB_iact_address_in_ready[1][2] 	= GLBCluster_iact_address_in_ready[1][2];		
-assign GLB_iact_data_in_ready[1][0] 		= GLBCluster_iact_data_in_ready[1][0]; 	
-assign GLB_iact_data_in_ready[1][1] 		= GLBCluster_iact_data_in_ready[1][1]; 
-assign GLB_iact_data_in_ready[1][2] 		= GLBCluster_iact_data_in_ready[1][2]; 
-
-assign GLB_iact_address_in_ready[2][0] 	= GLBCluster_iact_address_in_ready[2][0]; 
-assign GLB_iact_address_in_ready[2][1] 	= GLBCluster_iact_address_in_ready[2][1]; 
-assign GLB_iact_address_in_ready[2][2] 	= GLBCluster_iact_address_in_ready[2][2];		
-assign GLB_iact_data_in_ready[2][0] 		= GLBCluster_iact_data_in_ready[2][0]; 	
-assign GLB_iact_data_in_ready[2][1] 		= GLBCluster_iact_data_in_ready[2][1]; 
-assign GLB_iact_data_in_ready[2][2] 		= GLBCluster_iact_data_in_ready[2][2]; 
-
-// GLB weight SRAM Bank output connection
-assign GLB_weight_address_in_ready[0] 	= GLBCluster_weight_address_in_ready[0]; 
-assign GLB_weight_address_in_ready[1] 	= GLBCluster_weight_address_in_ready[1]; 	
-assign GLB_weight_address_in_ready[2] 	= GLBCluster_weight_address_in_ready[2]; 
-assign GLB_weight_data_in_ready[0] 		= GLBCluster_weight_data_in_ready[0];	
-assign GLB_weight_data_in_ready[1] 		= GLBCluster_weight_data_in_ready[1];	
-assign GLB_weight_data_in_ready[2] 		= GLBCluster_weight_data_in_ready[2];
 // GLB psum SRAM Bank output connection
 assign GLB_psum_0_data_in_ready 		= (router_cluster_psum_data_out_sel == TO_SOU) ? GLBCluster_psum_data_in_ready[0] : 1'b0; 
 assign GLB_psum_1_data_in_ready 		= (router_cluster_psum_data_out_sel == TO_SOU) ? GLBCluster_psum_data_in_ready[1] : 1'b0; 
@@ -1306,15 +1261,6 @@ assign PECluster_psum_in_from_south[0] 			= cg_south_psum_0_in;
 assign PECluster_psum_in_from_south[1] 			= cg_south_psum_1_in; 	
 assign PECluster_psum_in_from_south[2] 			= cg_south_psum_2_in; 	
 
-assign PECluster_PE_disable[0][0]					= PE_disable[0][0];
-assign PECluster_PE_disable[0][1]					= PE_disable[0][1];
-assign PECluster_PE_disable[0][2]					= PE_disable[0][2];
-assign PECluster_PE_disable[1][0]					= PE_disable[1][0];
-assign PECluster_PE_disable[1][1]					= PE_disable[1][1];
-assign PECluster_PE_disable[1][2]					= PE_disable[1][2];
-assign PECluster_PE_disable[2][0]					= PE_disable[2][0];
-assign PECluster_PE_disable[2][1]					= PE_disable[2][1];
-assign PECluster_PE_disable[2][2]					= PE_disable[2][2];
 
 assign PECluster_psum_load_en 					= cg_ctrl_psum_load_en; 
 assign PECluster_iact_data_in_sel 				= PE_cluster_iact_data_in_sel;
@@ -1328,55 +1274,7 @@ assign PECluster_weight_write_fin_clear 		= weight_write_fin_clear;
 // TOP iact and weight fetch and dataflow control
 assign GLBCluster_clock = clock;
 assign GLBCluster_reset = reset;
-assign GLBCluster_iact_address_in_valid[0][0]  	= GLB_iact_address_in_valid[0][0]; 
-assign GLBCluster_iact_address_in_valid[0][1]  	= GLB_iact_address_in_valid[0][1];
-assign GLBCluster_iact_address_in_valid[0][2]  	= GLB_iact_address_in_valid[0][2]; 
-assign GLBCluster_iact_address_in[0][0] 		= GLB_iact_address_in[0][0]; 
-assign GLBCluster_iact_address_in[0][1] 		= GLB_iact_address_in[0][1]; 
-assign GLBCluster_iact_address_in[0][2] 		= GLB_iact_address_in[0][2]; 
-assign GLBCluster_iact_data_in_valid[0][0] 	 	= GLB_iact_data_in_valid[0][0]; 
-assign GLBCluster_iact_data_in_valid[0][1] 	 	= GLB_iact_data_in_valid[0][1]; 
-assign GLBCluster_iact_data_in_valid[0][2] 	 	= GLB_iact_data_in_valid[0][2]; 
-assign GLBCluster_iact_data_in[0][0] 			= GLB_iact_data_in[0][0];
-assign GLBCluster_iact_data_in[0][1] 			= GLB_iact_data_in[0][1]; 
-assign GLBCluster_iact_data_in[0][2] 			= GLB_iact_data_in[0][2]; 
-assign GLBCluster_iact_address_in_valid[1][0]  	= GLB_iact_address_in_valid[1][0]; 
-assign GLBCluster_iact_address_in_valid[1][1]  	= GLB_iact_address_in_valid[1][1];
-assign GLBCluster_iact_address_in_valid[1][2]  	= GLB_iact_address_in_valid[1][2]; 
-assign GLBCluster_iact_address_in[1][0] 		= GLB_iact_address_in[1][0]; 
-assign GLBCluster_iact_address_in[1][1] 		= GLB_iact_address_in[1][1]; 
-assign GLBCluster_iact_address_in[1][2] 		= GLB_iact_address_in[1][2]; 
-assign GLBCluster_iact_data_in_valid[1][0] 	 	= GLB_iact_data_in_valid[1][0]; 
-assign GLBCluster_iact_data_in_valid[1][1] 	 	= GLB_iact_data_in_valid[1][1]; 
-assign GLBCluster_iact_data_in_valid[1][2] 	 	= GLB_iact_data_in_valid[1][2]; 
-assign GLBCluster_iact_data_in[1][0] 			= GLB_iact_data_in[1][0];
-assign GLBCluster_iact_data_in[1][1] 			= GLB_iact_data_in[1][1]; 
-assign GLBCluster_iact_data_in[1][2] 			= GLB_iact_data_in[1][2]; 
-assign GLBCluster_iact_address_in_valid[2][0]  	= GLB_iact_address_in_valid[2][0]; 
-assign GLBCluster_iact_address_in_valid[2][1]  	= GLB_iact_address_in_valid[2][1];
-assign GLBCluster_iact_address_in_valid[2][2]  	= GLB_iact_address_in_valid[2][2]; 
-assign GLBCluster_iact_address_in[2][0] 		= GLB_iact_address_in[2][0]; 
-assign GLBCluster_iact_address_in[2][1] 		= GLB_iact_address_in[2][1]; 
-assign GLBCluster_iact_address_in[2][2] 		= GLB_iact_address_in[2][2]; 
-assign GLBCluster_iact_data_in_valid[2][0] 	 	= GLB_iact_data_in_valid[2][0]; 
-assign GLBCluster_iact_data_in_valid[2][1] 	 	= GLB_iact_data_in_valid[2][1]; 
-assign GLBCluster_iact_data_in_valid[2][2] 	 	= GLB_iact_data_in_valid[2][2]; 
-assign GLBCluster_iact_data_in[2][0] 			= GLB_iact_data_in[2][0];
-assign GLBCluster_iact_data_in[2][1] 			= GLB_iact_data_in[2][1]; 
-assign GLBCluster_iact_data_in[2][2] 			= GLB_iact_data_in[2][2]; 
 
-assign GLBCluster_weight_address_in_valid[0]  	= GLB_weight_address_in_valid[0]; 
-assign GLBCluster_weight_address_in_valid[1]  	= GLB_weight_address_in_valid[1]; 
-assign GLBCluster_weight_address_in_valid[2]  	= GLB_weight_address_in_valid[2]; 
-assign GLBCluster_weight_address_in[0] 		= GLB_weight_address_in[0];
-assign GLBCluster_weight_address_in[1] 		= GLB_weight_address_in[1]; 
-assign GLBCluster_weight_address_in[2] 		= GLB_weight_address_in[2]; 
-assign GLBCluster_weight_data_in_valid[0] 	 	= GLB_weight_data_in_valid[0];
-assign GLBCluster_weight_data_in_valid[1] 	 	= GLB_weight_data_in_valid[1]; 
-assign GLBCluster_weight_data_in_valid[2] 	 	= GLB_weight_data_in_valid[2]; 
-assign GLBCluster_weight_data_in[0]			= GLB_weight_data_in[0]; 
-assign GLBCluster_weight_data_in[1]			= GLB_weight_data_in[1]; 
-assign GLBCluster_weight_data_in[2]			= GLB_weight_data_in[2]; 
 
 assign iact_0_data_in_sel  		= router_cluster_iact_data_in_sel; 
 assign iact_1_data_in_sel  		= router_cluster_iact_data_in_sel; 
@@ -1443,22 +1341,7 @@ assign GLBCluster_psum_read_out_en[1]	= psum_SRAM_Bank_1_read_out_en;
 assign GLBCluster_psum_read_out_en[2]	= psum_SRAM_Bank_2_read_out_en;
 
 
-assign GLBCluster_iact_read_addr[0][0]	= GLB_iact_read_addr[0][0]; 
-assign GLBCluster_iact_read_addr[0][1]	= GLB_iact_read_addr[0][1];
-assign GLBCluster_iact_read_addr[0][2]	= GLB_iact_read_addr[0][2];
-assign GLBCluster_iact_read_addr[1][0]	= GLB_iact_read_addr[1][0]; 
-assign GLBCluster_iact_read_addr[1][1]	= GLB_iact_read_addr[1][1];
-assign GLBCluster_iact_read_addr[1][2]	= GLB_iact_read_addr[1][2];
-assign GLBCluster_iact_read_addr[2][0]	= GLB_iact_read_addr[2][0]; 
-assign GLBCluster_iact_read_addr[2][1]	= GLB_iact_read_addr[2][1];
-assign GLBCluster_iact_read_addr[2][2]	= GLB_iact_read_addr[2][2];
 
-assign GLBCluster_psum_read_addr[0]	= GLB_psum_read_addr[0]; 
-assign GLBCluster_psum_read_addr[1]	= GLB_psum_read_addr[1]; 
-assign GLBCluster_psum_read_addr[2]	= GLB_psum_read_addr[2];  
-assign GLBCluster_psum_write_addr[0]	= GLB_psum_write_addr[0]; 
-assign GLBCluster_psum_write_addr[1]	= GLB_psum_write_addr[1]; 
-assign GLBCluster_psum_write_addr[2]	= GLB_psum_write_addr[2]; 
 
 //============= other cluster group inter-connection =============//
 // iact_ready
