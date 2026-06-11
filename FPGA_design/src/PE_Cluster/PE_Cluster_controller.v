@@ -97,46 +97,26 @@ wire [12:0] connections_iact_form_router_0_data_in_bits;
 wire [12:0] connections_iact_form_router_1_data_in_bits;
 wire [12:0] connections_iact_form_router_2_data_in_bits;
 
-wire connections_iact_to_PE_0_0_address_out_valid;	
-wire connections_iact_to_PE_0_1_address_out_valid;	
-wire connections_iact_to_PE_0_2_address_out_valid;	
-wire connections_iact_to_PE_1_0_address_out_valid;	
-wire connections_iact_to_PE_1_1_address_out_valid;	
-wire connections_iact_to_PE_1_2_address_out_valid;	
-wire connections_iact_to_PE_2_0_address_out_valid;	
-wire connections_iact_to_PE_2_1_address_out_valid;	
-wire connections_iact_to_PE_2_2_address_out_valid;	
+PE_Cluster_Connection PE_Cluster_Connection_inst (
+	.iact_to_PE_0_0_address_out_valid	(iact_to_PE_0_0_address_out_valid	),
+	.iact_to_PE_0_1_address_out_valid	(iact_to_PE_0_1_address_out_valid	),
+	.iact_to_PE_0_2_address_out_valid	(iact_to_PE_0_2_address_out_valid	),
+	.iact_to_PE_1_0_address_out_valid	(iact_to_PE_1_0_address_out_valid	),
+	.iact_to_PE_1_1_address_out_valid	(iact_to_PE_1_1_address_out_valid	),
+	.iact_to_PE_1_2_address_out_valid	(iact_to_PE_1_2_address_out_valid	),
+	.iact_to_PE_2_0_address_out_valid	(iact_to_PE_2_0_address_out_valid	),
+	.iact_to_PE_2_1_address_out_valid	(iact_to_PE_2_1_address_out_valid	),
+	.iact_to_PE_2_2_address_out_valid	(iact_to_PE_2_2_address_out_valid	),
 
-wire connections_iact_to_PE_0_0_data_out_valid;		
-wire connections_iact_to_PE_0_1_data_out_valid;		
-wire connections_iact_to_PE_0_2_data_out_valid;			
-wire connections_iact_to_PE_1_0_data_out_valid;		
-wire connections_iact_to_PE_1_1_data_out_valid;		
-wire connections_iact_to_PE_1_2_data_out_valid;			
-wire connections_iact_to_PE_2_0_data_out_valid;		
-wire connections_iact_to_PE_2_1_data_out_valid;		
-wire connections_iact_to_PE_2_2_data_out_valid;		
-
-PE_Cluster_Connection PE_Cluster_Connection_inst ( 
-	.iact_to_PE_0_0_address_out_valid	(connections_iact_to_PE_0_0_address_out_valid	),
-	.iact_to_PE_0_1_address_out_valid	(connections_iact_to_PE_0_1_address_out_valid	),
-	.iact_to_PE_0_2_address_out_valid	(connections_iact_to_PE_0_2_address_out_valid	),
-	.iact_to_PE_1_0_address_out_valid	(connections_iact_to_PE_1_0_address_out_valid	),
-	.iact_to_PE_1_1_address_out_valid	(connections_iact_to_PE_1_1_address_out_valid	),
-	.iact_to_PE_1_2_address_out_valid	(connections_iact_to_PE_1_2_address_out_valid	),
-	.iact_to_PE_2_0_address_out_valid	(connections_iact_to_PE_2_0_address_out_valid	),
-	.iact_to_PE_2_1_address_out_valid	(connections_iact_to_PE_2_1_address_out_valid	),
-	.iact_to_PE_2_2_address_out_valid	(connections_iact_to_PE_2_2_address_out_valid	),
-										
-	.iact_to_PE_0_0_data_out_valid		(connections_iact_to_PE_0_0_data_out_valid		),
-	.iact_to_PE_0_1_data_out_valid		(connections_iact_to_PE_0_1_data_out_valid		),
-	.iact_to_PE_0_2_data_out_valid		(connections_iact_to_PE_0_2_data_out_valid		),
-	.iact_to_PE_1_0_data_out_valid		(connections_iact_to_PE_1_0_data_out_valid		),
-	.iact_to_PE_1_1_data_out_valid		(connections_iact_to_PE_1_1_data_out_valid		),
-	.iact_to_PE_1_2_data_out_valid		(connections_iact_to_PE_1_2_data_out_valid		),
-	.iact_to_PE_2_0_data_out_valid		(connections_iact_to_PE_2_0_data_out_valid		),
-	.iact_to_PE_2_1_data_out_valid		(connections_iact_to_PE_2_1_data_out_valid		),
-	.iact_to_PE_2_2_data_out_valid		(connections_iact_to_PE_2_2_data_out_valid		),
+	.iact_to_PE_0_0_data_out_valid		(iact_to_PE_0_0_data_out_valid		),
+	.iact_to_PE_0_1_data_out_valid		(iact_to_PE_0_1_data_out_valid		),
+	.iact_to_PE_0_2_data_out_valid		(iact_to_PE_0_2_data_out_valid		),
+	.iact_to_PE_1_0_data_out_valid		(iact_to_PE_1_0_data_out_valid		),
+	.iact_to_PE_1_1_data_out_valid		(iact_to_PE_1_1_data_out_valid		),
+	.iact_to_PE_1_2_data_out_valid		(iact_to_PE_1_2_data_out_valid		),
+	.iact_to_PE_2_0_data_out_valid		(iact_to_PE_2_0_data_out_valid		),
+	.iact_to_PE_2_1_data_out_valid		(iact_to_PE_2_1_data_out_valid		),
+	.iact_to_PE_2_2_data_out_valid		(iact_to_PE_2_2_data_out_valid		),
 	
 	.iact_to_PE_0_0_address_out_bits	(iact_to_PE_0_0_address_out_bits	),
 	.iact_to_PE_0_1_address_out_bits	(iact_to_PE_0_1_address_out_bits	),
@@ -174,27 +154,7 @@ PE_Cluster_Connection PE_Cluster_Connection_inst (
 );
 
 
-assign iact_to_PE_0_0_address_out_valid = connections_iact_to_PE_0_0_address_out_valid;	                            
-assign iact_to_PE_0_1_address_out_valid = connections_iact_to_PE_0_1_address_out_valid;	                            
-assign iact_to_PE_0_2_address_out_valid = connections_iact_to_PE_0_2_address_out_valid;	                             
-assign iact_to_PE_1_0_address_out_valid = connections_iact_to_PE_1_0_address_out_valid;	                            
-assign iact_to_PE_1_1_address_out_valid = connections_iact_to_PE_1_1_address_out_valid;	                            
-assign iact_to_PE_1_2_address_out_valid = connections_iact_to_PE_1_2_address_out_valid;	                             
-assign iact_to_PE_2_0_address_out_valid = connections_iact_to_PE_2_0_address_out_valid;	                            
-assign iact_to_PE_2_1_address_out_valid = connections_iact_to_PE_2_1_address_out_valid;	                            
-assign iact_to_PE_2_2_address_out_valid = connections_iact_to_PE_2_2_address_out_valid;	                             
-                                                                         
-assign iact_to_PE_0_0_data_out_valid = connections_iact_to_PE_0_0_data_out_valid;		                         
-assign iact_to_PE_0_1_data_out_valid = connections_iact_to_PE_0_1_data_out_valid;		                         
-assign iact_to_PE_0_2_data_out_valid = connections_iact_to_PE_0_2_data_out_valid;		                         
-assign iact_to_PE_1_0_data_out_valid = connections_iact_to_PE_1_0_data_out_valid;		                         
-assign iact_to_PE_1_1_data_out_valid = connections_iact_to_PE_1_1_data_out_valid;		                         
-assign iact_to_PE_1_2_data_out_valid = connections_iact_to_PE_1_2_data_out_valid;			                         
-assign iact_to_PE_2_0_data_out_valid = connections_iact_to_PE_2_0_data_out_valid;		                         
-assign iact_to_PE_2_1_data_out_valid = connections_iact_to_PE_2_1_data_out_valid;		                         
-assign iact_to_PE_2_2_data_out_valid = connections_iact_to_PE_2_2_data_out_valid;		                         
-	
-wire  iact_from_router_address_in_valid = 	(iact_data_out_sel == ROUTER_2) ? iact_from_router_2_address_in_valid : 
+wire  iact_from_router_address_in_valid = 	(iact_data_out_sel == ROUTER_2) ? iact_from_router_2_address_in_valid :
 											(iact_data_out_sel == ROUTER_1) ? iact_from_router_1_address_in_valid : 
 											(iact_data_out_sel == ROUTER_0) ? iact_from_router_0_address_in_valid : 1'b0; 
 					
