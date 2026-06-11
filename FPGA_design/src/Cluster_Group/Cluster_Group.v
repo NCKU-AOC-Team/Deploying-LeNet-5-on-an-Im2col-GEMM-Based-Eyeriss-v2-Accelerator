@@ -105,421 +105,74 @@ module ClusterGroup (
 	output 	signed 	[20:0] 	GLB_psum_2_data_out,
 				
 	// ================== router IO ================== //
-	// iact router 0_0
-	output 			       	router_iact_0_0_north_address_in_ready,
-	input  			       	router_iact_0_0_north_address_in_valid,
-	input  			[6:0]  	router_iact_0_0_north_address_in,
-	output 			       	router_iact_0_0_north_data_in_ready,
-	input  			       	router_iact_0_0_north_data_in_valid,
-	input  			[11:0] 	router_iact_0_0_north_data_in,
-	output 			       	router_iact_0_0_south_address_in_ready,
-	input  			       	router_iact_0_0_south_address_in_valid,
-	input  			[6:0]  	router_iact_0_0_south_address_in,
-	output 			       	router_iact_0_0_south_data_in_ready,
-	input  			       	router_iact_0_0_south_data_in_valid,
-	input  			[11:0] 	router_iact_0_0_south_data_in,
-	output 			       	router_iact_0_0_horiz_address_in_ready,
-	input  			       	router_iact_0_0_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_0_0_horiz_address_in,
-	output 			       	router_iact_0_0_horiz_data_in_ready,
-	input  			       	router_iact_0_0_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_0_0_horiz_data_in,
-	input  			       	router_iact_0_0_north_address_out_ready,	
-	output 			       	router_iact_0_0_north_address_out_valid,
-	output 			[6:0]  	router_iact_0_0_north_address_out,
-	input  			       	router_iact_0_0_north_data_out_ready,
-	output 			       	router_iact_0_0_north_data_out_valid,
-	output 			[11:0] 	router_iact_0_0_north_data_out,
-	input  			       	router_iact_0_0_south_address_out_ready,
-	output 			       	router_iact_0_0_south_address_out_valid,
-	output 			[6:0]  	router_iact_0_0_south_address_out,
-	input  			       	router_iact_0_0_south_data_out_ready,
-	output 			       	router_iact_0_0_south_data_out_valid,
-	output 			[11:0] 	router_iact_0_0_south_data_out,
-	input  			       	router_iact_0_0_horiz_address_out_ready,
-	output 			       	router_iact_0_0_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_0_0_horiz_address_out,
-	input  			       	router_iact_0_0_horiz_data_out_ready,
-	output 			       	router_iact_0_0_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_0_0_horiz_data_out,
-	// iact router 0_1
-	output 			       	router_iact_0_1_north_address_in_ready,
-	input  			       	router_iact_0_1_north_address_in_valid,
-	input  			[6:0]  	router_iact_0_1_north_address_in,
-	output 			       	router_iact_0_1_north_data_in_ready,
-	input  			       	router_iact_0_1_north_data_in_valid,
-	input  			[11:0] 	router_iact_0_1_north_data_in,
-	output 			       	router_iact_0_1_south_address_in_ready,
-	input  			       	router_iact_0_1_south_address_in_valid,
-	input  			[6:0]  	router_iact_0_1_south_address_in,
-	output 			       	router_iact_0_1_south_data_in_ready,
-	input  			       	router_iact_0_1_south_data_in_valid,
-	input  			[11:0] 	router_iact_0_1_south_data_in,
-	output 			       	router_iact_0_1_horiz_address_in_ready,
-	input  			       	router_iact_0_1_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_0_1_horiz_address_in,
-	output 			       	router_iact_0_1_horiz_data_in_ready,
-	input  			       	router_iact_0_1_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_0_1_horiz_data_in,
-	input  			       	router_iact_0_1_north_address_out_ready,	
-	output 			       	router_iact_0_1_north_address_out_valid,
-	output 			[6:0]  	router_iact_0_1_north_address_out,
-	input  			       	router_iact_0_1_north_data_out_ready,
-	output 			       	router_iact_0_1_north_data_out_valid,
-	output 			[11:0] 	router_iact_0_1_north_data_out,
-	input  			       	router_iact_0_1_south_address_out_ready,
-	output 			       	router_iact_0_1_south_address_out_valid,
-	output 			[6:0]  	router_iact_0_1_south_address_out,
-	input  			       	router_iact_0_1_south_data_out_ready,
-	output 			       	router_iact_0_1_south_data_out_valid,
-	output 			[11:0] 	router_iact_0_1_south_data_out,
-	input  			       	router_iact_0_1_horiz_address_out_ready,
-	output 			       	router_iact_0_1_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_0_1_horiz_address_out,
-	input  			       	router_iact_0_1_horiz_data_out_ready,
-	output 			       	router_iact_0_1_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_0_1_horiz_data_out,
-	// iact	router 0_2
-	output 			       	router_iact_0_2_north_address_in_ready,
-	input  			       	router_iact_0_2_north_address_in_valid,
-	input  			[6:0]  	router_iact_0_2_north_address_in,
-	output 			       	router_iact_0_2_north_data_in_ready,
-	input  			       	router_iact_0_2_north_data_in_valid,
-	input  			[11:0] 	router_iact_0_2_north_data_in,
-	output 			       	router_iact_0_2_south_address_in_ready,
-	input  			       	router_iact_0_2_south_address_in_valid,
-	input  			[6:0]  	router_iact_0_2_south_address_in,
-	output 			       	router_iact_0_2_south_data_in_ready,
-	input  			       	router_iact_0_2_south_data_in_valid,
-	input  			[11:0] 	router_iact_0_2_south_data_in,
-	output 			       	router_iact_0_2_horiz_address_in_ready,
-	input  			       	router_iact_0_2_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_0_2_horiz_address_in,
-	output 			       	router_iact_0_2_horiz_data_in_ready,
-	input  			       	router_iact_0_2_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_0_2_horiz_data_in,
-	input  			       	router_iact_0_2_north_address_out_ready,	
-	output 			       	router_iact_0_2_north_address_out_valid,
-	output 			[6:0]  	router_iact_0_2_north_address_out,
-	input  			       	router_iact_0_2_north_data_out_ready,
-	output 			       	router_iact_0_2_north_data_out_valid,
-	output 			[11:0] 	router_iact_0_2_north_data_out,
-	input  			       	router_iact_0_2_south_address_out_ready,
-	output 			       	router_iact_0_2_south_address_out_valid,
-	output 			[6:0]  	router_iact_0_2_south_address_out,
-	input  			       	router_iact_0_2_south_data_out_ready,
-	output 			       	router_iact_0_2_south_data_out_valid,
-	output 			[11:0] 	router_iact_0_2_south_data_out,
-	input  			       	router_iact_0_2_horiz_address_out_ready,
-	output 			       	router_iact_0_2_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_0_2_horiz_address_out,
-	input  			       	router_iact_0_2_horiz_data_out_ready,
-	output 			       	router_iact_0_2_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_0_2_horiz_data_out,
-	// iact	router 1_0
-	output 			       	router_iact_1_0_north_address_in_ready,
-	input  			       	router_iact_1_0_north_address_in_valid,
-	input  			[6:0]  	router_iact_1_0_north_address_in,
-	output 			       	router_iact_1_0_north_data_in_ready,
-	input  			       	router_iact_1_0_north_data_in_valid,
-	input  			[11:0] 	router_iact_1_0_north_data_in,
-	output 			       	router_iact_1_0_south_address_in_ready,
-	input  			       	router_iact_1_0_south_address_in_valid,
-	input  			[6:0]  	router_iact_1_0_south_address_in,
-	output 			       	router_iact_1_0_south_data_in_ready,
-	input  			       	router_iact_1_0_south_data_in_valid,
-	input  			[11:0] 	router_iact_1_0_south_data_in,
-	output 			       	router_iact_1_0_horiz_address_in_ready,
-	input  			       	router_iact_1_0_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_1_0_horiz_address_in,
-	output 			       	router_iact_1_0_horiz_data_in_ready,
-	input  			       	router_iact_1_0_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_1_0_horiz_data_in,
-	input  			       	router_iact_1_0_north_address_out_ready,	
-	output 			       	router_iact_1_0_north_address_out_valid,
-	output 			[6:0]  	router_iact_1_0_north_address_out,
-	input  			       	router_iact_1_0_north_data_out_ready,
-	output 			       	router_iact_1_0_north_data_out_valid,
-	output 			[11:0] 	router_iact_1_0_north_data_out,
-	input  			       	router_iact_1_0_south_address_out_ready,
-	output 			       	router_iact_1_0_south_address_out_valid,
-	output 			[6:0]  	router_iact_1_0_south_address_out,
-	input  			       	router_iact_1_0_south_data_out_ready,
-	output 			       	router_iact_1_0_south_data_out_valid,
-	output 			[11:0] 	router_iact_1_0_south_data_out,
-	input  			       	router_iact_1_0_horiz_address_out_ready,
-	output 			       	router_iact_1_0_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_1_0_horiz_address_out,
-	input  			       	router_iact_1_0_horiz_data_out_ready,
-	output 			       	router_iact_1_0_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_1_0_horiz_data_out,
-	// iact	router	1_1        
-	output 			       	router_iact_1_1_north_address_in_ready,
-	input  			       	router_iact_1_1_north_address_in_valid,
-	input  			[6:0]  	router_iact_1_1_north_address_in,
-	output 			       	router_iact_1_1_north_data_in_ready,
-	input  			       	router_iact_1_1_north_data_in_valid,
-	input  			[11:0] 	router_iact_1_1_north_data_in,
-	output 			       	router_iact_1_1_south_address_in_ready,
-	input  			       	router_iact_1_1_south_address_in_valid,
-	input  			[6:0]  	router_iact_1_1_south_address_in,
-	output 			       	router_iact_1_1_south_data_in_ready,
-	input  			       	router_iact_1_1_south_data_in_valid,
-	input  			[11:0] 	router_iact_1_1_south_data_in,
-	output 			       	router_iact_1_1_horiz_address_in_ready,
-	input  			       	router_iact_1_1_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_1_1_horiz_address_in,
-	output 			       	router_iact_1_1_horiz_data_in_ready,
-	input  			       	router_iact_1_1_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_1_1_horiz_data_in,
-	input  			       	router_iact_1_1_north_address_out_ready,	
-	output 			       	router_iact_1_1_north_address_out_valid,
-	output 			[6:0]  	router_iact_1_1_north_address_out,
-	input  			       	router_iact_1_1_north_data_out_ready,
-	output 			       	router_iact_1_1_north_data_out_valid,
-	output 			[11:0] 	router_iact_1_1_north_data_out,
-	input  			       	router_iact_1_1_south_address_out_ready,
-	output 			       	router_iact_1_1_south_address_out_valid,
-	output 			[6:0]  	router_iact_1_1_south_address_out,
-	input  			       	router_iact_1_1_south_data_out_ready,
-	output 			       	router_iact_1_1_south_data_out_valid,
-	output 			[11:0] 	router_iact_1_1_south_data_out,
-	input  			       	router_iact_1_1_horiz_address_out_ready,
-	output 			       	router_iact_1_1_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_1_1_horiz_address_out,
-	input  			       	router_iact_1_1_horiz_data_out_ready,
-	output 			       	router_iact_1_1_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_1_1_horiz_data_out,
-	// iact	router 1_2        
-	output 			       	router_iact_1_2_north_address_in_ready,
-	input  			       	router_iact_1_2_north_address_in_valid,
-	input  			[6:0]  	router_iact_1_2_north_address_in,
-	output 			       	router_iact_1_2_north_data_in_ready,
-	input  			       	router_iact_1_2_north_data_in_valid,
-	input  			[11:0] 	router_iact_1_2_north_data_in,
-	output 			       	router_iact_1_2_south_address_in_ready,
-	input  			       	router_iact_1_2_south_address_in_valid,
-	input  			[6:0]  	router_iact_1_2_south_address_in,
-	output 			       	router_iact_1_2_south_data_in_ready,
-	input  			       	router_iact_1_2_south_data_in_valid,
-	input  			[11:0] 	router_iact_1_2_south_data_in,
-	output 			       	router_iact_1_2_horiz_address_in_ready,
-	input  			       	router_iact_1_2_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_1_2_horiz_address_in,
-	output 			       	router_iact_1_2_horiz_data_in_ready,
-	input  			       	router_iact_1_2_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_1_2_horiz_data_in,
-	input  			       	router_iact_1_2_north_address_out_ready,	
-	output 			       	router_iact_1_2_north_address_out_valid,
-	output 			[6:0]  	router_iact_1_2_north_address_out,
-	input  			       	router_iact_1_2_north_data_out_ready,
-	output 			       	router_iact_1_2_north_data_out_valid,
-	output 			[11:0] 	router_iact_1_2_north_data_out,
-	input  			       	router_iact_1_2_south_address_out_ready,
-	output 			       	router_iact_1_2_south_address_out_valid,
-	output 			[6:0]  	router_iact_1_2_south_address_out,
-	input  			       	router_iact_1_2_south_data_out_ready,
-	output 			       	router_iact_1_2_south_data_out_valid,
-	output 			[11:0] 	router_iact_1_2_south_data_out,
-	input  			       	router_iact_1_2_horiz_address_out_ready,
-	output 			       	router_iact_1_2_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_1_2_horiz_address_out,
-	input  			       	router_iact_1_2_horiz_data_out_ready,
-	output 			       	router_iact_1_2_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_1_2_horiz_data_out,
-	// iact	router 2_0
-	output 			       	router_iact_2_0_north_address_in_ready,
-	input  			       	router_iact_2_0_north_address_in_valid,
-	input  			[6:0]  	router_iact_2_0_north_address_in,
-	output 			       	router_iact_2_0_north_data_in_ready,
-	input  			       	router_iact_2_0_north_data_in_valid,
-	input  			[11:0] 	router_iact_2_0_north_data_in,
-	output 			       	router_iact_2_0_south_address_in_ready,
-	input  			       	router_iact_2_0_south_address_in_valid,
-	input  			[6:0]  	router_iact_2_0_south_address_in,
-	output 			       	router_iact_2_0_south_data_in_ready,
-	input  			       	router_iact_2_0_south_data_in_valid,
-	input  			[11:0] 	router_iact_2_0_south_data_in,
-	output 			       	router_iact_2_0_horiz_address_in_ready,
-	input  			       	router_iact_2_0_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_2_0_horiz_address_in,
-	output 			       	router_iact_2_0_horiz_data_in_ready,
-	input  			       	router_iact_2_0_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_2_0_horiz_data_in,
-	input  			       	router_iact_2_0_north_address_out_ready,	
-	output 			       	router_iact_2_0_north_address_out_valid,
-	output 			[6:0]  	router_iact_2_0_north_address_out,
-	input  			       	router_iact_2_0_north_data_out_ready,
-	output 			       	router_iact_2_0_north_data_out_valid,
-	output 			[11:0] 	router_iact_2_0_north_data_out,
-	input  			       	router_iact_2_0_south_address_out_ready,
-	output 			       	router_iact_2_0_south_address_out_valid,
-	output 			[6:0]  	router_iact_2_0_south_address_out,
-	input  			       	router_iact_2_0_south_data_out_ready,
-	output 			       	router_iact_2_0_south_data_out_valid,
-	output 			[11:0] 	router_iact_2_0_south_data_out,
-	input  			       	router_iact_2_0_horiz_address_out_ready,
-	output 			       	router_iact_2_0_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_2_0_horiz_address_out,
-	input  			       	router_iact_2_0_horiz_data_out_ready,
-	output 			       	router_iact_2_0_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_2_0_horiz_data_out,	
-	// iact	router 2_1        
-	output 			       	router_iact_2_1_north_address_in_ready,
-	input  			       	router_iact_2_1_north_address_in_valid,
-	input  			[6:0]  	router_iact_2_1_north_address_in,
-	output 			       	router_iact_2_1_north_data_in_ready,
-	input  			       	router_iact_2_1_north_data_in_valid,
-	input  			[11:0] 	router_iact_2_1_north_data_in,
-	output 			       	router_iact_2_1_south_address_in_ready,
-	input  			       	router_iact_2_1_south_address_in_valid,
-	input  			[6:0]  	router_iact_2_1_south_address_in,
-	output 			       	router_iact_2_1_south_data_in_ready,
-	input  			       	router_iact_2_1_south_data_in_valid,
-	input  			[11:0] 	router_iact_2_1_south_data_in,
-	output 			       	router_iact_2_1_horiz_address_in_ready,
-	input  			       	router_iact_2_1_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_2_1_horiz_address_in,
-	output 			       	router_iact_2_1_horiz_data_in_ready,
-	input  			       	router_iact_2_1_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_2_1_horiz_data_in,
-	input  			       	router_iact_2_1_north_address_out_ready,	
-	output 			       	router_iact_2_1_north_address_out_valid,
-	output 			[6:0]  	router_iact_2_1_north_address_out,
-	input  			       	router_iact_2_1_north_data_out_ready,
-	output 			       	router_iact_2_1_north_data_out_valid,
-	output 			[11:0] 	router_iact_2_1_north_data_out,
-	input  			       	router_iact_2_1_south_address_out_ready,
-	output 			       	router_iact_2_1_south_address_out_valid,
-	output 			[6:0]  	router_iact_2_1_south_address_out,
-	input  			       	router_iact_2_1_south_data_out_ready,
-	output 			       	router_iact_2_1_south_data_out_valid,
-	output 			[11:0] 	router_iact_2_1_south_data_out,
-	input  			       	router_iact_2_1_horiz_address_out_ready,
-	output 			       	router_iact_2_1_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_2_1_horiz_address_out,
-	input  			       	router_iact_2_1_horiz_data_out_ready,
-	output 			       	router_iact_2_1_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_2_1_horiz_data_out,
-	// iact	router 2_2        
-	output 			       	router_iact_2_2_north_address_in_ready,
-	input  			       	router_iact_2_2_north_address_in_valid,
-	input  			[6:0]  	router_iact_2_2_north_address_in,
-	output 			       	router_iact_2_2_north_data_in_ready,
-	input  			       	router_iact_2_2_north_data_in_valid,
-	input  			[11:0] 	router_iact_2_2_north_data_in,
-	output 			       	router_iact_2_2_south_address_in_ready,
-	input  			       	router_iact_2_2_south_address_in_valid,
-	input  			[6:0]  	router_iact_2_2_south_address_in,
-	output 			       	router_iact_2_2_south_data_in_ready,
-	input  			       	router_iact_2_2_south_data_in_valid,
-	input  			[11:0] 	router_iact_2_2_south_data_in,
-	output 			       	router_iact_2_2_horiz_address_in_ready,
-	input  			       	router_iact_2_2_horiz_address_in_valid,
-	input  			[6:0]  	router_iact_2_2_horiz_address_in,
-	output 			       	router_iact_2_2_horiz_data_in_ready,
-	input  			       	router_iact_2_2_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_2_2_horiz_data_in,
-	input  			       	router_iact_2_2_north_address_out_ready,	
-	output 			       	router_iact_2_2_north_address_out_valid,
-	output 			[6:0]  	router_iact_2_2_north_address_out,
-	input  			       	router_iact_2_2_north_data_out_ready,
-	output 			       	router_iact_2_2_north_data_out_valid,
-	output 			[11:0] 	router_iact_2_2_north_data_out,
-	input  			       	router_iact_2_2_south_address_out_ready,
-	output 			       	router_iact_2_2_south_address_out_valid,
-	output 			[6:0]  	router_iact_2_2_south_address_out,
-	input  			       	router_iact_2_2_south_data_out_ready,
-	output 			       	router_iact_2_2_south_data_out_valid,
-	output 			[11:0] 	router_iact_2_2_south_data_out,
-	input  			       	router_iact_2_2_horiz_address_out_ready,
-	output 			       	router_iact_2_2_horiz_address_out_valid,
-	output 			[6:0]  	router_iact_2_2_horiz_address_out,
-	input  			       	router_iact_2_2_horiz_data_out_ready,
-	output 			       	router_iact_2_2_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_2_2_horiz_data_out,
-					
-	// weight router 0
-	output 			       	router_weight_0_horiz_address_in_ready,
-	input  			       	router_weight_0_horiz_address_in_valid,
-	input  			[7:0]  	router_weight_0_horiz_address_in,
-	output 			       	router_weight_0_horiz_data_in_ready,
-	input  			       	router_weight_0_horiz_data_in_valid,
-	input  			[12:0] 	router_weight_0_horiz_data_in,
-	input  			       	router_weight_0_horiz_address_out_ready,
-	output 			       	router_weight_0_horiz_address_out_valid,
-	output 			[7:0]  	router_weight_0_horiz_address_out,
-	input  			       	router_weight_0_horiz_data_out_ready,
-	output 			       	router_weight_0_horiz_data_out_valid,
-	output 			[12:0] 	router_weight_0_horiz_data_out,
-	// weight router 1
-	output 			       	router_weight_1_horiz_address_in_ready,
-	input  			       	router_weight_1_horiz_address_in_valid,
-	input  			[7:0]  	router_weight_1_horiz_address_in,
-	output 			       	router_weight_1_horiz_data_in_ready,
-	input  			       	router_weight_1_horiz_data_in_valid,
-	input  			[12:0] 	router_weight_1_horiz_data_in,
-	input  			       	router_weight_1_horiz_address_out_ready,
-	output 			       	router_weight_1_horiz_address_out_valid,
-	output 			[7:0]  	router_weight_1_horiz_address_out,
-	input  			       	router_weight_1_horiz_data_out_ready,
-	output 			       	router_weight_1_horiz_data_out_valid,
-	output 			[12:0] 	router_weight_1_horiz_data_out,
-	// weight router 2
-	output    			    router_weight_2_horiz_address_in_ready,
-	input  			       	router_weight_2_horiz_address_in_valid,
-	input  			[7:0]  	router_weight_2_horiz_address_in,
-	output 			       	router_weight_2_horiz_data_in_ready,
-	input  			       	router_weight_2_horiz_data_in_valid,
-	input  			[12:0] 	router_weight_2_horiz_data_in,
-	input  			       	router_weight_2_horiz_address_out_ready,
-	output 			       	router_weight_2_horiz_address_out_valid,
-	output 			[7:0]  	router_weight_2_horiz_address_out,
-	input  			       	router_weight_2_horiz_data_out_ready,
-	output 			       	router_weight_2_horiz_data_out_valid,
-	output 			[12:0] 	router_weight_2_horiz_data_out,
-	
-	// psum router 0
-	output        			router_psum_0_north_in_ready,
-	input         			router_psum_0_north_in_valid,
-	input	signed	[20:0] 	router_psum_0_north_in,
-	input         			router_psum_0_south_out_ready,
-	output        			router_psum_0_south_out_valid,
-	output	signed	[20:0] 	router_psum_0_south_out,
-	// psum router 1
-	output        			router_psum_1_north_in_ready,
-	input         			router_psum_1_north_in_valid,
-	input	signed	[20:0] 	router_psum_1_north_in,
-	input         			router_psum_1_south_out_ready,
-	output        			router_psum_1_south_out_valid,
-	output	signed	[20:0] 	router_psum_1_south_out,
-	// psum router 2
-	output        			router_psum_2_north_in_ready,
-	input         			router_psum_2_north_in_valid,
-	input	signed	[20:0] 	router_psum_2_north_in,
-	input         			router_psum_2_south_out_ready,
-	output        			router_psum_2_south_out_valid,
-	output	signed	[20:0] 	router_psum_2_south_out,
-	
-	// psum veritcal flow (interconnect with vertical cluster group)
-	output        			cg_south_psum_0_in_ready,
-	input         			cg_south_psum_0_in_valid,
-	input	signed	[20:0] 	cg_south_psum_0_in,
-	output        			cg_south_psum_1_in_ready,
-	input         			cg_south_psum_1_in_valid,
-	input	signed	[20:0] 	cg_south_psum_1_in,
-	output        			cg_south_psum_2_in_ready,
-	input         			cg_south_psum_2_in_valid,
-	input	signed	[20:0] 	cg_south_psum_2_in,
-	input         			cg_north_psum_0_out_ready,
-	output        			cg_north_psum_0_out_valid,
-	output	signed	[20:0] 	cg_north_psum_0_out,
-	input         			cg_north_psum_1_out_ready,
-	output        			cg_north_psum_1_out_valid,
-	output	signed	[20:0] 	cg_north_psum_1_out,
-	input         			cg_north_psum_2_out_ready,
-	output        			cg_north_psum_2_out_valid,
-	output	signed	[20:0] 	cg_north_psum_2_out
+	// tile-chain 互連 port（在 CG_array 內與鄰 CG 對接）
+	// iact router [r][c]＝9 router；in=收進 router、out=送出 router；ready 為反向背壓
+	output 		       	iact_north_address_in_ready [0:2][0:2],
+	input  		       	iact_north_address_in_valid [0:2][0:2],
+	input  		[6:0]  	iact_north_address_in_bits [0:2][0:2],
+	output 		       	iact_north_data_in_ready [0:2][0:2],
+	input  		       	iact_north_data_in_valid [0:2][0:2],
+	input  		[11:0] 	iact_north_data_in_bits [0:2][0:2],
+	output 		       	iact_south_address_in_ready [0:2][0:2],
+	input  		       	iact_south_address_in_valid [0:2][0:2],
+	input  		[6:0]  	iact_south_address_in_bits [0:2][0:2],
+	output 		       	iact_south_data_in_ready [0:2][0:2],
+	input  		       	iact_south_data_in_valid [0:2][0:2],
+	input  		[11:0] 	iact_south_data_in_bits [0:2][0:2],
+	output 		       	iact_horiz_address_in_ready [0:2][0:2],
+	input  		       	iact_horiz_address_in_valid [0:2][0:2],
+	input  		[6:0]  	iact_horiz_address_in_bits [0:2][0:2],
+	output 		       	iact_horiz_data_in_ready [0:2][0:2],
+	input  		       	iact_horiz_data_in_valid [0:2][0:2],
+	input  		[11:0] 	iact_horiz_data_in_bits [0:2][0:2],
+	input  		       	iact_north_address_out_ready [0:2][0:2],
+	output 		       	iact_north_address_out_valid [0:2][0:2],
+	output 		[6:0]  	iact_north_address_out_bits [0:2][0:2],
+	input  		       	iact_north_data_out_ready [0:2][0:2],
+	output 		       	iact_north_data_out_valid [0:2][0:2],
+	output 		[11:0] 	iact_north_data_out_bits [0:2][0:2],
+	input  		       	iact_south_address_out_ready [0:2][0:2],
+	output 		       	iact_south_address_out_valid [0:2][0:2],
+	output 		[6:0]  	iact_south_address_out_bits [0:2][0:2],
+	input  		       	iact_south_data_out_ready [0:2][0:2],
+	output 		       	iact_south_data_out_valid [0:2][0:2],
+	output 		[11:0] 	iact_south_data_out_bits [0:2][0:2],
+	input  		       	iact_horiz_address_out_ready [0:2][0:2],
+	output 		       	iact_horiz_address_out_valid [0:2][0:2],
+	output 		[6:0]  	iact_horiz_address_out_bits [0:2][0:2],
+	input  		       	iact_horiz_data_out_ready [0:2][0:2],
+	output 		       	iact_horiz_data_out_valid [0:2][0:2],
+	output 		[11:0] 	iact_horiz_data_out_bits [0:2][0:2],
+
+	// weight router per-row [0:2]（僅 horiz 通道）
+	output 		       	weight_horiz_address_in_ready [0:2],
+	input  		       	weight_horiz_address_in_valid [0:2],
+	input  		[7:0]  	weight_horiz_address_in_bits [0:2],
+	output 		       	weight_horiz_data_in_ready [0:2],
+	input  		       	weight_horiz_data_in_valid [0:2],
+	input  		[12:0] 	weight_horiz_data_in_bits [0:2],
+	input  		       	weight_horiz_address_out_ready [0:2],
+	output 		       	weight_horiz_address_out_valid [0:2],
+	output 		[7:0]  	weight_horiz_address_out_bits [0:2],
+	input  		       	weight_horiz_data_out_ready [0:2],
+	output 		       	weight_horiz_data_out_valid [0:2],
+	output 		[12:0] 	weight_horiz_data_out_bits [0:2],
+
+	// psum router per-row [0:2]：北收（north_in）南送（south_out）
+	output 		       	psum_north_in_ready [0:2],
+	input  		       	psum_north_in_valid [0:2],
+	input  	signed	[20:0] 	psum_north_in_bits [0:2],
+	input  		       	psum_south_out_ready [0:2],
+	output 		       	psum_south_out_valid [0:2],
+	output 	signed	[20:0] 	psum_south_out_bits [0:2],
+
+	// psum veritcal flow (interconnect with vertical cluster group)：cg_psum 向北累加
+	output 		       	cg_south_psum_in_ready [0:2],
+	input  		       	cg_south_psum_in_valid [0:2],
+	input  	signed	[20:0] 	cg_south_psum_in [0:2],
+	input  		       	cg_north_psum_out_ready [0:2],
+	output 		       	cg_north_psum_out_valid [0:2],
+	output 	signed	[20:0] 	cg_north_psum_out [0:2]
 );
 
 
@@ -530,12 +183,9 @@ module ClusterGroup (
 // iact：ready 回手 (per-row [0:2])
 wire                 PECluster_iact_address_in_ready [0:2];
 wire                 PECluster_iact_data_in_ready    [0:2];
-// psum：輸出 + from_south 中繼 (per-column [0:2], signed [20:0])
+// psum：輸出 (per-column [0:2], signed [20:0])；from_south 已直連 cg_south_psum_* port
 wire                 PECluster_psum_out_valid [0:2];
 wire signed [20:0]   PECluster_psum_out       [0:2];
-wire                 PECluster_psum_in_from_south_ready [0:2];
-wire                 PECluster_psum_in_from_south_valid [0:2];
-wire signed [20:0]   PECluster_psum_in_from_south       [0:2];
 // control
 wire                 PECluster_all_write_fin;
 wire                 PECluster_all_cal_fin;                               
@@ -568,85 +218,31 @@ wire [6:0]         iact_GLB_address_in_bits [0:2][0:2];
 wire               iact_GLB_data_in_ready [0:2][0:2];
 wire               iact_GLB_data_in_valid [0:2][0:2];
 wire [11:0]        iact_GLB_data_in_bits [0:2][0:2];
-wire               iact_north_address_in_ready [0:2][0:2];
-wire               iact_north_address_in_valid [0:2][0:2];
-wire [6:0]         iact_north_address_in_bits [0:2][0:2];
-wire               iact_north_data_in_ready [0:2][0:2];
-wire               iact_north_data_in_valid [0:2][0:2];
-wire [11:0]        iact_north_data_in_bits [0:2][0:2];
-wire               iact_south_address_in_ready [0:2][0:2];
-wire               iact_south_address_in_valid [0:2][0:2];
-wire [6:0]         iact_south_address_in_bits [0:2][0:2];
-wire               iact_south_data_in_ready [0:2][0:2];
-wire               iact_south_data_in_valid [0:2][0:2];
-wire [11:0]        iact_south_data_in_bits [0:2][0:2];
-wire               iact_horiz_address_in_ready [0:2][0:2];
-wire               iact_horiz_address_in_valid [0:2][0:2];
-wire [6:0]         iact_horiz_address_in_bits [0:2][0:2];
-wire               iact_horiz_data_in_ready [0:2][0:2];
-wire               iact_horiz_data_in_valid [0:2][0:2];
-wire [11:0]        iact_horiz_data_in_bits [0:2][0:2];
 wire               iact_PE_address_out_ready [0:2][0:2];
 wire               iact_PE_address_out_valid [0:2][0:2];
 wire [6:0]         iact_PE_address_out_bits [0:2][0:2];
 wire               iact_PE_data_out_ready [0:2][0:2];
 wire               iact_PE_data_out_valid [0:2][0:2];
 wire [11:0]        iact_PE_data_out_bits [0:2][0:2];
-wire               iact_north_address_out_ready [0:2][0:2];
-wire               iact_north_address_out_valid [0:2][0:2];
-wire [6:0]         iact_north_address_out_bits [0:2][0:2];
-wire               iact_north_data_out_ready [0:2][0:2];
-wire               iact_north_data_out_valid [0:2][0:2];
-wire [11:0]        iact_north_data_out_bits [0:2][0:2];
-wire               iact_south_address_out_ready [0:2][0:2];
-wire               iact_south_address_out_valid [0:2][0:2];
-wire [6:0]         iact_south_address_out_bits [0:2][0:2];
-wire               iact_south_data_out_ready [0:2][0:2];
-wire               iact_south_data_out_valid [0:2][0:2];
-wire [11:0]        iact_south_data_out_bits [0:2][0:2];
-wire               iact_horiz_address_out_ready [0:2][0:2];
-wire               iact_horiz_address_out_valid [0:2][0:2];
-wire [6:0]         iact_horiz_address_out_bits [0:2][0:2];
-wire               iact_horiz_data_out_ready [0:2][0:2];
-wire               iact_horiz_data_out_valid [0:2][0:2];
-wire [11:0]        iact_horiz_data_out_bits [0:2][0:2];
 wire               weight_GLB_address_in_ready [0:2];
 wire               weight_GLB_address_in_valid [0:2];
 wire [7:0]         weight_GLB_address_in_bits [0:2];
 wire               weight_GLB_data_in_ready [0:2];
 wire               weight_GLB_data_in_valid [0:2];
 wire [12:0]        weight_GLB_data_in_bits [0:2];
-wire               weight_horiz_address_in_ready [0:2];
-wire               weight_horiz_address_in_valid [0:2];
-wire [7:0]         weight_horiz_address_in_bits [0:2];
-wire               weight_horiz_data_in_ready [0:2];
-wire               weight_horiz_data_in_valid [0:2];
-wire [12:0]        weight_horiz_data_in_bits [0:2];
 wire               weight_PE_address_out_valid [0:2];
 wire [7:0]         weight_PE_address_out_bits [0:2];
 wire               weight_PE_data_out_valid [0:2];
 wire [12:0]        weight_PE_data_out_bits [0:2];
-wire               weight_horiz_address_out_ready [0:2];
-wire               weight_horiz_address_out_valid [0:2];
-wire [7:0]         weight_horiz_address_out_bits [0:2];
-wire               weight_horiz_data_out_ready [0:2];
-wire               weight_horiz_data_out_valid [0:2];
-wire [12:0]        weight_horiz_data_out_bits [0:2];
 wire               psum_PE_in_ready [0:2];
 wire               psum_GLB_in_ready [0:2];
 wire               psum_GLB_in_valid [0:2];
-wire               psum_north_in_ready [0:2];
-wire               psum_north_in_valid [0:2];
-wire signed [20:0] psum_north_in_bits [0:2];
 wire               psum_PE_out_ready [0:2];
 wire               psum_PE_out_valid [0:2];
 wire signed [20:0] psum_PE_out_bits [0:2];
 wire               psum_GLB_out_ready [0:2];
 wire               psum_GLB_out_valid [0:2];
 wire signed [20:0] psum_GLB_out_bits [0:2];
-wire               psum_south_out_ready [0:2];
-wire               psum_south_out_valid [0:2];
-wire signed [20:0] psum_south_out_bits [0:2];
 
 
 // cluster group controller connection
@@ -682,9 +278,9 @@ PE_Cluster PE_Cluster_inst (
 	.psum_out_ready          (psum_PE_in_ready),
 	.psum_out_valid          (PECluster_psum_out_valid),
 	.psum_out                (PECluster_psum_out),
-	.psum_in_from_south_ready(PECluster_psum_in_from_south_ready),
-	.psum_in_from_south_valid(PECluster_psum_in_from_south_valid),
-	.psum_in_from_south      (PECluster_psum_in_from_south),
+	.psum_in_from_south_ready(cg_south_psum_in_ready),
+	.psum_in_from_south_valid(cg_south_psum_in_valid),
+	.psum_in_from_south      (cg_south_psum_in),
 	.PE_disable              (PE_disable),
 	.psum_load_en            (cg_ctrl_psum_load_en),
 	.iact_data_in_sel        (PE_cluster_iact_data_in_sel),
@@ -953,254 +549,18 @@ assign GLB_psum_0_data_out 				= GLBCluster_psum_data_out[0];
 assign GLB_psum_1_data_out 				= GLBCluster_psum_data_out[1]; 
 assign GLB_psum_2_data_out 				= GLBCluster_psum_data_out[2]; 
 
-// iact router ready connection
-assign router_iact_0_0_north_address_in_ready 	= iact_north_address_in_ready[0][0]; 	
-assign router_iact_0_0_south_address_in_ready 	= iact_south_address_in_ready[0][0]; 	
-assign router_iact_0_0_horiz_address_in_ready 	= iact_horiz_address_in_ready[0][0]; 
-assign router_iact_0_1_north_address_in_ready 	= iact_north_address_in_ready[0][1]; 
-assign router_iact_0_1_south_address_in_ready 	= iact_south_address_in_ready[0][1]; 
-assign router_iact_0_1_horiz_address_in_ready 	= iact_horiz_address_in_ready[0][1]; 
-assign router_iact_0_2_north_address_in_ready 	= iact_north_address_in_ready[0][2]; 
-assign router_iact_0_2_south_address_in_ready 	= iact_south_address_in_ready[0][2]; 
-assign router_iact_0_2_horiz_address_in_ready 	= iact_horiz_address_in_ready[0][2]; 
-													   
-assign router_iact_0_0_north_data_in_ready 		= iact_north_data_in_ready[0][0]; 			
-assign router_iact_0_0_south_data_in_ready 		= iact_south_data_in_ready[0][0]; 				
-assign router_iact_0_0_horiz_data_in_ready 		= iact_horiz_data_in_ready[0][0]; 
-assign router_iact_0_1_north_data_in_ready 		= iact_north_data_in_ready[0][1];
-assign router_iact_0_1_south_data_in_ready 		= iact_south_data_in_ready[0][1];
-assign router_iact_0_1_horiz_data_in_ready 		= iact_horiz_data_in_ready[0][1];
-assign router_iact_0_2_north_data_in_ready 		= iact_north_data_in_ready[0][2];
-assign router_iact_0_2_south_data_in_ready 		= iact_south_data_in_ready[0][2];
-assign router_iact_0_2_horiz_data_in_ready 		= iact_horiz_data_in_ready[0][2];
-
-assign router_iact_1_0_north_address_in_ready 	= iact_north_address_in_ready[1][0]; 	
-assign router_iact_1_0_south_address_in_ready 	= iact_south_address_in_ready[1][0]; 	
-assign router_iact_1_0_horiz_address_in_ready 	= iact_horiz_address_in_ready[1][0]; 
-assign router_iact_1_1_north_address_in_ready 	= iact_north_address_in_ready[1][1]; 
-assign router_iact_1_1_south_address_in_ready 	= iact_south_address_in_ready[1][1]; 
-assign router_iact_1_1_horiz_address_in_ready 	= iact_horiz_address_in_ready[1][1]; 
-assign router_iact_1_2_north_address_in_ready 	= iact_north_address_in_ready[1][2]; 
-assign router_iact_1_2_south_address_in_ready 	= iact_south_address_in_ready[1][2]; 
-assign router_iact_1_2_horiz_address_in_ready 	= iact_horiz_address_in_ready[1][2]; 
-											  
-assign router_iact_1_0_north_data_in_ready 		= iact_north_data_in_ready[1][0]; 			
-assign router_iact_1_0_south_data_in_ready 		= iact_south_data_in_ready[1][0]; 				
-assign router_iact_1_0_horiz_data_in_ready 		= iact_horiz_data_in_ready[1][0]; 
-assign router_iact_1_1_north_data_in_ready 		= iact_north_data_in_ready[1][1];
-assign router_iact_1_1_south_data_in_ready 		= iact_south_data_in_ready[1][1];
-assign router_iact_1_1_horiz_data_in_ready 		= iact_horiz_data_in_ready[1][1];
-assign router_iact_1_2_north_data_in_ready 		= iact_north_data_in_ready[1][2];
-assign router_iact_1_2_south_data_in_ready 		= iact_south_data_in_ready[1][2];
-assign router_iact_1_2_horiz_data_in_ready 		= iact_horiz_data_in_ready[1][2];
-
-assign router_iact_2_0_north_address_in_ready 	= iact_north_address_in_ready[2][0]; 	
-assign router_iact_2_0_south_address_in_ready 	= iact_south_address_in_ready[2][0]; 	
-assign router_iact_2_0_horiz_address_in_ready 	= iact_horiz_address_in_ready[2][0]; 
-assign router_iact_2_1_north_address_in_ready 	= iact_north_address_in_ready[2][1]; 
-assign router_iact_2_1_south_address_in_ready 	= iact_south_address_in_ready[2][1]; 
-assign router_iact_2_1_horiz_address_in_ready 	= iact_horiz_address_in_ready[2][1]; 
-assign router_iact_2_2_north_address_in_ready 	= iact_north_address_in_ready[2][2]; 
-assign router_iact_2_2_south_address_in_ready 	= iact_south_address_in_ready[2][2]; 
-assign router_iact_2_2_horiz_address_in_ready 	= iact_horiz_address_in_ready[2][2]; 
-											   
-assign router_iact_2_0_north_data_in_ready 		= iact_north_data_in_ready[2][0]; 			
-assign router_iact_2_0_south_data_in_ready 		= iact_south_data_in_ready[2][0]; 				
-assign router_iact_2_0_horiz_data_in_ready 		= iact_horiz_data_in_ready[2][0]; 
-assign router_iact_2_1_north_data_in_ready 		= iact_north_data_in_ready[2][1];
-assign router_iact_2_1_south_data_in_ready 		= iact_south_data_in_ready[2][1];
-assign router_iact_2_1_horiz_data_in_ready 		= iact_horiz_data_in_ready[2][1];
-assign router_iact_2_2_north_data_in_ready 		= iact_north_data_in_ready[2][2];
-assign router_iact_2_2_south_data_in_ready 		= iact_south_data_in_ready[2][2];
-assign router_iact_2_2_horiz_data_in_ready 		= iact_horiz_data_in_ready[2][2];
-
-// iact router valid connection
-assign router_iact_0_0_north_address_out_valid 	= iact_north_address_out_valid[0][0]; 
-assign router_iact_0_0_south_address_out_valid 	= iact_south_address_out_valid[0][0]; 
-assign router_iact_0_0_horiz_address_out_valid 	= iact_horiz_address_out_valid[0][0]; 
-assign router_iact_0_1_north_address_out_valid 	= iact_north_address_out_valid[0][1]; 
-assign router_iact_0_1_south_address_out_valid 	= iact_south_address_out_valid[0][1]; 
-assign router_iact_0_1_horiz_address_out_valid 	= iact_horiz_address_out_valid[0][1]; 
-assign router_iact_0_2_north_address_out_valid 	= iact_north_address_out_valid[0][2]; 
-assign router_iact_0_2_south_address_out_valid 	= iact_south_address_out_valid[0][2]; 
-assign router_iact_0_2_horiz_address_out_valid 	= iact_horiz_address_out_valid[0][2]; 
-													   
-assign router_iact_0_0_north_data_out_valid 	= iact_north_data_out_valid[0][0];
-assign router_iact_0_0_south_data_out_valid 	= iact_south_data_out_valid[0][0];
-assign router_iact_0_0_horiz_data_out_valid 	= iact_horiz_data_out_valid[0][0];
-assign router_iact_0_1_north_data_out_valid 	= iact_north_data_out_valid[0][1]; 
-assign router_iact_0_1_south_data_out_valid 	= iact_south_data_out_valid[0][1]; 
-assign router_iact_0_1_horiz_data_out_valid 	= iact_horiz_data_out_valid[0][1]; 
-assign router_iact_0_2_north_data_out_valid 	= iact_north_data_out_valid[0][2];
-assign router_iact_0_2_south_data_out_valid 	= iact_south_data_out_valid[0][2];
-assign router_iact_0_2_horiz_data_out_valid 	= iact_horiz_data_out_valid[0][2];
-
-assign router_iact_1_0_north_address_out_valid 	= iact_north_address_out_valid[1][0]; 
-assign router_iact_1_0_south_address_out_valid 	= iact_south_address_out_valid[1][0]; 
-assign router_iact_1_0_horiz_address_out_valid 	= iact_horiz_address_out_valid[1][0]; 
-assign router_iact_1_1_north_address_out_valid 	= iact_north_address_out_valid[1][1]; 
-assign router_iact_1_1_south_address_out_valid 	= iact_south_address_out_valid[1][1]; 
-assign router_iact_1_1_horiz_address_out_valid 	= iact_horiz_address_out_valid[1][1]; 
-assign router_iact_1_2_north_address_out_valid 	= iact_north_address_out_valid[1][2]; 
-assign router_iact_1_2_south_address_out_valid 	= iact_south_address_out_valid[1][2]; 
-assign router_iact_1_2_horiz_address_out_valid 	= iact_horiz_address_out_valid[1][2]; 
-												  
-assign router_iact_1_0_north_data_out_valid 	= iact_north_data_out_valid[1][0];
-assign router_iact_1_0_south_data_out_valid 	= iact_south_data_out_valid[1][0];
-assign router_iact_1_0_horiz_data_out_valid 	= iact_horiz_data_out_valid[1][0];
-assign router_iact_1_1_north_data_out_valid 	= iact_north_data_out_valid[1][1]; 
-assign router_iact_1_1_south_data_out_valid 	= iact_south_data_out_valid[1][1]; 
-assign router_iact_1_1_horiz_data_out_valid 	= iact_horiz_data_out_valid[1][1]; 
-assign router_iact_1_2_north_data_out_valid 	= iact_north_data_out_valid[1][2];
-assign router_iact_1_2_south_data_out_valid 	= iact_south_data_out_valid[1][2];
-assign router_iact_1_2_horiz_data_out_valid 	= iact_horiz_data_out_valid[1][2];
-
-assign router_iact_2_0_north_address_out_valid 	= iact_north_address_out_valid[2][0]; 
-assign router_iact_2_0_south_address_out_valid 	= iact_south_address_out_valid[2][0]; 
-assign router_iact_2_0_horiz_address_out_valid 	= iact_horiz_address_out_valid[2][0]; 
-assign router_iact_2_1_north_address_out_valid 	= iact_north_address_out_valid[2][1]; 
-assign router_iact_2_1_south_address_out_valid 	= iact_south_address_out_valid[2][1]; 
-assign router_iact_2_1_horiz_address_out_valid 	= iact_horiz_address_out_valid[2][1]; 
-assign router_iact_2_2_north_address_out_valid 	= iact_north_address_out_valid[2][2]; 
-assign router_iact_2_2_south_address_out_valid 	= iact_south_address_out_valid[2][2]; 
-assign router_iact_2_2_horiz_address_out_valid 	= iact_horiz_address_out_valid[2][2]; 
-											   
-assign router_iact_2_0_north_data_out_valid 	= iact_north_data_out_valid[2][0];
-assign router_iact_2_0_south_data_out_valid 	= iact_south_data_out_valid[2][0];
-assign router_iact_2_0_horiz_data_out_valid 	= iact_horiz_data_out_valid[2][0];
-assign router_iact_2_1_north_data_out_valid 	= iact_north_data_out_valid[2][1]; 
-assign router_iact_2_1_south_data_out_valid 	= iact_south_data_out_valid[2][1]; 
-assign router_iact_2_1_horiz_data_out_valid 	= iact_horiz_data_out_valid[2][1]; 
-assign router_iact_2_2_north_data_out_valid 	= iact_north_data_out_valid[2][2];
-assign router_iact_2_2_south_data_out_valid 	= iact_south_data_out_valid[2][2];
-assign router_iact_2_2_horiz_data_out_valid 	= iact_horiz_data_out_valid[2][2];
-
-
-// iact router data connection
-assign router_iact_0_0_north_address_out 		= iact_north_address_out_bits[0][0]; 
-assign router_iact_0_0_south_address_out 		= iact_south_address_out_bits[0][0];
-assign router_iact_0_0_horiz_address_out 		= iact_horiz_address_out_bits[0][0]; 
-assign router_iact_0_1_north_address_out 		= iact_north_address_out_bits[0][1]; 
-assign router_iact_0_1_south_address_out 		= iact_south_address_out_bits[0][1]; 
-assign router_iact_0_1_horiz_address_out 		= iact_horiz_address_out_bits[0][1]; 
-assign router_iact_0_2_north_address_out 		= iact_north_address_out_bits[0][2]; 
-assign router_iact_0_2_south_address_out 		= iact_south_address_out_bits[0][2]; 
-assign router_iact_0_2_horiz_address_out 		= iact_horiz_address_out_bits[0][2]; 
-													
-assign router_iact_0_0_north_data_out 			= iact_north_data_out_bits[0][0];  
-assign router_iact_0_0_south_data_out 			= iact_south_data_out_bits[0][0]; 
-assign router_iact_0_0_horiz_data_out 			= iact_horiz_data_out_bits[0][0]; 
-assign router_iact_0_1_north_data_out 			= iact_north_data_out_bits[0][1]; 
-assign router_iact_0_1_south_data_out 			= iact_south_data_out_bits[0][1]; 
-assign router_iact_0_1_horiz_data_out 			= iact_horiz_data_out_bits[0][1]; 
-assign router_iact_0_2_north_data_out 			= iact_north_data_out_bits[0][2]; 
-assign router_iact_0_2_south_data_out 			= iact_south_data_out_bits[0][2]; 
-assign router_iact_0_2_horiz_data_out 			= iact_horiz_data_out_bits[0][2]; 
-	
-assign router_iact_1_0_north_address_out 		= iact_north_address_out_bits[1][0]; 
-assign router_iact_1_0_south_address_out 		= iact_south_address_out_bits[1][0];
-assign router_iact_1_0_horiz_address_out 		= iact_horiz_address_out_bits[1][0]; 
-assign router_iact_1_1_north_address_out 		= iact_north_address_out_bits[1][1]; 
-assign router_iact_1_1_south_address_out 		= iact_south_address_out_bits[1][1]; 
-assign router_iact_1_1_horiz_address_out 		= iact_horiz_address_out_bits[1][1]; 
-assign router_iact_1_2_north_address_out 		= iact_north_address_out_bits[1][2]; 
-assign router_iact_1_2_south_address_out 		= iact_south_address_out_bits[1][2]; 
-assign router_iact_1_2_horiz_address_out 		= iact_horiz_address_out_bits[1][2]; 
-												
-assign router_iact_1_0_north_data_out 			= iact_north_data_out_bits[1][0];  
-assign router_iact_1_0_south_data_out 			= iact_south_data_out_bits[1][0]; 
-assign router_iact_1_0_horiz_data_out 			= iact_horiz_data_out_bits[1][0]; 
-assign router_iact_1_1_north_data_out 			= iact_north_data_out_bits[1][1]; 
-assign router_iact_1_1_south_data_out 			= iact_south_data_out_bits[1][1]; 
-assign router_iact_1_1_horiz_data_out 			= iact_horiz_data_out_bits[1][1]; 
-assign router_iact_1_2_north_data_out 			= iact_north_data_out_bits[1][2]; 
-assign router_iact_1_2_south_data_out 			= iact_south_data_out_bits[1][2]; 
-assign router_iact_1_2_horiz_data_out 			= iact_horiz_data_out_bits[1][2]; 
-	
-assign router_iact_2_0_north_address_out 		= iact_north_address_out_bits[2][0]; 
-assign router_iact_2_0_south_address_out 		= iact_south_address_out_bits[2][0];
-assign router_iact_2_0_horiz_address_out 		= iact_horiz_address_out_bits[2][0]; 
-assign router_iact_2_1_north_address_out 		= iact_north_address_out_bits[2][1]; 
-assign router_iact_2_1_south_address_out 		= iact_south_address_out_bits[2][1]; 
-assign router_iact_2_1_horiz_address_out 		= iact_horiz_address_out_bits[2][1]; 
-assign router_iact_2_2_north_address_out 		= iact_north_address_out_bits[2][2]; 
-assign router_iact_2_2_south_address_out 		= iact_south_address_out_bits[2][2]; 
-assign router_iact_2_2_horiz_address_out 		= iact_horiz_address_out_bits[2][2]; 
-			
-assign router_iact_2_0_north_data_out 			= iact_north_data_out_bits[2][0];  
-assign router_iact_2_0_south_data_out 			= iact_south_data_out_bits[2][0]; 
-assign router_iact_2_0_horiz_data_out 			= iact_horiz_data_out_bits[2][0]; 
-assign router_iact_2_1_north_data_out 			= iact_north_data_out_bits[2][1]; 
-assign router_iact_2_1_south_data_out 			= iact_south_data_out_bits[2][1]; 
-assign router_iact_2_1_horiz_data_out 			= iact_horiz_data_out_bits[2][1]; 
-assign router_iact_2_2_north_data_out 			= iact_north_data_out_bits[2][2]; 
-assign router_iact_2_2_south_data_out 			= iact_south_data_out_bits[2][2]; 
-assign router_iact_2_2_horiz_data_out 			= iact_horiz_data_out_bits[2][2]; 
-
-// weight router ready connection
-assign router_weight_0_horiz_address_in_ready	= weight_horiz_address_in_ready[0]; 
-assign router_weight_1_horiz_address_in_ready	= weight_horiz_address_in_ready[1]; 
-assign router_weight_2_horiz_address_in_ready	= weight_horiz_address_in_ready[2]; 
-
-assign router_weight_0_horiz_data_in_ready 		= weight_horiz_data_in_ready[0];
-assign router_weight_1_horiz_data_in_ready 		= weight_horiz_data_in_ready[1]; 
-assign router_weight_2_horiz_data_in_ready 		= weight_horiz_data_in_ready[2]; 
-
-// weight router valid connection
-assign router_weight_0_horiz_address_out_valid 	= weight_horiz_address_out_valid[0]; 
-assign router_weight_1_horiz_address_out_valid 	= weight_horiz_address_out_valid[1]; 
-assign router_weight_2_horiz_address_out_valid 	= weight_horiz_address_out_valid[2]; 
-assign router_weight_0_horiz_data_out_valid		= weight_horiz_data_out_valid[0];
-assign router_weight_1_horiz_data_out_valid		= weight_horiz_data_out_valid[1];
-assign router_weight_2_horiz_data_out_valid		= weight_horiz_data_out_valid[2];
-
-// weight router data connection
-assign router_weight_0_horiz_address_out 		= weight_horiz_address_out_bits[0]; 
-assign router_weight_1_horiz_address_out 		= weight_horiz_address_out_bits[1]; 
-assign router_weight_2_horiz_address_out 		= weight_horiz_address_out_bits[2]; 
-assign router_weight_0_horiz_data_out 			= weight_horiz_data_out_bits[0]; 
-assign router_weight_1_horiz_data_out 			= weight_horiz_data_out_bits[1]; 
-assign router_weight_2_horiz_data_out 			= weight_horiz_data_out_bits[2]; 
-
-// psum router ready connection
-assign router_psum_0_north_in_ready 	= psum_north_in_ready[0]; 
-assign router_psum_1_north_in_ready 	= psum_north_in_ready[1]; 
-assign router_psum_2_north_in_ready 	= psum_north_in_ready[2]; 	
-
-// psum router valid connection
-assign router_psum_0_south_out_valid 	= psum_south_out_valid[0]; 
-assign router_psum_1_south_out_valid 	= psum_south_out_valid[1];
-assign router_psum_2_south_out_valid 	= psum_south_out_valid[2]; 
-
-// psum router data connection
-assign router_psum_0_south_out 			= psum_south_out_bits[0]; 	
-assign router_psum_1_south_out 			= psum_south_out_bits[1]; 	
-assign router_psum_2_south_out 			= psum_south_out_bits[2];	 
 
 // interconnect with vertical cluster group
-assign cg_south_psum_0_in_ready 		= PECluster_psum_in_from_south_ready[0]; 
-assign cg_south_psum_1_in_ready 		= PECluster_psum_in_from_south_ready[1]; 
-assign cg_south_psum_2_in_ready 		= PECluster_psum_in_from_south_ready[2]; 
 
-assign cg_north_psum_0_out_valid 		= PECluster_psum_out_valid[0]; 
-assign cg_north_psum_1_out_valid 		= PECluster_psum_out_valid[1]; 	
-assign cg_north_psum_2_out_valid 		= PECluster_psum_out_valid[2];
+assign cg_north_psum_out_valid[0] 		= PECluster_psum_out_valid[0]; 
+assign cg_north_psum_out_valid[1] 		= PECluster_psum_out_valid[1]; 	
+assign cg_north_psum_out_valid[2] 		= PECluster_psum_out_valid[2];
 
-assign cg_north_psum_0_out 				= PECluster_psum_out[0]; 			
-assign cg_north_psum_1_out 				= PECluster_psum_out[1]; 			
-assign cg_north_psum_2_out 				= PECluster_psum_out[2]; 			
+assign cg_north_psum_out[0] 				= PECluster_psum_out[0]; 			
+assign cg_north_psum_out[1] 				= PECluster_psum_out[1]; 			
+assign cg_north_psum_out[2] 				= PECluster_psum_out[2]; 			
 
 //=============== intra-connection ===============//
-// router cluster to PE cluster
-
-
-// psum accumulate from south cluster group
-assign PECluster_psum_in_from_south_valid[0] 	= cg_south_psum_0_in_valid; 
-assign PECluster_psum_in_from_south_valid[1] 	= cg_south_psum_1_in_valid; 
-assign PECluster_psum_in_from_south_valid[2] 	= cg_south_psum_2_in_valid; 
-assign PECluster_psum_in_from_south[0] 			= cg_south_psum_0_in; 	
-assign PECluster_psum_in_from_south[1] 			= cg_south_psum_1_in; 	
-assign PECluster_psum_in_from_south[2] 			= cg_south_psum_2_in; 	
 
 
 // psum 
@@ -1224,7 +584,7 @@ assign GLBCluster_psum_read_out_en[1]	= psum_SRAM_Bank_1_read_out_en;
 assign GLBCluster_psum_read_out_en[2]	= psum_SRAM_Bank_2_read_out_en;
 
 
-//============= other cluster group inter-connection =============//
+//======= router-side glue: iact PE-ready broadcast / psum GLB gating =======//
 // iact_ready
 assign iact_PE_address_out_ready[0][0]    	= PECluster_iact_address_in_ready[0]; 
 assign iact_PE_address_out_ready[0][2] 	  	= PECluster_iact_address_in_ready[0]; 
@@ -1236,33 +596,6 @@ assign iact_PE_address_out_ready[2][0]    	= PECluster_iact_address_in_ready[2];
 assign iact_PE_address_out_ready[2][2] 	  	= PECluster_iact_address_in_ready[2];
 assign iact_PE_address_out_ready[2][1] 	 	= PECluster_iact_address_in_ready[2];
 
-assign iact_north_address_out_ready[0][0] 	= router_iact_0_0_north_address_out_ready; 	
-assign iact_north_address_out_ready[0][1] 	= router_iact_0_1_north_address_out_ready; 
-assign iact_north_address_out_ready[0][2] 	= router_iact_0_2_north_address_out_ready; 
-assign iact_south_address_out_ready[0][0] 	= router_iact_0_0_south_address_out_ready; 	
-assign iact_south_address_out_ready[0][1] 	= router_iact_0_1_south_address_out_ready; 
-assign iact_south_address_out_ready[0][2] 	= router_iact_0_2_south_address_out_ready; 
-assign iact_horiz_address_out_ready[0][0] 	= router_iact_0_0_horiz_address_out_ready; 	
-assign iact_horiz_address_out_ready[0][1] 	= router_iact_0_1_horiz_address_out_ready; 
-assign iact_horiz_address_out_ready[0][2] 	= router_iact_0_2_horiz_address_out_ready; 
-assign iact_north_address_out_ready[1][0] 	= router_iact_1_0_north_address_out_ready; 	
-assign iact_north_address_out_ready[1][1] 	= router_iact_1_1_north_address_out_ready; 
-assign iact_north_address_out_ready[1][2] 	= router_iact_1_2_north_address_out_ready; 
-assign iact_south_address_out_ready[1][0] 	= router_iact_1_0_south_address_out_ready; 	
-assign iact_south_address_out_ready[1][1] 	= router_iact_1_1_south_address_out_ready; 
-assign iact_south_address_out_ready[1][2] 	= router_iact_1_2_south_address_out_ready; 
-assign iact_horiz_address_out_ready[1][0] 	= router_iact_1_0_horiz_address_out_ready; 	
-assign iact_horiz_address_out_ready[1][1] 	= router_iact_1_1_horiz_address_out_ready; 
-assign iact_horiz_address_out_ready[1][2] 	= router_iact_1_2_horiz_address_out_ready; 
-assign iact_north_address_out_ready[2][0] 	= router_iact_2_0_north_address_out_ready; 	
-assign iact_north_address_out_ready[2][1] 	= router_iact_2_1_north_address_out_ready; 
-assign iact_north_address_out_ready[2][2] 	= router_iact_2_2_north_address_out_ready; 
-assign iact_south_address_out_ready[2][0] 	= router_iact_2_0_south_address_out_ready; 	
-assign iact_south_address_out_ready[2][1] 	= router_iact_2_1_south_address_out_ready; 
-assign iact_south_address_out_ready[2][2] 	= router_iact_2_2_south_address_out_ready; 
-assign iact_horiz_address_out_ready[2][0] 	= router_iact_2_0_horiz_address_out_ready; 	
-assign iact_horiz_address_out_ready[2][1] 	= router_iact_2_1_horiz_address_out_ready; 
-assign iact_horiz_address_out_ready[2][2] 	= router_iact_2_2_horiz_address_out_ready; 
 
 assign iact_PE_data_out_ready[0][0]    		= PECluster_iact_data_in_ready[0];
 assign iact_PE_data_out_ready[0][1] 			= PECluster_iact_data_in_ready[0];
@@ -1274,193 +607,15 @@ assign iact_PE_data_out_ready[2][0]    		= PECluster_iact_data_in_ready[2];
 assign iact_PE_data_out_ready[2][1] 			= PECluster_iact_data_in_ready[2];
 assign iact_PE_data_out_ready[2][2] 			= PECluster_iact_data_in_ready[2];
 
-assign iact_north_data_out_ready[0][0] 		= router_iact_0_0_north_data_out_ready; 	
-assign iact_north_data_out_ready[0][1] 		= router_iact_0_1_north_data_out_ready; 
-assign iact_north_data_out_ready[0][2] 		= router_iact_0_2_north_data_out_ready; 
-assign iact_south_data_out_ready[0][0] 		= router_iact_0_0_south_data_out_ready; 
-assign iact_south_data_out_ready[0][1] 		= router_iact_0_1_south_data_out_ready; 
-assign iact_south_data_out_ready[0][2] 		= router_iact_0_2_south_data_out_ready; 
-assign iact_horiz_data_out_ready[0][0] 		= router_iact_0_0_horiz_data_out_ready; 
-assign iact_horiz_data_out_ready[0][1] 		= router_iact_0_1_horiz_data_out_ready; 
-assign iact_horiz_data_out_ready[0][2] 		= router_iact_0_2_horiz_data_out_ready; 
-assign iact_north_data_out_ready[1][0] 		= router_iact_1_0_north_data_out_ready; 	
-assign iact_north_data_out_ready[1][1] 		= router_iact_1_1_north_data_out_ready; 
-assign iact_north_data_out_ready[1][2] 		= router_iact_1_2_north_data_out_ready; 
-assign iact_south_data_out_ready[1][0] 		= router_iact_1_0_south_data_out_ready; 
-assign iact_south_data_out_ready[1][1] 		= router_iact_1_1_south_data_out_ready; 
-assign iact_south_data_out_ready[1][2] 		= router_iact_1_2_south_data_out_ready; 
-assign iact_horiz_data_out_ready[1][0] 		= router_iact_1_0_horiz_data_out_ready; 
-assign iact_horiz_data_out_ready[1][1] 		= router_iact_1_1_horiz_data_out_ready; 
-assign iact_horiz_data_out_ready[1][2] 		= router_iact_1_2_horiz_data_out_ready;
-assign iact_north_data_out_ready[2][0] 		= router_iact_2_0_north_data_out_ready; 	
-assign iact_north_data_out_ready[2][1] 		= router_iact_2_1_north_data_out_ready; 
-assign iact_north_data_out_ready[2][2] 		= router_iact_2_2_north_data_out_ready; 
-assign iact_south_data_out_ready[2][0] 		= router_iact_2_0_south_data_out_ready; 
-assign iact_south_data_out_ready[2][1] 		= router_iact_2_1_south_data_out_ready; 
-assign iact_south_data_out_ready[2][2] 		= router_iact_2_2_south_data_out_ready; 
-assign iact_horiz_data_out_ready[2][0] 		= router_iact_2_0_horiz_data_out_ready; 
-assign iact_horiz_data_out_ready[2][1] 		= router_iact_2_1_horiz_data_out_ready; 
-assign iact_horiz_data_out_ready[2][2] 		= router_iact_2_2_horiz_data_out_ready;
-
-// iact_valid
-	
-assign iact_north_address_in_valid[0][0] 		= router_iact_0_0_north_address_in_valid; 
-assign iact_north_address_in_valid[0][1] 		= router_iact_0_1_north_address_in_valid; 
-assign iact_north_address_in_valid[0][2] 		= router_iact_0_2_north_address_in_valid;	
-assign iact_south_address_in_valid[0][0] 		= router_iact_0_0_south_address_in_valid;
-assign iact_south_address_in_valid[0][1] 		= router_iact_0_1_south_address_in_valid; 	
-assign iact_south_address_in_valid[0][2] 		= router_iact_0_2_south_address_in_valid;
-assign iact_horiz_address_in_valid[0][0] 		= router_iact_0_0_horiz_address_in_valid;
-assign iact_horiz_address_in_valid[0][1] 		= router_iact_0_1_horiz_address_in_valid;
-assign iact_horiz_address_in_valid[0][2] 		= router_iact_0_2_horiz_address_in_valid;
-assign iact_north_data_in_valid[0][0] 		= router_iact_0_0_north_data_in_valid; 	
-assign iact_north_data_in_valid[0][1] 		= router_iact_0_1_north_data_in_valid;	
-assign iact_north_data_in_valid[0][2] 		= router_iact_0_2_north_data_in_valid; 
-assign iact_south_data_in_valid[0][0] 		= router_iact_0_0_south_data_in_valid; 
-assign iact_south_data_in_valid[0][1] 		= router_iact_0_1_south_data_in_valid; 	
-assign iact_south_data_in_valid[0][2] 		= router_iact_0_2_south_data_in_valid; 
-assign iact_horiz_data_in_valid[0][0] 		= router_iact_0_0_horiz_data_in_valid; 
-assign iact_horiz_data_in_valid[0][1] 		= router_iact_0_1_horiz_data_in_valid; 
-assign iact_horiz_data_in_valid[0][2] 		= router_iact_0_2_horiz_data_in_valid; 
-assign iact_north_address_in_valid[1][0] 		= router_iact_1_0_north_address_in_valid; 
-assign iact_north_address_in_valid[1][1] 		= router_iact_1_1_north_address_in_valid; 
-assign iact_north_address_in_valid[1][2] 		= router_iact_1_2_north_address_in_valid;	
-assign iact_south_address_in_valid[1][0] 		= router_iact_1_0_south_address_in_valid;
-assign iact_south_address_in_valid[1][1] 		= router_iact_1_1_south_address_in_valid; 	
-assign iact_south_address_in_valid[1][2] 		= router_iact_1_2_south_address_in_valid;
-assign iact_horiz_address_in_valid[1][0] 		= router_iact_1_0_horiz_address_in_valid;
-assign iact_horiz_address_in_valid[1][1] 		= router_iact_1_1_horiz_address_in_valid;
-assign iact_horiz_address_in_valid[1][2] 		= router_iact_1_2_horiz_address_in_valid;
-assign iact_north_data_in_valid[1][0] 		= router_iact_1_0_north_data_in_valid; 	
-assign iact_north_data_in_valid[1][1] 		= router_iact_1_1_north_data_in_valid;	
-assign iact_north_data_in_valid[1][2] 		= router_iact_1_2_north_data_in_valid; 
-assign iact_south_data_in_valid[1][0] 		= router_iact_1_0_south_data_in_valid; 
-assign iact_south_data_in_valid[1][1] 		= router_iact_1_1_south_data_in_valid; 	
-assign iact_south_data_in_valid[1][2] 		= router_iact_1_2_south_data_in_valid; 
-assign iact_horiz_data_in_valid[1][0] 		= router_iact_1_0_horiz_data_in_valid; 
-assign iact_horiz_data_in_valid[1][1] 		= router_iact_1_1_horiz_data_in_valid; 
-assign iact_horiz_data_in_valid[1][2] 		= router_iact_1_2_horiz_data_in_valid;
-assign iact_north_address_in_valid[2][0] 		= router_iact_2_0_north_address_in_valid; 
-assign iact_north_address_in_valid[2][1] 		= router_iact_2_1_north_address_in_valid; 
-assign iact_north_address_in_valid[2][2] 		= router_iact_2_2_north_address_in_valid;	
-assign iact_south_address_in_valid[2][0] 		= router_iact_2_0_south_address_in_valid;
-assign iact_south_address_in_valid[2][1] 		= router_iact_2_1_south_address_in_valid; 	
-assign iact_south_address_in_valid[2][2] 		= router_iact_2_2_south_address_in_valid;
-assign iact_horiz_address_in_valid[2][0] 		= router_iact_2_0_horiz_address_in_valid;
-assign iact_horiz_address_in_valid[2][1] 		= router_iact_2_1_horiz_address_in_valid;
-assign iact_horiz_address_in_valid[2][2] 		= router_iact_2_2_horiz_address_in_valid;
-assign iact_north_data_in_valid[2][0] 		= router_iact_2_0_north_data_in_valid; 	
-assign iact_north_data_in_valid[2][1] 		= router_iact_2_1_north_data_in_valid;	
-assign iact_north_data_in_valid[2][2] 		= router_iact_2_2_north_data_in_valid; 
-assign iact_south_data_in_valid[2][0] 		= router_iact_2_0_south_data_in_valid; 
-assign iact_south_data_in_valid[2][1] 		= router_iact_2_1_south_data_in_valid; 	
-assign iact_south_data_in_valid[2][2] 		= router_iact_2_2_south_data_in_valid; 
-assign iact_horiz_data_in_valid[2][0] 		= router_iact_2_0_horiz_data_in_valid; 
-assign iact_horiz_data_in_valid[2][1] 		= router_iact_2_1_horiz_data_in_valid; 
-assign iact_horiz_data_in_valid[2][2] 		= router_iact_2_2_horiz_data_in_valid;
-	
-// iact_data	
-	
-assign iact_north_address_in_bits[0][0] 		= router_iact_0_0_north_address_in; 
-assign iact_north_address_in_bits[0][1] 		= router_iact_0_1_north_address_in; 
-assign iact_north_address_in_bits[0][2] 		= router_iact_0_2_north_address_in;
-assign iact_south_address_in_bits[0][0] 		= router_iact_0_0_south_address_in; 
-assign iact_south_address_in_bits[0][1] 		= router_iact_0_1_south_address_in;
-assign iact_south_address_in_bits[0][2] 		= router_iact_0_2_south_address_in; 
-assign iact_horiz_address_in_bits[0][0] 		= router_iact_0_0_horiz_address_in; 	
-assign iact_horiz_address_in_bits[0][1] 		= router_iact_0_1_horiz_address_in; 
-assign iact_horiz_address_in_bits[0][2] 		= router_iact_0_2_horiz_address_in;
-assign iact_north_data_in_bits[0][0] 			= router_iact_0_0_north_data_in; 	
-assign iact_north_data_in_bits[0][1] 			= router_iact_0_1_north_data_in; 	
-assign iact_north_data_in_bits[0][2] 			= router_iact_0_2_north_data_in; 	
-assign iact_south_data_in_bits[0][0] 			= router_iact_0_0_south_data_in; 	 
-assign iact_south_data_in_bits[0][1] 			= router_iact_0_1_south_data_in; 	
-assign iact_south_data_in_bits[0][2] 			= router_iact_0_2_south_data_in;		
-assign iact_horiz_data_in_bits[0][0] 			= router_iact_0_0_horiz_data_in; 
-assign iact_horiz_data_in_bits[0][1] 			= router_iact_0_1_horiz_data_in;
-assign iact_horiz_data_in_bits[0][2] 			= router_iact_0_2_horiz_data_in;
-assign iact_north_address_in_bits[1][0] 		= router_iact_1_0_north_address_in; 
-assign iact_north_address_in_bits[1][1] 		= router_iact_1_1_north_address_in; 
-assign iact_north_address_in_bits[1][2] 		= router_iact_1_2_north_address_in;
-assign iact_south_address_in_bits[1][0] 		= router_iact_1_0_south_address_in; 
-assign iact_south_address_in_bits[1][1] 		= router_iact_1_1_south_address_in;
-assign iact_south_address_in_bits[1][2] 		= router_iact_1_2_south_address_in; 
-assign iact_horiz_address_in_bits[1][0] 		= router_iact_1_0_horiz_address_in; 	
-assign iact_horiz_address_in_bits[1][1] 		= router_iact_1_1_horiz_address_in; 
-assign iact_horiz_address_in_bits[1][2] 		= router_iact_1_2_horiz_address_in;
-assign iact_north_data_in_bits[1][0] 			= router_iact_1_0_north_data_in; 	
-assign iact_north_data_in_bits[1][1] 			= router_iact_1_1_north_data_in; 	
-assign iact_north_data_in_bits[1][2] 			= router_iact_1_2_north_data_in; 	
-assign iact_south_data_in_bits[1][0] 			= router_iact_1_0_south_data_in; 	 
-assign iact_south_data_in_bits[1][1] 			= router_iact_1_1_south_data_in; 	
-assign iact_south_data_in_bits[1][2] 			= router_iact_1_2_south_data_in;		
-assign iact_horiz_data_in_bits[1][0] 			= router_iact_1_0_horiz_data_in; 
-assign iact_horiz_data_in_bits[1][1] 			= router_iact_1_1_horiz_data_in;
-assign iact_horiz_data_in_bits[1][2] 			= router_iact_1_2_horiz_data_in;
-assign iact_north_address_in_bits[2][0] 		= router_iact_2_0_north_address_in; 
-assign iact_north_address_in_bits[2][1] 		= router_iact_2_1_north_address_in; 
-assign iact_north_address_in_bits[2][2] 		= router_iact_2_2_north_address_in;
-assign iact_south_address_in_bits[2][0] 		= router_iact_2_0_south_address_in; 
-assign iact_south_address_in_bits[2][1] 		= router_iact_2_1_south_address_in;
-assign iact_south_address_in_bits[2][2] 		= router_iact_2_2_south_address_in; 
-assign iact_horiz_address_in_bits[2][0] 		= router_iact_2_0_horiz_address_in; 	
-assign iact_horiz_address_in_bits[2][1] 		= router_iact_2_1_horiz_address_in; 
-assign iact_horiz_address_in_bits[2][2] 		= router_iact_2_2_horiz_address_in;
-assign iact_north_data_in_bits[2][0] 			= router_iact_2_0_north_data_in; 	
-assign iact_north_data_in_bits[2][1] 			= router_iact_2_1_north_data_in; 	
-assign iact_north_data_in_bits[2][2] 			= router_iact_2_2_north_data_in; 	
-assign iact_south_data_in_bits[2][0] 			= router_iact_2_0_south_data_in; 	 
-assign iact_south_data_in_bits[2][1] 			= router_iact_2_1_south_data_in; 	
-assign iact_south_data_in_bits[2][2] 			= router_iact_2_2_south_data_in;		
-assign iact_horiz_data_in_bits[2][0] 			= router_iact_2_0_horiz_data_in; 
-assign iact_horiz_data_in_bits[2][1] 			= router_iact_2_1_horiz_data_in;
-assign iact_horiz_data_in_bits[2][2] 			= router_iact_2_2_horiz_data_in;
-	
-	
-// weight_ready (weight GLBs are just li	ke weight router)
-assign weight_horiz_address_out_ready[0] 	= router_weight_0_horiz_address_out_ready; 
-assign weight_horiz_address_out_ready[1] 	= router_weight_1_horiz_address_out_ready;
-assign weight_horiz_address_out_ready[2] 	= router_weight_2_horiz_address_out_ready; 
-assign weight_horiz_data_out_ready[0] 		= router_weight_0_horiz_data_out_ready; 
-assign weight_horiz_data_out_ready[1] 		= router_weight_1_horiz_data_out_ready; 
-assign weight_horiz_data_out_ready[2] 		= router_weight_2_horiz_data_out_ready; 
-	
-// weight_valid	
-assign weight_horiz_address_in_valid[0] 		= router_weight_0_horiz_address_in_valid;
-assign weight_horiz_address_in_valid[1] 		= router_weight_1_horiz_address_in_valid;
-assign weight_horiz_address_in_valid[2] 		= router_weight_2_horiz_address_in_valid;
-	
-assign weight_horiz_data_in_valid[0] 		= router_weight_0_horiz_data_in_valid; 
-assign weight_horiz_data_in_valid[1] 		= router_weight_1_horiz_data_in_valid;
-assign weight_horiz_data_in_valid[2] 		= router_weight_2_horiz_data_in_valid; 
-	
-// weight_data	
-assign weight_horiz_address_in_bits[0] 		= router_weight_0_horiz_address_in; 
-assign weight_horiz_address_in_bits[1] 		= router_weight_1_horiz_address_in; 
-assign weight_horiz_address_in_bits[2] 		= router_weight_2_horiz_address_in; 
-	
-assign weight_horiz_data_in_bits[0] 			= router_weight_0_horiz_data_in;
-assign weight_horiz_data_in_bits[1] 			= router_weight_1_horiz_data_in;
-assign weight_horiz_data_in_bits[2] 			= router_weight_2_horiz_data_in;
 
 // psum router inter-connection
 assign psum_GLB_out_ready[0] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[0]; 
 assign psum_GLB_out_ready[1] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[1];
 assign psum_GLB_out_ready[2] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[2];
-assign psum_south_out_ready[0] 				= router_psum_0_south_out_ready; 
-assign psum_south_out_ready[1] 				= router_psum_1_south_out_ready; 
-assign psum_south_out_ready[2] 				= router_psum_2_south_out_ready; 
 			
 assign psum_GLB_in_valid[0] 					= GLBCluster_psum_data_out_valid[0] & cg_ctrl_psum_add; 	
 assign psum_GLB_in_valid[1] 					= GLBCluster_psum_data_out_valid[1] & cg_ctrl_psum_add; 
 assign psum_GLB_in_valid[2] 					= GLBCluster_psum_data_out_valid[2] & cg_ctrl_psum_add; 
-assign psum_north_in_valid[0] 				= router_psum_0_north_in_valid; 
-assign psum_north_in_valid[1] 				= router_psum_1_north_in_valid; 
-assign psum_north_in_valid[2] 				= router_psum_2_north_in_valid;
-			
-assign psum_north_in_bits[0] 				= router_psum_0_north_in;	
-assign psum_north_in_bits[1] 				= router_psum_1_north_in; 	
-assign psum_north_in_bits[2] 				= router_psum_2_north_in; 
 
 
 // ====================================================================	//

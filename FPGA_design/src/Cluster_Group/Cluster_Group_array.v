@@ -71,13 +71,11 @@ module ClusterGroup_array(
 	output 	signed 	[20:0] 	CG_0_0_GLB_psum_2_data_out,
 	
 	input			[4:0]	CG_0_0_PSUM_DEPTH,
-							
-	
-	
+
+
 	// -------------------- CG_0_1 -------------------- //
-								 
-								 
-	
+
+
 	input					CG_0_1_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
@@ -122,9 +120,8 @@ module ClusterGroup_array(
 								 
 	
 	// -------------------- CG_1_0 -------------------- //
-							   
-							   
-	
+
+
 	input					CG_1_0_PE_disable [0:2][0:2],
 							   
 	input			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
@@ -166,13 +163,11 @@ module ClusterGroup_array(
 	output 	signed 	[20:0] 	CG_1_0_GLB_psum_2_data_out,
 							   
 	input			[4:0]	CG_1_0_PSUM_DEPTH,
-							   
-							   
-							   
-	// -------------------- CG_1_1 -------------------- //
-								
 
-	
+
+	// -------------------- CG_1_1 -------------------- //
+
+
 	input					CG_1_1_PE_disable [0:2][0:2],
 	
 	input			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
@@ -219,1627 +214,192 @@ module ClusterGroup_array(
 );
 
 
-
 // --------------------- CG_0_0 --------------------- //
 wire  		      		CG_0_0_clock = clock;
 wire  		      		CG_0_0_reset = reset;
 
-wire 			       	CG_0_0_router_iact_0_0_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_0_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_0_north_address_in;
-wire 			       	CG_0_0_router_iact_0_0_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_north_data_in;
-wire 			       	CG_0_0_router_iact_0_0_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_0_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_0_south_address_in;
-wire 			       	CG_0_0_router_iact_0_0_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_south_data_in;
-wire 			       	CG_0_0_router_iact_0_0_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_0_horiz_address_in;
-wire 			       	CG_0_0_router_iact_0_0_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_horiz_data_in;
-wire 			       	CG_0_0_router_iact_0_0_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_0_0_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_0_north_address_out;
-wire 			       	CG_0_0_router_iact_0_0_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_north_data_out;
-wire 			       	CG_0_0_router_iact_0_0_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_0_0_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_0_south_address_out;
-wire 			       	CG_0_0_router_iact_0_0_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_south_data_out;
-wire 			       	CG_0_0_router_iact_0_0_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_0_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_0_horiz_address_out;
-wire 			       	CG_0_0_router_iact_0_0_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_horiz_data_out;
-wire 			       	CG_0_0_router_iact_0_1_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_1_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_1_north_address_in;
-wire 			       	CG_0_0_router_iact_0_1_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_north_data_in;
-wire 			       	CG_0_0_router_iact_0_1_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_1_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_1_south_address_in;
-wire 			       	CG_0_0_router_iact_0_1_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_south_data_in;
-wire 			       	CG_0_0_router_iact_0_1_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_1_horiz_address_in;
-wire 			       	CG_0_0_router_iact_0_1_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_horiz_data_in;
-wire 			       	CG_0_0_router_iact_0_1_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_0_1_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_1_north_address_out;
-wire 			       	CG_0_0_router_iact_0_1_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_north_data_out;
-wire 			       	CG_0_0_router_iact_0_1_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_0_1_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_1_south_address_out;
-wire 			       	CG_0_0_router_iact_0_1_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_south_data_out;
-wire 			       	CG_0_0_router_iact_0_1_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_0_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_1_horiz_address_out;
-wire 			       	CG_0_0_router_iact_0_1_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_horiz_data_out;
-wire 			       	CG_0_0_router_iact_0_2_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_2_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_2_north_address_in;
-wire 			       	CG_0_0_router_iact_0_2_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_north_data_in;
-wire 			       	CG_0_0_router_iact_0_2_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_2_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_2_south_address_in;
-wire 			       	CG_0_0_router_iact_0_2_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_south_data_in;
-wire 			       	CG_0_0_router_iact_0_2_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_0_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_2_horiz_address_in;
-wire 			       	CG_0_0_router_iact_0_2_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_horiz_data_in;
-wire 			       	CG_0_0_router_iact_0_2_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_0_2_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_2_north_address_out;
-wire 			       	CG_0_0_router_iact_0_2_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_north_data_out;
-wire 			       	CG_0_0_router_iact_0_2_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_0_2_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_2_south_address_out;
-wire 			       	CG_0_0_router_iact_0_2_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_south_data_out;
-wire 			       	CG_0_0_router_iact_0_2_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_0_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_0_2_horiz_address_out;
-wire 			       	CG_0_0_router_iact_0_2_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_horiz_data_out;
-wire 			       	CG_0_0_router_iact_1_0_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_0_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_0_north_address_in;
-wire 			       	CG_0_0_router_iact_1_0_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_north_data_in;
-wire 			       	CG_0_0_router_iact_1_0_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_0_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_0_south_address_in;
-wire 			       	CG_0_0_router_iact_1_0_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_south_data_in;
-wire 			       	CG_0_0_router_iact_1_0_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_0_horiz_address_in;
-wire 			       	CG_0_0_router_iact_1_0_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_horiz_data_in;
-wire 			       	CG_0_0_router_iact_1_0_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_1_0_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_0_north_address_out;
-wire 			       	CG_0_0_router_iact_1_0_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_north_data_out;
-wire 			       	CG_0_0_router_iact_1_0_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_1_0_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_0_south_address_out;
-wire 			       	CG_0_0_router_iact_1_0_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_south_data_out;
-wire 			       	CG_0_0_router_iact_1_0_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_1_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_0_horiz_address_out;
-wire 			       	CG_0_0_router_iact_1_0_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_horiz_data_out;
-wire 			       	CG_0_0_router_iact_1_1_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_1_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_1_north_address_in;
-wire 			       	CG_0_0_router_iact_1_1_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_north_data_in;
-wire 			       	CG_0_0_router_iact_1_1_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_1_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_1_south_address_in;
-wire 			       	CG_0_0_router_iact_1_1_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_south_data_in;
-wire 			       	CG_0_0_router_iact_1_1_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_1_horiz_address_in;
-wire 			       	CG_0_0_router_iact_1_1_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_horiz_data_in;
-wire 			       	CG_0_0_router_iact_1_1_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_1_1_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_1_north_address_out;
-wire 			       	CG_0_0_router_iact_1_1_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_north_data_out;
-wire 			       	CG_0_0_router_iact_1_1_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_1_1_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_1_south_address_out;
-wire 			       	CG_0_0_router_iact_1_1_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_south_data_out;
-wire 			       	CG_0_0_router_iact_1_1_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_1_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_1_horiz_address_out;
-wire 			       	CG_0_0_router_iact_1_1_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_horiz_data_out;  
-wire 			       	CG_0_0_router_iact_1_2_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_2_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_2_north_address_in;
-wire 			       	CG_0_0_router_iact_1_2_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_north_data_in;
-wire 			       	CG_0_0_router_iact_1_2_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_2_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_2_south_address_in;
-wire 			       	CG_0_0_router_iact_1_2_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_south_data_in;
-wire 			       	CG_0_0_router_iact_1_2_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_1_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_2_horiz_address_in;
-wire 			       	CG_0_0_router_iact_1_2_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_horiz_data_in;
-wire 			       	CG_0_0_router_iact_1_2_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_1_2_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_2_north_address_out;
-wire 			       	CG_0_0_router_iact_1_2_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_north_data_out;
-wire 			       	CG_0_0_router_iact_1_2_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_1_2_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_2_south_address_out;
-wire 			       	CG_0_0_router_iact_1_2_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_south_data_out;
-wire 			       	CG_0_0_router_iact_1_2_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_1_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_1_2_horiz_address_out;
-wire 			       	CG_0_0_router_iact_1_2_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_horiz_data_out;
-wire 			       	CG_0_0_router_iact_2_0_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_0_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_0_north_address_in;
-wire 			       	CG_0_0_router_iact_2_0_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_north_data_in;
-wire 			       	CG_0_0_router_iact_2_0_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_0_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_0_south_address_in;
-wire 			       	CG_0_0_router_iact_2_0_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_south_data_in;
-wire 			       	CG_0_0_router_iact_2_0_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_0_horiz_address_in;
-wire 			       	CG_0_0_router_iact_2_0_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_horiz_data_in;
-wire 			       	CG_0_0_router_iact_2_0_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_2_0_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_0_north_address_out;
-wire 			       	CG_0_0_router_iact_2_0_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_north_data_out;
-wire 			       	CG_0_0_router_iact_2_0_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_2_0_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_0_south_address_out;
-wire 			       	CG_0_0_router_iact_2_0_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_south_data_out;
-wire 			       	CG_0_0_router_iact_2_0_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_2_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_0_horiz_address_out;
-wire 			       	CG_0_0_router_iact_2_0_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_horiz_data_out;
-wire 			       	CG_0_0_router_iact_2_1_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_1_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_1_north_address_in;
-wire 			       	CG_0_0_router_iact_2_1_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_north_data_in;
-wire 			       	CG_0_0_router_iact_2_1_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_1_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_1_south_address_in;
-wire 			       	CG_0_0_router_iact_2_1_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_south_data_in;
-wire 			       	CG_0_0_router_iact_2_1_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_1_horiz_address_in;
-wire 			       	CG_0_0_router_iact_2_1_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_horiz_data_in;
-wire 			       	CG_0_0_router_iact_2_1_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_2_1_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_1_north_address_out;
-wire 			       	CG_0_0_router_iact_2_1_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_north_data_out;
-wire 			       	CG_0_0_router_iact_2_1_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_2_1_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_1_south_address_out;
-wire 			       	CG_0_0_router_iact_2_1_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_south_data_out;
-wire 			       	CG_0_0_router_iact_2_1_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_2_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_1_horiz_address_out;
-wire 			       	CG_0_0_router_iact_2_1_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_horiz_data_out;   
-wire 			       	CG_0_0_router_iact_2_2_north_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_2_north_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_2_north_address_in;
-wire 			       	CG_0_0_router_iact_2_2_north_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_north_data_in;
-wire 			       	CG_0_0_router_iact_2_2_south_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_2_south_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_2_south_address_in;
-wire 			       	CG_0_0_router_iact_2_2_south_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_south_data_in;
-wire 			       	CG_0_0_router_iact_2_2_horiz_address_in_ready;
-wire 			       	CG_0_0_router_iact_2_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_2_horiz_address_in;
-wire 			       	CG_0_0_router_iact_2_2_horiz_data_in_ready;
-wire 			       	CG_0_0_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_horiz_data_in;
-wire 			       	CG_0_0_router_iact_2_2_north_address_out_ready;	
-wire 			       	CG_0_0_router_iact_2_2_north_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_2_north_address_out;
-wire 			       	CG_0_0_router_iact_2_2_north_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_north_data_out;
-wire 			       	CG_0_0_router_iact_2_2_south_address_out_ready;
-wire 			       	CG_0_0_router_iact_2_2_south_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_2_south_address_out;
-wire 			       	CG_0_0_router_iact_2_2_south_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_south_data_out;
-wire 			       	CG_0_0_router_iact_2_2_horiz_address_out_ready;
-wire 			       	CG_0_0_router_iact_2_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_0_router_iact_2_2_horiz_address_out;
-wire 			       	CG_0_0_router_iact_2_2_horiz_data_out_ready;
-wire 			       	CG_0_0_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_horiz_data_out;
-			
-wire 			       	CG_0_0_router_weight_0_horiz_address_in_ready;
-wire 			       	CG_0_0_router_weight_0_horiz_address_in_valid;
-wire 			[7:0]  	CG_0_0_router_weight_0_horiz_address_in;
-wire 			       	CG_0_0_router_weight_0_horiz_data_in_ready;
-wire 			       	CG_0_0_router_weight_0_horiz_data_in_valid;
-wire 			[12:0] 	CG_0_0_router_weight_0_horiz_data_in;
-wire 			       	CG_0_0_router_weight_0_horiz_address_out_ready;
-wire 			       	CG_0_0_router_weight_0_horiz_address_out_valid;
-wire 			[7:0]  	CG_0_0_router_weight_0_horiz_address_out;
-wire 			       	CG_0_0_router_weight_0_horiz_data_out_ready;
-wire 			       	CG_0_0_router_weight_0_horiz_data_out_valid;
-wire 			[12:0] 	CG_0_0_router_weight_0_horiz_data_out;
-wire 			       	CG_0_0_router_weight_1_horiz_address_in_ready;
-wire 			       	CG_0_0_router_weight_1_horiz_address_in_valid;
-wire 			[7:0]  	CG_0_0_router_weight_1_horiz_address_in;
-wire 			       	CG_0_0_router_weight_1_horiz_data_in_ready;
-wire 			       	CG_0_0_router_weight_1_horiz_data_in_valid;
-wire 			[12:0] 	CG_0_0_router_weight_1_horiz_data_in;
-wire 			       	CG_0_0_router_weight_1_horiz_address_out_ready;
-wire 			       	CG_0_0_router_weight_1_horiz_address_out_valid;
-wire 			[7:0]  	CG_0_0_router_weight_1_horiz_address_out;
-wire 			       	CG_0_0_router_weight_1_horiz_data_out_ready;
-wire 			       	CG_0_0_router_weight_1_horiz_data_out_valid;
-wire 			[12:0] 	CG_0_0_router_weight_1_horiz_data_out;
-wire 			       	CG_0_0_router_weight_2_horiz_address_in_ready;
-wire 			       	CG_0_0_router_weight_2_horiz_address_in_valid;
-wire 			[7:0]  	CG_0_0_router_weight_2_horiz_address_in;
-wire 			       	CG_0_0_router_weight_2_horiz_data_in_ready;
-wire 			       	CG_0_0_router_weight_2_horiz_data_in_valid;
-wire 			[12:0] 	CG_0_0_router_weight_2_horiz_data_in;
-wire 			       	CG_0_0_router_weight_2_horiz_address_out_ready;
-wire 			       	CG_0_0_router_weight_2_horiz_address_out_valid;
-wire 			[7:0]  	CG_0_0_router_weight_2_horiz_address_out;
-wire        			CG_0_0_router_weight_2_horiz_data_out_ready;
-wire        			CG_0_0_router_weight_2_horiz_data_out_valid;
-wire 			[12:0] 	CG_0_0_router_weight_2_horiz_data_out;
-		
-wire        			CG_0_0_router_psum_0_north_in_ready;
-wire        			CG_0_0_router_psum_0_north_in_valid;
-wire	signed	[20:0] 	CG_0_0_router_psum_0_north_in;
-wire        			CG_0_0_router_psum_0_south_out_ready;
-wire        			CG_0_0_router_psum_0_south_out_valid;
-wire	signed	[20:0] 	CG_0_0_router_psum_0_south_out;
-wire        			CG_0_0_router_psum_1_north_in_ready;
-wire        			CG_0_0_router_psum_1_north_in_valid;
-wire	signed	[20:0] 	CG_0_0_router_psum_1_north_in;
-wire        			CG_0_0_router_psum_1_south_out_ready;
-wire        			CG_0_0_router_psum_1_south_out_valid;
-wire	signed	[20:0] 	CG_0_0_router_psum_1_south_out;
-wire        			CG_0_0_router_psum_2_north_in_ready;
-wire        			CG_0_0_router_psum_2_north_in_valid;
-wire	signed	[20:0] 	CG_0_0_router_psum_2_north_in;
-wire        			CG_0_0_router_psum_2_south_out_ready;
-wire        			CG_0_0_router_psum_2_south_out_valid;
-wire	signed	[20:0] 	CG_0_0_router_psum_2_south_out;
-			
-wire        			CG_0_0_cg_south_psum_0_in_ready;
-wire        			CG_0_0_cg_south_psum_0_in_valid;
-wire	signed	[20:0] 	CG_0_0_cg_south_psum_0_in;
-wire        			CG_0_0_cg_south_psum_1_in_ready;
-wire        			CG_0_0_cg_south_psum_1_in_valid;
-wire	signed	[20:0] 	CG_0_0_cg_south_psum_1_in;
-wire        			CG_0_0_cg_south_psum_2_in_ready;
-wire        			CG_0_0_cg_south_psum_2_in_valid;
-wire	signed	[20:0] 	CG_0_0_cg_south_psum_2_in;
-wire        			CG_0_0_cg_north_psum_0_out_ready;
-wire        			CG_0_0_cg_north_psum_0_out_valid;
-wire	signed	[20:0] 	CG_0_0_cg_north_psum_0_out;
-wire        			CG_0_0_cg_north_psum_1_out_ready;
-wire        			CG_0_0_cg_north_psum_1_out_valid;
-wire	signed	[20:0] 	CG_0_0_cg_north_psum_1_out;
-wire        			CG_0_0_cg_north_psum_2_out_ready;
-wire        			CG_0_0_cg_north_psum_2_out_valid;
-wire	signed	[20:0] 	CG_0_0_cg_north_psum_2_out;
-			
+// tile-chain 介面（source-named：每條 wire 由 CG_0_0 對應 output port 驅動）
+wire 	       	CG_0_0_iact_north_address_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_0_iact_north_address_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[6:0]  	CG_0_0_iact_north_address_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_0_iact_north_data_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_0_iact_north_data_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[11:0] 	CG_0_0_iact_north_data_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_0_iact_south_address_in_ready [0:2][0:2];
+wire 	       	CG_0_0_iact_south_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_0_0_iact_south_address_out_bits [0:2][0:2];
+wire 	       	CG_0_0_iact_south_data_in_ready [0:2][0:2];
+wire 	       	CG_0_0_iact_south_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_0_0_iact_south_data_out_bits [0:2][0:2];
+wire 	       	CG_0_0_iact_horiz_address_in_ready [0:2][0:2];
+wire 	       	CG_0_0_iact_horiz_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_0_0_iact_horiz_address_out_bits [0:2][0:2];
+wire 	       	CG_0_0_iact_horiz_data_in_ready [0:2][0:2];
+wire 	       	CG_0_0_iact_horiz_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_0_0_iact_horiz_data_out_bits [0:2][0:2];
+wire 	       	CG_0_0_weight_horiz_address_in_ready [0:2];
+wire 	       	CG_0_0_weight_horiz_address_out_valid [0:2];
+wire 	[7:0]  	CG_0_0_weight_horiz_address_out_bits [0:2];
+wire 	       	CG_0_0_weight_horiz_data_in_ready [0:2];
+wire 	       	CG_0_0_weight_horiz_data_out_valid [0:2];
+wire 	[12:0] 	CG_0_0_weight_horiz_data_out_bits [0:2];
+wire 	       	CG_0_0_psum_north_in_ready [0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_0_psum_south_out_valid [0:2];
+wire signed	[20:0] 	CG_0_0_psum_south_out_bits [0:2];
+wire 	       	CG_0_0_cg_south_psum_in_ready [0:2];
+wire 	       	CG_0_0_cg_north_psum_out_valid [0:2];	// 懸空：無鄰 CG 讀取
+wire signed	[20:0] 	CG_0_0_cg_north_psum_out [0:2];	// 懸空：無鄰 CG 讀取
 
 
 // --------------------- CG_0_1 --------------------- //
 wire  		      		CG_0_1_clock = clock;
 wire  		      		CG_0_1_reset = reset;
 
-wire 			       	CG_0_1_router_iact_0_0_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_0_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_0_north_address_in;
-wire 			       	CG_0_1_router_iact_0_0_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_north_data_in;
-wire 			       	CG_0_1_router_iact_0_0_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_0_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_0_south_address_in;
-wire 			       	CG_0_1_router_iact_0_0_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_south_data_in;
-wire 			       	CG_0_1_router_iact_0_0_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_0_horiz_address_in;
-wire 			       	CG_0_1_router_iact_0_0_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_horiz_data_in;
-wire 			       	CG_0_1_router_iact_0_0_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_0_0_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_0_north_address_out;
-wire 			       	CG_0_1_router_iact_0_0_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_north_data_out;
-wire 			       	CG_0_1_router_iact_0_0_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_0_0_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_0_south_address_out;
-wire 			       	CG_0_1_router_iact_0_0_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_south_data_out;
-wire 			       	CG_0_1_router_iact_0_0_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_0_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_0_horiz_address_out;
-wire 			       	CG_0_1_router_iact_0_0_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_horiz_data_out;
-wire 			       	CG_0_1_router_iact_0_1_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_1_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_1_north_address_in;
-wire 			       	CG_0_1_router_iact_0_1_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_north_data_in;
-wire 			       	CG_0_1_router_iact_0_1_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_1_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_1_south_address_in;
-wire 			       	CG_0_1_router_iact_0_1_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_south_data_in;
-wire 			       	CG_0_1_router_iact_0_1_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_1_horiz_address_in;
-wire 			       	CG_0_1_router_iact_0_1_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_horiz_data_in;
-wire 			       	CG_0_1_router_iact_0_1_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_0_1_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_1_north_address_out;
-wire 			       	CG_0_1_router_iact_0_1_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_north_data_out;
-wire 			       	CG_0_1_router_iact_0_1_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_0_1_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_1_south_address_out;
-wire 			       	CG_0_1_router_iact_0_1_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_south_data_out;
-wire 			       	CG_0_1_router_iact_0_1_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_0_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_1_horiz_address_out;
-wire 			       	CG_0_1_router_iact_0_1_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_horiz_data_out;
-wire 			       	CG_0_1_router_iact_0_2_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_2_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_2_north_address_in;
-wire 			       	CG_0_1_router_iact_0_2_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_north_data_in;
-wire 			       	CG_0_1_router_iact_0_2_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_2_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_2_south_address_in;
-wire 			       	CG_0_1_router_iact_0_2_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_south_data_in;
-wire 			       	CG_0_1_router_iact_0_2_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_0_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_2_horiz_address_in;
-wire 			       	CG_0_1_router_iact_0_2_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_horiz_data_in;
-wire 			       	CG_0_1_router_iact_0_2_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_0_2_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_2_north_address_out;
-wire 			       	CG_0_1_router_iact_0_2_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_north_data_out;
-wire 			       	CG_0_1_router_iact_0_2_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_0_2_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_2_south_address_out;
-wire 			       	CG_0_1_router_iact_0_2_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_south_data_out;
-wire 			       	CG_0_1_router_iact_0_2_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_0_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_0_2_horiz_address_out;
-wire 			       	CG_0_1_router_iact_0_2_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_horiz_data_out;
-wire 			       	CG_0_1_router_iact_1_0_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_0_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_0_north_address_in;
-wire 			       	CG_0_1_router_iact_1_0_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_north_data_in;
-wire 			       	CG_0_1_router_iact_1_0_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_0_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_0_south_address_in;
-wire 			       	CG_0_1_router_iact_1_0_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_south_data_in;
-wire 			       	CG_0_1_router_iact_1_0_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_0_horiz_address_in;
-wire 			       	CG_0_1_router_iact_1_0_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_horiz_data_in;
-wire 			       	CG_0_1_router_iact_1_0_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_1_0_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_0_north_address_out;
-wire 			       	CG_0_1_router_iact_1_0_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_north_data_out;
-wire 			       	CG_0_1_router_iact_1_0_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_1_0_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_0_south_address_out;
-wire 			       	CG_0_1_router_iact_1_0_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_south_data_out;
-wire 			       	CG_0_1_router_iact_1_0_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_1_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_0_horiz_address_out;
-wire 			       	CG_0_1_router_iact_1_0_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_horiz_data_out;
-wire 			       	CG_0_1_router_iact_1_1_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_1_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_1_north_address_in;
-wire 			       	CG_0_1_router_iact_1_1_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_north_data_in;
-wire 			       	CG_0_1_router_iact_1_1_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_1_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_1_south_address_in;
-wire 			       	CG_0_1_router_iact_1_1_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_south_data_in;
-wire 			       	CG_0_1_router_iact_1_1_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_1_horiz_address_in;
-wire 			       	CG_0_1_router_iact_1_1_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_horiz_data_in;
-wire 			       	CG_0_1_router_iact_1_1_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_1_1_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_1_north_address_out;
-wire 			       	CG_0_1_router_iact_1_1_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_north_data_out;
-wire 			       	CG_0_1_router_iact_1_1_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_1_1_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_1_south_address_out;
-wire 			       	CG_0_1_router_iact_1_1_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_south_data_out;
-wire 			       	CG_0_1_router_iact_1_1_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_1_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_1_horiz_address_out;
-wire 			       	CG_0_1_router_iact_1_1_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_horiz_data_out;  
-wire 			       	CG_0_1_router_iact_1_2_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_2_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_2_north_address_in;
-wire 			       	CG_0_1_router_iact_1_2_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_north_data_in;
-wire 			       	CG_0_1_router_iact_1_2_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_2_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_2_south_address_in;
-wire 			       	CG_0_1_router_iact_1_2_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_south_data_in;
-wire 			       	CG_0_1_router_iact_1_2_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_1_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_2_horiz_address_in;
-wire 			       	CG_0_1_router_iact_1_2_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_horiz_data_in;
-wire 			       	CG_0_1_router_iact_1_2_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_1_2_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_2_north_address_out;
-wire 			       	CG_0_1_router_iact_1_2_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_north_data_out;
-wire 			       	CG_0_1_router_iact_1_2_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_1_2_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_2_south_address_out;
-wire 			       	CG_0_1_router_iact_1_2_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_south_data_out;
-wire 			       	CG_0_1_router_iact_1_2_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_1_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_1_2_horiz_address_out;
-wire 			       	CG_0_1_router_iact_1_2_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_horiz_data_out;
-wire 			       	CG_0_1_router_iact_2_0_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_0_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_0_north_address_in;
-wire 			       	CG_0_1_router_iact_2_0_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_north_data_in;
-wire 			       	CG_0_1_router_iact_2_0_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_0_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_0_south_address_in;
-wire 			       	CG_0_1_router_iact_2_0_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_south_data_in;
-wire 			       	CG_0_1_router_iact_2_0_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_0_horiz_address_in;
-wire 			       	CG_0_1_router_iact_2_0_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_horiz_data_in;
-wire 			       	CG_0_1_router_iact_2_0_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_2_0_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_0_north_address_out;
-wire 			       	CG_0_1_router_iact_2_0_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_north_data_out;
-wire 			       	CG_0_1_router_iact_2_0_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_2_0_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_0_south_address_out;
-wire 			       	CG_0_1_router_iact_2_0_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_south_data_out;
-wire 			       	CG_0_1_router_iact_2_0_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_2_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_0_horiz_address_out;
-wire 			       	CG_0_1_router_iact_2_0_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_horiz_data_out;
-wire 			       	CG_0_1_router_iact_2_1_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_1_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_1_north_address_in;
-wire 			       	CG_0_1_router_iact_2_1_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_north_data_in;
-wire 			       	CG_0_1_router_iact_2_1_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_1_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_1_south_address_in;
-wire 			       	CG_0_1_router_iact_2_1_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_south_data_in;
-wire 			       	CG_0_1_router_iact_2_1_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_1_horiz_address_in;
-wire 			       	CG_0_1_router_iact_2_1_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_horiz_data_in;
-wire 			       	CG_0_1_router_iact_2_1_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_2_1_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_1_north_address_out;
-wire 			       	CG_0_1_router_iact_2_1_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_north_data_out;
-wire 			       	CG_0_1_router_iact_2_1_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_2_1_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_1_south_address_out;
-wire 			       	CG_0_1_router_iact_2_1_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_south_data_out;
-wire 			       	CG_0_1_router_iact_2_1_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_2_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_1_horiz_address_out;
-wire 			       	CG_0_1_router_iact_2_1_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_horiz_data_out;   
-wire 			       	CG_0_1_router_iact_2_2_north_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_2_north_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_2_north_address_in;
-wire 			       	CG_0_1_router_iact_2_2_north_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_north_data_in;
-wire 			       	CG_0_1_router_iact_2_2_south_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_2_south_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_2_south_address_in;
-wire 			       	CG_0_1_router_iact_2_2_south_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_south_data_in;
-wire 			       	CG_0_1_router_iact_2_2_horiz_address_in_ready;
-wire 			       	CG_0_1_router_iact_2_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_2_horiz_address_in;
-wire 			       	CG_0_1_router_iact_2_2_horiz_data_in_ready;
-wire 			       	CG_0_1_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_horiz_data_in;
-wire 			       	CG_0_1_router_iact_2_2_north_address_out_ready;	
-wire 			       	CG_0_1_router_iact_2_2_north_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_2_north_address_out;
-wire 			       	CG_0_1_router_iact_2_2_north_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_north_data_out;
-wire 			       	CG_0_1_router_iact_2_2_south_address_out_ready;
-wire 			       	CG_0_1_router_iact_2_2_south_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_2_south_address_out;
-wire 			       	CG_0_1_router_iact_2_2_south_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_south_data_out;
-wire 			       	CG_0_1_router_iact_2_2_horiz_address_out_ready;
-wire 			       	CG_0_1_router_iact_2_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_0_1_router_iact_2_2_horiz_address_out;
-wire 			       	CG_0_1_router_iact_2_2_horiz_data_out_ready;
-wire 			       	CG_0_1_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_horiz_data_out;
-			
-wire 			       	CG_0_1_router_weight_0_horiz_address_in_ready;
-wire 			       	CG_0_1_router_weight_0_horiz_address_in_valid;
-wire 			[7:0]  	CG_0_1_router_weight_0_horiz_address_in;
-wire 			       	CG_0_1_router_weight_0_horiz_data_in_ready;
-wire 			       	CG_0_1_router_weight_0_horiz_data_in_valid;
-wire 			[12:0] 	CG_0_1_router_weight_0_horiz_data_in;
-wire 			       	CG_0_1_router_weight_0_horiz_address_out_ready;
-wire 			       	CG_0_1_router_weight_0_horiz_address_out_valid;
-wire 			[7:0]  	CG_0_1_router_weight_0_horiz_address_out;
-wire 			       	CG_0_1_router_weight_0_horiz_data_out_ready;
-wire 			       	CG_0_1_router_weight_0_horiz_data_out_valid;
-wire 			[12:0] 	CG_0_1_router_weight_0_horiz_data_out;
-wire 			       	CG_0_1_router_weight_1_horiz_address_in_ready;
-wire 			       	CG_0_1_router_weight_1_horiz_address_in_valid;
-wire 			[7:0]  	CG_0_1_router_weight_1_horiz_address_in;
-wire 			       	CG_0_1_router_weight_1_horiz_data_in_ready;
-wire 			       	CG_0_1_router_weight_1_horiz_data_in_valid;
-wire 			[12:0] 	CG_0_1_router_weight_1_horiz_data_in;
-wire 			       	CG_0_1_router_weight_1_horiz_address_out_ready;
-wire 			       	CG_0_1_router_weight_1_horiz_address_out_valid;
-wire 			[7:0]  	CG_0_1_router_weight_1_horiz_address_out;
-wire 			       	CG_0_1_router_weight_1_horiz_data_out_ready;
-wire 			       	CG_0_1_router_weight_1_horiz_data_out_valid;
-wire 			[12:0] 	CG_0_1_router_weight_1_horiz_data_out;
-wire 			       	CG_0_1_router_weight_2_horiz_address_in_ready;
-wire 			       	CG_0_1_router_weight_2_horiz_address_in_valid;
-wire 			[7:0]  	CG_0_1_router_weight_2_horiz_address_in;
-wire 			       	CG_0_1_router_weight_2_horiz_data_in_ready;
-wire 			       	CG_0_1_router_weight_2_horiz_data_in_valid;
-wire 			[12:0] 	CG_0_1_router_weight_2_horiz_data_in;
-wire 			       	CG_0_1_router_weight_2_horiz_address_out_ready;
-wire 			       	CG_0_1_router_weight_2_horiz_address_out_valid;
-wire 			[7:0]  	CG_0_1_router_weight_2_horiz_address_out;
-wire        			CG_0_1_router_weight_2_horiz_data_out_ready;
-wire        			CG_0_1_router_weight_2_horiz_data_out_valid;
-wire 			[12:0] 	CG_0_1_router_weight_2_horiz_data_out;
-		
-wire        			CG_0_1_router_psum_0_north_in_ready;
-wire        			CG_0_1_router_psum_0_north_in_valid;
-wire	signed	[20:0] 	CG_0_1_router_psum_0_north_in;
-wire        			CG_0_1_router_psum_0_south_out_ready;
-wire        			CG_0_1_router_psum_0_south_out_valid;
-wire	signed	[20:0] 	CG_0_1_router_psum_0_south_out;
-wire        			CG_0_1_router_psum_1_north_in_ready;
-wire        			CG_0_1_router_psum_1_north_in_valid;
-wire	signed	[20:0] 	CG_0_1_router_psum_1_north_in;
-wire        			CG_0_1_router_psum_1_south_out_ready;
-wire        			CG_0_1_router_psum_1_south_out_valid;
-wire	signed	[20:0] 	CG_0_1_router_psum_1_south_out;
-wire        			CG_0_1_router_psum_2_north_in_ready;
-wire        			CG_0_1_router_psum_2_north_in_valid;
-wire	signed	[20:0] 	CG_0_1_router_psum_2_north_in;
-wire        			CG_0_1_router_psum_2_south_out_ready;
-wire        			CG_0_1_router_psum_2_south_out_valid;
-wire	signed	[20:0] 	CG_0_1_router_psum_2_south_out;
-			
-wire        			CG_0_1_cg_south_psum_0_in_ready;
-wire        			CG_0_1_cg_south_psum_0_in_valid;
-wire	signed	[20:0] 	CG_0_1_cg_south_psum_0_in;
-wire        			CG_0_1_cg_south_psum_1_in_ready;
-wire        			CG_0_1_cg_south_psum_1_in_valid;
-wire	signed	[20:0] 	CG_0_1_cg_south_psum_1_in;
-wire        			CG_0_1_cg_south_psum_2_in_ready;
-wire        			CG_0_1_cg_south_psum_2_in_valid;
-wire	signed	[20:0] 	CG_0_1_cg_south_psum_2_in;
-wire        			CG_0_1_cg_north_psum_0_out_ready;
-wire        			CG_0_1_cg_north_psum_0_out_valid;
-wire	signed	[20:0] 	CG_0_1_cg_north_psum_0_out;
-wire        			CG_0_1_cg_north_psum_1_out_ready;
-wire        			CG_0_1_cg_north_psum_1_out_valid;
-wire	signed	[20:0] 	CG_0_1_cg_north_psum_1_out;
-wire        			CG_0_1_cg_north_psum_2_out_ready;
-wire        			CG_0_1_cg_north_psum_2_out_valid;
-wire	signed	[20:0] 	CG_0_1_cg_north_psum_2_out;
-			
+// tile-chain 介面（source-named：每條 wire 由 CG_0_1 對應 output port 驅動）
+wire 	       	CG_0_1_iact_north_address_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_1_iact_north_address_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[6:0]  	CG_0_1_iact_north_address_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_1_iact_north_data_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_1_iact_north_data_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[11:0] 	CG_0_1_iact_north_data_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_1_iact_south_address_in_ready [0:2][0:2];
+wire 	       	CG_0_1_iact_south_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_0_1_iact_south_address_out_bits [0:2][0:2];
+wire 	       	CG_0_1_iact_south_data_in_ready [0:2][0:2];
+wire 	       	CG_0_1_iact_south_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_0_1_iact_south_data_out_bits [0:2][0:2];
+wire 	       	CG_0_1_iact_horiz_address_in_ready [0:2][0:2];
+wire 	       	CG_0_1_iact_horiz_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_0_1_iact_horiz_address_out_bits [0:2][0:2];
+wire 	       	CG_0_1_iact_horiz_data_in_ready [0:2][0:2];
+wire 	       	CG_0_1_iact_horiz_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_0_1_iact_horiz_data_out_bits [0:2][0:2];
+wire 	       	CG_0_1_weight_horiz_address_in_ready [0:2];
+wire 	       	CG_0_1_weight_horiz_address_out_valid [0:2];
+wire 	[7:0]  	CG_0_1_weight_horiz_address_out_bits [0:2];
+wire 	       	CG_0_1_weight_horiz_data_in_ready [0:2];
+wire 	       	CG_0_1_weight_horiz_data_out_valid [0:2];
+wire 	[12:0] 	CG_0_1_weight_horiz_data_out_bits [0:2];
+wire 	       	CG_0_1_psum_north_in_ready [0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_0_1_psum_south_out_valid [0:2];
+wire signed	[20:0] 	CG_0_1_psum_south_out_bits [0:2];
+wire 	       	CG_0_1_cg_south_psum_in_ready [0:2];
+wire 	       	CG_0_1_cg_north_psum_out_valid [0:2];	// 懸空：無鄰 CG 讀取
+wire signed	[20:0] 	CG_0_1_cg_north_psum_out [0:2];	// 懸空：無鄰 CG 讀取
+// ⚠ 特例照搬原碼（保等價）：iact_north_address_out_ready 來源逐 element 不一致
+wire 	       	CG_0_1_iact_north_address_out_ready_src [0:2][0:2];
+assign CG_0_1_iact_north_address_out_ready_src[0][0] = 1'b0;	// ⚠ 原碼 'd0，全系統唯一
+assign CG_0_1_iact_north_address_out_ready_src[0][1] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[0][2] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[1][0] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[1][1] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[1][2] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[2][0] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[2][1] = 1'b1;
+assign CG_0_1_iact_north_address_out_ready_src[2][2] = 1'b1;
+// ⚠ 特例照搬原碼（保等價）：weight_horiz_address_out_ready 來源逐 element 不一致
+wire 	       	CG_0_1_weight_horiz_address_out_ready_src [0:2];
+assign CG_0_1_weight_horiz_address_out_ready_src[0] = CG_0_1_weight_horiz_address_in_ready[0];	// ⚠ 原碼接自己（self-loop）
+assign CG_0_1_weight_horiz_address_out_ready_src[1] = CG_0_0_weight_horiz_address_in_ready[1];
+assign CG_0_1_weight_horiz_address_out_ready_src[2] = CG_0_0_weight_horiz_address_in_ready[2];
+
 
 // --------------------- CG_1_0 --------------------- //
 wire  		      		CG_1_0_clock = clock;
 wire  		      		CG_1_0_reset = reset;
 
-wire 			       	CG_1_0_router_iact_0_0_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_0_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_0_north_address_in;
-wire 			       	CG_1_0_router_iact_0_0_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_north_data_in;
-wire 			       	CG_1_0_router_iact_0_0_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_0_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_0_south_address_in;
-wire 			       	CG_1_0_router_iact_0_0_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_south_data_in;
-wire 			       	CG_1_0_router_iact_0_0_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_0_horiz_address_in;
-wire 			       	CG_1_0_router_iact_0_0_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_horiz_data_in;
-wire 			       	CG_1_0_router_iact_0_0_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_0_0_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_0_north_address_out;
-wire 			       	CG_1_0_router_iact_0_0_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_north_data_out;
-wire 			       	CG_1_0_router_iact_0_0_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_0_0_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_0_south_address_out;
-wire 			       	CG_1_0_router_iact_0_0_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_south_data_out;
-wire 			       	CG_1_0_router_iact_0_0_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_0_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_0_horiz_address_out;
-wire 			       	CG_1_0_router_iact_0_0_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_horiz_data_out;
-wire 			       	CG_1_0_router_iact_0_1_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_1_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_1_north_address_in;
-wire 			       	CG_1_0_router_iact_0_1_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_north_data_in;
-wire 			       	CG_1_0_router_iact_0_1_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_1_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_1_south_address_in;
-wire 			       	CG_1_0_router_iact_0_1_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_south_data_in;
-wire 			       	CG_1_0_router_iact_0_1_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_1_horiz_address_in;
-wire 			       	CG_1_0_router_iact_0_1_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_horiz_data_in;
-wire 			       	CG_1_0_router_iact_0_1_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_0_1_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_1_north_address_out;
-wire 			       	CG_1_0_router_iact_0_1_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_north_data_out;
-wire 			       	CG_1_0_router_iact_0_1_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_0_1_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_1_south_address_out;
-wire 			       	CG_1_0_router_iact_0_1_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_south_data_out;
-wire 			       	CG_1_0_router_iact_0_1_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_0_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_1_horiz_address_out;
-wire 			       	CG_1_0_router_iact_0_1_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_horiz_data_out;
-wire 			       	CG_1_0_router_iact_0_2_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_2_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_2_north_address_in;
-wire 			       	CG_1_0_router_iact_0_2_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_north_data_in;
-wire 			       	CG_1_0_router_iact_0_2_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_2_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_2_south_address_in;
-wire 			       	CG_1_0_router_iact_0_2_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_south_data_in;
-wire 			       	CG_1_0_router_iact_0_2_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_0_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_2_horiz_address_in;
-wire 			       	CG_1_0_router_iact_0_2_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_horiz_data_in;
-wire 			       	CG_1_0_router_iact_0_2_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_0_2_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_2_north_address_out;
-wire 			       	CG_1_0_router_iact_0_2_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_north_data_out;
-wire 			       	CG_1_0_router_iact_0_2_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_0_2_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_2_south_address_out;
-wire 			       	CG_1_0_router_iact_0_2_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_south_data_out;
-wire 			       	CG_1_0_router_iact_0_2_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_0_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_0_2_horiz_address_out;
-wire 			       	CG_1_0_router_iact_0_2_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_horiz_data_out;
-wire 			       	CG_1_0_router_iact_1_0_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_0_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_0_north_address_in;
-wire 			       	CG_1_0_router_iact_1_0_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_north_data_in;
-wire 			       	CG_1_0_router_iact_1_0_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_0_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_0_south_address_in;
-wire 			       	CG_1_0_router_iact_1_0_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_south_data_in;
-wire 			       	CG_1_0_router_iact_1_0_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_0_horiz_address_in;
-wire 			       	CG_1_0_router_iact_1_0_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_horiz_data_in;
-wire 			       	CG_1_0_router_iact_1_0_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_1_0_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_0_north_address_out;
-wire 			       	CG_1_0_router_iact_1_0_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_north_data_out;
-wire 			       	CG_1_0_router_iact_1_0_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_1_0_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_0_south_address_out;
-wire 			       	CG_1_0_router_iact_1_0_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_south_data_out;
-wire 			       	CG_1_0_router_iact_1_0_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_1_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_0_horiz_address_out;
-wire 			       	CG_1_0_router_iact_1_0_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_horiz_data_out;
-wire 			       	CG_1_0_router_iact_1_1_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_1_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_1_north_address_in;
-wire 			       	CG_1_0_router_iact_1_1_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_north_data_in;
-wire 			       	CG_1_0_router_iact_1_1_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_1_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_1_south_address_in;
-wire 			       	CG_1_0_router_iact_1_1_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_south_data_in;
-wire 			       	CG_1_0_router_iact_1_1_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_1_horiz_address_in;
-wire 			       	CG_1_0_router_iact_1_1_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_horiz_data_in;
-wire 			       	CG_1_0_router_iact_1_1_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_1_1_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_1_north_address_out;
-wire 			       	CG_1_0_router_iact_1_1_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_north_data_out;
-wire 			       	CG_1_0_router_iact_1_1_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_1_1_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_1_south_address_out;
-wire 			       	CG_1_0_router_iact_1_1_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_south_data_out;
-wire 			       	CG_1_0_router_iact_1_1_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_1_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_1_horiz_address_out;
-wire 			       	CG_1_0_router_iact_1_1_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_horiz_data_out;  
-wire 			       	CG_1_0_router_iact_1_2_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_2_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_2_north_address_in;
-wire 			       	CG_1_0_router_iact_1_2_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_north_data_in;
-wire 			       	CG_1_0_router_iact_1_2_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_2_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_2_south_address_in;
-wire 			       	CG_1_0_router_iact_1_2_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_south_data_in;
-wire 			       	CG_1_0_router_iact_1_2_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_1_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_2_horiz_address_in;
-wire 			       	CG_1_0_router_iact_1_2_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_horiz_data_in;
-wire 			       	CG_1_0_router_iact_1_2_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_1_2_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_2_north_address_out;
-wire 			       	CG_1_0_router_iact_1_2_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_north_data_out;
-wire 			       	CG_1_0_router_iact_1_2_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_1_2_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_2_south_address_out;
-wire 			       	CG_1_0_router_iact_1_2_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_south_data_out;
-wire 			       	CG_1_0_router_iact_1_2_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_1_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_1_2_horiz_address_out;
-wire 			       	CG_1_0_router_iact_1_2_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_horiz_data_out;
-wire 			       	CG_1_0_router_iact_2_0_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_0_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_0_north_address_in;
-wire 			       	CG_1_0_router_iact_2_0_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_north_data_in;
-wire 			       	CG_1_0_router_iact_2_0_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_0_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_0_south_address_in;
-wire 			       	CG_1_0_router_iact_2_0_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_south_data_in;
-wire 			       	CG_1_0_router_iact_2_0_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_0_horiz_address_in;
-wire 			       	CG_1_0_router_iact_2_0_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_horiz_data_in;
-wire 			       	CG_1_0_router_iact_2_0_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_2_0_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_0_north_address_out;
-wire 			       	CG_1_0_router_iact_2_0_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_north_data_out;
-wire 			       	CG_1_0_router_iact_2_0_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_2_0_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_0_south_address_out;
-wire 			       	CG_1_0_router_iact_2_0_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_south_data_out;
-wire 			       	CG_1_0_router_iact_2_0_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_2_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_0_horiz_address_out;
-wire 			       	CG_1_0_router_iact_2_0_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_horiz_data_out;
-wire 			       	CG_1_0_router_iact_2_1_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_1_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_1_north_address_in;
-wire 			       	CG_1_0_router_iact_2_1_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_north_data_in;
-wire 			       	CG_1_0_router_iact_2_1_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_1_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_1_south_address_in;
-wire 			       	CG_1_0_router_iact_2_1_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_south_data_in;
-wire 			       	CG_1_0_router_iact_2_1_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_1_horiz_address_in;
-wire 			       	CG_1_0_router_iact_2_1_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_horiz_data_in;
-wire 			       	CG_1_0_router_iact_2_1_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_2_1_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_1_north_address_out;
-wire 			       	CG_1_0_router_iact_2_1_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_north_data_out;
-wire 			       	CG_1_0_router_iact_2_1_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_2_1_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_1_south_address_out;
-wire 			       	CG_1_0_router_iact_2_1_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_south_data_out;
-wire 			       	CG_1_0_router_iact_2_1_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_2_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_1_horiz_address_out;
-wire 			       	CG_1_0_router_iact_2_1_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_horiz_data_out;   
-wire 			       	CG_1_0_router_iact_2_2_north_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_2_north_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_2_north_address_in;
-wire 			       	CG_1_0_router_iact_2_2_north_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_north_data_in;
-wire 			       	CG_1_0_router_iact_2_2_south_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_2_south_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_2_south_address_in;
-wire 			       	CG_1_0_router_iact_2_2_south_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_south_data_in;
-wire 			       	CG_1_0_router_iact_2_2_horiz_address_in_ready;
-wire 			       	CG_1_0_router_iact_2_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_2_horiz_address_in;
-wire 			       	CG_1_0_router_iact_2_2_horiz_data_in_ready;
-wire 			       	CG_1_0_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_horiz_data_in;
-wire 			       	CG_1_0_router_iact_2_2_north_address_out_ready;	
-wire 			       	CG_1_0_router_iact_2_2_north_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_2_north_address_out;
-wire 			       	CG_1_0_router_iact_2_2_north_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_north_data_out;
-wire 			       	CG_1_0_router_iact_2_2_south_address_out_ready;
-wire 			       	CG_1_0_router_iact_2_2_south_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_2_south_address_out;
-wire 			       	CG_1_0_router_iact_2_2_south_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_south_data_out;
-wire 			       	CG_1_0_router_iact_2_2_horiz_address_out_ready;
-wire 			       	CG_1_0_router_iact_2_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_0_router_iact_2_2_horiz_address_out;
-wire 			       	CG_1_0_router_iact_2_2_horiz_data_out_ready;
-wire 			       	CG_1_0_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_horiz_data_out;
-			
-wire 			       	CG_1_0_router_weight_0_horiz_address_in_ready;
-wire 			       	CG_1_0_router_weight_0_horiz_address_in_valid;
-wire 			[7:0]  	CG_1_0_router_weight_0_horiz_address_in;
-wire 			       	CG_1_0_router_weight_0_horiz_data_in_ready;
-wire 			       	CG_1_0_router_weight_0_horiz_data_in_valid;
-wire 			[12:0] 	CG_1_0_router_weight_0_horiz_data_in;
-wire 			       	CG_1_0_router_weight_0_horiz_address_out_ready;
-wire 			       	CG_1_0_router_weight_0_horiz_address_out_valid;
-wire 			[7:0]  	CG_1_0_router_weight_0_horiz_address_out;
-wire 			       	CG_1_0_router_weight_0_horiz_data_out_ready;
-wire 			       	CG_1_0_router_weight_0_horiz_data_out_valid;
-wire 			[12:0] 	CG_1_0_router_weight_0_horiz_data_out;
-wire 			       	CG_1_0_router_weight_1_horiz_address_in_ready;
-wire 			       	CG_1_0_router_weight_1_horiz_address_in_valid;
-wire 			[7:0]  	CG_1_0_router_weight_1_horiz_address_in;
-wire 			       	CG_1_0_router_weight_1_horiz_data_in_ready;
-wire 			       	CG_1_0_router_weight_1_horiz_data_in_valid;
-wire 			[12:0] 	CG_1_0_router_weight_1_horiz_data_in;
-wire 			       	CG_1_0_router_weight_1_horiz_address_out_ready;
-wire 			       	CG_1_0_router_weight_1_horiz_address_out_valid;
-wire 			[7:0]  	CG_1_0_router_weight_1_horiz_address_out;
-wire 			       	CG_1_0_router_weight_1_horiz_data_out_ready;
-wire 			       	CG_1_0_router_weight_1_horiz_data_out_valid;
-wire 			[12:0] 	CG_1_0_router_weight_1_horiz_data_out;
-wire 			       	CG_1_0_router_weight_2_horiz_address_in_ready;
-wire 			       	CG_1_0_router_weight_2_horiz_address_in_valid;
-wire 			[7:0]  	CG_1_0_router_weight_2_horiz_address_in;
-wire 			       	CG_1_0_router_weight_2_horiz_data_in_ready;
-wire 			       	CG_1_0_router_weight_2_horiz_data_in_valid;
-wire 			[12:0] 	CG_1_0_router_weight_2_horiz_data_in;
-wire 			       	CG_1_0_router_weight_2_horiz_address_out_ready;
-wire 			       	CG_1_0_router_weight_2_horiz_address_out_valid;
-wire 			[7:0]  	CG_1_0_router_weight_2_horiz_address_out;
-wire        			CG_1_0_router_weight_2_horiz_data_out_ready;
-wire        			CG_1_0_router_weight_2_horiz_data_out_valid;
-wire 			[12:0] 	CG_1_0_router_weight_2_horiz_data_out;
-		
-wire        			CG_1_0_router_psum_0_north_in_ready;
-wire        			CG_1_0_router_psum_0_north_in_valid;
-wire	signed	[20:0] 	CG_1_0_router_psum_0_north_in;
-wire        			CG_1_0_router_psum_0_south_out_ready;
-wire        			CG_1_0_router_psum_0_south_out_valid;
-wire	signed	[20:0] 	CG_1_0_router_psum_0_south_out;
-wire        			CG_1_0_router_psum_1_north_in_ready;
-wire        			CG_1_0_router_psum_1_north_in_valid;
-wire	signed	[20:0] 	CG_1_0_router_psum_1_north_in;
-wire        			CG_1_0_router_psum_1_south_out_ready;
-wire        			CG_1_0_router_psum_1_south_out_valid;
-wire	signed	[20:0] 	CG_1_0_router_psum_1_south_out;
-wire        			CG_1_0_router_psum_2_north_in_ready;
-wire        			CG_1_0_router_psum_2_north_in_valid;
-wire	signed	[20:0] 	CG_1_0_router_psum_2_north_in;
-wire        			CG_1_0_router_psum_2_south_out_ready;
-wire        			CG_1_0_router_psum_2_south_out_valid;
-wire	signed	[20:0] 	CG_1_0_router_psum_2_south_out;
-			
-wire        			CG_1_0_cg_south_psum_0_in_ready;
-wire        			CG_1_0_cg_south_psum_0_in_valid;
-wire	signed	[20:0] 	CG_1_0_cg_south_psum_0_in;
-wire        			CG_1_0_cg_south_psum_1_in_ready;
-wire        			CG_1_0_cg_south_psum_1_in_valid;
-wire	signed	[20:0] 	CG_1_0_cg_south_psum_1_in;
-wire        			CG_1_0_cg_south_psum_2_in_ready;
-wire        			CG_1_0_cg_south_psum_2_in_valid;
-wire	signed	[20:0] 	CG_1_0_cg_south_psum_2_in;
-wire        			CG_1_0_cg_north_psum_0_out_ready;
-wire        			CG_1_0_cg_north_psum_0_out_valid;
-wire	signed	[20:0] 	CG_1_0_cg_north_psum_0_out;
-wire        			CG_1_0_cg_north_psum_1_out_ready;
-wire        			CG_1_0_cg_north_psum_1_out_valid;
-wire	signed	[20:0] 	CG_1_0_cg_north_psum_1_out;
-wire        			CG_1_0_cg_north_psum_2_out_ready;
-wire        			CG_1_0_cg_north_psum_2_out_valid;
-wire	signed	[20:0] 	CG_1_0_cg_north_psum_2_out;
-			
-			
+// tile-chain 介面（source-named：每條 wire 由 CG_1_0 對應 output port 驅動）
+wire 	       	CG_1_0_iact_north_address_in_ready [0:2][0:2];
+wire 	       	CG_1_0_iact_north_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_1_0_iact_north_address_out_bits [0:2][0:2];
+wire 	       	CG_1_0_iact_north_data_in_ready [0:2][0:2];
+wire 	       	CG_1_0_iact_north_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_1_0_iact_north_data_out_bits [0:2][0:2];
+wire 	       	CG_1_0_iact_south_address_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_0_iact_south_address_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[6:0]  	CG_1_0_iact_south_address_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_0_iact_south_data_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_0_iact_south_data_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[11:0] 	CG_1_0_iact_south_data_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_0_iact_horiz_address_in_ready [0:2][0:2];
+wire 	       	CG_1_0_iact_horiz_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_1_0_iact_horiz_address_out_bits [0:2][0:2];
+wire 	       	CG_1_0_iact_horiz_data_in_ready [0:2][0:2];
+wire 	       	CG_1_0_iact_horiz_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_1_0_iact_horiz_data_out_bits [0:2][0:2];
+wire 	       	CG_1_0_weight_horiz_address_in_ready [0:2];
+wire 	       	CG_1_0_weight_horiz_address_out_valid [0:2];
+wire 	[7:0]  	CG_1_0_weight_horiz_address_out_bits [0:2];
+wire 	       	CG_1_0_weight_horiz_data_in_ready [0:2];
+wire 	       	CG_1_0_weight_horiz_data_out_valid [0:2];
+wire 	[12:0] 	CG_1_0_weight_horiz_data_out_bits [0:2];
+wire 	       	CG_1_0_psum_north_in_ready [0:2];
+wire 	       	CG_1_0_psum_south_out_valid [0:2];	// 懸空：無鄰 CG 讀取
+wire signed	[20:0] 	CG_1_0_psum_south_out_bits [0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_0_cg_south_psum_in_ready [0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_0_cg_north_psum_out_valid [0:2];
+wire signed	[20:0] 	CG_1_0_cg_north_psum_out [0:2];
+
+
 // --------------------- CG_1_1 --------------------- //
 wire  		      		CG_1_1_clock = clock;
 wire  		      		CG_1_1_reset = reset;
 
-wire 			       	CG_1_1_router_iact_0_0_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_0_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_0_north_address_in;
-wire 			       	CG_1_1_router_iact_0_0_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_north_data_in;
-wire 			       	CG_1_1_router_iact_0_0_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_0_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_0_south_address_in;
-wire 			       	CG_1_1_router_iact_0_0_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_south_data_in;
-wire 			       	CG_1_1_router_iact_0_0_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_0_horiz_address_in;
-wire 			       	CG_1_1_router_iact_0_0_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_horiz_data_in;
-wire 			       	CG_1_1_router_iact_0_0_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_0_0_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_0_north_address_out;
-wire 			       	CG_1_1_router_iact_0_0_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_north_data_out;
-wire 			       	CG_1_1_router_iact_0_0_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_0_0_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_0_south_address_out;
-wire 			       	CG_1_1_router_iact_0_0_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_south_data_out;
-wire 			       	CG_1_1_router_iact_0_0_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_0_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_0_horiz_address_out;
-wire 			       	CG_1_1_router_iact_0_0_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_horiz_data_out;
-wire 			       	CG_1_1_router_iact_0_1_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_1_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_1_north_address_in;
-wire 			       	CG_1_1_router_iact_0_1_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_north_data_in;
-wire 			       	CG_1_1_router_iact_0_1_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_1_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_1_south_address_in;
-wire 			       	CG_1_1_router_iact_0_1_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_south_data_in;
-wire 			       	CG_1_1_router_iact_0_1_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_1_horiz_address_in;
-wire 			       	CG_1_1_router_iact_0_1_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_horiz_data_in;
-wire 			       	CG_1_1_router_iact_0_1_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_0_1_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_1_north_address_out;
-wire 			       	CG_1_1_router_iact_0_1_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_north_data_out;
-wire 			       	CG_1_1_router_iact_0_1_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_0_1_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_1_south_address_out;
-wire 			       	CG_1_1_router_iact_0_1_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_south_data_out;
-wire 			       	CG_1_1_router_iact_0_1_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_0_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_1_horiz_address_out;
-wire 			       	CG_1_1_router_iact_0_1_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_horiz_data_out;
-wire 			       	CG_1_1_router_iact_0_2_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_2_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_2_north_address_in;
-wire 			       	CG_1_1_router_iact_0_2_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_north_data_in;
-wire 			       	CG_1_1_router_iact_0_2_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_2_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_2_south_address_in;
-wire 			       	CG_1_1_router_iact_0_2_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_south_data_in;
-wire 			       	CG_1_1_router_iact_0_2_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_0_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_2_horiz_address_in;
-wire 			       	CG_1_1_router_iact_0_2_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_horiz_data_in;
-wire 			       	CG_1_1_router_iact_0_2_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_0_2_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_2_north_address_out;
-wire 			       	CG_1_1_router_iact_0_2_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_north_data_out;
-wire 			       	CG_1_1_router_iact_0_2_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_0_2_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_2_south_address_out;
-wire 			       	CG_1_1_router_iact_0_2_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_south_data_out;
-wire 			       	CG_1_1_router_iact_0_2_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_0_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_0_2_horiz_address_out;
-wire 			       	CG_1_1_router_iact_0_2_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_horiz_data_out;
-wire 			       	CG_1_1_router_iact_1_0_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_0_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_0_north_address_in;
-wire 			       	CG_1_1_router_iact_1_0_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_north_data_in;
-wire 			       	CG_1_1_router_iact_1_0_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_0_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_0_south_address_in;
-wire 			       	CG_1_1_router_iact_1_0_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_south_data_in;
-wire 			       	CG_1_1_router_iact_1_0_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_0_horiz_address_in;
-wire 			       	CG_1_1_router_iact_1_0_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_horiz_data_in;
-wire 			       	CG_1_1_router_iact_1_0_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_1_0_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_0_north_address_out;
-wire 			       	CG_1_1_router_iact_1_0_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_north_data_out;
-wire 			       	CG_1_1_router_iact_1_0_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_1_0_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_0_south_address_out;
-wire 			       	CG_1_1_router_iact_1_0_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_south_data_out;
-wire 			       	CG_1_1_router_iact_1_0_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_1_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_0_horiz_address_out;
-wire 			       	CG_1_1_router_iact_1_0_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_horiz_data_out;
-wire 			       	CG_1_1_router_iact_1_1_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_1_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_1_north_address_in;
-wire 			       	CG_1_1_router_iact_1_1_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_north_data_in;
-wire 			       	CG_1_1_router_iact_1_1_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_1_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_1_south_address_in;
-wire 			       	CG_1_1_router_iact_1_1_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_south_data_in;
-wire 			       	CG_1_1_router_iact_1_1_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_1_horiz_address_in;
-wire 			       	CG_1_1_router_iact_1_1_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_horiz_data_in;
-wire 			       	CG_1_1_router_iact_1_1_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_1_1_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_1_north_address_out;
-wire 			       	CG_1_1_router_iact_1_1_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_north_data_out;
-wire 			       	CG_1_1_router_iact_1_1_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_1_1_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_1_south_address_out;
-wire 			       	CG_1_1_router_iact_1_1_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_south_data_out;
-wire 			       	CG_1_1_router_iact_1_1_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_1_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_1_horiz_address_out;
-wire 			       	CG_1_1_router_iact_1_1_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_horiz_data_out;  
-wire 			       	CG_1_1_router_iact_1_2_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_2_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_2_north_address_in;
-wire 			       	CG_1_1_router_iact_1_2_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_north_data_in;
-wire 			       	CG_1_1_router_iact_1_2_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_2_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_2_south_address_in;
-wire 			       	CG_1_1_router_iact_1_2_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_south_data_in;
-wire 			       	CG_1_1_router_iact_1_2_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_1_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_2_horiz_address_in;
-wire 			       	CG_1_1_router_iact_1_2_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_horiz_data_in;
-wire 			       	CG_1_1_router_iact_1_2_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_1_2_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_2_north_address_out;
-wire 			       	CG_1_1_router_iact_1_2_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_north_data_out;
-wire 			       	CG_1_1_router_iact_1_2_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_1_2_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_2_south_address_out;
-wire 			       	CG_1_1_router_iact_1_2_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_south_data_out;
-wire 			       	CG_1_1_router_iact_1_2_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_1_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_1_2_horiz_address_out;
-wire 			       	CG_1_1_router_iact_1_2_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_horiz_data_out;
-wire 			       	CG_1_1_router_iact_2_0_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_0_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_0_north_address_in;
-wire 			       	CG_1_1_router_iact_2_0_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_north_data_in;
-wire 			       	CG_1_1_router_iact_2_0_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_0_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_0_south_address_in;
-wire 			       	CG_1_1_router_iact_2_0_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_south_data_in;
-wire 			       	CG_1_1_router_iact_2_0_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_0_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_0_horiz_address_in;
-wire 			       	CG_1_1_router_iact_2_0_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_horiz_data_in;
-wire 			       	CG_1_1_router_iact_2_0_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_2_0_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_0_north_address_out;
-wire 			       	CG_1_1_router_iact_2_0_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_north_data_out;
-wire 			       	CG_1_1_router_iact_2_0_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_2_0_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_0_south_address_out;
-wire 			       	CG_1_1_router_iact_2_0_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_south_data_out;
-wire 			       	CG_1_1_router_iact_2_0_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_2_0_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_0_horiz_address_out;
-wire 			       	CG_1_1_router_iact_2_0_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_horiz_data_out;
-wire 			       	CG_1_1_router_iact_2_1_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_1_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_1_north_address_in;
-wire 			       	CG_1_1_router_iact_2_1_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_north_data_in;
-wire 			       	CG_1_1_router_iact_2_1_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_1_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_1_south_address_in;
-wire 			       	CG_1_1_router_iact_2_1_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_south_data_in;
-wire 			       	CG_1_1_router_iact_2_1_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_1_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_1_horiz_address_in;
-wire 			       	CG_1_1_router_iact_2_1_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_horiz_data_in;
-wire 			       	CG_1_1_router_iact_2_1_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_2_1_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_1_north_address_out;
-wire 			       	CG_1_1_router_iact_2_1_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_north_data_out;
-wire 			       	CG_1_1_router_iact_2_1_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_2_1_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_1_south_address_out;
-wire 			       	CG_1_1_router_iact_2_1_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_south_data_out;
-wire 			       	CG_1_1_router_iact_2_1_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_2_1_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_1_horiz_address_out;
-wire 			       	CG_1_1_router_iact_2_1_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_horiz_data_out;   
-wire 			       	CG_1_1_router_iact_2_2_north_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_2_north_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_2_north_address_in;
-wire 			       	CG_1_1_router_iact_2_2_north_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_north_data_in;
-wire 			       	CG_1_1_router_iact_2_2_south_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_2_south_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_2_south_address_in;
-wire 			       	CG_1_1_router_iact_2_2_south_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_south_data_in;
-wire 			       	CG_1_1_router_iact_2_2_horiz_address_in_ready;
-wire 			       	CG_1_1_router_iact_2_2_horiz_address_in_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_2_horiz_address_in;
-wire 			       	CG_1_1_router_iact_2_2_horiz_data_in_ready;
-wire 			       	CG_1_1_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_horiz_data_in;
-wire 			       	CG_1_1_router_iact_2_2_north_address_out_ready;	
-wire 			       	CG_1_1_router_iact_2_2_north_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_2_north_address_out;
-wire 			       	CG_1_1_router_iact_2_2_north_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_north_data_out;
-wire 			       	CG_1_1_router_iact_2_2_south_address_out_ready;
-wire 			       	CG_1_1_router_iact_2_2_south_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_2_south_address_out;
-wire 			       	CG_1_1_router_iact_2_2_south_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_south_data_out;
-wire 			       	CG_1_1_router_iact_2_2_horiz_address_out_ready;
-wire 			       	CG_1_1_router_iact_2_2_horiz_address_out_valid;
-wire 			[6:0]  	CG_1_1_router_iact_2_2_horiz_address_out;
-wire 			       	CG_1_1_router_iact_2_2_horiz_data_out_ready;
-wire 			       	CG_1_1_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_horiz_data_out;
-			
-wire 			       	CG_1_1_router_weight_0_horiz_address_in_ready;
-wire 			       	CG_1_1_router_weight_0_horiz_address_in_valid;
-wire 			[7:0]  	CG_1_1_router_weight_0_horiz_address_in;
-wire 			       	CG_1_1_router_weight_0_horiz_data_in_ready;
-wire 			       	CG_1_1_router_weight_0_horiz_data_in_valid;
-wire 			[12:0] 	CG_1_1_router_weight_0_horiz_data_in;
-wire 			       	CG_1_1_router_weight_0_horiz_address_out_ready;
-wire 			       	CG_1_1_router_weight_0_horiz_address_out_valid;
-wire 			[7:0]  	CG_1_1_router_weight_0_horiz_address_out;
-wire 			       	CG_1_1_router_weight_0_horiz_data_out_ready;
-wire 			       	CG_1_1_router_weight_0_horiz_data_out_valid;
-wire 			[12:0] 	CG_1_1_router_weight_0_horiz_data_out;
-wire 			       	CG_1_1_router_weight_1_horiz_address_in_ready;
-wire 			       	CG_1_1_router_weight_1_horiz_address_in_valid;
-wire 			[7:0]  	CG_1_1_router_weight_1_horiz_address_in;
-wire 			       	CG_1_1_router_weight_1_horiz_data_in_ready;
-wire 			       	CG_1_1_router_weight_1_horiz_data_in_valid;
-wire 			[12:0] 	CG_1_1_router_weight_1_horiz_data_in;
-wire 			       	CG_1_1_router_weight_1_horiz_address_out_ready;
-wire 			       	CG_1_1_router_weight_1_horiz_address_out_valid;
-wire 			[7:0]  	CG_1_1_router_weight_1_horiz_address_out;
-wire 			       	CG_1_1_router_weight_1_horiz_data_out_ready;
-wire 			       	CG_1_1_router_weight_1_horiz_data_out_valid;
-wire 			[12:0] 	CG_1_1_router_weight_1_horiz_data_out;
-wire 			       	CG_1_1_router_weight_2_horiz_address_in_ready;
-wire 			       	CG_1_1_router_weight_2_horiz_address_in_valid;
-wire 			[7:0]  	CG_1_1_router_weight_2_horiz_address_in;
-wire 			       	CG_1_1_router_weight_2_horiz_data_in_ready;
-wire 			       	CG_1_1_router_weight_2_horiz_data_in_valid;
-wire 			[12:0] 	CG_1_1_router_weight_2_horiz_data_in;
-wire 			       	CG_1_1_router_weight_2_horiz_address_out_ready;
-wire 			       	CG_1_1_router_weight_2_horiz_address_out_valid;
-wire 			[7:0]  	CG_1_1_router_weight_2_horiz_address_out;
-wire        			CG_1_1_router_weight_2_horiz_data_out_ready;
-wire        			CG_1_1_router_weight_2_horiz_data_out_valid;
-wire 			[12:0] 	CG_1_1_router_weight_2_horiz_data_out;
-		
-wire        			CG_1_1_router_psum_0_north_in_ready;
-wire        			CG_1_1_router_psum_0_north_in_valid;
-wire	signed	[20:0] 	CG_1_1_router_psum_0_north_in;
-wire        			CG_1_1_router_psum_0_south_out_ready;
-wire        			CG_1_1_router_psum_0_south_out_valid;
-wire	signed	[20:0] 	CG_1_1_router_psum_0_south_out;
-wire        			CG_1_1_router_psum_1_north_in_ready;
-wire        			CG_1_1_router_psum_1_north_in_valid;
-wire	signed	[20:0] 	CG_1_1_router_psum_1_north_in;
-wire        			CG_1_1_router_psum_1_south_out_ready;
-wire        			CG_1_1_router_psum_1_south_out_valid;
-wire	signed	[20:0] 	CG_1_1_router_psum_1_south_out;
-wire        			CG_1_1_router_psum_2_north_in_ready;
-wire        			CG_1_1_router_psum_2_north_in_valid;
-wire	signed	[20:0] 	CG_1_1_router_psum_2_north_in;
-wire        			CG_1_1_router_psum_2_south_out_ready;
-wire        			CG_1_1_router_psum_2_south_out_valid;
-wire	signed	[20:0] 	CG_1_1_router_psum_2_south_out;
-			
-wire        			CG_1_1_cg_south_psum_0_in_ready;
-wire        			CG_1_1_cg_south_psum_0_in_valid;
-wire	signed	[20:0] 	CG_1_1_cg_south_psum_0_in;
-wire        			CG_1_1_cg_south_psum_1_in_ready;
-wire        			CG_1_1_cg_south_psum_1_in_valid;
-wire	signed	[20:0] 	CG_1_1_cg_south_psum_1_in;
-wire        			CG_1_1_cg_south_psum_2_in_ready;
-wire        			CG_1_1_cg_south_psum_2_in_valid;
-wire	signed	[20:0] 	CG_1_1_cg_south_psum_2_in;
-wire        			CG_1_1_cg_north_psum_0_out_ready;
-wire        			CG_1_1_cg_north_psum_0_out_valid;
-wire	signed	[20:0] 	CG_1_1_cg_north_psum_0_out;
-wire        			CG_1_1_cg_north_psum_1_out_ready;
-wire        			CG_1_1_cg_north_psum_1_out_valid;
-wire	signed	[20:0] 	CG_1_1_cg_north_psum_1_out;
-wire        			CG_1_1_cg_north_psum_2_out_ready;
-wire        			CG_1_1_cg_north_psum_2_out_valid;
-wire	signed	[20:0] 	CG_1_1_cg_north_psum_2_out;
-			
+// tile-chain 介面（source-named：每條 wire 由 CG_1_1 對應 output port 驅動）
+wire 	       	CG_1_1_iact_north_address_in_ready [0:2][0:2];
+wire 	       	CG_1_1_iact_north_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_1_1_iact_north_address_out_bits [0:2][0:2];
+wire 	       	CG_1_1_iact_north_data_in_ready [0:2][0:2];
+wire 	       	CG_1_1_iact_north_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_1_1_iact_north_data_out_bits [0:2][0:2];
+wire 	       	CG_1_1_iact_south_address_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_1_iact_south_address_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[6:0]  	CG_1_1_iact_south_address_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_1_iact_south_data_in_ready [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_1_iact_south_data_out_valid [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	[11:0] 	CG_1_1_iact_south_data_out_bits [0:2][0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_1_iact_horiz_address_in_ready [0:2][0:2];
+wire 	       	CG_1_1_iact_horiz_address_out_valid [0:2][0:2];
+wire 	[6:0]  	CG_1_1_iact_horiz_address_out_bits [0:2][0:2];
+wire 	       	CG_1_1_iact_horiz_data_in_ready [0:2][0:2];
+wire 	       	CG_1_1_iact_horiz_data_out_valid [0:2][0:2];
+wire 	[11:0] 	CG_1_1_iact_horiz_data_out_bits [0:2][0:2];
+wire 	       	CG_1_1_weight_horiz_address_in_ready [0:2];
+wire 	       	CG_1_1_weight_horiz_address_out_valid [0:2];
+wire 	[7:0]  	CG_1_1_weight_horiz_address_out_bits [0:2];
+wire 	       	CG_1_1_weight_horiz_data_in_ready [0:2];
+wire 	       	CG_1_1_weight_horiz_data_out_valid [0:2];
+wire 	[12:0] 	CG_1_1_weight_horiz_data_out_bits [0:2];
+wire 	       	CG_1_1_psum_north_in_ready [0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_1_psum_south_out_valid [0:2];
+wire signed	[20:0] 	CG_1_1_psum_south_out_bits [0:2];
+wire 	       	CG_1_1_cg_south_psum_in_ready [0:2];	// 懸空：無鄰 CG 讀取
+wire 	       	CG_1_1_cg_north_psum_out_valid [0:2];
+wire signed	[20:0] 	CG_1_1_cg_north_psum_out [0:2];
+
+
+// ---------------- tile-chain 邊緣終端（無鄰側：ready 恆 1、valid/bits 恆 0） ----------------
+wire 	       	tie_hi_3x3 [0:2][0:2];
+wire 	       	tie_lo_3x3 [0:2][0:2];
+wire 	[6:0]  	tie_lo_3x3_7b [0:2][0:2];
+wire 	[11:0] 	tie_lo_3x3_12b [0:2][0:2];
+wire 	       	tie_hi_3 [0:2];
+wire 	       	tie_lo_3 [0:2];
+wire signed	[20:0] 	tie_lo_3_21b [0:2];
+genvar te_r, te_c;
+generate
+for (te_r = 0; te_r < 3; te_r = te_r + 1) begin : TIE_R
+	assign tie_hi_3[te_r]     = 1'b1;
+	assign tie_lo_3[te_r]     = 1'b0;
+	assign tie_lo_3_21b[te_r] = 21'sd0;
+	for (te_c = 0; te_c < 3; te_c = te_c + 1) begin : TIE_C
+		assign tie_hi_3x3[te_r][te_c]     = 1'b1;
+		assign tie_lo_3x3[te_r][te_c]     = 1'b0;
+		assign tie_lo_3x3_7b[te_r][te_c]  = 7'd0;
+		assign tie_lo_3x3_12b[te_r][te_c] = 12'd0;
+	end
+end
+endgenerate
 
 wire	CG_0_0_all_cal_fin;
 wire	CG_0_1_all_cal_fin;
@@ -1925,413 +485,75 @@ ClusterGroup ClusterGroup_0_0 (
 	.GLB_psum_2_data_out_valid                  (CG_0_0_GLB_psum_2_data_out_valid               ),
 	.GLB_psum_2_data_out                        (CG_0_0_GLB_psum_2_data_out                     ),
 											
-	.router_iact_0_0_north_address_in_ready		(CG_0_0_router_iact_0_0_north_address_in_ready	),
-	.router_iact_0_0_north_address_in_valid     (CG_0_0_router_iact_0_0_north_address_in_valid  ),
-	.router_iact_0_0_north_address_in           (CG_0_0_router_iact_0_0_north_address_in        ),
-	.router_iact_0_0_north_data_in_ready        (CG_0_0_router_iact_0_0_north_data_in_ready     ),
-	.router_iact_0_0_north_data_in_valid        (CG_0_0_router_iact_0_0_north_data_in_valid     ),
-	.router_iact_0_0_north_data_in              (CG_0_0_router_iact_0_0_north_data_in           ),
-	.router_iact_0_0_south_address_in_ready     (CG_0_0_router_iact_0_0_south_address_in_ready  ),
-	.router_iact_0_0_south_address_in_valid     (CG_0_0_router_iact_0_0_south_address_in_valid  ),
-	.router_iact_0_0_south_address_in           (CG_0_0_router_iact_0_0_south_address_in        ),
-	.router_iact_0_0_south_data_in_ready        (CG_0_0_router_iact_0_0_south_data_in_ready     ),
-	.router_iact_0_0_south_data_in_valid        (CG_0_0_router_iact_0_0_south_data_in_valid     ),
-	.router_iact_0_0_south_data_in              (CG_0_0_router_iact_0_0_south_data_in           ),
-	.router_iact_0_0_horiz_address_in_ready     (CG_0_0_router_iact_0_0_horiz_address_in_ready  ),
-	.router_iact_0_0_horiz_address_in_valid     (CG_0_0_router_iact_0_0_horiz_address_in_valid  ),
-	.router_iact_0_0_horiz_address_in           (CG_0_0_router_iact_0_0_horiz_address_in        ),
-	.router_iact_0_0_horiz_data_in_ready        (CG_0_0_router_iact_0_0_horiz_data_in_ready     ),
-	.router_iact_0_0_horiz_data_in_valid        (CG_0_0_router_iact_0_0_horiz_data_in_valid     ),
-	.router_iact_0_0_horiz_data_in              (CG_0_0_router_iact_0_0_horiz_data_in           ),
-	.router_iact_0_0_north_address_out_ready	(CG_0_0_router_iact_0_0_north_address_out_ready	),
-	.router_iact_0_0_north_address_out_valid    (CG_0_0_router_iact_0_0_north_address_out_valid ),
-	.router_iact_0_0_north_address_out          (CG_0_0_router_iact_0_0_north_address_out       ),
-	.router_iact_0_0_north_data_out_ready       (CG_0_0_router_iact_0_0_north_data_out_ready    ),
-	.router_iact_0_0_north_data_out_valid       (CG_0_0_router_iact_0_0_north_data_out_valid    ),
-	.router_iact_0_0_north_data_out             (CG_0_0_router_iact_0_0_north_data_out          ),
-	.router_iact_0_0_south_address_out_ready    (CG_0_0_router_iact_0_0_south_address_out_ready ),
-	.router_iact_0_0_south_address_out_valid    (CG_0_0_router_iact_0_0_south_address_out_valid ),
-	.router_iact_0_0_south_address_out          (CG_0_0_router_iact_0_0_south_address_out       ),
-	.router_iact_0_0_south_data_out_ready       (CG_0_0_router_iact_0_0_south_data_out_ready    ),
-	.router_iact_0_0_south_data_out_valid       (CG_0_0_router_iact_0_0_south_data_out_valid    ),
-	.router_iact_0_0_south_data_out             (CG_0_0_router_iact_0_0_south_data_out          ),
-	.router_iact_0_0_horiz_address_out_ready    (CG_0_0_router_iact_0_0_horiz_address_out_ready ),
-	.router_iact_0_0_horiz_address_out_valid    (CG_0_0_router_iact_0_0_horiz_address_out_valid ),
-	.router_iact_0_0_horiz_address_out          (CG_0_0_router_iact_0_0_horiz_address_out       ),
-	.router_iact_0_0_horiz_data_out_ready       (CG_0_0_router_iact_0_0_horiz_data_out_ready    ),
-	.router_iact_0_0_horiz_data_out_valid       (CG_0_0_router_iact_0_0_horiz_data_out_valid    ),
-	.router_iact_0_0_horiz_data_out             (CG_0_0_router_iact_0_0_horiz_data_out          ),
-	.router_iact_0_1_north_address_in_ready     (CG_0_0_router_iact_0_1_north_address_in_ready  ),
-	.router_iact_0_1_north_address_in_valid     (CG_0_0_router_iact_0_1_north_address_in_valid  ),
-	.router_iact_0_1_north_address_in           (CG_0_0_router_iact_0_1_north_address_in        ),
-	.router_iact_0_1_north_data_in_ready        (CG_0_0_router_iact_0_1_north_data_in_ready     ),
-	.router_iact_0_1_north_data_in_valid        (CG_0_0_router_iact_0_1_north_data_in_valid     ),
-	.router_iact_0_1_north_data_in              (CG_0_0_router_iact_0_1_north_data_in           ),
-	.router_iact_0_1_south_address_in_ready     (CG_0_0_router_iact_0_1_south_address_in_ready  ),
-	.router_iact_0_1_south_address_in_valid     (CG_0_0_router_iact_0_1_south_address_in_valid  ),
-	.router_iact_0_1_south_address_in           (CG_0_0_router_iact_0_1_south_address_in        ),
-	.router_iact_0_1_south_data_in_ready        (CG_0_0_router_iact_0_1_south_data_in_ready     ),
-	.router_iact_0_1_south_data_in_valid        (CG_0_0_router_iact_0_1_south_data_in_valid     ),
-	.router_iact_0_1_south_data_in              (CG_0_0_router_iact_0_1_south_data_in           ),
-	.router_iact_0_1_horiz_address_in_ready     (CG_0_0_router_iact_0_1_horiz_address_in_ready  ),
-	.router_iact_0_1_horiz_address_in_valid     (CG_0_0_router_iact_0_1_horiz_address_in_valid  ),
-	.router_iact_0_1_horiz_address_in           (CG_0_0_router_iact_0_1_horiz_address_in        ),
-	.router_iact_0_1_horiz_data_in_ready        (CG_0_0_router_iact_0_1_horiz_data_in_ready     ),
-	.router_iact_0_1_horiz_data_in_valid        (CG_0_0_router_iact_0_1_horiz_data_in_valid     ),
-	.router_iact_0_1_horiz_data_in              (CG_0_0_router_iact_0_1_horiz_data_in           ),
-	.router_iact_0_1_north_address_out_ready	(CG_0_0_router_iact_0_1_north_address_out_ready	),
-	.router_iact_0_1_north_address_out_valid    (CG_0_0_router_iact_0_1_north_address_out_valid ),
-	.router_iact_0_1_north_address_out          (CG_0_0_router_iact_0_1_north_address_out       ),
-	.router_iact_0_1_north_data_out_ready       (CG_0_0_router_iact_0_1_north_data_out_ready    ),
-	.router_iact_0_1_north_data_out_valid       (CG_0_0_router_iact_0_1_north_data_out_valid    ),
-	.router_iact_0_1_north_data_out             (CG_0_0_router_iact_0_1_north_data_out          ),
-	.router_iact_0_1_south_address_out_ready    (CG_0_0_router_iact_0_1_south_address_out_ready ),
-	.router_iact_0_1_south_address_out_valid    (CG_0_0_router_iact_0_1_south_address_out_valid ),
-	.router_iact_0_1_south_address_out          (CG_0_0_router_iact_0_1_south_address_out       ),
-	.router_iact_0_1_south_data_out_ready       (CG_0_0_router_iact_0_1_south_data_out_ready    ),
-	.router_iact_0_1_south_data_out_valid       (CG_0_0_router_iact_0_1_south_data_out_valid    ),
-	.router_iact_0_1_south_data_out             (CG_0_0_router_iact_0_1_south_data_out          ),
-	.router_iact_0_1_horiz_address_out_ready    (CG_0_0_router_iact_0_1_horiz_address_out_ready ),
-	.router_iact_0_1_horiz_address_out_valid    (CG_0_0_router_iact_0_1_horiz_address_out_valid ),
-	.router_iact_0_1_horiz_address_out          (CG_0_0_router_iact_0_1_horiz_address_out       ),
-	.router_iact_0_1_horiz_data_out_ready       (CG_0_0_router_iact_0_1_horiz_data_out_ready    ),
-	.router_iact_0_1_horiz_data_out_valid       (CG_0_0_router_iact_0_1_horiz_data_out_valid    ),
-	.router_iact_0_1_horiz_data_out             (CG_0_0_router_iact_0_1_horiz_data_out          ),
-	.router_iact_0_2_north_address_in_ready     (CG_0_0_router_iact_0_2_north_address_in_ready  ),
-	.router_iact_0_2_north_address_in_valid     (CG_0_0_router_iact_0_2_north_address_in_valid  ),
-	.router_iact_0_2_north_address_in           (CG_0_0_router_iact_0_2_north_address_in        ),
-	.router_iact_0_2_north_data_in_ready        (CG_0_0_router_iact_0_2_north_data_in_ready     ),
-	.router_iact_0_2_north_data_in_valid        (CG_0_0_router_iact_0_2_north_data_in_valid     ),
-	.router_iact_0_2_north_data_in              (CG_0_0_router_iact_0_2_north_data_in           ),
-	.router_iact_0_2_south_address_in_ready     (CG_0_0_router_iact_0_2_south_address_in_ready  ),
-	.router_iact_0_2_south_address_in_valid     (CG_0_0_router_iact_0_2_south_address_in_valid  ),
-	.router_iact_0_2_south_address_in           (CG_0_0_router_iact_0_2_south_address_in        ),
-	.router_iact_0_2_south_data_in_ready        (CG_0_0_router_iact_0_2_south_data_in_ready     ),
-	.router_iact_0_2_south_data_in_valid        (CG_0_0_router_iact_0_2_south_data_in_valid     ),
-	.router_iact_0_2_south_data_in              (CG_0_0_router_iact_0_2_south_data_in           ),
-	.router_iact_0_2_horiz_address_in_ready     (CG_0_0_router_iact_0_2_horiz_address_in_ready  ),
-	.router_iact_0_2_horiz_address_in_valid     (CG_0_0_router_iact_0_2_horiz_address_in_valid  ),
-	.router_iact_0_2_horiz_address_in           (CG_0_0_router_iact_0_2_horiz_address_in        ),
-	.router_iact_0_2_horiz_data_in_ready        (CG_0_0_router_iact_0_2_horiz_data_in_ready     ),
-	.router_iact_0_2_horiz_data_in_valid        (CG_0_0_router_iact_0_2_horiz_data_in_valid     ),
-	.router_iact_0_2_horiz_data_in              (CG_0_0_router_iact_0_2_horiz_data_in           ),
-	.router_iact_0_2_north_address_out_ready	(CG_0_0_router_iact_0_2_north_address_out_ready	),
-	.router_iact_0_2_north_address_out_valid    (CG_0_0_router_iact_0_2_north_address_out_valid ),
-	.router_iact_0_2_north_address_out          (CG_0_0_router_iact_0_2_north_address_out       ),
-	.router_iact_0_2_north_data_out_ready       (CG_0_0_router_iact_0_2_north_data_out_ready    ),
-	.router_iact_0_2_north_data_out_valid       (CG_0_0_router_iact_0_2_north_data_out_valid    ),
-	.router_iact_0_2_north_data_out             (CG_0_0_router_iact_0_2_north_data_out          ),
-	.router_iact_0_2_south_address_out_ready    (CG_0_0_router_iact_0_2_south_address_out_ready ),
-	.router_iact_0_2_south_address_out_valid    (CG_0_0_router_iact_0_2_south_address_out_valid ),
-	.router_iact_0_2_south_address_out          (CG_0_0_router_iact_0_2_south_address_out       ),
-	.router_iact_0_2_south_data_out_ready       (CG_0_0_router_iact_0_2_south_data_out_ready    ),
-	.router_iact_0_2_south_data_out_valid       (CG_0_0_router_iact_0_2_south_data_out_valid    ),
-	.router_iact_0_2_south_data_out             (CG_0_0_router_iact_0_2_south_data_out          ),
-	.router_iact_0_2_horiz_address_out_ready    (CG_0_0_router_iact_0_2_horiz_address_out_ready ),
-	.router_iact_0_2_horiz_address_out_valid    (CG_0_0_router_iact_0_2_horiz_address_out_valid ),
-	.router_iact_0_2_horiz_address_out          (CG_0_0_router_iact_0_2_horiz_address_out       ),
-	.router_iact_0_2_horiz_data_out_ready       (CG_0_0_router_iact_0_2_horiz_data_out_ready    ),
-	.router_iact_0_2_horiz_data_out_valid       (CG_0_0_router_iact_0_2_horiz_data_out_valid    ),
-	.router_iact_0_2_horiz_data_out             (CG_0_0_router_iact_0_2_horiz_data_out          ),
-	.router_iact_1_0_north_address_in_ready     (CG_0_0_router_iact_1_0_north_address_in_ready  ),
-	.router_iact_1_0_north_address_in_valid     (CG_0_0_router_iact_1_0_north_address_in_valid  ),
-	.router_iact_1_0_north_address_in           (CG_0_0_router_iact_1_0_north_address_in        ),
-	.router_iact_1_0_north_data_in_ready        (CG_0_0_router_iact_1_0_north_data_in_ready     ),
-	.router_iact_1_0_north_data_in_valid        (CG_0_0_router_iact_1_0_north_data_in_valid     ),
-	.router_iact_1_0_north_data_in              (CG_0_0_router_iact_1_0_north_data_in           ),
-	.router_iact_1_0_south_address_in_ready     (CG_0_0_router_iact_1_0_south_address_in_ready  ),
-	.router_iact_1_0_south_address_in_valid     (CG_0_0_router_iact_1_0_south_address_in_valid  ),
-	.router_iact_1_0_south_address_in           (CG_0_0_router_iact_1_0_south_address_in        ),
-	.router_iact_1_0_south_data_in_ready        (CG_0_0_router_iact_1_0_south_data_in_ready     ),
-	.router_iact_1_0_south_data_in_valid        (CG_0_0_router_iact_1_0_south_data_in_valid     ),
-	.router_iact_1_0_south_data_in              (CG_0_0_router_iact_1_0_south_data_in           ),
-	.router_iact_1_0_horiz_address_in_ready     (CG_0_0_router_iact_1_0_horiz_address_in_ready  ),
-	.router_iact_1_0_horiz_address_in_valid     (CG_0_0_router_iact_1_0_horiz_address_in_valid  ),
-	.router_iact_1_0_horiz_address_in           (CG_0_0_router_iact_1_0_horiz_address_in        ),
-	.router_iact_1_0_horiz_data_in_ready        (CG_0_0_router_iact_1_0_horiz_data_in_ready     ),
-	.router_iact_1_0_horiz_data_in_valid        (CG_0_0_router_iact_1_0_horiz_data_in_valid     ),
-	.router_iact_1_0_horiz_data_in              (CG_0_0_router_iact_1_0_horiz_data_in           ),
-	.router_iact_1_0_north_address_out_ready	(CG_0_0_router_iact_1_0_north_address_out_ready	),
-	.router_iact_1_0_north_address_out_valid    (CG_0_0_router_iact_1_0_north_address_out_valid ),
-	.router_iact_1_0_north_address_out          (CG_0_0_router_iact_1_0_north_address_out       ),
-	.router_iact_1_0_north_data_out_ready       (CG_0_0_router_iact_1_0_north_data_out_ready    ),
-	.router_iact_1_0_north_data_out_valid       (CG_0_0_router_iact_1_0_north_data_out_valid    ),
-	.router_iact_1_0_north_data_out             (CG_0_0_router_iact_1_0_north_data_out          ),
-	.router_iact_1_0_south_address_out_ready    (CG_0_0_router_iact_1_0_south_address_out_ready ),
-	.router_iact_1_0_south_address_out_valid    (CG_0_0_router_iact_1_0_south_address_out_valid ),
-	.router_iact_1_0_south_address_out          (CG_0_0_router_iact_1_0_south_address_out       ),
-	.router_iact_1_0_south_data_out_ready       (CG_0_0_router_iact_1_0_south_data_out_ready    ),
-	.router_iact_1_0_south_data_out_valid       (CG_0_0_router_iact_1_0_south_data_out_valid    ),
-	.router_iact_1_0_south_data_out             (CG_0_0_router_iact_1_0_south_data_out          ),
-	.router_iact_1_0_horiz_address_out_ready    (CG_0_0_router_iact_1_0_horiz_address_out_ready ),
-	.router_iact_1_0_horiz_address_out_valid    (CG_0_0_router_iact_1_0_horiz_address_out_valid ),
-	.router_iact_1_0_horiz_address_out          (CG_0_0_router_iact_1_0_horiz_address_out       ),
-	.router_iact_1_0_horiz_data_out_ready       (CG_0_0_router_iact_1_0_horiz_data_out_ready    ),
-	.router_iact_1_0_horiz_data_out_valid       (CG_0_0_router_iact_1_0_horiz_data_out_valid    ),
-	.router_iact_1_0_horiz_data_out             (CG_0_0_router_iact_1_0_horiz_data_out          ),
-	.router_iact_1_1_north_address_in_ready     (CG_0_0_router_iact_1_1_north_address_in_ready  ),
-	.router_iact_1_1_north_address_in_valid     (CG_0_0_router_iact_1_1_north_address_in_valid  ),
-	.router_iact_1_1_north_address_in           (CG_0_0_router_iact_1_1_north_address_in        ),
-	.router_iact_1_1_north_data_in_ready        (CG_0_0_router_iact_1_1_north_data_in_ready     ),
-	.router_iact_1_1_north_data_in_valid        (CG_0_0_router_iact_1_1_north_data_in_valid     ),
-	.router_iact_1_1_north_data_in              (CG_0_0_router_iact_1_1_north_data_in           ),
-	.router_iact_1_1_south_address_in_ready     (CG_0_0_router_iact_1_1_south_address_in_ready  ),
-	.router_iact_1_1_south_address_in_valid     (CG_0_0_router_iact_1_1_south_address_in_valid  ),
-	.router_iact_1_1_south_address_in           (CG_0_0_router_iact_1_1_south_address_in        ),
-	.router_iact_1_1_south_data_in_ready        (CG_0_0_router_iact_1_1_south_data_in_ready     ),
-	.router_iact_1_1_south_data_in_valid        (CG_0_0_router_iact_1_1_south_data_in_valid     ),
-	.router_iact_1_1_south_data_in              (CG_0_0_router_iact_1_1_south_data_in           ),
-	.router_iact_1_1_horiz_address_in_ready     (CG_0_0_router_iact_1_1_horiz_address_in_ready  ),
-	.router_iact_1_1_horiz_address_in_valid     (CG_0_0_router_iact_1_1_horiz_address_in_valid  ),
-	.router_iact_1_1_horiz_address_in           (CG_0_0_router_iact_1_1_horiz_address_in        ),
-	.router_iact_1_1_horiz_data_in_ready        (CG_0_0_router_iact_1_1_horiz_data_in_ready     ),
-	.router_iact_1_1_horiz_data_in_valid        (CG_0_0_router_iact_1_1_horiz_data_in_valid     ),
-	.router_iact_1_1_horiz_data_in              (CG_0_0_router_iact_1_1_horiz_data_in           ),
-	.router_iact_1_1_north_address_out_ready	(CG_0_0_router_iact_1_1_north_address_out_ready	),
-	.router_iact_1_1_north_address_out_valid    (CG_0_0_router_iact_1_1_north_address_out_valid ),
-	.router_iact_1_1_north_address_out          (CG_0_0_router_iact_1_1_north_address_out       ),
-	.router_iact_1_1_north_data_out_ready       (CG_0_0_router_iact_1_1_north_data_out_ready    ),
-	.router_iact_1_1_north_data_out_valid       (CG_0_0_router_iact_1_1_north_data_out_valid    ),
-	.router_iact_1_1_north_data_out             (CG_0_0_router_iact_1_1_north_data_out          ),
-	.router_iact_1_1_south_address_out_ready    (CG_0_0_router_iact_1_1_south_address_out_ready ),
-	.router_iact_1_1_south_address_out_valid    (CG_0_0_router_iact_1_1_south_address_out_valid ),
-	.router_iact_1_1_south_address_out          (CG_0_0_router_iact_1_1_south_address_out       ),
-	.router_iact_1_1_south_data_out_ready       (CG_0_0_router_iact_1_1_south_data_out_ready    ),
-	.router_iact_1_1_south_data_out_valid       (CG_0_0_router_iact_1_1_south_data_out_valid    ),
-	.router_iact_1_1_south_data_out             (CG_0_0_router_iact_1_1_south_data_out          ),
-	.router_iact_1_1_horiz_address_out_ready    (CG_0_0_router_iact_1_1_horiz_address_out_ready ),
-	.router_iact_1_1_horiz_address_out_valid    (CG_0_0_router_iact_1_1_horiz_address_out_valid ),
-	.router_iact_1_1_horiz_address_out          (CG_0_0_router_iact_1_1_horiz_address_out       ),
-	.router_iact_1_1_horiz_data_out_ready       (CG_0_0_router_iact_1_1_horiz_data_out_ready    ),
-	.router_iact_1_1_horiz_data_out_valid       (CG_0_0_router_iact_1_1_horiz_data_out_valid    ),
-	.router_iact_1_1_horiz_data_out             (CG_0_0_router_iact_1_1_horiz_data_out          ),
-	.router_iact_1_2_north_address_in_ready     (CG_0_0_router_iact_1_2_north_address_in_ready  ),
-	.router_iact_1_2_north_address_in_valid     (CG_0_0_router_iact_1_2_north_address_in_valid  ),
-	.router_iact_1_2_north_address_in           (CG_0_0_router_iact_1_2_north_address_in        ),
-	.router_iact_1_2_north_data_in_ready        (CG_0_0_router_iact_1_2_north_data_in_ready     ),
-	.router_iact_1_2_north_data_in_valid        (CG_0_0_router_iact_1_2_north_data_in_valid     ),
-	.router_iact_1_2_north_data_in              (CG_0_0_router_iact_1_2_north_data_in           ),
-	.router_iact_1_2_south_address_in_ready     (CG_0_0_router_iact_1_2_south_address_in_ready  ),
-	.router_iact_1_2_south_address_in_valid     (CG_0_0_router_iact_1_2_south_address_in_valid  ),
-	.router_iact_1_2_south_address_in           (CG_0_0_router_iact_1_2_south_address_in        ),
-	.router_iact_1_2_south_data_in_ready        (CG_0_0_router_iact_1_2_south_data_in_ready     ),
-	.router_iact_1_2_south_data_in_valid        (CG_0_0_router_iact_1_2_south_data_in_valid     ),
-	.router_iact_1_2_south_data_in              (CG_0_0_router_iact_1_2_south_data_in           ),
-	.router_iact_1_2_horiz_address_in_ready     (CG_0_0_router_iact_1_2_horiz_address_in_ready  ),
-	.router_iact_1_2_horiz_address_in_valid     (CG_0_0_router_iact_1_2_horiz_address_in_valid  ),
-	.router_iact_1_2_horiz_address_in           (CG_0_0_router_iact_1_2_horiz_address_in        ),
-	.router_iact_1_2_horiz_data_in_ready        (CG_0_0_router_iact_1_2_horiz_data_in_ready     ),
-	.router_iact_1_2_horiz_data_in_valid        (CG_0_0_router_iact_1_2_horiz_data_in_valid     ),
-	.router_iact_1_2_horiz_data_in              (CG_0_0_router_iact_1_2_horiz_data_in           ),
-	.router_iact_1_2_north_address_out_ready	(CG_0_0_router_iact_1_2_north_address_out_ready	),
-	.router_iact_1_2_north_address_out_valid    (CG_0_0_router_iact_1_2_north_address_out_valid ),
-	.router_iact_1_2_north_address_out          (CG_0_0_router_iact_1_2_north_address_out       ),
-	.router_iact_1_2_north_data_out_ready       (CG_0_0_router_iact_1_2_north_data_out_ready    ),
-	.router_iact_1_2_north_data_out_valid       (CG_0_0_router_iact_1_2_north_data_out_valid    ),
-	.router_iact_1_2_north_data_out             (CG_0_0_router_iact_1_2_north_data_out          ),
-	.router_iact_1_2_south_address_out_ready    (CG_0_0_router_iact_1_2_south_address_out_ready ),
-	.router_iact_1_2_south_address_out_valid    (CG_0_0_router_iact_1_2_south_address_out_valid ),
-	.router_iact_1_2_south_address_out          (CG_0_0_router_iact_1_2_south_address_out       ),
-	.router_iact_1_2_south_data_out_ready       (CG_0_0_router_iact_1_2_south_data_out_ready    ),
-	.router_iact_1_2_south_data_out_valid       (CG_0_0_router_iact_1_2_south_data_out_valid    ),
-	.router_iact_1_2_south_data_out             (CG_0_0_router_iact_1_2_south_data_out          ),
-	.router_iact_1_2_horiz_address_out_ready    (CG_0_0_router_iact_1_2_horiz_address_out_ready ),
-	.router_iact_1_2_horiz_address_out_valid    (CG_0_0_router_iact_1_2_horiz_address_out_valid ),
-	.router_iact_1_2_horiz_address_out          (CG_0_0_router_iact_1_2_horiz_address_out       ),
-	.router_iact_1_2_horiz_data_out_ready       (CG_0_0_router_iact_1_2_horiz_data_out_ready    ),
-	.router_iact_1_2_horiz_data_out_valid       (CG_0_0_router_iact_1_2_horiz_data_out_valid    ),
-	.router_iact_1_2_horiz_data_out             (CG_0_0_router_iact_1_2_horiz_data_out          ),
-	.router_iact_2_0_north_address_in_ready     (CG_0_0_router_iact_2_0_north_address_in_ready  ),
-	.router_iact_2_0_north_address_in_valid     (CG_0_0_router_iact_2_0_north_address_in_valid  ),
-	.router_iact_2_0_north_address_in           (CG_0_0_router_iact_2_0_north_address_in        ),
-	.router_iact_2_0_north_data_in_ready        (CG_0_0_router_iact_2_0_north_data_in_ready     ),
-	.router_iact_2_0_north_data_in_valid        (CG_0_0_router_iact_2_0_north_data_in_valid     ),
-	.router_iact_2_0_north_data_in              (CG_0_0_router_iact_2_0_north_data_in           ),
-	.router_iact_2_0_south_address_in_ready     (CG_0_0_router_iact_2_0_south_address_in_ready  ),
-	.router_iact_2_0_south_address_in_valid     (CG_0_0_router_iact_2_0_south_address_in_valid  ),
-	.router_iact_2_0_south_address_in           (CG_0_0_router_iact_2_0_south_address_in        ),
-	.router_iact_2_0_south_data_in_ready        (CG_0_0_router_iact_2_0_south_data_in_ready     ),
-	.router_iact_2_0_south_data_in_valid        (CG_0_0_router_iact_2_0_south_data_in_valid     ),
-	.router_iact_2_0_south_data_in              (CG_0_0_router_iact_2_0_south_data_in           ),
-	.router_iact_2_0_horiz_address_in_ready     (CG_0_0_router_iact_2_0_horiz_address_in_ready  ),
-	.router_iact_2_0_horiz_address_in_valid     (CG_0_0_router_iact_2_0_horiz_address_in_valid  ),
-	.router_iact_2_0_horiz_address_in           (CG_0_0_router_iact_2_0_horiz_address_in        ),
-	.router_iact_2_0_horiz_data_in_ready        (CG_0_0_router_iact_2_0_horiz_data_in_ready     ),
-	.router_iact_2_0_horiz_data_in_valid        (CG_0_0_router_iact_2_0_horiz_data_in_valid     ),
-	.router_iact_2_0_horiz_data_in              (CG_0_0_router_iact_2_0_horiz_data_in           ),
-	.router_iact_2_0_north_address_out_ready	(CG_0_0_router_iact_2_0_north_address_out_ready	),
-	.router_iact_2_0_north_address_out_valid    (CG_0_0_router_iact_2_0_north_address_out_valid ),
-	.router_iact_2_0_north_address_out          (CG_0_0_router_iact_2_0_north_address_out       ),
-	.router_iact_2_0_north_data_out_ready       (CG_0_0_router_iact_2_0_north_data_out_ready    ),
-	.router_iact_2_0_north_data_out_valid       (CG_0_0_router_iact_2_0_north_data_out_valid    ),
-	.router_iact_2_0_north_data_out             (CG_0_0_router_iact_2_0_north_data_out          ),
-	.router_iact_2_0_south_address_out_ready    (CG_0_0_router_iact_2_0_south_address_out_ready ),
-	.router_iact_2_0_south_address_out_valid    (CG_0_0_router_iact_2_0_south_address_out_valid ),
-	.router_iact_2_0_south_address_out          (CG_0_0_router_iact_2_0_south_address_out       ),
-	.router_iact_2_0_south_data_out_ready       (CG_0_0_router_iact_2_0_south_data_out_ready    ),
-	.router_iact_2_0_south_data_out_valid       (CG_0_0_router_iact_2_0_south_data_out_valid    ),
-	.router_iact_2_0_south_data_out             (CG_0_0_router_iact_2_0_south_data_out          ),
-	.router_iact_2_0_horiz_address_out_ready    (CG_0_0_router_iact_2_0_horiz_address_out_ready ),
-	.router_iact_2_0_horiz_address_out_valid    (CG_0_0_router_iact_2_0_horiz_address_out_valid ),
-	.router_iact_2_0_horiz_address_out          (CG_0_0_router_iact_2_0_horiz_address_out       ),
-	.router_iact_2_0_horiz_data_out_ready       (CG_0_0_router_iact_2_0_horiz_data_out_ready    ),
-	.router_iact_2_0_horiz_data_out_valid       (CG_0_0_router_iact_2_0_horiz_data_out_valid    ),
-	.router_iact_2_0_horiz_data_out             (CG_0_0_router_iact_2_0_horiz_data_out          ),
-	.router_iact_2_1_north_address_in_ready     (CG_0_0_router_iact_2_1_north_address_in_ready  ),
-	.router_iact_2_1_north_address_in_valid     (CG_0_0_router_iact_2_1_north_address_in_valid  ),
-	.router_iact_2_1_north_address_in           (CG_0_0_router_iact_2_1_north_address_in        ),
-	.router_iact_2_1_north_data_in_ready        (CG_0_0_router_iact_2_1_north_data_in_ready     ),
-	.router_iact_2_1_north_data_in_valid        (CG_0_0_router_iact_2_1_north_data_in_valid     ),
-	.router_iact_2_1_north_data_in              (CG_0_0_router_iact_2_1_north_data_in           ),
-	.router_iact_2_1_south_address_in_ready     (CG_0_0_router_iact_2_1_south_address_in_ready  ),
-	.router_iact_2_1_south_address_in_valid     (CG_0_0_router_iact_2_1_south_address_in_valid  ),
-	.router_iact_2_1_south_address_in           (CG_0_0_router_iact_2_1_south_address_in        ),
-	.router_iact_2_1_south_data_in_ready        (CG_0_0_router_iact_2_1_south_data_in_ready     ),
-	.router_iact_2_1_south_data_in_valid        (CG_0_0_router_iact_2_1_south_data_in_valid     ),
-	.router_iact_2_1_south_data_in              (CG_0_0_router_iact_2_1_south_data_in           ),
-	.router_iact_2_1_horiz_address_in_ready     (CG_0_0_router_iact_2_1_horiz_address_in_ready  ),
-	.router_iact_2_1_horiz_address_in_valid     (CG_0_0_router_iact_2_1_horiz_address_in_valid  ),
-	.router_iact_2_1_horiz_address_in           (CG_0_0_router_iact_2_1_horiz_address_in        ),
-	.router_iact_2_1_horiz_data_in_ready        (CG_0_0_router_iact_2_1_horiz_data_in_ready     ),
-	.router_iact_2_1_horiz_data_in_valid        (CG_0_0_router_iact_2_1_horiz_data_in_valid     ),
-	.router_iact_2_1_horiz_data_in              (CG_0_0_router_iact_2_1_horiz_data_in           ),
-	.router_iact_2_1_north_address_out_ready	(CG_0_0_router_iact_2_1_north_address_out_ready	),
-	.router_iact_2_1_north_address_out_valid    (CG_0_0_router_iact_2_1_north_address_out_valid ),
-	.router_iact_2_1_north_address_out          (CG_0_0_router_iact_2_1_north_address_out       ),
-	.router_iact_2_1_north_data_out_ready       (CG_0_0_router_iact_2_1_north_data_out_ready    ),
-	.router_iact_2_1_north_data_out_valid       (CG_0_0_router_iact_2_1_north_data_out_valid    ),
-	.router_iact_2_1_north_data_out             (CG_0_0_router_iact_2_1_north_data_out          ),
-	.router_iact_2_1_south_address_out_ready    (CG_0_0_router_iact_2_1_south_address_out_ready ),
-	.router_iact_2_1_south_address_out_valid    (CG_0_0_router_iact_2_1_south_address_out_valid ),
-	.router_iact_2_1_south_address_out          (CG_0_0_router_iact_2_1_south_address_out       ),
-	.router_iact_2_1_south_data_out_ready       (CG_0_0_router_iact_2_1_south_data_out_ready    ),
-	.router_iact_2_1_south_data_out_valid       (CG_0_0_router_iact_2_1_south_data_out_valid    ),
-	.router_iact_2_1_south_data_out             (CG_0_0_router_iact_2_1_south_data_out          ),
-	.router_iact_2_1_horiz_address_out_ready    (CG_0_0_router_iact_2_1_horiz_address_out_ready ),
-	.router_iact_2_1_horiz_address_out_valid    (CG_0_0_router_iact_2_1_horiz_address_out_valid ),
-	.router_iact_2_1_horiz_address_out          (CG_0_0_router_iact_2_1_horiz_address_out       ),
-	.router_iact_2_1_horiz_data_out_ready       (CG_0_0_router_iact_2_1_horiz_data_out_ready    ),
-	.router_iact_2_1_horiz_data_out_valid       (CG_0_0_router_iact_2_1_horiz_data_out_valid    ),
-	.router_iact_2_1_horiz_data_out             (CG_0_0_router_iact_2_1_horiz_data_out          ),
-	.router_iact_2_2_north_address_in_ready     (CG_0_0_router_iact_2_2_north_address_in_ready  ),
-	.router_iact_2_2_north_address_in_valid     (CG_0_0_router_iact_2_2_north_address_in_valid  ),
-	.router_iact_2_2_north_address_in           (CG_0_0_router_iact_2_2_north_address_in        ),
-	.router_iact_2_2_north_data_in_ready        (CG_0_0_router_iact_2_2_north_data_in_ready     ),
-	.router_iact_2_2_north_data_in_valid        (CG_0_0_router_iact_2_2_north_data_in_valid     ),
-	.router_iact_2_2_north_data_in              (CG_0_0_router_iact_2_2_north_data_in           ),
-	.router_iact_2_2_south_address_in_ready     (CG_0_0_router_iact_2_2_south_address_in_ready  ),
-	.router_iact_2_2_south_address_in_valid     (CG_0_0_router_iact_2_2_south_address_in_valid  ),
-	.router_iact_2_2_south_address_in           (CG_0_0_router_iact_2_2_south_address_in        ),
-	.router_iact_2_2_south_data_in_ready        (CG_0_0_router_iact_2_2_south_data_in_ready     ),
-	.router_iact_2_2_south_data_in_valid        (CG_0_0_router_iact_2_2_south_data_in_valid     ),
-	.router_iact_2_2_south_data_in              (CG_0_0_router_iact_2_2_south_data_in           ),
-	.router_iact_2_2_horiz_address_in_ready     (CG_0_0_router_iact_2_2_horiz_address_in_ready  ),
-	.router_iact_2_2_horiz_address_in_valid     (CG_0_0_router_iact_2_2_horiz_address_in_valid  ),
-	.router_iact_2_2_horiz_address_in           (CG_0_0_router_iact_2_2_horiz_address_in        ),
-	.router_iact_2_2_horiz_data_in_ready        (CG_0_0_router_iact_2_2_horiz_data_in_ready     ),
-	.router_iact_2_2_horiz_data_in_valid        (CG_0_0_router_iact_2_2_horiz_data_in_valid     ),
-	.router_iact_2_2_horiz_data_in              (CG_0_0_router_iact_2_2_horiz_data_in           ),
-	.router_iact_2_2_north_address_out_ready	(CG_0_0_router_iact_2_2_north_address_out_ready	),
-	.router_iact_2_2_north_address_out_valid    (CG_0_0_router_iact_2_2_north_address_out_valid ),
-	.router_iact_2_2_north_address_out          (CG_0_0_router_iact_2_2_north_address_out       ),
-	.router_iact_2_2_north_data_out_ready       (CG_0_0_router_iact_2_2_north_data_out_ready    ),
-	.router_iact_2_2_north_data_out_valid       (CG_0_0_router_iact_2_2_north_data_out_valid    ),
-	.router_iact_2_2_north_data_out             (CG_0_0_router_iact_2_2_north_data_out          ),
-	.router_iact_2_2_south_address_out_ready    (CG_0_0_router_iact_2_2_south_address_out_ready ),
-	.router_iact_2_2_south_address_out_valid    (CG_0_0_router_iact_2_2_south_address_out_valid ),
-	.router_iact_2_2_south_address_out          (CG_0_0_router_iact_2_2_south_address_out       ),
-	.router_iact_2_2_south_data_out_ready       (CG_0_0_router_iact_2_2_south_data_out_ready    ),
-	.router_iact_2_2_south_data_out_valid       (CG_0_0_router_iact_2_2_south_data_out_valid    ),
-	.router_iact_2_2_south_data_out             (CG_0_0_router_iact_2_2_south_data_out          ),
-	.router_iact_2_2_horiz_address_out_ready    (CG_0_0_router_iact_2_2_horiz_address_out_ready ),
-	.router_iact_2_2_horiz_address_out_valid    (CG_0_0_router_iact_2_2_horiz_address_out_valid ),
-	.router_iact_2_2_horiz_address_out          (CG_0_0_router_iact_2_2_horiz_address_out       ),
-	.router_iact_2_2_horiz_data_out_ready       (CG_0_0_router_iact_2_2_horiz_data_out_ready    ),
-	.router_iact_2_2_horiz_data_out_valid       (CG_0_0_router_iact_2_2_horiz_data_out_valid    ),
-	.router_iact_2_2_horiz_data_out             (CG_0_0_router_iact_2_2_horiz_data_out          ),
-												
-	.router_weight_0_horiz_address_in_ready     (CG_0_0_router_weight_0_horiz_address_in_ready  ),
-	.router_weight_0_horiz_address_in_valid     (CG_0_0_router_weight_0_horiz_address_in_valid  ),
-	.router_weight_0_horiz_address_in           (CG_0_0_router_weight_0_horiz_address_in        ),
-	.router_weight_0_horiz_data_in_ready        (CG_0_0_router_weight_0_horiz_data_in_ready     ),
-	.router_weight_0_horiz_data_in_valid        (CG_0_0_router_weight_0_horiz_data_in_valid     ),
-	.router_weight_0_horiz_data_in              (CG_0_0_router_weight_0_horiz_data_in           ),
-	.router_weight_0_horiz_address_out_ready    (CG_0_0_router_weight_0_horiz_address_out_ready ),
-	.router_weight_0_horiz_address_out_valid    (CG_0_0_router_weight_0_horiz_address_out_valid ),
-	.router_weight_0_horiz_address_out          (CG_0_0_router_weight_0_horiz_address_out       ),
-	.router_weight_0_horiz_data_out_ready       (CG_0_0_router_weight_0_horiz_data_out_ready    ),
-	.router_weight_0_horiz_data_out_valid       (CG_0_0_router_weight_0_horiz_data_out_valid    ),
-	.router_weight_0_horiz_data_out             (CG_0_0_router_weight_0_horiz_data_out          ),
-	.router_weight_1_horiz_address_in_ready     (CG_0_0_router_weight_1_horiz_address_in_ready  ),
-	.router_weight_1_horiz_address_in_valid     (CG_0_0_router_weight_1_horiz_address_in_valid  ),
-	.router_weight_1_horiz_address_in           (CG_0_0_router_weight_1_horiz_address_in        ),
-	.router_weight_1_horiz_data_in_ready        (CG_0_0_router_weight_1_horiz_data_in_ready     ),
-	.router_weight_1_horiz_data_in_valid        (CG_0_0_router_weight_1_horiz_data_in_valid     ),
-	.router_weight_1_horiz_data_in              (CG_0_0_router_weight_1_horiz_data_in           ),
-	.router_weight_1_horiz_address_out_ready    (CG_0_0_router_weight_1_horiz_address_out_ready ),
-	.router_weight_1_horiz_address_out_valid    (CG_0_0_router_weight_1_horiz_address_out_valid ),
-	.router_weight_1_horiz_address_out          (CG_0_0_router_weight_1_horiz_address_out       ),
-	.router_weight_1_horiz_data_out_ready       (CG_0_0_router_weight_1_horiz_data_out_ready    ),
-	.router_weight_1_horiz_data_out_valid       (CG_0_0_router_weight_1_horiz_data_out_valid    ),
-	.router_weight_1_horiz_data_out             (CG_0_0_router_weight_1_horiz_data_out          ),
-	.router_weight_2_horiz_address_in_ready     (CG_0_0_router_weight_2_horiz_address_in_ready  ),
-	.router_weight_2_horiz_address_in_valid     (CG_0_0_router_weight_2_horiz_address_in_valid  ),
-	.router_weight_2_horiz_address_in           (CG_0_0_router_weight_2_horiz_address_in        ),
-	.router_weight_2_horiz_data_in_ready        (CG_0_0_router_weight_2_horiz_data_in_ready     ),
-	.router_weight_2_horiz_data_in_valid        (CG_0_0_router_weight_2_horiz_data_in_valid     ),
-	.router_weight_2_horiz_data_in              (CG_0_0_router_weight_2_horiz_data_in           ),
-	.router_weight_2_horiz_address_out_ready    (CG_0_0_router_weight_2_horiz_address_out_ready ),
-	.router_weight_2_horiz_address_out_valid    (CG_0_0_router_weight_2_horiz_address_out_valid ),
-	.router_weight_2_horiz_address_out          (CG_0_0_router_weight_2_horiz_address_out       ),
-	.router_weight_2_horiz_data_out_ready       (CG_0_0_router_weight_2_horiz_data_out_ready    ),
-	.router_weight_2_horiz_data_out_valid       (CG_0_0_router_weight_2_horiz_data_out_valid    ),
-	.router_weight_2_horiz_data_out             (CG_0_0_router_weight_2_horiz_data_out          ),
-												
-	.router_psum_0_north_in_ready               (CG_0_0_router_psum_0_north_in_ready            ),
-	.router_psum_0_north_in_valid               (CG_0_0_router_psum_0_north_in_valid            ),
-	.router_psum_0_north_in                     (CG_0_0_router_psum_0_north_in                  ),
-	.router_psum_0_south_out_ready              (CG_0_0_router_psum_0_south_out_ready           ),
-	.router_psum_0_south_out_valid              (CG_0_0_router_psum_0_south_out_valid           ),
-	.router_psum_0_south_out                    (CG_0_0_router_psum_0_south_out                 ),
-	.router_psum_1_north_in_ready               (CG_0_0_router_psum_1_north_in_ready            ),
-	.router_psum_1_north_in_valid               (CG_0_0_router_psum_1_north_in_valid            ),
-	.router_psum_1_north_in                     (CG_0_0_router_psum_1_north_in                  ),
-	.router_psum_1_south_out_ready              (CG_0_0_router_psum_1_south_out_ready           ),
-	.router_psum_1_south_out_valid              (CG_0_0_router_psum_1_south_out_valid           ),
-	.router_psum_1_south_out                    (CG_0_0_router_psum_1_south_out                 ),
-	.router_psum_2_north_in_ready               (CG_0_0_router_psum_2_north_in_ready            ),
-	.router_psum_2_north_in_valid               (CG_0_0_router_psum_2_north_in_valid            ),
-	.router_psum_2_north_in                     (CG_0_0_router_psum_2_north_in                  ),
-	.router_psum_2_south_out_ready              (CG_0_0_router_psum_2_south_out_ready           ),
-	.router_psum_2_south_out_valid              (CG_0_0_router_psum_2_south_out_valid           ),
-	.router_psum_2_south_out                    (CG_0_0_router_psum_2_south_out                 ),
-												 					
-	.cg_south_psum_0_in_ready                   (CG_0_0_cg_south_psum_0_in_ready                ),
-	.cg_south_psum_0_in_valid                   (CG_0_0_cg_south_psum_0_in_valid                ),
-	.cg_south_psum_0_in                         (CG_0_0_cg_south_psum_0_in                      ),
-	.cg_south_psum_1_in_ready                   (CG_0_0_cg_south_psum_1_in_ready                ),
-	.cg_south_psum_1_in_valid                   (CG_0_0_cg_south_psum_1_in_valid                ),
-	.cg_south_psum_1_in                         (CG_0_0_cg_south_psum_1_in                      ),
-	.cg_south_psum_2_in_ready                   (CG_0_0_cg_south_psum_2_in_ready                ),
-	.cg_south_psum_2_in_valid                   (CG_0_0_cg_south_psum_2_in_valid                ),
-	.cg_south_psum_2_in                         (CG_0_0_cg_south_psum_2_in                      ),
-	.cg_north_psum_0_out_ready                  (CG_0_0_cg_north_psum_0_out_ready               ),
-	.cg_north_psum_0_out_valid                  (CG_0_0_cg_north_psum_0_out_valid               ),
-	.cg_north_psum_0_out                        (CG_0_0_cg_north_psum_0_out                     ),
-	.cg_north_psum_1_out_ready                  (CG_0_0_cg_north_psum_1_out_ready               ),
-	.cg_north_psum_1_out_valid                  (CG_0_0_cg_north_psum_1_out_valid               ),
-	.cg_north_psum_1_out                        (CG_0_0_cg_north_psum_1_out                     ),
-	.cg_north_psum_2_out_ready                  (CG_0_0_cg_north_psum_2_out_ready               ),
-	.cg_north_psum_2_out_valid                  (CG_0_0_cg_north_psum_2_out_valid               ),
-	.cg_north_psum_2_out                        (CG_0_0_cg_north_psum_2_out                     ),
-									         
+	// --- tile-chain：iact / weight / psum router、cg_psum（array 直連） ---
+	.iact_north_address_in_ready    (CG_0_0_iact_north_address_in_ready         ),
+	.iact_north_address_in_valid    (tie_lo_3x3                                 ),
+	.iact_north_address_in_bits     (tie_lo_3x3_7b                              ),
+	.iact_north_address_out_ready   (tie_hi_3x3                                 ),
+	.iact_north_address_out_valid   (CG_0_0_iact_north_address_out_valid        ),
+	.iact_north_address_out_bits    (CG_0_0_iact_north_address_out_bits         ),
+	.iact_north_data_in_ready       (CG_0_0_iact_north_data_in_ready            ),
+	.iact_north_data_in_valid       (tie_lo_3x3                                 ),
+	.iact_north_data_in_bits        (tie_lo_3x3_12b                             ),
+	.iact_north_data_out_ready      (tie_hi_3x3                                 ),
+	.iact_north_data_out_valid      (CG_0_0_iact_north_data_out_valid           ),
+	.iact_north_data_out_bits       (CG_0_0_iact_north_data_out_bits            ),
+	.iact_south_address_in_ready    (CG_0_0_iact_south_address_in_ready         ),
+	.iact_south_address_in_valid    (CG_1_0_iact_north_address_out_valid        ),
+	.iact_south_address_in_bits     (CG_1_0_iact_north_address_out_bits         ),
+	.iact_south_address_out_ready   (CG_1_0_iact_north_address_in_ready         ),
+	.iact_south_address_out_valid   (CG_0_0_iact_south_address_out_valid        ),
+	.iact_south_address_out_bits    (CG_0_0_iact_south_address_out_bits         ),
+	.iact_south_data_in_ready       (CG_0_0_iact_south_data_in_ready            ),
+	.iact_south_data_in_valid       (CG_1_0_iact_north_data_out_valid           ),
+	.iact_south_data_in_bits        (CG_1_0_iact_north_data_out_bits            ),
+	.iact_south_data_out_ready      (CG_1_0_iact_north_data_in_ready            ),
+	.iact_south_data_out_valid      (CG_0_0_iact_south_data_out_valid           ),
+	.iact_south_data_out_bits       (CG_0_0_iact_south_data_out_bits            ),
+	.iact_horiz_address_in_ready    (CG_0_0_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_in_valid    (CG_0_1_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_in_bits     (CG_0_1_iact_horiz_address_out_bits         ),
+	.iact_horiz_address_out_ready   (CG_0_1_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_out_valid   (CG_0_0_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_out_bits    (CG_0_0_iact_horiz_address_out_bits         ),
+	.iact_horiz_data_in_ready       (CG_0_0_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_in_valid       (CG_0_1_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_in_bits        (CG_0_1_iact_horiz_data_out_bits            ),
+	.iact_horiz_data_out_ready      (CG_0_1_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_out_valid      (CG_0_0_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_out_bits       (CG_0_0_iact_horiz_data_out_bits            ),
+	.weight_horiz_address_in_ready  (CG_0_0_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_in_valid  (CG_0_1_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_in_bits   (CG_0_1_weight_horiz_address_out_bits       ),
+	.weight_horiz_address_out_ready (CG_0_1_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_out_valid (CG_0_0_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_out_bits  (CG_0_0_weight_horiz_address_out_bits       ),
+	.weight_horiz_data_in_ready     (CG_0_0_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_in_valid     (CG_0_1_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_in_bits      (CG_0_1_weight_horiz_data_out_bits          ),
+	.weight_horiz_data_out_ready    (CG_0_1_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_out_valid    (CG_0_0_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_out_bits     (CG_0_0_weight_horiz_data_out_bits          ),
+	.psum_north_in_ready            (CG_0_0_psum_north_in_ready                 ),
+	.psum_north_in_valid            (tie_lo_3                                   ),
+	.psum_north_in_bits             (tie_lo_3_21b                               ),
+	.psum_south_out_ready           (CG_1_0_psum_north_in_ready                 ),
+	.psum_south_out_valid           (CG_0_0_psum_south_out_valid                ),
+	.psum_south_out_bits            (CG_0_0_psum_south_out_bits                 ),
+	.cg_south_psum_in_ready         (CG_0_0_cg_south_psum_in_ready              ),
+	.cg_south_psum_in_valid         (CG_1_0_cg_north_psum_out_valid             ),
+	.cg_south_psum_in               (CG_1_0_cg_north_psum_out                   ),
+	.cg_north_psum_out_ready        (tie_hi_3                                   ),
+	.cg_north_psum_out_valid        (CG_0_0_cg_north_psum_out_valid             ),
+	.cg_north_psum_out              (CG_0_0_cg_north_psum_out                   ),
+
+
 	.PSUM_DEPTH                                 (CG_0_0_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_psum_spad_clear[0][0]                         ),
 											
 	.iact_write_fin_clear                       (CG_iact_write_fin_clear[0][0]                	),
 	.weight_write_fin_clear						(CG_weight_write_fin_clear[0][0]					)
 );
-
 
 
 ClusterGroup ClusterGroup_0_1 (
@@ -2403,413 +625,75 @@ ClusterGroup ClusterGroup_0_1 (
 	.GLB_psum_2_data_out_valid                  (CG_0_1_GLB_psum_2_data_out_valid               ),
 	.GLB_psum_2_data_out                        (CG_0_1_GLB_psum_2_data_out                     ),
 											
-	.router_iact_0_0_north_address_in_ready		(CG_0_1_router_iact_0_0_north_address_in_ready	),
-	.router_iact_0_0_north_address_in_valid     (CG_0_1_router_iact_0_0_north_address_in_valid  ),
-	.router_iact_0_0_north_address_in           (CG_0_1_router_iact_0_0_north_address_in        ),
-	.router_iact_0_0_north_data_in_ready        (CG_0_1_router_iact_0_0_north_data_in_ready     ),
-	.router_iact_0_0_north_data_in_valid        (CG_0_1_router_iact_0_0_north_data_in_valid     ),
-	.router_iact_0_0_north_data_in              (CG_0_1_router_iact_0_0_north_data_in           ),
-	.router_iact_0_0_south_address_in_ready     (CG_0_1_router_iact_0_0_south_address_in_ready  ),
-	.router_iact_0_0_south_address_in_valid     (CG_0_1_router_iact_0_0_south_address_in_valid  ),
-	.router_iact_0_0_south_address_in           (CG_0_1_router_iact_0_0_south_address_in        ),
-	.router_iact_0_0_south_data_in_ready        (CG_0_1_router_iact_0_0_south_data_in_ready     ),
-	.router_iact_0_0_south_data_in_valid        (CG_0_1_router_iact_0_0_south_data_in_valid     ),
-	.router_iact_0_0_south_data_in              (CG_0_1_router_iact_0_0_south_data_in           ),
-	.router_iact_0_0_horiz_address_in_ready     (CG_0_1_router_iact_0_0_horiz_address_in_ready  ),
-	.router_iact_0_0_horiz_address_in_valid     (CG_0_1_router_iact_0_0_horiz_address_in_valid  ),
-	.router_iact_0_0_horiz_address_in           (CG_0_1_router_iact_0_0_horiz_address_in        ),
-	.router_iact_0_0_horiz_data_in_ready        (CG_0_1_router_iact_0_0_horiz_data_in_ready     ),
-	.router_iact_0_0_horiz_data_in_valid        (CG_0_1_router_iact_0_0_horiz_data_in_valid     ),
-	.router_iact_0_0_horiz_data_in              (CG_0_1_router_iact_0_0_horiz_data_in           ),
-	.router_iact_0_0_north_address_out_ready	(CG_0_1_router_iact_0_0_north_address_out_ready	),
-	.router_iact_0_0_north_address_out_valid    (CG_0_1_router_iact_0_0_north_address_out_valid ),
-	.router_iact_0_0_north_address_out          (CG_0_1_router_iact_0_0_north_address_out       ),
-	.router_iact_0_0_north_data_out_ready       (CG_0_1_router_iact_0_0_north_data_out_ready    ),
-	.router_iact_0_0_north_data_out_valid       (CG_0_1_router_iact_0_0_north_data_out_valid    ),
-	.router_iact_0_0_north_data_out             (CG_0_1_router_iact_0_0_north_data_out          ),
-	.router_iact_0_0_south_address_out_ready    (CG_0_1_router_iact_0_0_south_address_out_ready ),
-	.router_iact_0_0_south_address_out_valid    (CG_0_1_router_iact_0_0_south_address_out_valid ),
-	.router_iact_0_0_south_address_out          (CG_0_1_router_iact_0_0_south_address_out       ),
-	.router_iact_0_0_south_data_out_ready       (CG_0_1_router_iact_0_0_south_data_out_ready    ),
-	.router_iact_0_0_south_data_out_valid       (CG_0_1_router_iact_0_0_south_data_out_valid    ),
-	.router_iact_0_0_south_data_out             (CG_0_1_router_iact_0_0_south_data_out          ),
-	.router_iact_0_0_horiz_address_out_ready    (CG_0_1_router_iact_0_0_horiz_address_out_ready ),
-	.router_iact_0_0_horiz_address_out_valid    (CG_0_1_router_iact_0_0_horiz_address_out_valid ),
-	.router_iact_0_0_horiz_address_out          (CG_0_1_router_iact_0_0_horiz_address_out       ),
-	.router_iact_0_0_horiz_data_out_ready       (CG_0_1_router_iact_0_0_horiz_data_out_ready    ),
-	.router_iact_0_0_horiz_data_out_valid       (CG_0_1_router_iact_0_0_horiz_data_out_valid    ),
-	.router_iact_0_0_horiz_data_out             (CG_0_1_router_iact_0_0_horiz_data_out          ),
-	.router_iact_0_1_north_address_in_ready     (CG_0_1_router_iact_0_1_north_address_in_ready  ),
-	.router_iact_0_1_north_address_in_valid     (CG_0_1_router_iact_0_1_north_address_in_valid  ),
-	.router_iact_0_1_north_address_in           (CG_0_1_router_iact_0_1_north_address_in        ),
-	.router_iact_0_1_north_data_in_ready        (CG_0_1_router_iact_0_1_north_data_in_ready     ),
-	.router_iact_0_1_north_data_in_valid        (CG_0_1_router_iact_0_1_north_data_in_valid     ),
-	.router_iact_0_1_north_data_in              (CG_0_1_router_iact_0_1_north_data_in           ),
-	.router_iact_0_1_south_address_in_ready     (CG_0_1_router_iact_0_1_south_address_in_ready  ),
-	.router_iact_0_1_south_address_in_valid     (CG_0_1_router_iact_0_1_south_address_in_valid  ),
-	.router_iact_0_1_south_address_in           (CG_0_1_router_iact_0_1_south_address_in        ),
-	.router_iact_0_1_south_data_in_ready        (CG_0_1_router_iact_0_1_south_data_in_ready     ),
-	.router_iact_0_1_south_data_in_valid        (CG_0_1_router_iact_0_1_south_data_in_valid     ),
-	.router_iact_0_1_south_data_in              (CG_0_1_router_iact_0_1_south_data_in           ),
-	.router_iact_0_1_horiz_address_in_ready     (CG_0_1_router_iact_0_1_horiz_address_in_ready  ),
-	.router_iact_0_1_horiz_address_in_valid     (CG_0_1_router_iact_0_1_horiz_address_in_valid  ),
-	.router_iact_0_1_horiz_address_in           (CG_0_1_router_iact_0_1_horiz_address_in        ),
-	.router_iact_0_1_horiz_data_in_ready        (CG_0_1_router_iact_0_1_horiz_data_in_ready     ),
-	.router_iact_0_1_horiz_data_in_valid        (CG_0_1_router_iact_0_1_horiz_data_in_valid     ),
-	.router_iact_0_1_horiz_data_in              (CG_0_1_router_iact_0_1_horiz_data_in           ),
-	.router_iact_0_1_north_address_out_ready	(CG_0_1_router_iact_0_1_north_address_out_ready	),
-	.router_iact_0_1_north_address_out_valid    (CG_0_1_router_iact_0_1_north_address_out_valid ),
-	.router_iact_0_1_north_address_out          (CG_0_1_router_iact_0_1_north_address_out       ),
-	.router_iact_0_1_north_data_out_ready       (CG_0_1_router_iact_0_1_north_data_out_ready    ),
-	.router_iact_0_1_north_data_out_valid       (CG_0_1_router_iact_0_1_north_data_out_valid    ),
-	.router_iact_0_1_north_data_out             (CG_0_1_router_iact_0_1_north_data_out          ),
-	.router_iact_0_1_south_address_out_ready    (CG_0_1_router_iact_0_1_south_address_out_ready ),
-	.router_iact_0_1_south_address_out_valid    (CG_0_1_router_iact_0_1_south_address_out_valid ),
-	.router_iact_0_1_south_address_out          (CG_0_1_router_iact_0_1_south_address_out       ),
-	.router_iact_0_1_south_data_out_ready       (CG_0_1_router_iact_0_1_south_data_out_ready    ),
-	.router_iact_0_1_south_data_out_valid       (CG_0_1_router_iact_0_1_south_data_out_valid    ),
-	.router_iact_0_1_south_data_out             (CG_0_1_router_iact_0_1_south_data_out          ),
-	.router_iact_0_1_horiz_address_out_ready    (CG_0_1_router_iact_0_1_horiz_address_out_ready ),
-	.router_iact_0_1_horiz_address_out_valid    (CG_0_1_router_iact_0_1_horiz_address_out_valid ),
-	.router_iact_0_1_horiz_address_out          (CG_0_1_router_iact_0_1_horiz_address_out       ),
-	.router_iact_0_1_horiz_data_out_ready       (CG_0_1_router_iact_0_1_horiz_data_out_ready    ),
-	.router_iact_0_1_horiz_data_out_valid       (CG_0_1_router_iact_0_1_horiz_data_out_valid    ),
-	.router_iact_0_1_horiz_data_out             (CG_0_1_router_iact_0_1_horiz_data_out          ),
-	.router_iact_0_2_north_address_in_ready     (CG_0_1_router_iact_0_2_north_address_in_ready  ),
-	.router_iact_0_2_north_address_in_valid     (CG_0_1_router_iact_0_2_north_address_in_valid  ),
-	.router_iact_0_2_north_address_in           (CG_0_1_router_iact_0_2_north_address_in        ),
-	.router_iact_0_2_north_data_in_ready        (CG_0_1_router_iact_0_2_north_data_in_ready     ),
-	.router_iact_0_2_north_data_in_valid        (CG_0_1_router_iact_0_2_north_data_in_valid     ),
-	.router_iact_0_2_north_data_in              (CG_0_1_router_iact_0_2_north_data_in           ),
-	.router_iact_0_2_south_address_in_ready     (CG_0_1_router_iact_0_2_south_address_in_ready  ),
-	.router_iact_0_2_south_address_in_valid     (CG_0_1_router_iact_0_2_south_address_in_valid  ),
-	.router_iact_0_2_south_address_in           (CG_0_1_router_iact_0_2_south_address_in        ),
-	.router_iact_0_2_south_data_in_ready        (CG_0_1_router_iact_0_2_south_data_in_ready     ),
-	.router_iact_0_2_south_data_in_valid        (CG_0_1_router_iact_0_2_south_data_in_valid     ),
-	.router_iact_0_2_south_data_in              (CG_0_1_router_iact_0_2_south_data_in           ),
-	.router_iact_0_2_horiz_address_in_ready     (CG_0_1_router_iact_0_2_horiz_address_in_ready  ),
-	.router_iact_0_2_horiz_address_in_valid     (CG_0_1_router_iact_0_2_horiz_address_in_valid  ),
-	.router_iact_0_2_horiz_address_in           (CG_0_1_router_iact_0_2_horiz_address_in        ),
-	.router_iact_0_2_horiz_data_in_ready        (CG_0_1_router_iact_0_2_horiz_data_in_ready     ),
-	.router_iact_0_2_horiz_data_in_valid        (CG_0_1_router_iact_0_2_horiz_data_in_valid     ),
-	.router_iact_0_2_horiz_data_in              (CG_0_1_router_iact_0_2_horiz_data_in           ),
-	.router_iact_0_2_north_address_out_ready	(CG_0_1_router_iact_0_2_north_address_out_ready	),
-	.router_iact_0_2_north_address_out_valid    (CG_0_1_router_iact_0_2_north_address_out_valid ),
-	.router_iact_0_2_north_address_out          (CG_0_1_router_iact_0_2_north_address_out       ),
-	.router_iact_0_2_north_data_out_ready       (CG_0_1_router_iact_0_2_north_data_out_ready    ),
-	.router_iact_0_2_north_data_out_valid       (CG_0_1_router_iact_0_2_north_data_out_valid    ),
-	.router_iact_0_2_north_data_out             (CG_0_1_router_iact_0_2_north_data_out          ),
-	.router_iact_0_2_south_address_out_ready    (CG_0_1_router_iact_0_2_south_address_out_ready ),
-	.router_iact_0_2_south_address_out_valid    (CG_0_1_router_iact_0_2_south_address_out_valid ),
-	.router_iact_0_2_south_address_out          (CG_0_1_router_iact_0_2_south_address_out       ),
-	.router_iact_0_2_south_data_out_ready       (CG_0_1_router_iact_0_2_south_data_out_ready    ),
-	.router_iact_0_2_south_data_out_valid       (CG_0_1_router_iact_0_2_south_data_out_valid    ),
-	.router_iact_0_2_south_data_out             (CG_0_1_router_iact_0_2_south_data_out          ),
-	.router_iact_0_2_horiz_address_out_ready    (CG_0_1_router_iact_0_2_horiz_address_out_ready ),
-	.router_iact_0_2_horiz_address_out_valid    (CG_0_1_router_iact_0_2_horiz_address_out_valid ),
-	.router_iact_0_2_horiz_address_out          (CG_0_1_router_iact_0_2_horiz_address_out       ),
-	.router_iact_0_2_horiz_data_out_ready       (CG_0_1_router_iact_0_2_horiz_data_out_ready    ),
-	.router_iact_0_2_horiz_data_out_valid       (CG_0_1_router_iact_0_2_horiz_data_out_valid    ),
-	.router_iact_0_2_horiz_data_out             (CG_0_1_router_iact_0_2_horiz_data_out          ),
-	.router_iact_1_0_north_address_in_ready     (CG_0_1_router_iact_1_0_north_address_in_ready  ),
-	.router_iact_1_0_north_address_in_valid     (CG_0_1_router_iact_1_0_north_address_in_valid  ),
-	.router_iact_1_0_north_address_in           (CG_0_1_router_iact_1_0_north_address_in        ),
-	.router_iact_1_0_north_data_in_ready        (CG_0_1_router_iact_1_0_north_data_in_ready     ),
-	.router_iact_1_0_north_data_in_valid        (CG_0_1_router_iact_1_0_north_data_in_valid     ),
-	.router_iact_1_0_north_data_in              (CG_0_1_router_iact_1_0_north_data_in           ),
-	.router_iact_1_0_south_address_in_ready     (CG_0_1_router_iact_1_0_south_address_in_ready  ),
-	.router_iact_1_0_south_address_in_valid     (CG_0_1_router_iact_1_0_south_address_in_valid  ),
-	.router_iact_1_0_south_address_in           (CG_0_1_router_iact_1_0_south_address_in        ),
-	.router_iact_1_0_south_data_in_ready        (CG_0_1_router_iact_1_0_south_data_in_ready     ),
-	.router_iact_1_0_south_data_in_valid        (CG_0_1_router_iact_1_0_south_data_in_valid     ),
-	.router_iact_1_0_south_data_in              (CG_0_1_router_iact_1_0_south_data_in           ),
-	.router_iact_1_0_horiz_address_in_ready     (CG_0_1_router_iact_1_0_horiz_address_in_ready  ),
-	.router_iact_1_0_horiz_address_in_valid     (CG_0_1_router_iact_1_0_horiz_address_in_valid  ),
-	.router_iact_1_0_horiz_address_in           (CG_0_1_router_iact_1_0_horiz_address_in        ),
-	.router_iact_1_0_horiz_data_in_ready        (CG_0_1_router_iact_1_0_horiz_data_in_ready     ),
-	.router_iact_1_0_horiz_data_in_valid        (CG_0_1_router_iact_1_0_horiz_data_in_valid     ),
-	.router_iact_1_0_horiz_data_in              (CG_0_1_router_iact_1_0_horiz_data_in           ),
-	.router_iact_1_0_north_address_out_ready	(CG_0_1_router_iact_1_0_north_address_out_ready	),
-	.router_iact_1_0_north_address_out_valid    (CG_0_1_router_iact_1_0_north_address_out_valid ),
-	.router_iact_1_0_north_address_out          (CG_0_1_router_iact_1_0_north_address_out       ),
-	.router_iact_1_0_north_data_out_ready       (CG_0_1_router_iact_1_0_north_data_out_ready    ),
-	.router_iact_1_0_north_data_out_valid       (CG_0_1_router_iact_1_0_north_data_out_valid    ),
-	.router_iact_1_0_north_data_out             (CG_0_1_router_iact_1_0_north_data_out          ),
-	.router_iact_1_0_south_address_out_ready    (CG_0_1_router_iact_1_0_south_address_out_ready ),
-	.router_iact_1_0_south_address_out_valid    (CG_0_1_router_iact_1_0_south_address_out_valid ),
-	.router_iact_1_0_south_address_out          (CG_0_1_router_iact_1_0_south_address_out       ),
-	.router_iact_1_0_south_data_out_ready       (CG_0_1_router_iact_1_0_south_data_out_ready    ),
-	.router_iact_1_0_south_data_out_valid       (CG_0_1_router_iact_1_0_south_data_out_valid    ),
-	.router_iact_1_0_south_data_out             (CG_0_1_router_iact_1_0_south_data_out          ),
-	.router_iact_1_0_horiz_address_out_ready    (CG_0_1_router_iact_1_0_horiz_address_out_ready ),
-	.router_iact_1_0_horiz_address_out_valid    (CG_0_1_router_iact_1_0_horiz_address_out_valid ),
-	.router_iact_1_0_horiz_address_out          (CG_0_1_router_iact_1_0_horiz_address_out       ),
-	.router_iact_1_0_horiz_data_out_ready       (CG_0_1_router_iact_1_0_horiz_data_out_ready    ),
-	.router_iact_1_0_horiz_data_out_valid       (CG_0_1_router_iact_1_0_horiz_data_out_valid    ),
-	.router_iact_1_0_horiz_data_out             (CG_0_1_router_iact_1_0_horiz_data_out          ),
-	.router_iact_1_1_north_address_in_ready     (CG_0_1_router_iact_1_1_north_address_in_ready  ),
-	.router_iact_1_1_north_address_in_valid     (CG_0_1_router_iact_1_1_north_address_in_valid  ),
-	.router_iact_1_1_north_address_in           (CG_0_1_router_iact_1_1_north_address_in        ),
-	.router_iact_1_1_north_data_in_ready        (CG_0_1_router_iact_1_1_north_data_in_ready     ),
-	.router_iact_1_1_north_data_in_valid        (CG_0_1_router_iact_1_1_north_data_in_valid     ),
-	.router_iact_1_1_north_data_in              (CG_0_1_router_iact_1_1_north_data_in           ),
-	.router_iact_1_1_south_address_in_ready     (CG_0_1_router_iact_1_1_south_address_in_ready  ),
-	.router_iact_1_1_south_address_in_valid     (CG_0_1_router_iact_1_1_south_address_in_valid  ),
-	.router_iact_1_1_south_address_in           (CG_0_1_router_iact_1_1_south_address_in        ),
-	.router_iact_1_1_south_data_in_ready        (CG_0_1_router_iact_1_1_south_data_in_ready     ),
-	.router_iact_1_1_south_data_in_valid        (CG_0_1_router_iact_1_1_south_data_in_valid     ),
-	.router_iact_1_1_south_data_in              (CG_0_1_router_iact_1_1_south_data_in           ),
-	.router_iact_1_1_horiz_address_in_ready     (CG_0_1_router_iact_1_1_horiz_address_in_ready  ),
-	.router_iact_1_1_horiz_address_in_valid     (CG_0_1_router_iact_1_1_horiz_address_in_valid  ),
-	.router_iact_1_1_horiz_address_in           (CG_0_1_router_iact_1_1_horiz_address_in        ),
-	.router_iact_1_1_horiz_data_in_ready        (CG_0_1_router_iact_1_1_horiz_data_in_ready     ),
-	.router_iact_1_1_horiz_data_in_valid        (CG_0_1_router_iact_1_1_horiz_data_in_valid     ),
-	.router_iact_1_1_horiz_data_in              (CG_0_1_router_iact_1_1_horiz_data_in           ),
-	.router_iact_1_1_north_address_out_ready	(CG_0_1_router_iact_1_1_north_address_out_ready	),
-	.router_iact_1_1_north_address_out_valid    (CG_0_1_router_iact_1_1_north_address_out_valid ),
-	.router_iact_1_1_north_address_out          (CG_0_1_router_iact_1_1_north_address_out       ),
-	.router_iact_1_1_north_data_out_ready       (CG_0_1_router_iact_1_1_north_data_out_ready    ),
-	.router_iact_1_1_north_data_out_valid       (CG_0_1_router_iact_1_1_north_data_out_valid    ),
-	.router_iact_1_1_north_data_out             (CG_0_1_router_iact_1_1_north_data_out          ),
-	.router_iact_1_1_south_address_out_ready    (CG_0_1_router_iact_1_1_south_address_out_ready ),
-	.router_iact_1_1_south_address_out_valid    (CG_0_1_router_iact_1_1_south_address_out_valid ),
-	.router_iact_1_1_south_address_out          (CG_0_1_router_iact_1_1_south_address_out       ),
-	.router_iact_1_1_south_data_out_ready       (CG_0_1_router_iact_1_1_south_data_out_ready    ),
-	.router_iact_1_1_south_data_out_valid       (CG_0_1_router_iact_1_1_south_data_out_valid    ),
-	.router_iact_1_1_south_data_out             (CG_0_1_router_iact_1_1_south_data_out          ),
-	.router_iact_1_1_horiz_address_out_ready    (CG_0_1_router_iact_1_1_horiz_address_out_ready ),
-	.router_iact_1_1_horiz_address_out_valid    (CG_0_1_router_iact_1_1_horiz_address_out_valid ),
-	.router_iact_1_1_horiz_address_out          (CG_0_1_router_iact_1_1_horiz_address_out       ),
-	.router_iact_1_1_horiz_data_out_ready       (CG_0_1_router_iact_1_1_horiz_data_out_ready    ),
-	.router_iact_1_1_horiz_data_out_valid       (CG_0_1_router_iact_1_1_horiz_data_out_valid    ),
-	.router_iact_1_1_horiz_data_out             (CG_0_1_router_iact_1_1_horiz_data_out          ),
-	.router_iact_1_2_north_address_in_ready     (CG_0_1_router_iact_1_2_north_address_in_ready  ),
-	.router_iact_1_2_north_address_in_valid     (CG_0_1_router_iact_1_2_north_address_in_valid  ),
-	.router_iact_1_2_north_address_in           (CG_0_1_router_iact_1_2_north_address_in        ),
-	.router_iact_1_2_north_data_in_ready        (CG_0_1_router_iact_1_2_north_data_in_ready     ),
-	.router_iact_1_2_north_data_in_valid        (CG_0_1_router_iact_1_2_north_data_in_valid     ),
-	.router_iact_1_2_north_data_in              (CG_0_1_router_iact_1_2_north_data_in           ),
-	.router_iact_1_2_south_address_in_ready     (CG_0_1_router_iact_1_2_south_address_in_ready  ),
-	.router_iact_1_2_south_address_in_valid     (CG_0_1_router_iact_1_2_south_address_in_valid  ),
-	.router_iact_1_2_south_address_in           (CG_0_1_router_iact_1_2_south_address_in        ),
-	.router_iact_1_2_south_data_in_ready        (CG_0_1_router_iact_1_2_south_data_in_ready     ),
-	.router_iact_1_2_south_data_in_valid        (CG_0_1_router_iact_1_2_south_data_in_valid     ),
-	.router_iact_1_2_south_data_in              (CG_0_1_router_iact_1_2_south_data_in           ),
-	.router_iact_1_2_horiz_address_in_ready     (CG_0_1_router_iact_1_2_horiz_address_in_ready  ),
-	.router_iact_1_2_horiz_address_in_valid     (CG_0_1_router_iact_1_2_horiz_address_in_valid  ),
-	.router_iact_1_2_horiz_address_in           (CG_0_1_router_iact_1_2_horiz_address_in        ),
-	.router_iact_1_2_horiz_data_in_ready        (CG_0_1_router_iact_1_2_horiz_data_in_ready     ),
-	.router_iact_1_2_horiz_data_in_valid        (CG_0_1_router_iact_1_2_horiz_data_in_valid     ),
-	.router_iact_1_2_horiz_data_in              (CG_0_1_router_iact_1_2_horiz_data_in           ),
-	.router_iact_1_2_north_address_out_ready	(CG_0_1_router_iact_1_2_north_address_out_ready	),
-	.router_iact_1_2_north_address_out_valid    (CG_0_1_router_iact_1_2_north_address_out_valid ),
-	.router_iact_1_2_north_address_out          (CG_0_1_router_iact_1_2_north_address_out       ),
-	.router_iact_1_2_north_data_out_ready       (CG_0_1_router_iact_1_2_north_data_out_ready    ),
-	.router_iact_1_2_north_data_out_valid       (CG_0_1_router_iact_1_2_north_data_out_valid    ),
-	.router_iact_1_2_north_data_out             (CG_0_1_router_iact_1_2_north_data_out          ),
-	.router_iact_1_2_south_address_out_ready    (CG_0_1_router_iact_1_2_south_address_out_ready ),
-	.router_iact_1_2_south_address_out_valid    (CG_0_1_router_iact_1_2_south_address_out_valid ),
-	.router_iact_1_2_south_address_out          (CG_0_1_router_iact_1_2_south_address_out       ),
-	.router_iact_1_2_south_data_out_ready       (CG_0_1_router_iact_1_2_south_data_out_ready    ),
-	.router_iact_1_2_south_data_out_valid       (CG_0_1_router_iact_1_2_south_data_out_valid    ),
-	.router_iact_1_2_south_data_out             (CG_0_1_router_iact_1_2_south_data_out          ),
-	.router_iact_1_2_horiz_address_out_ready    (CG_0_1_router_iact_1_2_horiz_address_out_ready ),
-	.router_iact_1_2_horiz_address_out_valid    (CG_0_1_router_iact_1_2_horiz_address_out_valid ),
-	.router_iact_1_2_horiz_address_out          (CG_0_1_router_iact_1_2_horiz_address_out       ),
-	.router_iact_1_2_horiz_data_out_ready       (CG_0_1_router_iact_1_2_horiz_data_out_ready    ),
-	.router_iact_1_2_horiz_data_out_valid       (CG_0_1_router_iact_1_2_horiz_data_out_valid    ),
-	.router_iact_1_2_horiz_data_out             (CG_0_1_router_iact_1_2_horiz_data_out          ),
-	.router_iact_2_0_north_address_in_ready     (CG_0_1_router_iact_2_0_north_address_in_ready  ),
-	.router_iact_2_0_north_address_in_valid     (CG_0_1_router_iact_2_0_north_address_in_valid  ),
-	.router_iact_2_0_north_address_in           (CG_0_1_router_iact_2_0_north_address_in        ),
-	.router_iact_2_0_north_data_in_ready        (CG_0_1_router_iact_2_0_north_data_in_ready     ),
-	.router_iact_2_0_north_data_in_valid        (CG_0_1_router_iact_2_0_north_data_in_valid     ),
-	.router_iact_2_0_north_data_in              (CG_0_1_router_iact_2_0_north_data_in           ),
-	.router_iact_2_0_south_address_in_ready     (CG_0_1_router_iact_2_0_south_address_in_ready  ),
-	.router_iact_2_0_south_address_in_valid     (CG_0_1_router_iact_2_0_south_address_in_valid  ),
-	.router_iact_2_0_south_address_in           (CG_0_1_router_iact_2_0_south_address_in        ),
-	.router_iact_2_0_south_data_in_ready        (CG_0_1_router_iact_2_0_south_data_in_ready     ),
-	.router_iact_2_0_south_data_in_valid        (CG_0_1_router_iact_2_0_south_data_in_valid     ),
-	.router_iact_2_0_south_data_in              (CG_0_1_router_iact_2_0_south_data_in           ),
-	.router_iact_2_0_horiz_address_in_ready     (CG_0_1_router_iact_2_0_horiz_address_in_ready  ),
-	.router_iact_2_0_horiz_address_in_valid     (CG_0_1_router_iact_2_0_horiz_address_in_valid  ),
-	.router_iact_2_0_horiz_address_in           (CG_0_1_router_iact_2_0_horiz_address_in        ),
-	.router_iact_2_0_horiz_data_in_ready        (CG_0_1_router_iact_2_0_horiz_data_in_ready     ),
-	.router_iact_2_0_horiz_data_in_valid        (CG_0_1_router_iact_2_0_horiz_data_in_valid     ),
-	.router_iact_2_0_horiz_data_in              (CG_0_1_router_iact_2_0_horiz_data_in           ),
-	.router_iact_2_0_north_address_out_ready	(CG_0_1_router_iact_2_0_north_address_out_ready	),
-	.router_iact_2_0_north_address_out_valid    (CG_0_1_router_iact_2_0_north_address_out_valid ),
-	.router_iact_2_0_north_address_out          (CG_0_1_router_iact_2_0_north_address_out       ),
-	.router_iact_2_0_north_data_out_ready       (CG_0_1_router_iact_2_0_north_data_out_ready    ),
-	.router_iact_2_0_north_data_out_valid       (CG_0_1_router_iact_2_0_north_data_out_valid    ),
-	.router_iact_2_0_north_data_out             (CG_0_1_router_iact_2_0_north_data_out          ),
-	.router_iact_2_0_south_address_out_ready    (CG_0_1_router_iact_2_0_south_address_out_ready ),
-	.router_iact_2_0_south_address_out_valid    (CG_0_1_router_iact_2_0_south_address_out_valid ),
-	.router_iact_2_0_south_address_out          (CG_0_1_router_iact_2_0_south_address_out       ),
-	.router_iact_2_0_south_data_out_ready       (CG_0_1_router_iact_2_0_south_data_out_ready    ),
-	.router_iact_2_0_south_data_out_valid       (CG_0_1_router_iact_2_0_south_data_out_valid    ),
-	.router_iact_2_0_south_data_out             (CG_0_1_router_iact_2_0_south_data_out          ),
-	.router_iact_2_0_horiz_address_out_ready    (CG_0_1_router_iact_2_0_horiz_address_out_ready ),
-	.router_iact_2_0_horiz_address_out_valid    (CG_0_1_router_iact_2_0_horiz_address_out_valid ),
-	.router_iact_2_0_horiz_address_out          (CG_0_1_router_iact_2_0_horiz_address_out       ),
-	.router_iact_2_0_horiz_data_out_ready       (CG_0_1_router_iact_2_0_horiz_data_out_ready    ),
-	.router_iact_2_0_horiz_data_out_valid       (CG_0_1_router_iact_2_0_horiz_data_out_valid    ),
-	.router_iact_2_0_horiz_data_out             (CG_0_1_router_iact_2_0_horiz_data_out          ),
-	.router_iact_2_1_north_address_in_ready     (CG_0_1_router_iact_2_1_north_address_in_ready  ),
-	.router_iact_2_1_north_address_in_valid     (CG_0_1_router_iact_2_1_north_address_in_valid  ),
-	.router_iact_2_1_north_address_in           (CG_0_1_router_iact_2_1_north_address_in        ),
-	.router_iact_2_1_north_data_in_ready        (CG_0_1_router_iact_2_1_north_data_in_ready     ),
-	.router_iact_2_1_north_data_in_valid        (CG_0_1_router_iact_2_1_north_data_in_valid     ),
-	.router_iact_2_1_north_data_in              (CG_0_1_router_iact_2_1_north_data_in           ),
-	.router_iact_2_1_south_address_in_ready     (CG_0_1_router_iact_2_1_south_address_in_ready  ),
-	.router_iact_2_1_south_address_in_valid     (CG_0_1_router_iact_2_1_south_address_in_valid  ),
-	.router_iact_2_1_south_address_in           (CG_0_1_router_iact_2_1_south_address_in        ),
-	.router_iact_2_1_south_data_in_ready        (CG_0_1_router_iact_2_1_south_data_in_ready     ),
-	.router_iact_2_1_south_data_in_valid        (CG_0_1_router_iact_2_1_south_data_in_valid     ),
-	.router_iact_2_1_south_data_in              (CG_0_1_router_iact_2_1_south_data_in           ),
-	.router_iact_2_1_horiz_address_in_ready     (CG_0_1_router_iact_2_1_horiz_address_in_ready  ),
-	.router_iact_2_1_horiz_address_in_valid     (CG_0_1_router_iact_2_1_horiz_address_in_valid  ),
-	.router_iact_2_1_horiz_address_in           (CG_0_1_router_iact_2_1_horiz_address_in        ),
-	.router_iact_2_1_horiz_data_in_ready        (CG_0_1_router_iact_2_1_horiz_data_in_ready     ),
-	.router_iact_2_1_horiz_data_in_valid        (CG_0_1_router_iact_2_1_horiz_data_in_valid     ),
-	.router_iact_2_1_horiz_data_in              (CG_0_1_router_iact_2_1_horiz_data_in           ),
-	.router_iact_2_1_north_address_out_ready	(CG_0_1_router_iact_2_1_north_address_out_ready	),
-	.router_iact_2_1_north_address_out_valid    (CG_0_1_router_iact_2_1_north_address_out_valid ),
-	.router_iact_2_1_north_address_out          (CG_0_1_router_iact_2_1_north_address_out       ),
-	.router_iact_2_1_north_data_out_ready       (CG_0_1_router_iact_2_1_north_data_out_ready    ),
-	.router_iact_2_1_north_data_out_valid       (CG_0_1_router_iact_2_1_north_data_out_valid    ),
-	.router_iact_2_1_north_data_out             (CG_0_1_router_iact_2_1_north_data_out          ),
-	.router_iact_2_1_south_address_out_ready    (CG_0_1_router_iact_2_1_south_address_out_ready ),
-	.router_iact_2_1_south_address_out_valid    (CG_0_1_router_iact_2_1_south_address_out_valid ),
-	.router_iact_2_1_south_address_out          (CG_0_1_router_iact_2_1_south_address_out       ),
-	.router_iact_2_1_south_data_out_ready       (CG_0_1_router_iact_2_1_south_data_out_ready    ),
-	.router_iact_2_1_south_data_out_valid       (CG_0_1_router_iact_2_1_south_data_out_valid    ),
-	.router_iact_2_1_south_data_out             (CG_0_1_router_iact_2_1_south_data_out          ),
-	.router_iact_2_1_horiz_address_out_ready    (CG_0_1_router_iact_2_1_horiz_address_out_ready ),
-	.router_iact_2_1_horiz_address_out_valid    (CG_0_1_router_iact_2_1_horiz_address_out_valid ),
-	.router_iact_2_1_horiz_address_out          (CG_0_1_router_iact_2_1_horiz_address_out       ),
-	.router_iact_2_1_horiz_data_out_ready       (CG_0_1_router_iact_2_1_horiz_data_out_ready    ),
-	.router_iact_2_1_horiz_data_out_valid       (CG_0_1_router_iact_2_1_horiz_data_out_valid    ),
-	.router_iact_2_1_horiz_data_out             (CG_0_1_router_iact_2_1_horiz_data_out          ),
-	.router_iact_2_2_north_address_in_ready     (CG_0_1_router_iact_2_2_north_address_in_ready  ),
-	.router_iact_2_2_north_address_in_valid     (CG_0_1_router_iact_2_2_north_address_in_valid  ),
-	.router_iact_2_2_north_address_in           (CG_0_1_router_iact_2_2_north_address_in        ),
-	.router_iact_2_2_north_data_in_ready        (CG_0_1_router_iact_2_2_north_data_in_ready     ),
-	.router_iact_2_2_north_data_in_valid        (CG_0_1_router_iact_2_2_north_data_in_valid     ),
-	.router_iact_2_2_north_data_in              (CG_0_1_router_iact_2_2_north_data_in           ),
-	.router_iact_2_2_south_address_in_ready     (CG_0_1_router_iact_2_2_south_address_in_ready  ),
-	.router_iact_2_2_south_address_in_valid     (CG_0_1_router_iact_2_2_south_address_in_valid  ),
-	.router_iact_2_2_south_address_in           (CG_0_1_router_iact_2_2_south_address_in        ),
-	.router_iact_2_2_south_data_in_ready        (CG_0_1_router_iact_2_2_south_data_in_ready     ),
-	.router_iact_2_2_south_data_in_valid        (CG_0_1_router_iact_2_2_south_data_in_valid     ),
-	.router_iact_2_2_south_data_in              (CG_0_1_router_iact_2_2_south_data_in           ),
-	.router_iact_2_2_horiz_address_in_ready     (CG_0_1_router_iact_2_2_horiz_address_in_ready  ),
-	.router_iact_2_2_horiz_address_in_valid     (CG_0_1_router_iact_2_2_horiz_address_in_valid  ),
-	.router_iact_2_2_horiz_address_in           (CG_0_1_router_iact_2_2_horiz_address_in        ),
-	.router_iact_2_2_horiz_data_in_ready        (CG_0_1_router_iact_2_2_horiz_data_in_ready     ),
-	.router_iact_2_2_horiz_data_in_valid        (CG_0_1_router_iact_2_2_horiz_data_in_valid     ),
-	.router_iact_2_2_horiz_data_in              (CG_0_1_router_iact_2_2_horiz_data_in           ),
-	.router_iact_2_2_north_address_out_ready	(CG_0_1_router_iact_2_2_north_address_out_ready	),
-	.router_iact_2_2_north_address_out_valid    (CG_0_1_router_iact_2_2_north_address_out_valid ),
-	.router_iact_2_2_north_address_out          (CG_0_1_router_iact_2_2_north_address_out       ),
-	.router_iact_2_2_north_data_out_ready       (CG_0_1_router_iact_2_2_north_data_out_ready    ),
-	.router_iact_2_2_north_data_out_valid       (CG_0_1_router_iact_2_2_north_data_out_valid    ),
-	.router_iact_2_2_north_data_out             (CG_0_1_router_iact_2_2_north_data_out          ),
-	.router_iact_2_2_south_address_out_ready    (CG_0_1_router_iact_2_2_south_address_out_ready ),
-	.router_iact_2_2_south_address_out_valid    (CG_0_1_router_iact_2_2_south_address_out_valid ),
-	.router_iact_2_2_south_address_out          (CG_0_1_router_iact_2_2_south_address_out       ),
-	.router_iact_2_2_south_data_out_ready       (CG_0_1_router_iact_2_2_south_data_out_ready    ),
-	.router_iact_2_2_south_data_out_valid       (CG_0_1_router_iact_2_2_south_data_out_valid    ),
-	.router_iact_2_2_south_data_out             (CG_0_1_router_iact_2_2_south_data_out          ),
-	.router_iact_2_2_horiz_address_out_ready    (CG_0_1_router_iact_2_2_horiz_address_out_ready ),
-	.router_iact_2_2_horiz_address_out_valid    (CG_0_1_router_iact_2_2_horiz_address_out_valid ),
-	.router_iact_2_2_horiz_address_out          (CG_0_1_router_iact_2_2_horiz_address_out       ),
-	.router_iact_2_2_horiz_data_out_ready       (CG_0_1_router_iact_2_2_horiz_data_out_ready    ),
-	.router_iact_2_2_horiz_data_out_valid       (CG_0_1_router_iact_2_2_horiz_data_out_valid    ),
-	.router_iact_2_2_horiz_data_out             (CG_0_1_router_iact_2_2_horiz_data_out          ),
-												
-	.router_weight_0_horiz_address_in_ready     (CG_0_1_router_weight_0_horiz_address_in_ready  ),
-	.router_weight_0_horiz_address_in_valid     (CG_0_1_router_weight_0_horiz_address_in_valid  ),
-	.router_weight_0_horiz_address_in           (CG_0_1_router_weight_0_horiz_address_in        ),
-	.router_weight_0_horiz_data_in_ready        (CG_0_1_router_weight_0_horiz_data_in_ready     ),
-	.router_weight_0_horiz_data_in_valid        (CG_0_1_router_weight_0_horiz_data_in_valid     ),
-	.router_weight_0_horiz_data_in              (CG_0_1_router_weight_0_horiz_data_in           ),
-	.router_weight_0_horiz_address_out_ready    (CG_0_1_router_weight_0_horiz_address_out_ready ),
-	.router_weight_0_horiz_address_out_valid    (CG_0_1_router_weight_0_horiz_address_out_valid ),
-	.router_weight_0_horiz_address_out          (CG_0_1_router_weight_0_horiz_address_out       ),
-	.router_weight_0_horiz_data_out_ready       (CG_0_1_router_weight_0_horiz_data_out_ready    ),
-	.router_weight_0_horiz_data_out_valid       (CG_0_1_router_weight_0_horiz_data_out_valid    ),
-	.router_weight_0_horiz_data_out             (CG_0_1_router_weight_0_horiz_data_out          ),
-	.router_weight_1_horiz_address_in_ready     (CG_0_1_router_weight_1_horiz_address_in_ready  ),
-	.router_weight_1_horiz_address_in_valid     (CG_0_1_router_weight_1_horiz_address_in_valid  ),
-	.router_weight_1_horiz_address_in           (CG_0_1_router_weight_1_horiz_address_in        ),
-	.router_weight_1_horiz_data_in_ready        (CG_0_1_router_weight_1_horiz_data_in_ready     ),
-	.router_weight_1_horiz_data_in_valid        (CG_0_1_router_weight_1_horiz_data_in_valid     ),
-	.router_weight_1_horiz_data_in              (CG_0_1_router_weight_1_horiz_data_in           ),
-	.router_weight_1_horiz_address_out_ready    (CG_0_1_router_weight_1_horiz_address_out_ready ),
-	.router_weight_1_horiz_address_out_valid    (CG_0_1_router_weight_1_horiz_address_out_valid ),
-	.router_weight_1_horiz_address_out          (CG_0_1_router_weight_1_horiz_address_out       ),
-	.router_weight_1_horiz_data_out_ready       (CG_0_1_router_weight_1_horiz_data_out_ready    ),
-	.router_weight_1_horiz_data_out_valid       (CG_0_1_router_weight_1_horiz_data_out_valid    ),
-	.router_weight_1_horiz_data_out             (CG_0_1_router_weight_1_horiz_data_out          ),
-	.router_weight_2_horiz_address_in_ready     (CG_0_1_router_weight_2_horiz_address_in_ready  ),
-	.router_weight_2_horiz_address_in_valid     (CG_0_1_router_weight_2_horiz_address_in_valid  ),
-	.router_weight_2_horiz_address_in           (CG_0_1_router_weight_2_horiz_address_in        ),
-	.router_weight_2_horiz_data_in_ready        (CG_0_1_router_weight_2_horiz_data_in_ready     ),
-	.router_weight_2_horiz_data_in_valid        (CG_0_1_router_weight_2_horiz_data_in_valid     ),
-	.router_weight_2_horiz_data_in              (CG_0_1_router_weight_2_horiz_data_in           ),
-	.router_weight_2_horiz_address_out_ready    (CG_0_1_router_weight_2_horiz_address_out_ready ),
-	.router_weight_2_horiz_address_out_valid    (CG_0_1_router_weight_2_horiz_address_out_valid ),
-	.router_weight_2_horiz_address_out          (CG_0_1_router_weight_2_horiz_address_out       ),
-	.router_weight_2_horiz_data_out_ready       (CG_0_1_router_weight_2_horiz_data_out_ready    ),
-	.router_weight_2_horiz_data_out_valid       (CG_0_1_router_weight_2_horiz_data_out_valid    ),
-	.router_weight_2_horiz_data_out             (CG_0_1_router_weight_2_horiz_data_out          ),
-												
-	.router_psum_0_north_in_ready               (CG_0_1_router_psum_0_north_in_ready            ),
-	.router_psum_0_north_in_valid               (CG_0_1_router_psum_0_north_in_valid            ),
-	.router_psum_0_north_in                     (CG_0_1_router_psum_0_north_in                  ),
-	.router_psum_0_south_out_ready              (CG_0_1_router_psum_0_south_out_ready           ),
-	.router_psum_0_south_out_valid              (CG_0_1_router_psum_0_south_out_valid           ),
-	.router_psum_0_south_out                    (CG_0_1_router_psum_0_south_out                 ),
-	.router_psum_1_north_in_ready               (CG_0_1_router_psum_1_north_in_ready            ),
-	.router_psum_1_north_in_valid               (CG_0_1_router_psum_1_north_in_valid            ),
-	.router_psum_1_north_in                     (CG_0_1_router_psum_1_north_in                  ),
-	.router_psum_1_south_out_ready              (CG_0_1_router_psum_1_south_out_ready           ),
-	.router_psum_1_south_out_valid              (CG_0_1_router_psum_1_south_out_valid           ),
-	.router_psum_1_south_out                    (CG_0_1_router_psum_1_south_out                 ),
-	.router_psum_2_north_in_ready               (CG_0_1_router_psum_2_north_in_ready            ),
-	.router_psum_2_north_in_valid               (CG_0_1_router_psum_2_north_in_valid            ),
-	.router_psum_2_north_in                     (CG_0_1_router_psum_2_north_in                  ),
-	.router_psum_2_south_out_ready              (CG_0_1_router_psum_2_south_out_ready           ),
-	.router_psum_2_south_out_valid              (CG_0_1_router_psum_2_south_out_valid           ),
-	.router_psum_2_south_out                    (CG_0_1_router_psum_2_south_out                 ),
-												 					
-	.cg_south_psum_0_in_ready                   (CG_0_1_cg_south_psum_0_in_ready                ),
-	.cg_south_psum_0_in_valid                   (CG_0_1_cg_south_psum_0_in_valid                ),
-	.cg_south_psum_0_in                         (CG_0_1_cg_south_psum_0_in                      ),
-	.cg_south_psum_1_in_ready                   (CG_0_1_cg_south_psum_1_in_ready                ),
-	.cg_south_psum_1_in_valid                   (CG_0_1_cg_south_psum_1_in_valid                ),
-	.cg_south_psum_1_in                         (CG_0_1_cg_south_psum_1_in                      ),
-	.cg_south_psum_2_in_ready                   (CG_0_1_cg_south_psum_2_in_ready                ),
-	.cg_south_psum_2_in_valid                   (CG_0_1_cg_south_psum_2_in_valid                ),
-	.cg_south_psum_2_in                         (CG_0_1_cg_south_psum_2_in                      ),
-	.cg_north_psum_0_out_ready                  (CG_0_1_cg_north_psum_0_out_ready               ),
-	.cg_north_psum_0_out_valid                  (CG_0_1_cg_north_psum_0_out_valid               ),
-	.cg_north_psum_0_out                        (CG_0_1_cg_north_psum_0_out                     ),
-	.cg_north_psum_1_out_ready                  (CG_0_1_cg_north_psum_1_out_ready               ),
-	.cg_north_psum_1_out_valid                  (CG_0_1_cg_north_psum_1_out_valid               ),
-	.cg_north_psum_1_out                        (CG_0_1_cg_north_psum_1_out                     ),
-	.cg_north_psum_2_out_ready                  (CG_0_1_cg_north_psum_2_out_ready               ),
-	.cg_north_psum_2_out_valid                  (CG_0_1_cg_north_psum_2_out_valid               ),
-	.cg_north_psum_2_out                        (CG_0_1_cg_north_psum_2_out                     ),
-									         
+	// --- tile-chain：iact / weight / psum router、cg_psum（array 直連） ---
+	.iact_north_address_in_ready    (CG_0_1_iact_north_address_in_ready         ),
+	.iact_north_address_in_valid    (tie_lo_3x3                                 ),
+	.iact_north_address_in_bits     (tie_lo_3x3_7b                              ),
+	.iact_north_address_out_ready   (CG_0_1_iact_north_address_out_ready_src    ),
+	.iact_north_address_out_valid   (CG_0_1_iact_north_address_out_valid        ),
+	.iact_north_address_out_bits    (CG_0_1_iact_north_address_out_bits         ),
+	.iact_north_data_in_ready       (CG_0_1_iact_north_data_in_ready            ),
+	.iact_north_data_in_valid       (tie_lo_3x3                                 ),
+	.iact_north_data_in_bits        (tie_lo_3x3_12b                             ),
+	.iact_north_data_out_ready      (tie_hi_3x3                                 ),
+	.iact_north_data_out_valid      (CG_0_1_iact_north_data_out_valid           ),
+	.iact_north_data_out_bits       (CG_0_1_iact_north_data_out_bits            ),
+	.iact_south_address_in_ready    (CG_0_1_iact_south_address_in_ready         ),
+	.iact_south_address_in_valid    (CG_1_1_iact_north_address_out_valid        ),
+	.iact_south_address_in_bits     (CG_1_1_iact_north_address_out_bits         ),
+	.iact_south_address_out_ready   (CG_1_1_iact_north_address_in_ready         ),
+	.iact_south_address_out_valid   (CG_0_1_iact_south_address_out_valid        ),
+	.iact_south_address_out_bits    (CG_0_1_iact_south_address_out_bits         ),
+	.iact_south_data_in_ready       (CG_0_1_iact_south_data_in_ready            ),
+	.iact_south_data_in_valid       (CG_1_1_iact_north_data_out_valid           ),
+	.iact_south_data_in_bits        (CG_1_1_iact_north_data_out_bits            ),
+	.iact_south_data_out_ready      (CG_1_1_iact_north_data_in_ready            ),
+	.iact_south_data_out_valid      (CG_0_1_iact_south_data_out_valid           ),
+	.iact_south_data_out_bits       (CG_0_1_iact_south_data_out_bits            ),
+	.iact_horiz_address_in_ready    (CG_0_1_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_in_valid    (CG_0_0_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_in_bits     (CG_0_0_iact_horiz_address_out_bits         ),
+	.iact_horiz_address_out_ready   (CG_0_0_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_out_valid   (CG_0_1_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_out_bits    (CG_0_1_iact_horiz_address_out_bits         ),
+	.iact_horiz_data_in_ready       (CG_0_1_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_in_valid       (CG_0_0_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_in_bits        (CG_0_0_iact_horiz_data_out_bits            ),
+	.iact_horiz_data_out_ready      (CG_0_0_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_out_valid      (CG_0_1_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_out_bits       (CG_0_1_iact_horiz_data_out_bits            ),
+	.weight_horiz_address_in_ready  (CG_0_1_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_in_valid  (CG_0_0_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_in_bits   (CG_0_0_weight_horiz_address_out_bits       ),
+	.weight_horiz_address_out_ready (CG_0_1_weight_horiz_address_out_ready_src  ),
+	.weight_horiz_address_out_valid (CG_0_1_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_out_bits  (CG_0_1_weight_horiz_address_out_bits       ),
+	.weight_horiz_data_in_ready     (CG_0_1_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_in_valid     (CG_0_0_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_in_bits      (CG_0_0_weight_horiz_data_out_bits          ),
+	.weight_horiz_data_out_ready    (CG_0_0_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_out_valid    (CG_0_1_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_out_bits     (CG_0_1_weight_horiz_data_out_bits          ),
+	.psum_north_in_ready            (CG_0_1_psum_north_in_ready                 ),
+	.psum_north_in_valid            (CG_1_1_psum_south_out_valid                ),
+	.psum_north_in_bits             (CG_1_1_psum_south_out_bits                 ),
+	.psum_south_out_ready           (tie_hi_3                                   ),
+	.psum_south_out_valid           (CG_0_1_psum_south_out_valid                ),
+	.psum_south_out_bits            (CG_0_1_psum_south_out_bits                 ),
+	.cg_south_psum_in_ready         (CG_0_1_cg_south_psum_in_ready              ),
+	.cg_south_psum_in_valid         (CG_1_1_cg_north_psum_out_valid             ),
+	.cg_south_psum_in               (CG_1_1_cg_north_psum_out                   ),
+	.cg_north_psum_out_ready        (tie_hi_3                                   ),
+	.cg_north_psum_out_valid        (CG_0_1_cg_north_psum_out_valid             ),
+	.cg_north_psum_out              (CG_0_1_cg_north_psum_out                   ),
+
+
 	.PSUM_DEPTH                                 (CG_0_1_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_psum_spad_clear[0][1]                         ),
 											
 	.iact_write_fin_clear                       (CG_iact_write_fin_clear[0][1]                	),
 	.weight_write_fin_clear						(CG_weight_write_fin_clear[0][1]					)
 );
-
 
 
 ClusterGroup ClusterGroup_1_0 (
@@ -2881,413 +765,75 @@ ClusterGroup ClusterGroup_1_0 (
 	.GLB_psum_2_data_out_valid                  (CG_1_0_GLB_psum_2_data_out_valid               ),
 	.GLB_psum_2_data_out                        (CG_1_0_GLB_psum_2_data_out                     ),
 											
-	.router_iact_0_0_north_address_in_ready		(CG_1_0_router_iact_0_0_north_address_in_ready	),
-	.router_iact_0_0_north_address_in_valid     (CG_1_0_router_iact_0_0_north_address_in_valid  ),
-	.router_iact_0_0_north_address_in           (CG_1_0_router_iact_0_0_north_address_in        ),
-	.router_iact_0_0_north_data_in_ready        (CG_1_0_router_iact_0_0_north_data_in_ready     ),
-	.router_iact_0_0_north_data_in_valid        (CG_1_0_router_iact_0_0_north_data_in_valid     ),
-	.router_iact_0_0_north_data_in              (CG_1_0_router_iact_0_0_north_data_in           ),
-	.router_iact_0_0_south_address_in_ready     (CG_1_0_router_iact_0_0_south_address_in_ready  ),
-	.router_iact_0_0_south_address_in_valid     (CG_1_0_router_iact_0_0_south_address_in_valid  ),
-	.router_iact_0_0_south_address_in           (CG_1_0_router_iact_0_0_south_address_in        ),
-	.router_iact_0_0_south_data_in_ready        (CG_1_0_router_iact_0_0_south_data_in_ready     ),
-	.router_iact_0_0_south_data_in_valid        (CG_1_0_router_iact_0_0_south_data_in_valid     ),
-	.router_iact_0_0_south_data_in              (CG_1_0_router_iact_0_0_south_data_in           ),
-	.router_iact_0_0_horiz_address_in_ready     (CG_1_0_router_iact_0_0_horiz_address_in_ready  ),
-	.router_iact_0_0_horiz_address_in_valid     (CG_1_0_router_iact_0_0_horiz_address_in_valid  ),
-	.router_iact_0_0_horiz_address_in           (CG_1_0_router_iact_0_0_horiz_address_in        ),
-	.router_iact_0_0_horiz_data_in_ready        (CG_1_0_router_iact_0_0_horiz_data_in_ready     ),
-	.router_iact_0_0_horiz_data_in_valid        (CG_1_0_router_iact_0_0_horiz_data_in_valid     ),
-	.router_iact_0_0_horiz_data_in              (CG_1_0_router_iact_0_0_horiz_data_in           ),
-	.router_iact_0_0_north_address_out_ready	(CG_1_0_router_iact_0_0_north_address_out_ready	),
-	.router_iact_0_0_north_address_out_valid    (CG_1_0_router_iact_0_0_north_address_out_valid ),
-	.router_iact_0_0_north_address_out          (CG_1_0_router_iact_0_0_north_address_out       ),
-	.router_iact_0_0_north_data_out_ready       (CG_1_0_router_iact_0_0_north_data_out_ready    ),
-	.router_iact_0_0_north_data_out_valid       (CG_1_0_router_iact_0_0_north_data_out_valid    ),
-	.router_iact_0_0_north_data_out             (CG_1_0_router_iact_0_0_north_data_out          ),
-	.router_iact_0_0_south_address_out_ready    (CG_1_0_router_iact_0_0_south_address_out_ready ),
-	.router_iact_0_0_south_address_out_valid    (CG_1_0_router_iact_0_0_south_address_out_valid ),
-	.router_iact_0_0_south_address_out          (CG_1_0_router_iact_0_0_south_address_out       ),
-	.router_iact_0_0_south_data_out_ready       (CG_1_0_router_iact_0_0_south_data_out_ready    ),
-	.router_iact_0_0_south_data_out_valid       (CG_1_0_router_iact_0_0_south_data_out_valid    ),
-	.router_iact_0_0_south_data_out             (CG_1_0_router_iact_0_0_south_data_out          ),
-	.router_iact_0_0_horiz_address_out_ready    (CG_1_0_router_iact_0_0_horiz_address_out_ready ),
-	.router_iact_0_0_horiz_address_out_valid    (CG_1_0_router_iact_0_0_horiz_address_out_valid ),
-	.router_iact_0_0_horiz_address_out          (CG_1_0_router_iact_0_0_horiz_address_out       ),
-	.router_iact_0_0_horiz_data_out_ready       (CG_1_0_router_iact_0_0_horiz_data_out_ready    ),
-	.router_iact_0_0_horiz_data_out_valid       (CG_1_0_router_iact_0_0_horiz_data_out_valid    ),
-	.router_iact_0_0_horiz_data_out             (CG_1_0_router_iact_0_0_horiz_data_out          ),
-	.router_iact_0_1_north_address_in_ready     (CG_1_0_router_iact_0_1_north_address_in_ready  ),
-	.router_iact_0_1_north_address_in_valid     (CG_1_0_router_iact_0_1_north_address_in_valid  ),
-	.router_iact_0_1_north_address_in           (CG_1_0_router_iact_0_1_north_address_in        ),
-	.router_iact_0_1_north_data_in_ready        (CG_1_0_router_iact_0_1_north_data_in_ready     ),
-	.router_iact_0_1_north_data_in_valid        (CG_1_0_router_iact_0_1_north_data_in_valid     ),
-	.router_iact_0_1_north_data_in              (CG_1_0_router_iact_0_1_north_data_in           ),
-	.router_iact_0_1_south_address_in_ready     (CG_1_0_router_iact_0_1_south_address_in_ready  ),
-	.router_iact_0_1_south_address_in_valid     (CG_1_0_router_iact_0_1_south_address_in_valid  ),
-	.router_iact_0_1_south_address_in           (CG_1_0_router_iact_0_1_south_address_in        ),
-	.router_iact_0_1_south_data_in_ready        (CG_1_0_router_iact_0_1_south_data_in_ready     ),
-	.router_iact_0_1_south_data_in_valid        (CG_1_0_router_iact_0_1_south_data_in_valid     ),
-	.router_iact_0_1_south_data_in              (CG_1_0_router_iact_0_1_south_data_in           ),
-	.router_iact_0_1_horiz_address_in_ready     (CG_1_0_router_iact_0_1_horiz_address_in_ready  ),
-	.router_iact_0_1_horiz_address_in_valid     (CG_1_0_router_iact_0_1_horiz_address_in_valid  ),
-	.router_iact_0_1_horiz_address_in           (CG_1_0_router_iact_0_1_horiz_address_in        ),
-	.router_iact_0_1_horiz_data_in_ready        (CG_1_0_router_iact_0_1_horiz_data_in_ready     ),
-	.router_iact_0_1_horiz_data_in_valid        (CG_1_0_router_iact_0_1_horiz_data_in_valid     ),
-	.router_iact_0_1_horiz_data_in              (CG_1_0_router_iact_0_1_horiz_data_in           ),
-	.router_iact_0_1_north_address_out_ready	(CG_1_0_router_iact_0_1_north_address_out_ready	),
-	.router_iact_0_1_north_address_out_valid    (CG_1_0_router_iact_0_1_north_address_out_valid ),
-	.router_iact_0_1_north_address_out          (CG_1_0_router_iact_0_1_north_address_out       ),
-	.router_iact_0_1_north_data_out_ready       (CG_1_0_router_iact_0_1_north_data_out_ready    ),
-	.router_iact_0_1_north_data_out_valid       (CG_1_0_router_iact_0_1_north_data_out_valid    ),
-	.router_iact_0_1_north_data_out             (CG_1_0_router_iact_0_1_north_data_out          ),
-	.router_iact_0_1_south_address_out_ready    (CG_1_0_router_iact_0_1_south_address_out_ready ),
-	.router_iact_0_1_south_address_out_valid    (CG_1_0_router_iact_0_1_south_address_out_valid ),
-	.router_iact_0_1_south_address_out          (CG_1_0_router_iact_0_1_south_address_out       ),
-	.router_iact_0_1_south_data_out_ready       (CG_1_0_router_iact_0_1_south_data_out_ready    ),
-	.router_iact_0_1_south_data_out_valid       (CG_1_0_router_iact_0_1_south_data_out_valid    ),
-	.router_iact_0_1_south_data_out             (CG_1_0_router_iact_0_1_south_data_out          ),
-	.router_iact_0_1_horiz_address_out_ready    (CG_1_0_router_iact_0_1_horiz_address_out_ready ),
-	.router_iact_0_1_horiz_address_out_valid    (CG_1_0_router_iact_0_1_horiz_address_out_valid ),
-	.router_iact_0_1_horiz_address_out          (CG_1_0_router_iact_0_1_horiz_address_out       ),
-	.router_iact_0_1_horiz_data_out_ready       (CG_1_0_router_iact_0_1_horiz_data_out_ready    ),
-	.router_iact_0_1_horiz_data_out_valid       (CG_1_0_router_iact_0_1_horiz_data_out_valid    ),
-	.router_iact_0_1_horiz_data_out             (CG_1_0_router_iact_0_1_horiz_data_out          ),
-	.router_iact_0_2_north_address_in_ready     (CG_1_0_router_iact_0_2_north_address_in_ready  ),
-	.router_iact_0_2_north_address_in_valid     (CG_1_0_router_iact_0_2_north_address_in_valid  ),
-	.router_iact_0_2_north_address_in           (CG_1_0_router_iact_0_2_north_address_in        ),
-	.router_iact_0_2_north_data_in_ready        (CG_1_0_router_iact_0_2_north_data_in_ready     ),
-	.router_iact_0_2_north_data_in_valid        (CG_1_0_router_iact_0_2_north_data_in_valid     ),
-	.router_iact_0_2_north_data_in              (CG_1_0_router_iact_0_2_north_data_in           ),
-	.router_iact_0_2_south_address_in_ready     (CG_1_0_router_iact_0_2_south_address_in_ready  ),
-	.router_iact_0_2_south_address_in_valid     (CG_1_0_router_iact_0_2_south_address_in_valid  ),
-	.router_iact_0_2_south_address_in           (CG_1_0_router_iact_0_2_south_address_in        ),
-	.router_iact_0_2_south_data_in_ready        (CG_1_0_router_iact_0_2_south_data_in_ready     ),
-	.router_iact_0_2_south_data_in_valid        (CG_1_0_router_iact_0_2_south_data_in_valid     ),
-	.router_iact_0_2_south_data_in              (CG_1_0_router_iact_0_2_south_data_in           ),
-	.router_iact_0_2_horiz_address_in_ready     (CG_1_0_router_iact_0_2_horiz_address_in_ready  ),
-	.router_iact_0_2_horiz_address_in_valid     (CG_1_0_router_iact_0_2_horiz_address_in_valid  ),
-	.router_iact_0_2_horiz_address_in           (CG_1_0_router_iact_0_2_horiz_address_in        ),
-	.router_iact_0_2_horiz_data_in_ready        (CG_1_0_router_iact_0_2_horiz_data_in_ready     ),
-	.router_iact_0_2_horiz_data_in_valid        (CG_1_0_router_iact_0_2_horiz_data_in_valid     ),
-	.router_iact_0_2_horiz_data_in              (CG_1_0_router_iact_0_2_horiz_data_in           ),
-	.router_iact_0_2_north_address_out_ready	(CG_1_0_router_iact_0_2_north_address_out_ready	),
-	.router_iact_0_2_north_address_out_valid    (CG_1_0_router_iact_0_2_north_address_out_valid ),
-	.router_iact_0_2_north_address_out          (CG_1_0_router_iact_0_2_north_address_out       ),
-	.router_iact_0_2_north_data_out_ready       (CG_1_0_router_iact_0_2_north_data_out_ready    ),
-	.router_iact_0_2_north_data_out_valid       (CG_1_0_router_iact_0_2_north_data_out_valid    ),
-	.router_iact_0_2_north_data_out             (CG_1_0_router_iact_0_2_north_data_out          ),
-	.router_iact_0_2_south_address_out_ready    (CG_1_0_router_iact_0_2_south_address_out_ready ),
-	.router_iact_0_2_south_address_out_valid    (CG_1_0_router_iact_0_2_south_address_out_valid ),
-	.router_iact_0_2_south_address_out          (CG_1_0_router_iact_0_2_south_address_out       ),
-	.router_iact_0_2_south_data_out_ready       (CG_1_0_router_iact_0_2_south_data_out_ready    ),
-	.router_iact_0_2_south_data_out_valid       (CG_1_0_router_iact_0_2_south_data_out_valid    ),
-	.router_iact_0_2_south_data_out             (CG_1_0_router_iact_0_2_south_data_out          ),
-	.router_iact_0_2_horiz_address_out_ready    (CG_1_0_router_iact_0_2_horiz_address_out_ready ),
-	.router_iact_0_2_horiz_address_out_valid    (CG_1_0_router_iact_0_2_horiz_address_out_valid ),
-	.router_iact_0_2_horiz_address_out          (CG_1_0_router_iact_0_2_horiz_address_out       ),
-	.router_iact_0_2_horiz_data_out_ready       (CG_1_0_router_iact_0_2_horiz_data_out_ready    ),
-	.router_iact_0_2_horiz_data_out_valid       (CG_1_0_router_iact_0_2_horiz_data_out_valid    ),
-	.router_iact_0_2_horiz_data_out             (CG_1_0_router_iact_0_2_horiz_data_out          ),
-	.router_iact_1_0_north_address_in_ready     (CG_1_0_router_iact_1_0_north_address_in_ready  ),
-	.router_iact_1_0_north_address_in_valid     (CG_1_0_router_iact_1_0_north_address_in_valid  ),
-	.router_iact_1_0_north_address_in           (CG_1_0_router_iact_1_0_north_address_in        ),
-	.router_iact_1_0_north_data_in_ready        (CG_1_0_router_iact_1_0_north_data_in_ready     ),
-	.router_iact_1_0_north_data_in_valid        (CG_1_0_router_iact_1_0_north_data_in_valid     ),
-	.router_iact_1_0_north_data_in              (CG_1_0_router_iact_1_0_north_data_in           ),
-	.router_iact_1_0_south_address_in_ready     (CG_1_0_router_iact_1_0_south_address_in_ready  ),
-	.router_iact_1_0_south_address_in_valid     (CG_1_0_router_iact_1_0_south_address_in_valid  ),
-	.router_iact_1_0_south_address_in           (CG_1_0_router_iact_1_0_south_address_in        ),
-	.router_iact_1_0_south_data_in_ready        (CG_1_0_router_iact_1_0_south_data_in_ready     ),
-	.router_iact_1_0_south_data_in_valid        (CG_1_0_router_iact_1_0_south_data_in_valid     ),
-	.router_iact_1_0_south_data_in              (CG_1_0_router_iact_1_0_south_data_in           ),
-	.router_iact_1_0_horiz_address_in_ready     (CG_1_0_router_iact_1_0_horiz_address_in_ready  ),
-	.router_iact_1_0_horiz_address_in_valid     (CG_1_0_router_iact_1_0_horiz_address_in_valid  ),
-	.router_iact_1_0_horiz_address_in           (CG_1_0_router_iact_1_0_horiz_address_in        ),
-	.router_iact_1_0_horiz_data_in_ready        (CG_1_0_router_iact_1_0_horiz_data_in_ready     ),
-	.router_iact_1_0_horiz_data_in_valid        (CG_1_0_router_iact_1_0_horiz_data_in_valid     ),
-	.router_iact_1_0_horiz_data_in              (CG_1_0_router_iact_1_0_horiz_data_in           ),
-	.router_iact_1_0_north_address_out_ready	(CG_1_0_router_iact_1_0_north_address_out_ready	),
-	.router_iact_1_0_north_address_out_valid    (CG_1_0_router_iact_1_0_north_address_out_valid ),
-	.router_iact_1_0_north_address_out          (CG_1_0_router_iact_1_0_north_address_out       ),
-	.router_iact_1_0_north_data_out_ready       (CG_1_0_router_iact_1_0_north_data_out_ready    ),
-	.router_iact_1_0_north_data_out_valid       (CG_1_0_router_iact_1_0_north_data_out_valid    ),
-	.router_iact_1_0_north_data_out             (CG_1_0_router_iact_1_0_north_data_out          ),
-	.router_iact_1_0_south_address_out_ready    (CG_1_0_router_iact_1_0_south_address_out_ready ),
-	.router_iact_1_0_south_address_out_valid    (CG_1_0_router_iact_1_0_south_address_out_valid ),
-	.router_iact_1_0_south_address_out          (CG_1_0_router_iact_1_0_south_address_out       ),
-	.router_iact_1_0_south_data_out_ready       (CG_1_0_router_iact_1_0_south_data_out_ready    ),
-	.router_iact_1_0_south_data_out_valid       (CG_1_0_router_iact_1_0_south_data_out_valid    ),
-	.router_iact_1_0_south_data_out             (CG_1_0_router_iact_1_0_south_data_out          ),
-	.router_iact_1_0_horiz_address_out_ready    (CG_1_0_router_iact_1_0_horiz_address_out_ready ),
-	.router_iact_1_0_horiz_address_out_valid    (CG_1_0_router_iact_1_0_horiz_address_out_valid ),
-	.router_iact_1_0_horiz_address_out          (CG_1_0_router_iact_1_0_horiz_address_out       ),
-	.router_iact_1_0_horiz_data_out_ready       (CG_1_0_router_iact_1_0_horiz_data_out_ready    ),
-	.router_iact_1_0_horiz_data_out_valid       (CG_1_0_router_iact_1_0_horiz_data_out_valid    ),
-	.router_iact_1_0_horiz_data_out             (CG_1_0_router_iact_1_0_horiz_data_out          ),
-	.router_iact_1_1_north_address_in_ready     (CG_1_0_router_iact_1_1_north_address_in_ready  ),
-	.router_iact_1_1_north_address_in_valid     (CG_1_0_router_iact_1_1_north_address_in_valid  ),
-	.router_iact_1_1_north_address_in           (CG_1_0_router_iact_1_1_north_address_in        ),
-	.router_iact_1_1_north_data_in_ready        (CG_1_0_router_iact_1_1_north_data_in_ready     ),
-	.router_iact_1_1_north_data_in_valid        (CG_1_0_router_iact_1_1_north_data_in_valid     ),
-	.router_iact_1_1_north_data_in              (CG_1_0_router_iact_1_1_north_data_in           ),
-	.router_iact_1_1_south_address_in_ready     (CG_1_0_router_iact_1_1_south_address_in_ready  ),
-	.router_iact_1_1_south_address_in_valid     (CG_1_0_router_iact_1_1_south_address_in_valid  ),
-	.router_iact_1_1_south_address_in           (CG_1_0_router_iact_1_1_south_address_in        ),
-	.router_iact_1_1_south_data_in_ready        (CG_1_0_router_iact_1_1_south_data_in_ready     ),
-	.router_iact_1_1_south_data_in_valid        (CG_1_0_router_iact_1_1_south_data_in_valid     ),
-	.router_iact_1_1_south_data_in              (CG_1_0_router_iact_1_1_south_data_in           ),
-	.router_iact_1_1_horiz_address_in_ready     (CG_1_0_router_iact_1_1_horiz_address_in_ready  ),
-	.router_iact_1_1_horiz_address_in_valid     (CG_1_0_router_iact_1_1_horiz_address_in_valid  ),
-	.router_iact_1_1_horiz_address_in           (CG_1_0_router_iact_1_1_horiz_address_in        ),
-	.router_iact_1_1_horiz_data_in_ready        (CG_1_0_router_iact_1_1_horiz_data_in_ready     ),
-	.router_iact_1_1_horiz_data_in_valid        (CG_1_0_router_iact_1_1_horiz_data_in_valid     ),
-	.router_iact_1_1_horiz_data_in              (CG_1_0_router_iact_1_1_horiz_data_in           ),
-	.router_iact_1_1_north_address_out_ready	(CG_1_0_router_iact_1_1_north_address_out_ready	),
-	.router_iact_1_1_north_address_out_valid    (CG_1_0_router_iact_1_1_north_address_out_valid ),
-	.router_iact_1_1_north_address_out          (CG_1_0_router_iact_1_1_north_address_out       ),
-	.router_iact_1_1_north_data_out_ready       (CG_1_0_router_iact_1_1_north_data_out_ready    ),
-	.router_iact_1_1_north_data_out_valid       (CG_1_0_router_iact_1_1_north_data_out_valid    ),
-	.router_iact_1_1_north_data_out             (CG_1_0_router_iact_1_1_north_data_out          ),
-	.router_iact_1_1_south_address_out_ready    (CG_1_0_router_iact_1_1_south_address_out_ready ),
-	.router_iact_1_1_south_address_out_valid    (CG_1_0_router_iact_1_1_south_address_out_valid ),
-	.router_iact_1_1_south_address_out          (CG_1_0_router_iact_1_1_south_address_out       ),
-	.router_iact_1_1_south_data_out_ready       (CG_1_0_router_iact_1_1_south_data_out_ready    ),
-	.router_iact_1_1_south_data_out_valid       (CG_1_0_router_iact_1_1_south_data_out_valid    ),
-	.router_iact_1_1_south_data_out             (CG_1_0_router_iact_1_1_south_data_out          ),
-	.router_iact_1_1_horiz_address_out_ready    (CG_1_0_router_iact_1_1_horiz_address_out_ready ),
-	.router_iact_1_1_horiz_address_out_valid    (CG_1_0_router_iact_1_1_horiz_address_out_valid ),
-	.router_iact_1_1_horiz_address_out          (CG_1_0_router_iact_1_1_horiz_address_out       ),
-	.router_iact_1_1_horiz_data_out_ready       (CG_1_0_router_iact_1_1_horiz_data_out_ready    ),
-	.router_iact_1_1_horiz_data_out_valid       (CG_1_0_router_iact_1_1_horiz_data_out_valid    ),
-	.router_iact_1_1_horiz_data_out             (CG_1_0_router_iact_1_1_horiz_data_out          ),
-	.router_iact_1_2_north_address_in_ready     (CG_1_0_router_iact_1_2_north_address_in_ready  ),
-	.router_iact_1_2_north_address_in_valid     (CG_1_0_router_iact_1_2_north_address_in_valid  ),
-	.router_iact_1_2_north_address_in           (CG_1_0_router_iact_1_2_north_address_in        ),
-	.router_iact_1_2_north_data_in_ready        (CG_1_0_router_iact_1_2_north_data_in_ready     ),
-	.router_iact_1_2_north_data_in_valid        (CG_1_0_router_iact_1_2_north_data_in_valid     ),
-	.router_iact_1_2_north_data_in              (CG_1_0_router_iact_1_2_north_data_in           ),
-	.router_iact_1_2_south_address_in_ready     (CG_1_0_router_iact_1_2_south_address_in_ready  ),
-	.router_iact_1_2_south_address_in_valid     (CG_1_0_router_iact_1_2_south_address_in_valid  ),
-	.router_iact_1_2_south_address_in           (CG_1_0_router_iact_1_2_south_address_in        ),
-	.router_iact_1_2_south_data_in_ready        (CG_1_0_router_iact_1_2_south_data_in_ready     ),
-	.router_iact_1_2_south_data_in_valid        (CG_1_0_router_iact_1_2_south_data_in_valid     ),
-	.router_iact_1_2_south_data_in              (CG_1_0_router_iact_1_2_south_data_in           ),
-	.router_iact_1_2_horiz_address_in_ready     (CG_1_0_router_iact_1_2_horiz_address_in_ready  ),
-	.router_iact_1_2_horiz_address_in_valid     (CG_1_0_router_iact_1_2_horiz_address_in_valid  ),
-	.router_iact_1_2_horiz_address_in           (CG_1_0_router_iact_1_2_horiz_address_in        ),
-	.router_iact_1_2_horiz_data_in_ready        (CG_1_0_router_iact_1_2_horiz_data_in_ready     ),
-	.router_iact_1_2_horiz_data_in_valid        (CG_1_0_router_iact_1_2_horiz_data_in_valid     ),
-	.router_iact_1_2_horiz_data_in              (CG_1_0_router_iact_1_2_horiz_data_in           ),
-	.router_iact_1_2_north_address_out_ready	(CG_1_0_router_iact_1_2_north_address_out_ready	),
-	.router_iact_1_2_north_address_out_valid    (CG_1_0_router_iact_1_2_north_address_out_valid ),
-	.router_iact_1_2_north_address_out          (CG_1_0_router_iact_1_2_north_address_out       ),
-	.router_iact_1_2_north_data_out_ready       (CG_1_0_router_iact_1_2_north_data_out_ready    ),
-	.router_iact_1_2_north_data_out_valid       (CG_1_0_router_iact_1_2_north_data_out_valid    ),
-	.router_iact_1_2_north_data_out             (CG_1_0_router_iact_1_2_north_data_out          ),
-	.router_iact_1_2_south_address_out_ready    (CG_1_0_router_iact_1_2_south_address_out_ready ),
-	.router_iact_1_2_south_address_out_valid    (CG_1_0_router_iact_1_2_south_address_out_valid ),
-	.router_iact_1_2_south_address_out          (CG_1_0_router_iact_1_2_south_address_out       ),
-	.router_iact_1_2_south_data_out_ready       (CG_1_0_router_iact_1_2_south_data_out_ready    ),
-	.router_iact_1_2_south_data_out_valid       (CG_1_0_router_iact_1_2_south_data_out_valid    ),
-	.router_iact_1_2_south_data_out             (CG_1_0_router_iact_1_2_south_data_out          ),
-	.router_iact_1_2_horiz_address_out_ready    (CG_1_0_router_iact_1_2_horiz_address_out_ready ),
-	.router_iact_1_2_horiz_address_out_valid    (CG_1_0_router_iact_1_2_horiz_address_out_valid ),
-	.router_iact_1_2_horiz_address_out          (CG_1_0_router_iact_1_2_horiz_address_out       ),
-	.router_iact_1_2_horiz_data_out_ready       (CG_1_0_router_iact_1_2_horiz_data_out_ready    ),
-	.router_iact_1_2_horiz_data_out_valid       (CG_1_0_router_iact_1_2_horiz_data_out_valid    ),
-	.router_iact_1_2_horiz_data_out             (CG_1_0_router_iact_1_2_horiz_data_out          ),
-	.router_iact_2_0_north_address_in_ready     (CG_1_0_router_iact_2_0_north_address_in_ready  ),
-	.router_iact_2_0_north_address_in_valid     (CG_1_0_router_iact_2_0_north_address_in_valid  ),
-	.router_iact_2_0_north_address_in           (CG_1_0_router_iact_2_0_north_address_in        ),
-	.router_iact_2_0_north_data_in_ready        (CG_1_0_router_iact_2_0_north_data_in_ready     ),
-	.router_iact_2_0_north_data_in_valid        (CG_1_0_router_iact_2_0_north_data_in_valid     ),
-	.router_iact_2_0_north_data_in              (CG_1_0_router_iact_2_0_north_data_in           ),
-	.router_iact_2_0_south_address_in_ready     (CG_1_0_router_iact_2_0_south_address_in_ready  ),
-	.router_iact_2_0_south_address_in_valid     (CG_1_0_router_iact_2_0_south_address_in_valid  ),
-	.router_iact_2_0_south_address_in           (CG_1_0_router_iact_2_0_south_address_in        ),
-	.router_iact_2_0_south_data_in_ready        (CG_1_0_router_iact_2_0_south_data_in_ready     ),
-	.router_iact_2_0_south_data_in_valid        (CG_1_0_router_iact_2_0_south_data_in_valid     ),
-	.router_iact_2_0_south_data_in              (CG_1_0_router_iact_2_0_south_data_in           ),
-	.router_iact_2_0_horiz_address_in_ready     (CG_1_0_router_iact_2_0_horiz_address_in_ready  ),
-	.router_iact_2_0_horiz_address_in_valid     (CG_1_0_router_iact_2_0_horiz_address_in_valid  ),
-	.router_iact_2_0_horiz_address_in           (CG_1_0_router_iact_2_0_horiz_address_in        ),
-	.router_iact_2_0_horiz_data_in_ready        (CG_1_0_router_iact_2_0_horiz_data_in_ready     ),
-	.router_iact_2_0_horiz_data_in_valid        (CG_1_0_router_iact_2_0_horiz_data_in_valid     ),
-	.router_iact_2_0_horiz_data_in              (CG_1_0_router_iact_2_0_horiz_data_in           ),
-	.router_iact_2_0_north_address_out_ready	(CG_1_0_router_iact_2_0_north_address_out_ready	),
-	.router_iact_2_0_north_address_out_valid    (CG_1_0_router_iact_2_0_north_address_out_valid ),
-	.router_iact_2_0_north_address_out          (CG_1_0_router_iact_2_0_north_address_out       ),
-	.router_iact_2_0_north_data_out_ready       (CG_1_0_router_iact_2_0_north_data_out_ready    ),
-	.router_iact_2_0_north_data_out_valid       (CG_1_0_router_iact_2_0_north_data_out_valid    ),
-	.router_iact_2_0_north_data_out             (CG_1_0_router_iact_2_0_north_data_out          ),
-	.router_iact_2_0_south_address_out_ready    (CG_1_0_router_iact_2_0_south_address_out_ready ),
-	.router_iact_2_0_south_address_out_valid    (CG_1_0_router_iact_2_0_south_address_out_valid ),
-	.router_iact_2_0_south_address_out          (CG_1_0_router_iact_2_0_south_address_out       ),
-	.router_iact_2_0_south_data_out_ready       (CG_1_0_router_iact_2_0_south_data_out_ready    ),
-	.router_iact_2_0_south_data_out_valid       (CG_1_0_router_iact_2_0_south_data_out_valid    ),
-	.router_iact_2_0_south_data_out             (CG_1_0_router_iact_2_0_south_data_out          ),
-	.router_iact_2_0_horiz_address_out_ready    (CG_1_0_router_iact_2_0_horiz_address_out_ready ),
-	.router_iact_2_0_horiz_address_out_valid    (CG_1_0_router_iact_2_0_horiz_address_out_valid ),
-	.router_iact_2_0_horiz_address_out          (CG_1_0_router_iact_2_0_horiz_address_out       ),
-	.router_iact_2_0_horiz_data_out_ready       (CG_1_0_router_iact_2_0_horiz_data_out_ready    ),
-	.router_iact_2_0_horiz_data_out_valid       (CG_1_0_router_iact_2_0_horiz_data_out_valid    ),
-	.router_iact_2_0_horiz_data_out             (CG_1_0_router_iact_2_0_horiz_data_out          ),
-	.router_iact_2_1_north_address_in_ready     (CG_1_0_router_iact_2_1_north_address_in_ready  ),
-	.router_iact_2_1_north_address_in_valid     (CG_1_0_router_iact_2_1_north_address_in_valid  ),
-	.router_iact_2_1_north_address_in           (CG_1_0_router_iact_2_1_north_address_in        ),
-	.router_iact_2_1_north_data_in_ready        (CG_1_0_router_iact_2_1_north_data_in_ready     ),
-	.router_iact_2_1_north_data_in_valid        (CG_1_0_router_iact_2_1_north_data_in_valid     ),
-	.router_iact_2_1_north_data_in              (CG_1_0_router_iact_2_1_north_data_in           ),
-	.router_iact_2_1_south_address_in_ready     (CG_1_0_router_iact_2_1_south_address_in_ready  ),
-	.router_iact_2_1_south_address_in_valid     (CG_1_0_router_iact_2_1_south_address_in_valid  ),
-	.router_iact_2_1_south_address_in           (CG_1_0_router_iact_2_1_south_address_in        ),
-	.router_iact_2_1_south_data_in_ready        (CG_1_0_router_iact_2_1_south_data_in_ready     ),
-	.router_iact_2_1_south_data_in_valid        (CG_1_0_router_iact_2_1_south_data_in_valid     ),
-	.router_iact_2_1_south_data_in              (CG_1_0_router_iact_2_1_south_data_in           ),
-	.router_iact_2_1_horiz_address_in_ready     (CG_1_0_router_iact_2_1_horiz_address_in_ready  ),
-	.router_iact_2_1_horiz_address_in_valid     (CG_1_0_router_iact_2_1_horiz_address_in_valid  ),
-	.router_iact_2_1_horiz_address_in           (CG_1_0_router_iact_2_1_horiz_address_in        ),
-	.router_iact_2_1_horiz_data_in_ready        (CG_1_0_router_iact_2_1_horiz_data_in_ready     ),
-	.router_iact_2_1_horiz_data_in_valid        (CG_1_0_router_iact_2_1_horiz_data_in_valid     ),
-	.router_iact_2_1_horiz_data_in              (CG_1_0_router_iact_2_1_horiz_data_in           ),
-	.router_iact_2_1_north_address_out_ready	(CG_1_0_router_iact_2_1_north_address_out_ready	),
-	.router_iact_2_1_north_address_out_valid    (CG_1_0_router_iact_2_1_north_address_out_valid ),
-	.router_iact_2_1_north_address_out          (CG_1_0_router_iact_2_1_north_address_out       ),
-	.router_iact_2_1_north_data_out_ready       (CG_1_0_router_iact_2_1_north_data_out_ready    ),
-	.router_iact_2_1_north_data_out_valid       (CG_1_0_router_iact_2_1_north_data_out_valid    ),
-	.router_iact_2_1_north_data_out             (CG_1_0_router_iact_2_1_north_data_out          ),
-	.router_iact_2_1_south_address_out_ready    (CG_1_0_router_iact_2_1_south_address_out_ready ),
-	.router_iact_2_1_south_address_out_valid    (CG_1_0_router_iact_2_1_south_address_out_valid ),
-	.router_iact_2_1_south_address_out          (CG_1_0_router_iact_2_1_south_address_out       ),
-	.router_iact_2_1_south_data_out_ready       (CG_1_0_router_iact_2_1_south_data_out_ready    ),
-	.router_iact_2_1_south_data_out_valid       (CG_1_0_router_iact_2_1_south_data_out_valid    ),
-	.router_iact_2_1_south_data_out             (CG_1_0_router_iact_2_1_south_data_out          ),
-	.router_iact_2_1_horiz_address_out_ready    (CG_1_0_router_iact_2_1_horiz_address_out_ready ),
-	.router_iact_2_1_horiz_address_out_valid    (CG_1_0_router_iact_2_1_horiz_address_out_valid ),
-	.router_iact_2_1_horiz_address_out          (CG_1_0_router_iact_2_1_horiz_address_out       ),
-	.router_iact_2_1_horiz_data_out_ready       (CG_1_0_router_iact_2_1_horiz_data_out_ready    ),
-	.router_iact_2_1_horiz_data_out_valid       (CG_1_0_router_iact_2_1_horiz_data_out_valid    ),
-	.router_iact_2_1_horiz_data_out             (CG_1_0_router_iact_2_1_horiz_data_out          ),
-	.router_iact_2_2_north_address_in_ready     (CG_1_0_router_iact_2_2_north_address_in_ready  ),
-	.router_iact_2_2_north_address_in_valid     (CG_1_0_router_iact_2_2_north_address_in_valid  ),
-	.router_iact_2_2_north_address_in           (CG_1_0_router_iact_2_2_north_address_in        ),
-	.router_iact_2_2_north_data_in_ready        (CG_1_0_router_iact_2_2_north_data_in_ready     ),
-	.router_iact_2_2_north_data_in_valid        (CG_1_0_router_iact_2_2_north_data_in_valid     ),
-	.router_iact_2_2_north_data_in              (CG_1_0_router_iact_2_2_north_data_in           ),
-	.router_iact_2_2_south_address_in_ready     (CG_1_0_router_iact_2_2_south_address_in_ready  ),
-	.router_iact_2_2_south_address_in_valid     (CG_1_0_router_iact_2_2_south_address_in_valid  ),
-	.router_iact_2_2_south_address_in           (CG_1_0_router_iact_2_2_south_address_in        ),
-	.router_iact_2_2_south_data_in_ready        (CG_1_0_router_iact_2_2_south_data_in_ready     ),
-	.router_iact_2_2_south_data_in_valid        (CG_1_0_router_iact_2_2_south_data_in_valid     ),
-	.router_iact_2_2_south_data_in              (CG_1_0_router_iact_2_2_south_data_in           ),
-	.router_iact_2_2_horiz_address_in_ready     (CG_1_0_router_iact_2_2_horiz_address_in_ready  ),
-	.router_iact_2_2_horiz_address_in_valid     (CG_1_0_router_iact_2_2_horiz_address_in_valid  ),
-	.router_iact_2_2_horiz_address_in           (CG_1_0_router_iact_2_2_horiz_address_in        ),
-	.router_iact_2_2_horiz_data_in_ready        (CG_1_0_router_iact_2_2_horiz_data_in_ready     ),
-	.router_iact_2_2_horiz_data_in_valid        (CG_1_0_router_iact_2_2_horiz_data_in_valid     ),
-	.router_iact_2_2_horiz_data_in              (CG_1_0_router_iact_2_2_horiz_data_in           ),
-	.router_iact_2_2_north_address_out_ready	(CG_1_0_router_iact_2_2_north_address_out_ready	),
-	.router_iact_2_2_north_address_out_valid    (CG_1_0_router_iact_2_2_north_address_out_valid ),
-	.router_iact_2_2_north_address_out          (CG_1_0_router_iact_2_2_north_address_out       ),
-	.router_iact_2_2_north_data_out_ready       (CG_1_0_router_iact_2_2_north_data_out_ready    ),
-	.router_iact_2_2_north_data_out_valid       (CG_1_0_router_iact_2_2_north_data_out_valid    ),
-	.router_iact_2_2_north_data_out             (CG_1_0_router_iact_2_2_north_data_out          ),
-	.router_iact_2_2_south_address_out_ready    (CG_1_0_router_iact_2_2_south_address_out_ready ),
-	.router_iact_2_2_south_address_out_valid    (CG_1_0_router_iact_2_2_south_address_out_valid ),
-	.router_iact_2_2_south_address_out          (CG_1_0_router_iact_2_2_south_address_out       ),
-	.router_iact_2_2_south_data_out_ready       (CG_1_0_router_iact_2_2_south_data_out_ready    ),
-	.router_iact_2_2_south_data_out_valid       (CG_1_0_router_iact_2_2_south_data_out_valid    ),
-	.router_iact_2_2_south_data_out             (CG_1_0_router_iact_2_2_south_data_out          ),
-	.router_iact_2_2_horiz_address_out_ready    (CG_1_0_router_iact_2_2_horiz_address_out_ready ),
-	.router_iact_2_2_horiz_address_out_valid    (CG_1_0_router_iact_2_2_horiz_address_out_valid ),
-	.router_iact_2_2_horiz_address_out          (CG_1_0_router_iact_2_2_horiz_address_out       ),
-	.router_iact_2_2_horiz_data_out_ready       (CG_1_0_router_iact_2_2_horiz_data_out_ready    ),
-	.router_iact_2_2_horiz_data_out_valid       (CG_1_0_router_iact_2_2_horiz_data_out_valid    ),
-	.router_iact_2_2_horiz_data_out             (CG_1_0_router_iact_2_2_horiz_data_out          ),
-												
-	.router_weight_0_horiz_address_in_ready     (CG_1_0_router_weight_0_horiz_address_in_ready  ),
-	.router_weight_0_horiz_address_in_valid     (CG_1_0_router_weight_0_horiz_address_in_valid  ),
-	.router_weight_0_horiz_address_in           (CG_1_0_router_weight_0_horiz_address_in        ),
-	.router_weight_0_horiz_data_in_ready        (CG_1_0_router_weight_0_horiz_data_in_ready     ),
-	.router_weight_0_horiz_data_in_valid        (CG_1_0_router_weight_0_horiz_data_in_valid     ),
-	.router_weight_0_horiz_data_in              (CG_1_0_router_weight_0_horiz_data_in           ),
-	.router_weight_0_horiz_address_out_ready    (CG_1_0_router_weight_0_horiz_address_out_ready ),
-	.router_weight_0_horiz_address_out_valid    (CG_1_0_router_weight_0_horiz_address_out_valid ),
-	.router_weight_0_horiz_address_out          (CG_1_0_router_weight_0_horiz_address_out       ),
-	.router_weight_0_horiz_data_out_ready       (CG_1_0_router_weight_0_horiz_data_out_ready    ),
-	.router_weight_0_horiz_data_out_valid       (CG_1_0_router_weight_0_horiz_data_out_valid    ),
-	.router_weight_0_horiz_data_out             (CG_1_0_router_weight_0_horiz_data_out          ),
-	.router_weight_1_horiz_address_in_ready     (CG_1_0_router_weight_1_horiz_address_in_ready  ),
-	.router_weight_1_horiz_address_in_valid     (CG_1_0_router_weight_1_horiz_address_in_valid  ),
-	.router_weight_1_horiz_address_in           (CG_1_0_router_weight_1_horiz_address_in        ),
-	.router_weight_1_horiz_data_in_ready        (CG_1_0_router_weight_1_horiz_data_in_ready     ),
-	.router_weight_1_horiz_data_in_valid        (CG_1_0_router_weight_1_horiz_data_in_valid     ),
-	.router_weight_1_horiz_data_in              (CG_1_0_router_weight_1_horiz_data_in           ),
-	.router_weight_1_horiz_address_out_ready    (CG_1_0_router_weight_1_horiz_address_out_ready ),
-	.router_weight_1_horiz_address_out_valid    (CG_1_0_router_weight_1_horiz_address_out_valid ),
-	.router_weight_1_horiz_address_out          (CG_1_0_router_weight_1_horiz_address_out       ),
-	.router_weight_1_horiz_data_out_ready       (CG_1_0_router_weight_1_horiz_data_out_ready    ),
-	.router_weight_1_horiz_data_out_valid       (CG_1_0_router_weight_1_horiz_data_out_valid    ),
-	.router_weight_1_horiz_data_out             (CG_1_0_router_weight_1_horiz_data_out          ),
-	.router_weight_2_horiz_address_in_ready     (CG_1_0_router_weight_2_horiz_address_in_ready  ),
-	.router_weight_2_horiz_address_in_valid     (CG_1_0_router_weight_2_horiz_address_in_valid  ),
-	.router_weight_2_horiz_address_in           (CG_1_0_router_weight_2_horiz_address_in        ),
-	.router_weight_2_horiz_data_in_ready        (CG_1_0_router_weight_2_horiz_data_in_ready     ),
-	.router_weight_2_horiz_data_in_valid        (CG_1_0_router_weight_2_horiz_data_in_valid     ),
-	.router_weight_2_horiz_data_in              (CG_1_0_router_weight_2_horiz_data_in           ),
-	.router_weight_2_horiz_address_out_ready    (CG_1_0_router_weight_2_horiz_address_out_ready ),
-	.router_weight_2_horiz_address_out_valid    (CG_1_0_router_weight_2_horiz_address_out_valid ),
-	.router_weight_2_horiz_address_out          (CG_1_0_router_weight_2_horiz_address_out       ),
-	.router_weight_2_horiz_data_out_ready       (CG_1_0_router_weight_2_horiz_data_out_ready    ),
-	.router_weight_2_horiz_data_out_valid       (CG_1_0_router_weight_2_horiz_data_out_valid    ),
-	.router_weight_2_horiz_data_out             (CG_1_0_router_weight_2_horiz_data_out          ),
-												
-	.router_psum_0_north_in_ready               (CG_1_0_router_psum_0_north_in_ready            ),
-	.router_psum_0_north_in_valid               (CG_1_0_router_psum_0_north_in_valid            ),
-	.router_psum_0_north_in                     (CG_1_0_router_psum_0_north_in                  ),
-	.router_psum_0_south_out_ready              (CG_1_0_router_psum_0_south_out_ready           ),
-	.router_psum_0_south_out_valid              (CG_1_0_router_psum_0_south_out_valid           ),
-	.router_psum_0_south_out                    (CG_1_0_router_psum_0_south_out                 ),
-	.router_psum_1_north_in_ready               (CG_1_0_router_psum_1_north_in_ready            ),
-	.router_psum_1_north_in_valid               (CG_1_0_router_psum_1_north_in_valid            ),
-	.router_psum_1_north_in                     (CG_1_0_router_psum_1_north_in                  ),
-	.router_psum_1_south_out_ready              (CG_1_0_router_psum_1_south_out_ready           ),
-	.router_psum_1_south_out_valid              (CG_1_0_router_psum_1_south_out_valid           ),
-	.router_psum_1_south_out                    (CG_1_0_router_psum_1_south_out                 ),
-	.router_psum_2_north_in_ready               (CG_1_0_router_psum_2_north_in_ready            ),
-	.router_psum_2_north_in_valid               (CG_1_0_router_psum_2_north_in_valid            ),
-	.router_psum_2_north_in                     (CG_1_0_router_psum_2_north_in                  ),
-	.router_psum_2_south_out_ready              (CG_1_0_router_psum_2_south_out_ready           ),
-	.router_psum_2_south_out_valid              (CG_1_0_router_psum_2_south_out_valid           ),
-	.router_psum_2_south_out                    (CG_1_0_router_psum_2_south_out                 ),
-												 					
-	.cg_south_psum_0_in_ready                   (CG_1_0_cg_south_psum_0_in_ready                ),
-	.cg_south_psum_0_in_valid                   (CG_1_0_cg_south_psum_0_in_valid                ),
-	.cg_south_psum_0_in                         (CG_1_0_cg_south_psum_0_in                      ),
-	.cg_south_psum_1_in_ready                   (CG_1_0_cg_south_psum_1_in_ready                ),
-	.cg_south_psum_1_in_valid                   (CG_1_0_cg_south_psum_1_in_valid                ),
-	.cg_south_psum_1_in                         (CG_1_0_cg_south_psum_1_in                      ),
-	.cg_south_psum_2_in_ready                   (CG_1_0_cg_south_psum_2_in_ready                ),
-	.cg_south_psum_2_in_valid                   (CG_1_0_cg_south_psum_2_in_valid                ),
-	.cg_south_psum_2_in                         (CG_1_0_cg_south_psum_2_in                      ),
-	.cg_north_psum_0_out_ready                  (CG_1_0_cg_north_psum_0_out_ready               ),
-	.cg_north_psum_0_out_valid                  (CG_1_0_cg_north_psum_0_out_valid               ),
-	.cg_north_psum_0_out                        (CG_1_0_cg_north_psum_0_out                     ),
-	.cg_north_psum_1_out_ready                  (CG_1_0_cg_north_psum_1_out_ready               ),
-	.cg_north_psum_1_out_valid                  (CG_1_0_cg_north_psum_1_out_valid               ),
-	.cg_north_psum_1_out                        (CG_1_0_cg_north_psum_1_out                     ),
-	.cg_north_psum_2_out_ready                  (CG_1_0_cg_north_psum_2_out_ready               ),
-	.cg_north_psum_2_out_valid                  (CG_1_0_cg_north_psum_2_out_valid               ),
-	.cg_north_psum_2_out                        (CG_1_0_cg_north_psum_2_out                     ),
-									         
+	// --- tile-chain：iact / weight / psum router、cg_psum（array 直連） ---
+	.iact_north_address_in_ready    (CG_1_0_iact_north_address_in_ready         ),
+	.iact_north_address_in_valid    (CG_0_0_iact_south_address_out_valid        ),
+	.iact_north_address_in_bits     (CG_0_0_iact_south_address_out_bits         ),
+	.iact_north_address_out_ready   (CG_0_0_iact_south_address_in_ready         ),
+	.iact_north_address_out_valid   (CG_1_0_iact_north_address_out_valid        ),
+	.iact_north_address_out_bits    (CG_1_0_iact_north_address_out_bits         ),
+	.iact_north_data_in_ready       (CG_1_0_iact_north_data_in_ready            ),
+	.iact_north_data_in_valid       (CG_0_0_iact_south_data_out_valid           ),
+	.iact_north_data_in_bits        (CG_0_0_iact_south_data_out_bits            ),
+	.iact_north_data_out_ready      (CG_0_0_iact_south_data_in_ready            ),
+	.iact_north_data_out_valid      (CG_1_0_iact_north_data_out_valid           ),
+	.iact_north_data_out_bits       (CG_1_0_iact_north_data_out_bits            ),
+	.iact_south_address_in_ready    (CG_1_0_iact_south_address_in_ready         ),
+	.iact_south_address_in_valid    (tie_lo_3x3                                 ),
+	.iact_south_address_in_bits     (tie_lo_3x3_7b                              ),
+	.iact_south_address_out_ready   (tie_hi_3x3                                 ),
+	.iact_south_address_out_valid   (CG_1_0_iact_south_address_out_valid        ),
+	.iact_south_address_out_bits    (CG_1_0_iact_south_address_out_bits         ),
+	.iact_south_data_in_ready       (CG_1_0_iact_south_data_in_ready            ),
+	.iact_south_data_in_valid       (tie_lo_3x3                                 ),
+	.iact_south_data_in_bits        (tie_lo_3x3_12b                             ),
+	.iact_south_data_out_ready      (tie_hi_3x3                                 ),
+	.iact_south_data_out_valid      (CG_1_0_iact_south_data_out_valid           ),
+	.iact_south_data_out_bits       (CG_1_0_iact_south_data_out_bits            ),
+	.iact_horiz_address_in_ready    (CG_1_0_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_in_valid    (CG_1_1_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_in_bits     (CG_1_1_iact_horiz_address_out_bits         ),
+	.iact_horiz_address_out_ready   (CG_1_1_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_out_valid   (CG_1_0_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_out_bits    (CG_1_0_iact_horiz_address_out_bits         ),
+	.iact_horiz_data_in_ready       (CG_1_0_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_in_valid       (CG_1_1_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_in_bits        (CG_1_1_iact_horiz_data_out_bits            ),
+	.iact_horiz_data_out_ready      (CG_1_1_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_out_valid      (CG_1_0_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_out_bits       (CG_1_0_iact_horiz_data_out_bits            ),
+	.weight_horiz_address_in_ready  (CG_1_0_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_in_valid  (CG_1_1_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_in_bits   (CG_1_1_weight_horiz_address_out_bits       ),
+	.weight_horiz_address_out_ready (CG_1_1_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_out_valid (CG_1_0_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_out_bits  (CG_1_0_weight_horiz_address_out_bits       ),
+	.weight_horiz_data_in_ready     (CG_1_0_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_in_valid     (CG_1_1_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_in_bits      (CG_1_1_weight_horiz_data_out_bits          ),
+	.weight_horiz_data_out_ready    (CG_1_1_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_out_valid    (CG_1_0_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_out_bits     (CG_1_0_weight_horiz_data_out_bits          ),
+	.psum_north_in_ready            (CG_1_0_psum_north_in_ready                 ),
+	.psum_north_in_valid            (CG_0_0_psum_south_out_valid                ),
+	.psum_north_in_bits             (CG_0_0_psum_south_out_bits                 ),
+	.psum_south_out_ready           (tie_hi_3                                   ),
+	.psum_south_out_valid           (CG_1_0_psum_south_out_valid                ),
+	.psum_south_out_bits            (CG_1_0_psum_south_out_bits                 ),
+	.cg_south_psum_in_ready         (CG_1_0_cg_south_psum_in_ready              ),
+	.cg_south_psum_in_valid         (tie_hi_3                                   ),
+	.cg_south_psum_in               (tie_lo_3_21b                               ),
+	.cg_north_psum_out_ready        (CG_0_0_cg_south_psum_in_ready              ),
+	.cg_north_psum_out_valid        (CG_1_0_cg_north_psum_out_valid             ),
+	.cg_north_psum_out              (CG_1_0_cg_north_psum_out                   ),
+
+
 	.PSUM_DEPTH                                 (CG_1_0_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_psum_spad_clear[1][0]                         ),
 											
 	.iact_write_fin_clear                       (CG_iact_write_fin_clear[1][0]                	),
 	.weight_write_fin_clear						(CG_weight_write_fin_clear[1][0]					)
 );
-
 
 
 ClusterGroup ClusterGroup_1_1 (
@@ -3359,406 +905,69 @@ ClusterGroup ClusterGroup_1_1 (
 	.GLB_psum_2_data_out_valid                  (CG_1_1_GLB_psum_2_data_out_valid               ),
 	.GLB_psum_2_data_out                        (CG_1_1_GLB_psum_2_data_out                     ),
 											
-	.router_iact_0_0_north_address_in_ready		(CG_1_1_router_iact_0_0_north_address_in_ready	),
-	.router_iact_0_0_north_address_in_valid     (CG_1_1_router_iact_0_0_north_address_in_valid  ),
-	.router_iact_0_0_north_address_in           (CG_1_1_router_iact_0_0_north_address_in        ),
-	.router_iact_0_0_north_data_in_ready        (CG_1_1_router_iact_0_0_north_data_in_ready     ),
-	.router_iact_0_0_north_data_in_valid        (CG_1_1_router_iact_0_0_north_data_in_valid     ),
-	.router_iact_0_0_north_data_in              (CG_1_1_router_iact_0_0_north_data_in           ),
-	.router_iact_0_0_south_address_in_ready     (CG_1_1_router_iact_0_0_south_address_in_ready  ),
-	.router_iact_0_0_south_address_in_valid     (CG_1_1_router_iact_0_0_south_address_in_valid  ),
-	.router_iact_0_0_south_address_in           (CG_1_1_router_iact_0_0_south_address_in        ),
-	.router_iact_0_0_south_data_in_ready        (CG_1_1_router_iact_0_0_south_data_in_ready     ),
-	.router_iact_0_0_south_data_in_valid        (CG_1_1_router_iact_0_0_south_data_in_valid     ),
-	.router_iact_0_0_south_data_in              (CG_1_1_router_iact_0_0_south_data_in           ),
-	.router_iact_0_0_horiz_address_in_ready     (CG_1_1_router_iact_0_0_horiz_address_in_ready  ),
-	.router_iact_0_0_horiz_address_in_valid     (CG_1_1_router_iact_0_0_horiz_address_in_valid  ),
-	.router_iact_0_0_horiz_address_in           (CG_1_1_router_iact_0_0_horiz_address_in        ),
-	.router_iact_0_0_horiz_data_in_ready        (CG_1_1_router_iact_0_0_horiz_data_in_ready     ),
-	.router_iact_0_0_horiz_data_in_valid        (CG_1_1_router_iact_0_0_horiz_data_in_valid     ),
-	.router_iact_0_0_horiz_data_in              (CG_1_1_router_iact_0_0_horiz_data_in           ),
-	.router_iact_0_0_north_address_out_ready	(CG_1_1_router_iact_0_0_north_address_out_ready	),
-	.router_iact_0_0_north_address_out_valid    (CG_1_1_router_iact_0_0_north_address_out_valid ),
-	.router_iact_0_0_north_address_out          (CG_1_1_router_iact_0_0_north_address_out       ),
-	.router_iact_0_0_north_data_out_ready       (CG_1_1_router_iact_0_0_north_data_out_ready    ),
-	.router_iact_0_0_north_data_out_valid       (CG_1_1_router_iact_0_0_north_data_out_valid    ),
-	.router_iact_0_0_north_data_out             (CG_1_1_router_iact_0_0_north_data_out          ),
-	.router_iact_0_0_south_address_out_ready    (CG_1_1_router_iact_0_0_south_address_out_ready ),
-	.router_iact_0_0_south_address_out_valid    (CG_1_1_router_iact_0_0_south_address_out_valid ),
-	.router_iact_0_0_south_address_out          (CG_1_1_router_iact_0_0_south_address_out       ),
-	.router_iact_0_0_south_data_out_ready       (CG_1_1_router_iact_0_0_south_data_out_ready    ),
-	.router_iact_0_0_south_data_out_valid       (CG_1_1_router_iact_0_0_south_data_out_valid    ),
-	.router_iact_0_0_south_data_out             (CG_1_1_router_iact_0_0_south_data_out          ),
-	.router_iact_0_0_horiz_address_out_ready    (CG_1_1_router_iact_0_0_horiz_address_out_ready ),
-	.router_iact_0_0_horiz_address_out_valid    (CG_1_1_router_iact_0_0_horiz_address_out_valid ),
-	.router_iact_0_0_horiz_address_out          (CG_1_1_router_iact_0_0_horiz_address_out       ),
-	.router_iact_0_0_horiz_data_out_ready       (CG_1_1_router_iact_0_0_horiz_data_out_ready    ),
-	.router_iact_0_0_horiz_data_out_valid       (CG_1_1_router_iact_0_0_horiz_data_out_valid    ),
-	.router_iact_0_0_horiz_data_out             (CG_1_1_router_iact_0_0_horiz_data_out          ),
-	.router_iact_0_1_north_address_in_ready     (CG_1_1_router_iact_0_1_north_address_in_ready  ),
-	.router_iact_0_1_north_address_in_valid     (CG_1_1_router_iact_0_1_north_address_in_valid  ),
-	.router_iact_0_1_north_address_in           (CG_1_1_router_iact_0_1_north_address_in        ),
-	.router_iact_0_1_north_data_in_ready        (CG_1_1_router_iact_0_1_north_data_in_ready     ),
-	.router_iact_0_1_north_data_in_valid        (CG_1_1_router_iact_0_1_north_data_in_valid     ),
-	.router_iact_0_1_north_data_in              (CG_1_1_router_iact_0_1_north_data_in           ),
-	.router_iact_0_1_south_address_in_ready     (CG_1_1_router_iact_0_1_south_address_in_ready  ),
-	.router_iact_0_1_south_address_in_valid     (CG_1_1_router_iact_0_1_south_address_in_valid  ),
-	.router_iact_0_1_south_address_in           (CG_1_1_router_iact_0_1_south_address_in        ),
-	.router_iact_0_1_south_data_in_ready        (CG_1_1_router_iact_0_1_south_data_in_ready     ),
-	.router_iact_0_1_south_data_in_valid        (CG_1_1_router_iact_0_1_south_data_in_valid     ),
-	.router_iact_0_1_south_data_in              (CG_1_1_router_iact_0_1_south_data_in           ),
-	.router_iact_0_1_horiz_address_in_ready     (CG_1_1_router_iact_0_1_horiz_address_in_ready  ),
-	.router_iact_0_1_horiz_address_in_valid     (CG_1_1_router_iact_0_1_horiz_address_in_valid  ),
-	.router_iact_0_1_horiz_address_in           (CG_1_1_router_iact_0_1_horiz_address_in        ),
-	.router_iact_0_1_horiz_data_in_ready        (CG_1_1_router_iact_0_1_horiz_data_in_ready     ),
-	.router_iact_0_1_horiz_data_in_valid        (CG_1_1_router_iact_0_1_horiz_data_in_valid     ),
-	.router_iact_0_1_horiz_data_in              (CG_1_1_router_iact_0_1_horiz_data_in           ),
-	.router_iact_0_1_north_address_out_ready	(CG_1_1_router_iact_0_1_north_address_out_ready	),
-	.router_iact_0_1_north_address_out_valid    (CG_1_1_router_iact_0_1_north_address_out_valid ),
-	.router_iact_0_1_north_address_out          (CG_1_1_router_iact_0_1_north_address_out       ),
-	.router_iact_0_1_north_data_out_ready       (CG_1_1_router_iact_0_1_north_data_out_ready    ),
-	.router_iact_0_1_north_data_out_valid       (CG_1_1_router_iact_0_1_north_data_out_valid    ),
-	.router_iact_0_1_north_data_out             (CG_1_1_router_iact_0_1_north_data_out          ),
-	.router_iact_0_1_south_address_out_ready    (CG_1_1_router_iact_0_1_south_address_out_ready ),
-	.router_iact_0_1_south_address_out_valid    (CG_1_1_router_iact_0_1_south_address_out_valid ),
-	.router_iact_0_1_south_address_out          (CG_1_1_router_iact_0_1_south_address_out       ),
-	.router_iact_0_1_south_data_out_ready       (CG_1_1_router_iact_0_1_south_data_out_ready    ),
-	.router_iact_0_1_south_data_out_valid       (CG_1_1_router_iact_0_1_south_data_out_valid    ),
-	.router_iact_0_1_south_data_out             (CG_1_1_router_iact_0_1_south_data_out          ),
-	.router_iact_0_1_horiz_address_out_ready    (CG_1_1_router_iact_0_1_horiz_address_out_ready ),
-	.router_iact_0_1_horiz_address_out_valid    (CG_1_1_router_iact_0_1_horiz_address_out_valid ),
-	.router_iact_0_1_horiz_address_out          (CG_1_1_router_iact_0_1_horiz_address_out       ),
-	.router_iact_0_1_horiz_data_out_ready       (CG_1_1_router_iact_0_1_horiz_data_out_ready    ),
-	.router_iact_0_1_horiz_data_out_valid       (CG_1_1_router_iact_0_1_horiz_data_out_valid    ),
-	.router_iact_0_1_horiz_data_out             (CG_1_1_router_iact_0_1_horiz_data_out          ),
-	.router_iact_0_2_north_address_in_ready     (CG_1_1_router_iact_0_2_north_address_in_ready  ),
-	.router_iact_0_2_north_address_in_valid     (CG_1_1_router_iact_0_2_north_address_in_valid  ),
-	.router_iact_0_2_north_address_in           (CG_1_1_router_iact_0_2_north_address_in        ),
-	.router_iact_0_2_north_data_in_ready        (CG_1_1_router_iact_0_2_north_data_in_ready     ),
-	.router_iact_0_2_north_data_in_valid        (CG_1_1_router_iact_0_2_north_data_in_valid     ),
-	.router_iact_0_2_north_data_in              (CG_1_1_router_iact_0_2_north_data_in           ),
-	.router_iact_0_2_south_address_in_ready     (CG_1_1_router_iact_0_2_south_address_in_ready  ),
-	.router_iact_0_2_south_address_in_valid     (CG_1_1_router_iact_0_2_south_address_in_valid  ),
-	.router_iact_0_2_south_address_in           (CG_1_1_router_iact_0_2_south_address_in        ),
-	.router_iact_0_2_south_data_in_ready        (CG_1_1_router_iact_0_2_south_data_in_ready     ),
-	.router_iact_0_2_south_data_in_valid        (CG_1_1_router_iact_0_2_south_data_in_valid     ),
-	.router_iact_0_2_south_data_in              (CG_1_1_router_iact_0_2_south_data_in           ),
-	.router_iact_0_2_horiz_address_in_ready     (CG_1_1_router_iact_0_2_horiz_address_in_ready  ),
-	.router_iact_0_2_horiz_address_in_valid     (CG_1_1_router_iact_0_2_horiz_address_in_valid  ),
-	.router_iact_0_2_horiz_address_in           (CG_1_1_router_iact_0_2_horiz_address_in        ),
-	.router_iact_0_2_horiz_data_in_ready        (CG_1_1_router_iact_0_2_horiz_data_in_ready     ),
-	.router_iact_0_2_horiz_data_in_valid        (CG_1_1_router_iact_0_2_horiz_data_in_valid     ),
-	.router_iact_0_2_horiz_data_in              (CG_1_1_router_iact_0_2_horiz_data_in           ),
-	.router_iact_0_2_north_address_out_ready	(CG_1_1_router_iact_0_2_north_address_out_ready	),
-	.router_iact_0_2_north_address_out_valid    (CG_1_1_router_iact_0_2_north_address_out_valid ),
-	.router_iact_0_2_north_address_out          (CG_1_1_router_iact_0_2_north_address_out       ),
-	.router_iact_0_2_north_data_out_ready       (CG_1_1_router_iact_0_2_north_data_out_ready    ),
-	.router_iact_0_2_north_data_out_valid       (CG_1_1_router_iact_0_2_north_data_out_valid    ),
-	.router_iact_0_2_north_data_out             (CG_1_1_router_iact_0_2_north_data_out          ),
-	.router_iact_0_2_south_address_out_ready    (CG_1_1_router_iact_0_2_south_address_out_ready ),
-	.router_iact_0_2_south_address_out_valid    (CG_1_1_router_iact_0_2_south_address_out_valid ),
-	.router_iact_0_2_south_address_out          (CG_1_1_router_iact_0_2_south_address_out       ),
-	.router_iact_0_2_south_data_out_ready       (CG_1_1_router_iact_0_2_south_data_out_ready    ),
-	.router_iact_0_2_south_data_out_valid       (CG_1_1_router_iact_0_2_south_data_out_valid    ),
-	.router_iact_0_2_south_data_out             (CG_1_1_router_iact_0_2_south_data_out          ),
-	.router_iact_0_2_horiz_address_out_ready    (CG_1_1_router_iact_0_2_horiz_address_out_ready ),
-	.router_iact_0_2_horiz_address_out_valid    (CG_1_1_router_iact_0_2_horiz_address_out_valid ),
-	.router_iact_0_2_horiz_address_out          (CG_1_1_router_iact_0_2_horiz_address_out       ),
-	.router_iact_0_2_horiz_data_out_ready       (CG_1_1_router_iact_0_2_horiz_data_out_ready    ),
-	.router_iact_0_2_horiz_data_out_valid       (CG_1_1_router_iact_0_2_horiz_data_out_valid    ),
-	.router_iact_0_2_horiz_data_out             (CG_1_1_router_iact_0_2_horiz_data_out          ),
-	.router_iact_1_0_north_address_in_ready     (CG_1_1_router_iact_1_0_north_address_in_ready  ),
-	.router_iact_1_0_north_address_in_valid     (CG_1_1_router_iact_1_0_north_address_in_valid  ),
-	.router_iact_1_0_north_address_in           (CG_1_1_router_iact_1_0_north_address_in        ),
-	.router_iact_1_0_north_data_in_ready        (CG_1_1_router_iact_1_0_north_data_in_ready     ),
-	.router_iact_1_0_north_data_in_valid        (CG_1_1_router_iact_1_0_north_data_in_valid     ),
-	.router_iact_1_0_north_data_in              (CG_1_1_router_iact_1_0_north_data_in           ),
-	.router_iact_1_0_south_address_in_ready     (CG_1_1_router_iact_1_0_south_address_in_ready  ),
-	.router_iact_1_0_south_address_in_valid     (CG_1_1_router_iact_1_0_south_address_in_valid  ),
-	.router_iact_1_0_south_address_in           (CG_1_1_router_iact_1_0_south_address_in        ),
-	.router_iact_1_0_south_data_in_ready        (CG_1_1_router_iact_1_0_south_data_in_ready     ),
-	.router_iact_1_0_south_data_in_valid        (CG_1_1_router_iact_1_0_south_data_in_valid     ),
-	.router_iact_1_0_south_data_in              (CG_1_1_router_iact_1_0_south_data_in           ),
-	.router_iact_1_0_horiz_address_in_ready     (CG_1_1_router_iact_1_0_horiz_address_in_ready  ),
-	.router_iact_1_0_horiz_address_in_valid     (CG_1_1_router_iact_1_0_horiz_address_in_valid  ),
-	.router_iact_1_0_horiz_address_in           (CG_1_1_router_iact_1_0_horiz_address_in        ),
-	.router_iact_1_0_horiz_data_in_ready        (CG_1_1_router_iact_1_0_horiz_data_in_ready     ),
-	.router_iact_1_0_horiz_data_in_valid        (CG_1_1_router_iact_1_0_horiz_data_in_valid     ),
-	.router_iact_1_0_horiz_data_in              (CG_1_1_router_iact_1_0_horiz_data_in           ),
-	.router_iact_1_0_north_address_out_ready	(CG_1_1_router_iact_1_0_north_address_out_ready	),
-	.router_iact_1_0_north_address_out_valid    (CG_1_1_router_iact_1_0_north_address_out_valid ),
-	.router_iact_1_0_north_address_out          (CG_1_1_router_iact_1_0_north_address_out       ),
-	.router_iact_1_0_north_data_out_ready       (CG_1_1_router_iact_1_0_north_data_out_ready    ),
-	.router_iact_1_0_north_data_out_valid       (CG_1_1_router_iact_1_0_north_data_out_valid    ),
-	.router_iact_1_0_north_data_out             (CG_1_1_router_iact_1_0_north_data_out          ),
-	.router_iact_1_0_south_address_out_ready    (CG_1_1_router_iact_1_0_south_address_out_ready ),
-	.router_iact_1_0_south_address_out_valid    (CG_1_1_router_iact_1_0_south_address_out_valid ),
-	.router_iact_1_0_south_address_out          (CG_1_1_router_iact_1_0_south_address_out       ),
-	.router_iact_1_0_south_data_out_ready       (CG_1_1_router_iact_1_0_south_data_out_ready    ),
-	.router_iact_1_0_south_data_out_valid       (CG_1_1_router_iact_1_0_south_data_out_valid    ),
-	.router_iact_1_0_south_data_out             (CG_1_1_router_iact_1_0_south_data_out          ),
-	.router_iact_1_0_horiz_address_out_ready    (CG_1_1_router_iact_1_0_horiz_address_out_ready ),
-	.router_iact_1_0_horiz_address_out_valid    (CG_1_1_router_iact_1_0_horiz_address_out_valid ),
-	.router_iact_1_0_horiz_address_out          (CG_1_1_router_iact_1_0_horiz_address_out       ),
-	.router_iact_1_0_horiz_data_out_ready       (CG_1_1_router_iact_1_0_horiz_data_out_ready    ),
-	.router_iact_1_0_horiz_data_out_valid       (CG_1_1_router_iact_1_0_horiz_data_out_valid    ),
-	.router_iact_1_0_horiz_data_out             (CG_1_1_router_iact_1_0_horiz_data_out          ),
-	.router_iact_1_1_north_address_in_ready     (CG_1_1_router_iact_1_1_north_address_in_ready  ),
-	.router_iact_1_1_north_address_in_valid     (CG_1_1_router_iact_1_1_north_address_in_valid  ),
-	.router_iact_1_1_north_address_in           (CG_1_1_router_iact_1_1_north_address_in        ),
-	.router_iact_1_1_north_data_in_ready        (CG_1_1_router_iact_1_1_north_data_in_ready     ),
-	.router_iact_1_1_north_data_in_valid        (CG_1_1_router_iact_1_1_north_data_in_valid     ),
-	.router_iact_1_1_north_data_in              (CG_1_1_router_iact_1_1_north_data_in           ),
-	.router_iact_1_1_south_address_in_ready     (CG_1_1_router_iact_1_1_south_address_in_ready  ),
-	.router_iact_1_1_south_address_in_valid     (CG_1_1_router_iact_1_1_south_address_in_valid  ),
-	.router_iact_1_1_south_address_in           (CG_1_1_router_iact_1_1_south_address_in        ),
-	.router_iact_1_1_south_data_in_ready        (CG_1_1_router_iact_1_1_south_data_in_ready     ),
-	.router_iact_1_1_south_data_in_valid        (CG_1_1_router_iact_1_1_south_data_in_valid     ),
-	.router_iact_1_1_south_data_in              (CG_1_1_router_iact_1_1_south_data_in           ),
-	.router_iact_1_1_horiz_address_in_ready     (CG_1_1_router_iact_1_1_horiz_address_in_ready  ),
-	.router_iact_1_1_horiz_address_in_valid     (CG_1_1_router_iact_1_1_horiz_address_in_valid  ),
-	.router_iact_1_1_horiz_address_in           (CG_1_1_router_iact_1_1_horiz_address_in        ),
-	.router_iact_1_1_horiz_data_in_ready        (CG_1_1_router_iact_1_1_horiz_data_in_ready     ),
-	.router_iact_1_1_horiz_data_in_valid        (CG_1_1_router_iact_1_1_horiz_data_in_valid     ),
-	.router_iact_1_1_horiz_data_in              (CG_1_1_router_iact_1_1_horiz_data_in           ),
-	.router_iact_1_1_north_address_out_ready	(CG_1_1_router_iact_1_1_north_address_out_ready	),
-	.router_iact_1_1_north_address_out_valid    (CG_1_1_router_iact_1_1_north_address_out_valid ),
-	.router_iact_1_1_north_address_out          (CG_1_1_router_iact_1_1_north_address_out       ),
-	.router_iact_1_1_north_data_out_ready       (CG_1_1_router_iact_1_1_north_data_out_ready    ),
-	.router_iact_1_1_north_data_out_valid       (CG_1_1_router_iact_1_1_north_data_out_valid    ),
-	.router_iact_1_1_north_data_out             (CG_1_1_router_iact_1_1_north_data_out          ),
-	.router_iact_1_1_south_address_out_ready    (CG_1_1_router_iact_1_1_south_address_out_ready ),
-	.router_iact_1_1_south_address_out_valid    (CG_1_1_router_iact_1_1_south_address_out_valid ),
-	.router_iact_1_1_south_address_out          (CG_1_1_router_iact_1_1_south_address_out       ),
-	.router_iact_1_1_south_data_out_ready       (CG_1_1_router_iact_1_1_south_data_out_ready    ),
-	.router_iact_1_1_south_data_out_valid       (CG_1_1_router_iact_1_1_south_data_out_valid    ),
-	.router_iact_1_1_south_data_out             (CG_1_1_router_iact_1_1_south_data_out          ),
-	.router_iact_1_1_horiz_address_out_ready    (CG_1_1_router_iact_1_1_horiz_address_out_ready ),
-	.router_iact_1_1_horiz_address_out_valid    (CG_1_1_router_iact_1_1_horiz_address_out_valid ),
-	.router_iact_1_1_horiz_address_out          (CG_1_1_router_iact_1_1_horiz_address_out       ),
-	.router_iact_1_1_horiz_data_out_ready       (CG_1_1_router_iact_1_1_horiz_data_out_ready    ),
-	.router_iact_1_1_horiz_data_out_valid       (CG_1_1_router_iact_1_1_horiz_data_out_valid    ),
-	.router_iact_1_1_horiz_data_out             (CG_1_1_router_iact_1_1_horiz_data_out          ),
-	.router_iact_1_2_north_address_in_ready     (CG_1_1_router_iact_1_2_north_address_in_ready  ),
-	.router_iact_1_2_north_address_in_valid     (CG_1_1_router_iact_1_2_north_address_in_valid  ),
-	.router_iact_1_2_north_address_in           (CG_1_1_router_iact_1_2_north_address_in        ),
-	.router_iact_1_2_north_data_in_ready        (CG_1_1_router_iact_1_2_north_data_in_ready     ),
-	.router_iact_1_2_north_data_in_valid        (CG_1_1_router_iact_1_2_north_data_in_valid     ),
-	.router_iact_1_2_north_data_in              (CG_1_1_router_iact_1_2_north_data_in           ),
-	.router_iact_1_2_south_address_in_ready     (CG_1_1_router_iact_1_2_south_address_in_ready  ),
-	.router_iact_1_2_south_address_in_valid     (CG_1_1_router_iact_1_2_south_address_in_valid  ),
-	.router_iact_1_2_south_address_in           (CG_1_1_router_iact_1_2_south_address_in        ),
-	.router_iact_1_2_south_data_in_ready        (CG_1_1_router_iact_1_2_south_data_in_ready     ),
-	.router_iact_1_2_south_data_in_valid        (CG_1_1_router_iact_1_2_south_data_in_valid     ),
-	.router_iact_1_2_south_data_in              (CG_1_1_router_iact_1_2_south_data_in           ),
-	.router_iact_1_2_horiz_address_in_ready     (CG_1_1_router_iact_1_2_horiz_address_in_ready  ),
-	.router_iact_1_2_horiz_address_in_valid     (CG_1_1_router_iact_1_2_horiz_address_in_valid  ),
-	.router_iact_1_2_horiz_address_in           (CG_1_1_router_iact_1_2_horiz_address_in        ),
-	.router_iact_1_2_horiz_data_in_ready        (CG_1_1_router_iact_1_2_horiz_data_in_ready     ),
-	.router_iact_1_2_horiz_data_in_valid        (CG_1_1_router_iact_1_2_horiz_data_in_valid     ),
-	.router_iact_1_2_horiz_data_in              (CG_1_1_router_iact_1_2_horiz_data_in           ),
-	.router_iact_1_2_north_address_out_ready	(CG_1_1_router_iact_1_2_north_address_out_ready	),
-	.router_iact_1_2_north_address_out_valid    (CG_1_1_router_iact_1_2_north_address_out_valid ),
-	.router_iact_1_2_north_address_out          (CG_1_1_router_iact_1_2_north_address_out       ),
-	.router_iact_1_2_north_data_out_ready       (CG_1_1_router_iact_1_2_north_data_out_ready    ),
-	.router_iact_1_2_north_data_out_valid       (CG_1_1_router_iact_1_2_north_data_out_valid    ),
-	.router_iact_1_2_north_data_out             (CG_1_1_router_iact_1_2_north_data_out          ),
-	.router_iact_1_2_south_address_out_ready    (CG_1_1_router_iact_1_2_south_address_out_ready ),
-	.router_iact_1_2_south_address_out_valid    (CG_1_1_router_iact_1_2_south_address_out_valid ),
-	.router_iact_1_2_south_address_out          (CG_1_1_router_iact_1_2_south_address_out       ),
-	.router_iact_1_2_south_data_out_ready       (CG_1_1_router_iact_1_2_south_data_out_ready    ),
-	.router_iact_1_2_south_data_out_valid       (CG_1_1_router_iact_1_2_south_data_out_valid    ),
-	.router_iact_1_2_south_data_out             (CG_1_1_router_iact_1_2_south_data_out          ),
-	.router_iact_1_2_horiz_address_out_ready    (CG_1_1_router_iact_1_2_horiz_address_out_ready ),
-	.router_iact_1_2_horiz_address_out_valid    (CG_1_1_router_iact_1_2_horiz_address_out_valid ),
-	.router_iact_1_2_horiz_address_out          (CG_1_1_router_iact_1_2_horiz_address_out       ),
-	.router_iact_1_2_horiz_data_out_ready       (CG_1_1_router_iact_1_2_horiz_data_out_ready    ),
-	.router_iact_1_2_horiz_data_out_valid       (CG_1_1_router_iact_1_2_horiz_data_out_valid    ),
-	.router_iact_1_2_horiz_data_out             (CG_1_1_router_iact_1_2_horiz_data_out          ),
-	.router_iact_2_0_north_address_in_ready     (CG_1_1_router_iact_2_0_north_address_in_ready  ),
-	.router_iact_2_0_north_address_in_valid     (CG_1_1_router_iact_2_0_north_address_in_valid  ),
-	.router_iact_2_0_north_address_in           (CG_1_1_router_iact_2_0_north_address_in        ),
-	.router_iact_2_0_north_data_in_ready        (CG_1_1_router_iact_2_0_north_data_in_ready     ),
-	.router_iact_2_0_north_data_in_valid        (CG_1_1_router_iact_2_0_north_data_in_valid     ),
-	.router_iact_2_0_north_data_in              (CG_1_1_router_iact_2_0_north_data_in           ),
-	.router_iact_2_0_south_address_in_ready     (CG_1_1_router_iact_2_0_south_address_in_ready  ),
-	.router_iact_2_0_south_address_in_valid     (CG_1_1_router_iact_2_0_south_address_in_valid  ),
-	.router_iact_2_0_south_address_in           (CG_1_1_router_iact_2_0_south_address_in        ),
-	.router_iact_2_0_south_data_in_ready        (CG_1_1_router_iact_2_0_south_data_in_ready     ),
-	.router_iact_2_0_south_data_in_valid        (CG_1_1_router_iact_2_0_south_data_in_valid     ),
-	.router_iact_2_0_south_data_in              (CG_1_1_router_iact_2_0_south_data_in           ),
-	.router_iact_2_0_horiz_address_in_ready     (CG_1_1_router_iact_2_0_horiz_address_in_ready  ),
-	.router_iact_2_0_horiz_address_in_valid     (CG_1_1_router_iact_2_0_horiz_address_in_valid  ),
-	.router_iact_2_0_horiz_address_in           (CG_1_1_router_iact_2_0_horiz_address_in        ),
-	.router_iact_2_0_horiz_data_in_ready        (CG_1_1_router_iact_2_0_horiz_data_in_ready     ),
-	.router_iact_2_0_horiz_data_in_valid        (CG_1_1_router_iact_2_0_horiz_data_in_valid     ),
-	.router_iact_2_0_horiz_data_in              (CG_1_1_router_iact_2_0_horiz_data_in           ),
-	.router_iact_2_0_north_address_out_ready	(CG_1_1_router_iact_2_0_north_address_out_ready	),
-	.router_iact_2_0_north_address_out_valid    (CG_1_1_router_iact_2_0_north_address_out_valid ),
-	.router_iact_2_0_north_address_out          (CG_1_1_router_iact_2_0_north_address_out       ),
-	.router_iact_2_0_north_data_out_ready       (CG_1_1_router_iact_2_0_north_data_out_ready    ),
-	.router_iact_2_0_north_data_out_valid       (CG_1_1_router_iact_2_0_north_data_out_valid    ),
-	.router_iact_2_0_north_data_out             (CG_1_1_router_iact_2_0_north_data_out          ),
-	.router_iact_2_0_south_address_out_ready    (CG_1_1_router_iact_2_0_south_address_out_ready ),
-	.router_iact_2_0_south_address_out_valid    (CG_1_1_router_iact_2_0_south_address_out_valid ),
-	.router_iact_2_0_south_address_out          (CG_1_1_router_iact_2_0_south_address_out       ),
-	.router_iact_2_0_south_data_out_ready       (CG_1_1_router_iact_2_0_south_data_out_ready    ),
-	.router_iact_2_0_south_data_out_valid       (CG_1_1_router_iact_2_0_south_data_out_valid    ),
-	.router_iact_2_0_south_data_out             (CG_1_1_router_iact_2_0_south_data_out          ),
-	.router_iact_2_0_horiz_address_out_ready    (CG_1_1_router_iact_2_0_horiz_address_out_ready ),
-	.router_iact_2_0_horiz_address_out_valid    (CG_1_1_router_iact_2_0_horiz_address_out_valid ),
-	.router_iact_2_0_horiz_address_out          (CG_1_1_router_iact_2_0_horiz_address_out       ),
-	.router_iact_2_0_horiz_data_out_ready       (CG_1_1_router_iact_2_0_horiz_data_out_ready    ),
-	.router_iact_2_0_horiz_data_out_valid       (CG_1_1_router_iact_2_0_horiz_data_out_valid    ),
-	.router_iact_2_0_horiz_data_out             (CG_1_1_router_iact_2_0_horiz_data_out          ),
-	.router_iact_2_1_north_address_in_ready     (CG_1_1_router_iact_2_1_north_address_in_ready  ),
-	.router_iact_2_1_north_address_in_valid     (CG_1_1_router_iact_2_1_north_address_in_valid  ),
-	.router_iact_2_1_north_address_in           (CG_1_1_router_iact_2_1_north_address_in        ),
-	.router_iact_2_1_north_data_in_ready        (CG_1_1_router_iact_2_1_north_data_in_ready     ),
-	.router_iact_2_1_north_data_in_valid        (CG_1_1_router_iact_2_1_north_data_in_valid     ),
-	.router_iact_2_1_north_data_in              (CG_1_1_router_iact_2_1_north_data_in           ),
-	.router_iact_2_1_south_address_in_ready     (CG_1_1_router_iact_2_1_south_address_in_ready  ),
-	.router_iact_2_1_south_address_in_valid     (CG_1_1_router_iact_2_1_south_address_in_valid  ),
-	.router_iact_2_1_south_address_in           (CG_1_1_router_iact_2_1_south_address_in        ),
-	.router_iact_2_1_south_data_in_ready        (CG_1_1_router_iact_2_1_south_data_in_ready     ),
-	.router_iact_2_1_south_data_in_valid        (CG_1_1_router_iact_2_1_south_data_in_valid     ),
-	.router_iact_2_1_south_data_in              (CG_1_1_router_iact_2_1_south_data_in           ),
-	.router_iact_2_1_horiz_address_in_ready     (CG_1_1_router_iact_2_1_horiz_address_in_ready  ),
-	.router_iact_2_1_horiz_address_in_valid     (CG_1_1_router_iact_2_1_horiz_address_in_valid  ),
-	.router_iact_2_1_horiz_address_in           (CG_1_1_router_iact_2_1_horiz_address_in        ),
-	.router_iact_2_1_horiz_data_in_ready        (CG_1_1_router_iact_2_1_horiz_data_in_ready     ),
-	.router_iact_2_1_horiz_data_in_valid        (CG_1_1_router_iact_2_1_horiz_data_in_valid     ),
-	.router_iact_2_1_horiz_data_in              (CG_1_1_router_iact_2_1_horiz_data_in           ),
-	.router_iact_2_1_north_address_out_ready	(CG_1_1_router_iact_2_1_north_address_out_ready	),
-	.router_iact_2_1_north_address_out_valid    (CG_1_1_router_iact_2_1_north_address_out_valid ),
-	.router_iact_2_1_north_address_out          (CG_1_1_router_iact_2_1_north_address_out       ),
-	.router_iact_2_1_north_data_out_ready       (CG_1_1_router_iact_2_1_north_data_out_ready    ),
-	.router_iact_2_1_north_data_out_valid       (CG_1_1_router_iact_2_1_north_data_out_valid    ),
-	.router_iact_2_1_north_data_out             (CG_1_1_router_iact_2_1_north_data_out          ),
-	.router_iact_2_1_south_address_out_ready    (CG_1_1_router_iact_2_1_south_address_out_ready ),
-	.router_iact_2_1_south_address_out_valid    (CG_1_1_router_iact_2_1_south_address_out_valid ),
-	.router_iact_2_1_south_address_out          (CG_1_1_router_iact_2_1_south_address_out       ),
-	.router_iact_2_1_south_data_out_ready       (CG_1_1_router_iact_2_1_south_data_out_ready    ),
-	.router_iact_2_1_south_data_out_valid       (CG_1_1_router_iact_2_1_south_data_out_valid    ),
-	.router_iact_2_1_south_data_out             (CG_1_1_router_iact_2_1_south_data_out          ),
-	.router_iact_2_1_horiz_address_out_ready    (CG_1_1_router_iact_2_1_horiz_address_out_ready ),
-	.router_iact_2_1_horiz_address_out_valid    (CG_1_1_router_iact_2_1_horiz_address_out_valid ),
-	.router_iact_2_1_horiz_address_out          (CG_1_1_router_iact_2_1_horiz_address_out       ),
-	.router_iact_2_1_horiz_data_out_ready       (CG_1_1_router_iact_2_1_horiz_data_out_ready    ),
-	.router_iact_2_1_horiz_data_out_valid       (CG_1_1_router_iact_2_1_horiz_data_out_valid    ),
-	.router_iact_2_1_horiz_data_out             (CG_1_1_router_iact_2_1_horiz_data_out          ),
-	.router_iact_2_2_north_address_in_ready     (CG_1_1_router_iact_2_2_north_address_in_ready  ),
-	.router_iact_2_2_north_address_in_valid     (CG_1_1_router_iact_2_2_north_address_in_valid  ),
-	.router_iact_2_2_north_address_in           (CG_1_1_router_iact_2_2_north_address_in        ),
-	.router_iact_2_2_north_data_in_ready        (CG_1_1_router_iact_2_2_north_data_in_ready     ),
-	.router_iact_2_2_north_data_in_valid        (CG_1_1_router_iact_2_2_north_data_in_valid     ),
-	.router_iact_2_2_north_data_in              (CG_1_1_router_iact_2_2_north_data_in           ),
-	.router_iact_2_2_south_address_in_ready     (CG_1_1_router_iact_2_2_south_address_in_ready  ),
-	.router_iact_2_2_south_address_in_valid     (CG_1_1_router_iact_2_2_south_address_in_valid  ),
-	.router_iact_2_2_south_address_in           (CG_1_1_router_iact_2_2_south_address_in        ),
-	.router_iact_2_2_south_data_in_ready        (CG_1_1_router_iact_2_2_south_data_in_ready     ),
-	.router_iact_2_2_south_data_in_valid        (CG_1_1_router_iact_2_2_south_data_in_valid     ),
-	.router_iact_2_2_south_data_in              (CG_1_1_router_iact_2_2_south_data_in           ),
-	.router_iact_2_2_horiz_address_in_ready     (CG_1_1_router_iact_2_2_horiz_address_in_ready  ),
-	.router_iact_2_2_horiz_address_in_valid     (CG_1_1_router_iact_2_2_horiz_address_in_valid  ),
-	.router_iact_2_2_horiz_address_in           (CG_1_1_router_iact_2_2_horiz_address_in        ),
-	.router_iact_2_2_horiz_data_in_ready        (CG_1_1_router_iact_2_2_horiz_data_in_ready     ),
-	.router_iact_2_2_horiz_data_in_valid        (CG_1_1_router_iact_2_2_horiz_data_in_valid     ),
-	.router_iact_2_2_horiz_data_in              (CG_1_1_router_iact_2_2_horiz_data_in           ),
-	.router_iact_2_2_north_address_out_ready	(CG_1_1_router_iact_2_2_north_address_out_ready	),
-	.router_iact_2_2_north_address_out_valid    (CG_1_1_router_iact_2_2_north_address_out_valid ),
-	.router_iact_2_2_north_address_out          (CG_1_1_router_iact_2_2_north_address_out       ),
-	.router_iact_2_2_north_data_out_ready       (CG_1_1_router_iact_2_2_north_data_out_ready    ),
-	.router_iact_2_2_north_data_out_valid       (CG_1_1_router_iact_2_2_north_data_out_valid    ),
-	.router_iact_2_2_north_data_out             (CG_1_1_router_iact_2_2_north_data_out          ),
-	.router_iact_2_2_south_address_out_ready    (CG_1_1_router_iact_2_2_south_address_out_ready ),
-	.router_iact_2_2_south_address_out_valid    (CG_1_1_router_iact_2_2_south_address_out_valid ),
-	.router_iact_2_2_south_address_out          (CG_1_1_router_iact_2_2_south_address_out       ),
-	.router_iact_2_2_south_data_out_ready       (CG_1_1_router_iact_2_2_south_data_out_ready    ),
-	.router_iact_2_2_south_data_out_valid       (CG_1_1_router_iact_2_2_south_data_out_valid    ),
-	.router_iact_2_2_south_data_out             (CG_1_1_router_iact_2_2_south_data_out          ),
-	.router_iact_2_2_horiz_address_out_ready    (CG_1_1_router_iact_2_2_horiz_address_out_ready ),
-	.router_iact_2_2_horiz_address_out_valid    (CG_1_1_router_iact_2_2_horiz_address_out_valid ),
-	.router_iact_2_2_horiz_address_out          (CG_1_1_router_iact_2_2_horiz_address_out       ),
-	.router_iact_2_2_horiz_data_out_ready       (CG_1_1_router_iact_2_2_horiz_data_out_ready    ),
-	.router_iact_2_2_horiz_data_out_valid       (CG_1_1_router_iact_2_2_horiz_data_out_valid    ),
-	.router_iact_2_2_horiz_data_out             (CG_1_1_router_iact_2_2_horiz_data_out          ),
-												
-	.router_weight_0_horiz_address_in_ready     (CG_1_1_router_weight_0_horiz_address_in_ready  ),
-	.router_weight_0_horiz_address_in_valid     (CG_1_1_router_weight_0_horiz_address_in_valid  ),
-	.router_weight_0_horiz_address_in           (CG_1_1_router_weight_0_horiz_address_in        ),
-	.router_weight_0_horiz_data_in_ready        (CG_1_1_router_weight_0_horiz_data_in_ready     ),
-	.router_weight_0_horiz_data_in_valid        (CG_1_1_router_weight_0_horiz_data_in_valid     ),
-	.router_weight_0_horiz_data_in              (CG_1_1_router_weight_0_horiz_data_in           ),
-	.router_weight_0_horiz_address_out_ready    (CG_1_1_router_weight_0_horiz_address_out_ready ),
-	.router_weight_0_horiz_address_out_valid    (CG_1_1_router_weight_0_horiz_address_out_valid ),
-	.router_weight_0_horiz_address_out          (CG_1_1_router_weight_0_horiz_address_out       ),
-	.router_weight_0_horiz_data_out_ready       (CG_1_1_router_weight_0_horiz_data_out_ready    ),
-	.router_weight_0_horiz_data_out_valid       (CG_1_1_router_weight_0_horiz_data_out_valid    ),
-	.router_weight_0_horiz_data_out             (CG_1_1_router_weight_0_horiz_data_out          ),
-	.router_weight_1_horiz_address_in_ready     (CG_1_1_router_weight_1_horiz_address_in_ready  ),
-	.router_weight_1_horiz_address_in_valid     (CG_1_1_router_weight_1_horiz_address_in_valid  ),
-	.router_weight_1_horiz_address_in           (CG_1_1_router_weight_1_horiz_address_in        ),
-	.router_weight_1_horiz_data_in_ready        (CG_1_1_router_weight_1_horiz_data_in_ready     ),
-	.router_weight_1_horiz_data_in_valid        (CG_1_1_router_weight_1_horiz_data_in_valid     ),
-	.router_weight_1_horiz_data_in              (CG_1_1_router_weight_1_horiz_data_in           ),
-	.router_weight_1_horiz_address_out_ready    (CG_1_1_router_weight_1_horiz_address_out_ready ),
-	.router_weight_1_horiz_address_out_valid    (CG_1_1_router_weight_1_horiz_address_out_valid ),
-	.router_weight_1_horiz_address_out          (CG_1_1_router_weight_1_horiz_address_out       ),
-	.router_weight_1_horiz_data_out_ready       (CG_1_1_router_weight_1_horiz_data_out_ready    ),
-	.router_weight_1_horiz_data_out_valid       (CG_1_1_router_weight_1_horiz_data_out_valid    ),
-	.router_weight_1_horiz_data_out             (CG_1_1_router_weight_1_horiz_data_out          ),
-	.router_weight_2_horiz_address_in_ready     (CG_1_1_router_weight_2_horiz_address_in_ready  ),
-	.router_weight_2_horiz_address_in_valid     (CG_1_1_router_weight_2_horiz_address_in_valid  ),
-	.router_weight_2_horiz_address_in           (CG_1_1_router_weight_2_horiz_address_in        ),
-	.router_weight_2_horiz_data_in_ready        (CG_1_1_router_weight_2_horiz_data_in_ready     ),
-	.router_weight_2_horiz_data_in_valid        (CG_1_1_router_weight_2_horiz_data_in_valid     ),
-	.router_weight_2_horiz_data_in              (CG_1_1_router_weight_2_horiz_data_in           ),
-	.router_weight_2_horiz_address_out_ready    (CG_1_1_router_weight_2_horiz_address_out_ready ),
-	.router_weight_2_horiz_address_out_valid    (CG_1_1_router_weight_2_horiz_address_out_valid ),
-	.router_weight_2_horiz_address_out          (CG_1_1_router_weight_2_horiz_address_out       ),
-	.router_weight_2_horiz_data_out_ready       (CG_1_1_router_weight_2_horiz_data_out_ready    ),
-	.router_weight_2_horiz_data_out_valid       (CG_1_1_router_weight_2_horiz_data_out_valid    ),
-	.router_weight_2_horiz_data_out             (CG_1_1_router_weight_2_horiz_data_out          ),
-												
-	.router_psum_0_north_in_ready               (CG_1_1_router_psum_0_north_in_ready            ),
-	.router_psum_0_north_in_valid               (CG_1_1_router_psum_0_north_in_valid            ),
-	.router_psum_0_north_in                     (CG_1_1_router_psum_0_north_in                  ),
-	.router_psum_0_south_out_ready              (CG_1_1_router_psum_0_south_out_ready           ),
-	.router_psum_0_south_out_valid              (CG_1_1_router_psum_0_south_out_valid           ),
-	.router_psum_0_south_out                    (CG_1_1_router_psum_0_south_out                 ),
-	.router_psum_1_north_in_ready               (CG_1_1_router_psum_1_north_in_ready            ),
-	.router_psum_1_north_in_valid               (CG_1_1_router_psum_1_north_in_valid            ),
-	.router_psum_1_north_in                     (CG_1_1_router_psum_1_north_in                  ),
-	.router_psum_1_south_out_ready              (CG_1_1_router_psum_1_south_out_ready           ),
-	.router_psum_1_south_out_valid              (CG_1_1_router_psum_1_south_out_valid           ),
-	.router_psum_1_south_out                    (CG_1_1_router_psum_1_south_out                 ),
-	.router_psum_2_north_in_ready               (CG_1_1_router_psum_2_north_in_ready            ),
-	.router_psum_2_north_in_valid               (CG_1_1_router_psum_2_north_in_valid            ),
-	.router_psum_2_north_in                     (CG_1_1_router_psum_2_north_in                  ),
-	.router_psum_2_south_out_ready              (CG_1_1_router_psum_2_south_out_ready           ),
-	.router_psum_2_south_out_valid              (CG_1_1_router_psum_2_south_out_valid           ),
-	.router_psum_2_south_out                    (CG_1_1_router_psum_2_south_out                 ),
-												 					
-	.cg_south_psum_0_in_ready                   (CG_1_1_cg_south_psum_0_in_ready                ),
-	.cg_south_psum_0_in_valid                   (CG_1_1_cg_south_psum_0_in_valid                ),
-	.cg_south_psum_0_in                         (CG_1_1_cg_south_psum_0_in                      ),
-	.cg_south_psum_1_in_ready                   (CG_1_1_cg_south_psum_1_in_ready                ),
-	.cg_south_psum_1_in_valid                   (CG_1_1_cg_south_psum_1_in_valid                ),
-	.cg_south_psum_1_in                         (CG_1_1_cg_south_psum_1_in                      ),
-	.cg_south_psum_2_in_ready                   (CG_1_1_cg_south_psum_2_in_ready                ),
-	.cg_south_psum_2_in_valid                   (CG_1_1_cg_south_psum_2_in_valid                ),
-	.cg_south_psum_2_in                         (CG_1_1_cg_south_psum_2_in                      ),
-	.cg_north_psum_0_out_ready                  (CG_1_1_cg_north_psum_0_out_ready               ),
-	.cg_north_psum_0_out_valid                  (CG_1_1_cg_north_psum_0_out_valid               ),
-	.cg_north_psum_0_out                        (CG_1_1_cg_north_psum_0_out                     ),
-	.cg_north_psum_1_out_ready                  (CG_1_1_cg_north_psum_1_out_ready               ),
-	.cg_north_psum_1_out_valid                  (CG_1_1_cg_north_psum_1_out_valid               ),
-	.cg_north_psum_1_out                        (CG_1_1_cg_north_psum_1_out                     ),
-	.cg_north_psum_2_out_ready                  (CG_1_1_cg_north_psum_2_out_ready               ),
-	.cg_north_psum_2_out_valid                  (CG_1_1_cg_north_psum_2_out_valid               ),
-	.cg_north_psum_2_out                        (CG_1_1_cg_north_psum_2_out                     ),
-									         
+	// --- tile-chain：iact / weight / psum router、cg_psum（array 直連） ---
+	.iact_north_address_in_ready    (CG_1_1_iact_north_address_in_ready         ),
+	.iact_north_address_in_valid    (CG_0_1_iact_south_address_out_valid        ),
+	.iact_north_address_in_bits     (CG_0_1_iact_south_address_out_bits         ),
+	.iact_north_address_out_ready   (CG_0_1_iact_south_address_in_ready         ),
+	.iact_north_address_out_valid   (CG_1_1_iact_north_address_out_valid        ),
+	.iact_north_address_out_bits    (CG_1_1_iact_north_address_out_bits         ),
+	.iact_north_data_in_ready       (CG_1_1_iact_north_data_in_ready            ),
+	.iact_north_data_in_valid       (CG_0_1_iact_south_data_out_valid           ),
+	.iact_north_data_in_bits        (CG_0_1_iact_south_data_out_bits            ),
+	.iact_north_data_out_ready      (CG_0_1_iact_south_data_in_ready            ),
+	.iact_north_data_out_valid      (CG_1_1_iact_north_data_out_valid           ),
+	.iact_north_data_out_bits       (CG_1_1_iact_north_data_out_bits            ),
+	.iact_south_address_in_ready    (CG_1_1_iact_south_address_in_ready         ),
+	.iact_south_address_in_valid    (tie_lo_3x3                                 ),
+	.iact_south_address_in_bits     (tie_lo_3x3_7b                              ),
+	.iact_south_address_out_ready   (tie_hi_3x3                                 ),
+	.iact_south_address_out_valid   (CG_1_1_iact_south_address_out_valid        ),
+	.iact_south_address_out_bits    (CG_1_1_iact_south_address_out_bits         ),
+	.iact_south_data_in_ready       (CG_1_1_iact_south_data_in_ready            ),
+	.iact_south_data_in_valid       (tie_lo_3x3                                 ),
+	.iact_south_data_in_bits        (tie_lo_3x3_12b                             ),
+	.iact_south_data_out_ready      (tie_hi_3x3                                 ),
+	.iact_south_data_out_valid      (CG_1_1_iact_south_data_out_valid           ),
+	.iact_south_data_out_bits       (CG_1_1_iact_south_data_out_bits            ),
+	.iact_horiz_address_in_ready    (CG_1_1_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_in_valid    (CG_1_0_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_in_bits     (CG_1_0_iact_horiz_address_out_bits         ),
+	.iact_horiz_address_out_ready   (CG_1_0_iact_horiz_address_in_ready         ),
+	.iact_horiz_address_out_valid   (CG_1_1_iact_horiz_address_out_valid        ),
+	.iact_horiz_address_out_bits    (CG_1_1_iact_horiz_address_out_bits         ),
+	.iact_horiz_data_in_ready       (CG_1_1_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_in_valid       (CG_1_0_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_in_bits        (CG_1_0_iact_horiz_data_out_bits            ),
+	.iact_horiz_data_out_ready      (CG_1_0_iact_horiz_data_in_ready            ),
+	.iact_horiz_data_out_valid      (CG_1_1_iact_horiz_data_out_valid           ),
+	.iact_horiz_data_out_bits       (CG_1_1_iact_horiz_data_out_bits            ),
+	.weight_horiz_address_in_ready  (CG_1_1_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_in_valid  (CG_1_0_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_in_bits   (CG_1_0_weight_horiz_address_out_bits       ),
+	.weight_horiz_address_out_ready (CG_1_0_weight_horiz_address_in_ready       ),
+	.weight_horiz_address_out_valid (CG_1_1_weight_horiz_address_out_valid      ),
+	.weight_horiz_address_out_bits  (CG_1_1_weight_horiz_address_out_bits       ),
+	.weight_horiz_data_in_ready     (CG_1_1_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_in_valid     (CG_1_0_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_in_bits      (CG_1_0_weight_horiz_data_out_bits          ),
+	.weight_horiz_data_out_ready    (CG_1_0_weight_horiz_data_in_ready          ),
+	.weight_horiz_data_out_valid    (CG_1_1_weight_horiz_data_out_valid         ),
+	.weight_horiz_data_out_bits     (CG_1_1_weight_horiz_data_out_bits          ),
+	.psum_north_in_ready            (CG_1_1_psum_north_in_ready                 ),
+	.psum_north_in_valid            (CG_0_1_psum_south_out_valid                ),
+	.psum_north_in_bits             (CG_0_1_psum_south_out_bits                 ),
+	.psum_south_out_ready           (tie_hi_3                                   ),
+	.psum_south_out_valid           (CG_1_1_psum_south_out_valid                ),
+	.psum_south_out_bits            (CG_1_1_psum_south_out_bits                 ),
+	.cg_south_psum_in_ready         (CG_1_1_cg_south_psum_in_ready              ),
+	.cg_south_psum_in_valid         (tie_hi_3                                   ),
+	.cg_south_psum_in               (tie_lo_3_21b                               ),
+	.cg_north_psum_out_ready        (CG_0_1_cg_south_psum_in_ready              ),
+	.cg_north_psum_out_valid        (CG_1_1_cg_north_psum_out_valid             ),
+	.cg_north_psum_out              (CG_1_1_cg_north_psum_out                   ),
+
+
 	.PSUM_DEPTH                                 (CG_1_1_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_psum_spad_clear[1][1]                         ),
 											
@@ -3766,829 +975,15 @@ ClusterGroup ClusterGroup_1_1 (
 	.weight_write_fin_clear						(CG_weight_write_fin_clear[1][1]					)
 );
 
-
-
-
-
-// ------------------- CG_0_0 ------------------- //
-assign	CG_0_0_router_iact_0_0_north_address_out_ready	= 'd1;
-assign	CG_0_0_router_iact_0_0_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_0_0_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_0_0_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_0_0_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_0_0_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_0_0_south_address_out_ready  = CG_1_0_router_iact_0_0_north_address_in_ready;   
-assign	CG_0_0_router_iact_0_0_south_address_in_valid   = CG_1_0_router_iact_0_0_north_address_out_valid;   
-assign	CG_0_0_router_iact_0_0_south_address_in         = CG_1_0_router_iact_0_0_north_address_out;         
-assign	CG_0_0_router_iact_0_0_south_data_out_ready     = CG_1_0_router_iact_0_0_north_data_in_ready;      
-assign	CG_0_0_router_iact_0_0_south_data_in_valid      = CG_1_0_router_iact_0_0_north_data_out_valid;      
-assign	CG_0_0_router_iact_0_0_south_data_in            = CG_1_0_router_iact_0_0_north_data_out;            
-assign	CG_0_0_router_iact_0_0_horiz_address_out_ready  = CG_0_1_router_iact_0_0_horiz_address_in_ready;   
-assign	CG_0_0_router_iact_0_0_horiz_address_in_valid   = CG_0_1_router_iact_0_0_horiz_address_out_valid;   
-assign	CG_0_0_router_iact_0_0_horiz_address_in         = CG_0_1_router_iact_0_0_horiz_address_out;         
-assign	CG_0_0_router_iact_0_0_horiz_data_out_ready     = CG_0_1_router_iact_0_0_horiz_data_in_ready;      
-assign	CG_0_0_router_iact_0_0_horiz_data_in_valid      = CG_0_1_router_iact_0_0_horiz_data_out_valid;      
-assign	CG_0_0_router_iact_0_0_horiz_data_in            = CG_0_1_router_iact_0_0_horiz_data_out;          
-assign	CG_0_0_router_iact_0_1_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_0_1_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_0_1_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_0_1_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_0_1_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_0_1_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_0_1_south_address_out_ready  = CG_1_0_router_iact_0_1_north_address_in_ready; 
-assign	CG_0_0_router_iact_0_1_south_address_in_valid   = CG_1_0_router_iact_0_1_north_address_out_valid; 
-assign	CG_0_0_router_iact_0_1_south_address_in         = CG_1_0_router_iact_0_1_north_address_out;       
-assign	CG_0_0_router_iact_0_1_south_data_out_ready     = CG_1_0_router_iact_0_1_north_data_in_ready;    
-assign	CG_0_0_router_iact_0_1_south_data_in_valid      = CG_1_0_router_iact_0_1_north_data_out_valid;    
-assign	CG_0_0_router_iact_0_1_south_data_in            = CG_1_0_router_iact_0_1_north_data_out;          
-assign	CG_0_0_router_iact_0_1_horiz_address_out_ready  = CG_0_1_router_iact_0_1_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_0_1_horiz_address_in_valid   = CG_0_1_router_iact_0_1_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_0_1_horiz_address_in         = CG_0_1_router_iact_0_1_horiz_address_out;       
-assign	CG_0_0_router_iact_0_1_horiz_data_out_ready     = CG_0_1_router_iact_0_1_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_0_1_horiz_data_in_valid      = CG_0_1_router_iact_0_1_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_0_1_horiz_data_in            = CG_0_1_router_iact_0_1_horiz_data_out;          
-assign	CG_0_0_router_iact_0_2_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_0_2_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_0_2_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_0_2_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_0_2_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_0_2_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_0_2_south_address_out_ready  = CG_1_0_router_iact_0_2_north_address_in_ready; 
-assign	CG_0_0_router_iact_0_2_south_address_in_valid   = CG_1_0_router_iact_0_2_north_address_out_valid; 
-assign	CG_0_0_router_iact_0_2_south_address_in         = CG_1_0_router_iact_0_2_north_address_out;       
-assign	CG_0_0_router_iact_0_2_south_data_out_ready     = CG_1_0_router_iact_0_2_north_data_in_ready;    
-assign	CG_0_0_router_iact_0_2_south_data_in_valid      = CG_1_0_router_iact_0_2_north_data_out_valid;    
-assign	CG_0_0_router_iact_0_2_south_data_in            = CG_1_0_router_iact_0_2_north_data_out;          
-assign	CG_0_0_router_iact_0_2_horiz_address_out_ready  = CG_0_1_router_iact_0_2_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_0_2_horiz_address_in_valid   = CG_0_1_router_iact_0_2_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_0_2_horiz_address_in         = CG_0_1_router_iact_0_2_horiz_address_out;       
-assign	CG_0_0_router_iact_0_2_horiz_data_out_ready     = CG_0_1_router_iact_0_2_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_0_2_horiz_data_in_valid      = CG_0_1_router_iact_0_2_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_0_2_horiz_data_in            = CG_0_1_router_iact_0_2_horiz_data_out;          
-assign	CG_0_0_router_iact_1_0_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_1_0_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_1_0_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_1_0_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_1_0_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_1_0_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_1_0_south_address_out_ready  = CG_1_0_router_iact_1_0_north_address_in_ready; 
-assign	CG_0_0_router_iact_1_0_south_address_in_valid   = CG_1_0_router_iact_1_0_north_address_out_valid; 
-assign	CG_0_0_router_iact_1_0_south_address_in         = CG_1_0_router_iact_1_0_north_address_out;       
-assign	CG_0_0_router_iact_1_0_south_data_out_ready     = CG_1_0_router_iact_1_0_north_data_in_ready;    
-assign	CG_0_0_router_iact_1_0_south_data_in_valid      = CG_1_0_router_iact_1_0_north_data_out_valid;    
-assign	CG_0_0_router_iact_1_0_south_data_in            = CG_1_0_router_iact_1_0_north_data_out;          
-assign	CG_0_0_router_iact_1_0_horiz_address_out_ready  = CG_0_1_router_iact_1_0_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_1_0_horiz_address_in_valid   = CG_0_1_router_iact_1_0_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_1_0_horiz_address_in         = CG_0_1_router_iact_1_0_horiz_address_out;       
-assign	CG_0_0_router_iact_1_0_horiz_data_out_ready     = CG_0_1_router_iact_1_0_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_1_0_horiz_data_in_valid      = CG_0_1_router_iact_1_0_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_1_0_horiz_data_in            = CG_0_1_router_iact_1_0_horiz_data_out;  
-          
-assign	CG_0_0_router_iact_1_1_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_1_1_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_1_1_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_1_1_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_1_1_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_1_1_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_1_1_south_address_out_ready  = CG_1_0_router_iact_1_1_north_address_in_ready; 
-assign	CG_0_0_router_iact_1_1_south_address_in_valid   = CG_1_0_router_iact_1_1_north_address_out_valid; 
-assign	CG_0_0_router_iact_1_1_south_address_in         = CG_1_0_router_iact_1_1_north_address_out;       
-assign	CG_0_0_router_iact_1_1_south_data_out_ready     = CG_1_0_router_iact_1_1_north_data_in_ready;    
-assign	CG_0_0_router_iact_1_1_south_data_in_valid      = CG_1_0_router_iact_1_1_north_data_out_valid;    
-assign	CG_0_0_router_iact_1_1_south_data_in            = CG_1_0_router_iact_1_1_north_data_out;          
-assign	CG_0_0_router_iact_1_1_horiz_address_out_ready  = CG_0_1_router_iact_1_1_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_1_1_horiz_address_in_valid   = CG_0_1_router_iact_1_1_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_1_1_horiz_address_in         = CG_0_1_router_iact_1_1_horiz_address_out;       
-assign	CG_0_0_router_iact_1_1_horiz_data_out_ready     = CG_0_1_router_iact_1_1_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_1_1_horiz_data_in_valid      = CG_0_1_router_iact_1_1_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_1_1_horiz_data_in            = CG_0_1_router_iact_1_1_horiz_data_out;          		
-assign	CG_0_0_router_iact_1_2_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_1_2_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_1_2_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_1_2_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_1_2_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_1_2_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_1_2_south_address_out_ready  = CG_1_0_router_iact_1_2_north_address_in_ready; 
-assign	CG_0_0_router_iact_1_2_south_address_in_valid   = CG_1_0_router_iact_1_2_north_address_out_valid; 
-assign	CG_0_0_router_iact_1_2_south_address_in         = CG_1_0_router_iact_1_2_north_address_out;       
-assign	CG_0_0_router_iact_1_2_south_data_out_ready     = CG_1_0_router_iact_1_2_north_data_in_ready;    
-assign	CG_0_0_router_iact_1_2_south_data_in_valid      = CG_1_0_router_iact_1_2_north_data_out_valid;    
-assign	CG_0_0_router_iact_1_2_south_data_in            = CG_1_0_router_iact_1_2_north_data_out;          
-assign	CG_0_0_router_iact_1_2_horiz_address_out_ready  = CG_0_1_router_iact_1_2_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_1_2_horiz_address_in_valid   = CG_0_1_router_iact_1_2_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_1_2_horiz_address_in         = CG_0_1_router_iact_1_2_horiz_address_out;       
-assign	CG_0_0_router_iact_1_2_horiz_data_out_ready     = CG_0_1_router_iact_1_2_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_1_2_horiz_data_in_valid      = CG_0_1_router_iact_1_2_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_1_2_horiz_data_in            = CG_0_1_router_iact_1_2_horiz_data_out;           
-assign	CG_0_0_router_iact_2_0_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_2_0_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_2_0_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_2_0_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_2_0_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_2_0_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_2_0_south_address_out_ready  = CG_1_0_router_iact_2_0_north_address_in_ready; 
-assign	CG_0_0_router_iact_2_0_south_address_in_valid   = CG_1_0_router_iact_2_0_north_address_out_valid; 
-assign	CG_0_0_router_iact_2_0_south_address_in         = CG_1_0_router_iact_2_0_north_address_out;       
-assign	CG_0_0_router_iact_2_0_south_data_out_ready     = CG_1_0_router_iact_2_0_north_data_in_ready;    
-assign	CG_0_0_router_iact_2_0_south_data_in_valid      = CG_1_0_router_iact_2_0_north_data_out_valid;    
-assign	CG_0_0_router_iact_2_0_south_data_in            = CG_1_0_router_iact_2_0_north_data_out;          
-assign	CG_0_0_router_iact_2_0_horiz_address_out_ready  = CG_0_1_router_iact_2_0_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_2_0_horiz_address_in_valid   = CG_0_1_router_iact_2_0_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_2_0_horiz_address_in         = CG_0_1_router_iact_2_0_horiz_address_out;       
-assign	CG_0_0_router_iact_2_0_horiz_data_out_ready     = CG_0_1_router_iact_2_0_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_2_0_horiz_data_in_valid      = CG_0_1_router_iact_2_0_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_2_0_horiz_data_in            = CG_0_1_router_iact_2_0_horiz_data_out;           					
-assign	CG_0_0_router_iact_2_1_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_2_1_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_2_1_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_2_1_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_2_1_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_2_1_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_2_1_south_address_out_ready  = CG_1_0_router_iact_2_1_north_address_in_ready; 
-assign	CG_0_0_router_iact_2_1_south_address_in_valid   = CG_1_0_router_iact_2_1_north_address_out_valid; 
-assign	CG_0_0_router_iact_2_1_south_address_in         = CG_1_0_router_iact_2_1_north_address_out;       
-assign	CG_0_0_router_iact_2_1_south_data_out_ready     = CG_1_0_router_iact_2_1_north_data_in_ready;    
-assign	CG_0_0_router_iact_2_1_south_data_in_valid      = CG_1_0_router_iact_2_1_north_data_out_valid;    
-assign	CG_0_0_router_iact_2_1_south_data_in            = CG_1_0_router_iact_2_1_north_data_out;          
-assign	CG_0_0_router_iact_2_1_horiz_address_out_ready  = CG_0_1_router_iact_2_1_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_2_1_horiz_address_in_valid   = CG_0_1_router_iact_2_1_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_2_1_horiz_address_in         = CG_0_1_router_iact_2_1_horiz_address_out;       
-assign	CG_0_0_router_iact_2_1_horiz_data_out_ready     = CG_0_1_router_iact_2_1_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_2_1_horiz_data_in_valid      = CG_0_1_router_iact_2_1_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_2_1_horiz_data_in            = CG_0_1_router_iact_2_1_horiz_data_out;                						
-assign	CG_0_0_router_iact_2_2_north_address_out_ready  = 'd1;
-assign	CG_0_0_router_iact_2_2_north_address_in_valid   = 'd0;
-assign	CG_0_0_router_iact_2_2_north_address_in         = 'd0;
-assign	CG_0_0_router_iact_2_2_north_data_out_ready     = 'd1;
-assign	CG_0_0_router_iact_2_2_north_data_in_valid      = 'd0;
-assign	CG_0_0_router_iact_2_2_north_data_in            = 'd0;
-assign	CG_0_0_router_iact_2_2_south_address_out_ready  = CG_1_0_router_iact_2_2_north_address_in_ready; 
-assign	CG_0_0_router_iact_2_2_south_address_in_valid   = CG_1_0_router_iact_2_2_north_address_out_valid; 
-assign	CG_0_0_router_iact_2_2_south_address_in         = CG_1_0_router_iact_2_2_north_address_out;       
-assign	CG_0_0_router_iact_2_2_south_data_out_ready     = CG_1_0_router_iact_2_2_north_data_in_ready;    
-assign	CG_0_0_router_iact_2_2_south_data_in_valid      = CG_1_0_router_iact_2_2_north_data_out_valid;    
-assign	CG_0_0_router_iact_2_2_south_data_in            = CG_1_0_router_iact_2_2_north_data_out;          
-assign	CG_0_0_router_iact_2_2_horiz_address_out_ready  = CG_0_1_router_iact_2_2_horiz_address_in_ready; 
-assign	CG_0_0_router_iact_2_2_horiz_address_in_valid   = CG_0_1_router_iact_2_2_horiz_address_out_valid; 
-assign	CG_0_0_router_iact_2_2_horiz_address_in         = CG_0_1_router_iact_2_2_horiz_address_out;       
-assign	CG_0_0_router_iact_2_2_horiz_data_out_ready     = CG_0_1_router_iact_2_2_horiz_data_in_ready;    
-assign	CG_0_0_router_iact_2_2_horiz_data_in_valid      = CG_0_1_router_iact_2_2_horiz_data_out_valid;    
-assign	CG_0_0_router_iact_2_2_horiz_data_in            = CG_0_1_router_iact_2_2_horiz_data_out;           
-
-assign	CG_0_0_router_weight_0_horiz_address_out_ready  = CG_0_1_router_weight_0_horiz_address_in_ready;   
-assign	CG_0_0_router_weight_0_horiz_address_in_valid   = CG_0_1_router_weight_0_horiz_address_out_valid;   
-assign	CG_0_0_router_weight_0_horiz_address_in         = CG_0_1_router_weight_0_horiz_address_out;         
-assign	CG_0_0_router_weight_0_horiz_data_out_ready     = CG_0_1_router_weight_0_horiz_data_in_ready;      
-assign	CG_0_0_router_weight_0_horiz_data_in_valid      = CG_0_1_router_weight_0_horiz_data_out_valid;      
-assign	CG_0_0_router_weight_0_horiz_data_in            = CG_0_1_router_weight_0_horiz_data_out;            
-assign	CG_0_0_router_weight_1_horiz_address_out_ready  = CG_0_1_router_weight_1_horiz_address_in_ready;   
-assign	CG_0_0_router_weight_1_horiz_address_in_valid   = CG_0_1_router_weight_1_horiz_address_out_valid;   
-assign	CG_0_0_router_weight_1_horiz_address_in         = CG_0_1_router_weight_1_horiz_address_out;         
-assign	CG_0_0_router_weight_1_horiz_data_out_ready     = CG_0_1_router_weight_1_horiz_data_in_ready;      
-assign	CG_0_0_router_weight_1_horiz_data_in_valid      = CG_0_1_router_weight_1_horiz_data_out_valid;      
-assign	CG_0_0_router_weight_1_horiz_data_in            = CG_0_1_router_weight_1_horiz_data_out;          
-assign	CG_0_0_router_weight_2_horiz_address_out_ready  = CG_0_1_router_weight_2_horiz_address_in_ready;  
-assign	CG_0_0_router_weight_2_horiz_address_in_valid   = CG_0_1_router_weight_2_horiz_address_out_valid;   
-assign	CG_0_0_router_weight_2_horiz_address_in         = CG_0_1_router_weight_2_horiz_address_out;          
-assign	CG_0_0_router_weight_2_horiz_data_out_ready     = CG_0_1_router_weight_2_horiz_data_in_ready;      
-assign	CG_0_0_router_weight_2_horiz_data_in_valid      = CG_0_1_router_weight_2_horiz_data_out_valid;      
-assign	CG_0_0_router_weight_2_horiz_data_in            = CG_0_1_router_weight_2_horiz_data_out;  
-		
-assign 	CG_0_0_router_psum_0_north_in_valid             = 'd0;
-assign 	CG_0_0_router_psum_0_north_in                   = 'd0;
-assign 	CG_0_0_router_psum_0_south_out_ready            = CG_1_0_router_psum_0_north_in_ready;
-assign 	CG_0_0_router_psum_1_north_in_valid             = 'd0;
-assign 	CG_0_0_router_psum_1_north_in                   = 'd0;
-assign 	CG_0_0_router_psum_1_south_out_ready            = CG_1_0_router_psum_1_north_in_ready;
-assign 	CG_0_0_router_psum_2_north_in_valid             = 'd0;
-assign 	CG_0_0_router_psum_2_north_in                   = 'd0;
-assign 	CG_0_0_router_psum_2_south_out_ready            = CG_1_0_router_psum_2_north_in_ready;
-
-assign	CG_0_0_cg_north_psum_0_out_ready                = 'd1;
-assign	CG_0_0_cg_south_psum_0_in_valid                 = CG_1_0_cg_north_psum_0_out_valid;
-assign	CG_0_0_cg_south_psum_0_in                       = CG_1_0_cg_north_psum_0_out;
-assign	CG_0_0_cg_north_psum_1_out_ready                = 'd1;
-assign	CG_0_0_cg_south_psum_1_in_valid                 = CG_1_0_cg_north_psum_1_out_valid;
-assign	CG_0_0_cg_south_psum_1_in                       = CG_1_0_cg_north_psum_1_out;
-assign	CG_0_0_cg_north_psum_2_out_ready                = 'd1;
-assign	CG_0_0_cg_south_psum_2_in_valid                 = CG_1_0_cg_north_psum_2_out_valid;
-assign	CG_0_0_cg_south_psum_2_in                       = CG_1_0_cg_north_psum_2_out;
-                   
-
-
-// ------------------- CG_0_1 ------------------- //
-assign	CG_0_1_router_iact_0_0_north_address_out_ready	= 'd0;
-assign	CG_0_1_router_iact_0_0_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_0_0_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_0_0_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_0_0_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_0_0_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_0_0_south_address_out_ready  = CG_1_1_router_iact_0_0_north_address_in_ready;   
-assign	CG_0_1_router_iact_0_0_south_address_in_valid   = CG_1_1_router_iact_0_0_north_address_out_valid;   
-assign	CG_0_1_router_iact_0_0_south_address_in         = CG_1_1_router_iact_0_0_north_address_out;         
-assign	CG_0_1_router_iact_0_0_south_data_out_ready     = CG_1_1_router_iact_0_0_north_data_in_ready;      
-assign	CG_0_1_router_iact_0_0_south_data_in_valid      = CG_1_1_router_iact_0_0_north_data_out_valid;      
-assign	CG_0_1_router_iact_0_0_south_data_in            = CG_1_1_router_iact_0_0_north_data_out;            
-assign	CG_0_1_router_iact_0_0_horiz_address_out_ready  = CG_0_0_router_iact_0_0_horiz_address_in_ready;   
-assign	CG_0_1_router_iact_0_0_horiz_address_in_valid   = CG_0_0_router_iact_0_0_horiz_address_out_valid;   
-assign	CG_0_1_router_iact_0_0_horiz_address_in         = CG_0_0_router_iact_0_0_horiz_address_out;         
-assign	CG_0_1_router_iact_0_0_horiz_data_out_ready     = CG_0_0_router_iact_0_0_horiz_data_in_ready;      
-assign	CG_0_1_router_iact_0_0_horiz_data_in_valid      = CG_0_0_router_iact_0_0_horiz_data_out_valid;      
-assign	CG_0_1_router_iact_0_0_horiz_data_in            = CG_0_0_router_iact_0_0_horiz_data_out;          
-assign	CG_0_1_router_iact_0_1_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_0_1_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_0_1_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_0_1_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_0_1_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_0_1_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_0_1_south_address_out_ready  = CG_1_1_router_iact_0_1_north_address_in_ready; 
-assign	CG_0_1_router_iact_0_1_south_address_in_valid   = CG_1_1_router_iact_0_1_north_address_out_valid; 
-assign	CG_0_1_router_iact_0_1_south_address_in         = CG_1_1_router_iact_0_1_north_address_out;       
-assign	CG_0_1_router_iact_0_1_south_data_out_ready     = CG_1_1_router_iact_0_1_north_data_in_ready;    
-assign	CG_0_1_router_iact_0_1_south_data_in_valid      = CG_1_1_router_iact_0_1_north_data_out_valid;    
-assign	CG_0_1_router_iact_0_1_south_data_in            = CG_1_1_router_iact_0_1_north_data_out;          
-assign	CG_0_1_router_iact_0_1_horiz_address_out_ready  = CG_0_0_router_iact_0_1_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_0_1_horiz_address_in_valid   = CG_0_0_router_iact_0_1_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_0_1_horiz_address_in         = CG_0_0_router_iact_0_1_horiz_address_out;       
-assign	CG_0_1_router_iact_0_1_horiz_data_out_ready     = CG_0_0_router_iact_0_1_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_0_1_horiz_data_in_valid      = CG_0_0_router_iact_0_1_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_0_1_horiz_data_in            = CG_0_0_router_iact_0_1_horiz_data_out;          
-assign	CG_0_1_router_iact_0_2_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_0_2_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_0_2_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_0_2_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_0_2_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_0_2_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_0_2_south_address_out_ready  = CG_1_1_router_iact_0_2_north_address_in_ready; 
-assign	CG_0_1_router_iact_0_2_south_address_in_valid   = CG_1_1_router_iact_0_2_north_address_out_valid; 
-assign	CG_0_1_router_iact_0_2_south_address_in         = CG_1_1_router_iact_0_2_north_address_out;       
-assign	CG_0_1_router_iact_0_2_south_data_out_ready     = CG_1_1_router_iact_0_2_north_data_in_ready;    
-assign	CG_0_1_router_iact_0_2_south_data_in_valid      = CG_1_1_router_iact_0_2_north_data_out_valid;    
-assign	CG_0_1_router_iact_0_2_south_data_in            = CG_1_1_router_iact_0_2_north_data_out;          
-assign	CG_0_1_router_iact_0_2_horiz_address_out_ready  = CG_0_0_router_iact_0_2_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_0_2_horiz_address_in_valid   = CG_0_0_router_iact_0_2_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_0_2_horiz_address_in         = CG_0_0_router_iact_0_2_horiz_address_out;       
-assign	CG_0_1_router_iact_0_2_horiz_data_out_ready     = CG_0_0_router_iact_0_2_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_0_2_horiz_data_in_valid      = CG_0_0_router_iact_0_2_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_0_2_horiz_data_in            = CG_0_0_router_iact_0_2_horiz_data_out;          
-assign	CG_0_1_router_iact_1_0_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_1_0_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_1_0_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_1_0_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_1_0_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_1_0_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_1_0_south_address_out_ready  = CG_1_1_router_iact_1_0_north_address_in_ready; 
-assign	CG_0_1_router_iact_1_0_south_address_in_valid   = CG_1_1_router_iact_1_0_north_address_out_valid; 
-assign	CG_0_1_router_iact_1_0_south_address_in         = CG_1_1_router_iact_1_0_north_address_out;       
-assign	CG_0_1_router_iact_1_0_south_data_out_ready     = CG_1_1_router_iact_1_0_north_data_in_ready;    
-assign	CG_0_1_router_iact_1_0_south_data_in_valid      = CG_1_1_router_iact_1_0_north_data_out_valid;    
-assign	CG_0_1_router_iact_1_0_south_data_in            = CG_1_1_router_iact_1_0_north_data_out;          
-assign	CG_0_1_router_iact_1_0_horiz_address_out_ready  = CG_0_0_router_iact_1_0_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_1_0_horiz_address_in_valid   = CG_0_0_router_iact_1_0_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_1_0_horiz_address_in         = CG_0_0_router_iact_1_0_horiz_address_out;       
-assign	CG_0_1_router_iact_1_0_horiz_data_out_ready     = CG_0_0_router_iact_1_0_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_1_0_horiz_data_in_valid      = CG_0_0_router_iact_1_0_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_1_0_horiz_data_in            = CG_0_0_router_iact_1_0_horiz_data_out;            
-assign	CG_0_1_router_iact_1_1_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_1_1_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_1_1_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_1_1_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_1_1_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_1_1_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_1_1_south_address_out_ready  = CG_1_1_router_iact_1_1_north_address_in_ready; 
-assign	CG_0_1_router_iact_1_1_south_address_in_valid   = CG_1_1_router_iact_1_1_north_address_out_valid; 
-assign	CG_0_1_router_iact_1_1_south_address_in         = CG_1_1_router_iact_1_1_north_address_out;       
-assign	CG_0_1_router_iact_1_1_south_data_out_ready     = CG_1_1_router_iact_1_1_north_data_in_ready;    
-assign	CG_0_1_router_iact_1_1_south_data_in_valid      = CG_1_1_router_iact_1_1_north_data_out_valid;    
-assign	CG_0_1_router_iact_1_1_south_data_in            = CG_1_1_router_iact_1_1_north_data_out;          
-assign	CG_0_1_router_iact_1_1_horiz_address_out_ready  = CG_0_0_router_iact_1_1_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_1_1_horiz_address_in_valid   = CG_0_0_router_iact_1_1_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_1_1_horiz_address_in         = CG_0_0_router_iact_1_1_horiz_address_out;       
-assign	CG_0_1_router_iact_1_1_horiz_data_out_ready     = CG_0_0_router_iact_1_1_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_1_1_horiz_data_in_valid      = CG_0_0_router_iact_1_1_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_1_1_horiz_data_in            = CG_0_0_router_iact_1_1_horiz_data_out;          		
-assign	CG_0_1_router_iact_1_2_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_1_2_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_1_2_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_1_2_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_1_2_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_1_2_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_1_2_south_address_out_ready  = CG_1_1_router_iact_1_2_north_address_in_ready; 
-assign	CG_0_1_router_iact_1_2_south_address_in_valid   = CG_1_1_router_iact_1_2_north_address_out_valid; 
-assign	CG_0_1_router_iact_1_2_south_address_in         = CG_1_1_router_iact_1_2_north_address_out;       
-assign	CG_0_1_router_iact_1_2_south_data_out_ready     = CG_1_1_router_iact_1_2_north_data_in_ready;    
-assign	CG_0_1_router_iact_1_2_south_data_in_valid      = CG_1_1_router_iact_1_2_north_data_out_valid;    
-assign	CG_0_1_router_iact_1_2_south_data_in            = CG_1_1_router_iact_1_2_north_data_out;          
-assign	CG_0_1_router_iact_1_2_horiz_address_out_ready  = CG_0_0_router_iact_1_2_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_1_2_horiz_address_in_valid   = CG_0_0_router_iact_1_2_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_1_2_horiz_address_in         = CG_0_0_router_iact_1_2_horiz_address_out;       
-assign	CG_0_1_router_iact_1_2_horiz_data_out_ready     = CG_0_0_router_iact_1_2_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_1_2_horiz_data_in_valid      = CG_0_0_router_iact_1_2_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_1_2_horiz_data_in            = CG_0_0_router_iact_1_2_horiz_data_out;           
-assign	CG_0_1_router_iact_2_0_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_2_0_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_2_0_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_2_0_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_2_0_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_2_0_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_2_0_south_address_out_ready  = CG_1_1_router_iact_2_0_north_address_in_ready; 
-assign	CG_0_1_router_iact_2_0_south_address_in_valid   = CG_1_1_router_iact_2_0_north_address_out_valid; 
-assign	CG_0_1_router_iact_2_0_south_address_in         = CG_1_1_router_iact_2_0_north_address_out;       
-assign	CG_0_1_router_iact_2_0_south_data_out_ready     = CG_1_1_router_iact_2_0_north_data_in_ready;    
-assign	CG_0_1_router_iact_2_0_south_data_in_valid      = CG_1_1_router_iact_2_0_north_data_out_valid;    
-assign	CG_0_1_router_iact_2_0_south_data_in            = CG_1_1_router_iact_2_0_north_data_out;          
-assign	CG_0_1_router_iact_2_0_horiz_address_out_ready  = CG_0_0_router_iact_2_0_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_2_0_horiz_address_in_valid   = CG_0_0_router_iact_2_0_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_2_0_horiz_address_in         = CG_0_0_router_iact_2_0_horiz_address_out;       
-assign	CG_0_1_router_iact_2_0_horiz_data_out_ready     = CG_0_0_router_iact_2_0_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_2_0_horiz_data_in_valid      = CG_0_0_router_iact_2_0_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_2_0_horiz_data_in            = CG_0_0_router_iact_2_0_horiz_data_out;           					
-assign	CG_0_1_router_iact_2_1_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_2_1_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_2_1_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_2_1_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_2_1_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_2_1_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_2_1_south_address_out_ready  = CG_1_1_router_iact_2_1_north_address_in_ready; 
-assign	CG_0_1_router_iact_2_1_south_address_in_valid   = CG_1_1_router_iact_2_1_north_address_out_valid; 
-assign	CG_0_1_router_iact_2_1_south_address_in         = CG_1_1_router_iact_2_1_north_address_out;       
-assign	CG_0_1_router_iact_2_1_south_data_out_ready     = CG_1_1_router_iact_2_1_north_data_in_ready;    
-assign	CG_0_1_router_iact_2_1_south_data_in_valid      = CG_1_1_router_iact_2_1_north_data_out_valid;    
-assign	CG_0_1_router_iact_2_1_south_data_in            = CG_1_1_router_iact_2_1_north_data_out;          
-assign	CG_0_1_router_iact_2_1_horiz_address_out_ready  = CG_0_0_router_iact_2_1_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_2_1_horiz_address_in_valid   = CG_0_0_router_iact_2_1_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_2_1_horiz_address_in         = CG_0_0_router_iact_2_1_horiz_address_out;       
-assign	CG_0_1_router_iact_2_1_horiz_data_out_ready     = CG_0_0_router_iact_2_1_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_2_1_horiz_data_in_valid      = CG_0_0_router_iact_2_1_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_2_1_horiz_data_in            = CG_0_0_router_iact_2_1_horiz_data_out;                						
-assign	CG_0_1_router_iact_2_2_north_address_out_ready  = 'd1;
-assign	CG_0_1_router_iact_2_2_north_address_in_valid   = 'd0;
-assign	CG_0_1_router_iact_2_2_north_address_in         = 'd0;
-assign	CG_0_1_router_iact_2_2_north_data_out_ready     = 'd1;
-assign	CG_0_1_router_iact_2_2_north_data_in_valid      = 'd0;
-assign	CG_0_1_router_iact_2_2_north_data_in            = 'd0;
-assign	CG_0_1_router_iact_2_2_south_address_out_ready  = CG_1_1_router_iact_2_2_north_address_in_ready; 
-assign	CG_0_1_router_iact_2_2_south_address_in_valid   = CG_1_1_router_iact_2_2_north_address_out_valid; 
-assign	CG_0_1_router_iact_2_2_south_address_in         = CG_1_1_router_iact_2_2_north_address_out;       
-assign	CG_0_1_router_iact_2_2_south_data_out_ready     = CG_1_1_router_iact_2_2_north_data_in_ready;    
-assign	CG_0_1_router_iact_2_2_south_data_in_valid      = CG_1_1_router_iact_2_2_north_data_out_valid;    
-assign	CG_0_1_router_iact_2_2_south_data_in            = CG_1_1_router_iact_2_2_north_data_out;          
-assign	CG_0_1_router_iact_2_2_horiz_address_out_ready  = CG_0_0_router_iact_2_2_horiz_address_in_ready; 
-assign	CG_0_1_router_iact_2_2_horiz_address_in_valid   = CG_0_0_router_iact_2_2_horiz_address_out_valid; 
-assign	CG_0_1_router_iact_2_2_horiz_address_in         = CG_0_0_router_iact_2_2_horiz_address_out;       
-assign	CG_0_1_router_iact_2_2_horiz_data_out_ready     = CG_0_0_router_iact_2_2_horiz_data_in_ready;    
-assign	CG_0_1_router_iact_2_2_horiz_data_in_valid      = CG_0_0_router_iact_2_2_horiz_data_out_valid;    
-assign	CG_0_1_router_iact_2_2_horiz_data_in            = CG_0_0_router_iact_2_2_horiz_data_out;           
-			
-assign	CG_0_1_router_weight_0_horiz_address_out_ready 	= CG_0_1_router_weight_0_horiz_address_in_ready;   
-assign	CG_0_1_router_weight_0_horiz_address_in_valid   = CG_0_0_router_weight_0_horiz_address_out_valid;   
-assign	CG_0_1_router_weight_0_horiz_address_in         = CG_0_0_router_weight_0_horiz_address_out;         
-assign	CG_0_1_router_weight_0_horiz_data_out_ready     = CG_0_0_router_weight_0_horiz_data_in_ready;      
-assign	CG_0_1_router_weight_0_horiz_data_in_valid      = CG_0_0_router_weight_0_horiz_data_out_valid;      
-assign	CG_0_1_router_weight_0_horiz_data_in            = CG_0_0_router_weight_0_horiz_data_out;            
-assign	CG_0_1_router_weight_1_horiz_address_out_ready  = CG_0_0_router_weight_1_horiz_address_in_ready;   
-assign	CG_0_1_router_weight_1_horiz_address_in_valid   = CG_0_0_router_weight_1_horiz_address_out_valid;   
-assign	CG_0_1_router_weight_1_horiz_address_in         = CG_0_0_router_weight_1_horiz_address_out;         
-assign	CG_0_1_router_weight_1_horiz_data_out_ready     = CG_0_0_router_weight_1_horiz_data_in_ready;      
-assign	CG_0_1_router_weight_1_horiz_data_in_valid      = CG_0_0_router_weight_1_horiz_data_out_valid;      
-assign	CG_0_1_router_weight_1_horiz_data_in            = CG_0_0_router_weight_1_horiz_data_out;          
-assign	CG_0_1_router_weight_2_horiz_address_out_ready  = CG_0_0_router_weight_2_horiz_address_in_ready;  
-assign	CG_0_1_router_weight_2_horiz_address_in_valid   = CG_0_0_router_weight_2_horiz_address_out_valid;   
-assign	CG_0_1_router_weight_2_horiz_address_in         = CG_0_0_router_weight_2_horiz_address_out;          
-assign	CG_0_1_router_weight_2_horiz_data_out_ready     = CG_0_0_router_weight_2_horiz_data_in_ready;      
-assign	CG_0_1_router_weight_2_horiz_data_in_valid      = CG_0_0_router_weight_2_horiz_data_out_valid;      
-assign	CG_0_1_router_weight_2_horiz_data_in            = CG_0_0_router_weight_2_horiz_data_out;  
-				
-assign 	CG_0_1_router_psum_0_north_in_valid             = CG_1_1_router_psum_0_south_out_valid;
-assign 	CG_0_1_router_psum_0_north_in                   = CG_1_1_router_psum_0_south_out;
-assign 	CG_0_1_router_psum_0_south_out_ready            = 'd1;
-assign 	CG_0_1_router_psum_1_north_in_valid             = CG_1_1_router_psum_1_south_out_valid;
-assign 	CG_0_1_router_psum_1_north_in                   = CG_1_1_router_psum_1_south_out;
-assign 	CG_0_1_router_psum_1_south_out_ready            = 'd1;
-assign 	CG_0_1_router_psum_2_north_in_valid             = CG_1_1_router_psum_2_south_out_valid;
-assign 	CG_0_1_router_psum_2_north_in                   = CG_1_1_router_psum_2_south_out;
-assign 	CG_0_1_router_psum_2_south_out_ready            = 'd1;
-				
-assign	CG_0_1_cg_north_psum_0_out_ready                = 'd1;
-assign	CG_0_1_cg_south_psum_0_in_valid                 = CG_1_1_cg_north_psum_0_out_valid;
-assign	CG_0_1_cg_south_psum_0_in                       = CG_1_1_cg_north_psum_0_out;
-assign	CG_0_1_cg_north_psum_1_out_ready                = 'd1;
-assign	CG_0_1_cg_south_psum_1_in_valid                 = CG_1_1_cg_north_psum_1_out_valid;
-assign	CG_0_1_cg_south_psum_1_in                       = CG_1_1_cg_north_psum_1_out;
-assign	CG_0_1_cg_north_psum_2_out_ready                = 'd1;
-assign	CG_0_1_cg_south_psum_2_in_valid                 = CG_1_1_cg_north_psum_2_out_valid;
-assign	CG_0_1_cg_south_psum_2_in                       = CG_1_1_cg_north_psum_2_out;
-
-
-
-// ------------------- CG_1_0 ------------------- //
-assign	CG_1_0_router_iact_0_0_north_address_out_ready	= CG_0_0_router_iact_0_0_south_address_in_ready;	
-assign	CG_1_0_router_iact_0_0_north_address_in_valid   = CG_0_0_router_iact_0_0_south_address_out_valid;   
-assign	CG_1_0_router_iact_0_0_north_address_in         = CG_0_0_router_iact_0_0_south_address_out;         
-assign	CG_1_0_router_iact_0_0_north_data_out_ready      = CG_0_0_router_iact_0_0_south_data_in_ready;      
-assign	CG_1_0_router_iact_0_0_north_data_in_valid      = CG_0_0_router_iact_0_0_south_data_out_valid;      
-assign	CG_1_0_router_iact_0_0_north_data_in            = CG_0_0_router_iact_0_0_south_data_out;            
-assign	CG_1_0_router_iact_0_0_south_address_out_ready   = 'd1;   
-assign	CG_1_0_router_iact_0_0_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_0_0_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_0_0_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_0_0_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_0_0_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_0_0_horiz_address_out_ready   = CG_1_1_router_iact_0_0_horiz_address_in_ready;   
-assign	CG_1_0_router_iact_0_0_horiz_address_in_valid   = CG_1_1_router_iact_0_0_horiz_address_out_valid;   
-assign	CG_1_0_router_iact_0_0_horiz_address_in         = CG_1_1_router_iact_0_0_horiz_address_out;         
-assign	CG_1_0_router_iact_0_0_horiz_data_out_ready      = CG_1_1_router_iact_0_0_horiz_data_in_ready;      
-assign	CG_1_0_router_iact_0_0_horiz_data_in_valid      = CG_1_1_router_iact_0_0_horiz_data_out_valid;      
-assign	CG_1_0_router_iact_0_0_horiz_data_in            = CG_1_1_router_iact_0_0_horiz_data_out;          
-assign	CG_1_0_router_iact_0_1_north_address_out_ready   = CG_0_0_router_iact_0_1_south_address_in_ready;	
-assign	CG_1_0_router_iact_0_1_north_address_in_valid   = CG_0_0_router_iact_0_1_south_address_out_valid;   
-assign	CG_1_0_router_iact_0_1_north_address_in         = CG_0_0_router_iact_0_1_south_address_out;         
-assign	CG_1_0_router_iact_0_1_north_data_out_ready      = CG_0_0_router_iact_0_1_south_data_in_ready;      
-assign	CG_1_0_router_iact_0_1_north_data_in_valid      = CG_0_0_router_iact_0_1_south_data_out_valid;      
-assign	CG_1_0_router_iact_0_1_north_data_in            = CG_0_0_router_iact_0_1_south_data_out;            
-assign	CG_1_0_router_iact_0_1_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_0_1_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_0_1_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_0_1_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_0_1_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_0_1_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_0_1_horiz_address_out_ready   = CG_1_1_router_iact_0_1_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_0_1_horiz_address_in_valid   = CG_1_1_router_iact_0_1_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_0_1_horiz_address_in         = CG_1_1_router_iact_0_1_horiz_address_out;       
-assign	CG_1_0_router_iact_0_1_horiz_data_out_ready      = CG_1_1_router_iact_0_1_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_0_1_horiz_data_in_valid      = CG_1_1_router_iact_0_1_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_0_1_horiz_data_in            = CG_1_1_router_iact_0_1_horiz_data_out;          
-assign	CG_1_0_router_iact_0_2_north_address_out_ready   = CG_0_0_router_iact_0_2_south_address_in_ready;   
-assign	CG_1_0_router_iact_0_2_north_address_in_valid   = CG_0_0_router_iact_0_2_south_address_out_valid;   
-assign	CG_1_0_router_iact_0_2_north_address_in         = CG_0_0_router_iact_0_2_south_address_out;         
-assign	CG_1_0_router_iact_0_2_north_data_out_ready      = CG_0_0_router_iact_0_2_south_data_in_ready;      
-assign	CG_1_0_router_iact_0_2_north_data_in_valid      = CG_0_0_router_iact_0_2_south_data_out_valid;      
-assign	CG_1_0_router_iact_0_2_north_data_in            = CG_0_0_router_iact_0_2_south_data_out;            
-assign	CG_1_0_router_iact_0_2_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_0_2_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_0_2_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_0_2_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_0_2_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_0_2_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_0_2_horiz_address_out_ready   = CG_1_1_router_iact_0_2_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_0_2_horiz_address_in_valid   = CG_1_1_router_iact_0_2_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_0_2_horiz_address_in         = CG_1_1_router_iact_0_2_horiz_address_out;       
-assign	CG_1_0_router_iact_0_2_horiz_data_out_ready      = CG_1_1_router_iact_0_2_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_0_2_horiz_data_in_valid      = CG_1_1_router_iact_0_2_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_0_2_horiz_data_in            = CG_1_1_router_iact_0_2_horiz_data_out;          
-assign	CG_1_0_router_iact_1_0_north_address_out_ready   = CG_0_0_router_iact_1_0_south_address_in_ready;   
-assign	CG_1_0_router_iact_1_0_north_address_in_valid   = CG_0_0_router_iact_1_0_south_address_out_valid;   
-assign	CG_1_0_router_iact_1_0_north_address_in         = CG_0_0_router_iact_1_0_south_address_out;         
-assign	CG_1_0_router_iact_1_0_north_data_out_ready      = CG_0_0_router_iact_1_0_south_data_in_ready;      
-assign	CG_1_0_router_iact_1_0_north_data_in_valid      = CG_0_0_router_iact_1_0_south_data_out_valid;     
-assign	CG_1_0_router_iact_1_0_north_data_in            = CG_0_0_router_iact_1_0_south_data_out;      
-assign	CG_1_0_router_iact_1_0_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_1_0_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_1_0_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_1_0_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_1_0_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_1_0_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_1_0_horiz_address_out_ready   = CG_1_1_router_iact_1_0_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_1_0_horiz_address_in_valid   = CG_1_1_router_iact_1_0_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_1_0_horiz_address_in         = CG_1_1_router_iact_1_0_horiz_address_out;       
-assign	CG_1_0_router_iact_1_0_horiz_data_out_ready      = CG_1_1_router_iact_1_0_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_1_0_horiz_data_in_valid      = CG_1_1_router_iact_1_0_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_1_0_horiz_data_in            = CG_1_1_router_iact_1_0_horiz_data_out;            
-assign	CG_1_0_router_iact_1_1_north_address_out_ready   = CG_0_0_router_iact_1_1_south_address_in_ready;   
-assign	CG_1_0_router_iact_1_1_north_address_in_valid   = CG_0_0_router_iact_1_1_south_address_out_valid;   
-assign	CG_1_0_router_iact_1_1_north_address_in         = CG_0_0_router_iact_1_1_south_address_out;         
-assign	CG_1_0_router_iact_1_1_north_data_out_ready      = CG_0_0_router_iact_1_1_south_data_in_ready;      
-assign	CG_1_0_router_iact_1_1_north_data_in_valid      = CG_0_0_router_iact_1_1_south_data_out_valid;      
-assign	CG_1_0_router_iact_1_1_north_data_in            = CG_0_0_router_iact_1_1_south_data_out;            
-assign	CG_1_0_router_iact_1_1_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_1_1_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_1_1_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_1_1_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_1_1_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_1_1_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_1_1_horiz_address_out_ready   = CG_1_1_router_iact_1_1_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_1_1_horiz_address_in_valid   = CG_1_1_router_iact_1_1_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_1_1_horiz_address_in         = CG_1_1_router_iact_1_1_horiz_address_out;       
-assign	CG_1_0_router_iact_1_1_horiz_data_out_ready      = CG_1_1_router_iact_1_1_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_1_1_horiz_data_in_valid      = CG_1_1_router_iact_1_1_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_1_1_horiz_data_in            = CG_1_1_router_iact_1_1_horiz_data_out;          		
-assign	CG_1_0_router_iact_1_2_north_address_out_ready   = CG_0_0_router_iact_1_2_south_address_in_ready;   
-assign	CG_1_0_router_iact_1_2_north_address_in_valid   = CG_0_0_router_iact_1_2_south_address_out_valid;   
-assign	CG_1_0_router_iact_1_2_north_address_in         = CG_0_0_router_iact_1_2_south_address_out;         
-assign	CG_1_0_router_iact_1_2_north_data_out_ready      = CG_0_0_router_iact_1_2_south_data_in_ready;      
-assign	CG_1_0_router_iact_1_2_north_data_in_valid      = CG_0_0_router_iact_1_2_south_data_out_valid;      
-assign	CG_1_0_router_iact_1_2_north_data_in            = CG_0_0_router_iact_1_2_south_data_out;            
-assign	CG_1_0_router_iact_1_2_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_1_2_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_1_2_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_1_2_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_1_2_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_1_2_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_1_2_horiz_address_out_ready   = CG_1_1_router_iact_1_2_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_1_2_horiz_address_in_valid   = CG_1_1_router_iact_1_2_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_1_2_horiz_address_in         = CG_1_1_router_iact_1_2_horiz_address_out;       
-assign	CG_1_0_router_iact_1_2_horiz_data_out_ready      = CG_1_1_router_iact_1_2_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_1_2_horiz_data_in_valid      = CG_1_1_router_iact_1_2_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_1_2_horiz_data_in            = CG_1_1_router_iact_1_2_horiz_data_out;           
-assign	CG_1_0_router_iact_2_0_north_address_out_ready   = CG_0_0_router_iact_2_0_south_address_in_ready;   
-assign	CG_1_0_router_iact_2_0_north_address_in_valid   = CG_0_0_router_iact_2_0_south_address_out_valid;   
-assign	CG_1_0_router_iact_2_0_north_address_in         = CG_0_0_router_iact_2_0_south_address_out;         
-assign	CG_1_0_router_iact_2_0_north_data_out_ready      = CG_0_0_router_iact_2_0_south_data_in_ready;      
-assign	CG_1_0_router_iact_2_0_north_data_in_valid      = CG_0_0_router_iact_2_0_south_data_out_valid;      
-assign	CG_1_0_router_iact_2_0_north_data_in            = CG_0_0_router_iact_2_0_south_data_out;            
-assign	CG_1_0_router_iact_2_0_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_2_0_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_2_0_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_2_0_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_2_0_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_2_0_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_2_0_horiz_address_out_ready   = CG_1_1_router_iact_2_0_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_2_0_horiz_address_in_valid   = CG_1_1_router_iact_2_0_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_2_0_horiz_address_in         = CG_1_1_router_iact_2_0_horiz_address_out;       
-assign	CG_1_0_router_iact_2_0_horiz_data_out_ready      = CG_1_1_router_iact_2_0_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_2_0_horiz_data_in_valid      = CG_1_1_router_iact_2_0_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_2_0_horiz_data_in            = CG_1_1_router_iact_2_0_horiz_data_out;           					
-assign	CG_1_0_router_iact_2_1_north_address_out_ready   = CG_0_0_router_iact_2_1_south_address_in_ready;   
-assign	CG_1_0_router_iact_2_1_north_address_in_valid   = CG_0_0_router_iact_2_1_south_address_out_valid;   
-assign	CG_1_0_router_iact_2_1_north_address_in         = CG_0_0_router_iact_2_1_south_address_out;         
-assign	CG_1_0_router_iact_2_1_north_data_out_ready      = CG_0_0_router_iact_2_1_south_data_in_ready;      
-assign	CG_1_0_router_iact_2_1_north_data_in_valid      = CG_0_0_router_iact_2_1_south_data_out_valid;      
-assign	CG_1_0_router_iact_2_1_north_data_in            = CG_0_0_router_iact_2_1_south_data_out;            
-assign	CG_1_0_router_iact_2_1_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_2_1_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_2_1_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_2_1_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_2_1_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_2_1_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_2_1_horiz_address_out_ready   = CG_1_1_router_iact_2_1_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_2_1_horiz_address_in_valid   = CG_1_1_router_iact_2_1_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_2_1_horiz_address_in         = CG_1_1_router_iact_2_1_horiz_address_out;       
-assign	CG_1_0_router_iact_2_1_horiz_data_out_ready      = CG_1_1_router_iact_2_1_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_2_1_horiz_data_in_valid      = CG_1_1_router_iact_2_1_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_2_1_horiz_data_in            = CG_1_1_router_iact_2_1_horiz_data_out;                						
-assign	CG_1_0_router_iact_2_2_north_address_out_ready   = CG_0_0_router_iact_2_2_south_address_in_ready;   
-assign	CG_1_0_router_iact_2_2_north_address_in_valid   = CG_0_0_router_iact_2_2_south_address_out_valid;   
-assign	CG_1_0_router_iact_2_2_north_address_in         = CG_0_0_router_iact_2_2_south_address_out;         
-assign	CG_1_0_router_iact_2_2_north_data_out_ready      = CG_0_0_router_iact_2_2_south_data_in_ready;      
-assign	CG_1_0_router_iact_2_2_north_data_in_valid      = CG_0_0_router_iact_2_2_south_data_out_valid;      
-assign	CG_1_0_router_iact_2_2_north_data_in            = CG_0_0_router_iact_2_2_south_data_out;            
-assign	CG_1_0_router_iact_2_2_south_address_out_ready   = 'd1;
-assign	CG_1_0_router_iact_2_2_south_address_in_valid   = 'd0;
-assign	CG_1_0_router_iact_2_2_south_address_in         = 'd0;
-assign	CG_1_0_router_iact_2_2_south_data_out_ready      = 'd1;
-assign	CG_1_0_router_iact_2_2_south_data_in_valid      = 'd0;
-assign	CG_1_0_router_iact_2_2_south_data_in            = 'd0;
-assign	CG_1_0_router_iact_2_2_horiz_address_out_ready   = CG_1_1_router_iact_2_2_horiz_address_in_ready; 
-assign	CG_1_0_router_iact_2_2_horiz_address_in_valid   = CG_1_1_router_iact_2_2_horiz_address_out_valid; 
-assign	CG_1_0_router_iact_2_2_horiz_address_in         = CG_1_1_router_iact_2_2_horiz_address_out;       
-assign	CG_1_0_router_iact_2_2_horiz_data_out_ready      = CG_1_1_router_iact_2_2_horiz_data_in_ready;    
-assign	CG_1_0_router_iact_2_2_horiz_data_in_valid      = CG_1_1_router_iact_2_2_horiz_data_out_valid;    
-assign	CG_1_0_router_iact_2_2_horiz_data_in            = CG_1_1_router_iact_2_2_horiz_data_out;           
-		  
-assign	CG_1_0_router_weight_0_horiz_address_out_ready   = CG_1_1_router_weight_0_horiz_address_in_ready;   
-assign	CG_1_0_router_weight_0_horiz_address_in_valid   = CG_1_1_router_weight_0_horiz_address_out_valid;   
-assign	CG_1_0_router_weight_0_horiz_address_in         = CG_1_1_router_weight_0_horiz_address_out;         
-assign	CG_1_0_router_weight_0_horiz_data_out_ready      = CG_1_1_router_weight_0_horiz_data_in_ready;      
-assign	CG_1_0_router_weight_0_horiz_data_in_valid      = CG_1_1_router_weight_0_horiz_data_out_valid;      
-assign	CG_1_0_router_weight_0_horiz_data_in            = CG_1_1_router_weight_0_horiz_data_out;            
-assign	CG_1_0_router_weight_1_horiz_address_out_ready   = CG_1_1_router_weight_1_horiz_address_in_ready;   
-assign	CG_1_0_router_weight_1_horiz_address_in_valid   = CG_1_1_router_weight_1_horiz_address_out_valid;   
-assign	CG_1_0_router_weight_1_horiz_address_in         = CG_1_1_router_weight_1_horiz_address_out;         
-assign	CG_1_0_router_weight_1_horiz_data_out_ready      = CG_1_1_router_weight_1_horiz_data_in_ready;      
-assign	CG_1_0_router_weight_1_horiz_data_in_valid      = CG_1_1_router_weight_1_horiz_data_out_valid;      
-assign	CG_1_0_router_weight_1_horiz_data_in            = CG_1_1_router_weight_1_horiz_data_out;          
-assign	CG_1_0_router_weight_2_horiz_address_out_ready   = CG_1_1_router_weight_2_horiz_address_in_ready;  
-assign	CG_1_0_router_weight_2_horiz_address_in_valid   = CG_1_1_router_weight_2_horiz_address_out_valid;   
-assign	CG_1_0_router_weight_2_horiz_address_in         = CG_1_1_router_weight_2_horiz_address_out;          
-assign	CG_1_0_router_weight_2_horiz_data_out_ready      = CG_1_1_router_weight_2_horiz_data_in_ready;      
-assign	CG_1_0_router_weight_2_horiz_data_in_valid      = CG_1_1_router_weight_2_horiz_data_out_valid;      
-assign	CG_1_0_router_weight_2_horiz_data_in            = CG_1_1_router_weight_2_horiz_data_out;  
-				
-assign 	CG_1_0_router_psum_0_north_in_valid             = CG_0_0_router_psum_0_south_out_valid;
-assign 	CG_1_0_router_psum_0_north_in                   = CG_0_0_router_psum_0_south_out;
-assign 	CG_1_0_router_psum_0_south_out_ready            = 'd1;
-assign 	CG_1_0_router_psum_1_north_in_valid             = CG_0_0_router_psum_1_south_out_valid;
-assign 	CG_1_0_router_psum_1_north_in                   = CG_0_0_router_psum_1_south_out;
-assign 	CG_1_0_router_psum_1_south_out_ready            = 'd1;
-assign 	CG_1_0_router_psum_2_north_in_valid             = CG_0_0_router_psum_2_south_out_valid;
-assign 	CG_1_0_router_psum_2_north_in                   = CG_0_0_router_psum_2_south_out;
-assign 	CG_1_0_router_psum_2_south_out_ready            = 'd1;
-				
-assign	CG_1_0_cg_north_psum_0_out_ready                = CG_0_0_cg_south_psum_0_in_ready;
-assign	CG_1_0_cg_south_psum_0_in_valid                 = 'd1;
-assign	CG_1_0_cg_south_psum_0_in                       = 'd0;
-assign	CG_1_0_cg_north_psum_1_out_ready                = CG_0_0_cg_south_psum_1_in_ready;
-assign	CG_1_0_cg_south_psum_1_in_valid                 = 'd1;
-assign	CG_1_0_cg_south_psum_1_in                       = 'd0;
-assign	CG_1_0_cg_north_psum_2_out_ready                = CG_0_0_cg_south_psum_2_in_ready;
-assign	CG_1_0_cg_south_psum_2_in_valid                 = 'd1;
-assign	CG_1_0_cg_south_psum_2_in                       = 'd0;
-                   
-
-
-// ------------------- CG_1_1 ------------------- //
-assign	CG_1_1_router_iact_0_0_north_address_out_ready	= CG_0_1_router_iact_0_0_south_address_in_ready;	
-assign	CG_1_1_router_iact_0_0_north_address_in_valid   = CG_0_1_router_iact_0_0_south_address_out_valid;   
-assign	CG_1_1_router_iact_0_0_north_address_in         = CG_0_1_router_iact_0_0_south_address_out;         
-assign	CG_1_1_router_iact_0_0_north_data_out_ready      = CG_0_1_router_iact_0_0_south_data_in_ready;      
-assign	CG_1_1_router_iact_0_0_north_data_in_valid      = CG_0_1_router_iact_0_0_south_data_out_valid;      
-assign	CG_1_1_router_iact_0_0_north_data_in            = CG_0_1_router_iact_0_0_south_data_out;            
-assign	CG_1_1_router_iact_0_0_south_address_out_ready   = 'd1;   
-assign	CG_1_1_router_iact_0_0_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_0_0_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_0_0_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_0_0_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_0_0_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_0_0_horiz_address_out_ready   = CG_1_0_router_iact_0_0_horiz_address_in_ready;   
-assign	CG_1_1_router_iact_0_0_horiz_address_in_valid   = CG_1_0_router_iact_0_0_horiz_address_out_valid;   
-assign	CG_1_1_router_iact_0_0_horiz_address_in         = CG_1_0_router_iact_0_0_horiz_address_out;         
-assign	CG_1_1_router_iact_0_0_horiz_data_out_ready      = CG_1_0_router_iact_0_0_horiz_data_in_ready;      
-assign	CG_1_1_router_iact_0_0_horiz_data_in_valid      = CG_1_0_router_iact_0_0_horiz_data_out_valid;      
-assign	CG_1_1_router_iact_0_0_horiz_data_in            = CG_1_0_router_iact_0_0_horiz_data_out;          
-assign	CG_1_1_router_iact_0_1_north_address_out_ready   = CG_0_1_router_iact_0_1_south_address_in_ready;	
-assign	CG_1_1_router_iact_0_1_north_address_in_valid   = CG_0_1_router_iact_0_1_south_address_out_valid;   
-assign	CG_1_1_router_iact_0_1_north_address_in         = CG_0_1_router_iact_0_1_south_address_out;         
-assign	CG_1_1_router_iact_0_1_north_data_out_ready      = CG_0_1_router_iact_0_1_south_data_in_ready;      
-assign	CG_1_1_router_iact_0_1_north_data_in_valid      = CG_0_1_router_iact_0_1_south_data_out_valid;      
-assign	CG_1_1_router_iact_0_1_north_data_in            = CG_0_1_router_iact_0_1_south_data_out;            
-assign	CG_1_1_router_iact_0_1_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_0_1_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_0_1_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_0_1_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_0_1_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_0_1_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_0_1_horiz_address_out_ready   = CG_1_0_router_iact_0_1_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_0_1_horiz_address_in_valid   = CG_1_0_router_iact_0_1_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_0_1_horiz_address_in         = CG_1_0_router_iact_0_1_horiz_address_out;       
-assign	CG_1_1_router_iact_0_1_horiz_data_out_ready      = CG_1_0_router_iact_0_1_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_0_1_horiz_data_in_valid      = CG_1_0_router_iact_0_1_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_0_1_horiz_data_in            = CG_1_0_router_iact_0_1_horiz_data_out;          
-assign	CG_1_1_router_iact_0_2_north_address_out_ready   = CG_0_1_router_iact_0_2_south_address_in_ready;   
-assign	CG_1_1_router_iact_0_2_north_address_in_valid   = CG_0_1_router_iact_0_2_south_address_out_valid;   
-assign	CG_1_1_router_iact_0_2_north_address_in         = CG_0_1_router_iact_0_2_south_address_out;         
-assign	CG_1_1_router_iact_0_2_north_data_out_ready      = CG_0_1_router_iact_0_2_south_data_in_ready;      
-assign	CG_1_1_router_iact_0_2_north_data_in_valid      = CG_0_1_router_iact_0_2_south_data_out_valid;      
-assign	CG_1_1_router_iact_0_2_north_data_in            = CG_0_1_router_iact_0_2_south_data_out;            
-assign	CG_1_1_router_iact_0_2_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_0_2_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_0_2_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_0_2_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_0_2_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_0_2_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_0_2_horiz_address_out_ready   = CG_1_0_router_iact_0_2_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_0_2_horiz_address_in_valid   = CG_1_0_router_iact_0_2_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_0_2_horiz_address_in         = CG_1_0_router_iact_0_2_horiz_address_out;       
-assign	CG_1_1_router_iact_0_2_horiz_data_out_ready      = CG_1_0_router_iact_0_2_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_0_2_horiz_data_in_valid      = CG_1_0_router_iact_0_2_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_0_2_horiz_data_in            = CG_1_0_router_iact_0_2_horiz_data_out;          
-assign	CG_1_1_router_iact_1_0_north_address_out_ready   = CG_0_1_router_iact_1_0_south_address_in_ready;   
-assign	CG_1_1_router_iact_1_0_north_address_in_valid   = CG_0_1_router_iact_1_0_south_address_out_valid;   
-assign	CG_1_1_router_iact_1_0_north_address_in         = CG_0_1_router_iact_1_0_south_address_out;         
-assign	CG_1_1_router_iact_1_0_north_data_out_ready      = CG_0_1_router_iact_1_0_south_data_in_ready;      
-assign	CG_1_1_router_iact_1_0_north_data_in_valid      = CG_0_1_router_iact_1_0_south_data_out_valid;     
-assign	CG_1_1_router_iact_1_0_north_data_in            = CG_0_1_router_iact_1_0_south_data_out;      
-assign	CG_1_1_router_iact_1_0_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_1_0_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_1_0_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_1_0_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_1_0_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_1_0_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_1_0_horiz_address_out_ready   = CG_1_0_router_iact_1_0_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_1_0_horiz_address_in_valid   = CG_1_0_router_iact_1_0_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_1_0_horiz_address_in         = CG_1_0_router_iact_1_0_horiz_address_out;       
-assign	CG_1_1_router_iact_1_0_horiz_data_out_ready      = CG_1_0_router_iact_1_0_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_1_0_horiz_data_in_valid      = CG_1_0_router_iact_1_0_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_1_0_horiz_data_in            = CG_1_0_router_iact_1_0_horiz_data_out;            
-assign	CG_1_1_router_iact_1_1_north_address_out_ready   = CG_0_1_router_iact_1_1_south_address_in_ready;   
-assign	CG_1_1_router_iact_1_1_north_address_in_valid   = CG_0_1_router_iact_1_1_south_address_out_valid;   
-assign	CG_1_1_router_iact_1_1_north_address_in         = CG_0_1_router_iact_1_1_south_address_out;         
-assign	CG_1_1_router_iact_1_1_north_data_out_ready      = CG_0_1_router_iact_1_1_south_data_in_ready;      
-assign	CG_1_1_router_iact_1_1_north_data_in_valid      = CG_0_1_router_iact_1_1_south_data_out_valid;      
-assign	CG_1_1_router_iact_1_1_north_data_in            = CG_0_1_router_iact_1_1_south_data_out;            
-assign	CG_1_1_router_iact_1_1_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_1_1_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_1_1_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_1_1_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_1_1_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_1_1_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_1_1_horiz_address_out_ready   = CG_1_0_router_iact_1_1_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_1_1_horiz_address_in_valid   = CG_1_0_router_iact_1_1_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_1_1_horiz_address_in         = CG_1_0_router_iact_1_1_horiz_address_out;       
-assign	CG_1_1_router_iact_1_1_horiz_data_out_ready      = CG_1_0_router_iact_1_1_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_1_1_horiz_data_in_valid      = CG_1_0_router_iact_1_1_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_1_1_horiz_data_in            = CG_1_0_router_iact_1_1_horiz_data_out;          		
-assign	CG_1_1_router_iact_1_2_north_address_out_ready   = CG_0_1_router_iact_1_2_south_address_in_ready;   
-assign	CG_1_1_router_iact_1_2_north_address_in_valid   = CG_0_1_router_iact_1_2_south_address_out_valid;   
-assign	CG_1_1_router_iact_1_2_north_address_in         = CG_0_1_router_iact_1_2_south_address_out;         
-assign	CG_1_1_router_iact_1_2_north_data_out_ready      = CG_0_1_router_iact_1_2_south_data_in_ready;      
-assign	CG_1_1_router_iact_1_2_north_data_in_valid      = CG_0_1_router_iact_1_2_south_data_out_valid;      
-assign	CG_1_1_router_iact_1_2_north_data_in            = CG_0_1_router_iact_1_2_south_data_out;            
-assign	CG_1_1_router_iact_1_2_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_1_2_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_1_2_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_1_2_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_1_2_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_1_2_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_1_2_horiz_address_out_ready   = CG_1_0_router_iact_1_2_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_1_2_horiz_address_in_valid   = CG_1_0_router_iact_1_2_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_1_2_horiz_address_in         = CG_1_0_router_iact_1_2_horiz_address_out;       
-assign	CG_1_1_router_iact_1_2_horiz_data_out_ready      = CG_1_0_router_iact_1_2_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_1_2_horiz_data_in_valid      = CG_1_0_router_iact_1_2_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_1_2_horiz_data_in            = CG_1_0_router_iact_1_2_horiz_data_out;           
-assign	CG_1_1_router_iact_2_0_north_address_out_ready   = CG_0_1_router_iact_2_0_south_address_in_ready;   
-assign	CG_1_1_router_iact_2_0_north_address_in_valid   = CG_0_1_router_iact_2_0_south_address_out_valid;   
-assign	CG_1_1_router_iact_2_0_north_address_in         = CG_0_1_router_iact_2_0_south_address_out;         
-assign	CG_1_1_router_iact_2_0_north_data_out_ready      = CG_0_1_router_iact_2_0_south_data_in_ready;      
-assign	CG_1_1_router_iact_2_0_north_data_in_valid      = CG_0_1_router_iact_2_0_south_data_out_valid;      
-assign	CG_1_1_router_iact_2_0_north_data_in            = CG_0_1_router_iact_2_0_south_data_out;            
-assign	CG_1_1_router_iact_2_0_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_2_0_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_2_0_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_2_0_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_2_0_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_2_0_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_2_0_horiz_address_out_ready   = CG_1_0_router_iact_2_0_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_2_0_horiz_address_in_valid   = CG_1_0_router_iact_2_0_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_2_0_horiz_address_in         = CG_1_0_router_iact_2_0_horiz_address_out;       
-assign	CG_1_1_router_iact_2_0_horiz_data_out_ready      = CG_1_0_router_iact_2_0_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_2_0_horiz_data_in_valid      = CG_1_0_router_iact_2_0_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_2_0_horiz_data_in            = CG_1_0_router_iact_2_0_horiz_data_out;           					
-assign	CG_1_1_router_iact_2_1_north_address_out_ready   = CG_0_1_router_iact_2_1_south_address_in_ready;   
-assign	CG_1_1_router_iact_2_1_north_address_in_valid   = CG_0_1_router_iact_2_1_south_address_out_valid;   
-assign	CG_1_1_router_iact_2_1_north_address_in         = CG_0_1_router_iact_2_1_south_address_out;         
-assign	CG_1_1_router_iact_2_1_north_data_out_ready      = CG_0_1_router_iact_2_1_south_data_in_ready;      
-assign	CG_1_1_router_iact_2_1_north_data_in_valid      = CG_0_1_router_iact_2_1_south_data_out_valid;      
-assign	CG_1_1_router_iact_2_1_north_data_in            = CG_0_1_router_iact_2_1_south_data_out;            
-assign	CG_1_1_router_iact_2_1_south_address_out_ready   = 'd1;
-assign	CG_1_1_router_iact_2_1_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_2_1_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_2_1_south_data_out_ready      = 'd1;
-assign	CG_1_1_router_iact_2_1_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_2_1_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_2_1_horiz_address_out_ready  = CG_1_0_router_iact_2_1_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_2_1_horiz_address_in_valid   = CG_1_0_router_iact_2_1_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_2_1_horiz_address_in         = CG_1_0_router_iact_2_1_horiz_address_out;       
-assign	CG_1_1_router_iact_2_1_horiz_data_out_ready     = CG_1_0_router_iact_2_1_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_2_1_horiz_data_in_valid      = CG_1_0_router_iact_2_1_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_2_1_horiz_data_in            = CG_1_0_router_iact_2_1_horiz_data_out;                						
-assign	CG_1_1_router_iact_2_2_north_address_out_ready  = CG_0_1_router_iact_2_2_south_address_in_ready;   
-assign	CG_1_1_router_iact_2_2_north_address_in_valid   = CG_0_1_router_iact_2_2_south_address_out_valid;   
-assign	CG_1_1_router_iact_2_2_north_address_in         = CG_0_1_router_iact_2_2_south_address_out;         
-assign	CG_1_1_router_iact_2_2_north_data_out_ready     = CG_0_1_router_iact_2_2_south_data_in_ready;      
-assign	CG_1_1_router_iact_2_2_north_data_in_valid      = CG_0_1_router_iact_2_2_south_data_out_valid;      
-assign	CG_1_1_router_iact_2_2_north_data_in            = CG_0_1_router_iact_2_2_south_data_out;            
-assign	CG_1_1_router_iact_2_2_south_address_out_ready  = 'd1;
-assign	CG_1_1_router_iact_2_2_south_address_in_valid   = 'd0;
-assign	CG_1_1_router_iact_2_2_south_address_in         = 'd0;
-assign	CG_1_1_router_iact_2_2_south_data_out_ready     = 'd1;
-assign	CG_1_1_router_iact_2_2_south_data_in_valid      = 'd0;
-assign	CG_1_1_router_iact_2_2_south_data_in            = 'd0;
-assign	CG_1_1_router_iact_2_2_horiz_address_out_ready  = CG_1_0_router_iact_2_2_horiz_address_in_ready; 
-assign	CG_1_1_router_iact_2_2_horiz_address_in_valid   = CG_1_0_router_iact_2_2_horiz_address_out_valid; 
-assign	CG_1_1_router_iact_2_2_horiz_address_in         = CG_1_0_router_iact_2_2_horiz_address_out;       
-assign	CG_1_1_router_iact_2_2_horiz_data_out_ready     = CG_1_0_router_iact_2_2_horiz_data_in_ready;    
-assign	CG_1_1_router_iact_2_2_horiz_data_in_valid      = CG_1_0_router_iact_2_2_horiz_data_out_valid;    
-assign	CG_1_1_router_iact_2_2_horiz_data_in            = CG_1_0_router_iact_2_2_horiz_data_out;           
-			 
-assign	CG_1_1_router_weight_0_horiz_address_out_ready  = CG_1_0_router_weight_0_horiz_address_in_ready;   
-assign	CG_1_1_router_weight_0_horiz_address_in_valid   = CG_1_0_router_weight_0_horiz_address_out_valid;   
-assign	CG_1_1_router_weight_0_horiz_address_in         = CG_1_0_router_weight_0_horiz_address_out;         
-assign	CG_1_1_router_weight_0_horiz_data_out_ready     = CG_1_0_router_weight_0_horiz_data_in_ready;      
-assign	CG_1_1_router_weight_0_horiz_data_in_valid      = CG_1_0_router_weight_0_horiz_data_out_valid;      
-assign	CG_1_1_router_weight_0_horiz_data_in            = CG_1_0_router_weight_0_horiz_data_out;            
-assign	CG_1_1_router_weight_1_horiz_address_out_ready  = CG_1_0_router_weight_1_horiz_address_in_ready;   
-assign	CG_1_1_router_weight_1_horiz_address_in_valid   = CG_1_0_router_weight_1_horiz_address_out_valid;   
-assign	CG_1_1_router_weight_1_horiz_address_in         = CG_1_0_router_weight_1_horiz_address_out;         
-assign	CG_1_1_router_weight_1_horiz_data_out_ready     = CG_1_0_router_weight_1_horiz_data_in_ready;      
-assign	CG_1_1_router_weight_1_horiz_data_in_valid      = CG_1_0_router_weight_1_horiz_data_out_valid;      
-assign	CG_1_1_router_weight_1_horiz_data_in            = CG_1_0_router_weight_1_horiz_data_out;          
-assign	CG_1_1_router_weight_2_horiz_address_out_ready  = CG_1_0_router_weight_2_horiz_address_in_ready;  
-assign	CG_1_1_router_weight_2_horiz_address_in_valid   = CG_1_0_router_weight_2_horiz_address_out_valid;   
-assign	CG_1_1_router_weight_2_horiz_address_in         = CG_1_0_router_weight_2_horiz_address_out;          
-assign	CG_1_1_router_weight_2_horiz_data_out_ready     = CG_1_0_router_weight_2_horiz_data_in_ready;      
-assign	CG_1_1_router_weight_2_horiz_data_in_valid      = CG_1_0_router_weight_2_horiz_data_out_valid;      
-assign	CG_1_1_router_weight_2_horiz_data_in            = CG_1_0_router_weight_2_horiz_data_out;  
-					
-assign 	CG_1_1_router_psum_0_north_in_valid             = CG_0_1_router_psum_0_south_out_valid;
-assign 	CG_1_1_router_psum_0_north_in                   = CG_0_1_router_psum_0_south_out;
-assign 	CG_1_1_router_psum_0_south_out_ready            = 'd1;
-assign 	CG_1_1_router_psum_1_north_in_valid             = CG_0_1_router_psum_1_south_out_valid;
-assign 	CG_1_1_router_psum_1_north_in                   = CG_0_1_router_psum_1_south_out;
-assign 	CG_1_1_router_psum_1_south_out_ready            = 'd1;
-assign 	CG_1_1_router_psum_2_north_in_valid             = CG_0_1_router_psum_2_south_out_valid;
-assign 	CG_1_1_router_psum_2_north_in                   = CG_0_1_router_psum_2_south_out;
-assign 	CG_1_1_router_psum_2_south_out_ready            = 'd1;
-					
-assign	CG_1_1_cg_north_psum_0_out_ready                = CG_0_1_cg_south_psum_0_in_ready;
-assign	CG_1_1_cg_south_psum_0_in_valid                 = 'd1;
-assign	CG_1_1_cg_south_psum_0_in                       = 'd0;
-assign	CG_1_1_cg_north_psum_1_out_ready                = CG_0_1_cg_south_psum_1_in_ready;
-assign	CG_1_1_cg_south_psum_1_in_valid                 = 'd1;
-assign	CG_1_1_cg_south_psum_1_in                       = 'd0;
-assign	CG_1_1_cg_north_psum_2_out_ready                = CG_0_1_cg_south_psum_2_in_ready;
-assign	CG_1_1_cg_south_psum_2_in_valid                 = 'd1;
-assign	CG_1_1_cg_south_psum_2_in                       = 'd0;
-
-
+// ====================================================================	//
+// 						Tile-chain 拓樸（共用 wire 直連，無 assign）  			//
+// ====================================================================	//
+// 由實例 port 直接對接（接收端 conn 直接吃驅動端 wire）：
+//   垂直   ：CG_0_c.iact_south_* ↔ CG_1_c.iact_north_*（iact 位址/資料雙向）
+//            CG_0_c.psum_south_out → CG_1_c.psum_north_in（router psum 向南）
+//            CG_1_c.cg_north_psum_out → CG_0_c.cg_south_psum_in（PE psum 向北累加）
+//   水平   ：CG_r_0.{iact,weight}_horiz_* ↔ CG_r_1.{iact,weight}_horiz_*（雙向）
+//   邊緣   ：北緣(row0)/南緣(row1) 無鄰側 in_valid/in_bits 接 tie_lo、out_ready 接 tie_hi，
+//            無人讀的輸出 wire 懸空（見各 CG wire 宣告區註解）。
 
 endmodule
