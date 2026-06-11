@@ -531,36 +531,22 @@ module ClusterGroup (
 wire                 PECluster_iact_address_in_ready [0:2];
 wire                 PECluster_iact_data_in_ready    [0:2];
 // psum：輸出 + from_south 中繼 (per-column [0:2], signed [20:0])
-wire                 PECluster_psum_in_ready [0:2];
 wire                 PECluster_psum_out_valid [0:2];
 wire signed [20:0]   PECluster_psum_out       [0:2];
 wire                 PECluster_psum_in_from_south_ready [0:2];
 wire                 PECluster_psum_in_from_south_valid [0:2];
 wire signed [20:0]   PECluster_psum_in_from_south       [0:2];
 // control
-wire                 PECluster_psum_load_en;
-wire                 PECluster_iact_data_in_sel;
-wire [1:0]           PECluster_iact_data_out_sel;
-wire                 PECluster_psum_data_in_sel;
-wire                 PECluster_do_en;
-wire                 PECluster_iact_write_fin_clear;
-wire                 PECluster_weight_write_fin_clear;
 wire                 PECluster_all_write_fin;
 wire                 PECluster_all_cal_fin;                               
 
 // GLB Cluster connection
 
 // [Refactor 2nd-stage] GLB interface array-ified (script-gen, equiv to flat wires)
-wire GLBCluster_clock;
-wire GLBCluster_reset;
 wire              GLBCluster_iact_write_en [0:2][0:2];
 wire              GLBCluster_iact_write_done [0:2][0:2];
 wire              GLBCluster_iact_read_en [0:2][0:2];
 wire              GLBCluster_iact_read_done [0:2][0:2];
-wire              GLBCluster_weight_address_out_valid [0:2];
-wire [7:0]        GLBCluster_weight_address_out [0:2];
-wire              GLBCluster_weight_data_out_valid [0:2];
-wire [12:0]       GLBCluster_weight_data_out [0:2];
 wire              GLBCluster_psum_data_in_ready [0:2];
 wire              GLBCluster_psum_data_in_valid [0:2];
 wire signed [20:0]       GLBCluster_psum_data_in [0:2];
@@ -572,29 +558,8 @@ wire              GLBCluster_psum_write_done [0:2];
 wire              GLBCluster_psum_read_out_en [0:2];
 wire              GLBCluster_psum_read_en [0:2];
 
-			
-   	
 
 // router Cluster connection
-wire			[1:0] 	iact_0_data_in_sel;             
-wire			[1:0] 	iact_0_data_out_sel;            
-wire			[1:0] 	iact_1_data_in_sel;             
-wire			[1:0] 	iact_1_data_out_sel;            
-wire			[1:0] 	iact_2_data_in_sel;             
-wire			[1:0] 	iact_2_data_out_sel;   
-wire			 		weight_0_data_in_sel;           
-wire			 		weight_0_data_out_sel;          
-wire			 		weight_1_data_in_sel;           
-wire			 		weight_1_data_out_sel;          
-wire			 		weight_2_data_in_sel;           
-wire			 		weight_2_data_out_sel; 
-wire				 	psum_0_data_in_sel;             
-wire				 	psum_0_data_out_sel;            
-wire				 	psum_1_data_in_sel;             
-wire				 	psum_1_data_out_sel;            
-wire				 	psum_2_data_in_sel;             
-wire				 	psum_2_data_out_sel;    
-    
 
 // [Refactor 2nd-stage] router interface array-ified (script-gen, equiv to flat wires)
 wire               iact_GLB_address_in_ready [0:2][0:2];
@@ -668,11 +633,8 @@ wire               weight_horiz_data_out_ready [0:2];
 wire               weight_horiz_data_out_valid [0:2];
 wire [12:0]        weight_horiz_data_out_bits [0:2];
 wire               psum_PE_in_ready [0:2];
-wire               psum_PE_in_valid [0:2];
-wire signed [20:0] psum_PE_in_bits [0:2];
 wire               psum_GLB_in_ready [0:2];
 wire               psum_GLB_in_valid [0:2];
-wire signed [20:0] psum_GLB_in_bits [0:2];
 wire               psum_north_in_ready [0:2];
 wire               psum_north_in_valid [0:2];
 wire signed [20:0] psum_north_in_bits [0:2];
@@ -686,33 +648,14 @@ wire               psum_south_out_ready [0:2];
 wire               psum_south_out_valid [0:2];
 wire signed [20:0] psum_south_out_bits [0:2];
 
-				
-
 
 // cluster group controller connection
-wire   					cg_ctrl_clock;                   
-wire   					cg_ctrl_reset;                   
 wire  					cg_ctrl_GLB_psum_0_write_en;     
-wire   					cg_ctrl_GLB_psum_0_write_done;   
-wire   					cg_ctrl_GLB_psum_0_read_en;       
 wire  					cg_ctrl_GLB_psum_1_write_en;      
-wire   					cg_ctrl_GLB_psum_1_write_done;   
-wire   					cg_ctrl_GLB_psum_1_read_en;      
 wire  					cg_ctrl_GLB_psum_2_write_en;      
-wire   					cg_ctrl_GLB_psum_2_write_done;   
-wire   					cg_ctrl_GLB_psum_2_read_en;        
-wire  					cg_ctrl_PE_load_en;              
 wire  					cg_ctrl_psum_load_en;     
-wire					cg_ctrl_src_GLB_load_fin;    
-wire					cg_ctrl_psum_acc_en;                
 wire  					cg_ctrl_psum_add;                
-wire  					cg_ctrl_read_psum_en;        
-wire  					cg_ctrl_cg_en;   
-wire					cg_ctrl_PE_all_write_fin;            
-wire  					cg_ctrl_cal_fin;             
-wire					cg_ctrl_idle_wire;
-wire  					cg_ctrl_GLB_load_en;    
-wire 					cg_ctrl_psum_acc_fin;   
+wire  					idle_wire;				// ctrl 輸出：清 all_cal_fin_reg
 
 
 // ====================================================================	//
@@ -733,7 +676,7 @@ PE_Cluster PE_Cluster_inst (
 	.weight_address_in       (iact_PE_address_out_bits),
 	.weight_data_in_valid    (iact_PE_data_out_valid),
 	.weight_data_in          (iact_PE_data_out_bits),
-	.psum_in_ready           (PECluster_psum_in_ready),
+	.psum_in_ready           (psum_PE_out_ready),
 	.psum_in_valid           (psum_PE_out_valid),
 	.psum_in                 (psum_PE_out_bits),
 	.psum_out_ready          (psum_PE_in_ready),
@@ -743,13 +686,13 @@ PE_Cluster PE_Cluster_inst (
 	.psum_in_from_south_valid(PECluster_psum_in_from_south_valid),
 	.psum_in_from_south      (PECluster_psum_in_from_south),
 	.PE_disable              (PE_disable),
-	.psum_load_en            (PECluster_psum_load_en),
-	.iact_data_in_sel        (PECluster_iact_data_in_sel),
-	.iact_data_out_sel       (PECluster_iact_data_out_sel),
-	.psum_data_in_sel        (PECluster_psum_data_in_sel),
-	.do_en                   (PECluster_do_en),
-	.iact_write_fin_clear    (PECluster_iact_write_fin_clear),
-	.weight_write_fin_clear  (PECluster_weight_write_fin_clear),
+	.psum_load_en            (cg_ctrl_psum_load_en),
+	.iact_data_in_sel        (PE_cluster_iact_data_in_sel),
+	.iact_data_out_sel       (PE_cluster_iact_data_out_sel),
+	.psum_data_in_sel        (PE_cluster_psum_data_in_sel),
+	.do_en                   (PE_weight_load_en),
+	.iact_write_fin_clear    (iact_write_fin_clear),
+	.weight_write_fin_clear  (weight_write_fin_clear),
 	.all_write_fin           (PECluster_all_write_fin),
 	.all_cal_fin             (PECluster_all_cal_fin),
 	.PSUM_DEPTH              (PSUM_DEPTH),
@@ -757,8 +700,8 @@ PE_Cluster PE_Cluster_inst (
 );
 
 GLB_Cluster GLB_Cluster_inst (
-	.clock(GLBCluster_clock),
-	.reset(GLBCluster_reset),
+	.clock(clock),
+	.reset(reset),
 	.iact_SRAM_Bank_address_in_ready(GLB_iact_address_in_ready),
 	.iact_SRAM_Bank_address_in_valid(GLB_iact_address_in_valid),
 	.iact_SRAM_Bank_address_in(GLB_iact_address_in),
@@ -783,11 +726,11 @@ GLB_Cluster GLB_Cluster_inst (
 	.weight_data_in_valid(GLB_weight_data_in_valid),
 	.weight_data_in(GLB_weight_data_in),
 	.weight_address_out_ready(weight_GLB_address_in_ready),
-	.weight_address_out_valid(GLBCluster_weight_address_out_valid),
-	.weight_address_out(GLBCluster_weight_address_out),
+	.weight_address_out_valid(weight_GLB_address_in_valid),
+	.weight_address_out(weight_GLB_address_in_bits),
 	.weight_data_out_ready(weight_GLB_data_in_ready),
-	.weight_data_out_valid(GLBCluster_weight_data_out_valid),
-	.weight_data_out(GLBCluster_weight_data_out),
+	.weight_data_out_valid(weight_GLB_data_in_valid),
+	.weight_data_out(weight_GLB_data_in_bits),
 	.psum_SRAM_Bank_data_in_ready(GLBCluster_psum_data_in_ready),
 	.psum_SRAM_Bank_data_in_valid(GLBCluster_psum_data_in_valid),
 	.psum_SRAM_Bank_data_in(GLBCluster_psum_data_in),
@@ -804,24 +747,24 @@ GLB_Cluster GLB_Cluster_inst (
 );
 
 Router_Cluster Router_Cluster_inst (
-	.iact_0_data_in_sel(iact_0_data_in_sel),
-	.iact_0_data_out_sel(iact_0_data_out_sel),
-	.iact_1_data_in_sel(iact_1_data_in_sel),
-	.iact_1_data_out_sel(iact_1_data_out_sel),
-	.iact_2_data_in_sel(iact_2_data_in_sel),
-	.iact_2_data_out_sel(iact_2_data_out_sel),
-	.weight_0_data_in_sel(weight_0_data_in_sel),
-	.weight_0_data_out_sel(weight_0_data_out_sel),
-	.weight_1_data_in_sel(weight_1_data_in_sel),
-	.weight_1_data_out_sel(weight_1_data_out_sel),
-	.weight_2_data_in_sel(weight_2_data_in_sel),
-	.weight_2_data_out_sel(weight_2_data_out_sel),
-	.psum_0_data_in_sel(psum_0_data_in_sel),
-	.psum_0_data_out_sel(psum_0_data_out_sel),
-	.psum_1_data_in_sel(psum_1_data_in_sel),
-	.psum_1_data_out_sel(psum_1_data_out_sel),
-	.psum_2_data_in_sel(psum_2_data_in_sel),
-	.psum_2_data_out_sel(psum_2_data_out_sel),
+	.iact_0_data_in_sel(router_cluster_iact_data_in_sel),
+	.iact_0_data_out_sel(router_cluster_iact_data_out_sel),
+	.iact_1_data_in_sel(router_cluster_iact_data_in_sel),
+	.iact_1_data_out_sel(router_cluster_iact_data_out_sel),
+	.iact_2_data_in_sel(router_cluster_iact_data_in_sel),
+	.iact_2_data_out_sel(router_cluster_iact_data_out_sel),
+	.weight_0_data_in_sel(router_cluster_weight_data_in_sel),
+	.weight_0_data_out_sel(router_cluster_weight_data_out_sel),
+	.weight_1_data_in_sel(router_cluster_weight_data_in_sel),
+	.weight_1_data_out_sel(router_cluster_weight_data_out_sel),
+	.weight_2_data_in_sel(router_cluster_weight_data_in_sel),
+	.weight_2_data_out_sel(router_cluster_weight_data_out_sel),
+	.psum_0_data_in_sel(router_cluster_psum_data_in_sel),
+	.psum_0_data_out_sel(router_cluster_psum_data_out_sel),
+	.psum_1_data_in_sel(router_cluster_psum_data_in_sel),
+	.psum_1_data_out_sel(router_cluster_psum_data_out_sel),
+	.psum_2_data_in_sel(router_cluster_psum_data_in_sel),
+	.psum_2_data_out_sel(router_cluster_psum_data_out_sel),
 	.iact_GLB_address_in_ready(iact_GLB_address_in_ready),
 	.iact_GLB_address_in_valid(iact_GLB_address_in_valid),
 	.iact_GLB_address_in_bits(iact_GLB_address_in_bits),
@@ -893,11 +836,11 @@ Router_Cluster Router_Cluster_inst (
 	.weight_horiz_data_out_valid(weight_horiz_data_out_valid),
 	.weight_horiz_data_out_bits(weight_horiz_data_out_bits),
 	.psum_PE_in_ready(psum_PE_in_ready),
-	.psum_PE_in_valid(psum_PE_in_valid),
-	.psum_PE_in_bits(psum_PE_in_bits),
+	.psum_PE_in_valid(PECluster_psum_out_valid),
+	.psum_PE_in_bits(PECluster_psum_out),
 	.psum_GLB_in_ready(psum_GLB_in_ready),
 	.psum_GLB_in_valid(psum_GLB_in_valid),
-	.psum_GLB_in_bits(psum_GLB_in_bits),
+	.psum_GLB_in_bits(GLBCluster_psum_data_out),
 	.psum_north_in_ready(psum_north_in_ready),
 	.psum_north_in_valid(psum_north_in_valid),
 	.psum_north_in_bits(psum_north_in_bits),
@@ -912,66 +855,68 @@ Router_Cluster Router_Cluster_inst (
 	.psum_south_out_bits(psum_south_out_bits)
 );
 
+// NOTE: cg_ctrl_* 中繼層已 inline（port 直連各 net）；僅 psum_load_en/psum_add/
+//       GLB_psum_*_write_en 留 cg_ctrl_ wire（多扇出或下游帶邏輯）。
 Cluster_Group_Controller Cluster_Group_Controller_inst ( 
-	.clock                 		(cg_ctrl_clock                 	),
-	.reset                 		(cg_ctrl_reset                 	),
+	.clock                 		(clock                 	),
+	.reset                 		(reset                 	),
 	.GLB_psum_0_write_en   		(cg_ctrl_GLB_psum_0_write_en   	),
 	.GLB_psum_1_write_en   		(cg_ctrl_GLB_psum_1_write_en   	),
 	.GLB_psum_2_write_en   		(cg_ctrl_GLB_psum_2_write_en   	),
-	.GLB_psum_0_write_done 		(cg_ctrl_GLB_psum_0_write_done 	),
-	.GLB_psum_1_write_done 		(cg_ctrl_GLB_psum_1_write_done 	),
-	.GLB_psum_2_write_done 		(cg_ctrl_GLB_psum_2_write_done 	),
-	.GLB_psum_0_read_en    		(cg_ctrl_GLB_psum_0_read_en    	),
-	.GLB_psum_1_read_en    		(cg_ctrl_GLB_psum_1_read_en    	),
-	.GLB_psum_2_read_en    		(cg_ctrl_GLB_psum_2_read_en    	),
-	.GLB_iact_0_0_write_en   	(cg_ctrl_GLB_iact_0_0_write_en  ),
-	.GLB_iact_0_1_write_en   	(cg_ctrl_GLB_iact_0_1_write_en  ),
-	.GLB_iact_0_2_write_en   	(cg_ctrl_GLB_iact_0_2_write_en  ),
-	.GLB_iact_0_0_write_done 	(cg_ctrl_GLB_iact_0_0_write_done),
-	.GLB_iact_0_1_write_done 	(cg_ctrl_GLB_iact_0_1_write_done),
-	.GLB_iact_0_2_write_done 	(cg_ctrl_GLB_iact_0_2_write_done),
-	.GLB_iact_0_0_read_en    	(cg_ctrl_GLB_iact_0_0_read_en   ),
-	.GLB_iact_0_1_read_en    	(cg_ctrl_GLB_iact_0_1_read_en   ),
-	.GLB_iact_0_2_read_en    	(cg_ctrl_GLB_iact_0_2_read_en   ),
-	.GLB_iact_0_0_read_done  	(cg_ctrl_GLB_iact_0_0_read_done ),
-	.GLB_iact_0_1_read_done  	(cg_ctrl_GLB_iact_0_1_read_done ),
-	.GLB_iact_0_2_read_done  	(cg_ctrl_GLB_iact_0_2_read_done ),
-	.GLB_iact_1_0_write_en   	(cg_ctrl_GLB_iact_1_0_write_en  ),
-	.GLB_iact_1_1_write_en   	(cg_ctrl_GLB_iact_1_1_write_en  ),
-	.GLB_iact_1_2_write_en   	(cg_ctrl_GLB_iact_1_2_write_en  ),
-	.GLB_iact_1_0_write_done 	(cg_ctrl_GLB_iact_1_0_write_done),
-	.GLB_iact_1_1_write_done 	(cg_ctrl_GLB_iact_1_1_write_done),
-	.GLB_iact_1_2_write_done 	(cg_ctrl_GLB_iact_1_2_write_done),
-	.GLB_iact_1_0_read_en    	(cg_ctrl_GLB_iact_1_0_read_en   ),
-	.GLB_iact_1_1_read_en    	(cg_ctrl_GLB_iact_1_1_read_en   ),
-	.GLB_iact_1_2_read_en    	(cg_ctrl_GLB_iact_1_2_read_en   ),
-	.GLB_iact_1_0_read_done  	(cg_ctrl_GLB_iact_1_0_read_done ),
-	.GLB_iact_1_1_read_done  	(cg_ctrl_GLB_iact_1_1_read_done ),
-	.GLB_iact_1_2_read_done  	(cg_ctrl_GLB_iact_1_2_read_done ),
-	.GLB_iact_2_0_write_en   	(cg_ctrl_GLB_iact_2_0_write_en  ),
-	.GLB_iact_2_1_write_en   	(cg_ctrl_GLB_iact_2_1_write_en  ),
-	.GLB_iact_2_2_write_en   	(cg_ctrl_GLB_iact_2_2_write_en  ),
-	.GLB_iact_2_0_write_done 	(cg_ctrl_GLB_iact_2_0_write_done),
-	.GLB_iact_2_1_write_done 	(cg_ctrl_GLB_iact_2_1_write_done),
-	.GLB_iact_2_2_write_done 	(cg_ctrl_GLB_iact_2_2_write_done),
-	.GLB_iact_2_0_read_en    	(cg_ctrl_GLB_iact_2_0_read_en   ),
-	.GLB_iact_2_1_read_en    	(cg_ctrl_GLB_iact_2_1_read_en   ),
-	.GLB_iact_2_2_read_en    	(cg_ctrl_GLB_iact_2_2_read_en   ),
-	.GLB_iact_2_0_read_done  	(cg_ctrl_GLB_iact_2_0_read_done ),
-	.GLB_iact_2_1_read_done  	(cg_ctrl_GLB_iact_2_1_read_done ),
-	.GLB_iact_2_2_read_done  	(cg_ctrl_GLB_iact_2_2_read_done ),
-	.PE_load_en         		(cg_ctrl_PE_load_en          	),
+	.GLB_psum_0_write_done 		(GLBCluster_psum_write_done[0] 	),
+	.GLB_psum_1_write_done 		(GLBCluster_psum_write_done[1] 	),
+	.GLB_psum_2_write_done 		(GLBCluster_psum_write_done[2] 	),
+	.GLB_psum_0_read_en    		(GLBCluster_psum_read_en[0]    	),
+	.GLB_psum_1_read_en    		(GLBCluster_psum_read_en[1]    	),
+	.GLB_psum_2_read_en    		(GLBCluster_psum_read_en[2]    	),
+	.GLB_iact_0_0_write_en   	(GLBCluster_iact_write_en[0][0]  ),
+	.GLB_iact_0_1_write_en   	(GLBCluster_iact_write_en[0][1]  ),
+	.GLB_iact_0_2_write_en   	(GLBCluster_iact_write_en[0][2]  ),
+	.GLB_iact_0_0_write_done 	(GLBCluster_iact_write_done[0][0]),
+	.GLB_iact_0_1_write_done 	(GLBCluster_iact_write_done[0][1]),
+	.GLB_iact_0_2_write_done 	(GLBCluster_iact_write_done[0][2]),
+	.GLB_iact_0_0_read_en    	(GLBCluster_iact_read_en[0][0]   ),
+	.GLB_iact_0_1_read_en    	(GLBCluster_iact_read_en[0][1]   ),
+	.GLB_iact_0_2_read_en    	(GLBCluster_iact_read_en[0][2]   ),
+	.GLB_iact_0_0_read_done  	(GLBCluster_iact_read_done[0][0] ),
+	.GLB_iact_0_1_read_done  	(GLBCluster_iact_read_done[0][1] ),
+	.GLB_iact_0_2_read_done  	(GLBCluster_iact_read_done[0][2] ),
+	.GLB_iact_1_0_write_en   	(GLBCluster_iact_write_en[1][0]  ),
+	.GLB_iact_1_1_write_en   	(GLBCluster_iact_write_en[1][1]  ),
+	.GLB_iact_1_2_write_en   	(GLBCluster_iact_write_en[1][2]  ),
+	.GLB_iact_1_0_write_done 	(GLBCluster_iact_write_done[1][0]),
+	.GLB_iact_1_1_write_done 	(GLBCluster_iact_write_done[1][1]),
+	.GLB_iact_1_2_write_done 	(GLBCluster_iact_write_done[1][2]),
+	.GLB_iact_1_0_read_en    	(GLBCluster_iact_read_en[1][0]   ),
+	.GLB_iact_1_1_read_en    	(GLBCluster_iact_read_en[1][1]   ),
+	.GLB_iact_1_2_read_en    	(GLBCluster_iact_read_en[1][2]   ),
+	.GLB_iact_1_0_read_done  	(GLBCluster_iact_read_done[1][0] ),
+	.GLB_iact_1_1_read_done  	(GLBCluster_iact_read_done[1][1] ),
+	.GLB_iact_1_2_read_done  	(GLBCluster_iact_read_done[1][2] ),
+	.GLB_iact_2_0_write_en   	(GLBCluster_iact_write_en[2][0]  ),
+	.GLB_iact_2_1_write_en   	(GLBCluster_iact_write_en[2][1]  ),
+	.GLB_iact_2_2_write_en   	(GLBCluster_iact_write_en[2][2]  ),
+	.GLB_iact_2_0_write_done 	(GLBCluster_iact_write_done[2][0]),
+	.GLB_iact_2_1_write_done 	(GLBCluster_iact_write_done[2][1]),
+	.GLB_iact_2_2_write_done 	(GLBCluster_iact_write_done[2][2]),
+	.GLB_iact_2_0_read_en    	(GLBCluster_iact_read_en[2][0]   ),
+	.GLB_iact_2_1_read_en    	(GLBCluster_iact_read_en[2][1]   ),
+	.GLB_iact_2_2_read_en    	(GLBCluster_iact_read_en[2][2]   ),
+	.GLB_iact_2_0_read_done  	(GLBCluster_iact_read_done[2][0] ),
+	.GLB_iact_2_1_read_done  	(GLBCluster_iact_read_done[2][1] ),
+	.GLB_iact_2_2_read_done  	(GLBCluster_iact_read_done[2][2] ),
+	.PE_load_en         		(PE_weight_load_en          	),
 	.psum_load_en       		(cg_ctrl_psum_load_en          	),
-	.src_GLB_load_fin			(cg_ctrl_src_GLB_load_fin		),
-	.psum_acc_en				(cg_ctrl_psum_acc_en			),
+	.src_GLB_load_fin			(src_GLB_load_fin		),
+	.psum_acc_en				(psum_acc_en			),
 	.psum_add           		(cg_ctrl_psum_add              	),
-	.read_psum_en      			(cg_ctrl_read_psum_en     	  	),
-	.cg_en             			(cg_ctrl_cg_en            	  	),
-	.PE_all_write_fin			(cg_ctrl_PE_all_write_fin	  	),
-	.cal_fin           			(cg_ctrl_cal_fin          	  	),
-	.idle_wire					(cg_ctrl_idle_wire				),
-	.GLB_load_en       			(cg_ctrl_GLB_load_en      	  	),
-	.psum_acc_fin				(cg_ctrl_psum_acc_fin			)
+	.read_psum_en      			(read_psum_en     	  	),
+	.cg_en             			(cg_en            	  	),
+	.PE_all_write_fin			(PECluster_all_write_fin	  	),
+	.cal_fin           			(cal_fin          	  	),
+	.idle_wire					(idle_wire				),
+	.GLB_load_en       			(GLB_iact_load_en      	  	),
+	.psum_acc_fin				(psum_acc_fin			)
 );
 
 
@@ -993,10 +938,6 @@ reg all_cal_fin_reg;
 // 						 		Combination  							//
 // ====================================================================	//
 //=============== CG output ===============//
-assign cal_fin 							= cg_ctrl_cal_fin; 				
-assign PE_weight_load_en				= cg_ctrl_PE_load_en; 	
-assign GLB_iact_load_en 				= cg_ctrl_GLB_load_en; 	
-assign idle_wire						= cg_ctrl_idle_wire;
 assign all_cal_fin 						= all_cal_fin_reg;
 
 // GLB psum SRAM Bank output connection
@@ -1262,42 +1203,6 @@ assign PECluster_psum_in_from_south[1] 			= cg_south_psum_1_in;
 assign PECluster_psum_in_from_south[2] 			= cg_south_psum_2_in; 	
 
 
-assign PECluster_psum_load_en 					= cg_ctrl_psum_load_en; 
-assign PECluster_iact_data_in_sel 				= PE_cluster_iact_data_in_sel;
-assign PECluster_iact_data_out_sel 				= PE_cluster_iact_data_out_sel; 
-assign PECluster_psum_data_in_sel 				= PE_cluster_psum_data_in_sel; 
-assign PECluster_do_en 							= cg_ctrl_PE_load_en; 
-
-assign PECluster_iact_write_fin_clear 			= iact_write_fin_clear;
-assign PECluster_weight_write_fin_clear 		= weight_write_fin_clear;
-
-// TOP iact and weight fetch and dataflow control
-assign GLBCluster_clock = clock;
-assign GLBCluster_reset = reset;
-
-
-assign iact_0_data_in_sel  		= router_cluster_iact_data_in_sel; 
-assign iact_1_data_in_sel  		= router_cluster_iact_data_in_sel; 
-assign iact_2_data_in_sel  		= router_cluster_iact_data_in_sel; 
-assign iact_0_data_out_sel 		= router_cluster_iact_data_out_sel;
-assign iact_1_data_out_sel 		= router_cluster_iact_data_out_sel;
-assign iact_2_data_out_sel 		= router_cluster_iact_data_out_sel;
-
-assign weight_0_data_in_sel  	= router_cluster_weight_data_in_sel; 
-assign weight_1_data_in_sel  	= router_cluster_weight_data_in_sel; 
-assign weight_2_data_in_sel  	= router_cluster_weight_data_in_sel; 
-assign weight_0_data_out_sel 	= router_cluster_weight_data_out_sel; 
-assign weight_1_data_out_sel 	= router_cluster_weight_data_out_sel; 
-assign weight_2_data_out_sel 	= router_cluster_weight_data_out_sel; 
-
-assign psum_0_data_in_sel  		= router_cluster_psum_data_in_sel; 	
-assign psum_1_data_in_sel  		= router_cluster_psum_data_in_sel; 	
-assign psum_2_data_in_sel  		= router_cluster_psum_data_in_sel; 	
-assign psum_0_data_out_sel 		= router_cluster_psum_data_out_sel; 
-assign psum_1_data_out_sel 		= router_cluster_psum_data_out_sel; 
-assign psum_2_data_out_sel 		= router_cluster_psum_data_out_sel; 
-
-
 // psum 
 assign GLBCluster_psum_data_in_valid[0]  		= psum_GLB_out_valid[0]; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_valid[0] : GLB_psum_0_data_in_valid;
 assign GLBCluster_psum_data_in_valid[1]  		= psum_GLB_out_valid[1]; // (router_cluster_psum_data_out_sel == TO_PE) ? psum_GLB_out_valid[1] : GLB_psum_1_data_in_valid;
@@ -1311,36 +1216,12 @@ assign GLBCluster_psum_data_out_ready[1] 		= (psum_GLB_in_ready[1] & cg_ctrl_psu
 assign GLBCluster_psum_data_out_ready[2] 		= (psum_GLB_in_ready[2] & cg_ctrl_psum_add) | (GLB_psum_2_data_out_ready & (read_psum_en | psum_SRAM_Bank_2_read_out_en)); 
 
 // cluster group control
-assign GLBCluster_iact_write_en[0][0]	= cg_ctrl_GLB_iact_0_0_write_en; 
-assign GLBCluster_iact_write_en[0][1]	= cg_ctrl_GLB_iact_0_1_write_en; 
-assign GLBCluster_iact_write_en[0][2]	= cg_ctrl_GLB_iact_0_2_write_en; 
-assign GLBCluster_iact_read_en[0][1] 	= cg_ctrl_GLB_iact_0_1_read_en; 
-assign GLBCluster_iact_read_en[0][0] 	= cg_ctrl_GLB_iact_0_0_read_en; 
-assign GLBCluster_iact_read_en[0][2] 	= cg_ctrl_GLB_iact_0_2_read_en;  
-assign GLBCluster_iact_write_en[1][0]	= cg_ctrl_GLB_iact_1_0_write_en; 
-assign GLBCluster_iact_write_en[1][1]	= cg_ctrl_GLB_iact_1_1_write_en; 
-assign GLBCluster_iact_write_en[1][2]	= cg_ctrl_GLB_iact_1_2_write_en; 
-assign GLBCluster_iact_read_en[1][1] 	= cg_ctrl_GLB_iact_1_1_read_en; 
-assign GLBCluster_iact_read_en[1][0] 	= cg_ctrl_GLB_iact_1_0_read_en; 
-assign GLBCluster_iact_read_en[1][2] 	= cg_ctrl_GLB_iact_1_2_read_en;   
-assign GLBCluster_iact_write_en[2][0]	= cg_ctrl_GLB_iact_2_0_write_en; 
-assign GLBCluster_iact_write_en[2][1]	= cg_ctrl_GLB_iact_2_1_write_en; 
-assign GLBCluster_iact_write_en[2][2]	= cg_ctrl_GLB_iact_2_2_write_en; 
-assign GLBCluster_iact_read_en[2][1] 	= cg_ctrl_GLB_iact_2_1_read_en; 
-assign GLBCluster_iact_read_en[2][0] 	= cg_ctrl_GLB_iact_2_0_read_en; 
-assign GLBCluster_iact_read_en[2][2] 	= cg_ctrl_GLB_iact_2_2_read_en;   
-
-assign GLBCluster_psum_write_en[0] 	= cg_ctrl_GLB_psum_0_write_en & GLB_psum_write_en; 
+assign GLBCluster_psum_write_en[0]	= cg_ctrl_GLB_psum_0_write_en & GLB_psum_write_en; 
 assign GLBCluster_psum_write_en[1] 	= cg_ctrl_GLB_psum_1_write_en & GLB_psum_write_en; 
 assign GLBCluster_psum_write_en[2] 	= cg_ctrl_GLB_psum_2_write_en & GLB_psum_write_en;  
-assign GLBCluster_psum_read_en[0]		= cg_ctrl_GLB_psum_0_read_en; 
-assign GLBCluster_psum_read_en[1]		= cg_ctrl_GLB_psum_1_read_en;   
-assign GLBCluster_psum_read_en[2]		= cg_ctrl_GLB_psum_2_read_en; 
 assign GLBCluster_psum_read_out_en[0]	= psum_SRAM_Bank_0_read_out_en;
 assign GLBCluster_psum_read_out_en[1]	= psum_SRAM_Bank_1_read_out_en;
 assign GLBCluster_psum_read_out_en[2]	= psum_SRAM_Bank_2_read_out_en;
-
-
 
 
 //============= other cluster group inter-connection =============//
@@ -1545,39 +1426,24 @@ assign weight_horiz_data_out_ready[1] 		= router_weight_1_horiz_data_out_ready;
 assign weight_horiz_data_out_ready[2] 		= router_weight_2_horiz_data_out_ready; 
 	
 // weight_valid	
-assign weight_GLB_address_in_valid[0] 		= GLBCluster_weight_address_out_valid[0]; 
-assign weight_GLB_address_in_valid[1] 		= GLBCluster_weight_address_out_valid[1]; 
-assign weight_GLB_address_in_valid[2] 		= GLBCluster_weight_address_out_valid[2]; 
 assign weight_horiz_address_in_valid[0] 		= router_weight_0_horiz_address_in_valid;
 assign weight_horiz_address_in_valid[1] 		= router_weight_1_horiz_address_in_valid;
 assign weight_horiz_address_in_valid[2] 		= router_weight_2_horiz_address_in_valid;
 	
-assign weight_GLB_data_in_valid[0] 			= GLBCluster_weight_data_out_valid[0];
-assign weight_GLB_data_in_valid[1] 			= GLBCluster_weight_data_out_valid[1];
-assign weight_GLB_data_in_valid[2] 			= GLBCluster_weight_data_out_valid[2];
 assign weight_horiz_data_in_valid[0] 		= router_weight_0_horiz_data_in_valid; 
 assign weight_horiz_data_in_valid[1] 		= router_weight_1_horiz_data_in_valid;
 assign weight_horiz_data_in_valid[2] 		= router_weight_2_horiz_data_in_valid; 
 	
 // weight_data	
-assign weight_GLB_address_in_bits[0] 		= GLBCluster_weight_address_out[0];
-assign weight_GLB_address_in_bits[1] 		= GLBCluster_weight_address_out[1]; 
-assign weight_GLB_address_in_bits[2] 		= GLBCluster_weight_address_out[2];
 assign weight_horiz_address_in_bits[0] 		= router_weight_0_horiz_address_in; 
 assign weight_horiz_address_in_bits[1] 		= router_weight_1_horiz_address_in; 
 assign weight_horiz_address_in_bits[2] 		= router_weight_2_horiz_address_in; 
 	
-assign weight_GLB_data_in_bits[0] 			= GLBCluster_weight_data_out[0]; 
-assign weight_GLB_data_in_bits[1] 			= GLBCluster_weight_data_out[1]; 
-assign weight_GLB_data_in_bits[2] 			= GLBCluster_weight_data_out[2]; 
 assign weight_horiz_data_in_bits[0] 			= router_weight_0_horiz_data_in;
 assign weight_horiz_data_in_bits[1] 			= router_weight_1_horiz_data_in;
 assign weight_horiz_data_in_bits[2] 			= router_weight_2_horiz_data_in;
 
 // psum router inter-connection
-assign psum_PE_out_ready[0] 					= PECluster_psum_in_ready[0]; 
-assign psum_PE_out_ready[1] 					= PECluster_psum_in_ready[1]; 
-assign psum_PE_out_ready[2] 					= PECluster_psum_in_ready[2];  	
 assign psum_GLB_out_ready[0] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[0]; 
 assign psum_GLB_out_ready[1] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[1];
 assign psum_GLB_out_ready[2] 				= router_cluster_psum_data_out_sel & GLBCluster_psum_data_in_ready[2];
@@ -1585,9 +1451,6 @@ assign psum_south_out_ready[0] 				= router_psum_0_south_out_ready;
 assign psum_south_out_ready[1] 				= router_psum_1_south_out_ready; 
 assign psum_south_out_ready[2] 				= router_psum_2_south_out_ready; 
 			
-assign psum_PE_in_valid[0] 					= PECluster_psum_out_valid[0]; 
-assign psum_PE_in_valid[1] 					= PECluster_psum_out_valid[1]; 
-assign psum_PE_in_valid[2] 					= PECluster_psum_out_valid[2]; 
 assign psum_GLB_in_valid[0] 					= GLBCluster_psum_data_out_valid[0] & cg_ctrl_psum_add; 	
 assign psum_GLB_in_valid[1] 					= GLBCluster_psum_data_out_valid[1] & cg_ctrl_psum_add; 
 assign psum_GLB_in_valid[2] 					= GLBCluster_psum_data_out_valid[2] & cg_ctrl_psum_add; 
@@ -1595,49 +1458,9 @@ assign psum_north_in_valid[0] 				= router_psum_0_north_in_valid;
 assign psum_north_in_valid[1] 				= router_psum_1_north_in_valid; 
 assign psum_north_in_valid[2] 				= router_psum_2_north_in_valid;
 			
-assign psum_PE_in_bits[0] 					= PECluster_psum_out[0]; 
-assign psum_PE_in_bits[1] 					= PECluster_psum_out[1]; 
-assign psum_PE_in_bits[2] 					= PECluster_psum_out[2]; 
-assign psum_GLB_in_bits[0] 					= GLBCluster_psum_data_out[0]; 
-assign psum_GLB_in_bits[1] 					= GLBCluster_psum_data_out[1];
-assign psum_GLB_in_bits[2] 					= GLBCluster_psum_data_out[2]; 
 assign psum_north_in_bits[0] 				= router_psum_0_north_in;	
 assign psum_north_in_bits[1] 				= router_psum_1_north_in; 	
 assign psum_north_in_bits[2] 				= router_psum_2_north_in; 
-
-// cluster group control
-assign cg_ctrl_clock = clock;
-assign cg_ctrl_reset = reset;
-assign cg_ctrl_GLB_psum_0_write_done 		= GLBCluster_psum_write_done[0]; 
-assign cg_ctrl_GLB_psum_1_write_done 		= GLBCluster_psum_write_done[1]; 
-assign cg_ctrl_GLB_psum_2_write_done 		= GLBCluster_psum_write_done[2]; 
-		
-assign cg_ctrl_GLB_iact_0_0_write_done 		= GLBCluster_iact_write_done[0][0];	
-assign cg_ctrl_GLB_iact_0_1_write_done 		= GLBCluster_iact_write_done[0][1]; 		
-assign cg_ctrl_GLB_iact_0_2_write_done 		= GLBCluster_iact_write_done[0][2]; 
-assign cg_ctrl_GLB_iact_1_0_write_done 		= GLBCluster_iact_write_done[1][0];	
-assign cg_ctrl_GLB_iact_1_1_write_done 		= GLBCluster_iact_write_done[1][1]; 		
-assign cg_ctrl_GLB_iact_1_2_write_done 		= GLBCluster_iact_write_done[1][2]; 
-assign cg_ctrl_GLB_iact_2_0_write_done 		= GLBCluster_iact_write_done[2][0];	
-assign cg_ctrl_GLB_iact_2_1_write_done 		= GLBCluster_iact_write_done[2][1]; 		
-assign cg_ctrl_GLB_iact_2_2_write_done 		= GLBCluster_iact_write_done[2][2]; 
-		
-assign cg_ctrl_GLB_iact_0_0_read_done  		= GLBCluster_iact_read_done[0][0]; 		
-assign cg_ctrl_GLB_iact_0_1_read_done  		= GLBCluster_iact_read_done[0][1]; 		
-assign cg_ctrl_GLB_iact_0_2_read_done  		= GLBCluster_iact_read_done[0][2]; 	
-assign cg_ctrl_GLB_iact_1_0_read_done  		= GLBCluster_iact_read_done[1][0]; 		
-assign cg_ctrl_GLB_iact_1_1_read_done  		= GLBCluster_iact_read_done[1][1]; 		
-assign cg_ctrl_GLB_iact_1_2_read_done  		= GLBCluster_iact_read_done[1][2]; 
-assign cg_ctrl_GLB_iact_2_0_read_done  		= GLBCluster_iact_read_done[2][0]; 		
-assign cg_ctrl_GLB_iact_2_1_read_done  		= GLBCluster_iact_read_done[2][1]; 		
-assign cg_ctrl_GLB_iact_2_2_read_done  		= GLBCluster_iact_read_done[2][2]; 
-
-assign cg_ctrl_read_psum_en 				= read_psum_en; 
-assign cg_ctrl_cg_en 						= cg_en; 
-assign cg_ctrl_PE_all_write_fin 			= PECluster_all_write_fin;
-assign cg_ctrl_src_GLB_load_fin 			= src_GLB_load_fin;
-assign cg_ctrl_psum_acc_en					= psum_acc_en;
-assign cg_ctrl_psum_acc_fin					= psum_acc_fin;
 
 
 // ====================================================================	//
