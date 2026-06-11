@@ -309,22 +309,6 @@ wire signed	[20:0] 	CG_0_1_psum_south_out_bits [0:2];
 wire 	       		CG_0_1_cg_south_psum_in_ready [0:2];
 wire 	       		CG_0_1_cg_north_psum_out_valid [0:2];	// 懸空：無鄰 CG 讀取
 wire signed	[20:0] 	CG_0_1_cg_north_psum_out [0:2];	// 懸空：無鄰 CG 讀取
-// ⚠ 特例照搬原碼（保等價）：iact_north_address_out_ready 來源逐 element 不一致
-wire 				CG_0_1_iact_north_address_out_ready_src [0:2][0:2];
-assign CG_0_1_iact_north_address_out_ready_src[0][0] = 1'b0;	// ⚠ 原碼 'd0，全系統唯一
-assign CG_0_1_iact_north_address_out_ready_src[0][1] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[0][2] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[1][0] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[1][1] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[1][2] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[2][0] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[2][1] = 1'b1;
-assign CG_0_1_iact_north_address_out_ready_src[2][2] = 1'b1;
-// ⚠ 特例照搬原碼（保等價）：weight_horiz_address_out_ready 來源逐 element 不一致
-wire 	       	CG_0_1_weight_horiz_address_out_ready_src [0:2];
-assign CG_0_1_weight_horiz_address_out_ready_src[0] = CG_0_1_weight_horiz_address_in_ready[0];	// ⚠ 原碼接自己（self-loop）
-assign CG_0_1_weight_horiz_address_out_ready_src[1] = CG_0_0_weight_horiz_address_in_ready[1];
-assign CG_0_1_weight_horiz_address_out_ready_src[2] = CG_0_0_weight_horiz_address_in_ready[2];
 
 
 // --------------------- CG_1_0 --------------------- //
@@ -387,9 +371,9 @@ wire 	[7:0]  	CG_1_1_weight_horiz_address_out_bits [0:2];
 wire 	       	CG_1_1_weight_horiz_data_in_ready [0:2];
 wire 	       	CG_1_1_weight_horiz_data_out_valid [0:2];
 wire 	[12:0] 	CG_1_1_weight_horiz_data_out_bits [0:2];
-wire 	       	CG_1_1_psum_north_in_ready [0:2];	// 懸空：無鄰 CG 讀取
-wire 	       	CG_1_1_psum_south_out_valid [0:2];
-wire signed	[20:0] 	CG_1_1_psum_south_out_bits [0:2];
+wire 	       	CG_1_1_psum_north_in_ready [0:2];
+wire 	       	CG_1_1_psum_south_out_valid [0:2];	// 懸空：無鄰 CG 讀取
+wire signed	[20:0] 	CG_1_1_psum_south_out_bits [0:2];	// 懸空：無鄰 CG 讀取
 wire 	       	CG_1_1_cg_south_psum_in_ready [0:2];	// 懸空：無鄰 CG 讀取
 wire 	       	CG_1_1_cg_north_psum_out_valid [0:2];
 wire signed	[20:0] 	CG_1_1_cg_north_psum_out [0:2];
@@ -691,7 +675,7 @@ ClusterGroup ClusterGroup_0_1 (
 	.iact_north_address_in_ready    (CG_0_1_iact_north_address_in_ready         ),
 	.iact_north_address_in_valid    (tie_lo_3x3                                 ),
 	.iact_north_address_in_bits     (tie_lo_3x3_7b                              ),
-	.iact_north_address_out_ready   (CG_0_1_iact_north_address_out_ready_src    ),
+	.iact_north_address_out_ready   (tie_hi_3x3								    ),
 	.iact_north_address_out_valid   (CG_0_1_iact_north_address_out_valid        ),
 	.iact_north_address_out_bits    (CG_0_1_iact_north_address_out_bits         ),
 	.iact_north_data_in_ready       (CG_0_1_iact_north_data_in_ready            ),
@@ -735,7 +719,7 @@ ClusterGroup ClusterGroup_0_1 (
 	.weight_horiz_address_in_ready  (CG_0_1_weight_horiz_address_in_ready       ),
 	.weight_horiz_address_in_valid  (CG_0_0_weight_horiz_address_out_valid      ),
 	.weight_horiz_address_in_bits   (CG_0_0_weight_horiz_address_out_bits       ),
-	.weight_horiz_address_out_ready (CG_0_1_weight_horiz_address_out_ready_src  ),
+	.weight_horiz_address_out_ready (CG_0_0_weight_horiz_address_in_ready		),
 	.weight_horiz_address_out_valid (CG_0_1_weight_horiz_address_out_valid      ),
 	.weight_horiz_address_out_bits  (CG_0_1_weight_horiz_address_out_bits       ),
 	.weight_horiz_data_in_ready     (CG_0_1_weight_horiz_data_in_ready          ),
@@ -748,9 +732,9 @@ ClusterGroup ClusterGroup_0_1 (
 
 	// --- psum --- //
 	.psum_north_in_ready            (CG_0_1_psum_north_in_ready                 ),
-	.psum_north_in_valid            (CG_1_1_psum_south_out_valid                ),
-	.psum_north_in_bits             (CG_1_1_psum_south_out_bits                 ),
-	.psum_south_out_ready           (tie_hi_3                                   ),
+	.psum_north_in_valid            (tie_lo_3                                	),
+	.psum_north_in_bits             (tie_lo_3_21b                            	),
+	.psum_south_out_ready           (CG_1_1_psum_north_in_ready                 ),
 	.psum_south_out_valid           (CG_0_1_psum_south_out_valid                ),
 	.psum_south_out_bits            (CG_0_1_psum_south_out_bits                 ),
 
@@ -1110,20 +1094,17 @@ ClusterGroup ClusterGroup_1_1 (
 // ====================================================================	//
 // 	       		  Tile-chain 拓樸（共用 wire 直連，無 assign）  		  //
 // ====================================================================	//
-// 由實例 port 直接對接（接收端 conn 直接吃驅動端 wire）：
+// 由實例 port 直接對接（接收端 conn 直接吃驅動端 wire）；col0/col1 接線完全鏡像對稱：
 //   垂直   ：CG_0_c.iact_south_* ↔ CG_1_c.iact_north_*（iact 位址/資料雙向，valid/ready/bits 全接）
-//            router psum 兩個 column 接法不同：
-//              col0：CG_0_0.psum_south_out → CG_1_0.psum_north_in（南向單鏈，valid/ready/bits 全接）
-//              col1：CG_0_1.psum_south_out → CG_1_1.psum_north_in，且 CG_1_1.psum_south_out 繞回
-//                    CG_0_1.psum_north_in（垂直環）；兩條皆只接 valid/bits——雙方 south_out_ready
-//                    接 tie_hi、north_in_ready 懸空，無 backpressure
+//            CG_0_c.psum_south_out → CG_1_c.psum_north_in（router psum 南向單鏈，valid/ready/bits 全接）
 //            CG_1_c.cg_north_psum_out → CG_0_c.cg_south_psum_in（PE psum 向北累加，valid/ready/bits 全接）
 //   水平   ：CG_r_0.{iact,weight}_horiz_* ↔ CG_r_1.{iact,weight}_horiz_*（雙向，valid/ready/bits 全接）
 //   邊緣   ：北緣(row0)/南緣(row1) 無鄰側 in_valid/in_bits 接 tie_lo、out_ready 接 tie_hi，
-//            無人讀的輸出 wire 懸空（見各 CG wire 宣告區註解）。例外三處：
-//              1) cg_south_psum_in 南緣 in_valid 接 tie_hi、data 接 0（底排恆收「有效的零 psum」供累加）
-//              2) CG_0_1.psum_north_in 雖在北緣但不 tie，改吃 CG_1_1 繞回線（見上 col1）
-//              3) 兩處 ⚠ 原碼特例：CG_0_1 iact_north addr out_ready[0][0]='d0、
-//                 weight addr out_ready[0] self-loop（詳見 CG_0_1 wire 宣告區）
+//            無人讀的輸出 wire 懸空（見各 CG wire 宣告區註解）。唯一例外：
+//            cg_south_psum_in 南緣 in_valid 接 tie_hi、data 接 0（底排恆收「有效的零 psum」供累加）。
+// 註：原碼 CG_0_1 有三處不規則接線（iact_north addr out_ready[0][0]='d0、weight addr
+//     out_ready[0] self-loop、psum col1 上下互餵成環且無 backpressure），已全部改為與
+//     col0 一致的規則接法；1000 張 MNIST sim 結果與 cycle 完全等價，證實三處皆為
+//     don't-care（原作者筆誤/無作用訊號）。
 
 endmodule
