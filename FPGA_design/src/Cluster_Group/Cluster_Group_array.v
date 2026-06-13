@@ -1,5 +1,7 @@
 module ClusterGroup_array(
-
+	// ======================================================================================== //
+	//                                  input/output controls                                   //
+	// ======================================================================================== //
 	input			clock,
 	input			reset,
 	
@@ -25,11 +27,11 @@ module ClusterGroup_array(
 	input			CG_psum_spad_clear [0:1][0:1],
 	input			CG_iact_write_fin_clear [0:1][0:1],
 	input			CG_weight_write_fin_clear [0:1][0:1],
-
+	// output
 	output			CG_cal_fin [0:1][0:1],
 	output			CG_PE_weight_load_en [0:1][0:1],
 	output			CG_GLB_iact_load_en [0:1][0:1],
-	
+	// ======================================================================================== //
 
 	// ---------------------------- CG_0_0 ---------------------------- //
 
@@ -498,8 +500,8 @@ ClusterGroup ClusterGroup_0_0 (
 	.PSUM_DEPTH                                 (CG_0_0_PSUM_DEPTH                  ),
 	
 											
-	// ======== tile-chain：iact / weight / psum router、cg_psum（array 直連） ======== //
-	// --- iact --- //
+	// ============ tile-chain：iact / weight / psum router、cg_psum（array 直連） ============ //
+	// ---------------------------------------- iact ---------------------------------------- //
 	// north: address_in/out, data_in/out
 	.iact_north_address_in_ready    (CG_0_0_iact_north_address_in_ready      		   ),
 	.iact_north_address_in_valid    (tie_lo_3x3                              		   ),
@@ -543,7 +545,7 @@ ClusterGroup ClusterGroup_0_0 (
 	.iact_horiz_data_out_bits       (CG_0_0_iact_horiz_data_out_bits         		   ),
 	
 
-	// --- weight --- //
+	// ---------------------------------------- weight ---------------------------------------- //
 	// horiz: address_in/out, data_in/out
 	.weight_horiz_address_in_ready  (CG_0_0_weight_horiz_address_in_ready    		   ),
 	.weight_horiz_address_in_valid  (CG_0_1_weight_horiz_address_out_valid   		   ),
@@ -559,7 +561,7 @@ ClusterGroup ClusterGroup_0_0 (
 	.weight_horiz_data_out_bits     (CG_0_0_weight_horiz_data_out_bits       		   ),
 
 
-	// --- psum --- //
+	// ---------------------------------------- psum ---------------------------------------- //
 	.psum_north_in_ready            (CG_0_0_psum_north_in_ready              		   ),
 	.psum_north_in_valid            (tie_lo_3                                		   ),
 	.psum_north_in_bits             (tie_lo_3_21b                            		   ),
@@ -568,7 +570,7 @@ ClusterGroup ClusterGroup_0_0 (
 	.psum_south_out_bits            (CG_0_0_psum_south_out_bits              		   ),
 
 	
-	// --- cg psum --- //
+	// ---------------------------------------- cg psum ---------------------------------------- //
 	.cg_south_psum_in_ready         (CG_0_0_cg_south_psum_in_ready           		   ),
 	.cg_south_psum_in_valid         (CG_1_0_cg_north_psum_out_valid          		   ),
 	.cg_south_psum_in               (CG_1_0_cg_north_psum_out                		   ),

@@ -9,6 +9,8 @@
 | **`Cluster_Group_array.v`** | 本文主角：例化 2×2 CG，定義 CG 之間的 tile-chain 互連 |
 | `Cluster_Group.v` | 單顆 CG（內含 3×3 PE + router + GLB） |
 | `Cluster_Group_Controller.v` | 產生 CG 的控制訊號 |
+| `cg_array_tile_chain.svg` | 架構圖①：array 層 4-CG tile-chain（下方〈架構圖〉） |
+| `cluster_group_interconnect.svg` | 架構圖②：單顆 CG 內四子模組互連（下方〈單顆 CG 內部互連〉） |
 
 ## 架構圖
 
@@ -41,6 +43,18 @@
 ## 對外介面（每個 CG）
 
 每個 CG 透過 GLB 介面對外連接：**iact 讀入**（3×3 PE 各一）、**weight 讀入**（3 lanes）、**psum 讀寫**（3 banks，21b signed），外加一組 select／enable 控制訊號。頂層 port 的 `[0:1][0:1]` 索引即對應 2×2 的 CG 位置。
+
+## 單顆 CG 內部互連（`Cluster_Group.v`）
+
+把一顆 CG 拆開看，內含**四個子模組**：`PE_Cluster`、`GLB_Cluster`、`Router_Cluster`、`Cluster_Group_Controller`。下圖整理它們彼此、以及與 `ClusterGroup` port 的接線關係。
+
+![ClusterGroup 內部互連](./cluster_group_interconnect.svg)
+
+- **資料面是一條鏈**：`GLB ⇄ Router ⇄ PE`（Router 居中當資料樞紐，PE 與 GLB 不直連）。iact／weight 由 GLB 讀出 → Router 繞徑 → PE；psum 在三者間流動，另有垂直 `cg_psum` 跨 CG 向北累加。
+- **控制面由 Controller 主導 PE＋GLB**，但 **Controller 完全不連 Router**。
+- ★ **PE 埠名交叉（CSC 命名）**：PE 的 `iact_*` 口實接 **weight**、`weight_*` 口實接 **iact**（讀資料流時別被埠名騙）。
+- **Router 純組合**（無 clock／reset），繞徑由 top 的 `router_cluster_*_sel` 決定。
+- **glue ＝ 模組外 `assign` 層**：psum 存/讀回的 `&psum_add`／`&sel` 閘控、`GLB_psum_n` 與 `read_out_en` 的 per-bank 攤平、iact PE-ready 1→3 廣播、`cg_north_psum_out` 匯出。
 
 ## 備註：CG_0_1 不規則接線已規則化（2026-06-11）
 
