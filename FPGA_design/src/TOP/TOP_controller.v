@@ -39,68 +39,20 @@ module TOP_controller # (
 	output 				fc_flag,
 	output	reg [2:0] 	layer_count,
 	
-	output 				CG_0_0_GLB_psum_0_out_en,
-	output 				CG_0_0_GLB_psum_1_out_en,
-	output 				CG_0_0_GLB_psum_2_out_en,
-	output 				CG_0_1_GLB_psum_0_out_en,
-	output 				CG_0_1_GLB_psum_1_out_en,
-	output 				CG_0_1_GLB_psum_2_out_en,
-	output 				CG_1_0_GLB_psum_0_out_en,
-	output 				CG_1_0_GLB_psum_1_out_en,
-	output 				CG_1_0_GLB_psum_2_out_en,
-	output 				CG_1_1_GLB_psum_0_out_en,
-	output 				CG_1_1_GLB_psum_1_out_en,
-	output 				CG_1_1_GLB_psum_2_out_en,
+	output			CG_0_0_GLB_psum_out_en [0:2],
+	output			CG_0_1_GLB_psum_out_en [0:2],
+	output			CG_1_0_GLB_psum_out_en [0:2],
+	output			CG_1_1_GLB_psum_out_en [0:2],
 	
-	output 				CG_0_0_GLB_iact_0_0_in_en,
-	output 				CG_0_0_GLB_iact_0_1_in_en,
-	output 				CG_0_0_GLB_iact_0_2_in_en,
-	output 				CG_0_0_GLB_iact_1_0_in_en,
-	output 				CG_0_0_GLB_iact_1_1_in_en,
-	output 				CG_0_0_GLB_iact_1_2_in_en,
-	output 				CG_0_0_GLB_iact_2_0_in_en,
-	output 				CG_0_0_GLB_iact_2_1_in_en,
-	output 				CG_0_0_GLB_iact_2_2_in_en,
-	output 				CG_0_1_GLB_iact_0_0_in_en,
-	output 				CG_0_1_GLB_iact_0_1_in_en,
-	output 				CG_0_1_GLB_iact_0_2_in_en,
-	output 				CG_0_1_GLB_iact_1_0_in_en,
-	output 				CG_0_1_GLB_iact_1_1_in_en,
-	output 				CG_0_1_GLB_iact_1_2_in_en,
-	output 				CG_0_1_GLB_iact_2_0_in_en,
-	output 				CG_0_1_GLB_iact_2_1_in_en,
-	output 				CG_0_1_GLB_iact_2_2_in_en,
-	output 				CG_1_0_GLB_iact_0_0_in_en,
-	output 				CG_1_0_GLB_iact_0_1_in_en,
-	output 				CG_1_0_GLB_iact_0_2_in_en,
-	output 				CG_1_0_GLB_iact_1_0_in_en,
-	output 				CG_1_0_GLB_iact_1_1_in_en,
-	output 				CG_1_0_GLB_iact_1_2_in_en,
-	output 				CG_1_0_GLB_iact_2_0_in_en,
-	output 				CG_1_0_GLB_iact_2_1_in_en,
-	output 				CG_1_0_GLB_iact_2_2_in_en,
-	output 				CG_1_1_GLB_iact_0_0_in_en,
-	output 				CG_1_1_GLB_iact_0_1_in_en,
-	output 				CG_1_1_GLB_iact_0_2_in_en,
-	output 				CG_1_1_GLB_iact_1_0_in_en,
-	output 				CG_1_1_GLB_iact_1_1_in_en,
-	output 				CG_1_1_GLB_iact_1_2_in_en,
-	output 				CG_1_1_GLB_iact_2_0_in_en,
-	output 				CG_1_1_GLB_iact_2_1_in_en,
-	output 				CG_1_1_GLB_iact_2_2_in_en,
+	output			CG_0_0_GLB_iact_in_en [0:2][0:2],
+	output			CG_0_1_GLB_iact_in_en [0:2][0:2],
+	output			CG_1_0_GLB_iact_in_en [0:2][0:2],
+	output			CG_1_1_GLB_iact_in_en [0:2][0:2],
 	
-	output 				CG_0_0_GLB_weight_0_in_en,
-	output 				CG_0_0_GLB_weight_1_in_en,
-	output 				CG_0_0_GLB_weight_2_in_en,
-	output 				CG_0_1_GLB_weight_0_in_en,
-	output 				CG_0_1_GLB_weight_1_in_en,
-	output 				CG_0_1_GLB_weight_2_in_en,
-	output 				CG_1_0_GLB_weight_0_in_en,
-	output 				CG_1_0_GLB_weight_1_in_en,
-	output 				CG_1_0_GLB_weight_2_in_en,
-	output 				CG_1_1_GLB_weight_0_in_en,
-	output 				CG_1_1_GLB_weight_1_in_en,
-	output 				CG_1_1_GLB_weight_2_in_en,
+	output			CG_0_0_GLB_weight_in_en [0:2],
+	output			CG_0_1_GLB_weight_in_en [0:2],
+	output			CG_1_0_GLB_weight_in_en [0:2],
+	output			CG_1_1_GLB_weight_in_en [0:2],
 	
 	// ------------- CG_0_0 ------------- //
 	output		CG_PE_cluster_iact_data_in_sel [0:1][0:1],
@@ -113,160 +65,73 @@ module TOP_controller # (
 	output		CG_router_cluster_weight_data_out_sel [0:1][0:1],
 	output		CG_router_cluster_psum_data_in_sel [0:1][0:1],
 	output		CG_router_cluster_psum_data_out_sel [0:1][0:1],
+	output	reg		CG_src_GLB_load_fin [0:1][0:1],
+	output			CG_cg_en [0:1][0:1],
+	output			CG_read_psum_en [0:1][0:1],
+	output			CG_psum_SRAM_Bank_0_read_out_en [0:1][0:1],
+	output			CG_psum_SRAM_Bank_1_read_out_en [0:1][0:1],
+	output			CG_psum_SRAM_Bank_2_read_out_en [0:1][0:1],
+	output			CG_GLB_psum_write_en [0:1][0:1],
+	output			CG_psum_spad_clear [0:1][0:1],
+	output			CG_iact_write_fin_clear [0:1][0:1],
+	output			CG_weight_write_fin_clear [0:1][0:1],
 			
-	input				CG_0_0_GLB_iact_load_en,
-	input				CG_0_0_PE_weight_load_en,
-	input				CG_0_0_cal_fin,
-	output	reg			CG_0_0_src_GLB_load_fin,
-	output				CG_0_0_cg_en,
-	output				CG_0_0_read_psum_en,
-	output				CG_0_0_psum_SRAM_Bank_0_read_out_en,
-	output				CG_0_0_psum_SRAM_Bank_1_read_out_en,
-	output				CG_0_0_psum_SRAM_Bank_2_read_out_en,
+	input				CG_GLB_iact_load_en [0:1][0:1],
+	input				CG_PE_weight_load_en [0:1][0:1],
+	input				CG_cal_fin [0:1][0:1],
 	
 	output				CG_0_0_PE_disable [0:2][0:2],
 		
-	output		[9:0]	CG_0_0_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
 		
-	output				CG_0_0_GLB_psum_write_en,
-	output	reg	[9:0]	CG_0_0_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_0_0_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_0_0_GLB_psum_2_write_addr,
-	output		[9:0]	CG_0_0_GLB_psum_0_read_addr,
-	output		[9:0]	CG_0_0_GLB_psum_1_read_addr,
-	output		[9:0]	CG_0_0_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_0_0_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_0_0_GLB_psum_read_addr [0:2],
 		   
 	output		[4:0]	CG_0_0_PSUM_DEPTH,
-	output				CG_0_0_psum_spad_clear,
 				
-	output				CG_0_0_iact_write_fin_clear,
-	output				CG_0_0_weight_write_fin_clear,
 	
 	// ------------- CG_0_1 ------------- //
 	
 							
-	input				CG_0_1_GLB_iact_load_en,
-	input				CG_0_1_PE_weight_load_en,
-	input				CG_0_1_cal_fin,
-	output	reg			CG_0_1_src_GLB_load_fin,
-	output				CG_0_1_cg_en,
-	output				CG_0_1_read_psum_en,
-	output				CG_0_1_psum_SRAM_Bank_0_read_out_en,
-	output				CG_0_1_psum_SRAM_Bank_1_read_out_en,
-	output				CG_0_1_psum_SRAM_Bank_2_read_out_en,
 	
 	output				CG_0_1_PE_disable [0:2][0:2],
 							 
-	output		[9:0]	CG_0_1_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
 							
-	output				CG_0_1_GLB_psum_write_en,
-	output	reg	[9:0]	CG_0_1_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_0_1_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_0_1_GLB_psum_2_write_addr,
-	output		[9:0]	CG_0_1_GLB_psum_0_read_addr,
-	output		[9:0]	CG_0_1_GLB_psum_1_read_addr,
-	output		[9:0]	CG_0_1_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_0_1_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_0_1_GLB_psum_read_addr [0:2],
 							
 	output		[4:0]	CG_0_1_PSUM_DEPTH,
-	output				CG_0_1_psum_spad_clear,
 							
-	output				CG_0_1_iact_write_fin_clear,
-	output				CG_0_1_weight_write_fin_clear,
 	
 	
 	// ------------- CG_1_0 ------------- //
 						
 						
-	input				CG_1_0_GLB_iact_load_en,
-	input				CG_1_0_PE_weight_load_en,
-	input				CG_1_0_cal_fin,
-	output	reg			CG_1_0_src_GLB_load_fin,
-	output				CG_1_0_cg_en,
-	output				CG_1_0_read_psum_en,
-	output				CG_1_0_psum_SRAM_Bank_0_read_out_en,
-	output				CG_1_0_psum_SRAM_Bank_1_read_out_en,
-	output				CG_1_0_psum_SRAM_Bank_2_read_out_en,
 	
 	output				CG_1_0_PE_disable [0:2][0:2],
 						
-	output		[9:0]	CG_1_0_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
 						
-	output				CG_1_0_GLB_psum_write_en,
-	output	reg	[9:0]	CG_1_0_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_1_0_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_1_0_GLB_psum_2_write_addr,
-	output		[9:0]	CG_1_0_GLB_psum_0_read_addr,
-	output		[9:0]	CG_1_0_GLB_psum_1_read_addr,
-	output		[9:0]	CG_1_0_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_1_0_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_1_0_GLB_psum_read_addr [0:2],
 						
 	output		[4:0]	CG_1_0_PSUM_DEPTH,
-	output				CG_1_0_psum_spad_clear,
 						
-	output				CG_1_0_iact_write_fin_clear,
-	output				CG_1_0_weight_write_fin_clear,
 						
 	// ------------- CG_1_1 ------------- //
 	
 	
-	input				CG_1_1_GLB_iact_load_en,
-	input				CG_1_1_PE_weight_load_en,
-	input				CG_1_1_cal_fin,
-	output	reg			CG_1_1_src_GLB_load_fin,
-	output				CG_1_1_cg_en,
-	output				CG_1_1_read_psum_en,
-	output				CG_1_1_psum_SRAM_Bank_0_read_out_en,
-	output				CG_1_1_psum_SRAM_Bank_1_read_out_en,
-	output				CG_1_1_psum_SRAM_Bank_2_read_out_en,
 	
 	output				CG_1_1_PE_disable [0:2][0:2],
 							
-	output		[9:0]	CG_1_1_GLB_iact_0_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_0_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_0_2_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_1_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_1_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_1_2_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_2_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_2_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_iact_2_2_read_addr,
+	output		[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
 							
-	output				CG_1_1_GLB_psum_write_en,
-	output	reg	[9:0]	CG_1_1_GLB_psum_0_write_addr,
-	output	reg	[9:0]	CG_1_1_GLB_psum_1_write_addr,
-	output	reg	[9:0]	CG_1_1_GLB_psum_2_write_addr,
-	output		[9:0]	CG_1_1_GLB_psum_0_read_addr,
-	output		[9:0]	CG_1_1_GLB_psum_1_read_addr,
-	output		[9:0]	CG_1_1_GLB_psum_2_read_addr,
+	output	reg	[9:0]	CG_1_1_GLB_psum_write_addr [0:2],
+	output		[9:0]	CG_1_1_GLB_psum_read_addr [0:2],
 							
 	output		[4:0]	CG_1_1_PSUM_DEPTH,
-	output				CG_1_1_psum_spad_clear,
 							
-	output				CG_1_1_iact_write_fin_clear,
-	output				CG_1_1_weight_write_fin_clear,
 		
 	// ------------- CSC_encoder ------------- //
 	output  	[4:0]  	CSC_encoder_iact_matrix_height,
@@ -609,10 +474,10 @@ assign fc_flag						= 	layer2_flag | layer3_flag | layer4_flag;
 assign 	layer_iter_fin_pulse 		= 	layer_iter_fin 	& (~layer_iter_fin_reg);
 
 // state machine control
-assign	ifmap_load_fin				= 	MEM_read_addr >= 'd783 & CG_0_0_GLB_psum_0_write_addr < 'd289;
-assign	all_GLB_load_en 			= 	(CG_0_0_GLB_iact_load_en | CG_0_1_GLB_iact_load_en | CG_1_0_GLB_iact_load_en | CG_1_1_GLB_iact_load_en) & (~load_PE_start);
-assign	all_PE_weight_load_en 		= 	CG_0_0_PE_weight_load_en| CG_0_1_PE_weight_load_en | CG_1_0_PE_weight_load_en| CG_1_1_PE_weight_load_en;
-assign	all_cal_fin					= 	CG_0_0_cal_fin & CG_0_1_cal_fin & CG_1_0_cal_fin & CG_1_1_cal_fin;
+assign	ifmap_load_fin				= 	MEM_read_addr >= 'd783 & CG_0_0_GLB_psum_write_addr[0] < 'd289;
+assign	all_GLB_load_en 			= 	(CG_GLB_iact_load_en[0][0] | CG_GLB_iact_load_en[0][1] | CG_GLB_iact_load_en[1][0] | CG_GLB_iact_load_en[1][1]) & (~load_PE_start);
+assign	all_PE_weight_load_en 		= 	CG_PE_weight_load_en[0][0]| CG_PE_weight_load_en[0][1] | CG_PE_weight_load_en[1][0]| CG_PE_weight_load_en[1][1];
+assign	all_cal_fin					= 	CG_cal_fin[0][0] & CG_cal_fin[0][1] & CG_cal_fin[1][0] & CG_cal_fin[1][1];
 
 // read ifmap control
 assign	ifmap_in_en 				= 	LAYER_LOAD_IFMAP_wire;
@@ -642,11 +507,11 @@ assign 	psum_rearrange_write_en 	= 	(LAYER_LOAD_IFMAP_wire) 	|
 										(LAYER3_READ_OUT_PSUM_reg)	| 
 										(LAYER4_READ_OUT_PSUM_reg);
 
-assign	psum_acc_fin				= 	(CG_0_0_GLB_psum_0_write_addr % 'd24 == 'd23 & layer0_flag)	| 
-										(CG_0_0_GLB_psum_0_write_addr % 'd32 == 'd31 & layer1_flag) | 
-										(CG_0_0_GLB_psum_0_write_addr % 'd4  == 'd3  & layer2_flag) | 
-										(CG_0_0_GLB_psum_0_write_addr % 'd4  == 'd3  & layer3_flag) | 
-										(CG_0_0_GLB_psum_0_write_addr % 'd4  == 'd3  & layer4_flag) | CG_0_0_GLB_psum_0_write_addr == 'd289;	// need to be optimized
+assign	psum_acc_fin				= 	(CG_0_0_GLB_psum_write_addr[0] % 'd24 == 'd23 & layer0_flag)	| 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd32 == 'd31 & layer1_flag) | 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd4  == 'd3  & layer2_flag) | 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd4  == 'd3  & layer3_flag) | 
+										(CG_0_0_GLB_psum_write_addr[0] % 'd4  == 'd3  & layer4_flag) | CG_0_0_GLB_psum_write_addr[0] == 'd289;	// need to be optimized
 
 
 // pool control
@@ -675,20 +540,20 @@ assign 	layer_done_fin 				= 	layer_done_count == 'd2; // 2 cycles for layer0 do
 assign psum_spad_clear 				= LAYER0_LOAD_GLB_wire | LAYER1_LOAD_GLB_wire | LAYER2_LOAD_GLB_wire | LAYER3_LOAD_GLB_wire | LAYER4_LOAD_GLB_wire;
 assign iact_write_fin_clear			= LAYER_DONE_wire | layer_1_former_iter_fin | layer_iter_fin | (layer2_flag & psum_acc_pulse & fc_weight_read_batch == 'd4);
 
-assign CG_0_0_psum_spad_clear 			= psum_spad_clear;
-assign CG_0_1_psum_spad_clear 			= psum_spad_clear;
-assign CG_1_0_psum_spad_clear 			= psum_spad_clear;
-assign CG_1_1_psum_spad_clear 			= psum_spad_clear;
+assign CG_psum_spad_clear[0][0] 			= psum_spad_clear;
+assign CG_psum_spad_clear[0][1] 			= psum_spad_clear;
+assign CG_psum_spad_clear[1][0] 			= psum_spad_clear;
+assign CG_psum_spad_clear[1][1] 			= psum_spad_clear;
 
-assign CG_0_0_iact_write_fin_clear		= iact_write_fin_clear;
-assign CG_0_1_iact_write_fin_clear		= iact_write_fin_clear;
-assign CG_1_0_iact_write_fin_clear		= iact_write_fin_clear;
-assign CG_1_1_iact_write_fin_clear		= iact_write_fin_clear;
+assign CG_iact_write_fin_clear[0][0]		= iact_write_fin_clear;
+assign CG_iact_write_fin_clear[0][1]		= iact_write_fin_clear;
+assign CG_iact_write_fin_clear[1][0]		= iact_write_fin_clear;
+assign CG_iact_write_fin_clear[1][1]		= iact_write_fin_clear;
 
-assign CG_0_0_weight_write_fin_clear	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
-assign CG_0_1_weight_write_fin_clear	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
-assign CG_1_0_weight_write_fin_clear	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
-assign CG_1_1_weight_write_fin_clear	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
+assign CG_weight_write_fin_clear[0][0]	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
+assign CG_weight_write_fin_clear[0][1]	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
+assign CG_weight_write_fin_clear[1][0]	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
+assign CG_weight_write_fin_clear[1][1]	= LAYER0_CAL_wire | LAYER1_CAL_wire | LAYER2_CAL_wire | LAYER3_CAL_wire | LAYER4_CAL_wire;
 
 
 
@@ -701,10 +566,10 @@ assign MEM_read_en	= 	(LAYER_LOAD_IFMAP_wire & ~ifmap_load_fin_reg) |
 
 
 // other modules control
-assign CG_0_0_cg_en						= cg_en;
-assign CG_0_1_cg_en						= cg_en;
-assign CG_1_0_cg_en						= cg_en;
-assign CG_1_1_cg_en						= cg_en;
+assign CG_cg_en[0][0]						= cg_en;
+assign CG_cg_en[0][1]						= cg_en;
+assign CG_cg_en[1][0]						= cg_en;
+assign CG_cg_en[1][1]						= cg_en;
 
 assign im2col_enable					= (MEM_read_addr > 'd783 & ~im2col_convert_one_stream_done_reg) & ~(layer1_flag & psum_read_out_oen_channel_read_done);
 assign im2col_ifmap_len					= layer0_flag ? 'd783 	: layer1_flag ? 'd143 	: 'd0;
@@ -722,15 +587,15 @@ assign CSC_encoder_weight_matrix_width	= 'd1;	// for fc layer
 assign CSC_encoder_weight_clear_iact_SRAM = (psum_rearrange_read_addr_reg == 'd3499) ? 'd1 : 'd0;
 
 assign psum_acc_en						= LAYER_PSUM_ACC_wire;
-assign CG_0_0_read_psum_en 				= psum_acc_en;
-assign CG_0_1_read_psum_en 				= psum_acc_en;
-assign CG_1_0_read_psum_en 				= psum_acc_en;
-assign CG_1_1_read_psum_en 				= psum_acc_en;
+assign CG_read_psum_en[0][0] 				= psum_acc_en;
+assign CG_read_psum_en[0][1] 				= psum_acc_en;
+assign CG_read_psum_en[1][0] 				= psum_acc_en;
+assign CG_read_psum_en[1][1] 				= psum_acc_en;
       
-assign CG_0_0_GLB_psum_write_en			= psum_acc_en;
-assign CG_0_1_GLB_psum_write_en			= psum_acc_en;
-assign CG_1_0_GLB_psum_write_en			= psum_acc_en;
-assign CG_1_1_GLB_psum_write_en			= psum_acc_en;
+assign CG_GLB_psum_write_en[0][0]			= psum_acc_en;
+assign CG_GLB_psum_write_en[0][1]			= psum_acc_en;
+assign CG_GLB_psum_write_en[1][0]			= psum_acc_en;
+assign CG_GLB_psum_write_en[1][1]			= psum_acc_en;
 
 
 wire GLB_iact_en_sel_0	= GLB_iact_en_sel == 'd0;
@@ -747,97 +612,97 @@ wire GLB_iact_en_sel_10	= GLB_iact_en_sel == 'd10;
 wire GLB_iact_en_sel_11	= GLB_iact_en_sel == 'd11;
 
 
-assign CG_0_0_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_0_0_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_0_1_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_1_0_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_0_0_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_0_1_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_0_2_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_1_0_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_1_1_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_1_2_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_2_0_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_2_1_read_addr = GLB_iact_read_addr;
-assign CG_1_1_GLB_iact_2_2_read_addr = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_0_0_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_0_1_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_1_0_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[0][0] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[0][1] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[0][2] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[1][0] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[1][1] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[1][2] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[2][0] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[2][1] = GLB_iact_read_addr;
+assign	CG_1_1_GLB_iact_read_addr[2][2] = GLB_iact_read_addr;
 
-assign CG_0_0_GLB_iact_0_0_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_0);
-assign CG_0_0_GLB_iact_0_1_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_1);
-assign CG_0_0_GLB_iact_0_2_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_2);
-assign CG_0_1_GLB_iact_0_0_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_3);
-assign CG_0_1_GLB_iact_0_1_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_4);
-assign CG_0_1_GLB_iact_0_2_in_en		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_5);
+assign CG_0_0_GLB_iact_in_en[0][0]		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_0);
+assign CG_0_0_GLB_iact_in_en[0][1]		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_1);
+assign CG_0_0_GLB_iact_in_en[0][2]		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_2);
+assign CG_0_1_GLB_iact_in_en[0][0]		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_3);
+assign CG_0_1_GLB_iact_in_en[0][1]		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_4);
+assign CG_0_1_GLB_iact_in_en[0][2]		= (~layer0_flag & GLB_iact_load_channel_0 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM | (layer0_flag & GLB_iact_en_sel_5);
 
-assign CG_0_0_GLB_iact_1_0_in_en		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_0)	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_0_GLB_iact_1_1_in_en		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_1)	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_0_GLB_iact_1_2_in_en		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_2)	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_1_GLB_iact_1_0_in_en		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_1_GLB_iact_1_1_in_en		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_1_GLB_iact_1_2_in_en		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_0_GLB_iact_in_en[1][0]		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_0)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_0_GLB_iact_in_en[1][1]		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_1)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_0_GLB_iact_in_en[1][2]		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_2)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_1_GLB_iact_in_en[1][0]		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_1_GLB_iact_in_en[1][1]		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_1_GLB_iact_in_en[1][2]		= (~layer0_flag & GLB_iact_load_channel_1 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM;
 																
-assign CG_0_0_GLB_iact_2_0_in_en		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_0)	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_0_GLB_iact_2_1_in_en		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_1)	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_0_GLB_iact_2_2_in_en		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_2)	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_1_GLB_iact_2_0_in_en		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_1_GLB_iact_2_1_in_en		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_0_1_GLB_iact_2_2_in_en		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_5)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_0_GLB_iact_in_en[2][0]		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_0)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_0_GLB_iact_in_en[2][1]		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_1)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_0_GLB_iact_in_en[2][2]		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_2)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_1_GLB_iact_in_en[2][0]		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_1_GLB_iact_in_en[2][1]		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_0_1_GLB_iact_in_en[2][2]		= (~layer0_flag & GLB_iact_load_channel_2 & GLB_iact_en_sel_5)	| CSC_encoder_iact_clear_iact_SRAM;
 																										   
-assign CG_1_0_GLB_iact_0_0_in_en		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_6;
-assign CG_1_0_GLB_iact_0_1_in_en		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_7;
-assign CG_1_0_GLB_iact_0_2_in_en		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_8;
-assign CG_1_1_GLB_iact_0_0_in_en		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_9;
-assign CG_1_1_GLB_iact_0_1_in_en		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_10;
-assign CG_1_1_GLB_iact_0_2_in_en		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_11;
+assign CG_1_0_GLB_iact_in_en[0][0]		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_6;
+assign CG_1_0_GLB_iact_in_en[0][1]		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_7;
+assign CG_1_0_GLB_iact_in_en[0][2]		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_8;
+assign CG_1_1_GLB_iact_in_en[0][0]		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_9;
+assign CG_1_1_GLB_iact_in_en[0][1]		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_10;
+assign CG_1_1_GLB_iact_in_en[0][2]		= (~layer0_flag & GLB_iact_load_channel_3 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM | layer0_flag & GLB_iact_en_sel_11;
 																										   
-assign CG_1_0_GLB_iact_1_0_in_en		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_0_GLB_iact_1_1_in_en		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_0_GLB_iact_1_2_in_en		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_1_GLB_iact_1_0_in_en		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_1_GLB_iact_1_1_in_en		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_1_GLB_iact_1_2_in_en		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_0_GLB_iact_in_en[1][0]		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_0_GLB_iact_in_en[1][1]		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_0_GLB_iact_in_en[1][2]		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_1_GLB_iact_in_en[1][0]		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_1_GLB_iact_in_en[1][1]		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_1_GLB_iact_in_en[1][2]		=(~layer0_flag & GLB_iact_load_channel_4 & GLB_iact_en_sel_5) 	| CSC_encoder_iact_clear_iact_SRAM;
 															
-assign CG_1_0_GLB_iact_2_0_in_en		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_0_GLB_iact_2_1_in_en		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_0_GLB_iact_2_2_in_en		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_1_GLB_iact_2_0_in_en		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_1_GLB_iact_2_1_in_en		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
-assign CG_1_1_GLB_iact_2_2_in_en		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_5)	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_0_GLB_iact_in_en[2][0]		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_0) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_0_GLB_iact_in_en[2][1]		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_1) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_0_GLB_iact_in_en[2][2]		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_2) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_1_GLB_iact_in_en[2][0]		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_3) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_1_GLB_iact_in_en[2][1]		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_4) 	| CSC_encoder_iact_clear_iact_SRAM;
+assign CG_1_1_GLB_iact_in_en[2][2]		=(~layer0_flag & GLB_iact_load_channel_5 & GLB_iact_en_sel_5)	| CSC_encoder_iact_clear_iact_SRAM;
 
-assign CG_0_0_GLB_weight_0_in_en	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_0);
-assign CG_0_0_GLB_weight_1_in_en	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_1);
-assign CG_0_0_GLB_weight_2_in_en	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_2);
-assign CG_0_1_GLB_weight_0_in_en	= 'd0;
-assign CG_0_1_GLB_weight_1_in_en	= 'd0;
-assign CG_0_1_GLB_weight_2_in_en	= 'd0;
-assign CG_1_0_GLB_weight_0_in_en	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_3);
-assign CG_1_0_GLB_weight_1_in_en	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_4);
-assign CG_1_0_GLB_weight_2_in_en	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_5);
-assign CG_1_1_GLB_weight_0_in_en	= 'd0;
-assign CG_1_1_GLB_weight_1_in_en	= 'd0;
-assign CG_1_1_GLB_weight_2_in_en	= 'd0;
+assign CG_0_0_GLB_weight_in_en[0]	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_0);
+assign CG_0_0_GLB_weight_in_en[1]	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_1);
+assign CG_0_0_GLB_weight_in_en[2]	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_2);
+assign CG_0_1_GLB_weight_in_en[0]	= 'd0;
+assign CG_0_1_GLB_weight_in_en[1]	= 'd0;
+assign CG_0_1_GLB_weight_in_en[2]	= 'd0;
+assign CG_1_0_GLB_weight_in_en[0]	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_3);
+assign CG_1_0_GLB_weight_in_en[1]	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_4);
+assign CG_1_0_GLB_weight_in_en[2]	= weight_broadcast | ((~weight_broadcast) & GLB_weight_load_channel_5);
+assign CG_1_1_GLB_weight_in_en[0]	= 'd0;
+assign CG_1_1_GLB_weight_in_en[1]	= 'd0;
+assign CG_1_1_GLB_weight_in_en[2]	= 'd0;
 
 reg [5:0] psum_depth;
 always@(*) begin
@@ -856,18 +721,18 @@ assign CG_0_1_PSUM_DEPTH = psum_depth - 'd1;
 assign CG_1_0_PSUM_DEPTH = psum_depth - 'd1;
 assign CG_1_1_PSUM_DEPTH = psum_depth - 'd1;
 
-assign CG_0_0_GLB_psum_0_out_en = (conv_flag & read_out_psum_sel == 'd0) 	| (fc_flag & GLB_psum_read_sel_reg == 'd0);
-assign CG_0_0_GLB_psum_1_out_en = (conv_flag & read_out_psum_sel == 'd1) 	| (fc_flag & GLB_psum_read_sel_reg == 'd1);
-assign CG_0_0_GLB_psum_2_out_en = (conv_flag & read_out_psum_sel == 'd2) 	| (fc_flag & GLB_psum_read_sel_reg == 'd2);
-assign CG_0_1_GLB_psum_0_out_en = (conv_flag & read_out_psum_sel == 'd3) 	| (fc_flag & GLB_psum_read_sel_reg == 'd3);
-assign CG_0_1_GLB_psum_1_out_en = (conv_flag & read_out_psum_sel == 'd4) 	| (fc_flag & GLB_psum_read_sel_reg == 'd4);
-assign CG_0_1_GLB_psum_2_out_en = (conv_flag & read_out_psum_sel == 'd5) 	| (fc_flag & GLB_psum_read_sel_reg == 'd5);
-assign CG_1_0_GLB_psum_0_out_en = (conv_flag & read_out_psum_sel == 'd6) 	| (fc_flag & GLB_psum_read_sel_reg == 'd6);
-assign CG_1_0_GLB_psum_1_out_en = (conv_flag & read_out_psum_sel == 'd7) 	| (fc_flag & GLB_psum_read_sel_reg == 'd7);
-assign CG_1_0_GLB_psum_2_out_en = (conv_flag & read_out_psum_sel == 'd8) 	| (fc_flag & GLB_psum_read_sel_reg == 'd8);
-assign CG_1_1_GLB_psum_0_out_en = (conv_flag & read_out_psum_sel == 'd9) 	| (fc_flag & GLB_psum_read_sel_reg == 'd9);
-assign CG_1_1_GLB_psum_1_out_en = (conv_flag & read_out_psum_sel == 'd10) 	| (fc_flag & GLB_psum_read_sel_reg == 'd10);
-assign CG_1_1_GLB_psum_2_out_en = (conv_flag & read_out_psum_sel == 'd11)	| (fc_flag & GLB_psum_read_sel_reg == 'd11);
+assign CG_0_0_GLB_psum_out_en[0] = (conv_flag & read_out_psum_sel == 'd0) 	| (fc_flag & GLB_psum_read_sel_reg == 'd0);
+assign CG_0_0_GLB_psum_out_en[1] = (conv_flag & read_out_psum_sel == 'd1) 	| (fc_flag & GLB_psum_read_sel_reg == 'd1);
+assign CG_0_0_GLB_psum_out_en[2] = (conv_flag & read_out_psum_sel == 'd2) 	| (fc_flag & GLB_psum_read_sel_reg == 'd2);
+assign CG_0_1_GLB_psum_out_en[0] = (conv_flag & read_out_psum_sel == 'd3) 	| (fc_flag & GLB_psum_read_sel_reg == 'd3);
+assign CG_0_1_GLB_psum_out_en[1] = (conv_flag & read_out_psum_sel == 'd4) 	| (fc_flag & GLB_psum_read_sel_reg == 'd4);
+assign CG_0_1_GLB_psum_out_en[2] = (conv_flag & read_out_psum_sel == 'd5) 	| (fc_flag & GLB_psum_read_sel_reg == 'd5);
+assign CG_1_0_GLB_psum_out_en[0] = (conv_flag & read_out_psum_sel == 'd6) 	| (fc_flag & GLB_psum_read_sel_reg == 'd6);
+assign CG_1_0_GLB_psum_out_en[1] = (conv_flag & read_out_psum_sel == 'd7) 	| (fc_flag & GLB_psum_read_sel_reg == 'd7);
+assign CG_1_0_GLB_psum_out_en[2] = (conv_flag & read_out_psum_sel == 'd8) 	| (fc_flag & GLB_psum_read_sel_reg == 'd8);
+assign CG_1_1_GLB_psum_out_en[0] = (conv_flag & read_out_psum_sel == 'd9) 	| (fc_flag & GLB_psum_read_sel_reg == 'd9);
+assign CG_1_1_GLB_psum_out_en[1] = (conv_flag & read_out_psum_sel == 'd10) 	| (fc_flag & GLB_psum_read_sel_reg == 'd10);
+assign CG_1_1_GLB_psum_out_en[2] = (conv_flag & read_out_psum_sel == 'd11)	| (fc_flag & GLB_psum_read_sel_reg == 'd11);
 
 
 // router control
@@ -916,36 +781,36 @@ assign CG_router_cluster_psum_data_out_sel[0][1]	= PSUM_TO_PE;
 assign CG_router_cluster_psum_data_out_sel[1][0]	= PSUM_TO_PE;
 assign CG_router_cluster_psum_data_out_sel[1][1]	= PSUM_TO_PE;
 
-assign CG_0_0_psum_SRAM_Bank_0_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd0);
-assign CG_0_0_psum_SRAM_Bank_1_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd1);
-assign CG_0_0_psum_SRAM_Bank_2_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd2);
-assign CG_0_1_psum_SRAM_Bank_0_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd3);
-assign CG_0_1_psum_SRAM_Bank_1_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd4);
-assign CG_0_1_psum_SRAM_Bank_2_read_out_en	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd5);
-assign CG_1_0_psum_SRAM_Bank_0_read_out_en	= read_out_psum_en_conv;
-assign CG_1_0_psum_SRAM_Bank_1_read_out_en	= read_out_psum_en_conv;
-assign CG_1_0_psum_SRAM_Bank_2_read_out_en	= read_out_psum_en_conv;
-assign CG_1_1_psum_SRAM_Bank_0_read_out_en	= read_out_psum_en_conv;
-assign CG_1_1_psum_SRAM_Bank_1_read_out_en	= read_out_psum_en_conv;
-assign CG_1_1_psum_SRAM_Bank_2_read_out_en	= read_out_psum_en_conv;
+assign CG_psum_SRAM_Bank_0_read_out_en[0][0]	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd0);
+assign CG_psum_SRAM_Bank_1_read_out_en[0][0]	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd1);
+assign CG_psum_SRAM_Bank_2_read_out_en[0][0]	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd2);
+assign CG_psum_SRAM_Bank_0_read_out_en[0][1]	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd3);
+assign CG_psum_SRAM_Bank_1_read_out_en[0][1]	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd4);
+assign CG_psum_SRAM_Bank_2_read_out_en[0][1]	= read_out_psum_en_conv | (read_out_psum_en_fc & GLB_psum_read_sel == 'd5);
+assign CG_psum_SRAM_Bank_0_read_out_en[1][0]	= read_out_psum_en_conv;
+assign CG_psum_SRAM_Bank_1_read_out_en[1][0]	= read_out_psum_en_conv;
+assign CG_psum_SRAM_Bank_2_read_out_en[1][0]	= read_out_psum_en_conv;
+assign CG_psum_SRAM_Bank_0_read_out_en[1][1]	= read_out_psum_en_conv;
+assign CG_psum_SRAM_Bank_1_read_out_en[1][1]	= read_out_psum_en_conv;
+assign CG_psum_SRAM_Bank_2_read_out_en[1][1]	= read_out_psum_en_conv;
 
 assign ReLU_en		=	(LAYER_READ_OUT_PSUM_wire & conv_flag) | fc_flag;
 assign pool_enable	=	LAYER0_READ_OUT_PSUM_wire | LAYER1_READ_OUT_PSUM_wire;
 assign softmax_en	= 	LAYER4_READ_OUT_PSUM_reg;
 
-assign	CG_0_0_GLB_psum_0_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd0) ? (CG_0_0_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_0_GLB_psum_1_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd1) ? (CG_0_0_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_0_GLB_psum_2_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd2) ? (CG_0_0_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_1_GLB_psum_0_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd3) ? (CG_0_1_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_1_GLB_psum_1_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd4) ? (CG_0_1_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
-assign	CG_0_1_GLB_psum_2_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd5) ? (CG_0_1_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_0_GLB_psum_read_addr[0] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd0) ? (CG_0_0_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_0_GLB_psum_read_addr[1] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd1) ? (CG_0_0_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_0_GLB_psum_read_addr[2] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd2) ? (CG_0_0_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_1_GLB_psum_read_addr[0] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd3) ? (CG_0_1_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_1_GLB_psum_read_addr[1] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd4) ? (CG_0_1_GLB_psum_1_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_1_read_addr_reg + first_GLB_psum_read_out_adjust);
+assign	CG_0_1_GLB_psum_read_addr[2] = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd5) ? (CG_0_1_GLB_psum_2_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_1_GLB_psum_2_read_addr_reg + first_GLB_psum_read_out_adjust);
 
-assign	CG_1_0_GLB_psum_0_read_addr = CG_1_0_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_0_GLB_psum_1_read_addr = CG_1_0_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_0_GLB_psum_2_read_addr = CG_1_0_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_1_GLB_psum_0_read_addr = CG_1_1_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_1_GLB_psum_1_read_addr = CG_1_1_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
-assign	CG_1_1_GLB_psum_2_read_addr = CG_1_1_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_0_GLB_psum_read_addr[0] = CG_1_0_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_0_GLB_psum_read_addr[1] = CG_1_0_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_0_GLB_psum_read_addr[2] = CG_1_0_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_1_GLB_psum_read_addr[0] = CG_1_1_GLB_psum_0_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_1_GLB_psum_read_addr[1] = CG_1_1_GLB_psum_1_read_addr_reg + (read_out_psum_channel<<'d2);
+assign	CG_1_1_GLB_psum_read_addr[2] = CG_1_1_GLB_psum_2_read_addr_reg + (read_out_psum_channel<<'d2);
 
 
 // next state logic
@@ -1100,10 +965,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_0_GLB_psum_0_read_addr_reg <= 'd1;
 		end
-		else if(read_out_psum_count == 'd3 & CG_1_1_GLB_psum_2_out_en & layer0_flag) begin
+		else if(read_out_psum_count == 'd3 & CG_1_1_GLB_psum_out_en[2] & layer0_flag) begin
 			CG_0_0_GLB_psum_0_read_addr_reg <= CG_0_0_GLB_psum_0_read_addr_reg + 'd1;
 		end
-		else if(CG_0_0_GLB_psum_0_out_en) begin
+		else if(CG_0_0_GLB_psum_out_en[0]) begin
 			CG_0_0_GLB_psum_0_read_addr_reg <= (CG_0_0_GLB_psum_0_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_0_GLB_psum_0_read_addr_reg + 'd1);
 		end
 		else if(LAYER0_PSUM_ACC_wire) begin
@@ -1120,10 +985,10 @@ always @(posedge clock) begin
 		else if(LAYER_DONE_wire) begin
 			CG_0_0_GLB_psum_0_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & (CG_0_1_GLB_psum_2_out_en | (read_out_psum_iter == 'd2 & CG_0_1_GLB_psum_0_out_en))) begin
+		else if(read_out_psum_count == 'd3 & (CG_0_1_GLB_psum_out_en[2] | (read_out_psum_iter == 'd2 & CG_0_1_GLB_psum_out_en[0]))) begin
 			CG_0_0_GLB_psum_0_read_addr_reg <= CG_0_0_GLB_psum_0_read_addr_reg + 'd1;
 		end
-		else if(CG_0_0_GLB_psum_0_out_en) begin
+		else if(CG_0_0_GLB_psum_out_en[0]) begin
 			CG_0_0_GLB_psum_0_read_addr_reg <= (CG_0_0_GLB_psum_0_read_addr_reg[1:0] == 2'b00) ? (read_out_psum_iter == 'd2) ? 'd0 : ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_0_GLB_psum_0_read_addr_reg + 'd1);
 		end
 		else if(LAYER1_PSUM_ACC_wire) begin
@@ -1148,10 +1013,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_0_GLB_psum_1_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_0_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_out_en[0]) begin
 			CG_0_0_GLB_psum_1_read_addr_reg <= CG_0_0_GLB_psum_1_read_addr_reg + 'd1;
 		end
-		else if(CG_0_0_GLB_psum_1_out_en) begin
+		else if(CG_0_0_GLB_psum_out_en[1]) begin
 			CG_0_0_GLB_psum_1_read_addr_reg <= (CG_0_0_GLB_psum_1_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_0_GLB_psum_1_read_addr_reg + 'd1);
 		end
 		else if(LAYER0_PSUM_ACC_wire) begin
@@ -1165,10 +1030,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_0_GLB_psum_1_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_0_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_out_en[0]) begin
 			CG_0_0_GLB_psum_1_read_addr_reg <= CG_0_0_GLB_psum_1_read_addr_reg + 'd1;
 		end
-		else if(CG_0_0_GLB_psum_1_out_en) begin
+		else if(CG_0_0_GLB_psum_out_en[1]) begin
 			CG_0_0_GLB_psum_1_read_addr_reg <= (CG_0_0_GLB_psum_1_read_addr_reg[1:0] == 2'b00) ? (read_out_psum_iter == 'd2) ? 'd0 : ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_0_GLB_psum_1_read_addr_reg + 'd1);
 		end
 		else if(LAYER1_PSUM_ACC_wire) begin
@@ -1193,10 +1058,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_0_GLB_psum_2_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_1_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_out_en[1]) begin
 			CG_0_0_GLB_psum_2_read_addr_reg <= CG_0_0_GLB_psum_2_read_addr_reg + 'd1;
 		end
-		else if(CG_0_0_GLB_psum_2_out_en) begin
+		else if(CG_0_0_GLB_psum_out_en[2]) begin
 			CG_0_0_GLB_psum_2_read_addr_reg <= (CG_0_0_GLB_psum_2_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_0_GLB_psum_2_read_addr_reg + 'd1);
 		end
 		else if(LAYER0_PSUM_ACC_wire) begin
@@ -1210,10 +1075,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_0_GLB_psum_2_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_1_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_out_en[1]) begin
 			CG_0_0_GLB_psum_2_read_addr_reg <= CG_0_0_GLB_psum_2_read_addr_reg + 'd1;
 		end
-		else if(CG_0_0_GLB_psum_2_out_en) begin
+		else if(CG_0_0_GLB_psum_out_en[2]) begin
 			CG_0_0_GLB_psum_2_read_addr_reg <= (CG_0_0_GLB_psum_2_read_addr_reg[1:0] == 2'b00) ? (read_out_psum_iter == 'd2) ? 'd0 : ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_0_GLB_psum_2_read_addr_reg + 'd1);
 		end
 		else if(LAYER1_PSUM_ACC_wire) begin
@@ -1238,10 +1103,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_1_GLB_psum_0_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_2_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_out_en[2]) begin
 			CG_0_1_GLB_psum_0_read_addr_reg <= CG_0_1_GLB_psum_0_read_addr_reg + 'd1;
 		end
-		else if(CG_0_1_GLB_psum_0_out_en) begin
+		else if(CG_0_1_GLB_psum_out_en[0]) begin
 			CG_0_1_GLB_psum_0_read_addr_reg <= (CG_0_1_GLB_psum_0_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_1_GLB_psum_0_read_addr_reg + 'd1);
 		end
 		else if(LAYER0_PSUM_ACC_wire) begin
@@ -1255,10 +1120,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_1_GLB_psum_0_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_2_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_0_GLB_psum_out_en[2]) begin
 			CG_0_1_GLB_psum_0_read_addr_reg <= CG_0_1_GLB_psum_0_read_addr_reg + 'd1;
 		end
-		else if(CG_0_1_GLB_psum_0_out_en) begin
+		else if(CG_0_1_GLB_psum_out_en[0]) begin
 			CG_0_1_GLB_psum_0_read_addr_reg <= (CG_0_1_GLB_psum_0_read_addr_reg[1:0] == 2'b00) ? (read_out_psum_iter == 'd2) ? 'd0 : ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_1_GLB_psum_0_read_addr_reg + 'd1);
 		end
 		else if(LAYER1_PSUM_ACC_wire) begin
@@ -1283,10 +1148,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_1_GLB_psum_1_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_0_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_out_en[0]) begin
 			CG_0_1_GLB_psum_1_read_addr_reg <= CG_0_1_GLB_psum_1_read_addr_reg + 'd1;
 		end
-		else if(CG_0_1_GLB_psum_1_out_en) begin
+		else if(CG_0_1_GLB_psum_out_en[1]) begin
 			CG_0_1_GLB_psum_1_read_addr_reg <= (CG_0_1_GLB_psum_1_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_1_GLB_psum_1_read_addr_reg + 'd1);
 		end
 		else if(LAYER0_PSUM_ACC_wire) begin
@@ -1300,10 +1165,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_1_GLB_psum_1_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_0_out_en & ~read_out_psum_iter_done) begin
+		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_out_en[0] & ~read_out_psum_iter_done) begin
 			CG_0_1_GLB_psum_1_read_addr_reg <= CG_0_1_GLB_psum_1_read_addr_reg + 'd1;
 		end
-		else if(CG_0_1_GLB_psum_1_out_en) begin
+		else if(CG_0_1_GLB_psum_out_en[1]) begin
 			CG_0_1_GLB_psum_1_read_addr_reg <= (CG_0_1_GLB_psum_1_read_addr_reg[1:0] == 2'b00) ? (read_out_psum_iter == 'd1) ? 'd0 : ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_1_GLB_psum_1_read_addr_reg + 'd1);
 		end
 		else if(LAYER1_PSUM_ACC_wire) begin
@@ -1328,10 +1193,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_1_GLB_psum_2_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_1_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_out_en[1]) begin
 			CG_0_1_GLB_psum_2_read_addr_reg <= CG_0_1_GLB_psum_2_read_addr_reg + 'd1;
 		end
-		else if(CG_0_1_GLB_psum_2_out_en) begin
+		else if(CG_0_1_GLB_psum_out_en[2]) begin
 			CG_0_1_GLB_psum_2_read_addr_reg <= (CG_0_1_GLB_psum_2_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_1_GLB_psum_2_read_addr_reg + 'd1);
 		end
 		else if(LAYER0_PSUM_ACC_wire) begin
@@ -1345,10 +1210,10 @@ always @(posedge clock) begin
 		if(layer_iter_fin_pulse) begin
 			CG_0_1_GLB_psum_2_read_addr_reg <= 'd0;
 		end
-		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_1_out_en) begin
+		else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_out_en[1]) begin
 			CG_0_1_GLB_psum_2_read_addr_reg <= CG_0_1_GLB_psum_2_read_addr_reg + 'd1;
 		end
-		else if(CG_0_1_GLB_psum_2_out_en) begin
+		else if(CG_0_1_GLB_psum_out_en[2]) begin
 			CG_0_1_GLB_psum_2_read_addr_reg <= (CG_0_1_GLB_psum_2_read_addr_reg[1:0] == 2'b00) ? (read_out_psum_iter == 'd1) ? 'd0 : ((read_out_psum_iter+'d1) * psum_depth) : (CG_0_1_GLB_psum_2_read_addr_reg + 'd1);
 		end
 		else if(LAYER1_PSUM_ACC_wire) begin
@@ -1372,10 +1237,10 @@ always @(posedge clock) begin
     else if(layer_iter_fin_pulse) begin
         CG_1_0_GLB_psum_0_read_addr_reg <= 'd0;
     end
-	else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_2_out_en) begin
+	else if(read_out_psum_count == 'd3 & CG_0_1_GLB_psum_out_en[2]) begin
         CG_1_0_GLB_psum_0_read_addr_reg <= CG_1_0_GLB_psum_0_read_addr_reg + 'd1;
     end
-    else if(CG_1_0_GLB_psum_0_out_en) begin
+    else if(CG_1_0_GLB_psum_out_en[0]) begin
         CG_1_0_GLB_psum_0_read_addr_reg <= (CG_1_0_GLB_psum_0_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_1_0_GLB_psum_0_read_addr_reg + 'd1);
     end
     else if(LAYER_PSUM_ACC_wire & conv_flag) begin
@@ -1393,10 +1258,10 @@ always @(posedge clock) begin
     else if(layer_iter_fin_pulse) begin
         CG_1_0_GLB_psum_1_read_addr_reg <= 'd0;
     end
-	else if(read_out_psum_count == 'd3 & CG_1_0_GLB_psum_0_out_en) begin
+	else if(read_out_psum_count == 'd3 & CG_1_0_GLB_psum_out_en[0]) begin
         CG_1_0_GLB_psum_1_read_addr_reg <= CG_1_0_GLB_psum_1_read_addr_reg + 'd1;
     end
-    else if(CG_1_0_GLB_psum_1_out_en) begin
+    else if(CG_1_0_GLB_psum_out_en[1]) begin
         CG_1_0_GLB_psum_1_read_addr_reg <= (CG_1_0_GLB_psum_1_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_1_0_GLB_psum_1_read_addr_reg + 'd1);
     end
     else if(LAYER_PSUM_ACC_wire & conv_flag) begin
@@ -1415,10 +1280,10 @@ always @(posedge clock) begin
     else if(layer_iter_fin_pulse) begin
         CG_1_0_GLB_psum_2_read_addr_reg <= 'd0;
     end
-	else if(read_out_psum_count == 'd3 & CG_1_0_GLB_psum_1_out_en) begin
+	else if(read_out_psum_count == 'd3 & CG_1_0_GLB_psum_out_en[1]) begin
         CG_1_0_GLB_psum_2_read_addr_reg <= CG_1_0_GLB_psum_2_read_addr_reg + 'd1;
     end
-    else if(CG_1_0_GLB_psum_2_out_en) begin
+    else if(CG_1_0_GLB_psum_out_en[2]) begin
         CG_1_0_GLB_psum_2_read_addr_reg <= (CG_1_0_GLB_psum_2_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_1_0_GLB_psum_2_read_addr_reg + 'd1);
     end
     else if(LAYER_PSUM_ACC_wire & conv_flag) begin
@@ -1436,10 +1301,10 @@ always @(posedge clock) begin
     else if(layer_iter_fin_pulse) begin
         CG_1_1_GLB_psum_0_read_addr_reg <= 'd0;
     end
-	else if(read_out_psum_count == 'd3 & CG_1_0_GLB_psum_2_out_en) begin
+	else if(read_out_psum_count == 'd3 & CG_1_0_GLB_psum_out_en[2]) begin
         CG_1_1_GLB_psum_0_read_addr_reg <= CG_1_1_GLB_psum_0_read_addr_reg + 'd1;
     end
-    else if(CG_1_1_GLB_psum_0_out_en) begin
+    else if(CG_1_1_GLB_psum_out_en[0]) begin
         CG_1_1_GLB_psum_0_read_addr_reg <= (CG_1_1_GLB_psum_0_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_1_1_GLB_psum_0_read_addr_reg + 'd1);
     end
     else if(LAYER_PSUM_ACC_wire & conv_flag) begin
@@ -1457,10 +1322,10 @@ always @(posedge clock) begin
     else if(layer_iter_fin_pulse) begin
         CG_1_1_GLB_psum_1_read_addr_reg <= 'd0;
     end
-	else if(read_out_psum_count == 'd3 & CG_1_1_GLB_psum_0_out_en) begin
+	else if(read_out_psum_count == 'd3 & CG_1_1_GLB_psum_out_en[0]) begin
         CG_1_1_GLB_psum_1_read_addr_reg <= CG_1_1_GLB_psum_1_read_addr_reg + 'd1;
     end
-    else if(CG_1_1_GLB_psum_1_out_en) begin
+    else if(CG_1_1_GLB_psum_out_en[1]) begin
         CG_1_1_GLB_psum_1_read_addr_reg <= (CG_1_1_GLB_psum_1_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_1_1_GLB_psum_1_read_addr_reg + 'd1);
     end
     else if(LAYER_PSUM_ACC_wire & conv_flag) begin
@@ -1478,10 +1343,10 @@ always @(posedge clock) begin
     else if(layer_iter_fin_pulse) begin
         CG_1_1_GLB_psum_2_read_addr_reg <= 'd0;
     end
-	else if(read_out_psum_count == 'd3 & CG_1_1_GLB_psum_1_out_en) begin
+	else if(read_out_psum_count == 'd3 & CG_1_1_GLB_psum_out_en[1]) begin
         CG_1_1_GLB_psum_2_read_addr_reg <= CG_1_1_GLB_psum_2_read_addr_reg + 'd1;
     end
-    else if(CG_1_1_GLB_psum_2_out_en) begin
+    else if(CG_1_1_GLB_psum_out_en[2]) begin
         CG_1_1_GLB_psum_2_read_addr_reg <= (CG_1_1_GLB_psum_2_read_addr_reg[1:0] == 2'b00) ? ((read_out_psum_iter+'d1) * psum_depth) : (CG_1_1_GLB_psum_2_read_addr_reg + 'd1);
     end
     else if(LAYER_PSUM_ACC_wire & conv_flag) begin
@@ -1705,68 +1570,68 @@ end
 
 always@(posedge clock) begin
 	if(reset) begin
-		CG_0_0_src_GLB_load_fin <= 'd0;
-		CG_0_1_src_GLB_load_fin <= 'd0;
-		CG_1_0_src_GLB_load_fin <= 'd0;
-		CG_1_1_src_GLB_load_fin <= 'd0;
+		CG_src_GLB_load_fin[0][0] <= 'd0;
+		CG_src_GLB_load_fin[0][1] <= 'd0;
+		CG_src_GLB_load_fin[1][0] <= 'd0;
+		CG_src_GLB_load_fin[1][1] <= 'd0;
 	end
 	else if(LAYER_DONE_wire) begin
-		CG_0_0_src_GLB_load_fin <= 'd0;
-		CG_0_1_src_GLB_load_fin <= 'd0;
-		CG_1_0_src_GLB_load_fin <= 'd0;
-		CG_1_1_src_GLB_load_fin <= 'd0;
+		CG_src_GLB_load_fin[0][0] <= 'd0;
+		CG_src_GLB_load_fin[0][1] <= 'd0;
+		CG_src_GLB_load_fin[1][0] <= 'd0;
+		CG_src_GLB_load_fin[1][1] <= 'd0;
 	end
 	else if(load_PE_start) begin
-		CG_0_0_src_GLB_load_fin <= 'd1;
-		CG_0_1_src_GLB_load_fin <= 'd1;
-		CG_1_0_src_GLB_load_fin <= 'd1;
-		CG_1_1_src_GLB_load_fin <= 'd1;
+		CG_src_GLB_load_fin[0][0] <= 'd1;
+		CG_src_GLB_load_fin[0][1] <= 'd1;
+		CG_src_GLB_load_fin[1][0] <= 'd1;
+		CG_src_GLB_load_fin[1][1] <= 'd1;
 	end
 end
 
 
 always@(posedge clock) begin
 	if(reset) begin
-		CG_0_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_2_write_addr	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[2]	<= 'd0;
 	end
 	else if(LAYER_PSUM_ACC_wire) begin
-		CG_0_0_GLB_psum_0_write_addr	<= CG_0_0_GLB_psum_0_write_addr	+ 'd1;
-		CG_0_0_GLB_psum_1_write_addr	<= CG_0_0_GLB_psum_1_write_addr + 'd1;
-		CG_0_0_GLB_psum_2_write_addr	<= CG_0_0_GLB_psum_2_write_addr + 'd1;
-		CG_0_1_GLB_psum_0_write_addr	<= CG_0_1_GLB_psum_0_write_addr + 'd1;
-		CG_0_1_GLB_psum_1_write_addr	<= CG_0_1_GLB_psum_1_write_addr + 'd1;
-		CG_0_1_GLB_psum_2_write_addr	<= CG_0_1_GLB_psum_2_write_addr + 'd1;
-		CG_1_0_GLB_psum_0_write_addr	<= CG_1_0_GLB_psum_0_write_addr + 'd1;
-		CG_1_0_GLB_psum_1_write_addr	<= CG_1_0_GLB_psum_1_write_addr + 'd1;
-		CG_1_0_GLB_psum_2_write_addr	<= CG_1_0_GLB_psum_2_write_addr + 'd1;
-		CG_1_1_GLB_psum_0_write_addr	<= CG_1_1_GLB_psum_0_write_addr + 'd1;
-		CG_1_1_GLB_psum_1_write_addr	<= CG_1_1_GLB_psum_1_write_addr + 'd1;
-		CG_1_1_GLB_psum_2_write_addr	<= CG_1_1_GLB_psum_2_write_addr + 'd1;
+		CG_0_0_GLB_psum_write_addr[0]	<= CG_0_0_GLB_psum_write_addr[0]	+ 'd1;
+		CG_0_0_GLB_psum_write_addr[1]	<= CG_0_0_GLB_psum_write_addr[1] + 'd1;
+		CG_0_0_GLB_psum_write_addr[2]	<= CG_0_0_GLB_psum_write_addr[2] + 'd1;
+		CG_0_1_GLB_psum_write_addr[0]	<= CG_0_1_GLB_psum_write_addr[0] + 'd1;
+		CG_0_1_GLB_psum_write_addr[1]	<= CG_0_1_GLB_psum_write_addr[1] + 'd1;
+		CG_0_1_GLB_psum_write_addr[2]	<= CG_0_1_GLB_psum_write_addr[2] + 'd1;
+		CG_1_0_GLB_psum_write_addr[0]	<= CG_1_0_GLB_psum_write_addr[0] + 'd1;
+		CG_1_0_GLB_psum_write_addr[1]	<= CG_1_0_GLB_psum_write_addr[1] + 'd1;
+		CG_1_0_GLB_psum_write_addr[2]	<= CG_1_0_GLB_psum_write_addr[2] + 'd1;
+		CG_1_1_GLB_psum_write_addr[0]	<= CG_1_1_GLB_psum_write_addr[0] + 'd1;
+		CG_1_1_GLB_psum_write_addr[1]	<= CG_1_1_GLB_psum_write_addr[1] + 'd1;
+		CG_1_1_GLB_psum_write_addr[2]	<= CG_1_1_GLB_psum_write_addr[2] + 'd1;
 	end
 	else if(LAYER_DONE_wire | (fc_weight_read_batch == 'd4 & psum_acc_pulse)) begin
-		CG_0_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_0_1_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_0_GLB_psum_2_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_0_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_1_write_addr	<= 'd0;
-		CG_1_1_GLB_psum_2_write_addr	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_0_1_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_0_GLB_psum_write_addr[2]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[0]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[1]	<= 'd0;
+		CG_1_1_GLB_psum_write_addr[2]	<= 'd0;
 	end
 end
 

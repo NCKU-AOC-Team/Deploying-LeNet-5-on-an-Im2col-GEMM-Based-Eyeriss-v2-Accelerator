@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1160" height="990" viewBox="0 0 1160 990">
+  <style>
+    text { font-family: 'Noto Sans TC','Noto Sans CJK TC','Microsoft JhengHei','PingFang TC','WenQuanYi Zen Hei',sans-serif; }
+    .h1    { font-size: 19px; font-weight: bold; fill: #111; text-anchor: middle; }
+    .h2    { font-size: 13px; fill: #555; text-anchor: middle; }
+    .ptitle{ font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .box   { fill: #e9eef8; stroke: #3a557e; stroke-width: 1.4; }
+    .boxlb { font-size: 15px; font-weight: bold; fill: #1d2c45; text-anchor: middle; }
+    .lbl   { font-size: 11.5px; }
+    .gray  { font-size: 11px; fill: #888; text-anchor: middle; }
+    .note  { font-size: 11.5px; fill: #555; }
+    .aB { stroke: #1f77b4; stroke-width: 2.2; fill: none; }
+    .aG { stroke: #2ca02c; stroke-width: 2.2; fill: none; }
+    .aR { stroke: #d62728; stroke-width: 2.2; fill: none; }
+    .aO { stroke: #e07b00; stroke-width: 2.2; fill: none; }
+    .aY { stroke: #888888; stroke-width: 2.0; fill: none; }
+  </style>
+  <defs>
+    <marker id="mB" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f77b4"/></marker>
+    <marker id="mG" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#2ca02c"/></marker>
+    <marker id="mR" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#d62728"/></marker>
+    <marker id="mO" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#e07b00"/></marker>
+    <marker id="mY" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#888888"/></marker>
+    <g id="cgboxes">
+      <rect class="box" x="70"  y="70"  width="120" height="52" rx="6"/>
+      <rect class="box" x="360" y="70"  width="120" height="52" rx="6"/>
+      <rect class="box" x="70"  y="300" width="120" height="52" rx="6"/>
+      <rect class="box" x="360" y="300" width="120" height="52" rx="6"/>
+      <text class="boxlb" x="130" y="103">CG_0_0</text>
+      <text class="boxlb" x="420" y="103">CG_0_1</text>
+      <text class="boxlb" x="130" y="333">CG_1_0</text>
+      <text class="boxlb" x="420" y="333">CG_1_1</text>
+    </g>
+  </defs>
+
+  <rect x="0" y="0" width="1160" height="990" fill="#ffffff"/>
+  <text class="h1" x="580" y="32">Cluster_Group_array.v — 四個 ClusterGroup 的 tile-chain 互連</text>
+  <text class="h2" x="580" y="56">CG_row_col：row 0 = 北、row 1 = 南；對角線無接線。col0/col1 接線完全鏡像（原 CG_0_1 三處不規則已於 2026-06-12 規則化，1000 張 sim 等價 = don't-care）</text>
+
+  <!-- ===================== Panel 1: iact ===================== -->
+  <g transform="translate(10,70)">
+    <rect x="0" y="0" width="560" height="440" rx="10" fill="#fcfcfd" stroke="#d8d8de"/>
+    <text class="ptitle" x="280" y="28" fill="#1f77b4">iact — 垂直＋水平皆雙向（9 lanes，addr 7b＋data 12b）</text>
+    <use href="#cgboxes" xlink:href="#cgboxes"/>
+    <!-- row 0 horizontal pair -->
+    <line class="aB" x1="196" y1="90"  x2="354" y2="90"  marker-end="url(#mB)"/>
+    <line class="aB" x1="354" y1="100" x2="196" y2="100" marker-end="url(#mB)"/>
+    <text class="lbl" x="275" y="78" fill="#1f77b4" text-anchor="middle">iact_horiz ×9</text>
+    <!-- row 1 horizontal pair -->
+    <line class="aB" x1="196" y1="322" x2="354" y2="322" marker-end="url(#mB)"/>
+    <line class="aB" x1="354" y1="332" x2="196" y2="332" marker-end="url(#mB)"/>
+    <text class="lbl" x="275" y="310" fill="#1f77b4" text-anchor="middle">iact_horiz ×9</text>
+    <!-- col 0 vertical pair -->
+    <line class="aB" x1="124" y1="128" x2="124" y2="294" marker-end="url(#mB)"/>
+    <line class="aB" x1="136" y1="294" x2="136" y2="128" marker-end="url(#mB)"/>
+    <text class="lbl" x="150" y="206" fill="#1f77b4">south ↕ north ×9</text>
+    <text class="lbl" x="150" y="222" fill="#1f77b4">(addr + data)</text>
+    <!-- col 1 vertical pair -->
+    <line class="aB" x1="414" y1="128" x2="414" y2="294" marker-end="url(#mB)"/>
+    <line class="aB" x1="426" y1="294" x2="426" y2="128" marker-end="url(#mB)"/>
+    <text class="note" x="20" y="404">四條邊皆雙向 pair link（valid/ready/bits 全接），實際走向由 router select 決定</text>
+    <text class="note" x="20" y="424">×9 lanes = CG 內 3×3 的 9 顆 PE 各一條；北/南無鄰側照 tie 規則（in 接 0、out_ready 接 1）</text>
+  </g>
+
+  <!-- ===================== Panel 2: weight ===================== -->
+  <g transform="translate(590,70)">
+    <rect x="0" y="0" width="560" height="440" rx="10" fill="#fcfcfd" stroke="#d8d8de"/>
+    <text class="ptitle" x="280" y="28" fill="#2ca02c">weight — 僅水平（3 lanes，addr 8b＋data 13b）</text>
+    <use href="#cgboxes" xlink:href="#cgboxes"/>
+    <!-- row 0 horizontal pair -->
+    <line class="aG" x1="196" y1="90"  x2="354" y2="90"  marker-end="url(#mG)"/>
+    <line class="aG" x1="354" y1="100" x2="196" y2="100" marker-end="url(#mG)"/>
+    <text class="lbl" x="275" y="78" fill="#2ca02c" text-anchor="middle">weight_horiz ×3</text>
+    <!-- row 1 horizontal pair -->
+    <line class="aG" x1="196" y1="322" x2="354" y2="322" marker-end="url(#mG)"/>
+    <line class="aG" x1="354" y1="332" x2="196" y2="332" marker-end="url(#mG)"/>
+    <text class="lbl" x="275" y="310" fill="#2ca02c" text-anchor="middle">weight_horiz ×3</text>
+    <text class="note" x="20" y="404">weight 沒有南北向連線（垂直軸不存在 weight chain），兩 row 同款</text>
+    <text class="note" x="20" y="424">原 CG_0_1 lane0 addr out_ready self-loop 已規則化（改聽 CG_0_0 in_ready）</text>
+  </g>
+
+  <!-- ===================== Panel 3: router psum ===================== -->
+  <g transform="translate(10,530)">
+    <rect x="0" y="0" width="560" height="440" rx="10" fill="#fcfcfd" stroke="#d8d8de"/>
+    <text class="ptitle" x="280" y="28" fill="#d62728">router psum — 僅垂直（3 lanes，21b），南向單鏈（兩 column 相同）</text>
+    <use href="#cgboxes" xlink:href="#cgboxes"/>
+    <text class="gray" x="130" y="62">north_in ← tie_lo</text>
+    <text class="gray" x="420" y="62">north_in ← tie_lo</text>
+    <!-- both columns: one-way southward chain, full handshake -->
+    <line class="aR" x1="130" y1="128" x2="130" y2="294" marker-end="url(#mR)"/>
+    <line class="aR" x1="420" y1="128" x2="420" y2="294" marker-end="url(#mR)"/>
+    <text class="lbl" x="146" y="204" fill="#d62728">×3</text>
+    <text class="lbl" x="146" y="220" fill="#d62728">valid＋ready 全接</text>
+    <text class="lbl" x="436" y="204" fill="#d62728">×3</text>
+    <text class="lbl" x="436" y="220" fill="#d62728">valid＋ready 全接</text>
+    <text class="gray" x="130" y="372">south_out 懸空</text>
+    <text class="gray" x="420" y="372">south_out 懸空</text>
+    <text class="note" x="20" y="404">原碼 col1 曾是上下互餵的垂直環（只接 valid/bits、無 backpressure）＋ CG_0_1 兩處特殊 ready，</text>
+    <text class="note" x="20" y="424">2026-06-12 全部規則化成與 col0 相同；1000 張 sim 結果與 cycle 等價 → 證實原異常為 don't-care</text>
+  </g>
+
+  <!-- ===================== Panel 4: cg psum ===================== -->
+  <g transform="translate(590,530)">
+    <rect x="0" y="0" width="560" height="440" rx="10" fill="#fcfcfd" stroke="#d8d8de"/>
+    <text class="ptitle" x="280" y="28" fill="#e07b00">cg psum — 僅垂直（3 lanes，21b），南 → 北累加</text>
+    <use href="#cgboxes" xlink:href="#cgboxes"/>
+    <text class="gray" x="275" y="60">頂端：輸出懸空、out_ready = tie_hi</text>
+    <!-- northward accumulate links -->
+    <line class="aO" x1="130" y1="294" x2="130" y2="128" marker-end="url(#mO)"/>
+    <line class="aO" x1="420" y1="294" x2="420" y2="128" marker-end="url(#mO)"/>
+    <text class="lbl" x="146" y="204" fill="#e07b00">cg_north_psum_out ×3</text>
+    <text class="lbl" x="146" y="220" fill="#e07b00">valid/ready/bits 全接</text>
+    <!-- bottom-edge constant feed -->
+    <line class="aY" x1="130" y1="392" x2="130" y2="360" marker-end="url(#mY)"/>
+    <line class="aY" x1="420" y1="392" x2="420" y2="360" marker-end="url(#mY)"/>
+    <text class="gray" x="275" y="414">底端：cg_south_psum_in_valid = tie_hi、data = 0（恆收「有效的零 psum」供累加）</text>
+  </g>
+</svg>

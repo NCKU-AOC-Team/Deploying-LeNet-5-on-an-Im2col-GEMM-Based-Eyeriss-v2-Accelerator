@@ -51,18 +51,21 @@ wire	ctrl_CG_router_cluster_weight_data_in_sel [0:1][0:1];
 wire	ctrl_CG_router_cluster_weight_data_out_sel [0:1][0:1];
 wire	ctrl_CG_router_cluster_psum_data_in_sel [0:1][0:1];
 wire	ctrl_CG_router_cluster_psum_data_out_sel [0:1][0:1];
-wire 			     	CG_0_0_read_psum_en;
-wire			     	CG_0_0_cal_fin;
-wire 			     	CG_0_0_cg_en;
-wire			     	CG_0_0_PE_weight_load_en;
-wire			     	CG_0_0_GLB_iact_load_en;
-wire					CG_0_0_src_GLB_load_fin;
-wire					CG_0_0_psum_SRAM_Bank_0_read_out_en;
-wire					CG_0_0_psum_SRAM_Bank_1_read_out_en;
-wire					CG_0_0_psum_SRAM_Bank_2_read_out_en;
+wire	ctrl_CG_src_GLB_load_fin [0:1][0:1];
+wire	ctrl_CG_cg_en [0:1][0:1];
+wire	ctrl_CG_read_psum_en [0:1][0:1];
+wire	ctrl_CG_psum_SRAM_Bank_0_read_out_en [0:1][0:1];
+wire	ctrl_CG_psum_SRAM_Bank_1_read_out_en [0:1][0:1];
+wire	ctrl_CG_psum_SRAM_Bank_2_read_out_en [0:1][0:1];
+wire	ctrl_CG_GLB_psum_write_en [0:1][0:1];
+wire	ctrl_CG_psum_spad_clear [0:1][0:1];
+wire	ctrl_CG_iact_write_fin_clear [0:1][0:1];
+wire	ctrl_CG_weight_write_fin_clear [0:1][0:1];
+wire	CG_cal_fin [0:1][0:1];
+wire	CG_PE_weight_load_en [0:1][0:1];
+wire	CG_GLB_iact_load_en [0:1][0:1];
 wire					ctrl_CG_0_0_PE_disable [0:2][0:2];
 wire			[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2];
-wire					CG_0_0_GLB_psum_write_en;
 wire			[9:0]	CG_0_0_GLB_psum_write_addr [0:2];
 wire			[9:0]	CG_0_0_GLB_psum_read_addr [0:2];
 wire			      	CG_0_0_GLB_iact_address_in_ready [0:2][0:2];
@@ -96,21 +99,8 @@ wire         			CG_0_0_GLB_psum_2_data_out_ready;
 wire        			CG_0_0_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_0_0_GLB_psum_2_data_out;
 wire			[4:0]	CG_0_0_PSUM_DEPTH;
-wire					CG_0_0_psum_spad_clear;
-wire					CG_0_0_iact_write_fin_clear;
-wire					CG_0_0_weight_write_fin_clear;
-wire 			     	CG_0_1_read_psum_en;
-wire			     	CG_0_1_cal_fin;
-wire 			     	CG_0_1_cg_en;
-wire			     	CG_0_1_PE_weight_load_en;
-wire			     	CG_0_1_GLB_iact_load_en;
-wire					CG_0_1_src_GLB_load_fin;
-wire					CG_0_1_psum_SRAM_Bank_0_read_out_en;
-wire					CG_0_1_psum_SRAM_Bank_1_read_out_en;
-wire					CG_0_1_psum_SRAM_Bank_2_read_out_en;
 wire					ctrl_CG_0_1_PE_disable [0:2][0:2];
 wire			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2];
-wire					CG_0_1_GLB_psum_write_en;
 wire			[9:0]	CG_0_1_GLB_psum_write_addr [0:2];
 wire			[9:0]	CG_0_1_GLB_psum_read_addr [0:2];
 wire			      	CG_0_1_GLB_iact_address_in_ready [0:2][0:2];
@@ -144,21 +134,8 @@ wire         			CG_0_1_GLB_psum_2_data_out_ready;
 wire        			CG_0_1_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_0_1_GLB_psum_2_data_out;
 wire			[4:0]	CG_0_1_PSUM_DEPTH;
-wire					CG_0_1_psum_spad_clear;
-wire					CG_0_1_iact_write_fin_clear;
-wire					CG_0_1_weight_write_fin_clear;
-wire 			     	CG_1_0_read_psum_en;
-wire			     	CG_1_0_cal_fin;
-wire 			     	CG_1_0_cg_en;
-wire			     	CG_1_0_PE_weight_load_en;
-wire			     	CG_1_0_GLB_iact_load_en;
-wire					CG_1_0_src_GLB_load_fin;
-wire					CG_1_0_psum_SRAM_Bank_0_read_out_en;
-wire					CG_1_0_psum_SRAM_Bank_1_read_out_en;
-wire					CG_1_0_psum_SRAM_Bank_2_read_out_en;
 wire					ctrl_CG_1_0_PE_disable [0:2][0:2];
 wire			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2];
-wire					CG_1_0_GLB_psum_write_en;
 wire			[9:0]	CG_1_0_GLB_psum_write_addr [0:2];
 wire			[9:0]	CG_1_0_GLB_psum_read_addr [0:2];
 wire			      	CG_1_0_GLB_iact_address_in_ready [0:2][0:2];
@@ -192,21 +169,8 @@ wire         			CG_1_0_GLB_psum_2_data_out_ready;
 wire        			CG_1_0_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_1_0_GLB_psum_2_data_out;
 wire			[4:0]	CG_1_0_PSUM_DEPTH;
-wire					CG_1_0_psum_spad_clear;
-wire					CG_1_0_iact_write_fin_clear;
-wire					CG_1_0_weight_write_fin_clear;
-wire 			     	CG_1_1_read_psum_en;
-wire			     	CG_1_1_cal_fin;
-wire 			     	CG_1_1_cg_en;
-wire			     	CG_1_1_PE_weight_load_en;
-wire			     	CG_1_1_GLB_iact_load_en;
-wire					CG_1_1_src_GLB_load_fin;
-wire					CG_1_1_psum_SRAM_Bank_0_read_out_en;
-wire					CG_1_1_psum_SRAM_Bank_1_read_out_en;
-wire					CG_1_1_psum_SRAM_Bank_2_read_out_en;
 wire					ctrl_CG_1_1_PE_disable [0:2][0:2];
 wire			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2];
-wire					CG_1_1_GLB_psum_write_en;
 wire			[9:0]	CG_1_1_GLB_psum_write_addr [0:2];
 wire			[9:0]	CG_1_1_GLB_psum_read_addr [0:2];
 wire			      	CG_1_1_GLB_iact_address_in_ready [0:2][0:2];
@@ -240,9 +204,6 @@ wire         			CG_1_1_GLB_psum_2_data_out_ready;
 wire        			CG_1_1_GLB_psum_2_data_out_valid;
 wire 	signed 	[20:0] 	CG_1_1_GLB_psum_2_data_out;
 wire			[4:0]	CG_1_1_PSUM_DEPTH;
-wire					CG_1_1_psum_spad_clear;
-wire					CG_1_1_iact_write_fin_clear;
-wire					CG_1_1_weight_write_fin_clear;
 
 
 // ---------------- im2col converter ---------------- //
@@ -343,182 +304,22 @@ wire			ctrl_ifmap_in_en;
 wire			ctrl_ReLU_en;
 wire			ctrl_psum_acc_fin;
 wire			ctrl_psum_SRAM_out_acc_en;
-wire			ctrl_CG_0_0_GLB_psum_0_out_en;
-wire			ctrl_CG_0_0_GLB_psum_1_out_en;
-wire			ctrl_CG_0_0_GLB_psum_2_out_en;
-wire			ctrl_CG_0_1_GLB_psum_0_out_en;
-wire			ctrl_CG_0_1_GLB_psum_1_out_en;
-wire			ctrl_CG_0_1_GLB_psum_2_out_en;
-wire			ctrl_CG_1_0_GLB_psum_0_out_en;
-wire			ctrl_CG_1_0_GLB_psum_1_out_en;
-wire			ctrl_CG_1_0_GLB_psum_2_out_en;
-wire			ctrl_CG_1_1_GLB_psum_0_out_en;
-wire			ctrl_CG_1_1_GLB_psum_1_out_en;
-wire			ctrl_CG_1_1_GLB_psum_2_out_en;
-wire			ctrl_CG_0_0_GLB_iact_0_0_in_en;
-wire			ctrl_CG_0_0_GLB_iact_0_1_in_en;
-wire			ctrl_CG_0_0_GLB_iact_0_2_in_en;
-wire			ctrl_CG_0_0_GLB_iact_1_0_in_en;
-wire			ctrl_CG_0_0_GLB_iact_1_1_in_en;
-wire			ctrl_CG_0_0_GLB_iact_1_2_in_en;
-wire			ctrl_CG_0_0_GLB_iact_2_0_in_en;
-wire			ctrl_CG_0_0_GLB_iact_2_1_in_en;
-wire			ctrl_CG_0_0_GLB_iact_2_2_in_en;
-wire			ctrl_CG_0_1_GLB_iact_0_0_in_en;
-wire			ctrl_CG_0_1_GLB_iact_0_1_in_en;
-wire			ctrl_CG_0_1_GLB_iact_0_2_in_en;
-wire			ctrl_CG_0_1_GLB_iact_1_0_in_en;
-wire			ctrl_CG_0_1_GLB_iact_1_1_in_en;
-wire			ctrl_CG_0_1_GLB_iact_1_2_in_en;
-wire			ctrl_CG_0_1_GLB_iact_2_0_in_en;
-wire			ctrl_CG_0_1_GLB_iact_2_1_in_en;
-wire			ctrl_CG_0_1_GLB_iact_2_2_in_en;
-wire			ctrl_CG_1_0_GLB_iact_0_0_in_en;
-wire			ctrl_CG_1_0_GLB_iact_0_1_in_en;
-wire			ctrl_CG_1_0_GLB_iact_0_2_in_en;
-wire			ctrl_CG_1_0_GLB_iact_1_0_in_en;
-wire			ctrl_CG_1_0_GLB_iact_1_1_in_en;
-wire			ctrl_CG_1_0_GLB_iact_1_2_in_en;
-wire			ctrl_CG_1_0_GLB_iact_2_0_in_en;
-wire			ctrl_CG_1_0_GLB_iact_2_1_in_en;
-wire			ctrl_CG_1_0_GLB_iact_2_2_in_en;
-wire			ctrl_CG_1_1_GLB_iact_0_0_in_en;
-wire			ctrl_CG_1_1_GLB_iact_0_1_in_en;
-wire			ctrl_CG_1_1_GLB_iact_0_2_in_en;
-wire			ctrl_CG_1_1_GLB_iact_1_0_in_en;
-wire			ctrl_CG_1_1_GLB_iact_1_1_in_en;
-wire			ctrl_CG_1_1_GLB_iact_1_2_in_en;
-wire			ctrl_CG_1_1_GLB_iact_2_0_in_en;
-wire			ctrl_CG_1_1_GLB_iact_2_1_in_en;
-wire			ctrl_CG_1_1_GLB_iact_2_2_in_en;
-wire			ctrl_CG_0_0_GLB_weight_0_in_en;
-wire			ctrl_CG_0_0_GLB_weight_1_in_en;
-wire			ctrl_CG_0_0_GLB_weight_2_in_en;
-wire			ctrl_CG_0_1_GLB_weight_0_in_en;
-wire			ctrl_CG_0_1_GLB_weight_1_in_en;
-wire			ctrl_CG_0_1_GLB_weight_2_in_en;
-wire			ctrl_CG_1_0_GLB_weight_0_in_en;
-wire			ctrl_CG_1_0_GLB_weight_1_in_en;
-wire			ctrl_CG_1_0_GLB_weight_2_in_en;
-wire			ctrl_CG_1_1_GLB_weight_0_in_en;
-wire			ctrl_CG_1_1_GLB_weight_1_in_en;
-wire			ctrl_CG_1_1_GLB_weight_2_in_en;
-wire			ctrl_CG_0_0_src_GLB_load_fin;
-wire			ctrl_CG_0_0_GLB_iact_load_en;
-wire			ctrl_CG_0_0_PE_weight_load_en;
-wire			ctrl_CG_0_0_cal_fin;
-wire			ctrl_CG_0_0_cg_en;
-wire			ctrl_CG_0_0_read_psum_en;
-wire			ctrl_CG_0_0_psum_SRAM_Bank_0_read_out_en;
-wire			ctrl_CG_0_0_psum_SRAM_Bank_1_read_out_en;
-wire			ctrl_CG_0_0_psum_SRAM_Bank_2_read_out_en;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_iact_2_2_read_addr;
-wire			ctrl_CG_0_0_GLB_psum_write_en;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_0_0_GLB_psum_2_read_addr;
+wire			ctrl_CG_0_0_GLB_psum_out_en [0:2];
+wire			ctrl_CG_0_1_GLB_psum_out_en [0:2];
+wire			ctrl_CG_1_0_GLB_psum_out_en [0:2];
+wire			ctrl_CG_1_1_GLB_psum_out_en [0:2];
+wire			ctrl_CG_0_0_GLB_iact_in_en [0:2][0:2];
+wire			ctrl_CG_0_1_GLB_iact_in_en [0:2][0:2];
+wire			ctrl_CG_1_0_GLB_iact_in_en [0:2][0:2];
+wire			ctrl_CG_1_1_GLB_iact_in_en [0:2][0:2];
+wire			ctrl_CG_0_0_GLB_weight_in_en [0:2];
+wire			ctrl_CG_0_1_GLB_weight_in_en [0:2];
+wire			ctrl_CG_1_0_GLB_weight_in_en [0:2];
+wire			ctrl_CG_1_1_GLB_weight_in_en [0:2];
 wire	[4:0]	ctrl_CG_0_0_PSUM_DEPTH;
-wire			ctrl_CG_0_0_psum_spad_clear;
-wire			ctrl_CG_0_0_iact_write_fin_clear;
-wire			ctrl_CG_0_0_weight_write_fin_clear;
-wire			ctrl_CG_0_1_src_GLB_load_fin;
-wire			ctrl_CG_0_1_GLB_iact_load_en;
-wire			ctrl_CG_0_1_PE_weight_load_en;
-wire			ctrl_CG_0_1_cal_fin;
-wire			ctrl_CG_0_1_cg_en;
-wire			ctrl_CG_0_1_read_psum_en;
-wire			ctrl_CG_0_1_psum_SRAM_Bank_0_read_out_en;
-wire			ctrl_CG_0_1_psum_SRAM_Bank_1_read_out_en;
-wire			ctrl_CG_0_1_psum_SRAM_Bank_2_read_out_en;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_iact_2_2_read_addr;
-wire			ctrl_CG_0_1_GLB_psum_write_en;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_0_1_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_0_1_PSUM_DEPTH;
-wire			ctrl_CG_0_1_psum_spad_clear;
-wire			ctrl_CG_0_1_iact_write_fin_clear;
-wire			ctrl_CG_0_1_weight_write_fin_clear;
-wire			ctrl_CG_1_0_src_GLB_load_fin;
-wire			ctrl_CG_1_0_GLB_iact_load_en;
-wire			ctrl_CG_1_0_PE_weight_load_en;
-wire			ctrl_CG_1_0_cal_fin;
-wire			ctrl_CG_1_0_cg_en;
-wire			ctrl_CG_1_0_read_psum_en;
-wire			ctrl_CG_1_0_psum_SRAM_Bank_0_read_out_en;
-wire			ctrl_CG_1_0_psum_SRAM_Bank_1_read_out_en;
-wire			ctrl_CG_1_0_psum_SRAM_Bank_2_read_out_en;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_iact_2_2_read_addr;
-wire			ctrl_CG_1_0_GLB_psum_write_en;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_1_0_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_1_0_PSUM_DEPTH;
-wire			ctrl_CG_1_0_psum_spad_clear;
-wire			ctrl_CG_1_0_iact_write_fin_clear;
-wire			ctrl_CG_1_0_weight_write_fin_clear;
-wire			ctrl_CG_1_1_src_GLB_load_fin;
-wire			ctrl_CG_1_1_GLB_iact_load_en;
-wire			ctrl_CG_1_1_PE_weight_load_en;
-wire			ctrl_CG_1_1_cal_fin;
-wire			ctrl_CG_1_1_cg_en;
-wire			ctrl_CG_1_1_read_psum_en;
-wire			ctrl_CG_1_1_psum_SRAM_Bank_0_read_out_en;
-wire			ctrl_CG_1_1_psum_SRAM_Bank_1_read_out_en;
-wire			ctrl_CG_1_1_psum_SRAM_Bank_2_read_out_en;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_0_2_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_1_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_1_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_1_2_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_2_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_2_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_iact_2_2_read_addr;
-wire			ctrl_CG_1_1_GLB_psum_write_en;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_0_write_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_1_write_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_2_write_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_0_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_1_read_addr;
-wire	[9:0]	ctrl_CG_1_1_GLB_psum_2_read_addr;
 wire	[4:0]	ctrl_CG_1_1_PSUM_DEPTH;
-wire			ctrl_CG_1_1_psum_spad_clear;
-wire			ctrl_CG_1_1_iact_write_fin_clear;
-wire			ctrl_CG_1_1_weight_write_fin_clear;
 wire  	[4:0]  	ctrl_CSC_encoder_iact_matrix_height;
 wire  	[4:0]  	ctrl_CSC_encoder_iact_matrix_width;
 wire			ctrl_CSC_encoder_iact_clear_iact_SRAM;
@@ -557,18 +358,21 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_router_cluster_weight_data_out_sel		(ctrl_CG_router_cluster_weight_data_out_sel		),
 	.CG_router_cluster_psum_data_in_sel		(ctrl_CG_router_cluster_psum_data_in_sel		),
 	.CG_router_cluster_psum_data_out_sel		(ctrl_CG_router_cluster_psum_data_out_sel		),
-	.CG_0_0_read_psum_en                        (CG_0_0_read_psum_en                        ),
-	.CG_0_0_cal_fin                             (CG_0_0_cal_fin                             ),
-	.CG_0_0_cg_en                               (CG_0_0_cg_en                               ),
-	.CG_0_0_PE_weight_load_en                   (CG_0_0_PE_weight_load_en                   ),
-	.CG_0_0_GLB_iact_load_en                    (CG_0_0_GLB_iact_load_en                    ),
-	.CG_0_0_src_GLB_load_fin                    (CG_0_0_src_GLB_load_fin                    ),
-	.CG_0_0_psum_SRAM_Bank_0_read_out_en        (CG_0_0_psum_SRAM_Bank_0_read_out_en        ),
-	.CG_0_0_psum_SRAM_Bank_1_read_out_en        (CG_0_0_psum_SRAM_Bank_1_read_out_en        ),
-	.CG_0_0_psum_SRAM_Bank_2_read_out_en        (CG_0_0_psum_SRAM_Bank_2_read_out_en        ),	
+	.CG_src_GLB_load_fin                         (ctrl_CG_src_GLB_load_fin                    ),
+	.CG_cg_en                                    (ctrl_CG_cg_en                               ),
+	.CG_read_psum_en                             (ctrl_CG_read_psum_en                        ),
+	.CG_psum_SRAM_Bank_0_read_out_en             (ctrl_CG_psum_SRAM_Bank_0_read_out_en        ),
+	.CG_psum_SRAM_Bank_1_read_out_en             (ctrl_CG_psum_SRAM_Bank_1_read_out_en        ),
+	.CG_psum_SRAM_Bank_2_read_out_en             (ctrl_CG_psum_SRAM_Bank_2_read_out_en        ),
+	.CG_GLB_psum_write_en                        (ctrl_CG_GLB_psum_write_en                   ),
+	.CG_psum_spad_clear                          (ctrl_CG_psum_spad_clear                     ),
+	.CG_iact_write_fin_clear                     (ctrl_CG_iact_write_fin_clear                ),
+	.CG_weight_write_fin_clear                   (ctrl_CG_weight_write_fin_clear              ),
+	.CG_cal_fin                                 (CG_cal_fin                                 ),
+	.CG_PE_weight_load_en                       (CG_PE_weight_load_en                       ),
+	.CG_GLB_iact_load_en                        (CG_GLB_iact_load_en                        ),
 	.CG_0_0_PE_disable(ctrl_CG_0_0_PE_disable),
 	.CG_0_0_GLB_iact_read_addr(CG_0_0_GLB_iact_read_addr),
-	.CG_0_0_GLB_psum_write_en                   (CG_0_0_GLB_psum_write_en                   ),
 	.CG_0_0_GLB_psum_write_addr(CG_0_0_GLB_psum_write_addr),
 	.CG_0_0_GLB_psum_read_addr(CG_0_0_GLB_psum_read_addr),
 	.CG_0_0_GLB_iact_address_in_ready(CG_0_0_GLB_iact_address_in_ready),
@@ -602,22 +406,9 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_0_0_GLB_psum_2_data_out_valid           (CG_0_0_GLB_psum_2_data_out_valid           ),
 	.CG_0_0_GLB_psum_2_data_out                 (CG_0_0_GLB_psum_2_data_out                 ),
 	.CG_0_0_PSUM_DEPTH                          (CG_0_0_PSUM_DEPTH                          ),
-	.CG_0_0_psum_spad_clear                     (CG_0_0_psum_spad_clear                     ),
-	.CG_0_0_iact_write_fin_clear                (CG_0_0_iact_write_fin_clear                ),
-	.CG_0_0_weight_write_fin_clear              (CG_0_0_weight_write_fin_clear              ),
 	
-	.CG_0_1_read_psum_en                        (CG_0_1_read_psum_en                        ),
-	.CG_0_1_cal_fin                             (CG_0_1_cal_fin                             ),
-	.CG_0_1_cg_en                               (CG_0_1_cg_en                               ),
-	.CG_0_1_PE_weight_load_en                   (CG_0_1_PE_weight_load_en                   ),
-	.CG_0_1_GLB_iact_load_en                    (CG_0_1_GLB_iact_load_en                    ),
-	.CG_0_1_src_GLB_load_fin                    (CG_0_1_src_GLB_load_fin                    ),
-	.CG_0_1_psum_SRAM_Bank_0_read_out_en        (CG_0_1_psum_SRAM_Bank_0_read_out_en        ),
-	.CG_0_1_psum_SRAM_Bank_1_read_out_en        (CG_0_1_psum_SRAM_Bank_1_read_out_en        ),
-	.CG_0_1_psum_SRAM_Bank_2_read_out_en        (CG_0_1_psum_SRAM_Bank_2_read_out_en        ),
 	.CG_0_1_PE_disable(ctrl_CG_0_1_PE_disable),
 	.CG_0_1_GLB_iact_read_addr(CG_0_1_GLB_iact_read_addr),
-	.CG_0_1_GLB_psum_write_en                   (CG_0_1_GLB_psum_write_en                   ),
 	.CG_0_1_GLB_psum_write_addr(CG_0_1_GLB_psum_write_addr),
 	.CG_0_1_GLB_psum_read_addr(CG_0_1_GLB_psum_read_addr),
 	.CG_0_1_GLB_iact_address_in_ready(CG_0_1_GLB_iact_address_in_ready),
@@ -651,22 +442,9 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_0_1_GLB_psum_2_data_out_valid           (CG_0_1_GLB_psum_2_data_out_valid           ),
 	.CG_0_1_GLB_psum_2_data_out                 (CG_0_1_GLB_psum_2_data_out                 ),
 	.CG_0_1_PSUM_DEPTH                          (CG_0_1_PSUM_DEPTH                          ),
-	.CG_0_1_psum_spad_clear                     (CG_0_1_psum_spad_clear                     ),
-	.CG_0_1_iact_write_fin_clear                (CG_0_1_iact_write_fin_clear                ),
-	.CG_0_1_weight_write_fin_clear              (CG_0_1_weight_write_fin_clear              ),
 	
-	.CG_1_0_read_psum_en                        (CG_1_0_read_psum_en                        ),
-	.CG_1_0_cal_fin                             (CG_1_0_cal_fin                             ),
-	.CG_1_0_cg_en                               (CG_1_0_cg_en                               ),
-	.CG_1_0_PE_weight_load_en                   (CG_1_0_PE_weight_load_en                   ),
-	.CG_1_0_GLB_iact_load_en                    (CG_1_0_GLB_iact_load_en                    ),
-	.CG_1_0_src_GLB_load_fin                    (CG_1_0_src_GLB_load_fin                    ),
-	.CG_1_0_psum_SRAM_Bank_0_read_out_en        (CG_1_0_psum_SRAM_Bank_0_read_out_en        ),
-	.CG_1_0_psum_SRAM_Bank_1_read_out_en        (CG_1_0_psum_SRAM_Bank_1_read_out_en        ),
-	.CG_1_0_psum_SRAM_Bank_2_read_out_en        (CG_1_0_psum_SRAM_Bank_2_read_out_en        ),
 	.CG_1_0_PE_disable(ctrl_CG_1_0_PE_disable),
 	.CG_1_0_GLB_iact_read_addr(CG_1_0_GLB_iact_read_addr),
-	.CG_1_0_GLB_psum_write_en                   (CG_1_0_GLB_psum_write_en                   ),
 	.CG_1_0_GLB_psum_write_addr(CG_1_0_GLB_psum_write_addr),
 	.CG_1_0_GLB_psum_read_addr(CG_1_0_GLB_psum_read_addr),
 	.CG_1_0_GLB_iact_address_in_ready(CG_1_0_GLB_iact_address_in_ready),
@@ -700,22 +478,9 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_1_0_GLB_psum_2_data_out_valid           (CG_1_0_GLB_psum_2_data_out_valid           ),
 	.CG_1_0_GLB_psum_2_data_out                 (CG_1_0_GLB_psum_2_data_out                 ),
 	.CG_1_0_PSUM_DEPTH                          (CG_1_0_PSUM_DEPTH                          ),
-	.CG_1_0_psum_spad_clear                     (CG_1_0_psum_spad_clear                     ),
-	.CG_1_0_iact_write_fin_clear                (CG_1_0_iact_write_fin_clear                ),
-	.CG_1_0_weight_write_fin_clear              (CG_1_0_weight_write_fin_clear              ),
 	
-	.CG_1_1_read_psum_en                        (CG_1_1_read_psum_en                        ),
-	.CG_1_1_cal_fin                             (CG_1_1_cal_fin                             ),
-	.CG_1_1_cg_en                               (CG_1_1_cg_en                               ),
-	.CG_1_1_PE_weight_load_en                   (CG_1_1_PE_weight_load_en                   ),
-	.CG_1_1_GLB_iact_load_en                    (CG_1_1_GLB_iact_load_en                    ),
-	.CG_1_1_src_GLB_load_fin                    (CG_1_1_src_GLB_load_fin                    ),
-	.CG_1_1_psum_SRAM_Bank_0_read_out_en        (CG_1_1_psum_SRAM_Bank_0_read_out_en        ),
-	.CG_1_1_psum_SRAM_Bank_1_read_out_en        (CG_1_1_psum_SRAM_Bank_1_read_out_en        ),
-	.CG_1_1_psum_SRAM_Bank_2_read_out_en        (CG_1_1_psum_SRAM_Bank_2_read_out_en        ),
 	.CG_1_1_PE_disable(ctrl_CG_1_1_PE_disable),
 	.CG_1_1_GLB_iact_read_addr(CG_1_1_GLB_iact_read_addr),
-	.CG_1_1_GLB_psum_write_en                   (CG_1_1_GLB_psum_write_en                   ),
 	.CG_1_1_GLB_psum_write_addr(CG_1_1_GLB_psum_write_addr),
 	.CG_1_1_GLB_psum_read_addr(CG_1_1_GLB_psum_read_addr),
 	.CG_1_1_GLB_iact_address_in_ready(CG_1_1_GLB_iact_address_in_ready),
@@ -748,10 +513,7 @@ ClusterGroup_array ClusterGroup_array(
 	.CG_1_1_GLB_psum_2_data_out_ready           (CG_1_1_GLB_psum_2_data_out_ready           ),
 	.CG_1_1_GLB_psum_2_data_out_valid           (CG_1_1_GLB_psum_2_data_out_valid           ),
 	.CG_1_1_GLB_psum_2_data_out                 (CG_1_1_GLB_psum_2_data_out                 ),
-	.CG_1_1_PSUM_DEPTH                          (CG_1_1_PSUM_DEPTH                          ),
-	.CG_1_1_psum_spad_clear                     (CG_1_1_psum_spad_clear                     ),
-	.CG_1_1_iact_write_fin_clear                (CG_1_1_iact_write_fin_clear                ),
-	.CG_1_1_weight_write_fin_clear              (CG_1_1_weight_write_fin_clear              )
+	.CG_1_1_PSUM_DEPTH                          (CG_1_1_PSUM_DEPTH                          )
 	
 );
 
@@ -929,66 +691,18 @@ TOP_controller (
 	.ReLU_en									(ctrl_ReLU_en									),
 	.psum_acc_fin								(ctrl_psum_acc_fin								),
 	.psum_SRAM_out_acc_en						(ctrl_psum_SRAM_out_acc_en						),
-	.CG_0_0_GLB_psum_0_out_en					(ctrl_CG_0_0_GLB_psum_0_out_en					),
-	.CG_0_0_GLB_psum_1_out_en                   (ctrl_CG_0_0_GLB_psum_1_out_en 					),
-	.CG_0_0_GLB_psum_2_out_en                   (ctrl_CG_0_0_GLB_psum_2_out_en 					),
-	.CG_0_1_GLB_psum_0_out_en                   (ctrl_CG_0_1_GLB_psum_0_out_en 					),
-	.CG_0_1_GLB_psum_1_out_en                   (ctrl_CG_0_1_GLB_psum_1_out_en 					),
-	.CG_0_1_GLB_psum_2_out_en                   (ctrl_CG_0_1_GLB_psum_2_out_en 					),
-	.CG_1_0_GLB_psum_0_out_en                   (ctrl_CG_1_0_GLB_psum_0_out_en 					),
-	.CG_1_0_GLB_psum_1_out_en                   (ctrl_CG_1_0_GLB_psum_1_out_en 					),
-	.CG_1_0_GLB_psum_2_out_en                   (ctrl_CG_1_0_GLB_psum_2_out_en 					),
-	.CG_1_1_GLB_psum_0_out_en                   (ctrl_CG_1_1_GLB_psum_0_out_en 					),
-	.CG_1_1_GLB_psum_1_out_en                   (ctrl_CG_1_1_GLB_psum_1_out_en 					),
-	.CG_1_1_GLB_psum_2_out_en                   (ctrl_CG_1_1_GLB_psum_2_out_en 					),
-	.CG_0_0_GLB_iact_0_0_in_en                  (ctrl_CG_0_0_GLB_iact_0_0_in_en					),
-	.CG_0_0_GLB_iact_0_1_in_en                  (ctrl_CG_0_0_GLB_iact_0_1_in_en					),
-	.CG_0_0_GLB_iact_0_2_in_en                  (ctrl_CG_0_0_GLB_iact_0_2_in_en					),
-	.CG_0_0_GLB_iact_1_0_in_en                  (ctrl_CG_0_0_GLB_iact_1_0_in_en					),
-	.CG_0_0_GLB_iact_1_1_in_en                  (ctrl_CG_0_0_GLB_iact_1_1_in_en					),
-	.CG_0_0_GLB_iact_1_2_in_en                  (ctrl_CG_0_0_GLB_iact_1_2_in_en					),
-	.CG_0_0_GLB_iact_2_0_in_en                  (ctrl_CG_0_0_GLB_iact_2_0_in_en					),
-	.CG_0_0_GLB_iact_2_1_in_en                  (ctrl_CG_0_0_GLB_iact_2_1_in_en					),
-	.CG_0_0_GLB_iact_2_2_in_en                  (ctrl_CG_0_0_GLB_iact_2_2_in_en					),
-	.CG_0_1_GLB_iact_0_0_in_en                  (ctrl_CG_0_1_GLB_iact_0_0_in_en					),
-	.CG_0_1_GLB_iact_0_1_in_en                  (ctrl_CG_0_1_GLB_iact_0_1_in_en					),
-	.CG_0_1_GLB_iact_0_2_in_en                  (ctrl_CG_0_1_GLB_iact_0_2_in_en					),
-	.CG_0_1_GLB_iact_1_0_in_en                  (ctrl_CG_0_1_GLB_iact_1_0_in_en					),
-	.CG_0_1_GLB_iact_1_1_in_en                  (ctrl_CG_0_1_GLB_iact_1_1_in_en					),
-	.CG_0_1_GLB_iact_1_2_in_en                  (ctrl_CG_0_1_GLB_iact_1_2_in_en					),
-	.CG_0_1_GLB_iact_2_0_in_en                  (ctrl_CG_0_1_GLB_iact_2_0_in_en					),
-	.CG_0_1_GLB_iact_2_1_in_en                  (ctrl_CG_0_1_GLB_iact_2_1_in_en					),
-	.CG_0_1_GLB_iact_2_2_in_en                  (ctrl_CG_0_1_GLB_iact_2_2_in_en					),
-	.CG_1_0_GLB_iact_0_0_in_en                  (ctrl_CG_1_0_GLB_iact_0_0_in_en					),
-	.CG_1_0_GLB_iact_0_1_in_en                  (ctrl_CG_1_0_GLB_iact_0_1_in_en					),
-	.CG_1_0_GLB_iact_0_2_in_en                  (ctrl_CG_1_0_GLB_iact_0_2_in_en					),
-	.CG_1_0_GLB_iact_1_0_in_en                  (ctrl_CG_1_0_GLB_iact_1_0_in_en					),
-	.CG_1_0_GLB_iact_1_1_in_en                  (ctrl_CG_1_0_GLB_iact_1_1_in_en					),
-	.CG_1_0_GLB_iact_1_2_in_en                  (ctrl_CG_1_0_GLB_iact_1_2_in_en					),
-	.CG_1_0_GLB_iact_2_0_in_en                  (ctrl_CG_1_0_GLB_iact_2_0_in_en					),
-	.CG_1_0_GLB_iact_2_1_in_en                  (ctrl_CG_1_0_GLB_iact_2_1_in_en					),
-	.CG_1_0_GLB_iact_2_2_in_en                  (ctrl_CG_1_0_GLB_iact_2_2_in_en					),
-	.CG_1_1_GLB_iact_0_0_in_en                  (ctrl_CG_1_1_GLB_iact_0_0_in_en					),
-	.CG_1_1_GLB_iact_0_1_in_en                  (ctrl_CG_1_1_GLB_iact_0_1_in_en					),
-	.CG_1_1_GLB_iact_0_2_in_en                  (ctrl_CG_1_1_GLB_iact_0_2_in_en					),
-	.CG_1_1_GLB_iact_1_0_in_en                  (ctrl_CG_1_1_GLB_iact_1_0_in_en					),
-	.CG_1_1_GLB_iact_1_1_in_en                  (ctrl_CG_1_1_GLB_iact_1_1_in_en					),
-	.CG_1_1_GLB_iact_1_2_in_en                  (ctrl_CG_1_1_GLB_iact_1_2_in_en					),
-	.CG_1_1_GLB_iact_2_0_in_en                  (ctrl_CG_1_1_GLB_iact_2_0_in_en					),
-	.CG_1_1_GLB_iact_2_1_in_en                  (ctrl_CG_1_1_GLB_iact_2_1_in_en					),
-	.CG_1_1_GLB_iact_2_2_in_en                  (ctrl_CG_1_1_GLB_iact_2_2_in_en					),
-	.CG_0_0_GLB_weight_0_in_en                  (ctrl_CG_0_0_GLB_weight_0_in_en					),
-	.CG_0_0_GLB_weight_1_in_en                  (ctrl_CG_0_0_GLB_weight_1_in_en					),
-	.CG_0_0_GLB_weight_2_in_en                  (ctrl_CG_0_0_GLB_weight_2_in_en					),
-	.CG_0_1_GLB_weight_0_in_en                  (ctrl_CG_0_1_GLB_weight_0_in_en					),
-	.CG_0_1_GLB_weight_1_in_en                  (ctrl_CG_0_1_GLB_weight_1_in_en					),
-	.CG_0_1_GLB_weight_2_in_en                  (ctrl_CG_0_1_GLB_weight_2_in_en					),
-	.CG_1_0_GLB_weight_0_in_en                  (ctrl_CG_1_0_GLB_weight_0_in_en					),
-	.CG_1_0_GLB_weight_1_in_en                  (ctrl_CG_1_0_GLB_weight_1_in_en					),
-	.CG_1_0_GLB_weight_2_in_en                  (ctrl_CG_1_0_GLB_weight_2_in_en					),
-	.CG_1_1_GLB_weight_0_in_en                  (ctrl_CG_1_1_GLB_weight_0_in_en					),
-	.CG_1_1_GLB_weight_1_in_en                  (ctrl_CG_1_1_GLB_weight_1_in_en					),
-	.CG_1_1_GLB_weight_2_in_en                  (ctrl_CG_1_1_GLB_weight_2_in_en					),
+	.CG_0_0_GLB_psum_out_en					(ctrl_CG_0_0_GLB_psum_out_en					),
+	.CG_0_1_GLB_psum_out_en					(ctrl_CG_0_1_GLB_psum_out_en					),
+	.CG_1_0_GLB_psum_out_en					(ctrl_CG_1_0_GLB_psum_out_en					),
+	.CG_1_1_GLB_psum_out_en					(ctrl_CG_1_1_GLB_psum_out_en					),
+	.CG_0_0_GLB_iact_in_en					(ctrl_CG_0_0_GLB_iact_in_en					),
+	.CG_0_1_GLB_iact_in_en					(ctrl_CG_0_1_GLB_iact_in_en					),
+	.CG_1_0_GLB_iact_in_en					(ctrl_CG_1_0_GLB_iact_in_en					),
+	.CG_1_1_GLB_iact_in_en					(ctrl_CG_1_1_GLB_iact_in_en					),
+	.CG_0_0_GLB_weight_in_en					(ctrl_CG_0_0_GLB_weight_in_en					),
+	.CG_0_1_GLB_weight_in_en					(ctrl_CG_0_1_GLB_weight_in_en					),
+	.CG_1_0_GLB_weight_in_en					(ctrl_CG_1_0_GLB_weight_in_en					),
+	.CG_1_1_GLB_weight_in_en					(ctrl_CG_1_1_GLB_weight_in_en					),
 	
 	.CG_PE_cluster_iact_data_in_sel		(ctrl_CG_PE_cluster_iact_data_in_sel		),
 	.CG_PE_cluster_iact_data_out_sel		(ctrl_CG_PE_cluster_iact_data_out_sel		),
@@ -999,126 +713,39 @@ TOP_controller (
 	.CG_router_cluster_weight_data_out_sel		(ctrl_CG_router_cluster_weight_data_out_sel		),
 	.CG_router_cluster_psum_data_in_sel		(ctrl_CG_router_cluster_psum_data_in_sel		),
 	.CG_router_cluster_psum_data_out_sel		(ctrl_CG_router_cluster_psum_data_out_sel		),
-	.CG_0_0_src_GLB_load_fin                    (ctrl_CG_0_0_src_GLB_load_fin                   ),
-	.CG_0_0_GLB_iact_load_en                    (ctrl_CG_0_0_GLB_iact_load_en                   ),
-	.CG_0_0_PE_weight_load_en                   (ctrl_CG_0_0_PE_weight_load_en                  ),
-	.CG_0_0_cal_fin                             (ctrl_CG_0_0_cal_fin                            ),
-	.CG_0_0_cg_en                               (ctrl_CG_0_0_cg_en                              ),
-	.CG_0_0_read_psum_en                        (ctrl_CG_0_0_read_psum_en                       ),
-	.CG_0_0_psum_SRAM_Bank_0_read_out_en        (ctrl_CG_0_0_psum_SRAM_Bank_0_read_out_en       ),
-	.CG_0_0_psum_SRAM_Bank_1_read_out_en        (ctrl_CG_0_0_psum_SRAM_Bank_1_read_out_en       ),
-	.CG_0_0_psum_SRAM_Bank_2_read_out_en        (ctrl_CG_0_0_psum_SRAM_Bank_2_read_out_en       ),
+	.CG_src_GLB_load_fin                         (ctrl_CG_src_GLB_load_fin                    ),
+	.CG_cg_en                                    (ctrl_CG_cg_en                               ),
+	.CG_read_psum_en                             (ctrl_CG_read_psum_en                        ),
+	.CG_psum_SRAM_Bank_0_read_out_en             (ctrl_CG_psum_SRAM_Bank_0_read_out_en        ),
+	.CG_psum_SRAM_Bank_1_read_out_en             (ctrl_CG_psum_SRAM_Bank_1_read_out_en        ),
+	.CG_psum_SRAM_Bank_2_read_out_en             (ctrl_CG_psum_SRAM_Bank_2_read_out_en        ),
+	.CG_GLB_psum_write_en                        (ctrl_CG_GLB_psum_write_en                   ),
+	.CG_psum_spad_clear                          (ctrl_CG_psum_spad_clear                     ),
+	.CG_iact_write_fin_clear                     (ctrl_CG_iact_write_fin_clear                ),
+	.CG_weight_write_fin_clear                   (ctrl_CG_weight_write_fin_clear              ),
+	.CG_GLB_iact_load_en                        (CG_GLB_iact_load_en                        ),
+	.CG_PE_weight_load_en                       (CG_PE_weight_load_en                       ),
+	.CG_cal_fin                                 (CG_cal_fin                                 ),
 	.CG_0_0_PE_disable						(ctrl_CG_0_0_PE_disable						),
-	.CG_0_0_GLB_iact_0_0_read_addr              (ctrl_CG_0_0_GLB_iact_0_0_read_addr             ),
-	.CG_0_0_GLB_iact_0_1_read_addr              (ctrl_CG_0_0_GLB_iact_0_1_read_addr             ),
-	.CG_0_0_GLB_iact_0_2_read_addr              (ctrl_CG_0_0_GLB_iact_0_2_read_addr             ),
-	.CG_0_0_GLB_iact_1_0_read_addr              (ctrl_CG_0_0_GLB_iact_1_0_read_addr             ),
-	.CG_0_0_GLB_iact_1_1_read_addr              (ctrl_CG_0_0_GLB_iact_1_1_read_addr             ),
-	.CG_0_0_GLB_iact_1_2_read_addr              (ctrl_CG_0_0_GLB_iact_1_2_read_addr             ),
-	.CG_0_0_GLB_iact_2_0_read_addr              (ctrl_CG_0_0_GLB_iact_2_0_read_addr             ),
-	.CG_0_0_GLB_iact_2_1_read_addr              (ctrl_CG_0_0_GLB_iact_2_1_read_addr             ),
-	.CG_0_0_GLB_iact_2_2_read_addr              (ctrl_CG_0_0_GLB_iact_2_2_read_addr             ),
-	.CG_0_0_GLB_psum_write_en                   (ctrl_CG_0_0_GLB_psum_write_en                  ),
-	.CG_0_0_GLB_psum_0_write_addr               (ctrl_CG_0_0_GLB_psum_0_write_addr              ),
-	.CG_0_0_GLB_psum_1_write_addr               (ctrl_CG_0_0_GLB_psum_1_write_addr              ),
-	.CG_0_0_GLB_psum_2_write_addr               (ctrl_CG_0_0_GLB_psum_2_write_addr              ),
-	.CG_0_0_GLB_psum_0_read_addr                (ctrl_CG_0_0_GLB_psum_0_read_addr               ),
-	.CG_0_0_GLB_psum_1_read_addr                (ctrl_CG_0_0_GLB_psum_1_read_addr               ),
-	.CG_0_0_GLB_psum_2_read_addr                (ctrl_CG_0_0_GLB_psum_2_read_addr               ),
+	.CG_0_0_GLB_iact_read_addr                  (CG_0_0_GLB_iact_read_addr                      ),
+	.CG_0_0_GLB_psum_write_addr                 (CG_0_0_GLB_psum_write_addr                     ),
+	.CG_0_0_GLB_psum_read_addr                  (CG_0_0_GLB_psum_read_addr                      ),
 	.CG_0_0_PSUM_DEPTH                          (ctrl_CG_0_0_PSUM_DEPTH                         ),
-	.CG_0_0_psum_spad_clear                     (ctrl_CG_0_0_psum_spad_clear                    ),
-	.CG_0_0_iact_write_fin_clear                (ctrl_CG_0_0_iact_write_fin_clear               ),
-	.CG_0_0_weight_write_fin_clear              (ctrl_CG_0_0_weight_write_fin_clear             ),
-	.CG_0_1_src_GLB_load_fin                    (ctrl_CG_0_1_src_GLB_load_fin                   ),
-	.CG_0_1_GLB_iact_load_en                    (ctrl_CG_0_1_GLB_iact_load_en                   ),
-	.CG_0_1_PE_weight_load_en                   (ctrl_CG_0_1_PE_weight_load_en                  ),
-	.CG_0_1_cal_fin                             (ctrl_CG_0_1_cal_fin                            ),
-	.CG_0_1_cg_en                               (ctrl_CG_0_1_cg_en                              ),
-	.CG_0_1_read_psum_en                        (ctrl_CG_0_1_read_psum_en                       ),
-	.CG_0_1_psum_SRAM_Bank_0_read_out_en        (ctrl_CG_0_1_psum_SRAM_Bank_0_read_out_en       ),
-	.CG_0_1_psum_SRAM_Bank_1_read_out_en        (ctrl_CG_0_1_psum_SRAM_Bank_1_read_out_en       ),
-	.CG_0_1_psum_SRAM_Bank_2_read_out_en        (ctrl_CG_0_1_psum_SRAM_Bank_2_read_out_en       ),
 	.CG_0_1_PE_disable						(ctrl_CG_0_1_PE_disable						),
-	.CG_0_1_GLB_iact_0_0_read_addr              (ctrl_CG_0_1_GLB_iact_0_0_read_addr             ),
-	.CG_0_1_GLB_iact_0_1_read_addr              (ctrl_CG_0_1_GLB_iact_0_1_read_addr             ),
-	.CG_0_1_GLB_iact_0_2_read_addr              (ctrl_CG_0_1_GLB_iact_0_2_read_addr             ),
-	.CG_0_1_GLB_iact_1_0_read_addr              (ctrl_CG_0_1_GLB_iact_1_0_read_addr             ),
-	.CG_0_1_GLB_iact_1_1_read_addr              (ctrl_CG_0_1_GLB_iact_1_1_read_addr             ),
-	.CG_0_1_GLB_iact_1_2_read_addr              (ctrl_CG_0_1_GLB_iact_1_2_read_addr             ),
-	.CG_0_1_GLB_iact_2_0_read_addr              (ctrl_CG_0_1_GLB_iact_2_0_read_addr             ),
-	.CG_0_1_GLB_iact_2_1_read_addr              (ctrl_CG_0_1_GLB_iact_2_1_read_addr             ),
-	.CG_0_1_GLB_iact_2_2_read_addr              (ctrl_CG_0_1_GLB_iact_2_2_read_addr             ),
-	.CG_0_1_GLB_psum_write_en                   (ctrl_CG_0_1_GLB_psum_write_en                  ),
-	.CG_0_1_GLB_psum_0_write_addr               (ctrl_CG_0_1_GLB_psum_0_write_addr              ),
-	.CG_0_1_GLB_psum_1_write_addr               (ctrl_CG_0_1_GLB_psum_1_write_addr              ),
-	.CG_0_1_GLB_psum_2_write_addr               (ctrl_CG_0_1_GLB_psum_2_write_addr              ),
-	.CG_0_1_GLB_psum_0_read_addr                (ctrl_CG_0_1_GLB_psum_0_read_addr               ),
-	.CG_0_1_GLB_psum_1_read_addr                (ctrl_CG_0_1_GLB_psum_1_read_addr               ),
-	.CG_0_1_GLB_psum_2_read_addr                (ctrl_CG_0_1_GLB_psum_2_read_addr               ),
+	.CG_0_1_GLB_iact_read_addr                  (CG_0_1_GLB_iact_read_addr                      ),
+	.CG_0_1_GLB_psum_write_addr                 (CG_0_1_GLB_psum_write_addr                     ),
+	.CG_0_1_GLB_psum_read_addr                  (CG_0_1_GLB_psum_read_addr                      ),
 	.CG_0_1_PSUM_DEPTH                          (ctrl_CG_0_1_PSUM_DEPTH                         ),
-	.CG_0_1_psum_spad_clear                     (ctrl_CG_0_1_psum_spad_clear                    ),
-	.CG_0_1_iact_write_fin_clear                (ctrl_CG_0_1_iact_write_fin_clear               ),
-	.CG_0_1_weight_write_fin_clear              (ctrl_CG_0_1_weight_write_fin_clear             ),
-	.CG_1_0_src_GLB_load_fin                    (ctrl_CG_1_0_src_GLB_load_fin                   ),
-	.CG_1_0_GLB_iact_load_en                    (ctrl_CG_1_0_GLB_iact_load_en                   ),
-	.CG_1_0_PE_weight_load_en                   (ctrl_CG_1_0_PE_weight_load_en                  ),
-	.CG_1_0_cal_fin                             (ctrl_CG_1_0_cal_fin                            ),
-	.CG_1_0_cg_en                               (ctrl_CG_1_0_cg_en                              ),
-	.CG_1_0_read_psum_en                        (ctrl_CG_1_0_read_psum_en                       ),
-	.CG_1_0_psum_SRAM_Bank_0_read_out_en        (ctrl_CG_1_0_psum_SRAM_Bank_0_read_out_en       ),
-	.CG_1_0_psum_SRAM_Bank_1_read_out_en        (ctrl_CG_1_0_psum_SRAM_Bank_1_read_out_en       ),
-	.CG_1_0_psum_SRAM_Bank_2_read_out_en        (ctrl_CG_1_0_psum_SRAM_Bank_2_read_out_en       ),
 	.CG_1_0_PE_disable						(ctrl_CG_1_0_PE_disable						),
-	.CG_1_0_GLB_iact_0_0_read_addr              (ctrl_CG_1_0_GLB_iact_0_0_read_addr             ),
-	.CG_1_0_GLB_iact_0_1_read_addr              (ctrl_CG_1_0_GLB_iact_0_1_read_addr             ),
-	.CG_1_0_GLB_iact_0_2_read_addr              (ctrl_CG_1_0_GLB_iact_0_2_read_addr             ),
-	.CG_1_0_GLB_iact_1_0_read_addr              (ctrl_CG_1_0_GLB_iact_1_0_read_addr             ),
-	.CG_1_0_GLB_iact_1_1_read_addr              (ctrl_CG_1_0_GLB_iact_1_1_read_addr             ),
-	.CG_1_0_GLB_iact_1_2_read_addr              (ctrl_CG_1_0_GLB_iact_1_2_read_addr             ),
-	.CG_1_0_GLB_iact_2_0_read_addr              (ctrl_CG_1_0_GLB_iact_2_0_read_addr             ),
-	.CG_1_0_GLB_iact_2_1_read_addr              (ctrl_CG_1_0_GLB_iact_2_1_read_addr             ),
-	.CG_1_0_GLB_iact_2_2_read_addr              (ctrl_CG_1_0_GLB_iact_2_2_read_addr             ),
-	.CG_1_0_GLB_psum_write_en                   (ctrl_CG_1_0_GLB_psum_write_en                  ),
-	.CG_1_0_GLB_psum_0_write_addr               (ctrl_CG_1_0_GLB_psum_0_write_addr              ),
-	.CG_1_0_GLB_psum_1_write_addr               (ctrl_CG_1_0_GLB_psum_1_write_addr              ),
-	.CG_1_0_GLB_psum_2_write_addr               (ctrl_CG_1_0_GLB_psum_2_write_addr              ),
-	.CG_1_0_GLB_psum_0_read_addr                (ctrl_CG_1_0_GLB_psum_0_read_addr               ),
-	.CG_1_0_GLB_psum_1_read_addr                (ctrl_CG_1_0_GLB_psum_1_read_addr               ),
-	.CG_1_0_GLB_psum_2_read_addr                (ctrl_CG_1_0_GLB_psum_2_read_addr               ),
+	.CG_1_0_GLB_iact_read_addr                  (CG_1_0_GLB_iact_read_addr                      ),
+	.CG_1_0_GLB_psum_write_addr                 (CG_1_0_GLB_psum_write_addr                     ),
+	.CG_1_0_GLB_psum_read_addr                  (CG_1_0_GLB_psum_read_addr                      ),
 	.CG_1_0_PSUM_DEPTH                          (ctrl_CG_1_0_PSUM_DEPTH                         ),
-	.CG_1_0_psum_spad_clear                     (ctrl_CG_1_0_psum_spad_clear                    ),
-	.CG_1_0_iact_write_fin_clear                (ctrl_CG_1_0_iact_write_fin_clear               ),
-	.CG_1_0_weight_write_fin_clear              (ctrl_CG_1_0_weight_write_fin_clear             ),
-	.CG_1_1_src_GLB_load_fin                    (ctrl_CG_1_1_src_GLB_load_fin                   ),
-	.CG_1_1_GLB_iact_load_en                    (ctrl_CG_1_1_GLB_iact_load_en                   ),
-	.CG_1_1_PE_weight_load_en                   (ctrl_CG_1_1_PE_weight_load_en                  ),
-	.CG_1_1_cal_fin                             (ctrl_CG_1_1_cal_fin                            ),
-	.CG_1_1_cg_en                               (ctrl_CG_1_1_cg_en                              ),
-	.CG_1_1_read_psum_en                        (ctrl_CG_1_1_read_psum_en                       ),
-	.CG_1_1_psum_SRAM_Bank_0_read_out_en        (ctrl_CG_1_1_psum_SRAM_Bank_0_read_out_en       ),
-	.CG_1_1_psum_SRAM_Bank_1_read_out_en        (ctrl_CG_1_1_psum_SRAM_Bank_1_read_out_en       ),
-	.CG_1_1_psum_SRAM_Bank_2_read_out_en        (ctrl_CG_1_1_psum_SRAM_Bank_2_read_out_en       ),
 	.CG_1_1_PE_disable						(ctrl_CG_1_1_PE_disable						),
-	.CG_1_1_GLB_iact_0_0_read_addr              (ctrl_CG_1_1_GLB_iact_0_0_read_addr             ),
-	.CG_1_1_GLB_iact_0_1_read_addr              (ctrl_CG_1_1_GLB_iact_0_1_read_addr             ),
-	.CG_1_1_GLB_iact_0_2_read_addr              (ctrl_CG_1_1_GLB_iact_0_2_read_addr             ),
-	.CG_1_1_GLB_iact_1_0_read_addr              (ctrl_CG_1_1_GLB_iact_1_0_read_addr             ),
-	.CG_1_1_GLB_iact_1_1_read_addr              (ctrl_CG_1_1_GLB_iact_1_1_read_addr             ),
-	.CG_1_1_GLB_iact_1_2_read_addr              (ctrl_CG_1_1_GLB_iact_1_2_read_addr             ),
-	.CG_1_1_GLB_iact_2_0_read_addr              (ctrl_CG_1_1_GLB_iact_2_0_read_addr             ),
-	.CG_1_1_GLB_iact_2_1_read_addr              (ctrl_CG_1_1_GLB_iact_2_1_read_addr             ),
-	.CG_1_1_GLB_iact_2_2_read_addr              (ctrl_CG_1_1_GLB_iact_2_2_read_addr             ),
-	.CG_1_1_GLB_psum_write_en                   (ctrl_CG_1_1_GLB_psum_write_en                  ),
-	.CG_1_1_GLB_psum_0_write_addr               (ctrl_CG_1_1_GLB_psum_0_write_addr              ),
-	.CG_1_1_GLB_psum_1_write_addr               (ctrl_CG_1_1_GLB_psum_1_write_addr              ),
-	.CG_1_1_GLB_psum_2_write_addr               (ctrl_CG_1_1_GLB_psum_2_write_addr              ),
-	.CG_1_1_GLB_psum_0_read_addr                (ctrl_CG_1_1_GLB_psum_0_read_addr               ),
-	.CG_1_1_GLB_psum_1_read_addr                (ctrl_CG_1_1_GLB_psum_1_read_addr               ),
-	.CG_1_1_GLB_psum_2_read_addr                (ctrl_CG_1_1_GLB_psum_2_read_addr               ),
+	.CG_1_1_GLB_iact_read_addr                  (CG_1_1_GLB_iact_read_addr                      ),
+	.CG_1_1_GLB_psum_write_addr                 (CG_1_1_GLB_psum_write_addr                     ),
+	.CG_1_1_GLB_psum_read_addr                  (CG_1_1_GLB_psum_read_addr                      ),
 	.CG_1_1_PSUM_DEPTH                          (ctrl_CG_1_1_PSUM_DEPTH                         ),
-	.CG_1_1_psum_spad_clear                     (ctrl_CG_1_1_psum_spad_clear                    ),
-	.CG_1_1_iact_write_fin_clear                (ctrl_CG_1_1_iact_write_fin_clear               ),
-	.CG_1_1_weight_write_fin_clear              (ctrl_CG_1_1_weight_write_fin_clear             ),
 	.CSC_encoder_iact_matrix_height				(ctrl_CSC_encoder_iact_matrix_height            ),
 	.CSC_encoder_iact_matrix_width				(ctrl_CSC_encoder_iact_matrix_width     		),
 	.CSC_encoder_iact_clear_iact_SRAM			(ctrl_CSC_encoder_iact_clear_iact_SRAM			),
@@ -1144,77 +771,55 @@ TOP_controller (
 	
 	
 assign	psum_acc_fin 									= ctrl_psum_acc_fin;
-assign	CG_0_0_read_psum_en								= ctrl_CG_0_0_read_psum_en;
-assign	CG_0_0_cg_en                                  	= ctrl_CG_0_0_cg_en;
-assign	CG_0_0_src_GLB_load_fin                         = ctrl_CG_0_0_src_GLB_load_fin;
-assign	CG_0_0_psum_SRAM_Bank_0_read_out_en        		= ctrl_CG_0_0_psum_SRAM_Bank_0_read_out_en;
-assign	CG_0_0_psum_SRAM_Bank_1_read_out_en        		= ctrl_CG_0_0_psum_SRAM_Bank_1_read_out_en;	
-assign	CG_0_0_psum_SRAM_Bank_2_read_out_en        		= ctrl_CG_0_0_psum_SRAM_Bank_2_read_out_en;
 
-assign	CG_0_0_GLB_iact_read_addr[0][0]              		= ctrl_CG_0_0_GLB_iact_0_0_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[0][1]                   = ctrl_CG_0_0_GLB_iact_0_1_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[0][2]                   = ctrl_CG_0_0_GLB_iact_0_2_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[1][0]                   = ctrl_CG_0_0_GLB_iact_1_0_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[1][1]                   = ctrl_CG_0_0_GLB_iact_1_1_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[1][2]                   = ctrl_CG_0_0_GLB_iact_1_2_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[2][0]                   = ctrl_CG_0_0_GLB_iact_2_0_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[2][1]                   = ctrl_CG_0_0_GLB_iact_2_1_read_addr;            
-assign	CG_0_0_GLB_iact_read_addr[2][2]                   = ctrl_CG_0_0_GLB_iact_2_2_read_addr;            
-assign	CG_0_0_GLB_psum_write_en                        = ctrl_CG_0_0_GLB_psum_write_en;                  
-assign	CG_0_0_GLB_psum_write_addr[0]                    = ctrl_CG_0_0_GLB_psum_0_write_addr;              
-assign	CG_0_0_GLB_psum_write_addr[1]                    = ctrl_CG_0_0_GLB_psum_1_write_addr;              
-assign	CG_0_0_GLB_psum_write_addr[2]                    = ctrl_CG_0_0_GLB_psum_2_write_addr;              
-assign	CG_0_0_GLB_psum_read_addr[0]                     = ctrl_CG_0_0_GLB_psum_0_read_addr;               
-assign	CG_0_0_GLB_psum_read_addr[1]                     = ctrl_CG_0_0_GLB_psum_1_read_addr;               
-assign	CG_0_0_GLB_psum_read_addr[2]                     = ctrl_CG_0_0_GLB_psum_2_read_addr;               
-assign	CG_0_0_GLB_iact_address_in_valid[0][0]            = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[0][0]                  = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[0][0]               = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[0][0]                     = ctrl_CG_0_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[0][1]            = ctrl_CG_0_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[0][1]                  = ctrl_CG_0_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[0][1]               = ctrl_CG_0_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[0][1]                     = ctrl_CG_0_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[0][2]            = ctrl_CG_0_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[0][2]                  = ctrl_CG_0_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[0][2]               = ctrl_CG_0_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[0][2]                     = ctrl_CG_0_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[1][0]            = ctrl_CG_0_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[1][0]                  = ctrl_CG_0_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[1][0]               = ctrl_CG_0_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[1][0]                     = ctrl_CG_0_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[1][1]            = ctrl_CG_0_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[1][1]                  = ctrl_CG_0_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;  
-assign	CG_0_0_GLB_iact_data_in_valid[1][1]               = ctrl_CG_0_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[1][1]                     = ctrl_CG_0_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[1][2]            = ctrl_CG_0_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[1][2]                  = ctrl_CG_0_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[1][2]               = ctrl_CG_0_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[1][2]                     = ctrl_CG_0_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[2][0]            = ctrl_CG_0_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[2][0]                  = ctrl_CG_0_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[2][0]               = ctrl_CG_0_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[2][0]                     = ctrl_CG_0_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[2][1]            = ctrl_CG_0_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[2][1]                  = ctrl_CG_0_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[2][1]               = ctrl_CG_0_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[2][1]                     = ctrl_CG_0_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_address_in_valid[2][2]            = ctrl_CG_0_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_address_in[2][2]                  = ctrl_CG_0_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_0_GLB_iact_data_in_valid[2][2]               = ctrl_CG_0_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_0_GLB_iact_data_in[2][2]                     = ctrl_CG_0_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_0_GLB_weight_address_in_valid[0]            = ctrl_CG_0_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_0_0_GLB_weight_address_in[0]                  = ctrl_CG_0_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_0_0_GLB_weight_data_in_valid[0]               = ctrl_CG_0_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_0_0_GLB_weight_data_in[0]                     = ctrl_CG_0_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_0_0_GLB_weight_address_in_valid[1]            = ctrl_CG_0_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_0_0_GLB_weight_address_in[1]                  = ctrl_CG_0_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_0_0_GLB_weight_data_in_valid[1]               = ctrl_CG_0_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_0_0_GLB_weight_data_in[1]                     = ctrl_CG_0_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_0_0_GLB_weight_address_in_valid[2]            = ctrl_CG_0_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_0_0_GLB_weight_address_in[2]                  = ctrl_CG_0_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_0_0_GLB_weight_data_in_valid[2]               = ctrl_CG_0_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_0_0_GLB_weight_data_in[2]                     = ctrl_CG_0_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[0][0]            = ctrl_CG_0_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[0][0]                  = ctrl_CG_0_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[0][0]               = ctrl_CG_0_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[0][0]                     = ctrl_CG_0_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[0][1]            = ctrl_CG_0_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[0][1]                  = ctrl_CG_0_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[0][1]               = ctrl_CG_0_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[0][1]                     = ctrl_CG_0_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[0][2]            = ctrl_CG_0_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[0][2]                  = ctrl_CG_0_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[0][2]               = ctrl_CG_0_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[0][2]                     = ctrl_CG_0_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[1][0]            = ctrl_CG_0_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[1][0]                  = ctrl_CG_0_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[1][0]               = ctrl_CG_0_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[1][0]                     = ctrl_CG_0_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[1][1]            = ctrl_CG_0_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[1][1]                  = ctrl_CG_0_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;  
+assign	CG_0_0_GLB_iact_data_in_valid[1][1]               = ctrl_CG_0_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[1][1]                     = ctrl_CG_0_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[1][2]            = ctrl_CG_0_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[1][2]                  = ctrl_CG_0_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[1][2]               = ctrl_CG_0_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[1][2]                     = ctrl_CG_0_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[2][0]            = ctrl_CG_0_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[2][0]                  = ctrl_CG_0_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[2][0]               = ctrl_CG_0_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[2][0]                     = ctrl_CG_0_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[2][1]            = ctrl_CG_0_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[2][1]                  = ctrl_CG_0_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[2][1]               = ctrl_CG_0_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[2][1]                     = ctrl_CG_0_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_address_in_valid[2][2]            = ctrl_CG_0_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_address_in[2][2]                  = ctrl_CG_0_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_0_GLB_iact_data_in_valid[2][2]               = ctrl_CG_0_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_0_GLB_iact_data_in[2][2]                     = ctrl_CG_0_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_0_GLB_weight_address_in_valid[0]            = ctrl_CG_0_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_0_0_GLB_weight_address_in[0]                  = ctrl_CG_0_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_0_0_GLB_weight_data_in_valid[0]               = ctrl_CG_0_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_0_0_GLB_weight_data_in[0]                     = ctrl_CG_0_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_0_0_GLB_weight_address_in_valid[1]            = ctrl_CG_0_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_0_0_GLB_weight_address_in[1]                  = ctrl_CG_0_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_0_0_GLB_weight_data_in_valid[1]               = ctrl_CG_0_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_0_0_GLB_weight_data_in[1]                     = ctrl_CG_0_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_0_0_GLB_weight_address_in_valid[2]            = ctrl_CG_0_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_0_0_GLB_weight_address_in[2]                  = ctrl_CG_0_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_0_0_GLB_weight_data_in_valid[2]               = ctrl_CG_0_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_0_0_GLB_weight_data_in[2]                     = ctrl_CG_0_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
 assign	CG_0_0_GLB_psum_0_data_in_valid                 = 'd1;
 assign	CG_0_0_GLB_psum_0_data_in                       = 'd0;
 assign	CG_0_0_GLB_psum_0_data_out_ready                = 'd1;
@@ -1225,81 +830,56 @@ assign	CG_0_0_GLB_psum_2_data_in_valid                 = 'd1;
 assign	CG_0_0_GLB_psum_2_data_in                       = 'd0;
 assign	CG_0_0_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_0_0_PSUM_DEPTH                               = ctrl_CG_0_0_PSUM_DEPTH;
-assign	CG_0_0_psum_spad_clear                          = ctrl_CG_0_0_psum_spad_clear;
-assign	CG_0_0_iact_write_fin_clear                     = ctrl_CG_0_0_iact_write_fin_clear;
-assign	CG_0_0_weight_write_fin_clear                   = ctrl_CG_0_0_weight_write_fin_clear; 
 
 
-assign	CG_0_1_read_psum_en								= ctrl_CG_0_1_read_psum_en;
-assign	CG_0_1_cg_en                                  	= ctrl_CG_0_1_cg_en;
-assign	CG_0_1_src_GLB_load_fin                         = ctrl_CG_0_1_src_GLB_load_fin;
-assign	CG_0_1_psum_SRAM_Bank_0_read_out_en        		= ctrl_CG_0_1_psum_SRAM_Bank_0_read_out_en;
-assign	CG_0_1_psum_SRAM_Bank_1_read_out_en        		= ctrl_CG_0_1_psum_SRAM_Bank_1_read_out_en;	
-assign	CG_0_1_psum_SRAM_Bank_2_read_out_en        		= ctrl_CG_0_1_psum_SRAM_Bank_2_read_out_en;
-assign	CG_0_1_GLB_iact_read_addr[0][0]              		= ctrl_CG_0_1_GLB_iact_0_0_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[0][1]                   = ctrl_CG_0_1_GLB_iact_0_1_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[0][2]                   = ctrl_CG_0_1_GLB_iact_0_2_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[1][0]                   = ctrl_CG_0_1_GLB_iact_1_0_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[1][1]                   = ctrl_CG_0_1_GLB_iact_1_1_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[1][2]                   = ctrl_CG_0_1_GLB_iact_1_2_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[2][0]                   = ctrl_CG_0_1_GLB_iact_2_0_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[2][1]                   = ctrl_CG_0_1_GLB_iact_2_1_read_addr;            
-assign	CG_0_1_GLB_iact_read_addr[2][2]                   = ctrl_CG_0_1_GLB_iact_2_2_read_addr;            
-assign	CG_0_1_GLB_psum_write_en                        = ctrl_CG_0_1_GLB_psum_write_en;                  
-assign	CG_0_1_GLB_psum_write_addr[0]                    = ctrl_CG_0_1_GLB_psum_0_write_addr;              
-assign	CG_0_1_GLB_psum_write_addr[1]                    = ctrl_CG_0_1_GLB_psum_1_write_addr;              
-assign	CG_0_1_GLB_psum_write_addr[2]                    = ctrl_CG_0_1_GLB_psum_2_write_addr;              
-assign	CG_0_1_GLB_psum_read_addr[0]                     = ctrl_CG_0_1_GLB_psum_0_read_addr;               
-assign	CG_0_1_GLB_psum_read_addr[1]                     = ctrl_CG_0_1_GLB_psum_1_read_addr;               
-assign	CG_0_1_GLB_psum_read_addr[2]                     = ctrl_CG_0_1_GLB_psum_2_read_addr;               
-assign	CG_0_1_GLB_iact_address_in_valid[0][0]            = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[0][0]                  = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[0][0]               = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[0][0]                     = ctrl_CG_0_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[0][1]            = ctrl_CG_0_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[0][1]                  = ctrl_CG_0_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[0][1]               = ctrl_CG_0_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[0][1]                     = ctrl_CG_0_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[0][2]            = ctrl_CG_0_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[0][2]                  = ctrl_CG_0_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[0][2]               = ctrl_CG_0_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[0][2]                     = ctrl_CG_0_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[1][0]            = ctrl_CG_0_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[1][0]                  = ctrl_CG_0_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[1][0]               = ctrl_CG_0_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[1][0]                     = ctrl_CG_0_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[1][1]            = ctrl_CG_0_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[1][1]                  = ctrl_CG_0_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0; 
-assign	CG_0_1_GLB_iact_data_in_valid[1][1]               = ctrl_CG_0_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[1][1]                     = ctrl_CG_0_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[1][2]            = ctrl_CG_0_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[1][2]                  = ctrl_CG_0_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[1][2]               = ctrl_CG_0_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[1][2]                     = ctrl_CG_0_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[2][0]            = ctrl_CG_0_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[2][0]                  = ctrl_CG_0_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[2][0]               = ctrl_CG_0_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[2][0]                     = ctrl_CG_0_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[2][1]            = ctrl_CG_0_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[2][1]                  = ctrl_CG_0_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[2][1]               = ctrl_CG_0_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[2][1]                     = ctrl_CG_0_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_address_in_valid[2][2]            = ctrl_CG_0_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_address_in[2][2]                  = ctrl_CG_0_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_0_1_GLB_iact_data_in_valid[2][2]               = ctrl_CG_0_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_0_1_GLB_iact_data_in[2][2]                     = ctrl_CG_0_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_0_1_GLB_weight_address_in_valid[0]            = ctrl_CG_0_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_0_1_GLB_weight_address_in[0]                  = ctrl_CG_0_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_0_1_GLB_weight_data_in_valid[0]               = ctrl_CG_0_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_0_1_GLB_weight_data_in[0]                     = ctrl_CG_0_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_0_1_GLB_weight_address_in_valid[1]            = ctrl_CG_0_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_0_1_GLB_weight_address_in[1]                  = ctrl_CG_0_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_0_1_GLB_weight_data_in_valid[1]               = ctrl_CG_0_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_0_1_GLB_weight_data_in[1]                     = ctrl_CG_0_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_0_1_GLB_weight_address_in_valid[2]            = ctrl_CG_0_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_0_1_GLB_weight_address_in[2]                  = ctrl_CG_0_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_0_1_GLB_weight_data_in_valid[2]               = ctrl_CG_0_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_0_1_GLB_weight_data_in[2]                     = ctrl_CG_0_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[0][0]            = ctrl_CG_0_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[0][0]                  = ctrl_CG_0_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[0][0]               = ctrl_CG_0_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[0][0]                     = ctrl_CG_0_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[0][1]            = ctrl_CG_0_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[0][1]                  = ctrl_CG_0_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[0][1]               = ctrl_CG_0_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[0][1]                     = ctrl_CG_0_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[0][2]            = ctrl_CG_0_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[0][2]                  = ctrl_CG_0_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[0][2]               = ctrl_CG_0_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[0][2]                     = ctrl_CG_0_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[1][0]            = ctrl_CG_0_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[1][0]                  = ctrl_CG_0_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[1][0]               = ctrl_CG_0_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[1][0]                     = ctrl_CG_0_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[1][1]            = ctrl_CG_0_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[1][1]                  = ctrl_CG_0_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0; 
+assign	CG_0_1_GLB_iact_data_in_valid[1][1]               = ctrl_CG_0_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[1][1]                     = ctrl_CG_0_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[1][2]            = ctrl_CG_0_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[1][2]                  = ctrl_CG_0_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[1][2]               = ctrl_CG_0_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[1][2]                     = ctrl_CG_0_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[2][0]            = ctrl_CG_0_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[2][0]                  = ctrl_CG_0_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[2][0]               = ctrl_CG_0_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[2][0]                     = ctrl_CG_0_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[2][1]            = ctrl_CG_0_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[2][1]                  = ctrl_CG_0_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[2][1]               = ctrl_CG_0_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[2][1]                     = ctrl_CG_0_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_address_in_valid[2][2]            = ctrl_CG_0_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_address_in[2][2]                  = ctrl_CG_0_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_0_1_GLB_iact_data_in_valid[2][2]               = ctrl_CG_0_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_0_1_GLB_iact_data_in[2][2]                     = ctrl_CG_0_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_0_1_GLB_weight_address_in_valid[0]            = ctrl_CG_0_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_0_1_GLB_weight_address_in[0]                  = ctrl_CG_0_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_0_1_GLB_weight_data_in_valid[0]               = ctrl_CG_0_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_0_1_GLB_weight_data_in[0]                     = ctrl_CG_0_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_0_1_GLB_weight_address_in_valid[1]            = ctrl_CG_0_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_0_1_GLB_weight_address_in[1]                  = ctrl_CG_0_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_0_1_GLB_weight_data_in_valid[1]               = ctrl_CG_0_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_0_1_GLB_weight_data_in[1]                     = ctrl_CG_0_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_0_1_GLB_weight_address_in_valid[2]            = ctrl_CG_0_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_0_1_GLB_weight_address_in[2]                  = ctrl_CG_0_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_0_1_GLB_weight_data_in_valid[2]               = ctrl_CG_0_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_0_1_GLB_weight_data_in[2]                     = ctrl_CG_0_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
 assign	CG_0_1_GLB_psum_0_data_in_valid                 = 'd1;
 assign	CG_0_1_GLB_psum_0_data_in                       = 'd0;
 assign	CG_0_1_GLB_psum_0_data_out_ready                = 'd1;
@@ -1310,81 +890,56 @@ assign	CG_0_1_GLB_psum_2_data_in_valid                 = 'd1;
 assign	CG_0_1_GLB_psum_2_data_in                       = 'd0;
 assign	CG_0_1_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_0_1_PSUM_DEPTH                               = ctrl_CG_0_1_PSUM_DEPTH;
-assign	CG_0_1_psum_spad_clear                          = ctrl_CG_0_1_psum_spad_clear;
-assign	CG_0_1_iact_write_fin_clear                     = ctrl_CG_0_1_iact_write_fin_clear;
-assign	CG_0_1_weight_write_fin_clear                   = ctrl_CG_0_1_weight_write_fin_clear; 
 
 
-assign	CG_1_0_read_psum_en								= ctrl_CG_1_0_read_psum_en;
-assign	CG_1_0_cg_en                                  	= ctrl_CG_1_0_cg_en;
-assign	CG_1_0_src_GLB_load_fin                         = ctrl_CG_1_0_src_GLB_load_fin;
-assign	CG_1_0_psum_SRAM_Bank_0_read_out_en        		= ctrl_CG_1_0_psum_SRAM_Bank_0_read_out_en;
-assign	CG_1_0_psum_SRAM_Bank_1_read_out_en        		= ctrl_CG_1_0_psum_SRAM_Bank_1_read_out_en;	
-assign	CG_1_0_psum_SRAM_Bank_2_read_out_en        		= ctrl_CG_1_0_psum_SRAM_Bank_2_read_out_en;
-assign	CG_1_0_GLB_iact_read_addr[0][0]              		= ctrl_CG_1_0_GLB_iact_0_0_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[0][1]                   = ctrl_CG_1_0_GLB_iact_0_1_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[0][2]                   = ctrl_CG_1_0_GLB_iact_0_2_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[1][0]                   = ctrl_CG_1_0_GLB_iact_1_0_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[1][1]                   = ctrl_CG_1_0_GLB_iact_1_1_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[1][2]                   = ctrl_CG_1_0_GLB_iact_1_2_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[2][0]                   = ctrl_CG_1_0_GLB_iact_2_0_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[2][1]                   = ctrl_CG_1_0_GLB_iact_2_1_read_addr;            
-assign	CG_1_0_GLB_iact_read_addr[2][2]                   = ctrl_CG_1_0_GLB_iact_2_2_read_addr;            
-assign	CG_1_0_GLB_psum_write_en                        = ctrl_CG_1_0_GLB_psum_write_en;                  
-assign	CG_1_0_GLB_psum_write_addr[0]                    = ctrl_CG_1_0_GLB_psum_0_write_addr;              
-assign	CG_1_0_GLB_psum_write_addr[1]                    = ctrl_CG_1_0_GLB_psum_1_write_addr;              
-assign	CG_1_0_GLB_psum_write_addr[2]                    = ctrl_CG_1_0_GLB_psum_2_write_addr;              
-assign	CG_1_0_GLB_psum_read_addr[0]                     = ctrl_CG_1_0_GLB_psum_0_read_addr;               
-assign	CG_1_0_GLB_psum_read_addr[1]                     = ctrl_CG_1_0_GLB_psum_1_read_addr;               
-assign	CG_1_0_GLB_psum_read_addr[2]                     = ctrl_CG_1_0_GLB_psum_2_read_addr;               
-assign	CG_1_0_GLB_iact_address_in_valid[0][0]            = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[0][0]                  = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[0][0]               = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[0][0]                     = ctrl_CG_1_0_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[0][1]            = ctrl_CG_1_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[0][1]                  = ctrl_CG_1_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[0][1]               = ctrl_CG_1_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[0][1]                     = ctrl_CG_1_0_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[0][2]            = ctrl_CG_1_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[0][2]                  = ctrl_CG_1_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[0][2]               = ctrl_CG_1_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[0][2]                     = ctrl_CG_1_0_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[1][0]            = ctrl_CG_1_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[1][0]                  = ctrl_CG_1_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[1][0]               = ctrl_CG_1_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[1][0]                     = ctrl_CG_1_0_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[1][1]            = ctrl_CG_1_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[1][1]                  = ctrl_CG_1_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0; 
-assign	CG_1_0_GLB_iact_data_in_valid[1][1]               = ctrl_CG_1_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[1][1]                     = ctrl_CG_1_0_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[1][2]            = ctrl_CG_1_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[1][2]                  = ctrl_CG_1_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[1][2]               = ctrl_CG_1_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[1][2]                     = ctrl_CG_1_0_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[2][0]            = ctrl_CG_1_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[2][0]                  = ctrl_CG_1_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[2][0]               = ctrl_CG_1_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[2][0]                     = ctrl_CG_1_0_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[2][1]            = ctrl_CG_1_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[2][1]                  = ctrl_CG_1_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[2][1]               = ctrl_CG_1_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[2][1]                     = ctrl_CG_1_0_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_address_in_valid[2][2]            = ctrl_CG_1_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_address_in[2][2]                  = ctrl_CG_1_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
-assign	CG_1_0_GLB_iact_data_in_valid[2][2]               = ctrl_CG_1_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
-assign	CG_1_0_GLB_iact_data_in[2][2]                     = ctrl_CG_1_0_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_0_GLB_weight_address_in_valid[0]            = ctrl_CG_1_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_1_0_GLB_weight_address_in[0]                  = ctrl_CG_1_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_1_0_GLB_weight_data_in_valid[0]               = ctrl_CG_1_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_1_0_GLB_weight_data_in[0]                     = ctrl_CG_1_0_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_1_0_GLB_weight_address_in_valid[1]            = ctrl_CG_1_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_1_0_GLB_weight_address_in[1]                  = ctrl_CG_1_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_1_0_GLB_weight_data_in_valid[1]               = ctrl_CG_1_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_1_0_GLB_weight_data_in[1]                     = ctrl_CG_1_0_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_1_0_GLB_weight_address_in_valid[2]            = ctrl_CG_1_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
-assign	CG_1_0_GLB_weight_address_in[2]                  = ctrl_CG_1_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_1_0_GLB_weight_data_in_valid[2]               = ctrl_CG_1_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
-assign	CG_1_0_GLB_weight_data_in[2]                     = ctrl_CG_1_0_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[0][0]            = ctrl_CG_1_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[0][0]                  = ctrl_CG_1_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[0][0]               = ctrl_CG_1_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[0][0]                     = ctrl_CG_1_0_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[0][1]            = ctrl_CG_1_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[0][1]                  = ctrl_CG_1_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[0][1]               = ctrl_CG_1_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[0][1]                     = ctrl_CG_1_0_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[0][2]            = ctrl_CG_1_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[0][2]                  = ctrl_CG_1_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[0][2]               = ctrl_CG_1_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[0][2]                     = ctrl_CG_1_0_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[1][0]            = ctrl_CG_1_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[1][0]                  = ctrl_CG_1_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[1][0]               = ctrl_CG_1_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[1][0]                     = ctrl_CG_1_0_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[1][1]            = ctrl_CG_1_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[1][1]                  = ctrl_CG_1_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0; 
+assign	CG_1_0_GLB_iact_data_in_valid[1][1]               = ctrl_CG_1_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[1][1]                     = ctrl_CG_1_0_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[1][2]            = ctrl_CG_1_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[1][2]                  = ctrl_CG_1_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[1][2]               = ctrl_CG_1_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[1][2]                     = ctrl_CG_1_0_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[2][0]            = ctrl_CG_1_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[2][0]                  = ctrl_CG_1_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[2][0]               = ctrl_CG_1_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[2][0]                     = ctrl_CG_1_0_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[2][1]            = ctrl_CG_1_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[2][1]                  = ctrl_CG_1_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[2][1]               = ctrl_CG_1_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[2][1]                     = ctrl_CG_1_0_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_address_in_valid[2][2]            = ctrl_CG_1_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_address_in[2][2]                  = ctrl_CG_1_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out		: weight_addr_in) 				: 'd0;
+assign	CG_1_0_GLB_iact_data_in_valid[2][2]               = ctrl_CG_1_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid	: weight_data_in_valid) 		: 'd0;
+assign	CG_1_0_GLB_iact_data_in[2][2]                     = ctrl_CG_1_0_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_0_GLB_weight_address_in_valid[0]            = ctrl_CG_1_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_1_0_GLB_weight_address_in[0]                  = ctrl_CG_1_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_1_0_GLB_weight_data_in_valid[0]               = ctrl_CG_1_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_1_0_GLB_weight_data_in[0]                     = ctrl_CG_1_0_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_1_0_GLB_weight_address_in_valid[1]            = ctrl_CG_1_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_1_0_GLB_weight_address_in[1]                  = ctrl_CG_1_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_1_0_GLB_weight_data_in_valid[1]               = ctrl_CG_1_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_1_0_GLB_weight_data_in[1]                     = ctrl_CG_1_0_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_1_0_GLB_weight_address_in_valid[2]            = ctrl_CG_1_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid		: csc_weight_address_out_valid)	: 'd0;
+assign	CG_1_0_GLB_weight_address_in[2]                  = ctrl_CG_1_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_1_0_GLB_weight_data_in_valid[2]               = ctrl_CG_1_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid		: csc_weight_data_out_valid)	: 'd0;
+assign	CG_1_0_GLB_weight_data_in[2]                     = ctrl_CG_1_0_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
 assign	CG_1_0_GLB_psum_0_data_in_valid                 = 'd1;
 assign	CG_1_0_GLB_psum_0_data_in                       = 'd0;
 assign	CG_1_0_GLB_psum_0_data_out_ready                = 'd1;
@@ -1395,81 +950,56 @@ assign	CG_1_0_GLB_psum_2_data_in_valid                 = 'd1;
 assign	CG_1_0_GLB_psum_2_data_in                       = 'd0;
 assign	CG_1_0_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_1_0_PSUM_DEPTH                               = ctrl_CG_1_0_PSUM_DEPTH;
-assign	CG_1_0_psum_spad_clear                          = ctrl_CG_1_0_psum_spad_clear;
-assign	CG_1_0_iact_write_fin_clear                     = ctrl_CG_1_0_iact_write_fin_clear;
-assign	CG_1_0_weight_write_fin_clear                   = ctrl_CG_1_0_weight_write_fin_clear; 
 
 
-assign	CG_1_1_read_psum_en								= ctrl_CG_1_1_read_psum_en;
-assign	CG_1_1_cg_en                                  	= ctrl_CG_1_1_cg_en;
-assign	CG_1_1_src_GLB_load_fin                         = ctrl_CG_1_1_src_GLB_load_fin;
-assign	CG_1_1_psum_SRAM_Bank_0_read_out_en        		= ctrl_CG_1_1_psum_SRAM_Bank_0_read_out_en;
-assign	CG_1_1_psum_SRAM_Bank_1_read_out_en        		= ctrl_CG_1_1_psum_SRAM_Bank_1_read_out_en;	
-assign	CG_1_1_psum_SRAM_Bank_2_read_out_en        		= ctrl_CG_1_1_psum_SRAM_Bank_2_read_out_en;
-assign	CG_1_1_GLB_iact_read_addr[0][0]              		= ctrl_CG_1_1_GLB_iact_0_0_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[0][1]                   = ctrl_CG_1_1_GLB_iact_0_1_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[0][2]                   = ctrl_CG_1_1_GLB_iact_0_2_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[1][0]                   = ctrl_CG_1_1_GLB_iact_1_0_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[1][1]                   = ctrl_CG_1_1_GLB_iact_1_1_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[1][2]                   = ctrl_CG_1_1_GLB_iact_1_2_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[2][0]                   = ctrl_CG_1_1_GLB_iact_2_0_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[2][1]                   = ctrl_CG_1_1_GLB_iact_2_1_read_addr;            
-assign	CG_1_1_GLB_iact_read_addr[2][2]                   = ctrl_CG_1_1_GLB_iact_2_2_read_addr;            
-assign	CG_1_1_GLB_psum_write_en                        = ctrl_CG_1_1_GLB_psum_write_en;                  
-assign	CG_1_1_GLB_psum_write_addr[0]                    = ctrl_CG_1_1_GLB_psum_0_write_addr;              
-assign	CG_1_1_GLB_psum_write_addr[1]                    = ctrl_CG_1_1_GLB_psum_1_write_addr;              
-assign	CG_1_1_GLB_psum_write_addr[2]                    = ctrl_CG_1_1_GLB_psum_2_write_addr;              
-assign	CG_1_1_GLB_psum_read_addr[0]                     = ctrl_CG_1_1_GLB_psum_0_read_addr;               
-assign	CG_1_1_GLB_psum_read_addr[1]                     = ctrl_CG_1_1_GLB_psum_1_read_addr;               
-assign	CG_1_1_GLB_psum_read_addr[2]                     = ctrl_CG_1_1_GLB_psum_2_read_addr;               
-assign	CG_1_1_GLB_iact_address_in_valid[0][0]            = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[0][0]                  = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[0][0]               = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[0][0]                     = ctrl_CG_1_1_GLB_iact_0_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[0][1]            = ctrl_CG_1_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[0][1]                  = ctrl_CG_1_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[0][1]               = ctrl_CG_1_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[0][1]                     = ctrl_CG_1_1_GLB_iact_0_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[0][2]            = ctrl_CG_1_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[0][2]                  = ctrl_CG_1_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[0][2]               = ctrl_CG_1_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[0][2]                     = ctrl_CG_1_1_GLB_iact_0_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[1][0]            = ctrl_CG_1_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[1][0]                  = ctrl_CG_1_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[1][0]               = ctrl_CG_1_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[1][0]                     = ctrl_CG_1_1_GLB_iact_1_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[1][1]            = ctrl_CG_1_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[1][1]                  = ctrl_CG_1_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0; 
-assign	CG_1_1_GLB_iact_data_in_valid[1][1]               = ctrl_CG_1_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[1][1]                     = ctrl_CG_1_1_GLB_iact_1_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[1][2]            = ctrl_CG_1_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[1][2]                  = ctrl_CG_1_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[1][2]               = ctrl_CG_1_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[1][2]                     = ctrl_CG_1_1_GLB_iact_1_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[2][0]            = ctrl_CG_1_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[2][0]                  = ctrl_CG_1_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[2][0]               = ctrl_CG_1_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[2][0]                     = ctrl_CG_1_1_GLB_iact_2_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[2][1]            = ctrl_CG_1_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[2][1]                  = ctrl_CG_1_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[2][1]               = ctrl_CG_1_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[2][1]                     = ctrl_CG_1_1_GLB_iact_2_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_address_in_valid[2][2]            = ctrl_CG_1_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_address_in[2][2]                  = ctrl_CG_1_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
-assign	CG_1_1_GLB_iact_data_in_valid[2][2]               = ctrl_CG_1_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
-assign	CG_1_1_GLB_iact_data_in[2][2]                     = ctrl_CG_1_1_GLB_iact_2_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
-assign	CG_1_1_GLB_weight_address_in_valid[0]            = ctrl_CG_1_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid			: csc_weight_address_out_valid)	: 'd0;
-assign	CG_1_1_GLB_weight_address_in[0]                  = ctrl_CG_1_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_1_1_GLB_weight_data_in_valid[0]               = ctrl_CG_1_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid			: csc_weight_data_out_valid)	: 'd0;
-assign	CG_1_1_GLB_weight_data_in[0]                     = ctrl_CG_1_1_GLB_weight_0_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_1_1_GLB_weight_address_in_valid[1]            = ctrl_CG_1_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid			: csc_weight_address_out_valid)	: 'd0;
-assign	CG_1_1_GLB_weight_address_in[1]                  = ctrl_CG_1_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_1_1_GLB_weight_data_in_valid[1]               = ctrl_CG_1_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid			: csc_weight_data_out_valid)	: 'd0;
-assign	CG_1_1_GLB_weight_data_in[1]                     = ctrl_CG_1_1_GLB_weight_1_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
-assign	CG_1_1_GLB_weight_address_in_valid[2]            = ctrl_CG_1_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid			: csc_weight_address_out_valid)	: 'd0;
-assign	CG_1_1_GLB_weight_address_in[2]                  = ctrl_CG_1_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
-assign	CG_1_1_GLB_weight_data_in_valid[2]               = ctrl_CG_1_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid			: csc_weight_data_out_valid)	: 'd0;
-assign	CG_1_1_GLB_weight_data_in[2]                     = ctrl_CG_1_1_GLB_weight_2_in_en ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[0][0]            = ctrl_CG_1_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[0][0]                  = ctrl_CG_1_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[0][0]               = ctrl_CG_1_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[0][0]                     = ctrl_CG_1_1_GLB_iact_in_en[0][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[0][1]            = ctrl_CG_1_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[0][1]                  = ctrl_CG_1_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[0][1]               = ctrl_CG_1_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[0][1]                     = ctrl_CG_1_1_GLB_iact_in_en[0][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[0][2]            = ctrl_CG_1_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[0][2]                  = ctrl_CG_1_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[0][2]               = ctrl_CG_1_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[0][2]                     = ctrl_CG_1_1_GLB_iact_in_en[0][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[1][0]            = ctrl_CG_1_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[1][0]                  = ctrl_CG_1_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[1][0]               = ctrl_CG_1_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[1][0]                     = ctrl_CG_1_1_GLB_iact_in_en[1][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[1][1]            = ctrl_CG_1_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[1][1]                  = ctrl_CG_1_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0; 
+assign	CG_1_1_GLB_iact_data_in_valid[1][1]               = ctrl_CG_1_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[1][1]                     = ctrl_CG_1_1_GLB_iact_in_en[1][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[1][2]            = ctrl_CG_1_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[1][2]                  = ctrl_CG_1_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[1][2]               = ctrl_CG_1_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[1][2]                     = ctrl_CG_1_1_GLB_iact_in_en[1][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[2][0]            = ctrl_CG_1_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[2][0]                  = ctrl_CG_1_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[2][0]               = ctrl_CG_1_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[2][0]                     = ctrl_CG_1_1_GLB_iact_in_en[2][0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[2][1]            = ctrl_CG_1_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[2][1]                  = ctrl_CG_1_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[2][1]               = ctrl_CG_1_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[2][1]                     = ctrl_CG_1_1_GLB_iact_in_en[2][1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_address_in_valid[2][2]            = ctrl_CG_1_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out_valid	: weight_addr_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_address_in[2][2]                  = ctrl_CG_1_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_address_out			: weight_addr_in) 				: 'd0;
+assign	CG_1_1_GLB_iact_data_in_valid[2][2]               = ctrl_CG_1_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out_valid		: weight_data_in_valid) 		: 'd0;
+assign	CG_1_1_GLB_iact_data_in[2][2]                     = ctrl_CG_1_1_GLB_iact_in_en[2][2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? csc_iact_data_out			: weight_data_in) 				: 'd0;
+assign	CG_1_1_GLB_weight_address_in_valid[0]            = ctrl_CG_1_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid			: csc_weight_address_out_valid)	: 'd0;
+assign	CG_1_1_GLB_weight_address_in[0]                  = ctrl_CG_1_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_1_1_GLB_weight_data_in_valid[0]               = ctrl_CG_1_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid			: csc_weight_data_out_valid)	: 'd0;
+assign	CG_1_1_GLB_weight_data_in[0]                     = ctrl_CG_1_1_GLB_weight_in_en[0] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_1_1_GLB_weight_address_in_valid[1]            = ctrl_CG_1_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid			: csc_weight_address_out_valid)	: 'd0;
+assign	CG_1_1_GLB_weight_address_in[1]                  = ctrl_CG_1_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_1_1_GLB_weight_data_in_valid[1]               = ctrl_CG_1_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid			: csc_weight_data_out_valid)	: 'd0;
+assign	CG_1_1_GLB_weight_data_in[1]                     = ctrl_CG_1_1_GLB_weight_in_en[1] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
+assign	CG_1_1_GLB_weight_address_in_valid[2]            = ctrl_CG_1_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in_valid			: csc_weight_address_out_valid)	: 'd0;
+assign	CG_1_1_GLB_weight_address_in[2]                  = ctrl_CG_1_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_addr_in				: csc_weight_address_out)		: 'd0;
+assign	CG_1_1_GLB_weight_data_in_valid[2]               = ctrl_CG_1_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in_valid			: csc_weight_data_out_valid)	: 'd0;
+assign	CG_1_1_GLB_weight_data_in[2]                     = ctrl_CG_1_1_GLB_weight_in_en[2] ? ((ctrl_conv_flag | ctrl_CSC_encoder_iact_clear_iact_SRAM) ? weight_data_in				: csc_weight_data_out)			: 'd0;
 assign	CG_1_1_GLB_psum_0_data_in_valid                 = 'd1;
 assign	CG_1_1_GLB_psum_0_data_in                       = 'd0;
 assign	CG_1_1_GLB_psum_0_data_out_ready                = 'd1;
@@ -1480,9 +1010,6 @@ assign	CG_1_1_GLB_psum_2_data_in_valid                 = 'd1;
 assign	CG_1_1_GLB_psum_2_data_in                       = 'd0;
 assign	CG_1_1_GLB_psum_2_data_out_ready                = 'd1;
 assign	CG_1_1_PSUM_DEPTH                               = ctrl_CG_1_1_PSUM_DEPTH;
-assign	CG_1_1_psum_spad_clear                          = ctrl_CG_1_1_psum_spad_clear;
-assign	CG_1_1_iact_write_fin_clear                     = ctrl_CG_1_1_iact_write_fin_clear;
-assign	CG_1_1_weight_write_fin_clear                   = ctrl_CG_1_1_weight_write_fin_clear; 
 
 
 
@@ -1518,31 +1045,31 @@ assign	rearrange_data_in_valid         = ctrl_ifmap_in_en ? iact_in_valid	: (poo
 assign	rearrange_read_addr             = ctrl_psum_rearrange_read_addr;
 
 
-wire signed	[20:0]	GLB_psum_out		= ctrl_CG_0_0_GLB_psum_0_out_en ? CG_0_0_GLB_psum_0_data_out : 
-										  ctrl_CG_0_0_GLB_psum_1_out_en ? CG_0_0_GLB_psum_1_data_out : 
-										  ctrl_CG_0_0_GLB_psum_2_out_en ? CG_0_0_GLB_psum_2_data_out : 
-										  ctrl_CG_0_1_GLB_psum_0_out_en ? CG_0_1_GLB_psum_0_data_out : 
-										  ctrl_CG_0_1_GLB_psum_1_out_en ? CG_0_1_GLB_psum_1_data_out : 
-										  ctrl_CG_0_1_GLB_psum_2_out_en ? CG_0_1_GLB_psum_2_data_out : 
-										  ctrl_CG_1_0_GLB_psum_0_out_en ? CG_1_0_GLB_psum_0_data_out : 
-										  ctrl_CG_1_0_GLB_psum_1_out_en ? CG_1_0_GLB_psum_1_data_out : 
-										  ctrl_CG_1_0_GLB_psum_2_out_en ? CG_1_0_GLB_psum_2_data_out : 
-										  ctrl_CG_1_1_GLB_psum_0_out_en ? CG_1_1_GLB_psum_0_data_out : 
-										  ctrl_CG_1_1_GLB_psum_1_out_en ? CG_1_1_GLB_psum_1_data_out : 
-										  ctrl_CG_1_1_GLB_psum_2_out_en ? CG_1_1_GLB_psum_2_data_out : 'sd0;
+wire signed	[20:0]	GLB_psum_out		= ctrl_CG_0_0_GLB_psum_out_en[0] ? CG_0_0_GLB_psum_0_data_out : 
+										  ctrl_CG_0_0_GLB_psum_out_en[1] ? CG_0_0_GLB_psum_1_data_out : 
+										  ctrl_CG_0_0_GLB_psum_out_en[2] ? CG_0_0_GLB_psum_2_data_out : 
+										  ctrl_CG_0_1_GLB_psum_out_en[0] ? CG_0_1_GLB_psum_0_data_out : 
+										  ctrl_CG_0_1_GLB_psum_out_en[1] ? CG_0_1_GLB_psum_1_data_out : 
+										  ctrl_CG_0_1_GLB_psum_out_en[2] ? CG_0_1_GLB_psum_2_data_out : 
+										  ctrl_CG_1_0_GLB_psum_out_en[0] ? CG_1_0_GLB_psum_0_data_out : 
+										  ctrl_CG_1_0_GLB_psum_out_en[1] ? CG_1_0_GLB_psum_1_data_out : 
+										  ctrl_CG_1_0_GLB_psum_out_en[2] ? CG_1_0_GLB_psum_2_data_out : 
+										  ctrl_CG_1_1_GLB_psum_out_en[0] ? CG_1_1_GLB_psum_0_data_out : 
+										  ctrl_CG_1_1_GLB_psum_out_en[1] ? CG_1_1_GLB_psum_1_data_out : 
+										  ctrl_CG_1_1_GLB_psum_out_en[2] ? CG_1_1_GLB_psum_2_data_out : 'sd0;
 										  
-wire 				GLB_psum_out_valid	= ctrl_CG_0_0_GLB_psum_0_out_en ? CG_0_0_GLB_psum_0_data_out_valid : 
-										  ctrl_CG_0_0_GLB_psum_1_out_en ? CG_0_0_GLB_psum_1_data_out_valid : 
-										  ctrl_CG_0_0_GLB_psum_2_out_en ? CG_0_0_GLB_psum_2_data_out_valid : 
-										  ctrl_CG_0_1_GLB_psum_0_out_en ? CG_0_1_GLB_psum_0_data_out_valid : 
-										  ctrl_CG_0_1_GLB_psum_1_out_en ? CG_0_1_GLB_psum_1_data_out_valid : 
-										  ctrl_CG_0_1_GLB_psum_2_out_en ? CG_0_1_GLB_psum_2_data_out_valid : 
-										  ctrl_CG_1_0_GLB_psum_0_out_en ? CG_1_0_GLB_psum_0_data_out_valid : 
-										  ctrl_CG_1_0_GLB_psum_1_out_en ? CG_1_0_GLB_psum_1_data_out_valid : 
-										  ctrl_CG_1_0_GLB_psum_2_out_en ? CG_1_0_GLB_psum_2_data_out_valid : 
-										  ctrl_CG_1_1_GLB_psum_0_out_en ? CG_1_1_GLB_psum_0_data_out_valid : 
-										  ctrl_CG_1_1_GLB_psum_1_out_en ? CG_1_1_GLB_psum_1_data_out_valid : 
-										  ctrl_CG_1_1_GLB_psum_2_out_en ? CG_1_1_GLB_psum_2_data_out_valid : 'd0;
+wire 				GLB_psum_out_valid	= ctrl_CG_0_0_GLB_psum_out_en[0] ? CG_0_0_GLB_psum_0_data_out_valid : 
+										  ctrl_CG_0_0_GLB_psum_out_en[1] ? CG_0_0_GLB_psum_1_data_out_valid : 
+										  ctrl_CG_0_0_GLB_psum_out_en[2] ? CG_0_0_GLB_psum_2_data_out_valid : 
+										  ctrl_CG_0_1_GLB_psum_out_en[0] ? CG_0_1_GLB_psum_0_data_out_valid : 
+										  ctrl_CG_0_1_GLB_psum_out_en[1] ? CG_0_1_GLB_psum_1_data_out_valid : 
+										  ctrl_CG_0_1_GLB_psum_out_en[2] ? CG_0_1_GLB_psum_2_data_out_valid : 
+										  ctrl_CG_1_0_GLB_psum_out_en[0] ? CG_1_0_GLB_psum_0_data_out_valid : 
+										  ctrl_CG_1_0_GLB_psum_out_en[1] ? CG_1_0_GLB_psum_1_data_out_valid : 
+										  ctrl_CG_1_0_GLB_psum_out_en[2] ? CG_1_0_GLB_psum_2_data_out_valid : 
+										  ctrl_CG_1_1_GLB_psum_out_en[0] ? CG_1_1_GLB_psum_0_data_out_valid : 
+										  ctrl_CG_1_1_GLB_psum_out_en[1] ? CG_1_1_GLB_psum_1_data_out_valid : 
+										  ctrl_CG_1_1_GLB_psum_out_en[2] ? CG_1_1_GLB_psum_2_data_out_valid : 'd0;
 
 
 // output
@@ -1569,18 +1096,6 @@ assign	pool_enable						= ctrl_pool_enable;
 assign	pool_data_in                    = ctrl_pool_enable ? ReLU_data_out : 'sd0;
 assign	pool_data_in_valid              = ctrl_pool_enable ? ReLU_data_out_valid : 'd0;
 
-assign	ctrl_CG_0_0_GLB_iact_load_en    = CG_0_0_GLB_iact_load_en;    
-assign	ctrl_CG_0_0_PE_weight_load_en   = CG_0_0_PE_weight_load_en;   
-assign	ctrl_CG_0_0_cal_fin             = CG_0_0_cal_fin;           
-assign	ctrl_CG_0_1_GLB_iact_load_en    = CG_0_1_GLB_iact_load_en;    
-assign	ctrl_CG_0_1_PE_weight_load_en   = CG_0_1_PE_weight_load_en;   
-assign	ctrl_CG_0_1_cal_fin             = CG_0_1_cal_fin;            
-assign	ctrl_CG_1_0_GLB_iact_load_en    = CG_1_0_GLB_iact_load_en;    
-assign	ctrl_CG_1_0_PE_weight_load_en   = CG_1_0_PE_weight_load_en;   
-assign	ctrl_CG_1_0_cal_fin             = CG_1_0_cal_fin;              
-assign	ctrl_CG_1_1_GLB_iact_load_en    = CG_1_1_GLB_iact_load_en;    
-assign	ctrl_CG_1_1_PE_weight_load_en   = CG_1_1_PE_weight_load_en;   
-assign	ctrl_CG_1_1_cal_fin             = CG_1_1_cal_fin;             
 assign	ctrl_CSC_encoder_iact_one_vector_done 	= csc_iact_one_vector_done;
 assign	ctrl_CSC_encoder_weight_one_vector_done = csc_weight_one_vector_done;
 
