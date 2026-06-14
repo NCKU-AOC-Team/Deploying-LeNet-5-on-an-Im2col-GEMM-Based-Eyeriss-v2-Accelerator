@@ -34,10 +34,27 @@ OCC_ON := $(filter 1 yes true on,$(OCC))
 OCC_FLAG := $(if $(OCC_ON),+define+BRAM_OCCUPANCY,)
 INT4_REGEN ?= 0
 INT4_REGEN_ON := $(filter 1 yes true on,$(INT4_REGEN))
-INT4_REGEN_FLAG := $(if $(INT4_REGEN_ON),+define+INT4_AS_INT8_REGEN,)
+INT4_PACKED ?= 0
+INT4_PACKED_ON := $(filter 1 yes true on,$(INT4_PACKED))
+INT4_PACKED_TWO_LANE ?= 0
+INT4_PACKED_TWO_LANE_ON := $(filter 1 yes true on,$(INT4_PACKED_TWO_LANE))
+INT4_PACKED_SIMD2 ?= 0
+INT4_PACKED_SIMD2_ON := $(filter 1 yes true on,$(INT4_PACKED_SIMD2))
+INT4_PACKED_SIMD2_FULL ?= 0
+INT4_PACKED_SIMD2_FULL_ON := $(filter 1 yes true on,$(INT4_PACKED_SIMD2_FULL))
+INT4_PACKED_SPAD ?= 0
+INT4_PACKED_SPAD_ON := $(filter 1 yes true on,$(INT4_PACKED_SPAD))
+INT4_MODE_ON := $(filter 1 yes true on,$(INT4_REGEN) $(INT4_PACKED) $(INT4_PACKED_TWO_LANE) $(INT4_PACKED_SIMD2) $(INT4_PACKED_SIMD2_FULL))
+INT4_REGEN_FLAG := $(if $(INT4_MODE_ON),+define+INT4_AS_INT8_REGEN,)
+INT4_PACKED_FLAG := $(if $(INT4_PACKED_SIMD2_FULL_ON),+define+INT4_PACKED_SIMD2_FULL,$(if $(INT4_PACKED_SIMD2_ON),+define+INT4_PACKED_SIMD2,$(if $(INT4_PACKED_TWO_LANE_ON),+define+INT4_PACKED_TWO_LANE,$(if $(INT4_PACKED_ON),+define+INT4_PACKED_SINGLE_LANE,))))
+INT4_PACKED_SPAD_FLAG := $(if $(INT4_PACKED_SPAD_ON),+define+INT4_PACKED_SPAD_STORAGE,)
+INT4_LANE_SEL ?= 0
+INT4_LANE1_ON := $(filter 1 yes true on,$(INT4_LANE_SEL))
+INT4_LANE_FLAG := $(if $(INT4_LANE1_ON),+define+INT4_LANE1,)
 INT4_REQUANT ?= 14_7
-INT4_REQUANT_FLAG := $(if $(INT4_REGEN_ON),+define+INT4_REQUANT_$(INT4_REQUANT),)
-BUILD_DIR := obj_dir$(if $(PUBLIC_FLAT_RW_ON),_public,)$(if $(TRACE_ON),_trace,)$(if $(OCC_ON),_occ,)$(if $(INT4_REGEN_ON),_int4_$(INT4_REQUANT),)
+INT4_REQUANT_FLAG := $(if $(INT4_MODE_ON),+define+INT4_REQUANT_$(INT4_REQUANT),)
+INT4_RUNTIME_MODE_ARG := $(if $(INT4_PACKED_SIMD2_FULL_ON),--int4-weight-mode,)
+BUILD_DIR := obj_dir$(if $(PUBLIC_FLAT_RW_ON),_public,)$(if $(TRACE_ON),_trace,)$(if $(OCC_ON),_occ,)$(if $(INT4_REGEN_ON),_int4_$(INT4_REQUANT),)$(if $(INT4_PACKED_ON),_int4_packed_$(INT4_REQUANT),)$(if $(INT4_PACKED_TWO_LANE_ON),_int4_two_lane_$(INT4_REQUANT)_lane$(INT4_LANE_SEL),)$(if $(INT4_PACKED_SIMD2_ON),_int4_simd2_$(INT4_REQUANT),)$(if $(INT4_PACKED_SIMD2_FULL_ON),_int4_simd2_full_$(INT4_REQUANT),)$(if $(INT4_PACKED_SPAD_ON),_spad4,)
 
 RTL_DIR  := ../../src
 TEST_DIR := ../../test/tb/TOP_test/MEM
@@ -60,7 +77,7 @@ CPP_SRCS   := sim_main.cpp
 
 # LeNet weight ROM: convert Vivado COE to $readmemh format at build time.
 # The behavioral ROM_sparse_weight module reads this on sim start.
-COE_FILE ?= $(if $(INT4_REGEN_ON),../../test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe,../../Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe)
+COE_FILE ?= $(if $(INT4_PACKED_SIMD2_FULL_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SIMD2_FULL.coe,$(if $(INT4_PACKED_SIMD2_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SAME_COUNT_SIMD2.coe,$(if $(INT4_PACKED_TWO_LANE_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_TWO_LANE_FC_SIDEBAND.coe,$(if $(INT4_PACKED_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SINGLE_LANE.coe,$(if $(INT4_REGEN_ON),../../test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe,../../Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe)))))
 MEM_FILE := rom_sparse_weight.mem
 
 VFLAGS := --cc --exe --build -j 0 \
@@ -70,6 +87,9 @@ VFLAGS := --cc --exe --build -j 0 \
           $(PUBLIC_FLAT_RW_FLAG) \
           $(OCC_FLAG) \
           $(INT4_REGEN_FLAG) \
+          $(INT4_PACKED_FLAG) \
+          $(INT4_PACKED_SPAD_FLAG) \
+          $(INT4_LANE_FLAG) \
           $(INT4_REQUANT_FLAG) \
           -Wno-WIDTH -Wno-UNOPTFLAT -Wno-CASEINCOMPLETE \
           -Wno-INITIALDLY -Wno-LATCH -Wno-UNUSED \
@@ -106,7 +126,7 @@ $(MEM_FILE): $(COE_FILE)
 	@echo "  $$(wc -l < $@) entries"
 
 sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
-	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN)
+	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) $(INT4_RUNTIME_MODE_ARG)
 
 sim_public: ## Run sim with --public-flat-rw enabled
 	$(MAKE) sim PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN) OCC=$(OCC)
@@ -115,7 +135,7 @@ trace: ## Same as sim but dumps dump.vcd
 	$(MAKE) run_trace TRACE=1 PUBLIC_FLAT_RW=$(PUBLIC_FLAT_RW) ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN) OCC=$(OCC)
 
 run_trace: build
-	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) --trace
+	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) $(INT4_RUNTIME_MODE_ARG) --trace
 	@echo "Waveform: $(CURDIR)/dump.vcd"
 
 trace_public: ## Same as trace, but builds with --public-flat-rw enabled

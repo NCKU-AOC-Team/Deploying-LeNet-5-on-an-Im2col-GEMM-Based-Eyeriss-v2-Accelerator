@@ -6,6 +6,9 @@
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module ProcessingElement (
 	input         			clock,
 	input         			reset,
@@ -25,7 +28,7 @@ module ProcessingElement (
 	input  			       	weight_address_in_valid,
 	input  			[6:0]  	weight_address_in,
 	input  			       	weight_data_in_valid,
-	input  			[11:0] 	weight_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	weight_data_in,
 	
 	// control signals
 	output 			       	iact_address_write_fin,
@@ -41,7 +44,9 @@ module ProcessingElement (
 	output 					all_write_fin,
 	
 	input			[4:0]	PSUM_DEPTH,
-	input					psum_spad_clear
+	input					psum_spad_clear,
+	input					int4_former_weight_mode,
+	input					int4_later_weight_mode
 );
 
 // ====================================================================	//
@@ -75,7 +80,7 @@ wire		[12:0] 	PE_pad_former_data_in;
 wire		 		PE_pad_later_address_in_valid; 
 wire		[6:0] 	PE_pad_later_address_in; 
 wire		 		PE_pad_later_data_in_valid; 
-wire		[11:0] 	PE_pad_later_data_in;
+wire		[`BOYU_LATER_STREAM_RANGE] 	PE_pad_later_data_in;
 wire		 		PE_pad_former_address_write_fin; 
 wire		 		PE_pad_former_data_write_fin; 
 wire		 		PE_pad_later_address_write_fin; 
@@ -103,9 +108,9 @@ wire 		[6:0] 	FIFO_later_address_out;
 		
 wire 		 		FIFO_later_data_in_ready; 
 wire 		 		FIFO_later_data_in_valid; 
-wire 		[11:0] 	FIFO_later_data_in;
+wire 		[`BOYU_LATER_STREAM_RANGE] 	FIFO_later_data_in;
 wire 		 		FIFO_later_data_out_valid; 
-wire 		[11:0] 	FIFO_later_data_out;
+wire 		[`BOYU_LATER_STREAM_RANGE] 	FIFO_later_data_out;
 
 wire  				FIFO_in_psum_in_ready; 
 wire  				FIFO_in_psum_in_valid; 
@@ -162,7 +167,9 @@ Processing_Element_core Processing_Element_core_inst (
 	.later_data_write_fin		(PE_pad_later_data_write_fin	),              
 	.psum_acc_fin				(PE_pad_psum_add_fin			),
 	.PSUM_DEPTH					(PSUM_DEPTH						),
-	.psum_spad_clear			(psum_spad_clear				)
+	.psum_spad_clear			(psum_spad_clear				),
+	.int4_former_weight_mode	(int4_former_weight_mode		),
+	.int4_later_weight_mode		(int4_later_weight_mode			)
 );                                                                                  
               
 
@@ -172,7 +179,7 @@ Processing_Element_core Processing_Element_core_inst (
 parameter FORMER_ADDR_DATA_WIDTH 	= 8;	// fomer matrix contains 256 elements (8-bit)
 parameter FORMER_DATA_DATA_WIDTH 	= 13;	// data bitwidth = 8, count birwidth = 5
 parameter LATER_ADDR_DATA_WIDTH 	= 7;	// later matrix contains 128 elements (7-bit)
-parameter LATER_DATA_DATA_WIDTH 	= 12;	// data bitwidth = 8, count birwidth = 4
+parameter LATER_DATA_DATA_WIDTH 	= 16;	// INT4x2 full format = {w1,c1,w0,c0}
   
 // FIFO for former address                                                          
 PE_data_FIFO #(

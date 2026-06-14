@@ -1,6 +1,7 @@
 module TOP_integration(
 	input 			clock,
 	input 			reset,
+	input			int4_weight_mode,
 	
 	input			ifmap_BRAM_wr_in,
 	input	[7:0]	ifmap_BRAM_dina_in,
@@ -41,6 +42,7 @@ wire	[7:0]	ifmap_BRAM_douta;
 TOP_interface TOP_interface_inst (
 	.clock				(clock				),
 	.reset              (reset              ),
+	.int4_weight_mode	(int4_weight_mode	),
 	.system_enable      (system_enable      ),
 	.DRAM_data_in       (DRAM_data_in       ),
 	.DRAM_read_en       (DRAM_read_en       ),

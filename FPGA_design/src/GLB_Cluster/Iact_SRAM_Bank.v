@@ -6,6 +6,9 @@
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module Iact_SRAM_Bank(
 	input         clock,
 	input         reset,
@@ -16,7 +19,7 @@ module Iact_SRAM_Bank(
 	
 	output        iact_data_in_ready,
 	input         iact_data_in_valid,
-	input  [11:0] iact_data_in,
+	input  [`BOYU_LATER_STREAM_RANGE] iact_data_in,
 	
 	input         iact_address_out_ready,
 	output        iact_address_out_valid,
@@ -24,7 +27,7 @@ module Iact_SRAM_Bank(
 	
 	input         iact_data_out_ready,
 	output        iact_data_out_valid,
-	output [11:0] iact_data_out,
+	output [`BOYU_LATER_STREAM_RANGE] iact_data_out,
 	
 	// control signals
 	input         iact_write_en,

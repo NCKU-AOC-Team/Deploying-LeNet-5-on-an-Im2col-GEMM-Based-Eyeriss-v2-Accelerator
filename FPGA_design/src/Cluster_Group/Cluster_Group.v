@@ -10,6 +10,9 @@
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module ClusterGroup (
 	input  			       	clock,
 	input  			       	reset,
@@ -42,6 +45,8 @@ module ClusterGroup (
 	
 	input			[4:0]	PSUM_DEPTH,
 	input					psum_spad_clear,
+	input					int4_former_weight_mode,
+	input					int4_later_weight_mode,
 	
 	input					iact_write_fin_clear,
 	input					weight_write_fin_clear,
@@ -62,7 +67,7 @@ module ClusterGroup (
 	input  			[6:0]  	GLB_iact_address_in [0:2][0:2],
 	output 			   		GLB_iact_data_in_ready [0:2][0:2],
 	input  			   		GLB_iact_data_in_valid [0:2][0:2],
-	input  			[11:0] 	GLB_iact_data_in [0:2][0:2],
+	input  			[`BOYU_LATER_STREAM_RANGE] 	GLB_iact_data_in [0:2][0:2],
 	// GLB iact SRAM Bank 0_1
 	// GLB iact SRAM Bank 0_2
 	// GLB iact SRAM Bank 1_0
@@ -111,333 +116,333 @@ module ClusterGroup (
 	input  			[6:0]  	router_iact_0_0_north_address_in,
 	output 			       	router_iact_0_0_north_data_in_ready,
 	input  			       	router_iact_0_0_north_data_in_valid,
-	input  			[11:0] 	router_iact_0_0_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_0_north_data_in,
 	output 			       	router_iact_0_0_south_address_in_ready,
 	input  			       	router_iact_0_0_south_address_in_valid,
 	input  			[6:0]  	router_iact_0_0_south_address_in,
 	output 			       	router_iact_0_0_south_data_in_ready,
 	input  			       	router_iact_0_0_south_data_in_valid,
-	input  			[11:0] 	router_iact_0_0_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_0_south_data_in,
 	output 			       	router_iact_0_0_horiz_address_in_ready,
 	input  			       	router_iact_0_0_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_0_0_horiz_address_in,
 	output 			       	router_iact_0_0_horiz_data_in_ready,
 	input  			       	router_iact_0_0_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_0_0_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_0_horiz_data_in,
 	input  			       	router_iact_0_0_north_address_out_ready,	
 	output 			       	router_iact_0_0_north_address_out_valid,
 	output 			[6:0]  	router_iact_0_0_north_address_out,
 	input  			       	router_iact_0_0_north_data_out_ready,
 	output 			       	router_iact_0_0_north_data_out_valid,
-	output 			[11:0] 	router_iact_0_0_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_0_north_data_out,
 	input  			       	router_iact_0_0_south_address_out_ready,
 	output 			       	router_iact_0_0_south_address_out_valid,
 	output 			[6:0]  	router_iact_0_0_south_address_out,
 	input  			       	router_iact_0_0_south_data_out_ready,
 	output 			       	router_iact_0_0_south_data_out_valid,
-	output 			[11:0] 	router_iact_0_0_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_0_south_data_out,
 	input  			       	router_iact_0_0_horiz_address_out_ready,
 	output 			       	router_iact_0_0_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_0_0_horiz_address_out,
 	input  			       	router_iact_0_0_horiz_data_out_ready,
 	output 			       	router_iact_0_0_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_0_0_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_0_horiz_data_out,
 	// iact router 0_1
 	output 			       	router_iact_0_1_north_address_in_ready,
 	input  			       	router_iact_0_1_north_address_in_valid,
 	input  			[6:0]  	router_iact_0_1_north_address_in,
 	output 			       	router_iact_0_1_north_data_in_ready,
 	input  			       	router_iact_0_1_north_data_in_valid,
-	input  			[11:0] 	router_iact_0_1_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_1_north_data_in,
 	output 			       	router_iact_0_1_south_address_in_ready,
 	input  			       	router_iact_0_1_south_address_in_valid,
 	input  			[6:0]  	router_iact_0_1_south_address_in,
 	output 			       	router_iact_0_1_south_data_in_ready,
 	input  			       	router_iact_0_1_south_data_in_valid,
-	input  			[11:0] 	router_iact_0_1_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_1_south_data_in,
 	output 			       	router_iact_0_1_horiz_address_in_ready,
 	input  			       	router_iact_0_1_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_0_1_horiz_address_in,
 	output 			       	router_iact_0_1_horiz_data_in_ready,
 	input  			       	router_iact_0_1_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_0_1_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_1_horiz_data_in,
 	input  			       	router_iact_0_1_north_address_out_ready,	
 	output 			       	router_iact_0_1_north_address_out_valid,
 	output 			[6:0]  	router_iact_0_1_north_address_out,
 	input  			       	router_iact_0_1_north_data_out_ready,
 	output 			       	router_iact_0_1_north_data_out_valid,
-	output 			[11:0] 	router_iact_0_1_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_1_north_data_out,
 	input  			       	router_iact_0_1_south_address_out_ready,
 	output 			       	router_iact_0_1_south_address_out_valid,
 	output 			[6:0]  	router_iact_0_1_south_address_out,
 	input  			       	router_iact_0_1_south_data_out_ready,
 	output 			       	router_iact_0_1_south_data_out_valid,
-	output 			[11:0] 	router_iact_0_1_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_1_south_data_out,
 	input  			       	router_iact_0_1_horiz_address_out_ready,
 	output 			       	router_iact_0_1_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_0_1_horiz_address_out,
 	input  			       	router_iact_0_1_horiz_data_out_ready,
 	output 			       	router_iact_0_1_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_0_1_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_1_horiz_data_out,
 	// iact	router 0_2
 	output 			       	router_iact_0_2_north_address_in_ready,
 	input  			       	router_iact_0_2_north_address_in_valid,
 	input  			[6:0]  	router_iact_0_2_north_address_in,
 	output 			       	router_iact_0_2_north_data_in_ready,
 	input  			       	router_iact_0_2_north_data_in_valid,
-	input  			[11:0] 	router_iact_0_2_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_2_north_data_in,
 	output 			       	router_iact_0_2_south_address_in_ready,
 	input  			       	router_iact_0_2_south_address_in_valid,
 	input  			[6:0]  	router_iact_0_2_south_address_in,
 	output 			       	router_iact_0_2_south_data_in_ready,
 	input  			       	router_iact_0_2_south_data_in_valid,
-	input  			[11:0] 	router_iact_0_2_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_2_south_data_in,
 	output 			       	router_iact_0_2_horiz_address_in_ready,
 	input  			       	router_iact_0_2_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_0_2_horiz_address_in,
 	output 			       	router_iact_0_2_horiz_data_in_ready,
 	input  			       	router_iact_0_2_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_0_2_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_2_horiz_data_in,
 	input  			       	router_iact_0_2_north_address_out_ready,	
 	output 			       	router_iact_0_2_north_address_out_valid,
 	output 			[6:0]  	router_iact_0_2_north_address_out,
 	input  			       	router_iact_0_2_north_data_out_ready,
 	output 			       	router_iact_0_2_north_data_out_valid,
-	output 			[11:0] 	router_iact_0_2_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_2_north_data_out,
 	input  			       	router_iact_0_2_south_address_out_ready,
 	output 			       	router_iact_0_2_south_address_out_valid,
 	output 			[6:0]  	router_iact_0_2_south_address_out,
 	input  			       	router_iact_0_2_south_data_out_ready,
 	output 			       	router_iact_0_2_south_data_out_valid,
-	output 			[11:0] 	router_iact_0_2_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_2_south_data_out,
 	input  			       	router_iact_0_2_horiz_address_out_ready,
 	output 			       	router_iact_0_2_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_0_2_horiz_address_out,
 	input  			       	router_iact_0_2_horiz_data_out_ready,
 	output 			       	router_iact_0_2_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_0_2_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_0_2_horiz_data_out,
 	// iact	router 1_0
 	output 			       	router_iact_1_0_north_address_in_ready,
 	input  			       	router_iact_1_0_north_address_in_valid,
 	input  			[6:0]  	router_iact_1_0_north_address_in,
 	output 			       	router_iact_1_0_north_data_in_ready,
 	input  			       	router_iact_1_0_north_data_in_valid,
-	input  			[11:0] 	router_iact_1_0_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_0_north_data_in,
 	output 			       	router_iact_1_0_south_address_in_ready,
 	input  			       	router_iact_1_0_south_address_in_valid,
 	input  			[6:0]  	router_iact_1_0_south_address_in,
 	output 			       	router_iact_1_0_south_data_in_ready,
 	input  			       	router_iact_1_0_south_data_in_valid,
-	input  			[11:0] 	router_iact_1_0_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_0_south_data_in,
 	output 			       	router_iact_1_0_horiz_address_in_ready,
 	input  			       	router_iact_1_0_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_1_0_horiz_address_in,
 	output 			       	router_iact_1_0_horiz_data_in_ready,
 	input  			       	router_iact_1_0_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_1_0_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_0_horiz_data_in,
 	input  			       	router_iact_1_0_north_address_out_ready,	
 	output 			       	router_iact_1_0_north_address_out_valid,
 	output 			[6:0]  	router_iact_1_0_north_address_out,
 	input  			       	router_iact_1_0_north_data_out_ready,
 	output 			       	router_iact_1_0_north_data_out_valid,
-	output 			[11:0] 	router_iact_1_0_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_0_north_data_out,
 	input  			       	router_iact_1_0_south_address_out_ready,
 	output 			       	router_iact_1_0_south_address_out_valid,
 	output 			[6:0]  	router_iact_1_0_south_address_out,
 	input  			       	router_iact_1_0_south_data_out_ready,
 	output 			       	router_iact_1_0_south_data_out_valid,
-	output 			[11:0] 	router_iact_1_0_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_0_south_data_out,
 	input  			       	router_iact_1_0_horiz_address_out_ready,
 	output 			       	router_iact_1_0_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_1_0_horiz_address_out,
 	input  			       	router_iact_1_0_horiz_data_out_ready,
 	output 			       	router_iact_1_0_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_1_0_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_0_horiz_data_out,
 	// iact	router	1_1        
 	output 			       	router_iact_1_1_north_address_in_ready,
 	input  			       	router_iact_1_1_north_address_in_valid,
 	input  			[6:0]  	router_iact_1_1_north_address_in,
 	output 			       	router_iact_1_1_north_data_in_ready,
 	input  			       	router_iact_1_1_north_data_in_valid,
-	input  			[11:0] 	router_iact_1_1_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_1_north_data_in,
 	output 			       	router_iact_1_1_south_address_in_ready,
 	input  			       	router_iact_1_1_south_address_in_valid,
 	input  			[6:0]  	router_iact_1_1_south_address_in,
 	output 			       	router_iact_1_1_south_data_in_ready,
 	input  			       	router_iact_1_1_south_data_in_valid,
-	input  			[11:0] 	router_iact_1_1_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_1_south_data_in,
 	output 			       	router_iact_1_1_horiz_address_in_ready,
 	input  			       	router_iact_1_1_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_1_1_horiz_address_in,
 	output 			       	router_iact_1_1_horiz_data_in_ready,
 	input  			       	router_iact_1_1_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_1_1_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_1_horiz_data_in,
 	input  			       	router_iact_1_1_north_address_out_ready,	
 	output 			       	router_iact_1_1_north_address_out_valid,
 	output 			[6:0]  	router_iact_1_1_north_address_out,
 	input  			       	router_iact_1_1_north_data_out_ready,
 	output 			       	router_iact_1_1_north_data_out_valid,
-	output 			[11:0] 	router_iact_1_1_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_1_north_data_out,
 	input  			       	router_iact_1_1_south_address_out_ready,
 	output 			       	router_iact_1_1_south_address_out_valid,
 	output 			[6:0]  	router_iact_1_1_south_address_out,
 	input  			       	router_iact_1_1_south_data_out_ready,
 	output 			       	router_iact_1_1_south_data_out_valid,
-	output 			[11:0] 	router_iact_1_1_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_1_south_data_out,
 	input  			       	router_iact_1_1_horiz_address_out_ready,
 	output 			       	router_iact_1_1_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_1_1_horiz_address_out,
 	input  			       	router_iact_1_1_horiz_data_out_ready,
 	output 			       	router_iact_1_1_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_1_1_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_1_horiz_data_out,
 	// iact	router 1_2        
 	output 			       	router_iact_1_2_north_address_in_ready,
 	input  			       	router_iact_1_2_north_address_in_valid,
 	input  			[6:0]  	router_iact_1_2_north_address_in,
 	output 			       	router_iact_1_2_north_data_in_ready,
 	input  			       	router_iact_1_2_north_data_in_valid,
-	input  			[11:0] 	router_iact_1_2_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_2_north_data_in,
 	output 			       	router_iact_1_2_south_address_in_ready,
 	input  			       	router_iact_1_2_south_address_in_valid,
 	input  			[6:0]  	router_iact_1_2_south_address_in,
 	output 			       	router_iact_1_2_south_data_in_ready,
 	input  			       	router_iact_1_2_south_data_in_valid,
-	input  			[11:0] 	router_iact_1_2_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_2_south_data_in,
 	output 			       	router_iact_1_2_horiz_address_in_ready,
 	input  			       	router_iact_1_2_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_1_2_horiz_address_in,
 	output 			       	router_iact_1_2_horiz_data_in_ready,
 	input  			       	router_iact_1_2_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_1_2_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_2_horiz_data_in,
 	input  			       	router_iact_1_2_north_address_out_ready,	
 	output 			       	router_iact_1_2_north_address_out_valid,
 	output 			[6:0]  	router_iact_1_2_north_address_out,
 	input  			       	router_iact_1_2_north_data_out_ready,
 	output 			       	router_iact_1_2_north_data_out_valid,
-	output 			[11:0] 	router_iact_1_2_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_2_north_data_out,
 	input  			       	router_iact_1_2_south_address_out_ready,
 	output 			       	router_iact_1_2_south_address_out_valid,
 	output 			[6:0]  	router_iact_1_2_south_address_out,
 	input  			       	router_iact_1_2_south_data_out_ready,
 	output 			       	router_iact_1_2_south_data_out_valid,
-	output 			[11:0] 	router_iact_1_2_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_2_south_data_out,
 	input  			       	router_iact_1_2_horiz_address_out_ready,
 	output 			       	router_iact_1_2_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_1_2_horiz_address_out,
 	input  			       	router_iact_1_2_horiz_data_out_ready,
 	output 			       	router_iact_1_2_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_1_2_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_1_2_horiz_data_out,
 	// iact	router 2_0
 	output 			       	router_iact_2_0_north_address_in_ready,
 	input  			       	router_iact_2_0_north_address_in_valid,
 	input  			[6:0]  	router_iact_2_0_north_address_in,
 	output 			       	router_iact_2_0_north_data_in_ready,
 	input  			       	router_iact_2_0_north_data_in_valid,
-	input  			[11:0] 	router_iact_2_0_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_0_north_data_in,
 	output 			       	router_iact_2_0_south_address_in_ready,
 	input  			       	router_iact_2_0_south_address_in_valid,
 	input  			[6:0]  	router_iact_2_0_south_address_in,
 	output 			       	router_iact_2_0_south_data_in_ready,
 	input  			       	router_iact_2_0_south_data_in_valid,
-	input  			[11:0] 	router_iact_2_0_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_0_south_data_in,
 	output 			       	router_iact_2_0_horiz_address_in_ready,
 	input  			       	router_iact_2_0_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_2_0_horiz_address_in,
 	output 			       	router_iact_2_0_horiz_data_in_ready,
 	input  			       	router_iact_2_0_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_2_0_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_0_horiz_data_in,
 	input  			       	router_iact_2_0_north_address_out_ready,	
 	output 			       	router_iact_2_0_north_address_out_valid,
 	output 			[6:0]  	router_iact_2_0_north_address_out,
 	input  			       	router_iact_2_0_north_data_out_ready,
 	output 			       	router_iact_2_0_north_data_out_valid,
-	output 			[11:0] 	router_iact_2_0_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_0_north_data_out,
 	input  			       	router_iact_2_0_south_address_out_ready,
 	output 			       	router_iact_2_0_south_address_out_valid,
 	output 			[6:0]  	router_iact_2_0_south_address_out,
 	input  			       	router_iact_2_0_south_data_out_ready,
 	output 			       	router_iact_2_0_south_data_out_valid,
-	output 			[11:0] 	router_iact_2_0_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_0_south_data_out,
 	input  			       	router_iact_2_0_horiz_address_out_ready,
 	output 			       	router_iact_2_0_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_2_0_horiz_address_out,
 	input  			       	router_iact_2_0_horiz_data_out_ready,
 	output 			       	router_iact_2_0_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_2_0_horiz_data_out,	
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_0_horiz_data_out,	
 	// iact	router 2_1        
 	output 			       	router_iact_2_1_north_address_in_ready,
 	input  			       	router_iact_2_1_north_address_in_valid,
 	input  			[6:0]  	router_iact_2_1_north_address_in,
 	output 			       	router_iact_2_1_north_data_in_ready,
 	input  			       	router_iact_2_1_north_data_in_valid,
-	input  			[11:0] 	router_iact_2_1_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_1_north_data_in,
 	output 			       	router_iact_2_1_south_address_in_ready,
 	input  			       	router_iact_2_1_south_address_in_valid,
 	input  			[6:0]  	router_iact_2_1_south_address_in,
 	output 			       	router_iact_2_1_south_data_in_ready,
 	input  			       	router_iact_2_1_south_data_in_valid,
-	input  			[11:0] 	router_iact_2_1_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_1_south_data_in,
 	output 			       	router_iact_2_1_horiz_address_in_ready,
 	input  			       	router_iact_2_1_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_2_1_horiz_address_in,
 	output 			       	router_iact_2_1_horiz_data_in_ready,
 	input  			       	router_iact_2_1_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_2_1_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_1_horiz_data_in,
 	input  			       	router_iact_2_1_north_address_out_ready,	
 	output 			       	router_iact_2_1_north_address_out_valid,
 	output 			[6:0]  	router_iact_2_1_north_address_out,
 	input  			       	router_iact_2_1_north_data_out_ready,
 	output 			       	router_iact_2_1_north_data_out_valid,
-	output 			[11:0] 	router_iact_2_1_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_1_north_data_out,
 	input  			       	router_iact_2_1_south_address_out_ready,
 	output 			       	router_iact_2_1_south_address_out_valid,
 	output 			[6:0]  	router_iact_2_1_south_address_out,
 	input  			       	router_iact_2_1_south_data_out_ready,
 	output 			       	router_iact_2_1_south_data_out_valid,
-	output 			[11:0] 	router_iact_2_1_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_1_south_data_out,
 	input  			       	router_iact_2_1_horiz_address_out_ready,
 	output 			       	router_iact_2_1_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_2_1_horiz_address_out,
 	input  			       	router_iact_2_1_horiz_data_out_ready,
 	output 			       	router_iact_2_1_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_2_1_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_1_horiz_data_out,
 	// iact	router 2_2        
 	output 			       	router_iact_2_2_north_address_in_ready,
 	input  			       	router_iact_2_2_north_address_in_valid,
 	input  			[6:0]  	router_iact_2_2_north_address_in,
 	output 			       	router_iact_2_2_north_data_in_ready,
 	input  			       	router_iact_2_2_north_data_in_valid,
-	input  			[11:0] 	router_iact_2_2_north_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_2_north_data_in,
 	output 			       	router_iact_2_2_south_address_in_ready,
 	input  			       	router_iact_2_2_south_address_in_valid,
 	input  			[6:0]  	router_iact_2_2_south_address_in,
 	output 			       	router_iact_2_2_south_data_in_ready,
 	input  			       	router_iact_2_2_south_data_in_valid,
-	input  			[11:0] 	router_iact_2_2_south_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_2_south_data_in,
 	output 			       	router_iact_2_2_horiz_address_in_ready,
 	input  			       	router_iact_2_2_horiz_address_in_valid,
 	input  			[6:0]  	router_iact_2_2_horiz_address_in,
 	output 			       	router_iact_2_2_horiz_data_in_ready,
 	input  			       	router_iact_2_2_horiz_data_in_valid,
-	input  			[11:0] 	router_iact_2_2_horiz_data_in,
+	input  			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_2_horiz_data_in,
 	input  			       	router_iact_2_2_north_address_out_ready,	
 	output 			       	router_iact_2_2_north_address_out_valid,
 	output 			[6:0]  	router_iact_2_2_north_address_out,
 	input  			       	router_iact_2_2_north_data_out_ready,
 	output 			       	router_iact_2_2_north_data_out_valid,
-	output 			[11:0] 	router_iact_2_2_north_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_2_north_data_out,
 	input  			       	router_iact_2_2_south_address_out_ready,
 	output 			       	router_iact_2_2_south_address_out_valid,
 	output 			[6:0]  	router_iact_2_2_south_address_out,
 	input  			       	router_iact_2_2_south_data_out_ready,
 	output 			       	router_iact_2_2_south_data_out_valid,
-	output 			[11:0] 	router_iact_2_2_south_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_2_south_data_out,
 	input  			       	router_iact_2_2_horiz_address_out_ready,
 	output 			       	router_iact_2_2_horiz_address_out_valid,
 	output 			[6:0]  	router_iact_2_2_horiz_address_out,
 	input  			       	router_iact_2_2_horiz_data_out_ready,
 	output 			       	router_iact_2_2_horiz_data_out_valid,
-	output 			[11:0] 	router_iact_2_2_horiz_data_out,
+	output 			[`BOYU_LATER_STREAM_RANGE] 	router_iact_2_2_horiz_data_out,
 					
 	// weight router 0
 	output 			       	router_weight_0_horiz_address_in_ready,
@@ -526,11 +531,11 @@ module ClusterGroup (
 // ====================================================================	//
 // 						 		Wires  									//
 // ====================================================================	//
-// PE Cluster connection — 只剩「PE 輸出」+「控制(源頭還攤平)」的中繼線；輸入資料已直連 router 輸出(見實例化)
-// iact：ready 回手 (per-row [0:2])
+// PE Cluster connection ???�剩?�PE 輸出???�控??源頭?�攤�??��?中繼線�?輸入資�?已直??router 輸出(見實例�?)
+// iact：ready ?��? (per-row [0:2])
 wire                 PECluster_iact_address_in_ready [0:2];
 wire                 PECluster_iact_data_in_ready    [0:2];
-// psum：輸出 + from_south 中繼 (per-column [0:2], signed [20:0])
+// psum：輸??+ from_south 中繼 (per-column [0:2], signed [20:0])
 wire                 PECluster_psum_in_ready [0:2];
 wire                 PECluster_psum_out_valid [0:2];
 wire signed [20:0]   PECluster_psum_out       [0:2];
@@ -559,7 +564,7 @@ wire              GLBCluster_iact_address_in_valid [0:2][0:2];
 wire [6:0]        GLBCluster_iact_address_in [0:2][0:2];
 wire              GLBCluster_iact_data_in_ready [0:2][0:2];
 wire              GLBCluster_iact_data_in_valid [0:2][0:2];
-wire [11:0]       GLBCluster_iact_data_in [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]       GLBCluster_iact_data_in [0:2][0:2];
 wire              GLBCluster_iact_write_en [0:2][0:2];
 wire              GLBCluster_iact_write_done [0:2][0:2];
 wire              GLBCluster_iact_read_en [0:2][0:2];
@@ -618,49 +623,49 @@ wire               iact_GLB_address_in_valid [0:2][0:2];
 wire [6:0]         iact_GLB_address_in_bits [0:2][0:2];
 wire               iact_GLB_data_in_ready [0:2][0:2];
 wire               iact_GLB_data_in_valid [0:2][0:2];
-wire [11:0]        iact_GLB_data_in_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_GLB_data_in_bits [0:2][0:2];
 wire               iact_north_address_in_ready [0:2][0:2];
 wire               iact_north_address_in_valid [0:2][0:2];
 wire [6:0]         iact_north_address_in_bits [0:2][0:2];
 wire               iact_north_data_in_ready [0:2][0:2];
 wire               iact_north_data_in_valid [0:2][0:2];
-wire [11:0]        iact_north_data_in_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_north_data_in_bits [0:2][0:2];
 wire               iact_south_address_in_ready [0:2][0:2];
 wire               iact_south_address_in_valid [0:2][0:2];
 wire [6:0]         iact_south_address_in_bits [0:2][0:2];
 wire               iact_south_data_in_ready [0:2][0:2];
 wire               iact_south_data_in_valid [0:2][0:2];
-wire [11:0]        iact_south_data_in_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_south_data_in_bits [0:2][0:2];
 wire               iact_horiz_address_in_ready [0:2][0:2];
 wire               iact_horiz_address_in_valid [0:2][0:2];
 wire [6:0]         iact_horiz_address_in_bits [0:2][0:2];
 wire               iact_horiz_data_in_ready [0:2][0:2];
 wire               iact_horiz_data_in_valid [0:2][0:2];
-wire [11:0]        iact_horiz_data_in_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_horiz_data_in_bits [0:2][0:2];
 wire               iact_PE_address_out_ready [0:2][0:2];
 wire               iact_PE_address_out_valid [0:2][0:2];
 wire [6:0]         iact_PE_address_out_bits [0:2][0:2];
 wire               iact_PE_data_out_ready [0:2][0:2];
 wire               iact_PE_data_out_valid [0:2][0:2];
-wire [11:0]        iact_PE_data_out_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_PE_data_out_bits [0:2][0:2];
 wire               iact_north_address_out_ready [0:2][0:2];
 wire               iact_north_address_out_valid [0:2][0:2];
 wire [6:0]         iact_north_address_out_bits [0:2][0:2];
 wire               iact_north_data_out_ready [0:2][0:2];
 wire               iact_north_data_out_valid [0:2][0:2];
-wire [11:0]        iact_north_data_out_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_north_data_out_bits [0:2][0:2];
 wire               iact_south_address_out_ready [0:2][0:2];
 wire               iact_south_address_out_valid [0:2][0:2];
 wire [6:0]         iact_south_address_out_bits [0:2][0:2];
 wire               iact_south_data_out_ready [0:2][0:2];
 wire               iact_south_data_out_valid [0:2][0:2];
-wire [11:0]        iact_south_data_out_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_south_data_out_bits [0:2][0:2];
 wire               iact_horiz_address_out_ready [0:2][0:2];
 wire               iact_horiz_address_out_valid [0:2][0:2];
 wire [6:0]         iact_horiz_address_out_bits [0:2][0:2];
 wire               iact_horiz_data_out_ready [0:2][0:2];
 wire               iact_horiz_data_out_valid [0:2][0:2];
-wire [11:0]        iact_horiz_data_out_bits [0:2][0:2];
+wire [`BOYU_LATER_STREAM_RANGE]        iact_horiz_data_out_bits [0:2][0:2];
 wire               weight_GLB_address_in_ready [0:2];
 wire               weight_GLB_address_in_valid [0:2];
 wire [7:0]         weight_GLB_address_in_bits [0:2];
@@ -735,8 +740,8 @@ wire 					cg_ctrl_psum_acc_fin;
 // 						 		Instantiation  							//
 // ====================================================================	//
 PE_Cluster PE_Cluster_inst (
-	// NOTE: router<->PE 埠名交叉(CSC 命名)：PE 的 weight port 實際吃 iact router 輸出、
-	//       iact port 實際吃 weight router 輸出；下方直連即反映此交叉。
+	// NOTE: router<->PE ?��?交�?(CSC ?��?)：PE ??weight port 實�???iact router 輸出??
+	//       iact port 實�???weight router 輸出；�??�直??��?��?此交?��?
 	.clock                   (clock),
 	.reset                   (reset),
 	.iact_address_in_ready   (PECluster_iact_address_in_ready),
@@ -769,7 +774,9 @@ PE_Cluster PE_Cluster_inst (
 	.all_write_fin           (PECluster_all_write_fin),
 	.all_cal_fin             (PECluster_all_cal_fin),
 	.PSUM_DEPTH              (PSUM_DEPTH),
-	.psum_spad_clear         (psum_spad_clear)
+	.psum_spad_clear         (psum_spad_clear),
+	.int4_former_weight_mode (int4_former_weight_mode),
+	.int4_later_weight_mode  (int4_later_weight_mode)
 );
 
 GLB_Cluster GLB_Cluster_inst (

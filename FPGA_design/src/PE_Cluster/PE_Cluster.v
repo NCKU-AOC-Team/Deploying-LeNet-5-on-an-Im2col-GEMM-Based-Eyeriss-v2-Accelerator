@@ -6,18 +6,21 @@
 // disable signals is used to disable selected PE for physical mapping.
 // If disable signals are high, the utilization of PE will be decrease.
 // ------------------------------------------------------------------------------------------------------ //
-// [Refactor] 兩階段重構，行為與原攤平版等價（diff 50 張驗證）：
-//   階段1（內部接線）：手動展開改為 generate/array —— PE 實例化 / 控制廣播 / always reg /
-//                      reduction 用 genvar 迴圈；特例邏輯原封照搬，只改接 array：
-//                        * psum 縱向 systolic chain 上下邊界 (gr==0 吐外部 / gr==2 吃 router|south mux)
-//                        * iact controller 的 port 連接 (含原作者 typo: .iact_from_router_2_data_in_vaild)
-//   階段2（port 介面）：module port 也 array 化（iact [0:2]、weight / PE_disable [0:2][0:2]、psum [0:2] signed）；
-//                      攤平 → 內部 array 的 adapter 收成 generate 迴圈（見下方 *_ADAPT）。
-//                      ★ 此層 port 一改，上層 Cluster_Group.v 的 PE_Cluster_inst 必須一起改（已同步）。
-//   - PE 實例層次名：PE_INST_R[r].PE_INST_C[c].pe。
+// [Refactor] ?��?段�?構�?行為?��??�平?��??��?diff 50 張�?證�?�?
+//   ?�段1（內?�接線�?：�??��??�改??generate/array ?��?PE 實�???/ ?�制�?�� / always reg /
+//                      reduction ??genvar 迴�?；特例�?輯�?封照?��??�改??array�?
+//                        * psum 縱�? systolic chain 上�??��? (gr==0 ?��???/ gr==2 ??router|south mux)
+//                        * iact controller ??port ??�� (?��?作�?typo: .iact_from_router_2_data_in_vaild)
+//   ?�段2（port 介面）�?module port �?array ?��?iact [0:2]?�weight / PE_disable [0:2][0:2]?�psum [0:2] signed）�?
+//                      ?�平 ???�部 array ??adapter ?��? generate 迴�?（�?下方 *_ADAPT）�?
+//                      ??此層 port 一?��?上層 Cluster_Group.v ??PE_Cluster_inst 必�?一起改（已?�步）�?
+//   - PE 實�?層次?��?PE_INST_R[r].PE_INST_C[c].pe??
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module PE_Cluster(
 	input  clock,
 	input  reset,
@@ -34,7 +37,7 @@ module PE_Cluster(
 	input                weight_address_in_valid [0:2][0:2],
 	input        [6:0]   weight_address_in       [0:2][0:2],
 	input                weight_data_in_valid    [0:2][0:2],
-	input        [11:0]  weight_data_in          [0:2][0:2],
+	input        [`BOYU_LATER_STREAM_RANGE]  weight_data_in          [0:2][0:2],
 
 	// ----- psum : per-column [0:2], signed [20:0] -----
 	output               psum_in_ready            [0:2],
@@ -59,7 +62,9 @@ module PE_Cluster(
 	output        all_write_fin,
 	output        all_cal_fin,
 	input  [4:0]  PSUM_DEPTH,
-	input         psum_spad_clear
+	input         psum_spad_clear,
+	input         int4_former_weight_mode,
+	input         int4_later_weight_mode
 );
 
 // ====================================================================	//
@@ -69,7 +74,7 @@ localparam PSUM_FROM_SOU 	= 1'b0;
 localparam PSUM_FROM_ROUTER = 1'b1;
 
 // ====================================================================	//
-// 		Internal per-PE signals (3x3 array, 取代原本攤平 wire 宣告)		//
+// 		Internal per-PE signals (3x3 array, ?�代?�本?�平 wire �??)		//
 // ====================================================================	//
 wire               pe_psum_in_ready        [0:2][0:2];
 wire               pe_psum_in_valid        [0:2][0:2];
@@ -84,7 +89,7 @@ wire        [12:0] pe_iact_data_in         [0:2][0:2];
 wire               pe_weight_addr_in_valid [0:2][0:2];
 wire        [6:0]  pe_weight_addr_in       [0:2][0:2];
 wire               pe_weight_data_in_valid [0:2][0:2];
-wire        [11:0] pe_weight_data_in       [0:2][0:2];
+wire        [`BOYU_LATER_STREAM_RANGE] pe_weight_data_in       [0:2][0:2];
 wire               pe_iact_addr_write_fin  [0:2][0:2];
 wire               pe_iact_data_write_fin  [0:2][0:2];
 wire               pe_psum_add_fin         [0:2][0:2];
@@ -99,14 +104,14 @@ wire               pe_disable              [0:2][0:2];
 reg                pe_cal_fin_reg          [0:2][0:2];
 reg                pe_write_fin_reg        [0:2][0:2];
 
-// per-column psum 中繼線：systolic 邊界要用，下方 adapter 從 array port 填入
+// per-column psum 中繼線�?systolic ?��?要用，�???adapter �?array port 填入
 wire               psum_in_v_ext   [0:2];
 wire signed [20:0] psum_in_d_ext   [0:2];
 wire               psum_in_south_v [0:2];
 wire signed [20:0] psum_in_south_d [0:2];
 wire               psum_out_rdy_ext[0:2];
 
-// adapter：array port → 內部 array（psum 中繼線 / weight / disable），等價於原攤平 assign
+// adapter：array port ???�部 array（psum 中繼�?/ weight / disable）�?等價?��??�平 assign
 genvar ai, aj;
 generate
 	for (aj = 0; aj < 3; aj = aj + 1) begin: PSUM_EXT_ADAPT
@@ -128,7 +133,7 @@ generate
 endgenerate
 
 // ====================================================================	//
-// 				PE array (3x3) 實例化 + 規律控制廣播 (generate)			//
+// 				PE array (3x3) 實�???+ 規�??�制�?�� (generate)			//
 // ====================================================================	//
 genvar gr, gc;
 generate
@@ -161,10 +166,12 @@ generate
 				.weight_write_fin_clear	(pe_weight_write_fin_clear[gr][gc]),
 				.all_write_fin			(pe_write_fin            [gr][gc]),
 				.PSUM_DEPTH				(PSUM_DEPTH),
-				.psum_spad_clear		(psum_spad_clear)
+				.psum_spad_clear		(psum_spad_clear),
+				.int4_former_weight_mode(int4_former_weight_mode),
+				.int4_later_weight_mode	(int4_later_weight_mode)
 			);
 
-			// 規律的控制信號 (廣播 / 每 PE 自身 gating)，等價於原攤平 assign
+			// 規�??�控?�信??(�?�� / �?PE ?�身 gating)，�??�於?�攤�?assign
 			assign pe_psum_enq_en          [gr][gc] = psum_load_en;
 			assign pe_do_load_en           [gr][gc] = do_en & ~pe_cal_fin_reg[gr][gc];
 			assign pe_iact_write_fin_clear [gr][gc] = iact_write_fin_clear;
@@ -174,27 +181,27 @@ generate
 endgenerate
 
 // ====================================================================	//
-// 		psum 縱向 systolic chain：底排(gr==2)吃外部，頂排(gr==0)吐外部		//
-//		此區為「特例邏輯」，原封照搬，僅改接 array (gr 由下往上累加)			//
+// 		psum 縱�? systolic chain：�???gr==2)?��??��??��?(gr==0)?��???	//
+//		此�??�「特例�?輯」�??��??�搬，�??�接 array (gr ?��?往上累??			//
 // ====================================================================	//
 generate
 	for (gc = 0; gc < 3; gc = gc + 1) begin: PSUM_C
 		for (gr = 0; gr < 3; gr = gr + 1) begin: PSUM_R
 			if (gr == 2) begin: PSUM_IN_SEL
-				// 底排：psum_in 來自 router psum 或 south psum (由 psum_data_in_sel 選)
+				// 底�?：psum_in 來自 router psum ??south psum (??psum_data_in_sel ??
 				assign pe_psum_in_valid[gr][gc] = (psum_data_in_sel == PSUM_FROM_ROUTER) ? psum_in_v_ext[gc] : psum_in_south_v[gc];
 				assign pe_psum_in      [gr][gc] = (psum_data_in_sel == PSUM_FROM_ROUTER) ? psum_in_d_ext[gc] : psum_in_south_d[gc];
 			end else begin: PSUM_IN_SEL
-				// 中間/上排：psum_in 來自下一排的 psum_out
+				// 中�?/上�?：psum_in 來自下�??��? psum_out
 				assign pe_psum_in_valid[gr][gc] = pe_psum_out_valid[gr+1][gc];
 				assign pe_psum_in      [gr][gc] = pe_psum_out      [gr+1][gc];
 			end
 
 			if (gr == 0) begin: PSUM_OUT_RDY
-				// 頂排：psum_out 的 ready 來自外部
+				// ?��?：psum_out ??ready 來自外部
 				assign pe_psum_out_ready[gr][gc] = psum_out_rdy_ext[gc];
 			end else begin: PSUM_OUT_RDY
-				// 其餘：psum_out 的 ready 來自上一排的 psum_in_ready
+				// ?��?：psum_out ??ready 來自上�??��? psum_in_ready
 				assign pe_psum_out_ready[gr][gc] = pe_psum_in_ready[gr-1][gc];
 			end
 		end
@@ -202,7 +209,7 @@ generate
 endgenerate
 
 // ====================================================================	//
-// 				外部 psum 輸出：array output port ← PE array (per-column 迴圈)					//
+// 				外部 psum 輸出：array output port ??PE array (per-column 迴�?)					//
 // ====================================================================	//
 generate
 	for (aj = 0; aj < 3; aj = aj + 1) begin: PSUM_OUT_ADAPT
@@ -214,7 +221,7 @@ generate
 endgenerate
 
 // ====================================================================	//
-// 					reduction：全 PE 完成才拉高							//
+// 					reduction：全 PE 完�??��?�?						//
 // ====================================================================	//
 assign all_write_fin = pe_write_fin_reg[0][0] & pe_write_fin_reg[0][1] & pe_write_fin_reg[0][2] &
                        pe_write_fin_reg[1][0] & pe_write_fin_reg[1][1] & pe_write_fin_reg[1][2] &
@@ -225,7 +232,7 @@ assign all_cal_fin   = pe_cal_fin_reg[0][0] & pe_cal_fin_reg[0][1] & pe_cal_fin_
                        pe_cal_fin_reg[2][0] & pe_cal_fin_reg[2][1] & pe_cal_fin_reg[2][2];
 
 // ====================================================================	//
-// 			iact controller (攤平 port 連接，含原作者 typo，照搬)			//
+// 			iact controller (?�平 port ??��，含?��???typo，照??			//
 // ====================================================================	//
 PE_Cluster_controller PE_Cluster_controller_inst (
 	.iact_data_in_sel                   (iact_data_in_sel				),

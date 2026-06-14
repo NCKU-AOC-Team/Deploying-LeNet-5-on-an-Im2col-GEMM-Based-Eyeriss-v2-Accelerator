@@ -1,103 +1,72 @@
-# 稀疏卷積神經網路加速器 FPGA 專案
+# 稀疏 CNN 加速器 FPGA 專案整理
 
-本專案是以 Eyeriss v2 架構為基礎修改而成的稀疏卷積神經網路加速器。設計重點包含 `im2col`、`GEMM`、CSC 稀疏壓縮、router 資料流重整，以及適合 LeNet-5 推論的 FPGA 控制流程。
+本專案以 Eyeriss v2 類似架構為基礎，實作適合 LeNet-5 推論的稀疏 CNN FPGA accelerator。主要設計包含 `im2col`、GEMM、CSC sparse stream、Router、GLB/PE local storage、ReLU/Softmax、Psum requantizer，以及 TOP controller 排程。
 
-原始專案曾獲中興大學電機系大學部專題競賽第一名。此 repository 主要提供 FPGA prototype、Verilog RTL、測試資料產生腳本、Vivado 專案與相關文件。
+目前這份 README 以 BOYU 分支整理為主，讓組員能快速知道：
 
-## Repository 內容
+1. 原版 RTL / Verilator 到底吃哪些資料。
+2. INT8、INT4-as-INT8、真正 INT4 hardware 分別做到哪裡。
+3. 每個 BOYU branch 的改動和目前驗證結果。
 
-- `FPGA_design/src/`：主要 Verilog RTL。
-- `FPGA_design/sim/verilator/`：Verilator simulation flow。
-- `FPGA_design/test/tb/TOP_test/`：TOP-level 測試資料、DRAM、golden、layer data。
-- `FPGA_design/Vivado/PYNQ_Z2/`：PYNQ-Z2 Vivado project 與既有 implementation 產物。
-- `docs/`：架構分析、controller FSM、module reference 等文件。
-- `host_demo/`：主機端 demo 相關程式。
-- `picture/`：README 與報告使用的圖片。
+## Repository 結構
 
-Demo 影片：[YouTube](https://www.youtube.com/watch?v=wLz8Di9vdas&ab_channel=BOCHUNChen)
+| 路徑 | 內容 |
+| --- | --- |
+| `FPGA_design/src/` | Verilog RTL，包含 TOP、GLB、Router、Cluster Group、PE、Spad、Pooling、Quantizer。 |
+| `FPGA_design/sim/verilator/` | Verilator simulation flow，包含 `Makefile`、`sim_main.cpp`、behavioral BRAM model。 |
+| `FPGA_design/test/tb/TOP_test/` | TOP-level 測試資料、DRAM、golden label、layer data、ROM/COE。 |
+| `FPGA_design/tools/` | BOYU 分支新增的 INT4 / sparse ROM generator。 |
+| `FPGA_design/Vivado/PYNQ_Z2/` | 原本 Vivado project 與 PYNQ-Z2 相關檔案。 |
+| `docs/` | 架構、controller FSM、module reference 等文件。 |
+| `host_demo/` | Host demo 程式。 |
 
-## 目前分支狀態
+原始 demo 影片：[YouTube](https://www.youtube.com/watch?v=wLz8Di9vdas&ab_channel=BOCHUNChen)
 
-### BOYU_ShunWei
+## 原版 Verilator Flow 吃的資料
 
-目前工作分支是 `BOYU_ShunWei`，來源是 `origin/feat/hw-analysis`。這個分支用來測試 ShunWei 重構後的 RTL，並在自己的 branch 上做低風險優化，不修改或污染其他人的遠端 branch。
-
-目前同步到的 commit：
-
-```text
-7b21c07 refactor(task#2): arrayify PE_disable ([r][c], ctrl-tap); read_out_en/data_out/data_in/interconnect left as-is
-```
-
-Verilator smoke test：
+Verilator 入口在：
 
 ```bash
 cd FPGA_design/sim/verilator
-make clean
 make sim ITERS=5
 ```
 
-目前結果：
-
-```text
-Iter 0: result=5 golden=5 (88400 cycles) OK
-Iter 1: result=0 golden=0 (88440 cycles) OK
-Iter 2: result=4 golden=4 (85152 cycles) OK
-Iter 3: result=1 golden=1 (87474 cycles) OK
-Iter 4: result=9 golden=9 (87722 cycles) OK
-
-=== Summary: 5/5 passed (100%) ===
-```
-
-## Verilator `make sim` 目前吃的檔案
-
-目前 `FPGA_design/sim/verilator/Makefile` 跑的是 Verilator C++ harness，不是直接跑原本的 Verilog testbench。也就是說，TOP-level testbench 由 `sim_main.cpp` 取代，RTL top module 是 `TOP_integration`。
-
-預設指令：
-
-```bash
-cd FPGA_design/sim/verilator
-make sim
-```
-
-等價於：
+等價於執行：
 
 ```bash
 ./obj_dir/VTOP_integration \
   --iters 5 \
+  --start 0 \
   --dram ../../test/tb/TOP_test/MEM/DRAM.txt \
   --golden ../../test/tb/TOP_test/MEM/GOLDEN.txt
 ```
 
-目前資料來源如下：
+### 原版資料來源
 
-| 類別 | 目前使用檔案 / module | 說明 |
-|---|---|---|
-| Verilator harness / tb | `FPGA_design/sim/verilator/sim_main.cpp` | 取代原本 Verilog TB，負責 reset、等待、寫入 ifmap、讀 `result` 並比對 golden。 |
-| RTL top | `FPGA_design/src/TOP/TOP_integration.v` | Verilator top module，Makefile 用 `--top-module TOP_integration`。 |
-| Behavioral BRAM/IP replacement | `FPGA_design/sim/verilator/bram_behavioral.v` | 取代 Vivado Block Memory Generator IP，讓 RTL 可以在 Verilator 下跑。 |
-| Iact / input image | `FPGA_design/test/tb/TOP_test/MEM/DRAM.txt` | `sim_main.cpp` 每個 pattern 讀 784 bytes，透過 `ifmap_BRAM_wr_in` / `ifmap_BRAM_dina_in` 寫入 ifmap BRAM。 |
-| Golden label | `FPGA_design/test/tb/TOP_test/MEM/GOLDEN.txt` | 每個 pattern 一個 expected class label，`sim_main.cpp` 用來比對 `dut->result`。 |
-| Weight COE source | `FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe` | Makefile 預設從這個 Vivado COE 取 sparse weight。 |
-| Weight runtime mem | `FPGA_design/sim/verilator/rom_sparse_weight.mem` | Makefile build 前由 `ROM_sparse_COE.coe` 轉出，`ROM_sparse_weight` 用 `$readmemh` 載入。這是 generated file，`make clean` 會刪掉。 |
-| Weight ROM module | `ROM_sparse_weight` in `bram_behavioral.v` | 模擬版 sparse weight ROM，接在 `TOP_interface.v` 的 `ROM_weight_inst`。 |
+| 類型 | 預設檔案 / module | 用途 |
+| --- | --- | --- |
+| Verilator harness | `FPGA_design/sim/verilator/sim_main.cpp` | C++ test harness，負責 reset、餵 ifmap、讀 result、比對 golden。 |
+| RTL top | `FPGA_design/src/TOP/TOP_integration.v` | Verilator top module，Makefile 使用 `--top-module TOP_integration`。 |
+| Behavioral BRAM | `FPGA_design/sim/verilator/bram_behavioral.v` | 取代 Vivado Block Memory Generator，讓 RTL 能在 Verilator 跑。 |
+| Iact / input image | `FPGA_design/test/tb/TOP_test/MEM/DRAM.txt` | 每筆 pattern 讀 784 bytes，透過 `ifmap_BRAM_wr_in` / `ifmap_BRAM_dina_in` 餵入 ifmap BRAM。 |
+| Golden label | `FPGA_design/test/tb/TOP_test/MEM/GOLDEN.txt` | 每筆 pattern 的 expected class label，用來比對 `dut->result`。 |
+| Weight COE source | `FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe` | 原版 sparse weight ROM 來源。 |
+| Weight runtime mem | `FPGA_design/sim/verilator/rom_sparse_weight.mem` | Makefile 由 COE 轉出的 Verilator `$readmemh` 檔案，`make clean` 會刪掉後重建。 |
+| Weight ROM module | `ROM_sparse_weight` in `bram_behavioral.v` | Verilator 用的 sparse weight ROM，接到 `TOP_interface.v` 的 `ROM_weight_inst`。 |
 
-相關行號：
+### TOP_interface 的資料切換
 
-| 檔案 | 行號 | 內容 |
-|---|---:|---|
-| `FPGA_design/sim/verilator/Makefile` | 37-38 | `RTL_DIR` 與 `TEST_DIR`，預設 test data 指到 `../../test/tb/TOP_test/MEM`。 |
-| `FPGA_design/sim/verilator/Makefile` | 55-56 | `COE_FILE` 與 `MEM_FILE`，定義 sparse weight COE 來源與轉出的 `.mem`。 |
-| `FPGA_design/sim/verilator/Makefile` | 74-76 | `ITERS`、`DRAM`、`GOLDEN` 預設值。 |
-| `FPGA_design/sim/verilator/Makefile` | 93-99 | 將 `ROM_sparse_COE.coe` 轉成 `rom_sparse_weight.mem`。 |
-| `FPGA_design/sim/verilator/Makefile` | 101-102 | `make sim` 執行 `VTOP_integration --dram ... --golden ...`。 |
-| `FPGA_design/sim/verilator/sim_main.cpp` | 89-97 | C++ harness 的 `--iters`、`--dram`、`--golden` 參數解析。 |
-| `FPGA_design/sim/verilator/sim_main.cpp` | 152-156 | 每個 pattern 寫入 784 bytes ifmap 到 DUT。 |
-| `FPGA_design/src/TOP/TOP_integration.v` | 67-88 | `IP_ifmap_BRAM` 與 `ifmap_BRAM_wr_in` / `ifmap_BRAM_dina_in` 接線。 |
-| `FPGA_design/src/TOP/TOP_interface.v` | 71-76 | `ROM_sparse_weight ROM_weight_inst`，TOP 從這裡讀 sparse weight。 |
-| `FPGA_design/src/TOP/TOP_interface.v` | 98-106 | `MEM_read_addr < 784` 時讀 DRAM/iact，`>= 784` 時讀 ROM/weight。 |
-| `FPGA_design/sim/verilator/bram_behavioral.v` | 240-248 | `ROM_sparse_weight` module 宣告與 `$readmemh("rom_sparse_weight.mem", mem)`。 |
+| 條件 | 讀取來源 | 說明 |
+| --- | --- | --- |
+| `MEM_read_addr < 784` | DRAM / ifmap | 讀 input activation。 |
+| `MEM_read_addr >= 784` | ROM_sparse_weight | 讀 sparse weight stream。 |
 
-如果要改成吃別的 iact / golden，不需要改 RTL，可以直接覆蓋 Makefile 變數：
+所以：
+
+- 換 input image / golden：改 `DRAM=...` 和 `GOLDEN=...`。
+- 換 weight：改 `COE_FILE=...`，Makefile 會重新產生 `rom_sparse_weight.mem`。
+
+範例：
 
 ```bash
 make sim ITERS=5 \
@@ -105,641 +74,203 @@ make sim ITERS=5 \
   GOLDEN=../../test/tb/TOP_test/MEM/Test/GOLDEN_INT4.txt
 ```
 
-如果要改 weight，重點不是 `DRAM`，而是要改 `COE_FILE` 指到的 sparse weight COE，或修改 Makefile 讓它從新的 COE/MEM 產生 `rom_sparse_weight.mem`。
-
-## INT4-as-INT8 container 初版實驗
-
-目前已在 `BOYU_INT4` branch 建立第一版 INT4 sparse weight 實驗，但這版不是從真正的 INT4 QAT checkpoint 匯出，原因是目前 repo 內沒有明確的 `best_lenet_int4_qat.pth`，且目前 Windows Python 環境沒有 `torch` 可以重新載入 QAT model。
-
-目前 INT4 來源：
-
-```text
-FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe
-```
-
-產生方式：
-
-```text
-原本 sparse INT8 COE
-  -> 只轉換 data/count segment
-  -> signed INT8 weight 重新量化到 signed INT4 [-8, 7]
-  -> INT4 bit[3] 作為 sign bit
-  -> sign-extend 回原本 8-bit weight container
-  -> 保留原本 CSC addr/count stream 與一筆 addr 對一筆 data 的格式
-```
-
-新增工具：
-
-```text
-FPGA_design/tools/make_int4_as_int8_sparse_rom.py
-```
-
-產生的 COE：
-
-```text
-FPGA_design/test/tb/TOP_test/MEM/int4_as_int8/ROM_sparse_INT4_AS_INT8.coe
-```
-
-使用方式：
-
 ```bash
-cd FPGA_design/sim/verilator
-make clean
 make sim ITERS=5 \
-  COE_FILE=../../test/tb/TOP_test/MEM/int4_as_int8/ROM_sparse_INT4_AS_INT8.coe
+  COE_FILE=../../test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe
 ```
 
-測試結果：
+## Sparse Weight / CSC 格式
+
+原版 ROM 不是單純 dense weight array，而是 CSC sparse stream。概念上是一串 address / data-count / data 相關資訊，controller 依照 boundary 與 counter 去讀。
+
+| 格式 | 內容 |
+| --- | --- |
+| INT8 sparse container | 原版 RTL 預期 weight data 是 signed 8-bit，並搭配 count/address stream。 |
+| INT4 sign-extend as INT8 | 先把 INT8 權重量化成 signed INT4 `[-8, 7]`，INT4 bit[3] 是 sign bit，再 sign-extend 回 signed 8-bit container。CSC stream 形狀盡量維持原版一筆 addr 對一筆 data。 |
+| INT4 scaled as INT8 | 把 signed INT4 code decode 後乘 scale，例如 `q4 * 16`，再放回 8-bit container。這比較像調整數值尺度，不是真正省 storage。 |
+| INT4 packed single-lane | ROM data 低 4 bit 放 INT4 weight，進 RTL weight path 前 sign-extend 給原本 PE 使用。 |
+| INT4x2 storage-only | Spad 內部格式先能放兩個 INT4 lane，但目前 PE core 仍只讀 lane0。 |
+
+目前已知：
+
+- `INT4_REQUANT=14_7` 是目前 INT4 sign-extend flow 最穩定的 requantizer slice。
+- `make sim ITERS=1000 INT4_REGEN=1 INT4_REQUANT=14_7` 曾跑到 `998/1000 passed (99.8%)`。
+- 錯誤筆數：`Iter 224`、`Iter 418`。
+
+## 常用 Verilator 指令
+
+| 目的 | 指令 |
+| --- | --- |
+| 原版 INT8 baseline | `make clean && make sim ITERS=5` |
+| 指定從第 N 筆開始 | `make trace START=32` |
+| INT4 sign-extend + `[14:7]` requant | `make clean && make sim ITERS=5 INT4_REGEN=1 INT4_REQUANT=14_7` |
+| INT4 packed single-lane | `make clean && make sim ITERS=5 INT4_PACKED=1 INT4_REQUANT=14_7` |
+| INT4 packed + Spad storage mode | `make clean && make sim ITERS=5 INT4_PACKED=1 INT4_PACKED_SPAD=1 INT4_REQUANT=14_7` |
+
+`make sim` 預設不開 trace；`make trace` 才會開 VCD，避免一般 simulation build 太慢。
+
+## Branch 整理
+
+### BOYU_ShunWei
+
+來源：從 `origin/feat/hw-analysis` 開出來，目的是拿 ShunWei 較乾淨、較好跑的 RTL 作為 BOYU 後續基準。
+
+主要內容：
+
+| 類別 | 改動 |
+| --- | --- |
+| Verilator build | 將 `make sim` 與 `make trace` 拆開，`make sim` 不再預設開 VCD trace。 |
+| Router cleanup | `Iact_Router.v`、`Weight_Router.v`、`Psum_Router.v` 共用 select decode wire，減少重複 comparator / case。 |
+| Psum_Router 修正 | 修正 `internal_data` 為 signed `[20:0]`，避免 psum data 被隱含截成 1-bit。 |
+| PE / FIFO hint | PE MAC 加 `use_dsp` hint，小 FIFO 加 distributed RAM hint。 |
+| TOP_controller cleanup | 抽出部分重複算式，例如 psum index boundary，降低重複邏輯。 |
+
+驗證：
 
 ```text
-Iter 0: result=15 golden=5 TIMEOUT
-Iter 1: result=15 golden=0 TIMEOUT
-Iter 2: result=15 golden=4 TIMEOUT
-Iter 3: result=15 golden=1 TIMEOUT
-Iter 4: result=15 golden=9 TIMEOUT
-
-=== Summary: 0/5 passed (0%) ===
+make sim ITERS=20
+=== Summary: 20/20 passed (100%) ===
 ```
+
+### BOYU_INT4
+
+目標：不大改 RTL，先用 INT4-as-INT8 container 驗證 INT4 weight 的可行性。
+
+主要內容：
+
+| 項目 | 狀態 | 說明 |
+| --- | --- | --- |
+| INT4 sign-extend ROM | 已完成 | 由 INT8 dense weight txt 量化成 signed INT4，再 sign-extend 成 RTL 原本能吃的 signed 8-bit container。 |
+| CSC stream 保持原版格式 | 已完成 | 盡量維持原本一筆 address 對一筆 data/count 的 sparse stream。 |
+| Requantizer sweep | 已完成 | `[14:7]` 目前效果最好。 |
+| 1000 筆測試 | 已完成 | `998/1000 passed (99.8%)`。 |
+
+重要檔案：
+
+| 檔案 | 說明 |
+| --- | --- |
+| `FPGA_design/tools/generate_int4_as_int8_sparse_rom_from_txt.py` | 從 dense txt 產生 INT4-as-INT8 sparse ROM。 |
+| `FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe` | INT4 sign-extend as INT8 container 的 COE。 |
+| `FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SCALED_AS_INT8.coe` | INT4 scaled as INT8 container 的 COE。 |
+
+### BOYU_INT4_HARDWARE
+
+目前所在分支。目標是從「INT4 權重放進 INT8 container」逐步往真正 INT4 hardware 前進。
+
+已完成 / 進度表：
+
+| 項目 | 目前做法 | 狀態 | 驗證結果 | 備註 |
+| --- | --- | --- | --- | --- |
+| INT8 baseline | 保留原本 INT8 ROM / CSC / PE datapath | 已完成 | `make sim ITERS=5`，5/5 passed | 確認 INT4 修改沒有破壞原本流程。 |
+| INT4 packed ROM single-lane | ROM data 低 4 bit 放 INT4 weight，進 GLB weight path 前 sign-extend | 已完成 | `make sim ITERS=5 INT4_PACKED=1 INT4_REQUANT=14_7` 可跑 | PE core 不改。 |
+| Later_Data_Spad 16-bit storage-only | INT4 mode 內部格式 `{w1[3:0], count1[3:0], w0[3:0], count0[3:0]}`，目前 lane1 = 0，PE 只讀 lane0 | 已完成 | `make sim ITERS=5 INT4_PACKED=1 INT4_PACKED_SPAD=1 INT4_REQUANT=14_7`，5/5 passed | 對外還原成原本 `{signed 8-bit data, 4-bit count}`。 |
+| Former_Data_Spad 18-bit storage-only | INT4 mode 內部格式 `{w1[3:0], count1[4:0], w0[3:0], count0[4:0]}`，目前 lane1 = 0，PE 只讀 lane0 | 已完成 | 同上，5/5 passed | Former 原始 entry 是 `{data[12:5], count[4:0]}`，lane0 INT4 weight 對應 `dina[8:5]`。 |
+| INT4x2 lane0 fallback | Spad 內部可容納兩個 INT4 lane，但目前只輸出 lane0 | 已完成 | 同上，5/5 passed | 只確認 storage format 不 timeout，還不是 SIMD 加速。 |
+| lane select single-lane | 加 `lane_sel` 選 lane0/lane1，但一次只算一個 MAC | 暫停 | 尚未測 | 目前 generator 仍是 single-lane，lane1 沒有真實資料。 |
+| Later / FC pseudo-SIMD | 若 `count0 == count1`，做 `psum += iact*w0 + iact*w1` | 暫停 | 尚未測 | 目前分析過 adjacent same-count pair 幾乎為 0，效益很低。 |
+
+目前 INT4 hardware 的重點觀念：
+
+- 現在不是完整 SIMD。
+- 目前是先讓 Spad 內部格式可以容納 INT4x2。
+- PE core 仍維持原本一個 MAC lane。
+- 要真的做到 SIMD2，必須先有真正 two-lane packed generator，讓 lane1 有有效 weight/count。
+
+建議下一步：
+
+1. 先做真正 two-lane INT4 packed generator。
+2. 再做 lane select single-lane，分別驗證 lane0 / lane1。
+3. 最後再評估 pseudo-SIMD 或 SIMD2 MAC，避免太早改 psum accumulate、finish timing、controller schedule。
+
+## INT4 權重檔案說明
+
+如果要把 INT4 相關檔案給組員，建議給以下資料夾：
+
+| 資料夾 / 檔案 | 說明 |
+| --- | --- |
+| `FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/` | INT4 sign-extend / scaled as INT8 container 的 ROM。適合給原本 RTL 或 BOYU_INT4 flow 使用。 |
+| `FPGA_design/test/tb/TOP_test/MEM/int4_packed/` | 真 INT4 packed single-lane ROM。適合 BOYU_INT4_HARDWARE flow 使用。 |
+| `FPGA_design/tools/generate_int4_as_int8_sparse_rom_from_txt.py` | 產生 INT4-as-INT8 ROM 的 script。 |
+| `FPGA_design/tools/generate_int4_packed_sparse_rom_from_txt.py` | 產生 INT4 packed ROM 的 script。 |
+
+`ROM_sparse_INT4_PACKED_SINGLE_LANE.coe` 看起來像 `0019`、`002f` 這種 16-bit hex，是因為整個 ROM word 還包含 sparse stream 的 address/count/data container，不代表每個 word 都只有 4 bit。INT4 weight 通常只佔其中低 4 bit，其他 bit 仍是 CSC stream 或 RTL container 需要的欄位。
+
+## FPGA utilization 目前已知數據
+
+目前已知一次 Vivado utilization 摘要：
+
+| Resource | 使用量 |
+| --- | --- |
+| Slice LUTs | `39537 / 53200 = 74.32%` |
+| Slice Registers | `51828 / 106400 = 48.71%` |
+| BRAM | `134.5 / 140 = 96.07%` |
+| DSP | `0 / 220 = 0.00%` |
 
 判斷：
 
-- Makefile / baseline RTL 沒壞，因為同一個 branch 用原本 `ROM_sparse_COE.coe` 跑 `make sim ITERS=5` 仍是 `5/5 passed`。
-- 目前 INT4-as-INT8 COE 只證明「可以產生格式相同的 INT4 container COE」，但不能作為可用 INT4 accuracy 結果。
-- 真正要提高 INT4 準確率，下一步應從 INT4 QAT 權重 checkpoint 匯出 sparse ROM，而不是從既有 INT8 sparse ROM 重新壓到 INT4。
-- 若要確認 `result=15` 是 final output invalid 還是 `final_out_valid` 沒發生，需要再用 `make trace` 或 public signal debug，但這會花較多時間。
+- BRAM 使用率接近滿，後續若要上板或加功能，BRAM 是最大壓力。
+- DSP 使用量為 0，代表原本乘法可能被合成到 LUT，理論上可以用 DSP mapping 降低 LUT / timing 壓力，但需要 Vivado report 驗證。
+- 沒有 Vivado timing report 前，不建議大改 PE pipeline 或 controller schedule。
 
-## BOYU_INT4 最新結果：重新 CSC 產生 INT4 ROM
+## 注意事項
 
-這次已經改成從現有 dense INT8 權重文字檔重新跑 CSC encoder，而不是直接後處理舊的 sparse COE。
+- 不要直接把 `BOYU_INT4_HARDWARE` 的實驗 RTL merge 到穩定 branch，除非對 INT8 baseline 和 INT4 flow 都做過 regression。
+- `record.md` 是 BOYU 分支的詳細操作紀錄。
+- Verilator log、VCD、`obj_dir*`、generated `.mem` 屬於中間產物，不建議 commit。
+- `make sim` 只驗證 cycle-level functional result，不代表 Vivado timing / area 一定改善。
+## BOYU INT4 two-lane packed 進度摘要
 
-來源：
-```text
-FPGA_design/SW/layer2/kernel1.txt
-FPGA_design/SW/layer2/kernel2.txt
-FPGA_design/SW/layer2/kernel3.txt
-FPGA_design/SW/layer2/kernel4.txt
-FPGA_design/SW/layer2/kernel5.txt
-```
+這段是 BOYU 分支目前 INT4 hardware 實驗的補充紀錄，詳細整理請看 `BOYU_README.md`。
 
-工具：
-```text
-FPGA_design/tools/generate_int4_as_int8_sparse_rom_from_txt.py
-```
+| 項目 | 內容 | 狀態 |
+| --- | --- | --- |
+| two-lane FC sideband generator | `FPGA_design/tools/generate_int4_packed_sparse_rom_from_txt.py` 新增 `--two-lane-fc-sideband`，對 FC/Later count-width-4 data word 產生 `{w1[3:0], count1[3:0], w0[3:0], count0[3:0]}`。 | 已完成 |
+| 產生檔案 | `FPGA_design/test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_TWO_LANE_FC_SIDEBAND.txt` 與 `.coe`。 | 已完成 |
+| lane1 payload | FC/Later data entries 共 `37765` 筆，其中 `36529` 筆有 lane1 payload，比例約 `96.7271%`。 | 已確認 |
+| TOP_interface lane select | 新增 `INT4_PACKED_TWO_LANE` 與 `INT4_LANE_SEL`。預設 lane0，`INT4_LANE_SEL=1` 可選 lane1 debug path。 | 已完成 |
+| 功能驗證 | `make sim ITERS=5 INT4_PACKED_TWO_LANE=1 INT4_REQUANT=14_7`。 | 5/5 passed |
 
-先做過 sanity check：
+注意：目前 two-lane sideband 不改 stream 長度，也不代表已經完成 SIMD。lane0 保持原本行為以確保 regression 通過；lane1 已有有效資料，但尚未納入 PE SIMD accumulate 與 golden regression。
 
-- `--quant none` 會重生原本 INT8 sparse ROM。
-- 重生結果為 `33722` words。
-- boundary 為 `7,97,151,760,814,1351,9511,25090,27736,32974,33238,33722`。
-- 用重生 INT8 COE 跑 `make sim ITERS=5`，結果仍是 `5/5 passed`。
+PE SIMD2 目前先暫停直接修改。原因是 sideband 版本只是把下一筆 logical weight 放到 lane1，但下一筆仍然存在於 stream 中；若 PE 直接做 `psum += iact*w0 + iact*w1`，下一個 cycle 會再次處理同一個 w1，造成 double count。另外若 `count0 != count1`，lane0/lane1 會對應到不同 psum index，而目前 `Psum_Spad` 一次 `WRITE_BACK` 只能寫一個 index。後續若要做真正 SIMD2，應先做會同步更新 address / boundary 的 packed stream，再修改 PE accumulate。
 
-因此目前可以確認新的 generator 產生的 CSC 排列格式是正確的。
+### BOYU INT4 same-count SIMD2 初版
 
-### 純 INT4 sign-extend 測試
+已新增保守版 SIMD2 flow：
 
-產生方式：
-```bash
-python FPGA_design/tools/generate_int4_as_int8_sparse_rom_from_txt.py \
-  --quant int4 \
-  --threshold 0 \
-  --container-scale 1 \
-  --output-txt FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.txt \
-  --output-coe FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe
-```
+| 項目 | 結果 |
+| --- | --- |
+| generator | `generate_int4_packed_sparse_rom_from_txt.py --same-count-simd2` |
+| 新 ROM | `FPGA_design/test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SAME_COUNT_SIMD2.coe` |
+| packed stream | 會合併同一 column 且 `count0 == count1` 的兩筆 weight，並重算 address / boundary |
+| 實際 pack 數量 | `packed_same_count_pairs=0`，目前資料沒有可合併 pair |
+| RTL | `TOP_interface.v` 新增 `INT4_PACKED_SIMD2`；`Processing_Element_core.v` 新增 guarded `former*w0 + former*w1` datapath |
+| 驗證 | `make sim ITERS=5 INT4_PACKED_SIMD2=1 INT4_REQUANT=14_7`，5/5 passed |
 
-意義：
+結論：這版修正了 sideband 可能 double count 的問題，也把 PE SIMD2 datapath 放進 RTL；但因目前資料沒有 same-count pair，實際效果仍等同 single-lane fallback，還不會帶來速度提升。
 
-- 先把 INT8 權重量化成 signed INT4 `[-8, 7]`。
-- INT4 sign bit 是 bit[3]。
-- 再 sign-extend 成目前 RTL 可吃的 signed 8-bit container。
-- 重新產生 CSC addr / data_count stream。
+### BOYU INT4 count0 != count1 SIMD2 設計摘要
 
-結果：
+若要支援 `count0 != count1`，不能只改 PE 乘法器。原因是目前 FC/Later data path 是 12-bit，只能表示：
 
 ```text
-words=51263
-boundaries=7,149,203,1300,1354,2428,10588,38449,41095,50204,50468,51263
-
-make sim ITERS=5 INT4_REGEN=1
-=== Summary: 0/5 passed (0%) ===
-全部 TIMEOUT
+{weight[7:0], count[3:0]}
 ```
 
-判斷：這是初版純 sign-extend 測試，當時仍使用一般 INT8 requantizer slice，因此前 5 筆 timeout。後續已改成在 `INT4_REGEN=1` 時測試 INT4 專用 requantizer bit slice，詳見下面的 `[14:7]` 測試。
-
-### INT4 code decode 回 INT8 scale 測試
-
-產生方式：
-```bash
-python FPGA_design/tools/generate_int4_as_int8_sparse_rom_from_txt.py \
-  --quant int4 \
-  --threshold 0 \
-  --container-scale 16 \
-  --output-txt FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SCALED_AS_INT8.txt \
-  --output-coe FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SCALED_AS_INT8.coe
-```
-
-意義：
-
-- INT4 code 仍然是 signed INT4 `[-8, 7]`。
-- 但存進目前 8-bit RTL container 前，先 decode 成 `q4 * 16`。
-- 這不是純 INT4 sign-extend 硬體版本，而是用來驗證目前 timeout 是否主要來自數值尺度。
-
-當時 Makefile 設定：
-
-- `make sim`：仍吃原本 INT8 COE。
-- `make sim INT4_REGEN=1`：當時吃 `ROM_sparse_INT4_SCALED_AS_INT8.coe`，啟用 `INT4_AS_INT8_REGEN` boundary，並使用獨立 `obj_dir_int4`，避免和一般 INT8 simulation build 混在一起。
-
-目前 Makefile 已改成預設吃純 sign-extend ROM：`ROM_sparse_INT4_SIGNEXT_AS_INT8.coe`，並透過 `INT4_REQUANT` 選擇 requantizer bit slice。
-
-測試結果：
-```text
-make sim ITERS=5 INT4_REGEN=1
-
-Iter 0: result=0 golden=5 FAIL
-Iter 1: result=0 golden=0 OK
-Iter 2: result=4 golden=4 OK
-Iter 3: result=1 golden=1 OK
-Iter 4: result=9 golden=9 OK
-
-=== Summary: 4/5 passed (80%) ===
-```
-
-當時結論：
-
-- CSC generator 格式正確，因為 INT8 regen 可 5/5 通過。
-- 初版純 INT4 sign-extend 搭配一般 INT8 requantizer 會 timeout，主要問題不是 sparse ROM 排列，而是 requantizer 尺度。
-- `q4 * 16` 版本可跑完且前 5 筆 4/5 正確，表示數值尺度會直接影響 final result。
-- 後續改成純 INT4 sign-extend ROM 搭配 `INT4_REQUANT=14_7` 後，前 5 筆可 5/5 通過。
-
-### INT4 sign-extend + requantizer bit-slice sweep
-
-後續改成保留純 INT4 sign-extend ROM，並只在 `INT4_REGEN=1` 時調整 `Psum_Requantizer.v` 的輸出 bit slice。
-
-一般 INT8 模式仍維持：
-
-```verilog
-assign data_out = data_in[17:10];
-```
-
-INT4 模式測試以下四組：
-
-| INT4_REQUANT | Requantizer bit slice | `make sim ITERS=5 INT4_REGEN=1` 結果 |
-|---|---:|---|
-| `16_9` | `[16:9]` | `0/5`，後 4 筆 timeout |
-| `15_8` | `[15:8]` | `1/5`，可跑完但多數輸出 0 |
-| `14_7` | `[14:7]` | `5/5`，全部通過 |
-| `13_6` | `[13:6]` | `4/5`，可跑完 |
-
-目前 Makefile 預設：
-
-```make
-INT4_REQUANT ?= 14_7
-```
-
-也就是直接執行：
-
-```bash
-cd FPGA_design/sim/verilator
-make clean
-make sim ITERS=5 INT4_REGEN=1
-```
-
-會使用純 INT4 sign-extend ROM 搭配 `Psum_Requantizer.v` 的 `[14:7]` bit slice。這裡的 `[14:7]` 是目前預設設定，使用的是「純 INT4 sign-extend」版本，不是 `q4 * 16` scaled 版本。
-
-資料來源與格式：
-
-- 原始權重來源：`FPGA_design/SW/layer2/kernel1.txt` 到 `kernel5.txt` 的既有 INT8 dense weight。
-- 產生方式：先把 INT8 權重量化到 signed INT4 範圍 `[-8, 7]`。
-- INT4 sign bit：使用 INT4 的第 3 bit，也就是 4-bit two's complement 的最高位。
-- RTL container：再把 signed INT4 sign-extend 回原本 RTL 能吃的 signed 8-bit 權重欄位。
-- CSC 格式：維持原本「一筆 address 對一筆 data」的 sparse stream 格式。
-- ROM 檔案：`FPGA_design/test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe`。
-- Requantizer：`INT4_REGEN=1 INT4_REQUANT=14_7` 會讓 `Psum_Requantizer.v` 使用 `data_in[14:7]`。
-
-已完成的 5 筆測試結果：
+真正不同 count 的 INT4x2 需要 16-bit：
 
 ```text
-Iter 0: result=5 golden=5 OK
-Iter 1: result=0 golden=0 OK
-Iter 2: result=4 golden=4 OK
-Iter 3: result=1 golden=1 OK
-Iter 4: result=9 golden=9 OK
-
-=== Summary: 5/5 passed (100%) ===
+{w1[3:0], count1[3:0], w0[3:0], count0[3:0]}
 ```
 
-若要測 `[14:7]` 的 100 筆與 1000 筆，建議在 WSL 或 Docker bash 裡執行：
-
-```bash
-cd FPGA_design/sim/verilator
-make clean
-set -o pipefail
-make sim ITERS=100 INT4_REGEN=1 INT4_REQUANT=14_7 2>&1 | tee int4_signext_14_7_100.log
-```
-
-```bash
-cd FPGA_design/sim/verilator
-make clean
-set -o pipefail
-make sim ITERS=1000 INT4_REGEN=1 INT4_REQUANT=14_7 2>&1 | tee int4_signext_14_7_1000.log
-```
-
-`tee` 會把完整 log 存下來給組員看；`set -o pipefail` 會保留 `make sim` 的失敗狀態，避免因為接了 pipe 後看起來像成功。
-
-1000 筆測試結果：
-
-```text
-make sim ITERS=1000 INT4_REGEN=1 INT4_REQUANT=14_7
-
-Iter 224: result=7 golden=1 (126342 cycles) FAIL
-Iter 418: result=5 golden=8 (119503 cycles) FAIL
-
-=== Summary: 998/1000 passed (99.8%) ===
-make: *** [Makefile:109: sim] Error 1
-```
-
-`make` 回傳 `Error 1` 是因為 1000 筆中仍有 2 筆分類錯誤，不是 Verilator build 或 simulation timeout。這代表目前純 INT4 sign-extend ROM 搭配 `[14:7]` requantizer 已經可以完整跑完 1000 筆，但仍不是完全 bit-accurate。
-
-## Vivado baseline utilization
-
-既有 Vivado implementation baseline：
-
-```text
-Slice LUTs       39537 / 53200  = 74.32%
-Slice Registers  51828 / 106400 = 48.71%
-BRAM             134.5 / 140    = 96.07%
-DSP              0 / 220        = 0.00%
-```
-
-目前判斷：
-
-- BRAM 使用率最高，已接近 PYNQ-Z2 上限，是最主要的 FPGA 資源瓶頸。
-- LUT 使用率也偏高，但還沒有像 BRAM 一樣接近滿載。
-- DSP 使用量為 0，代表 PE MAC 乘法可能被映射到 LUT，後續可嘗試讓 Vivado 使用 DSP。
-- 既有 timing report 顯示 timing 已通過，因此不應該在沒有 critical path 證據前先改 pipeline 或 controller cycle timing。
-
-## 已完成的 BOYU_ShunWei 修改
-
-### 1. Verilator build flow 拆分 trace / no-trace
-
-原本 `make sim` 也會用 `--trace` 編譯，導致一般 simulation build 較慢。現在改成：
-
-- `make sim`：不開 VCD trace，使用 `obj_dir`。
-- `make trace`：開 VCD trace，使用 `obj_dir_trace`。
-- `make trace_public`：開 trace 與 `--public-flat-rw`，使用獨立 build directory。
-
-這只影響 simulation build time，不影響 FPGA RTL 面積或 timing。
-
-### 2. 低風險 RTL area / timing cleanup
-
-在沒有 Vivado report 的情況下，只做功能等價且風險較低的 RTL 修改：
-
-- `Processing_Element_core.v`
-  - 保留 PE MAC 的 `(* use_dsp = "yes" *)` DSP mapping hint。
-  - 將 psum write index 中的常數乘法 `*4` 改成 shift/concat。
-- `PE_data_FIFO.v`
-  - 對 4-depth 小 buffer 加上 `(* ram_style = "distributed" *)`。
-- `PE_psum_FIFO.v`
-  - 對 4-depth 小 buffer 加上 `(* ram_style = "distributed" *)`。
-- `Iact_Router.v`
-  - 共用 `data_in_sel` / `data_out_sel` decode wire。
-  - 將 output valid 的重複 case block 改成等價 continuous assignment。
-- `TOP_controller.v`
-  - 只簡化兩邊結果完全相同的 ternary expression。
-- `Weight_Router.v`
-  - 將 `data_in_sel` / `data_out_sel` 先 decode 成共用 wire，避免同一個 select 在多處重複比較。
-- `Psum_Router.v`
-  - 將 `data_in_sel` / `data_out_sel` 先 decode 成共用 wire。
-  - 修正 `internal_data` 宣告為 `signed [20:0]`，避免 21-bit psum data 被隱含截成 1-bit wire。
-- `TOP_controller.v`
-  - 將多處重複的 `(read_out_psum_iter + 1) * psum_depth` 抽成共用 wire。
-  - 將 `psum_read_out_channel * 144` 改成 shift/add 形式。
-
-這些修改不改 BRAM depth、不改 bank count、不改 TOP controller 排程、不改 ready/valid protocol。
-
-較長 regression：
-
-```text
-make sim ITERS=20
-=== Summary: 20/20 passed (100%) ===
-```
-
-### 2.1 修改原因與行號對照
-
-以下行號以目前 `BOYU_ShunWei` branch 的檔案內容為準。這些修改的共同原則是：先做不改功能、不改資料流排程、不改 BRAM bank/depth 的低風險整理，讓一般 simulation 更快，並讓未來 Vivado synthesis 比較有機會壓 LUT、routing depth 或 control logic。
-
-#### Verilator build flow 拆分 trace / no-trace
-
-為什麼要改：
-
-- 原本 `make sim` 也會用 `--trace` 編譯，Verilator 需要產生 VCD trace 相關 C++ code，build time 會明顯變長。
-- 一般功能驗證不需要波形，所以 `make sim` 應該保持 trace-free。
-- 需要看波形時才用 `make trace`；需要用 public signal debug 時才用 `make trace_public`。
-- 這只影響 Verilator build/run flow，不會改 FPGA RTL 面積或 timing。
-
-修改位置：
-
-| 檔案 | 行號 | 內容 |
-|---|---:|---|
-| `FPGA_design/sim/verilator/Makefile` | 24-35 | 新增 `TRACE`、`TRACE_FLAG`，並讓 `BUILD_DIR` 依 `TRACE` / `PUBLIC_FLAT_RW` / `OCC` 分開。 |
-| `FPGA_design/sim/verilator/Makefile` | 64-65 | Verilator command 只在需要時加入 `--trace` 與 `--public-flat-rw`。 |
-| `FPGA_design/sim/verilator/Makefile` | 107-115 | `make trace` / `make trace_public` 改成獨立 trace build flow。 |
-| `FPGA_design/sim/verilator/Makefile` | 118 | `make clean` 同時清掉不同 build mode 的 output directory。 |
-| `FPGA_design/sim/verilator/sim_main.cpp` | 18, 34, 41, 48, 122-129, 188 | 用 `#if VM_TRACE` 包住 VCD trace code，避免 no-trace binary 編譯不必要的 trace 支援。 |
-
-#### PE MAC / arithmetic path
-
-為什麼要改：
-
-- PE 的乘加路徑通常是 timing 與 LUT 使用量的候選熱點。
-- `(* use_dsp = "yes" *)` 是 synthesis hint，目標是讓乘法器優先 mapping 到 DSP，降低 LUT 壓力。
-- `*4` 屬於固定倍率 index 計算，用 shift/concat 表達比乘法器語意更直接，也比較不容易被工具保留成多餘算術邏輯。
-- 沒有 Vivado timing report 前，不改 MAC pipeline，避免改 cycle timing。
-
-修改位置：
-
-| 檔案 | 行號 | 內容 |
-|---|---:|---|
-| `FPGA_design/src/PE_Cluster/PE/Processing_Element_core.v` | 237 | 保留 PE MAC 的 `(* use_dsp = "yes" *)` DSP mapping hint。 |
-| `FPGA_design/src/PE_Cluster/PE/Processing_Element_core.v` | 241-243 | 先用 `{former_matrix_col_minus_one_wire[2:0], 2'b00}` 產生等價於 `*4` 的 base，再加上 `later_matrix_row_wire[2:0]`。第 243 行本身是最後加法，shift/concat 在第 242 行。 |
-| `FPGA_design/src/PE_Cluster/PE/Processing_Element_core.v` | 284 | `Psum_Spad_write_idx` 繼續使用整理後的 `psum_write_idx_wire`，不改寫入時序。 |
-
-#### 小 FIFO / buffer inference
-
-為什麼要改：
-
-- 4-depth FIFO 很小，若被合成成大量 FF/LUT，可能增加 slice 使用。
-- 加上 `ram_style = "distributed"` hint，讓工具優先用 distributed RAM / SRL 類資源處理小 buffer。
-- 這不改主要 BRAM，不改 FIFO depth，也不改 ready/valid protocol。
-
-修改位置：
-
-| 檔案 | 行號 | 內容 |
-|---|---:|---|
-| `FPGA_design/src/PE_Cluster/PE/PE_data_FIFO.v` | 32 | 對 `buffer` 加上 `(* ram_style = "distributed" *)`。 |
-| `FPGA_design/src/PE_Cluster/PE/PE_psum_FIFO.v` | 32 | 對 psum FIFO `buffer` 加上 `(* ram_style = "distributed" *)`。 |
-
-#### Router mux cleanup
-
-為什麼要改：
-
-- Router 裡的 `data_in_sel` / `data_out_sel` 會在多個 mux、valid、ready 判斷中重複比較，可能增加 LUT 與 mux depth。
-- 先 decode 成共用 wire，可以減少重複 comparator，讓 synthesis 更容易共用條件。
-- 只整理等價組合邏輯，不改資料路徑寬度、方向或 ready/valid 行為。
-
-修改位置：
-
-| 檔案 | 行號 | 內容 |
-|---|---:|---|
-| `FPGA_design/src/Router_Cluster/Iact_Router.v` | 113-120 | 新增 `route_*` 與 `select_*` decode wire，共用 `data_in_sel` / `data_out_sel` 判斷。 |
-| `FPGA_design/src/Router_Cluster/Iact_Router.v` | 128-159 | ready / valid output 改用共用 decode wire 與 continuous assignment。 |
-| `FPGA_design/src/Router_Cluster/Weight_Router.v` | 73-83 | 新增 `select_horiz_in_wire`、`route_hor_cast_wire`，共用 input/output select 判斷。 |
-| `FPGA_design/src/Router_Cluster/Weight_Router.v` | 90-106 | ready / valid / data assignment 改用共用 decode wire。 |
-| `FPGA_design/src/Router_Cluster/Psum_Router.v` | 71-76 | 新增 `select_from_glb_wire`、`select_to_pe_wire`，並修正 `internal_data` 為 `signed [20:0]`。 |
-| `FPGA_design/src/Router_Cluster/Psum_Router.v` | 91, 94 | output data 繼續接整理後的 21-bit `internal_data`，避免 psum 被隱含截成 1-bit。 |
-
-#### TOP_controller arithmetic / duplicate logic cleanup
-
-為什麼要改：
-
-- `TOP_controller.v` 很大，重複 comparator、重複乘法與結果相同的 ternary 會增加組合邏輯。
-- 把重複算式抽成 wire，可讓 synthesis 共用邏輯，也讓 RTL 更容易 review。
-- `psum_read_out_channel * 144` 改成 `*128 + *16` 的 shift/add 形式，避免固定倍率乘法語意。
-- 只整理等價 expression，不改 state transition、address schedule、`csc_en` / `csc_en_fin` 時序。
-
-修改位置：
-
-| 檔案 | 行號 | 內容 |
-|---|---:|---|
-| `FPGA_design/src/TOP/TOP_controller.v` | 916 | 新增 `read_out_psum_iter_next_base`，共用 `(read_out_psum_iter + 1) * psum_depth`。 |
-| `FPGA_design/src/TOP/TOP_controller.v` | 917-918 | 新增 `psum_read_out_channel_x144`，用 shift/add 表達 `psum_read_out_channel * 144`。 |
-| `FPGA_design/src/TOP/TOP_controller.v` | 945-948 | 簡化兩邊結果完全相同的 psum source ternary，只保留真正會變的條件。 |
-| `FPGA_design/src/TOP/TOP_controller.v` | 1168-1546 | 多處 GLB psum read address base 改用共用 `read_out_psum_iter_next_base`。 |
-| `FPGA_design/src/TOP/TOP_controller.v` | 1953 | `psum_rearrange_read_addr` 改用 `psum_read_out_channel_x144`。 |
-
-#### 功能驗證
-
-修改後已做較長 Verilator regression：
-
-```text
-make sim ITERS=20
-=== Summary: 20/20 passed (100%) ===
-```
-
-這代表目前已測 pattern 的 RTL output 沒有因上述 cleanup 改變。不過實際 FPGA area / timing 是否改善，仍需 Vivado utilization / timing report 驗證。
-
-### 3. Verilator-only BRAM occupancy 統計
-
-新增 Verilator-only occupancy counter，用來觀察 simulation 中各類 BRAM 實際最高寫入 address。這是未來安全縮 SRAM depth 前的依據。
-
-使用方式：
-
-```bash
-cd FPGA_design/sim/verilator
-make clean
-make sim ITERS=1 OCC=1 > occ_iter1.log 2>&1
-python3 summarize_occ.py occ_iter1.log
-```
-
-範例摘要：
-
-```text
-kind,instances,total_writes,max_write_addr,depth,used_percent,width
-GLB Iact addr SRAM,36,18066,314,512,61.52%,7
-GLB Iact data SRAM,36,35432,815,2048,39.84%,12
-GLB Psum SRAM,12,6720,287,512,56.25%,21
-PE Iact data SPad,36,15120,127,256,50.00%,13
-PE Psum SPad,36,1614936,31,32,100.00%,21
-PE Weight data SPad,36,45787,99,128,78.12%,12
-TOP Psum_Rearrange,1,10696,4095,4096,100.00%,8
-TOP ifmap BRAM,1,784,783,1024,76.56%,8
-```
-
-注意：occupancy 只代表跑過的 pattern，不代表所有資料與所有 layer 都安全。要縮 BRAM depth 前，必須用更多 patterns / layers 驗證。
-
-## Vivado report flow
-
-目前本機沒有 Vivado，因此不能直接重新跑 FPGA implementation。已新增 Tcl script，供有 Vivado 的環境使用：
-
-```bash
-vivado -mode batch -source FPGA_design/Vivado/PYNQ_Z2/run_boyu_reports.tcl
-```
-
-輸出位置：
-
-```text
-FPGA_design/Vivado/PYNQ_Z2/reports_boyu_shunwei/
-```
-
-會產生：
-
-```text
-utilization_flat.rpt
-utilization_hierarchical.rpt
-timing_summary.rpt
-control_sets.rpt
-qor_suggestions.rpt
-```
-
-使用建議：
-
-- 用 `utilization_hierarchical.rpt` 確認 BRAM 主要消耗在 PE SPad、GLB SRAM，還是 ROM / memory init。
-- 用 `timing_summary.rpt` 確認 critical path，再決定是否改 router mux、PE MAC、controller fanout 或 pipeline。
-- 不要在沒有 occupancy 與 utilization hierarchy 的情況下直接縮 BRAM depth 或 bank count。
-
-## 後續優化建議
-
-### BRAM
-
-優先順序：
-
-1. 先取得最新 Vivado hierarchical utilization。
-2. 用 Verilator occupancy counter 跑更多 patterns。
-3. 確認每個 SRAM / SPad 的最大使用深度。
-4. 先做 depth 參數化，再逐步縮 depth。
-5. 最後才考慮減 bank count。
-
-不建議一開始就減 bank count，因為這會改變 bandwidth、ready/valid timing 與 controller scheduling。
-
-### Area
-
-可優先檢查：
-
-- PE MAC 是否成功 mapping 到 DSP。
-- 常數乘法是否已被簡化成 shift/add。
-- 小型 FIFO / buffer 是否可用 distributed RAM 或 SRL。
-- Router mux 是否可用 one-hot select 或預解碼降低 mux depth。
-
-### Timing
-
-沒有 Vivado timing report 前，不建議猜 critical path。若未來 report 顯示：
-
-- critical path 在 PE MAC：檢查 DSP mapping 或 pipeline。
-- critical path 在 router mux：整理 `Iact_Router` / `Weight_Router` / `Psum_Router` mux。
-- critical path 在 control fanout：考慮 local register / buffer。
-- critical path 在 `clock_gen`：不需要動 accelerator datapath。
-
-## 系統架構總覽
-
-核心控制模組是 `TOP_controller.v`，針對 LeNet-5 寫死 per-layer FSM。它負責控制 `Cluster_Group`、GLB、PE、Router、im2col、CSC encoder、requantizer、pooling 與 softmax。
-
-```text
-TOP_integration_{uart,rom}.v
-        |
-TOP_interface.v + ROM_sparse_weight
-        |
-        +-------------------------------+
-        |                               |
-      TOP.v                       TOP_controller.v
-        |
-        +-------------+-----------------+----------------+
-                      |                                  |
-              Cluster_Group                         post-process
-              2x2 cluster array                     Quantizer / ReLU
-                      |                              Softmax / Pooling
-        +-------------+-------------+
-        |             |             |
-   PE_Cluster    GLB_Cluster   Router_Cluster
-   3x3 PEs       iact/psum     iact/weight/psum
-                 SRAM banks    routers
-```
-
-主要模組：
-
-| 區塊 | 模組 | 功能 |
-|---|---|---|
-| Top control | `TOP/TOP_controller.v` | LeNet-5 per-layer scheduling FSM |
-| Datapath top | `TOP/TOP.v`, `TOP/TOP_interface.v` | 串接 controller、fabric、I/O |
-| Compute fabric | `Cluster_Group/*` | 2x2 cluster array |
-| PE | `PE_Cluster/PE/*` | MAC datapath、SPad、PE FSM |
-| GLB | `GLB_Cluster/*` | iact / psum SRAM banks |
-| Router | `Router_Cluster/*` | iact、weight、psum routing |
-| Data prep | `im2col_converter/*`, `CSC_encoder/*` | im2col reshape 與 CSC 壓縮 |
-| Post-process | `Quantizer/*`, `Activation/*`, `Pooling/*` | requantize、ReLU、Softmax、Max pooling |
-
-## FPGA design overview
-
-此 repository 提供的是 FPGA prototype。ASIC 設計概念相近，但架構細節不同，且不在此專案開源。
-
-FPGA prototype 的限制：
-
-- 沒有 ASIC 版本中的 NoC systolic array。
-- PE 沒有 ASIC 版本中的 pipeline。
-- Top controller 目前針對 LeNet-5 寫死，若要跑其他模型，需要修改 controller 或增加 software driver。
-- Array size 可以手動修改，但原始設計沒有完整參數化自動調整功能。
-
-## 已知限制
-
-CSC implementation 支援第一欄與最後一欄為 0 的矩陣，但不支援連續兩欄全 0 的情況。原始做法會在第二個 zero column 的最後補 `1` 避免錯誤。
-
-## TODO
-
-- 開發 software driver，讓 PS / PL 之間能更彈性地分配資料與控制推論流程。
-- 修正 CSC implementation 對連續 zero columns 的限制。
-- 將 array size 參數化，降低修改不同模型或不同硬體規模時的維護成本。
-- 用最新 Vivado report 驗證 `BOYU_ShunWei` 的 DSP / LUT / BRAM / timing 改善。
-
-## 架構說明
-
-### Top-Level Architecture
-
-![Top Level Architecture](picture/top_level_architecture.png)
-
-原始設計概念是 8x2 cluster array；在 PYNQ-Z2 FPGA 上因資源限制縮小為 2x2 cluster array。每個 cluster 內包含 PE cluster、GLB cluster 與 router cluster。
-
-資料進入 accelerator 後，im2col converter 會將 ifmap 重排成適合 GEMM 的矩陣，再由 CSC encoder 壓縮後存入 GLB。運算完成後，psum 會經過 requantizer、activation、pooling 或 softmax。
-
-### Global Buffer
-
-![Global Buffer Architecture](picture/GLB_architecture.png)
-
-GLB 是外部 DRAM 與 compute fabric 之間的橋接。GLB 內含 iact SRAM banks 與 psum SRAM banks。由於 iact 使用 CSC 壓縮，iact SRAM 會分成 address 與 data count 兩類記憶體，並搭配 LUT / RF 記錄 stream boundary。
-
-### Router
-
-![Router Architecture](picture/router_architecture.png)
-
-Router cluster 參考 Eyeriss v2 的 HM-NoC 概念，包含 iact router、weight router 與 psum router。Router 透過 `data_in_sel` 與 `data_out_sel` 控制資料來源與輸出方向，使用 valid / ready handshake 保持資料傳輸正確。
-
-### PE
-
-![PE Architecture](picture/PE_architecture.png)
-
-每個 PE 包含 address SPad、data SPad、weight SPad、psum SPad 與 MAC datapath。PE 使用 CSC 格式解碼 iact / weight，完成乘加後寫回 psum SPad，或透過 psum path 傳到其他 PE / GLB。
-
-![CSC format](picture/CSC_format.png)
-
-### PE Cluster
-
-![PE Cluster](picture/PE_cluster.png)
-
-PE cluster 是 3x3 PE array。卷積層中，weight 沿 row reuse，iact 沿 column 分配；fully connected layer 中，iact / weight 的進入方向會交換，以符合 FC 的資料流。
-
-### Data Flow
-
-![Data Flow Design](picture/data_flow.png)
-
-本設計結合 im2col、GEMM 與 CSC compression。im2col 提供規則矩陣乘法形狀，CSC 壓縮降低 zero data 的儲存與傳輸成本。資料流混合 weight stationary、input stationary 與 output stationary 的概念，以提高 reuse。
-
-### Scheduling
-
-![Data Scheduling](picture/data_scheduling.png)
-
-系統在 load、compress、compute、psum accumulate、read out、pooling 等階段之間進行 scheduling。由於 im2col 與 CSC encoder 會引入額外 cycle，因此 controller 需要安排各 layer 的資料載入與運算時序。
-
-## FPGA 驗證
-
-![Vivado Report](picture/vivado_report.png)
-
-原始專案曾在 PYNQ-Z2 上完成 FPGA implementation，並透過 UART / GPIO 類似流程進行手寫數字辨識 demo。
-
-![FPGA Demo](picture/FPGA_demo.png)
-
-## 結論
-
-本專案展示了一個以 Eyeriss v2 為基礎、支援 sparse convolution 與 LeNet-5 推論的 FPGA prototype。後續工作重點是降低 BRAM 使用量、改善 LUT/DSP mapping、整理 controller 與 router timing，並用 Vivado report 驗證每一次硬體優化是否有效。
-
-## References
-
-- Chen, Y.-H., Emer, J., & Sze, V. (2019). Eyeriss v2: A Flexible Accelerator for Emerging Deep Neural Networks on Mobile Devices. IEEE Journal on Emerging and Selected Topics in Circuits and Systems, 9(2), 292-308.
+因此後續應採用最低風險的「第二個 write-back cycle」架構：
+
+| 階段 | 內容 |
+| --- | --- |
+| 1 | 新增 `INT4_PACKED_SIMD2_FULL`，只在此模式下擴 FC/Later weight data path 到 16-bit。 |
+| 2 | `Later_Data_Spad` 在 SIMD2 full mode 儲存完整 16-bit packed word。 |
+| 3 | PE core 解出 `w0/count0` 與 `w1/count1`。 |
+| 4 | lane0 先用原本 write-back 寫 `psum[count0]`。 |
+| 5 | 若 lane1 valid，進入額外 state，再讀 `psum[count1]`、計算 `iact*w1`、寫回 `psum[count1]`。 |
+
+暫時不建議先做雙 port / banked Psum_Spad，因為會改 memory 結構與 collision 行為，風險比第二個 write-back cycle 高很多。

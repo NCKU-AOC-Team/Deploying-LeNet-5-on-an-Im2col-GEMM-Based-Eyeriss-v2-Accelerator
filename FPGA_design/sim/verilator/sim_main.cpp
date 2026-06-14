@@ -87,16 +87,18 @@ int main(int argc, char** argv) {
     std::string dram_path = "../../test/tb/TOP_test/MEM/DRAM.txt";
     std::string golden_path = "../../test/tb/TOP_test/MEM/GOLDEN.txt";
     bool trace = false;
+    bool int4_weight_mode = false;
 
     for (int i = 1; i < argc; ++i) {
         std::string a = argv[i];
         if (a == "--iters" && i + 1 < argc) iters = std::atoi(argv[++i]);
         else if (a == "--dram" && i + 1 < argc) dram_path = argv[++i];
         else if (a == "--golden" && i + 1 < argc) golden_path = argv[++i];
+        else if (a == "--int4-weight-mode") int4_weight_mode = true;
         else if (a == "--trace") trace = true;
         else if (a == "--help" || a == "-h") {
             std::cout << "Usage: " << argv[0]
-                      << " [--iters N] [--dram path] [--golden path] [--trace]\n";
+                      << " [--iters N] [--dram path] [--golden path] [--int4-weight-mode] [--trace]\n";
             return 0;
         }
     }
@@ -117,6 +119,7 @@ int main(int argc, char** argv) {
     }
 
     auto* dut = new VTOP_integration;
+    dut->int4_weight_mode = int4_weight_mode ? 1 : 0;
 
     if (trace) {
 #if VM_TRACE

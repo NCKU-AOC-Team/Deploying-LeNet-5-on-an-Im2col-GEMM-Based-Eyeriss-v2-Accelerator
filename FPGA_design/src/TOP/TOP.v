@@ -1,3 +1,9 @@
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
+`ifndef BOYU_TOP_WEIGHT_STREAM_RANGE
+`define BOYU_TOP_WEIGHT_STREAM_RANGE 15:0
+`endif
 module TOP_eyeriss # (
 	parameter WEIGHT_DATA_3_END = 'd30619,
 	parameter WEIGHT_DATA_4_END = 'd39877,
@@ -12,8 +18,9 @@ module TOP_eyeriss # (
 		
 	input	signed		[7:0]	weight_addr_in,
 	input						weight_addr_in_valid,
-	input	signed		[12:0]	weight_data_in,
+	input	signed		[`BOYU_TOP_WEIGHT_STREAM_RANGE]	weight_data_in,
 	input						weight_data_in_valid,
+	input						int4_weight_mode,
 	
 	input						system_enable,
 	//output				[5:0]	state,
@@ -70,7 +77,7 @@ wire 			      	CG_0_0_GLB_iact_address_in_valid [0:2][0:2];
 wire 			[6:0]  	CG_0_0_GLB_iact_address_in [0:2][0:2];
 wire			      	CG_0_0_GLB_iact_data_in_ready [0:2][0:2];
 wire 			      	CG_0_0_GLB_iact_data_in_valid [0:2][0:2];
-wire 			[11:0] 	CG_0_0_GLB_iact_data_in [0:2][0:2];
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_GLB_iact_data_in [0:2][0:2];
 wire			       	CG_0_0_GLB_weight_address_in_ready [0:2];
 wire 			       	CG_0_0_GLB_weight_address_in_valid [0:2];
 wire 			[7:0]  	CG_0_0_GLB_weight_address_in [0:2];
@@ -127,7 +134,7 @@ wire 			      	CG_0_1_GLB_iact_address_in_valid [0:2][0:2];
 wire 			[6:0]  	CG_0_1_GLB_iact_address_in [0:2][0:2];
 wire			      	CG_0_1_GLB_iact_data_in_ready [0:2][0:2];
 wire 			      	CG_0_1_GLB_iact_data_in_valid [0:2][0:2];
-wire 			[11:0] 	CG_0_1_GLB_iact_data_in [0:2][0:2];
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_GLB_iact_data_in [0:2][0:2];
 wire			       	CG_0_1_GLB_weight_address_in_ready [0:2];
 wire 			       	CG_0_1_GLB_weight_address_in_valid [0:2];
 wire 			[7:0]  	CG_0_1_GLB_weight_address_in [0:2];
@@ -184,7 +191,7 @@ wire 			      	CG_1_0_GLB_iact_address_in_valid [0:2][0:2];
 wire 			[6:0]  	CG_1_0_GLB_iact_address_in [0:2][0:2];
 wire			      	CG_1_0_GLB_iact_data_in_ready [0:2][0:2];
 wire 			      	CG_1_0_GLB_iact_data_in_valid [0:2][0:2];
-wire 			[11:0] 	CG_1_0_GLB_iact_data_in [0:2][0:2];
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_GLB_iact_data_in [0:2][0:2];
 wire			       	CG_1_0_GLB_weight_address_in_ready [0:2];
 wire 			       	CG_1_0_GLB_weight_address_in_valid [0:2];
 wire 			[7:0]  	CG_1_0_GLB_weight_address_in [0:2];
@@ -241,7 +248,7 @@ wire 			      	CG_1_1_GLB_iact_address_in_valid [0:2][0:2];
 wire 			[6:0]  	CG_1_1_GLB_iact_address_in [0:2][0:2];
 wire			      	CG_1_1_GLB_iact_data_in_ready [0:2][0:2];
 wire 			      	CG_1_1_GLB_iact_data_in_valid [0:2][0:2];
-wire 			[11:0] 	CG_1_1_GLB_iact_data_in [0:2][0:2];
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_GLB_iact_data_in [0:2][0:2];
 wire			       	CG_1_1_GLB_weight_address_in_ready [0:2];
 wire 			       	CG_1_1_GLB_weight_address_in_valid [0:2];
 wire 			[7:0]  	CG_1_1_GLB_weight_address_in [0:2];
@@ -365,6 +372,9 @@ wire			ctrl_softmax_en;
 wire 			ctrl_csc_en;
 wire			ctrl_conv_flag;
 wire			ctrl_fc_flag;
+wire			int4_weight_mode_wire = int4_weight_mode;
+wire			int4_former_weight_mode_wire = int4_weight_mode_wire & ctrl_conv_flag;
+wire			int4_later_weight_mode_wire  = int4_weight_mode_wire & ctrl_fc_flag;
 wire	[2:0]	ctrl_layer_count;
 wire			ctrl_ifmap_in_en;
 wire			ctrl_ReLU_en;
@@ -647,6 +657,8 @@ ClusterGroup_array ClusterGroup_array(
 	.clock										(clock										),
 	.reset                                      (reset                                      ),	
 	.psum_acc_fin								(psum_acc_fin								),
+	.int4_former_weight_mode					(int4_former_weight_mode_wire				),
+	.int4_later_weight_mode						(int4_later_weight_mode_wire					),
 	.CG_0_0_PE_cluster_iact_data_in_sel         (CG_0_0_PE_cluster_iact_data_in_sel         ),
 	.CG_0_0_PE_cluster_iact_data_out_sel        (CG_0_0_PE_cluster_iact_data_out_sel        ),
 	.CG_0_0_PE_cluster_psum_data_in_sel         (CG_0_0_PE_cluster_psum_data_in_sel         ),								

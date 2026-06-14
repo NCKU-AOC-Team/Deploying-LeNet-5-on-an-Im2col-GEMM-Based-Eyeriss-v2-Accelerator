@@ -9,16 +9,19 @@
 // router cluster is the core of the Hierarchical mesh-NoC, which provides flexibility to the accelerator.
 // This architecture can support all kinds of dataflow topology with data_in_sel / data_out_sel controls.
 // ------------------------------------------------------------------------------------------------------ //
-// [Refactor] port 介面 array 化、15 個 router 收成 3 個 generate（行為與原攤平版等價，diff 50 張驗證）。
-//   - iact   ×9：array [0:2][0:2]（per-PE, one-to-one）、addr[6:0]/data[11:0]、4 src 向(GLB/north/south/horiz in)+4 dst 向。
-//   - weight ×3：array [0:2]（per-row, one-to-row）、addr[7:0]/data[12:0]、PE_out 無 ready（只有 valid+bits）。
-//   - psum   ×3：array [0:2]（per-col, one-to-column）、signed [20:0]、in: PE/GLB/north  out: PE/GLB/south。
-//   - data_in_sel / data_out_sel 維持攤平 port（可能來自 TOP，不 array 化以免連動上層）+ 內部 adapter；iact sel 為 per-row。
-//   - 葉子 Iact/Weight/Psum_Router 是純組合 MUX（circuit switching），未更動。
+// [Refactor] port 介面 array ?��?5 ??router ?��? 3 ??generate（�??��??�攤平�?等價，diff 50 張�?證�???
+//   - iact   ?9：array [0:2][0:2]（per-PE, one-to-one）、addr[6:0]/data[`BOYU_LATER_STREAM_RANGE]?? src ??GLB/north/south/horiz in)+4 dst ?��?
+//   - weight ?3：array [0:2]（per-row, one-to-row）、addr[7:0]/data[12:0]?�PE_out ??ready（只??valid+bits）�?
+//   - psum   ?3：array [0:2]（per-col, one-to-column）、signed [20:0]?�in: PE/GLB/north  out: PE/GLB/south??
+//   - data_in_sel / data_out_sel 維�??�平 port（可?��???TOP，�? array ?�以?��??上層�? ?�部 adapter；iact sel ??per-row??
+//   - ?��? Iact/Weight/Psum_Router ?��?組�? MUX（circuit switching）�??�更?��?
 // ====================================================================================================== //
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module Router_Cluster (
-	// ===== control：data_in_sel / data_out_sel（攤平；iact per-row、weight/psum per-router）=====
+	// ===== control：data_in_sel / data_out_sel（攤平�?iact per-row?�weight/psum per-router�?====
 	input  [1:0] iact_0_data_in_sel,
 	input  [1:0] iact_0_data_out_sel,
 	input  [1:0] iact_1_data_in_sel,
@@ -38,32 +41,32 @@ module Router_Cluster (
 	input        psum_2_data_in_sel,
 	input        psum_2_data_out_sel,
 
-	// ===== iact routers ×9（one-to-one to PEs）— array [0:2][0:2] =====
+	// ===== iact routers ?9（one-to-one to PEs）�?array [0:2][0:2] =====
 	//   src ports: GLB / north / south / horiz   (address + data in)
 	output               iact_GLB_address_in_ready [0:2][0:2],
 	input                iact_GLB_address_in_valid [0:2][0:2],
 	input  [6:0]         iact_GLB_address_in_bits [0:2][0:2],
 	output               iact_GLB_data_in_ready [0:2][0:2],
 	input                iact_GLB_data_in_valid [0:2][0:2],
-	input  [11:0]        iact_GLB_data_in_bits [0:2][0:2],
+	input  [`BOYU_LATER_STREAM_RANGE]        iact_GLB_data_in_bits [0:2][0:2],
 	output               iact_north_address_in_ready [0:2][0:2],
 	input                iact_north_address_in_valid [0:2][0:2],
 	input  [6:0]         iact_north_address_in_bits [0:2][0:2],
 	output               iact_north_data_in_ready [0:2][0:2],
 	input                iact_north_data_in_valid [0:2][0:2],
-	input  [11:0]        iact_north_data_in_bits [0:2][0:2],
+	input  [`BOYU_LATER_STREAM_RANGE]        iact_north_data_in_bits [0:2][0:2],
 	output               iact_south_address_in_ready [0:2][0:2],
 	input                iact_south_address_in_valid [0:2][0:2],
 	input  [6:0]         iact_south_address_in_bits [0:2][0:2],
 	output               iact_south_data_in_ready [0:2][0:2],
 	input                iact_south_data_in_valid [0:2][0:2],
-	input  [11:0]        iact_south_data_in_bits [0:2][0:2],
+	input  [`BOYU_LATER_STREAM_RANGE]        iact_south_data_in_bits [0:2][0:2],
 	output               iact_horiz_address_in_ready [0:2][0:2],
 	input                iact_horiz_address_in_valid [0:2][0:2],
 	input  [6:0]         iact_horiz_address_in_bits [0:2][0:2],
 	output               iact_horiz_data_in_ready [0:2][0:2],
 	input                iact_horiz_data_in_valid [0:2][0:2],
-	input  [11:0]        iact_horiz_data_in_bits [0:2][0:2],
+	input  [`BOYU_LATER_STREAM_RANGE]        iact_horiz_data_in_bits [0:2][0:2],
 
 	//   dst ports: PE / north / south / horiz    (address + data out)
 	input                iact_PE_address_out_ready [0:2][0:2],
@@ -71,27 +74,27 @@ module Router_Cluster (
 	output [6:0]         iact_PE_address_out_bits [0:2][0:2],
 	input                iact_PE_data_out_ready [0:2][0:2],
 	output               iact_PE_data_out_valid [0:2][0:2],
-	output [11:0]        iact_PE_data_out_bits [0:2][0:2],
+	output [`BOYU_LATER_STREAM_RANGE]        iact_PE_data_out_bits [0:2][0:2],
 	input                iact_north_address_out_ready [0:2][0:2],
 	output               iact_north_address_out_valid [0:2][0:2],
 	output [6:0]         iact_north_address_out_bits [0:2][0:2],
 	input                iact_north_data_out_ready [0:2][0:2],
 	output               iact_north_data_out_valid [0:2][0:2],
-	output [11:0]        iact_north_data_out_bits [0:2][0:2],
+	output [`BOYU_LATER_STREAM_RANGE]        iact_north_data_out_bits [0:2][0:2],
 	input                iact_south_address_out_ready [0:2][0:2],
 	output               iact_south_address_out_valid [0:2][0:2],
 	output [6:0]         iact_south_address_out_bits [0:2][0:2],
 	input                iact_south_data_out_ready [0:2][0:2],
 	output               iact_south_data_out_valid [0:2][0:2],
-	output [11:0]        iact_south_data_out_bits [0:2][0:2],
+	output [`BOYU_LATER_STREAM_RANGE]        iact_south_data_out_bits [0:2][0:2],
 	input                iact_horiz_address_out_ready [0:2][0:2],
 	output               iact_horiz_address_out_valid [0:2][0:2],
 	output [6:0]         iact_horiz_address_out_bits [0:2][0:2],
 	input                iact_horiz_data_out_ready [0:2][0:2],
 	output               iact_horiz_data_out_valid [0:2][0:2],
-	output [11:0]        iact_horiz_data_out_bits [0:2][0:2],
+	output [`BOYU_LATER_STREAM_RANGE]        iact_horiz_data_out_bits [0:2][0:2],
 
-	// ===== weight routers ×3（one-to-row）— array [0:2]；PE_out 無 ready（只有 valid+bits）=====
+	// ===== weight routers ?3（one-to-row）�?array [0:2]；PE_out ??ready（只??valid+bits�?====
 	//   src: GLB / horiz (in)    dst: PE / horiz (out)
 	output               weight_GLB_address_in_ready [0:2],
 	input                weight_GLB_address_in_valid [0:2],
@@ -116,7 +119,7 @@ module Router_Cluster (
 	output               weight_horiz_data_out_valid [0:2],
 	output [12:0]        weight_horiz_data_out_bits [0:2],
 
-	// ===== psum routers ×3（one-to-column）— array [0:2]；signed [20:0] =====
+	// ===== psum routers ?3（one-to-column）�?array [0:2]；signed [20:0] =====
 	//   src: PE / GLB / north (in)    dst: PE / GLB / south (out)
 	output               psum_PE_in_ready [0:2],
 	input                psum_PE_in_valid [0:2],
@@ -141,8 +144,8 @@ module Router_Cluster (
 genvar r,c,i;
 
 // ----------------------------------------------------------------------------------------- //
-// sel adapter：data_in_sel / data_out_sel 維持攤平 port，這裡收進 array 餵下面的 generate。
-//   iact 的 sel 是 per-row（iact_0/1/2 給整個 row 共用），weight / psum 則是 per-router。
+// sel adapter：data_in_sel / data_out_sel 維�??�平 port，這裡?��?array 餵�??��? generate??
+//   iact ??sel ??per-row（iact_0/1/2 給整??row ?�用）�?weight / psum ?�是 per-router??
 // ----------------------------------------------------------------------------------------- //
 wire [1:0] iact_sd   [0:2];  wire [1:0] iact_so   [0:2];  // iact   data_in/out_sel (per-row)
 wire       weight_sd [0:2];  wire       weight_so [0:2];  // weight data_in/out_sel
@@ -160,7 +163,7 @@ assign psum_sd[0]   = psum_0_data_in_sel;    assign psum_so[0]   = psum_0_data_o
 assign psum_sd[1]   = psum_1_data_in_sel;    assign psum_so[1]   = psum_1_data_out_sel;
 assign psum_sd[2]   = psum_2_data_in_sel;    assign psum_so[2]   = psum_2_data_out_sel;
 
-// ===== iact ×9 — per-PE [r][c]；sel 為 per-row → iact_sd[r] / iact_so[r] =====
+// ===== iact ?9 ??per-PE [r][c]；sel ??per-row ??iact_sd[r] / iact_so[r] =====
 generate for(r=0;r<3;r=r+1) for(c=0;c<3;c=c+1) begin: IACT_R
 	Iact_Router u (
 		.GLB_address_in_ready(iact_GLB_address_in_ready[r][c]),
@@ -216,7 +219,7 @@ generate for(r=0;r<3;r=r+1) for(c=0;c<3;c=c+1) begin: IACT_R
 	);
 end endgenerate
 
-// ===== weight ×3 — per-row；PE_out 只有 valid+bits（無 ready）=====
+// ===== weight ?3 ??per-row；PE_out ?��? valid+bits（無 ready�?====
 generate for(i=0;i<3;i=i+1) begin: WEIGHT_R
 	Weight_Router u (
 		.GLB_address_in_ready(weight_GLB_address_in_ready[i]),
@@ -246,7 +249,7 @@ generate for(i=0;i<3;i=i+1) begin: WEIGHT_R
 	);
 end endgenerate
 
-// ===== psum ×3 — per-column；signed datapath（in: PE/GLB/north, out: PE/GLB/south）=====
+// ===== psum ?3 ??per-column；signed datapath（in: PE/GLB/north, out: PE/GLB/south�?====
 generate for(i=0;i<3;i=i+1) begin: PSUM_R
 	Psum_Router u (
 		.PE_in_ready(psum_PE_in_ready[i]),

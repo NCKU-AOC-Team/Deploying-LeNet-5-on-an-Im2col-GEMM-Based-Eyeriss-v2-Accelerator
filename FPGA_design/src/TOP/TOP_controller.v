@@ -441,6 +441,59 @@ wire LAYER2_CAL_wire 			= layer2_flag & LAYER_CAL_wire;
 wire LAYER3_CAL_wire 			= layer3_flag & LAYER_CAL_wire;
 wire LAYER4_CAL_wire 			= layer4_flag & LAYER_CAL_wire;
 
+`ifdef VERILATOR
+integer dbg_ifmap_load_cycles;
+integer dbg_glb_load_cycles;
+integer dbg_pe_load_cycles;
+integer dbg_conv_mac_cycles;
+integer dbg_fc1_mac_cycles;
+integer dbg_fc2_mac_cycles;
+integer dbg_fc3_mac_cycles;
+integer dbg_psum_acc_cycles;
+integer dbg_output_cycles;
+integer dbg_mem_read_cycles;
+
+always @(posedge clock) begin
+	if (reset) begin
+		dbg_ifmap_load_cycles <= 0;
+		dbg_glb_load_cycles <= 0;
+		dbg_pe_load_cycles <= 0;
+		dbg_conv_mac_cycles <= 0;
+		dbg_fc1_mac_cycles <= 0;
+		dbg_fc2_mac_cycles <= 0;
+		dbg_fc3_mac_cycles <= 0;
+		dbg_psum_acc_cycles <= 0;
+		dbg_output_cycles <= 0;
+		dbg_mem_read_cycles <= 0;
+	end
+	else begin
+		if (LAYER_LOAD_IFMAP_wire) dbg_ifmap_load_cycles <= dbg_ifmap_load_cycles + 1;
+		if (LAYER_LOAD_GLB_wire) dbg_glb_load_cycles <= dbg_glb_load_cycles + 1;
+		if (LAYER_LOAD_PE_wire) dbg_pe_load_cycles <= dbg_pe_load_cycles + 1;
+		if (LAYER0_CAL_wire | LAYER1_CAL_wire) dbg_conv_mac_cycles <= dbg_conv_mac_cycles + 1;
+		if (LAYER2_CAL_wire) dbg_fc1_mac_cycles <= dbg_fc1_mac_cycles + 1;
+		if (LAYER3_CAL_wire) dbg_fc2_mac_cycles <= dbg_fc2_mac_cycles + 1;
+		if (LAYER4_CAL_wire) dbg_fc3_mac_cycles <= dbg_fc3_mac_cycles + 1;
+		if (LAYER_PSUM_ACC_wire) dbg_psum_acc_cycles <= dbg_psum_acc_cycles + 1;
+		if (LAYER_READ_OUT_PSUM_wire | LAYER_POOLING_wire | LAYER_DONE_wire | DONE_wire) dbg_output_cycles <= dbg_output_cycles + 1;
+		if (MEM_read_en) dbg_mem_read_cycles <= dbg_mem_read_cycles + 1;
+		if (~DONE_wire & (next_state == DONE)) begin
+			$display("[cycle_breakdown] ifmap_load=%0d glb_load=%0d pe_load_weight_iact=%0d conv_mac=%0d fc1_mac=%0d fc2_mac=%0d fc3_mac=%0d psum_acc=%0d output=%0d mem_read=%0d",
+				dbg_ifmap_load_cycles,
+				dbg_glb_load_cycles,
+				dbg_pe_load_cycles,
+				dbg_conv_mac_cycles,
+				dbg_fc1_mac_cycles,
+				dbg_fc2_mac_cycles,
+				dbg_fc3_mac_cycles,
+				dbg_psum_acc_cycles,
+				dbg_output_cycles,
+				dbg_mem_read_cycles);
+		end
+	end
+end
+`endif
+
 wire LAYER0_PSUM_ACC_wire 		= layer0_flag & LAYER_PSUM_ACC_wire;
 wire LAYER1_PSUM_ACC_wire 		= layer1_flag & LAYER_PSUM_ACC_wire;
 wire LAYER2_PSUM_ACC_wire 		= layer2_flag & LAYER_PSUM_ACC_wire;

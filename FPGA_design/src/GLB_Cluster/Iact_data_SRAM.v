@@ -9,16 +9,19 @@
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module iact_data_SRAM(
 	input        		clock,
 	input        		reset,
 	// data signals
 	output       		data_in_ready,
 	input        		data_in_valid,
-	input  		[11:0] 	data_in,
+	input  		[`BOYU_LATER_STREAM_RANGE] 	data_in,
 	input        		data_out_ready,
 	output reg       	data_out_valid,
-	output  	[11:0] 	data_out,
+	output  	[`BOYU_LATER_STREAM_RANGE] 	data_out,
 	
 	// control signals
 	input        		write_en,
@@ -198,8 +201,8 @@ wire 			IP_BRAM_write_en	= data_in_shake;
 wire			IP_BRAM_read_en		= read_shake;
 wire 	[10:0]	IP_BRAM_write_addr	= SRAM_write_idx;
 wire 	[10:0]	IP_BRAM_read_addr	= SRAM_read_addr;
-wire	[11:0]	IP_BRAM_data_in		= data_in;
-wire	[11:0]	IP_BRAM_data_out;
+wire	[`BOYU_LATER_STREAM_RANGE]	IP_BRAM_data_in		= data_in;
+wire	[`BOYU_LATER_STREAM_RANGE]	IP_BRAM_data_out;
 
 assign data_out	= IP_BRAM_data_out;
 	
@@ -217,6 +220,9 @@ Iact_Data_SRAM_BRAM Iact_Data_SRAM_BRAM_inst (
 endmodule
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module Iact_Data_SRAM_BRAM (
     input 			clk,
 	input			reset,
@@ -226,28 +232,33 @@ module Iact_Data_SRAM_BRAM (
 	input 	[10:0]	write_addr,
 	input 	[10:0]	read_addr,
 	
-	input	[11:0]	data_in,
+	input	[`BOYU_LATER_STREAM_RANGE]	data_in,
 	
-	output	[11:0]	data_out
+	output	[`BOYU_LATER_STREAM_RANGE]	data_out
 );
 
 wire		wr;
 wire [10:0] addra;
-wire [11:0] dina;
+wire [`BOYU_LATER_STREAM_RANGE] dina;
 wire [10:0] addrb;
-wire [11:0] doutb;
+wire [`BOYU_LATER_STREAM_RANGE] doutb;
 
-IP_Iact_Data_SRAM_BRAM u0 (   	
-  .clka		(clk	),  
-  .wea		(wr		),     	
-  .addra	(addra	),  	
-  .dina		(dina	),  
-  
-  .clkb		(clk	),  
-  .rstb		(reset	),     
-  .addrb	(addrb	),  	  
-  .doutb	(doutb	)  	
-);
+reg [`BOYU_LATER_STREAM_RANGE] mem [0:2047];
+reg [`BOYU_LATER_STREAM_RANGE] doutb_reg;
+
+always @(posedge clk) begin
+	if (wr) begin
+		mem[addra] <= dina;
+	end
+	if (reset) begin
+		doutb_reg <= 'd0;
+	end
+	else if (read_en) begin
+		doutb_reg <= mem[addrb];
+	end
+end
+
+assign doutb = doutb_reg;
 
 // need 4 cycles to clear spad data
 reg	[1:0] 	clear_count;

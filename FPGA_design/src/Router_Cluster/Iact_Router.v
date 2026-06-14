@@ -19,6 +19,10 @@
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
+
 module Iact_Router (
 	// source ports
 	output 		       GLB_address_in_ready,
@@ -26,28 +30,28 @@ module Iact_Router (
 	input  		[6:0]  GLB_address_in,
 	output 		       GLB_data_in_ready,
 	input  		       GLB_data_in_valid,
-	input  		[11:0] GLB_data_in,
+	input  		[`BOYU_LATER_STREAM_RANGE] GLB_data_in,
 			
 	output 		       north_address_in_ready,
 	input  		       north_address_in_valid,
 	input  		[6:0]  north_address_in,
 	output 		       north_data_in_ready,
 	input  		       north_data_in_valid,
-	input  		[11:0] north_data_in,
+	input  		[`BOYU_LATER_STREAM_RANGE] north_data_in,
 			
 	output 		       south_address_in_ready,
 	input  		       south_address_in_valid,
 	input  		[6:0]  south_address_in,
 	output 		       south_data_in_ready,
 	input  		       south_data_in_valid,
-	input  		[11:0] south_data_in,
+	input  		[`BOYU_LATER_STREAM_RANGE] south_data_in,
 			
 	output 		       horiz_address_in_ready,
 	input  		       horiz_address_in_valid,
 	input  		[6:0]  horiz_address_in,
 	output 		       horiz_data_in_ready,
 	input  		       horiz_data_in_valid,
-	input  		[11:0] horiz_data_in,
+	input  		[`BOYU_LATER_STREAM_RANGE] horiz_data_in,
 	
 	// destination ports
 	input         		PE_address_out_ready,
@@ -55,28 +59,28 @@ module Iact_Router (
 	output		[6:0]  	PE_address_out,
 	input         		PE_data_out_ready,
 	output        		PE_data_out_valid,
-	output 	 	[11:0] 	PE_data_out,
+	output 	 	[`BOYU_LATER_STREAM_RANGE] 	PE_data_out,
 	
 	input				north_address_out_ready,
 	output 	        	north_address_out_valid,
 	output 	 	[6:0]  	north_address_out,
 	input				north_data_out_ready,
 	output 	        	north_data_out_valid,
-	output 	 	[11:0] 	north_data_out,
+	output 	 	[`BOYU_LATER_STREAM_RANGE] 	north_data_out,
 	
 	input         		south_address_out_ready,
 	output 	        	south_address_out_valid,
 	output 	 	[6:0]  	south_address_out,
 	input         		south_data_out_ready,
 	output 	        	south_data_out_valid,
-	output 	 	[11:0] 	south_data_out,
+	output 	 	[`BOYU_LATER_STREAM_RANGE] 	south_data_out,
 	
 	input         		horiz_address_out_ready,
 	output 	        	horiz_address_out_valid,
 	output 	 	[6:0]  	horiz_address_out,
 	input         		horiz_data_out_ready,
 	output		       	horiz_data_out_valid,
-	output 	 	[11:0]	horiz_data_out,
+	output 	 	[`BOYU_LATER_STREAM_RANGE]	horiz_data_out,
 	
 	// control
 	input  		[1:0]  	data_in_sel,
@@ -108,7 +112,7 @@ reg  		internal_data_ready;
 reg  		internal_address_valid;
 reg  		internal_data_valid;
 reg [6:0] 	internal_address;
-reg [11:0]	internal_data;
+reg [`BOYU_LATER_STREAM_RANGE]	internal_data;
 
 wire route_hor_cast_wire  = data_out_sel == HOR_CAST;
 wire route_ver_cast_wire  = data_out_sel == VER_CAST;
