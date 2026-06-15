@@ -6,3 +6,9 @@ ASIC_design/
 FPGA_design/sim/verilator/obj_dir/
 FPGA_design/sim/verilator/*.vcd
 FPGA_design/sim/verilator/rom_sparse_weight.mem
+
+# Vivado bitstream build output from NCKU_AOC_Team/build_bitstream.tcl
+FPGA_design/Vivado/NCKU_AOC_Team/build/
+build.log
+vivado*.jou
+vivado*.log
