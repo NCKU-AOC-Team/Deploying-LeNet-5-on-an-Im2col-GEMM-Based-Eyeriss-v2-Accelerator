@@ -39,53 +39,53 @@ module TOP_controller # (
 	output 				fc_flag,
 	output	reg [2:0] 	layer_count,
 	
-	output			CG_0_0_GLB_psum_out_en [0:2],
-	output			CG_0_1_GLB_psum_out_en [0:2],
-	output			CG_1_0_GLB_psum_out_en [0:2],
-	output			CG_1_1_GLB_psum_out_en [0:2],
+	output [0:2] CG_0_0_GLB_psum_out_en,
+	output [0:2] CG_0_1_GLB_psum_out_en,
+	output [0:2] CG_1_0_GLB_psum_out_en,
+	output [0:2] CG_1_1_GLB_psum_out_en,
 	
-	output			CG_0_0_GLB_iact_in_en [0:2][0:2],
-	output			CG_0_1_GLB_iact_in_en [0:2][0:2],
-	output			CG_1_0_GLB_iact_in_en [0:2][0:2],
-	output			CG_1_1_GLB_iact_in_en [0:2][0:2],
+	output [0:2][0:2] CG_0_0_GLB_iact_in_en,
+	output [0:2][0:2] CG_0_1_GLB_iact_in_en,
+	output [0:2][0:2] CG_1_0_GLB_iact_in_en,
+	output [0:2][0:2] CG_1_1_GLB_iact_in_en,
 	
-	output			CG_0_0_GLB_weight_in_en [0:2],
-	output			CG_0_1_GLB_weight_in_en [0:2],
-	output			CG_1_0_GLB_weight_in_en [0:2],
-	output			CG_1_1_GLB_weight_in_en [0:2],
+	output [0:2] CG_0_0_GLB_weight_in_en,
+	output [0:2] CG_0_1_GLB_weight_in_en,
+	output [0:2] CG_1_0_GLB_weight_in_en,
+	output [0:2] CG_1_1_GLB_weight_in_en,
 	
 	// ------------- CG_0_0 ------------- //
-	output		CG_PE_cluster_iact_data_in_sel [0:1][0:1],
-	output		[1:0]	CG_PE_cluster_iact_data_out_sel [0:1][0:1],
-	output		CG_PE_cluster_psum_data_in_sel [0:1][0:1],
+	output [0:1][0:1]      CG_PE_cluster_iact_data_in_sel,
+	output [0:1][0:1][1:0] CG_PE_cluster_iact_data_out_sel,
+	output [0:1][0:1]      CG_PE_cluster_psum_data_in_sel,
 	
-	output		[1:0]	CG_router_cluster_iact_data_in_sel [0:1][0:1],
-	output		[1:0]	CG_router_cluster_iact_data_out_sel [0:1][0:1],
-	output		CG_router_cluster_weight_data_in_sel [0:1][0:1],
-	output		CG_router_cluster_weight_data_out_sel [0:1][0:1],
-	output		CG_router_cluster_psum_data_in_sel [0:1][0:1],
-	output		CG_router_cluster_psum_data_out_sel [0:1][0:1],
-	output	reg		CG_src_GLB_load_fin [0:1][0:1],
-	output			CG_cg_en [0:1][0:1],
-	output			CG_read_psum_en [0:1][0:1],
-	output			CG_psum_SRAM_Bank_0_read_out_en [0:1][0:1],
-	output			CG_psum_SRAM_Bank_1_read_out_en [0:1][0:1],
-	output			CG_psum_SRAM_Bank_2_read_out_en [0:1][0:1],
-	output			CG_GLB_psum_write_en [0:1][0:1],
-	output			CG_psum_spad_clear [0:1][0:1],
-	output			CG_iact_write_fin_clear [0:1][0:1],
-	output			CG_weight_write_fin_clear [0:1][0:1],
+	output [0:1][0:1][1:0] CG_router_cluster_iact_data_in_sel,
+	output [0:1][0:1][1:0] CG_router_cluster_iact_data_out_sel,
+	output [0:1][0:1]      CG_router_cluster_weight_data_in_sel,
+	output [0:1][0:1]      CG_router_cluster_weight_data_out_sel,
+	output [0:1][0:1]      CG_router_cluster_psum_data_in_sel,
+	output [0:1][0:1]      CG_router_cluster_psum_data_out_sel,
+	output reg [0:1][0:1] CG_src_GLB_load_fin,
+	output [0:1][0:1] CG_cg_en,
+	output [0:1][0:1] CG_read_psum_en,
+	output [0:1][0:1] CG_psum_SRAM_Bank_0_read_out_en,
+	output [0:1][0:1] CG_psum_SRAM_Bank_1_read_out_en,
+	output [0:1][0:1] CG_psum_SRAM_Bank_2_read_out_en,
+	output [0:1][0:1] CG_GLB_psum_write_en,
+	output [0:1][0:1] CG_psum_spad_clear,
+	output [0:1][0:1] CG_iact_write_fin_clear,
+	output [0:1][0:1] CG_weight_write_fin_clear,
 			
-	input				CG_GLB_iact_load_en [0:1][0:1],
-	input				CG_PE_weight_load_en [0:1][0:1],
-	input				CG_cal_fin [0:1][0:1],
+	input [0:1][0:1] CG_GLB_iact_load_en,
+	input [0:1][0:1] CG_PE_weight_load_en,
+	input [0:1][0:1] CG_cal_fin,
 	
-	output				CG_0_0_PE_disable [0:2][0:2],
+	output [0:2][0:2] CG_0_0_PE_disable,
 		
-	output		[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
+	output [0:2][0:2][9:0] CG_0_0_GLB_iact_read_addr,
 		
-	output	reg	[9:0]	CG_0_0_GLB_psum_write_addr [0:2],
-	output		[9:0]	CG_0_0_GLB_psum_read_addr [0:2],
+	output reg [0:2][9:0] CG_0_0_GLB_psum_write_addr,
+	output [0:2][9:0] CG_0_0_GLB_psum_read_addr,
 		   
 	output		[4:0]	CG_0_0_PSUM_DEPTH,
 				
@@ -94,12 +94,12 @@ module TOP_controller # (
 	
 							
 	
-	output				CG_0_1_PE_disable [0:2][0:2],
+	output [0:2][0:2] CG_0_1_PE_disable,
 							 
-	output		[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
+	output [0:2][0:2][9:0] CG_0_1_GLB_iact_read_addr,
 							
-	output	reg	[9:0]	CG_0_1_GLB_psum_write_addr [0:2],
-	output		[9:0]	CG_0_1_GLB_psum_read_addr [0:2],
+	output reg [0:2][9:0] CG_0_1_GLB_psum_write_addr,
+	output [0:2][9:0] CG_0_1_GLB_psum_read_addr,
 							
 	output		[4:0]	CG_0_1_PSUM_DEPTH,
 							
@@ -109,12 +109,12 @@ module TOP_controller # (
 						
 						
 	
-	output				CG_1_0_PE_disable [0:2][0:2],
+	output [0:2][0:2] CG_1_0_PE_disable,
 						
-	output		[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
+	output [0:2][0:2][9:0] CG_1_0_GLB_iact_read_addr,
 						
-	output	reg	[9:0]	CG_1_0_GLB_psum_write_addr [0:2],
-	output		[9:0]	CG_1_0_GLB_psum_read_addr [0:2],
+	output reg [0:2][9:0] CG_1_0_GLB_psum_write_addr,
+	output [0:2][9:0] CG_1_0_GLB_psum_read_addr,
 						
 	output		[4:0]	CG_1_0_PSUM_DEPTH,
 						
@@ -123,12 +123,12 @@ module TOP_controller # (
 	
 	
 	
-	output				CG_1_1_PE_disable [0:2][0:2],
+	output [0:2][0:2] CG_1_1_PE_disable,
 							
-	output		[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
+	output [0:2][0:2][9:0] CG_1_1_GLB_iact_read_addr,
 							
-	output	reg	[9:0]	CG_1_1_GLB_psum_write_addr [0:2],
-	output		[9:0]	CG_1_1_GLB_psum_read_addr [0:2],
+	output reg [0:2][9:0] CG_1_1_GLB_psum_write_addr,
+	output [0:2][9:0] CG_1_1_GLB_psum_read_addr,
 							
 	output		[4:0]	CG_1_1_PSUM_DEPTH,
 							
