@@ -5,37 +5,37 @@ module ClusterGroup_array(
 	input			clock,
 	input			reset,
 	
-	input	     	psum_acc_fin,
-	input [0:1][0:1]      CG_PE_cluster_iact_data_in_sel,
+	input psum_acc_fin,
+	input [0:1][0:1][0:0] CG_PE_cluster_iact_data_in_sel,
 	input [0:1][0:1][1:0] CG_PE_cluster_iact_data_out_sel,
-	input [0:1][0:1]      CG_PE_cluster_psum_data_in_sel,
+	input [0:1][0:1][0:0] CG_PE_cluster_psum_data_in_sel,
 						
 	input [0:1][0:1][1:0] CG_router_cluster_iact_data_in_sel,
 	input [0:1][0:1][1:0] CG_router_cluster_iact_data_out_sel,
-	input [0:1][0:1]      CG_router_cluster_weight_data_in_sel,
-	input [0:1][0:1]      CG_router_cluster_weight_data_out_sel,
-	input [0:1][0:1]      CG_router_cluster_psum_data_in_sel,
-	input [0:1][0:1]      CG_router_cluster_psum_data_out_sel,
+	input [0:1][0:1][0:0] CG_router_cluster_weight_data_in_sel,
+	input [0:1][0:1][0:0] CG_router_cluster_weight_data_out_sel,
+	input [0:1][0:1][0:0] CG_router_cluster_psum_data_in_sel,
+	input [0:1][0:1][0:0] CG_router_cluster_psum_data_out_sel,
 
-	input [0:1][0:1] CG_src_GLB_load_fin,
-	input [0:1][0:1] CG_cg_en,
-	input [0:1][0:1] CG_read_psum_en,
-	input [0:1][0:1] CG_psum_SRAM_Bank_0_read_out_en,
-	input [0:1][0:1] CG_psum_SRAM_Bank_1_read_out_en,
-	input [0:1][0:1] CG_psum_SRAM_Bank_2_read_out_en,
-	input [0:1][0:1] CG_GLB_psum_write_en,
-	input [0:1][0:1] CG_psum_spad_clear,
-	input [0:1][0:1] CG_iact_write_fin_clear,
-	input [0:1][0:1] CG_weight_write_fin_clear,
+	input [0:1][0:1][0:0] CG_src_GLB_load_fin,
+	input [0:1][0:1][0:0] CG_cg_en,
+	input [0:1][0:1][0:0] CG_read_psum_en,
+	input [0:1][0:1][0:0] CG_psum_SRAM_Bank_0_read_out_en,
+	input [0:1][0:1][0:0] CG_psum_SRAM_Bank_1_read_out_en,
+	input [0:1][0:1][0:0] CG_psum_SRAM_Bank_2_read_out_en,
+	input [0:1][0:1][0:0] CG_GLB_psum_write_en,
+	input [0:1][0:1][0:0] CG_psum_spad_clear,
+	input [0:1][0:1][0:0] CG_iact_write_fin_clear,
+	input [0:1][0:1][0:0] CG_weight_write_fin_clear,
 	// output
-	output [0:1][0:1] CG_cal_fin,
-	output [0:1][0:1] CG_PE_weight_load_en,
-	output [0:1][0:1] CG_GLB_iact_load_en,
+	output [0:1][0:1][0:0] CG_cal_fin,
+	output [0:1][0:1][0:0] CG_PE_weight_load_en,
+	output [0:1][0:1][0:0] CG_GLB_iact_load_en,
 	// ======================================================================================== //
 
 	// ---------------------------- CG_0_0 ---------------------------- //
 
-	input [0:2][0:2] CG_0_0_PE_disable,
+	input [0:2][0:2][0:0] CG_0_0_PE_disable,
 
 	// ================================================================ //
 	//                               GLB                                //
@@ -46,11 +46,11 @@ module ClusterGroup_array(
 	input [0:2][9:0]      CG_0_0_GLB_psum_read_addr,
 	
 	// GLB iact address & data
-	output [0:2][0:2]       CG_0_0_GLB_iact_address_in_ready,
-	input  [0:2][0:2]       CG_0_0_GLB_iact_address_in_valid,
+	output [0:2][0:2][0:0]  CG_0_0_GLB_iact_address_in_ready,
+	input  [0:2][0:2][0:0]  CG_0_0_GLB_iact_address_in_valid,
 	input  [0:2][0:2][6:0]  CG_0_0_GLB_iact_address_in,
-	output [0:2][0:2]       CG_0_0_GLB_iact_data_in_ready,
-	input  [0:2][0:2]       CG_0_0_GLB_iact_data_in_valid,
+	output [0:2][0:2][0:0]  CG_0_0_GLB_iact_data_in_ready,
+	input  [0:2][0:2][0:0]  CG_0_0_GLB_iact_data_in_valid,
 	input  [0:2][0:2][11:0] CG_0_0_GLB_iact_data_in,
 
 	// GLB weight address & data			
@@ -88,7 +88,7 @@ module ClusterGroup_array(
 
 	// ---------------------------- CG_0_1 ---------------------------- //
 
-	input [0:2][0:2] CG_0_1_PE_disable,
+	input [0:2][0:2][0:0] CG_0_1_PE_disable,
 
 	// ================================================================ //
 	//                               GLB                                //
@@ -99,11 +99,11 @@ module ClusterGroup_array(
 	input [0:2][9:0]      CG_0_1_GLB_psum_read_addr,
 	
 	// GLB iact address & data
-	output [0:2][0:2]       CG_0_1_GLB_iact_address_in_ready,
-	input  [0:2][0:2]       CG_0_1_GLB_iact_address_in_valid,
+	output [0:2][0:2][0:0]  CG_0_1_GLB_iact_address_in_ready,
+	input  [0:2][0:2][0:0]  CG_0_1_GLB_iact_address_in_valid,
 	input  [0:2][0:2][6:0]  CG_0_1_GLB_iact_address_in,
-	output [0:2][0:2]       CG_0_1_GLB_iact_data_in_ready,
-	input  [0:2][0:2]       CG_0_1_GLB_iact_data_in_valid,
+	output [0:2][0:2][0:0]  CG_0_1_GLB_iact_data_in_ready,
+	input  [0:2][0:2][0:0]  CG_0_1_GLB_iact_data_in_valid,
 	input  [0:2][0:2][11:0] CG_0_1_GLB_iact_data_in,
 
 	// GLB weight address & data			
@@ -141,7 +141,7 @@ module ClusterGroup_array(
 
 	// ---------------------------- CG_1_0 ---------------------------- //
 
-	input [0:2][0:2] CG_1_0_PE_disable,
+	input [0:2][0:2][0:0] CG_1_0_PE_disable,
 
 	// ================================================================ //
 	//                               GLB                                //
@@ -152,11 +152,11 @@ module ClusterGroup_array(
 	input [0:2][9:0]      CG_1_0_GLB_psum_read_addr,
 	
 	// GLB iact address & data
-	output [0:2][0:2]       CG_1_0_GLB_iact_address_in_ready,
-	input  [0:2][0:2]       CG_1_0_GLB_iact_address_in_valid,
+	output [0:2][0:2][0:0]  CG_1_0_GLB_iact_address_in_ready,
+	input  [0:2][0:2][0:0]  CG_1_0_GLB_iact_address_in_valid,
 	input  [0:2][0:2][6:0]  CG_1_0_GLB_iact_address_in,
-	output [0:2][0:2]       CG_1_0_GLB_iact_data_in_ready,
-	input  [0:2][0:2]       CG_1_0_GLB_iact_data_in_valid,
+	output [0:2][0:2][0:0]  CG_1_0_GLB_iact_data_in_ready,
+	input  [0:2][0:2][0:0]  CG_1_0_GLB_iact_data_in_valid,
 	input  [0:2][0:2][11:0] CG_1_0_GLB_iact_data_in,
 
 	// GLB weight address & data			
@@ -194,7 +194,7 @@ module ClusterGroup_array(
 
 	// ---------------------------- CG_1_1 ---------------------------- //
 
-	input [0:2][0:2] CG_1_1_PE_disable,
+	input [0:2][0:2][0:0] CG_1_1_PE_disable,
 
 	// ================================================================ //
 	//                               GLB                                //
@@ -205,11 +205,11 @@ module ClusterGroup_array(
 	input [0:2][9:0]      CG_1_1_GLB_psum_read_addr,
 	
 	// GLB iact address & data
-	output [0:2][0:2]       CG_1_1_GLB_iact_address_in_ready,
-	input  [0:2][0:2]       CG_1_1_GLB_iact_address_in_valid,
+	output [0:2][0:2][0:0]  CG_1_1_GLB_iact_address_in_ready,
+	input  [0:2][0:2][0:0]  CG_1_1_GLB_iact_address_in_valid,
 	input  [0:2][0:2][6:0]  CG_1_1_GLB_iact_address_in,
-	output [0:2][0:2]       CG_1_1_GLB_iact_data_in_ready,
-	input  [0:2][0:2]       CG_1_1_GLB_iact_data_in_valid,
+	output [0:2][0:2][0:0]  CG_1_1_GLB_iact_data_in_ready,
+	input  [0:2][0:2][0:0]  CG_1_1_GLB_iact_data_in_valid,
 	input  [0:2][0:2][11:0] CG_1_1_GLB_iact_data_in,
 
 	// GLB weight address & data			
@@ -247,143 +247,143 @@ module ClusterGroup_array(
 
 // --------------------- CG_0_0 --------------------- //
 // tile-chain 介面（source-named：每條 wire 由 CG_0_0 對應 output port 驅動）
-wire [0:2][0:2]       CG_0_0_iact_north_address_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_0_iact_north_address_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][6:0]  CG_0_0_iact_north_address_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_0_iact_north_data_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_0_iact_north_data_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][11:0] CG_0_0_iact_north_data_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_0_iact_south_address_in_ready;
-wire [0:2][0:2]       CG_0_0_iact_south_address_out_valid;
-wire [0:2][0:2][6:0]  CG_0_0_iact_south_address_out_bits;
-wire [0:2][0:2]       CG_0_0_iact_south_data_in_ready;
-wire [0:2][0:2]       CG_0_0_iact_south_data_out_valid;
-wire [0:2][0:2][11:0] CG_0_0_iact_south_data_out_bits;
-wire [0:2][0:2]       CG_0_0_iact_horiz_address_in_ready;
-wire [0:2][0:2]       CG_0_0_iact_horiz_address_out_valid;
-wire [0:2][0:2][6:0]  CG_0_0_iact_horiz_address_out_bits;
-wire [0:2][0:2]       CG_0_0_iact_horiz_data_in_ready;
-wire [0:2][0:2]       CG_0_0_iact_horiz_data_out_valid;
-wire [0:2][0:2][11:0] CG_0_0_iact_horiz_data_out_bits;
-wire [0:2]            CG_0_0_weight_horiz_address_in_ready;
-wire [0:2]            CG_0_0_weight_horiz_address_out_valid;
-wire [0:2][7:0]       CG_0_0_weight_horiz_address_out_bits;
-wire [0:2]            CG_0_0_weight_horiz_data_in_ready;
-wire [0:2]            CG_0_0_weight_horiz_data_out_valid;
-wire [0:2][12:0]      CG_0_0_weight_horiz_data_out_bits;
-wire [0:2] CG_0_0_psum_north_in_ready;	// 懸空：無鄰 CG 讀取
-wire        [0:2]       CG_0_0_psum_south_out_valid;
-wire signed [0:2][20:0] CG_0_0_psum_south_out_bits;
-wire        [0:2]       CG_0_0_cg_south_psum_in_ready;
-wire        [0:2]       CG_0_0_cg_north_psum_out_valid;	// 懸空：無鄰 CG 讀取
-wire signed [0:2][20:0] CG_0_0_cg_north_psum_out;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_0_iact_north_address_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_0_iact_north_address_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][6:0]  CG_0_0_iact_north_address_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_0_iact_north_data_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_0_iact_north_data_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][11:0] CG_0_0_iact_north_data_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_0_iact_south_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_south_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_0_0_iact_south_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_south_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_south_data_out_valid;
+wire        [0:2][0:2][11:0] CG_0_0_iact_south_data_out_bits;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_horiz_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_horiz_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_0_0_iact_horiz_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_horiz_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_0_iact_horiz_data_out_valid;
+wire        [0:2][0:2][11:0] CG_0_0_iact_horiz_data_out_bits;
+wire        [0:2]            CG_0_0_weight_horiz_address_in_ready;
+wire        [0:2]            CG_0_0_weight_horiz_address_out_valid;
+wire        [0:2][7:0]       CG_0_0_weight_horiz_address_out_bits;
+wire        [0:2]            CG_0_0_weight_horiz_data_in_ready;
+wire        [0:2]            CG_0_0_weight_horiz_data_out_valid;
+wire        [0:2][12:0]      CG_0_0_weight_horiz_data_out_bits;
+wire        [0:2]            CG_0_0_psum_north_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2]            CG_0_0_psum_south_out_valid;
+wire signed [0:2][20:0]      CG_0_0_psum_south_out_bits;
+wire        [0:2]            CG_0_0_cg_south_psum_in_ready;
+wire        [0:2]            CG_0_0_cg_north_psum_out_valid;	// 懸空：無鄰 CG 讀取
+wire signed [0:2][20:0]      CG_0_0_cg_north_psum_out;	// 懸空：無鄰 CG 讀取
 
 
 // --------------------- CG_0_1 --------------------- //
 // tile-chain 介面（source-named：每條 wire 由 CG_0_1 對應 output port 驅動）
-wire [0:2][0:2]       CG_0_1_iact_north_address_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_1_iact_north_address_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][6:0]  CG_0_1_iact_north_address_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_1_iact_north_data_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_1_iact_north_data_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][11:0] CG_0_1_iact_north_data_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_0_1_iact_south_address_in_ready;
-wire [0:2][0:2]       CG_0_1_iact_south_address_out_valid;
-wire [0:2][0:2][6:0]  CG_0_1_iact_south_address_out_bits;
-wire [0:2][0:2]       CG_0_1_iact_south_data_in_ready;
-wire [0:2][0:2]       CG_0_1_iact_south_data_out_valid;
-wire [0:2][0:2][11:0] CG_0_1_iact_south_data_out_bits;
-wire [0:2][0:2]       CG_0_1_iact_horiz_address_in_ready;
-wire [0:2][0:2]       CG_0_1_iact_horiz_address_out_valid;
-wire [0:2][0:2][6:0]  CG_0_1_iact_horiz_address_out_bits;
-wire [0:2][0:2]       CG_0_1_iact_horiz_data_in_ready;
-wire [0:2][0:2]       CG_0_1_iact_horiz_data_out_valid;
-wire [0:2][0:2][11:0] CG_0_1_iact_horiz_data_out_bits;
-wire [0:2]            CG_0_1_weight_horiz_address_in_ready;
-wire [0:2]            CG_0_1_weight_horiz_address_out_valid;
-wire [0:2][7:0]       CG_0_1_weight_horiz_address_out_bits;
-wire [0:2]            CG_0_1_weight_horiz_data_in_ready;
-wire [0:2]            CG_0_1_weight_horiz_data_out_valid;
-wire [0:2][12:0]      CG_0_1_weight_horiz_data_out_bits;
-wire [0:2] CG_0_1_psum_north_in_ready;	// 懸空：無鄰 CG 讀取
-wire        [0:2]       CG_0_1_psum_south_out_valid;
-wire signed [0:2][20:0] CG_0_1_psum_south_out_bits;
-wire        [0:2]       CG_0_1_cg_south_psum_in_ready;
-wire        [0:2]       CG_0_1_cg_north_psum_out_valid;	// 懸空：無鄰 CG 讀取
-wire signed [0:2][20:0] CG_0_1_cg_north_psum_out;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_1_iact_north_address_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_1_iact_north_address_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][6:0]  CG_0_1_iact_north_address_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_1_iact_north_data_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_1_iact_north_data_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][11:0] CG_0_1_iact_north_data_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_0_1_iact_south_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_south_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_0_1_iact_south_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_south_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_south_data_out_valid;
+wire        [0:2][0:2][11:0] CG_0_1_iact_south_data_out_bits;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_horiz_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_horiz_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_0_1_iact_horiz_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_horiz_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_0_1_iact_horiz_data_out_valid;
+wire        [0:2][0:2][11:0] CG_0_1_iact_horiz_data_out_bits;
+wire        [0:2]            CG_0_1_weight_horiz_address_in_ready;
+wire        [0:2]            CG_0_1_weight_horiz_address_out_valid;
+wire        [0:2][7:0]       CG_0_1_weight_horiz_address_out_bits;
+wire        [0:2]            CG_0_1_weight_horiz_data_in_ready;
+wire        [0:2]            CG_0_1_weight_horiz_data_out_valid;
+wire        [0:2][12:0]      CG_0_1_weight_horiz_data_out_bits;
+wire        [0:2]            CG_0_1_psum_north_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2]            CG_0_1_psum_south_out_valid;
+wire signed [0:2][20:0]      CG_0_1_psum_south_out_bits;
+wire        [0:2]            CG_0_1_cg_south_psum_in_ready;
+wire        [0:2]            CG_0_1_cg_north_psum_out_valid;	// 懸空：無鄰 CG 讀取
+wire signed [0:2][20:0]      CG_0_1_cg_north_psum_out;	// 懸空：無鄰 CG 讀取
 
 
 // --------------------- CG_1_0 --------------------- //
 // tile-chain 介面（source-named：每條 wire 由 CG_1_0 對應 output port 驅動）
-wire [0:2][0:2]       CG_1_0_iact_north_address_in_ready;
-wire [0:2][0:2]       CG_1_0_iact_north_address_out_valid;
-wire [0:2][0:2][6:0]  CG_1_0_iact_north_address_out_bits;
-wire [0:2][0:2]       CG_1_0_iact_north_data_in_ready;
-wire [0:2][0:2]       CG_1_0_iact_north_data_out_valid;
-wire [0:2][0:2][11:0] CG_1_0_iact_north_data_out_bits;
-wire [0:2][0:2]       CG_1_0_iact_south_address_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_0_iact_south_address_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][6:0]  CG_1_0_iact_south_address_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_0_iact_south_data_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_0_iact_south_data_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][11:0] CG_1_0_iact_south_data_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_0_iact_horiz_address_in_ready;
-wire [0:2][0:2]       CG_1_0_iact_horiz_address_out_valid;
-wire [0:2][0:2][6:0]  CG_1_0_iact_horiz_address_out_bits;
-wire [0:2][0:2]       CG_1_0_iact_horiz_data_in_ready;
-wire [0:2][0:2]       CG_1_0_iact_horiz_data_out_valid;
-wire [0:2][0:2][11:0] CG_1_0_iact_horiz_data_out_bits;
-wire [0:2]            CG_1_0_weight_horiz_address_in_ready;
-wire [0:2]            CG_1_0_weight_horiz_address_out_valid;
-wire [0:2][7:0]       CG_1_0_weight_horiz_address_out_bits;
-wire [0:2]            CG_1_0_weight_horiz_data_in_ready;
-wire [0:2]            CG_1_0_weight_horiz_data_out_valid;
-wire [0:2][12:0]      CG_1_0_weight_horiz_data_out_bits;
-wire [0:2]            CG_1_0_psum_north_in_ready;
-wire        [0:2]       CG_1_0_psum_south_out_valid;	// 懸空：無鄰 CG 讀取
-wire signed [0:2][20:0] CG_1_0_psum_south_out_bits;	// 懸空：無鄰 CG 讀取
-wire        [0:2]       CG_1_0_cg_south_psum_in_ready;	// 懸空：無鄰 CG 讀取
-wire        [0:2]       CG_1_0_cg_north_psum_out_valid;
-wire signed [0:2][20:0] CG_1_0_cg_north_psum_out;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_north_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_north_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_1_0_iact_north_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_north_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_north_data_out_valid;
+wire        [0:2][0:2][11:0] CG_1_0_iact_north_data_out_bits;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_south_address_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_0_iact_south_address_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][6:0]  CG_1_0_iact_south_address_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_0_iact_south_data_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_0_iact_south_data_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][11:0] CG_1_0_iact_south_data_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_0_iact_horiz_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_horiz_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_1_0_iact_horiz_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_horiz_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_0_iact_horiz_data_out_valid;
+wire        [0:2][0:2][11:0] CG_1_0_iact_horiz_data_out_bits;
+wire        [0:2]            CG_1_0_weight_horiz_address_in_ready;
+wire        [0:2]            CG_1_0_weight_horiz_address_out_valid;
+wire        [0:2][7:0]       CG_1_0_weight_horiz_address_out_bits;
+wire        [0:2]            CG_1_0_weight_horiz_data_in_ready;
+wire        [0:2]            CG_1_0_weight_horiz_data_out_valid;
+wire        [0:2][12:0]      CG_1_0_weight_horiz_data_out_bits;
+wire        [0:2]            CG_1_0_psum_north_in_ready;
+wire        [0:2]            CG_1_0_psum_south_out_valid;	// 懸空：無鄰 CG 讀取
+wire signed [0:2][20:0]      CG_1_0_psum_south_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2]            CG_1_0_cg_south_psum_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2]            CG_1_0_cg_north_psum_out_valid;
+wire signed [0:2][20:0]      CG_1_0_cg_north_psum_out;
 
 
 // --------------------- CG_1_1 --------------------- //
 // tile-chain 介面（source-named：每條 wire 由 CG_1_1 對應 output port 驅動）
-wire [0:2][0:2]       CG_1_1_iact_north_address_in_ready;
-wire [0:2][0:2]       CG_1_1_iact_north_address_out_valid;
-wire [0:2][0:2][6:0]  CG_1_1_iact_north_address_out_bits;
-wire [0:2][0:2]       CG_1_1_iact_north_data_in_ready;
-wire [0:2][0:2]       CG_1_1_iact_north_data_out_valid;
-wire [0:2][0:2][11:0] CG_1_1_iact_north_data_out_bits;
-wire [0:2][0:2]       CG_1_1_iact_south_address_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_1_iact_south_address_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][6:0]  CG_1_1_iact_south_address_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_1_iact_south_data_in_ready;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_1_iact_south_data_out_valid;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2][11:0] CG_1_1_iact_south_data_out_bits;	// 懸空：無鄰 CG 讀取
-wire [0:2][0:2]       CG_1_1_iact_horiz_address_in_ready;
-wire [0:2][0:2]       CG_1_1_iact_horiz_address_out_valid;
-wire [0:2][0:2][6:0]  CG_1_1_iact_horiz_address_out_bits;
-wire [0:2][0:2]       CG_1_1_iact_horiz_data_in_ready;
-wire [0:2][0:2]       CG_1_1_iact_horiz_data_out_valid;
-wire [0:2][0:2][11:0] CG_1_1_iact_horiz_data_out_bits;
-wire [0:2]            CG_1_1_weight_horiz_address_in_ready;
-wire [0:2]            CG_1_1_weight_horiz_address_out_valid;
-wire [0:2][7:0]       CG_1_1_weight_horiz_address_out_bits;
-wire [0:2]            CG_1_1_weight_horiz_data_in_ready;
-wire [0:2]            CG_1_1_weight_horiz_data_out_valid;
-wire [0:2][12:0]      CG_1_1_weight_horiz_data_out_bits;
-wire [0:2]            CG_1_1_psum_north_in_ready;
-wire        [0:2]       CG_1_1_psum_south_out_valid;	// 懸空：無鄰 CG 讀取
-wire signed [0:2][20:0] CG_1_1_psum_south_out_bits;	// 懸空：無鄰 CG 讀取
-wire        [0:2]       CG_1_1_cg_south_psum_in_ready;	// 懸空：無鄰 CG 讀取
-wire        [0:2]       CG_1_1_cg_north_psum_out_valid;
-wire signed [0:2][20:0] CG_1_1_cg_north_psum_out;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_north_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_north_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_1_1_iact_north_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_north_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_north_data_out_valid;
+wire        [0:2][0:2][11:0] CG_1_1_iact_north_data_out_bits;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_south_address_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_1_iact_south_address_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][6:0]  CG_1_1_iact_south_address_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_1_iact_south_data_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_1_iact_south_data_out_valid;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][11:0] CG_1_1_iact_south_data_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2][0:2][0:0]  CG_1_1_iact_horiz_address_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_horiz_address_out_valid;
+wire        [0:2][0:2][6:0]  CG_1_1_iact_horiz_address_out_bits;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_horiz_data_in_ready;
+wire        [0:2][0:2][0:0]  CG_1_1_iact_horiz_data_out_valid;
+wire        [0:2][0:2][11:0] CG_1_1_iact_horiz_data_out_bits;
+wire        [0:2]            CG_1_1_weight_horiz_address_in_ready;
+wire        [0:2]            CG_1_1_weight_horiz_address_out_valid;
+wire        [0:2][7:0]       CG_1_1_weight_horiz_address_out_bits;
+wire        [0:2]            CG_1_1_weight_horiz_data_in_ready;
+wire        [0:2]            CG_1_1_weight_horiz_data_out_valid;
+wire        [0:2][12:0]      CG_1_1_weight_horiz_data_out_bits;
+wire        [0:2]            CG_1_1_psum_north_in_ready;
+wire        [0:2]            CG_1_1_psum_south_out_valid;	// 懸空：無鄰 CG 讀取
+wire signed [0:2][20:0]      CG_1_1_psum_south_out_bits;	// 懸空：無鄰 CG 讀取
+wire        [0:2]            CG_1_1_cg_south_psum_in_ready;	// 懸空：無鄰 CG 讀取
+wire        [0:2]            CG_1_1_cg_north_psum_out_valid;
+wire signed [0:2][20:0]      CG_1_1_cg_north_psum_out;
 
 
 // ---------------- tile-chain 邊緣終端（無鄰側：ready 恆 1、valid/bits 恆 0） ----------------
-wire        [0:2][0:2]       tie_hi_3x3;
-wire        [0:2][0:2]       tie_lo_3x3;
+wire        [0:2][0:2][0:0]  tie_hi_3x3;
+wire        [0:2][0:2][0:0]  tie_lo_3x3;
 wire        [0:2][0:2][6:0]  tie_lo_3x3_7b;
 wire        [0:2][0:2][11:0] tie_lo_3x3_12b;
 wire        [0:2]            tie_hi_3;
