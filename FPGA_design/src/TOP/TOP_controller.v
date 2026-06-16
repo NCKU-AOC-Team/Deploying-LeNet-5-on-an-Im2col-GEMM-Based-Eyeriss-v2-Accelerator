@@ -349,6 +349,7 @@ module TOP_controller # (
 	input               im2col_convert_one_stream_done,
 	
 	
+	input				pool_data_valid,
 	// ------------- psum_rearrange_write_en ------------- //
 	output				psum_rearrange_write_en,
 	output	reg	[11:0]	psum_rearrange_write_addr,
@@ -528,6 +529,7 @@ reg	[7:0]	psum_acc_times;
 reg			pool_row_count;
 reg			pool_col_count;
 reg [3:0]	pool_ofmap_row_count;
+reg [5:0]	pool_cleanup_count;
 
 reg	[4:0]	read_out_psum_count; 	// 0~3
 reg	[4:0]	read_out_psum_sel;		// 0~11
@@ -745,12 +747,12 @@ assign	all_GLB_psum_read_out_done 	= 	(layer0_flag & read_out_psum_channel_done)
 assign 	first_GLB_psum_read_out_adjust = all_iter_fin ? (read_out_psum_channel == 'd7) ? 'd96 : ((read_out_psum_channel+'d1)<<'d2) : (read_out_psum_channel<<'d2);
 
 assign 	psum_rearrange_write_en 	= 	(LAYER_LOAD_IFMAP_wire) 	| 
-										(LAYER0_READ_OUT_PSUM_wire) | 
-										(LAYER1_READ_OUT_PSUM_wire) | 
-										(fc_psum_read_en) 			| 
-										(LAYER3_READ_OUT_PSUM_reg)	| 
-										(LAYER4_READ_OUT_PSUM_reg)	| 
-										(LAYER_POOLING_wire & ~pool_pulse & ~pool_pulse_reg & ~pool_col_done & ~pool_row_done); 
+							((LAYER0_READ_OUT_PSUM_wire | LAYER1_READ_OUT_PSUM_wire) &
+							 pool_data_valid &
+							 ~(layer0_flag & psum_rearrange_write_addr == 'd863)) |
+							(fc_psum_read_en) 			| 
+							(LAYER3_READ_OUT_PSUM_reg)	| 
+							(LAYER4_READ_OUT_PSUM_reg); 
 
 assign	psum_acc_fin				= 	(CG_0_0_GLB_psum_0_write_addr % 'd24 == 'd23 & layer0_flag)	| 
 										(CG_0_0_GLB_psum_0_write_addr % 'd32 == 'd31 & layer1_flag) | 
@@ -764,7 +766,7 @@ assign 	pool_pulse 					= 	pool_pulse_wire & (~pool_state_reg);
 assign	pool_row_done 				= 	pool_row_count == 'd1;
 assign	pool_col_done 				= 	pool_col_count == 'd1;
 assign	pool_ofmap_row_done 		= 	pool_ofmap_row_count == pool_ofmap_rows;
-assign	pool_fin					= 	LAYER_POOLING_wire & ((layer0_flag & psum_rearrange_read_addr_reg == 'd3455) | (layer1_flag & psum_rearrange_read_addr_reg == 'd1024)); // 573+574*5=3443
+assign	pool_fin					= 	LAYER_POOLING_wire & (pool_cleanup_count == 6'd31);
 
 
 wire psum_acc_done = (layer0_flag & psum_acc_times == 'd12) 	|
@@ -1044,7 +1046,7 @@ assign CG_1_1_psum_SRAM_Bank_1_read_out_en	= read_out_psum_en_conv;
 assign CG_1_1_psum_SRAM_Bank_2_read_out_en	= read_out_psum_en_conv;
 
 assign ReLU_en		=	(LAYER_READ_OUT_PSUM_wire & conv_flag) | fc_flag;
-assign pool_enable	=	LAYER_POOLING_wire & ~pool_pulse;
+assign pool_enable	=	LAYER0_READ_OUT_PSUM_wire | LAYER1_READ_OUT_PSUM_wire;
 assign softmax_en	= 	LAYER4_READ_OUT_PSUM_reg;
 
 assign	CG_0_0_GLB_psum_0_read_addr = ((layer2_flag | layer3_flag) & GLB_psum_read_sel == 'd0) ? (CG_0_0_GLB_psum_0_read_addr_reg + 'd20*GLB_psum_read_channel + 'd4*GLB_psum_read_batch)  : (read_out_psum_later_flag ? CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust + 'd96 	: CG_0_0_GLB_psum_0_read_addr_reg + first_GLB_psum_read_out_adjust);
@@ -1951,6 +1953,15 @@ always@(posedge clock) begin
 	end
 end
 
+
+always@(posedge clock) begin
+	if(reset | ~LAYER_POOLING_wire) begin
+		pool_cleanup_count <= 6'd0;
+	end
+	else begin
+		pool_cleanup_count <= pool_cleanup_count + 6'd1;
+	end
+end
 always@(posedge clock) begin
 	if(reset) begin
 		psum_rearrange_write_addr <= 'd4095;

@@ -998,14 +998,12 @@ ReLU	ReLU(
 );
 
 
-Max_pooling	#(
-	.stride(POOL_STRIDE)
-	)
-Max_pooling
+Streaming_Max_pooling Streaming_Max_pooling
 (	
 	.clock			(clock				),
 	.reset          (reset          	),
 	.enable         (pool_enable        ),
+	.ifmap_width	(ctrl_layer_count == 3'd0 ? 5'd24 : 5'd8),
 	.data_in        (pool_data_in       ),
 	.data_in_valid  (pool_data_in_valid ),
 	.data_out       (pool_data_out      ),
@@ -1335,6 +1333,7 @@ TOP_controller (
 	.im2col_next_vector_jump		        	(ctrl_im2col_next_vector_jump		       	 	),
 	.im2col_read_psum_addr						(ctrl_im2col_read_psum_addr						),
 	.im2col_convert_one_stream_done             (ctrl_im2col_convert_one_stream_done			),
+	.pool_data_valid							(pool_data_out_valid							),
 	.psum_rearrange_write_en                    (ctrl_psum_rearrange_write_en                   ),
 	.psum_rearrange_write_addr					(ctrl_psum_rearrange_write_addr					),
 	.psum_rearrange_read_addr                   (ctrl_psum_rearrange_read_addr                  ),
@@ -1837,8 +1836,8 @@ assign	ReLU_data_in					= quant_data_out;
 assign	ReLU_data_in_valid				= quant_data_out_valid;
 	
 assign	pool_enable						= ctrl_pool_enable;
-assign	pool_data_in                    = ctrl_pool_enable ? rearrange_data_out : 'sd0;
-assign	pool_data_in_valid              = ctrl_pool_enable ? 'd1 : 'sd0;
+assign	pool_data_in                    = ctrl_pool_enable ? ReLU_data_out : 'sd0;
+assign	pool_data_in_valid              = ctrl_pool_enable ? ReLU_data_out_valid : 'd0;
 
 assign	ctrl_CG_0_0_GLB_iact_load_en    = CG_0_0_GLB_iact_load_en;    
 assign	ctrl_CG_0_0_PE_weight_load_en   = CG_0_0_PE_weight_load_en;   
