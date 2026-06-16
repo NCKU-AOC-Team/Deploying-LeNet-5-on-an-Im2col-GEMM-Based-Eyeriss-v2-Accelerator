@@ -1,0 +1,14 @@
+parameter IACT_DATA_END             = 'd784;
+
+parameter ROM_WEIGHT_ADDR_1_END     = 'd7;
+parameter ROM_WEIGHT_DATA_1_END     = 'd81;
+parameter ROM_WEIGHT_ADDR_2_FORMER_END = 'd135;
+parameter ROM_WEIGHT_DATA_2_FORMER_END = 'd715;
+parameter ROM_WEIGHT_ADDR_2_LATER_END = 'd769;
+parameter ROM_WEIGHT_DATA_2_LATER_END = 'd1292;
+parameter ROM_WEIGHT_ADDR_3_END     = 'd9452;
+parameter ROM_WEIGHT_DATA_3_END     = 'd22940;
+parameter ROM_WEIGHT_ADDR_4_END     = 'd25586;
+parameter ROM_WEIGHT_DATA_4_END     = 'd30369;
+parameter ROM_WEIGHT_ADDR_5_END     = 'd30633;
+parameter ROM_WEIGHT_DATA_5_END     = 'd31083;
