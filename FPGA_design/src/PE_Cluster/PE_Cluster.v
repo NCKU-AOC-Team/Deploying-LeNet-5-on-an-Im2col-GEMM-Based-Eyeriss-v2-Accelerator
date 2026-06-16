@@ -31,9 +31,9 @@ module PE_Cluster(
 	input  [0:2][12:0] iact_data_in,
 
 	// ----- weight : per-PE [0:2][0:2], addr[6:0] / data[11:0] (no ready) -----
-	input [0:2][0:2][0:0]  weight_address_in_valid,
+	input [0:2][0:2]       weight_address_in_valid,
 	input [0:2][0:2][6:0]  weight_address_in,
-	input [0:2][0:2][0:0]  weight_data_in_valid,
+	input [0:2][0:2]       weight_data_in_valid,
 	input [0:2][0:2][11:0] weight_data_in,
 
 	// ----- psum : per-column [0:2], signed [20:0] -----
@@ -48,18 +48,18 @@ module PE_Cluster(
 	input signed  [0:2][20:0] psum_in_from_south,
 
 	// ----- control -----
-	input  [0:2][0:2][0:0] PE_disable,
-	input  psum_load_en,
-	input  iact_data_in_sel,
-	input  [1:0]           iact_data_out_sel,
-	input  psum_data_in_sel,	// true for GLB psum, false for south psum
-	input  do_en,
-	input  iact_write_fin_clear,
-	input  weight_write_fin_clear,
-	output all_write_fin,
-	output all_cal_fin,
-	input  [4:0]           PSUM_DEPTH,
-	input  psum_spad_clear
+	input [0:2][0:2] PE_disable,
+	input         psum_load_en,
+	input         iact_data_in_sel,
+	input  [1:0]  iact_data_out_sel,
+	input         psum_data_in_sel, // true for GLB psum, false for south psum
+	input         do_en,
+	input         iact_write_fin_clear,
+	input         weight_write_fin_clear,
+	output        all_write_fin,
+	output        all_cal_fin,
+	input  [4:0]  PSUM_DEPTH,
+	input         psum_spad_clear
 );
 
 // ====================================================================	//
@@ -71,33 +71,33 @@ localparam PSUM_FROM_ROUTER = 1'b1;
 // ====================================================================	//
 // 		Internal per-PE signals (3x3 array, 取代原本攤平 wire 宣告)		//
 // ====================================================================	//
-wire        [0:2][0:2][0:0]  pe_psum_in_ready;
-wire        [0:2][0:2][0:0]  pe_psum_in_valid;
+wire        [0:2][0:2]       pe_psum_in_ready;
+wire        [0:2][0:2]       pe_psum_in_valid;
 wire signed [0:2][0:2][20:0] pe_psum_in;
-wire        [0:2][0:2][0:0]  pe_psum_out_ready;
-wire        [0:2][0:2][0:0]  pe_psum_out_valid;
+wire        [0:2][0:2]       pe_psum_out_ready;
+wire        [0:2][0:2]       pe_psum_out_valid;
 wire signed [0:2][0:2][20:0] pe_psum_out;
-wire        [0:2][0:2][0:0]  pe_iact_addr_in_valid;
+wire        [0:2][0:2]       pe_iact_addr_in_valid;
 wire        [0:2][0:2][7:0]  pe_iact_addr_in;
-wire        [0:2][0:2][0:0]  pe_iact_data_in_valid;
+wire        [0:2][0:2]       pe_iact_data_in_valid;
 wire        [0:2][0:2][12:0] pe_iact_data_in;
-wire        [0:2][0:2][0:0]  pe_weight_addr_in_valid;
+wire        [0:2][0:2]       pe_weight_addr_in_valid;
 wire        [0:2][0:2][6:0]  pe_weight_addr_in;
-wire        [0:2][0:2][0:0]  pe_weight_data_in_valid;
+wire        [0:2][0:2]       pe_weight_data_in_valid;
 wire        [0:2][0:2][11:0] pe_weight_data_in;
-wire        [0:2][0:2][0:0]  pe_iact_addr_write_fin;
-wire        [0:2][0:2][0:0]  pe_iact_data_write_fin;
-wire        [0:2][0:2][0:0]  pe_psum_add_fin;
-wire        [0:2][0:2][0:0]  pe_psum_enq_en;
-wire        [0:2][0:2][0:0]  pe_do_load_en;
-wire        [0:2][0:2][0:0]  pe_cal_fin;
-wire        [0:2][0:2][0:0]  pe_iact_write_fin_clear;
-wire        [0:2][0:2][0:0]  pe_weight_write_fin_clear;
-wire        [0:2][0:2][0:0]  pe_write_fin;
-wire        [0:2][0:2][0:0]  pe_disable;
+wire        [0:2][0:2]       pe_iact_addr_write_fin;
+wire        [0:2][0:2]       pe_iact_data_write_fin;
+wire        [0:2][0:2]       pe_psum_add_fin;
+wire        [0:2][0:2]       pe_psum_enq_en;
+wire        [0:2][0:2]       pe_do_load_en;
+wire        [0:2][0:2]       pe_cal_fin;
+wire        [0:2][0:2]       pe_iact_write_fin_clear;
+wire        [0:2][0:2]       pe_weight_write_fin_clear;
+wire        [0:2][0:2]       pe_write_fin;
+wire        [0:2][0:2]       pe_disable;
 
-reg [0:2][0:2][0:0] pe_cal_fin_reg;
-reg [0:2][0:2][0:0] pe_write_fin_reg;
+reg [0:2][0:2] pe_cal_fin_reg;
+reg [0:2][0:2] pe_write_fin_reg;
 
 // per-column psum 中繼線：systolic 邊界要用，下方 adapter 從 array port 填入
 wire        [0:2]       psum_in_v_ext;

@@ -53,7 +53,7 @@ module ClusterGroup (
 
 	// These control signals are used to disable some PE in PE cluster.
 	// It is for physical mapping issue, which causes the decreasing of PE utilization.
-	input [0:2][0:2][0:0] PE_disable,
+	input [0:2][0:2] PE_disable,
 
 	// ============================================================================ //
 	//                                     GLB                                      //
@@ -64,11 +64,11 @@ module ClusterGroup (
 	input [0:2][9:0]      GLB_psum_read_addr,
 
 	// GLB iact address & data（iact SRAM Bank [r][c]＝9 bank）
-	output [0:2][0:2][0:0]  GLB_iact_address_in_ready,
-	input  [0:2][0:2][0:0]  GLB_iact_address_in_valid,
+	output [0:2][0:2]       GLB_iact_address_in_ready,
+	input  [0:2][0:2]       GLB_iact_address_in_valid,
 	input  [0:2][0:2][6:0]  GLB_iact_address_in,
-	output [0:2][0:2][0:0]  GLB_iact_data_in_ready,
-	input  [0:2][0:2][0:0]  GLB_iact_data_in_valid,
+	output [0:2][0:2]       GLB_iact_data_in_ready,
+	input  [0:2][0:2]       GLB_iact_data_in_valid,
 	input  [0:2][0:2][11:0] GLB_iact_data_in,
 
 	// GLB weight address & data（weight routing [0:2]＝3 路）
@@ -110,45 +110,45 @@ module ClusterGroup (
 	// ---------------------------------------- iact ---------------------------------------- //
 	// iact router [r][c]＝9 router；in=收進 router、out=送出 router；ready 為反向背壓
 	// north: address_in/out, data_in/out
-	output [0:2][0:2][0:0]  iact_north_address_in_ready,
-	input  [0:2][0:2][0:0]  iact_north_address_in_valid,
+	output [0:2][0:2]       iact_north_address_in_ready,
+	input  [0:2][0:2]       iact_north_address_in_valid,
 	input  [0:2][0:2][6:0]  iact_north_address_in_bits,
-	input  [0:2][0:2][0:0]  iact_north_address_out_ready,
-	output [0:2][0:2][0:0]  iact_north_address_out_valid,
+	input  [0:2][0:2]       iact_north_address_out_ready,
+	output [0:2][0:2]       iact_north_address_out_valid,
 	output [0:2][0:2][6:0]  iact_north_address_out_bits,
-	output [0:2][0:2][0:0]  iact_north_data_in_ready,
-	input  [0:2][0:2][0:0]  iact_north_data_in_valid,
+	output [0:2][0:2]       iact_north_data_in_ready,
+	input  [0:2][0:2]       iact_north_data_in_valid,
 	input  [0:2][0:2][11:0] iact_north_data_in_bits,
-	input  [0:2][0:2][0:0]  iact_north_data_out_ready,
-	output [0:2][0:2][0:0]  iact_north_data_out_valid,
+	input  [0:2][0:2]       iact_north_data_out_ready,
+	output [0:2][0:2]       iact_north_data_out_valid,
 	output [0:2][0:2][11:0] iact_north_data_out_bits,
 
 	// south: address_in/out, data_in/out
-	output [0:2][0:2][0:0]  iact_south_address_in_ready,
-	input  [0:2][0:2][0:0]  iact_south_address_in_valid,
+	output [0:2][0:2]       iact_south_address_in_ready,
+	input  [0:2][0:2]       iact_south_address_in_valid,
 	input  [0:2][0:2][6:0]  iact_south_address_in_bits,
-	input  [0:2][0:2][0:0]  iact_south_address_out_ready,
-	output [0:2][0:2][0:0]  iact_south_address_out_valid,
+	input  [0:2][0:2]       iact_south_address_out_ready,
+	output [0:2][0:2]       iact_south_address_out_valid,
 	output [0:2][0:2][6:0]  iact_south_address_out_bits,
-	output [0:2][0:2][0:0]  iact_south_data_in_ready,
-	input  [0:2][0:2][0:0]  iact_south_data_in_valid,
+	output [0:2][0:2]       iact_south_data_in_ready,
+	input  [0:2][0:2]       iact_south_data_in_valid,
 	input  [0:2][0:2][11:0] iact_south_data_in_bits,
-	input  [0:2][0:2][0:0]  iact_south_data_out_ready,
-	output [0:2][0:2][0:0]  iact_south_data_out_valid,
+	input  [0:2][0:2]       iact_south_data_out_ready,
+	output [0:2][0:2]       iact_south_data_out_valid,
 	output [0:2][0:2][11:0] iact_south_data_out_bits,
 
 	// horiz: address_in/out, data_in/out
-	output [0:2][0:2][0:0]  iact_horiz_address_in_ready,
-	input  [0:2][0:2][0:0]  iact_horiz_address_in_valid,
+	output [0:2][0:2]       iact_horiz_address_in_ready,
+	input  [0:2][0:2]       iact_horiz_address_in_valid,
 	input  [0:2][0:2][6:0]  iact_horiz_address_in_bits,
-	input  [0:2][0:2][0:0]  iact_horiz_address_out_ready,
-	output [0:2][0:2][0:0]  iact_horiz_address_out_valid,
+	input  [0:2][0:2]       iact_horiz_address_out_ready,
+	output [0:2][0:2]       iact_horiz_address_out_valid,
 	output [0:2][0:2][6:0]  iact_horiz_address_out_bits,
-	output [0:2][0:2][0:0]  iact_horiz_data_in_ready,
-	input  [0:2][0:2][0:0]  iact_horiz_data_in_valid,
+	output [0:2][0:2]       iact_horiz_data_in_ready,
+	input  [0:2][0:2]       iact_horiz_data_in_valid,
 	input  [0:2][0:2][11:0] iact_horiz_data_in_bits,
-	input  [0:2][0:2][0:0]  iact_horiz_data_out_ready,
-	output [0:2][0:2][0:0]  iact_horiz_data_out_valid,
+	input  [0:2][0:2]       iact_horiz_data_out_ready,
+	output [0:2][0:2]       iact_horiz_data_out_valid,
 	output [0:2][0:2][11:0] iact_horiz_data_out_bits,
 
 	// ---------------------------------------- weight ---------------------------------------- //
@@ -205,36 +205,36 @@ wire                 PECluster_all_cal_fin;
 // GLB Cluster connection
 
 // [Refactor 2nd-stage] GLB interface array-ified (script-gen, equiv to flat wires)
-wire        [0:2][0:2][0:0] GLBCluster_iact_write_en;
-wire        [0:2][0:2][0:0] GLBCluster_iact_write_done;
-wire        [0:2][0:2][0:0] GLBCluster_iact_read_en;
-wire        [0:2][0:2][0:0] GLBCluster_iact_read_done;
-wire        [0:2]           GLBCluster_psum_data_in_ready;
-wire        [0:2]           GLBCluster_psum_data_in_valid;
-wire signed [0:2][20:0]     GLBCluster_psum_data_in;
-wire        [0:2]           GLBCluster_psum_data_out_ready;
-wire        [0:2]           GLBCluster_psum_data_out_valid;
-wire signed [0:2][20:0]     GLBCluster_psum_data_out;
-wire        [0:2]           GLBCluster_psum_write_en;
-wire        [0:2]           GLBCluster_psum_write_done;
-wire        [0:2]           GLBCluster_psum_read_out_en;
-wire        [0:2]           GLBCluster_psum_read_en;
+wire        [0:2][0:2]  GLBCluster_iact_write_en;
+wire        [0:2][0:2]  GLBCluster_iact_write_done;
+wire        [0:2][0:2]  GLBCluster_iact_read_en;
+wire        [0:2][0:2]  GLBCluster_iact_read_done;
+wire        [0:2]       GLBCluster_psum_data_in_ready;
+wire        [0:2]       GLBCluster_psum_data_in_valid;
+wire signed [0:2][20:0] GLBCluster_psum_data_in;
+wire        [0:2]       GLBCluster_psum_data_out_ready;
+wire        [0:2]       GLBCluster_psum_data_out_valid;
+wire signed [0:2][20:0] GLBCluster_psum_data_out;
+wire        [0:2]       GLBCluster_psum_write_en;
+wire        [0:2]       GLBCluster_psum_write_done;
+wire        [0:2]       GLBCluster_psum_read_out_en;
+wire        [0:2]       GLBCluster_psum_read_en;
 
 
 // router Cluster connection
 
 // [Refactor 2nd-stage] router interface array-ified (script-gen, equiv to flat wires)
-wire        [0:2][0:2][0:0]  iact_GLB_address_in_ready;
-wire        [0:2][0:2][0:0]  iact_GLB_address_in_valid;
+wire        [0:2][0:2]       iact_GLB_address_in_ready;
+wire        [0:2][0:2]       iact_GLB_address_in_valid;
 wire        [0:2][0:2][6:0]  iact_GLB_address_in_bits;
-wire        [0:2][0:2][0:0]  iact_GLB_data_in_ready;
-wire        [0:2][0:2][0:0]  iact_GLB_data_in_valid;
+wire        [0:2][0:2]       iact_GLB_data_in_ready;
+wire        [0:2][0:2]       iact_GLB_data_in_valid;
 wire        [0:2][0:2][11:0] iact_GLB_data_in_bits;
-wire        [0:2][0:2][0:0]  iact_PE_address_out_ready;
-wire        [0:2][0:2][0:0]  iact_PE_address_out_valid;
+wire        [0:2][0:2]       iact_PE_address_out_ready;
+wire        [0:2][0:2]       iact_PE_address_out_valid;
 wire        [0:2][0:2][6:0]  iact_PE_address_out_bits;
-wire        [0:2][0:2][0:0]  iact_PE_data_out_ready;
-wire        [0:2][0:2][0:0]  iact_PE_data_out_valid;
+wire        [0:2][0:2]       iact_PE_data_out_ready;
+wire        [0:2][0:2]       iact_PE_data_out_valid;
 wire        [0:2][0:2][11:0] iact_PE_data_out_bits;
 wire        [0:2]            weight_GLB_address_in_ready;
 wire        [0:2]            weight_GLB_address_in_valid;

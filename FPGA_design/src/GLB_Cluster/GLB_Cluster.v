@@ -22,25 +22,25 @@ module GLB_Cluster (
 	input        			reset,
 
 	// ===== iact SRAM Bank [row][col] = [0:2][0:2] ===== //
-	output [0:2][0:2][0:0]  iact_SRAM_Bank_address_in_ready,
-	input  [0:2][0:2][0:0]  iact_SRAM_Bank_address_in_valid,
+	output [0:2][0:2]       iact_SRAM_Bank_address_in_ready,
+	input  [0:2][0:2]       iact_SRAM_Bank_address_in_valid,
 	input  [0:2][0:2][6:0]  iact_SRAM_Bank_address_in,
-	output [0:2][0:2][0:0]  iact_SRAM_Bank_data_in_ready,
-	input  [0:2][0:2][0:0]  iact_SRAM_Bank_data_in_valid,
+	output [0:2][0:2]       iact_SRAM_Bank_data_in_ready,
+	input  [0:2][0:2]       iact_SRAM_Bank_data_in_valid,
 	input  [0:2][0:2][11:0] iact_SRAM_Bank_data_in,
 
-	input  [0:2][0:2][0:0]  iact_SRAM_Bank_address_out_ready,
-	output [0:2][0:2][0:0]  iact_SRAM_Bank_address_out_valid,
+	input  [0:2][0:2]       iact_SRAM_Bank_address_out_ready,
+	output [0:2][0:2]       iact_SRAM_Bank_address_out_valid,
 	output [0:2][0:2][6:0]  iact_SRAM_Bank_address_out,
-	input  [0:2][0:2][0:0]  iact_SRAM_Bank_data_out_ready,
-	output [0:2][0:2][0:0]  iact_SRAM_Bank_data_out_valid,
+	input  [0:2][0:2]       iact_SRAM_Bank_data_out_ready,
+	output [0:2][0:2]       iact_SRAM_Bank_data_out_valid,
 	output [0:2][0:2][11:0] iact_SRAM_Bank_data_out,
 
-	input  [0:2][0:2][0:0] iact_SRAM_Bank_write_en,
-	output [0:2][0:2][0:0] iact_SRAM_Bank_write_done,
-	input  [0:2][0:2][0:0] iact_SRAM_Bank_read_en,
+	input  [0:2][0:2]      iact_SRAM_Bank_write_en,
+	output [0:2][0:2]      iact_SRAM_Bank_write_done,
+	input  [0:2][0:2]      iact_SRAM_Bank_read_en,
 	input  [0:2][0:2][9:0] iact_SRAM_Bank_read_addr,
-	output [0:2][0:2][0:0] iact_SRAM_Bank_read_done,
+	output [0:2][0:2]      iact_SRAM_Bank_read_done,
 
 	// ===== weight pass-through [0:2]（無 SRAM，直接穿過 GLB 給 PE spad）===== //
 	output [0:2]       weight_address_in_ready,
