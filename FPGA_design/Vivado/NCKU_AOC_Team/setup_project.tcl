@@ -68,6 +68,15 @@ set RTL [collect_v $SRC_DIR]
 puts "== 收到 [llength $RTL] 個 .v from src/ =="
 add_files -norecurse $RTL
 
+# ---- 2.5 多維 packed array（[i][j]/genvar 索引）需以 SystemVerilog 解析 --------
+#   .v 預設被當 Verilog-2001 → 多維 packed 索引報 Synth 8-1008 "is not a memory"。
+#   下列檔用到多維 packed array，設為 SV 即可正常索引（已掃過無 SV 保留字衝突）。
+foreach b {Cluster_Group.v Cluster_Group_array.v Router_Cluster.v \
+           GLB_Cluster.v PE_Cluster.v TOP.v TOP_controller.v} {
+    set ff [get_files -quiet */$b]
+    if {[llength $ff]} { set_property file_type SystemVerilog $ff }
+}
+
 # ---- 3. 加入 BRAM/ROM IP -----------------------------------------------------
 foreach ip $IP_LIST {
     set xci $IP_DIR/$ip/$ip.xci
