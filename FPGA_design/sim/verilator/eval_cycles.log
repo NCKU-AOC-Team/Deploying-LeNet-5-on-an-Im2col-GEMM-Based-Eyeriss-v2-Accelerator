@@ -1,0 +1,202 @@
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32480 fc1_mac=2976 fc2_mac=724 fc3_mac=223 psum_acc=560 output=5012 mem_read=34506
+Iter 0: result=5 golden=5 (83981 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32426 fc1_mac=2958 fc2_mac=809 fc3_mac=250 psum_acc=560 output=5012 mem_read=34506
+Iter 1: result=0 golden=0 (84021 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29233 fc1_mac=2873 fc2_mac=818 fc3_mac=231 psum_acc=560 output=5012 mem_read=34506
+Iter 2: result=4 golden=4 (80733 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31333 fc1_mac=2910 fc2_mac=980 fc3_mac=254 psum_acc=560 output=5012 mem_read=34506
+Iter 3: result=1 golden=1 (83055 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31923 fc1_mac=2776 fc2_mac=806 fc3_mac=220 psum_acc=560 output=5012 mem_read=34506
+Iter 4: result=9 golden=9 (83303 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32928 fc1_mac=3062 fc2_mac=904 fc3_mac=217 psum_acc=560 output=5012 mem_read=34506
+Iter 5: result=2 golden=2 (84689 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30848 fc1_mac=2518 fc2_mac=854 fc3_mac=227 psum_acc=560 output=5012 mem_read=34506
+Iter 6: result=1 golden=1 (82025 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33929 fc1_mac=2881 fc2_mac=767 fc3_mac=268 psum_acc=560 output=5012 mem_read=34506
+Iter 7: result=3 golden=3 (85423 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=27989 fc1_mac=2645 fc2_mac=857 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 8: result=1 golden=1 (79297 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31551 fc1_mac=3018 fc2_mac=823 fc3_mac=250 psum_acc=560 output=5012 mem_read=34506
+Iter 9: result=4 golden=4 (83220 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33722 fc1_mac=2782 fc2_mac=771 fc3_mac=250 psum_acc=560 output=5012 mem_read=34506
+Iter 10: result=3 golden=3 (85103 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=28280 fc1_mac=2898 fc2_mac=745 fc3_mac=252 psum_acc=560 output=5012 mem_read=34506
+Iter 11: result=5 golden=5 (79753 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33778 fc1_mac=2883 fc2_mac=798 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 12: result=3 golden=3 (85277 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32730 fc1_mac=2857 fc2_mac=716 fc3_mac=258 psum_acc=560 output=5012 mem_read=34506
+Iter 13: result=6 golden=6 (84139 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=26761 fc1_mac=2634 fc2_mac=963 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 14: result=1 golden=1 (78164 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31987 fc1_mac=2978 fc2_mac=874 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 15: result=7 golden=7 (83657 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30166 fc1_mac=2836 fc2_mac=844 fc3_mac=266 psum_acc=560 output=5012 mem_read=34506
+Iter 16: result=2 golden=2 (81690 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33591 fc1_mac=2916 fc2_mac=785 fc3_mac=230 psum_acc=560 output=5012 mem_read=34506
+Iter 17: result=8 golden=8 (85100 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29728 fc1_mac=3017 fc2_mac=831 fc3_mac=273 psum_acc=560 output=5012 mem_read=34506
+Iter 18: result=6 golden=6 (81427 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31502 fc1_mac=2853 fc2_mac=748 fc3_mac=234 psum_acc=560 output=5012 mem_read=34506
+Iter 19: result=9 golden=9 (82915 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32736 fc1_mac=2672 fc2_mac=751 fc3_mac=254 psum_acc=560 output=5012 mem_read=34506
+Iter 20: result=4 golden=4 (83991 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33563 fc1_mac=2936 fc2_mac=804 fc3_mac=232 psum_acc=560 output=5012 mem_read=34506
+Iter 21: result=0 golden=0 (85113 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30216 fc1_mac=2730 fc2_mac=811 fc3_mac=290 psum_acc=560 output=5012 mem_read=34506
+Iter 22: result=9 golden=9 (81625 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31166 fc1_mac=3011 fc2_mac=932 fc3_mac=210 psum_acc=560 output=5012 mem_read=34506
+Iter 23: result=1 golden=1 (82897 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32259 fc1_mac=3381 fc2_mac=872 fc3_mac=238 psum_acc=560 output=5012 mem_read=34506
+Iter 24: result=1 golden=1 (84328 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=34598 fc1_mac=2875 fc2_mac=853 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 25: result=2 golden=2 (86144 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29061 fc1_mac=2891 fc2_mac=884 fc3_mac=238 psum_acc=560 output=5012 mem_read=34506
+Iter 26: result=4 golden=4 (80652 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=34798 fc1_mac=2671 fc2_mac=748 fc3_mac=256 psum_acc=560 output=5012 mem_read=34506
+Iter 27: result=3 golden=3 (86051 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=34313 fc1_mac=2744 fc2_mac=909 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 28: result=2 golden=2 (85772 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29579 fc1_mac=2898 fc2_mac=878 fc3_mac=258 psum_acc=560 output=5012 mem_read=34506
+Iter 29: result=7 golden=7 (81191 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31278 fc1_mac=2883 fc2_mac=704 fc3_mac=242 psum_acc=560 output=5012 mem_read=34506
+Iter 30: result=3 golden=3 (82685 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33667 fc1_mac=2901 fc2_mac=895 fc3_mac=280 psum_acc=560 output=5012 mem_read=34506
+Iter 31: result=8 golden=8 (85321 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30491 fc1_mac=3054 fc2_mac=888 fc3_mac=268 psum_acc=560 output=5012 mem_read=34506
+Iter 32: result=6 golden=6 (82279 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32435 fc1_mac=2899 fc2_mac=934 fc3_mac=213 psum_acc=560 output=5012 mem_read=34506
+Iter 33: result=9 golden=9 (84059 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33506 fc1_mac=2773 fc2_mac=917 fc3_mac=286 psum_acc=560 output=5012 mem_read=34506
+Iter 34: result=0 golden=0 (85060 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=28913 fc1_mac=2989 fc2_mac=794 fc3_mac=237 psum_acc=560 output=5012 mem_read=34506
+Iter 35: result=5 golden=5 (80511 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33873 fc1_mac=2702 fc2_mac=833 fc3_mac=255 psum_acc=560 output=5012 mem_read=34506
+Iter 36: result=0 golden=6 (85241 cycles) FAIL
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33844 fc1_mac=2934 fc2_mac=907 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 37: result=0 golden=0 (85491 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30596 fc1_mac=3159 fc2_mac=832 fc3_mac=254 psum_acc=560 output=5012 mem_read=34506
+Iter 38: result=7 golden=7 (82419 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32581 fc1_mac=2879 fc2_mac=905 fc3_mac=282 psum_acc=560 output=5012 mem_read=34506
+Iter 39: result=6 golden=6 (84225 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29411 fc1_mac=2768 fc2_mac=1003 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 40: result=1 golden=1 (80988 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33248 fc1_mac=3102 fc2_mac=797 fc3_mac=221 psum_acc=560 output=5012 mem_read=34506
+Iter 41: result=8 golden=8 (84946 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29016 fc1_mac=2940 fc2_mac=895 fc3_mac=264 psum_acc=560 output=5012 mem_read=34506
+Iter 42: result=7 golden=7 (80693 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31390 fc1_mac=2891 fc2_mac=734 fc3_mac=270 psum_acc=560 output=5012 mem_read=34506
+Iter 43: result=9 golden=9 (82863 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29828 fc1_mac=3068 fc2_mac=762 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 44: result=3 golden=3 (81476 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31948 fc1_mac=3021 fc2_mac=826 fc3_mac=244 psum_acc=560 output=5012 mem_read=34506
+Iter 45: result=9 golden=9 (83617 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32283 fc1_mac=3106 fc2_mac=726 fc3_mac=244 psum_acc=560 output=5012 mem_read=34506
+Iter 46: result=8 golden=8 (83937 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29766 fc1_mac=3044 fc2_mac=724 fc3_mac=237 psum_acc=560 output=5012 mem_read=34506
+Iter 47: result=5 golden=5 (81349 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30909 fc1_mac=2849 fc2_mac=654 fc3_mac=255 psum_acc=560 output=5012 mem_read=34506
+Iter 48: result=9 golden=9 (82245 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33792 fc1_mac=2867 fc2_mac=755 fc3_mac=268 psum_acc=560 output=5012 mem_read=34506
+Iter 49: result=3 golden=3 (85260 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30631 fc1_mac=3169 fc2_mac=767 fc3_mac=250 psum_acc=560 output=5012 mem_read=34506
+Iter 50: result=3 golden=3 (82395 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33852 fc1_mac=2790 fc2_mac=809 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 51: result=0 golden=0 (85257 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31804 fc1_mac=2705 fc2_mac=835 fc3_mac=224 psum_acc=560 output=5012 mem_read=34506
+Iter 52: result=7 golden=7 (83146 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30592 fc1_mac=2762 fc2_mac=763 fc3_mac=248 psum_acc=560 output=5012 mem_read=34506
+Iter 53: result=4 golden=4 (81943 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31256 fc1_mac=2855 fc2_mac=755 fc3_mac=238 psum_acc=560 output=5012 mem_read=34506
+Iter 54: result=9 golden=9 (82682 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33431 fc1_mac=2860 fc2_mac=802 fc3_mac=256 psum_acc=560 output=5012 mem_read=34506
+Iter 55: result=0 golden=8 (84927 cycles) FAIL
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33020 fc1_mac=2746 fc2_mac=804 fc3_mac=256 psum_acc=560 output=5012 mem_read=34506
+Iter 56: result=0 golden=0 (84404 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31129 fc1_mac=2811 fc2_mac=796 fc3_mac=226 psum_acc=560 output=5012 mem_read=34506
+Iter 57: result=9 golden=9 (82540 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32010 fc1_mac=2828 fc2_mac=833 fc3_mac=264 psum_acc=560 output=5012 mem_read=34506
+Iter 58: result=4 golden=4 (83513 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30723 fc1_mac=2903 fc2_mac=998 fc3_mac=203 psum_acc=560 output=5012 mem_read=34506
+Iter 59: result=1 golden=1 (82405 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30488 fc1_mac=2845 fc2_mac=875 fc3_mac=256 psum_acc=560 output=5012 mem_read=34506
+Iter 60: result=9 golden=4 (82042 cycles) FAIL
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31196 fc1_mac=2842 fc2_mac=787 fc3_mac=266 psum_acc=560 output=5012 mem_read=34506
+Iter 61: result=4 golden=4 (82669 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33362 fc1_mac=2799 fc2_mac=801 fc3_mac=246 psum_acc=560 output=5012 mem_read=34506
+Iter 62: result=6 golden=6 (84786 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=34406 fc1_mac=2980 fc2_mac=822 fc3_mac=274 psum_acc=560 output=5012 mem_read=34506
+Iter 63: result=0 golden=0 (86060 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31025 fc1_mac=2854 fc2_mac=805 fc3_mac=244 psum_acc=560 output=5012 mem_read=34506
+Iter 64: result=4 golden=4 (82506 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=28821 fc1_mac=3037 fc2_mac=752 fc3_mac=238 psum_acc=560 output=5012 mem_read=34506
+Iter 65: result=5 golden=5 (80426 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30936 fc1_mac=2913 fc2_mac=805 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 66: result=6 golden=6 (82472 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30908 fc1_mac=2980 fc2_mac=962 fc3_mac=237 psum_acc=560 output=5012 mem_read=34506
+Iter 67: result=1 golden=1 (82665 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29124 fc1_mac=2824 fc2_mac=841 fc3_mac=288 psum_acc=560 output=5012 mem_read=34506
+Iter 68: result=0 golden=0 (80655 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=34691 fc1_mac=2777 fc2_mac=966 fc3_mac=242 psum_acc=560 output=5012 mem_read=34506
+Iter 69: result=0 golden=0 (86254 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30659 fc1_mac=2838 fc2_mac=847 fc3_mac=221 psum_acc=560 output=5012 mem_read=34506
+Iter 70: result=1 golden=1 (82143 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30218 fc1_mac=2846 fc2_mac=863 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 71: result=7 golden=7 (81745 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=26342 fc1_mac=2747 fc2_mac=1003 fc3_mac=210 psum_acc=560 output=5012 mem_read=34506
+Iter 72: result=1 golden=1 (77880 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32539 fc1_mac=2937 fc2_mac=793 fc3_mac=268 psum_acc=560 output=5012 mem_read=34506
+Iter 73: result=6 golden=6 (84115 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32647 fc1_mac=2826 fc2_mac=818 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 74: result=3 golden=3 (84109 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33706 fc1_mac=2822 fc2_mac=922 fc3_mac=242 psum_acc=560 output=5012 mem_read=34506
+Iter 75: result=0 golden=0 (85270 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32439 fc1_mac=2781 fc2_mac=902 fc3_mac=214 psum_acc=560 output=5012 mem_read=34506
+Iter 76: result=2 golden=2 (83914 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30847 fc1_mac=2914 fc2_mac=957 fc3_mac=244 psum_acc=560 output=5012 mem_read=34506
+Iter 77: result=1 golden=1 (82540 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31683 fc1_mac=2961 fc2_mac=1039 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 78: result=0 golden=1 (83501 cycles) FAIL
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31834 fc1_mac=3028 fc2_mac=888 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 79: result=7 golden=7 (83568 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31451 fc1_mac=2975 fc2_mac=894 fc3_mac=252 psum_acc=560 output=5012 mem_read=34506
+Iter 80: result=2 golden=9 (83150 cycles) FAIL
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33739 fc1_mac=2876 fc2_mac=981 fc3_mac=242 psum_acc=560 output=5012 mem_read=34506
+Iter 81: result=0 golden=0 (85416 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33860 fc1_mac=2950 fc2_mac=853 fc3_mac=234 psum_acc=560 output=5012 mem_read=34506
+Iter 82: result=2 golden=2 (85475 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30796 fc1_mac=2862 fc2_mac=813 fc3_mac=280 psum_acc=560 output=5012 mem_read=34506
+Iter 83: result=6 golden=6 (82329 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29822 fc1_mac=2676 fc2_mac=844 fc3_mac=272 psum_acc=560 output=5012 mem_read=34506
+Iter 84: result=7 golden=7 (81192 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32942 fc1_mac=3055 fc2_mac=854 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 85: result=8 golden=8 (84669 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30950 fc1_mac=2828 fc2_mac=774 fc3_mac=240 psum_acc=560 output=5012 mem_read=34506
+Iter 86: result=3 golden=3 (82370 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32468 fc1_mac=2853 fc2_mac=778 fc3_mac=250 psum_acc=560 output=5012 mem_read=34506
+Iter 87: result=9 golden=9 (83927 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32905 fc1_mac=2712 fc2_mac=831 fc3_mac=252 psum_acc=560 output=5012 mem_read=34506
+Iter 88: result=0 golden=0 (84278 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31598 fc1_mac=3075 fc2_mac=825 fc3_mac=244 psum_acc=560 output=5012 mem_read=34506
+Iter 89: result=4 golden=4 (83320 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=32240 fc1_mac=2910 fc2_mac=791 fc3_mac=257 psum_acc=560 output=5012 mem_read=34506
+Iter 90: result=6 golden=6 (83776 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31487 fc1_mac=2845 fc2_mac=870 fc3_mac=226 psum_acc=560 output=5012 mem_read=34506
+Iter 91: result=7 golden=7 (83006 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=27739 fc1_mac=2872 fc2_mac=764 fc3_mac=228 psum_acc=560 output=5012 mem_read=34506
+Iter 92: result=4 golden=4 (79181 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33623 fc1_mac=3141 fc2_mac=851 fc3_mac=258 psum_acc=560 output=5012 mem_read=34506
+Iter 93: result=6 golden=6 (85451 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33102 fc1_mac=2854 fc2_mac=843 fc3_mac=238 psum_acc=560 output=5012 mem_read=34506
+Iter 94: result=8 golden=8 (84615 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33733 fc1_mac=2772 fc2_mac=860 fc3_mac=274 psum_acc=560 output=5012 mem_read=34506
+Iter 95: result=0 golden=0 (85217 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=30098 fc1_mac=2795 fc2_mac=887 fc3_mac=212 psum_acc=560 output=5012 mem_read=34506
+Iter 96: result=7 golden=7 (81570 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=33052 fc1_mac=3019 fc2_mac=835 fc3_mac=266 psum_acc=560 output=5012 mem_read=34506
+Iter 97: result=8 golden=8 (84750 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=31073 fc1_mac=3102 fc2_mac=770 fc3_mac=216 psum_acc=560 output=5012 mem_read=34506
+Iter 98: result=3 golden=3 (82739 cycles) OK
+[cycle_breakdown] ifmap_load=784 glb_load=41182 pe_load_weight_iact=38 conv_mac=29658 fc1_mac=3061 fc2_mac=1039 fc3_mac=211 psum_acc=560 output=5012 mem_read=34506
+Iter 99: result=1 golden=1 (81547 cycles) OK
+
+=== Summary: 95/100 passed (95%) ===

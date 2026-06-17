@@ -120,14 +120,50 @@ $(BUILD_DIR)/V$(TOP): $(RTL_SRCS) $(BEHAV_SRCS) $(CPP_SRCS) $(MEM_FILE) Makefile
 
 # Strip COE header (lines 1-2) and trailing commas/semicolons, leaving one hex
 # value per line — the $readmemh format ROM_sparse_weight expects.
-$(MEM_FILE): $(COE_FILE)
+#
+# Always force-regenerate because COE_FILE changes with INT4 mode flags;
+# make's timestamp-based check cannot detect that a previously-built
+# rom_sparse_weight.mem came from a different COE_FILE.
+.PHONY: _force_mem
+$(MEM_FILE): _force_mem $(COE_FILE)
 	@echo "[coe->mem] $(notdir $(COE_FILE)) -> $(MEM_FILE)"
-	@tail -n +3 $< | tr -d ',;' | tr -d ' \t' | grep -v '^$$' > $@
+	@tail -n +3 $(COE_FILE) | tr -d ',;' | tr -d ' \t' | grep -v '^$$' > $@
 	@echo "  $$(wc -l < $@) entries"
 
-sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
-	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) $(INT4_RUNTIME_MODE_ARG)
+#sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
+#./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) $(INT4_RUNTIME_MODE_ARG)
 
+
+sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
+	@{ ./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) $(INT4_RUNTIME_MODE_ARG); echo "EXIT:$$?"; } \
+	| tee /tmp/sim_run.log \
+	| grep -oP '\(\K\d+(?= cycles\))' \
+	| awk '{ sum+=$$1; n++; if(n==1||$$1<mn)mn=$$1; if($$1>mx)mx=$$1; v[n]=$$1 } \
+	  END { if(n==0) exit; avg=sum/n; \
+	    for(i=1;i<=n;i++) sq+=(v[i]-avg)^2; \
+	    printf "\n========== Cycle Statistics (%d patterns) ==========\n",n; \
+	    printf "  Avg    : %.2f cycles\n",avg; \
+	    printf "  Min    : %d cycles\n",mn; \
+	    printf "  Max    : %d cycles\n",mx; \
+	    printf "  StdDev : %.2f cycles\n",sqrt(sq/n); \
+	    printf "====================================================\n" }'; \
+	grep -q "FAIL" /tmp/sim_run.log && exit 1 || exit 0
+
+sim: build ## Run sim (default ITERS=5; override: make sim ITERS=10)
+	./$(BUILD_DIR)/V$(TOP) --iters $(ITERS) --dram $(DRAM) --golden $(GOLDEN) $(INT4_RUNTIME_MODE_ARG) \
+	2>&1 | tee /tmp/sim_run.log; \
+	grep -oP '\(\K\d+(?= cycles\))' /tmp/sim_run.log | awk \
+	'{ sum+=$$1; n++; if(n==1||$$1<mn)mn=$$1; if($$1>mx)mx=$$1; v[n]=$$1 } \
+	END { if(n==0) exit; avg=sum/n; \
+	  for(i=1;i<=n;i++) sq+=(v[i]-avg)^2; \
+	  printf "\n========== Cycle Statistics (%d patterns) ==========\n",n; \
+	  printf "  Avg    : %.2f cycles\n",avg; \
+	  printf "  Min    : %d cycles\n",mn; \
+	  printf "  Max    : %d cycles\n",mx; \
+	  printf "  StdDev : %.2f cycles\n",sqrt(sq/n); \
+	  printf "====================================================\n" }'; \
+	grep -q "FAIL" /tmp/sim_run.log && exit 1 || exit 0
+    
 sim_public: ## Run sim with --public-flat-rw enabled
 	$(MAKE) sim PUBLIC_FLAT_RW=1 ITERS=$(ITERS) DRAM=$(DRAM) GOLDEN=$(GOLDEN) OCC=$(OCC)
 
