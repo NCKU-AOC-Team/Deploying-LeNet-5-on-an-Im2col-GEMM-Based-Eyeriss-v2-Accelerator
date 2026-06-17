@@ -108,6 +108,7 @@ wire 			 		later_data_spad_read_en;
 wire 			[6:0] 	later_data_spad_read_idx; 
 wire 			 		later_data_spad_read_idx_inc;
 wire 			 		later_data_spad_read_idx_en;
+wire 						later_data_spad_write_back_read_en;
 
 `ifdef INT4_PACKED_SIMD2_FULL
 wire					Psum_Spad_lane1_en;
@@ -201,6 +202,7 @@ Later_Data_Spad Later_Data_Spad_inst (
 	.write_en		(later_data_spad_write_en		),
 	.write_fin		(later_data_spad_write_fin		),
 	.read_en		(later_data_spad_read_en		),
+	.write_back_read_en	(later_data_spad_write_back_read_en),
 	.read_idx		(later_data_spad_read_idx		),
 	.index_inc		(later_data_spad_read_idx_inc	),
 	.read_idx_en	(later_data_spad_read_idx_en	),
@@ -459,6 +461,7 @@ assign later_data_spad_read_idx 			= later_matrix_read_first_col_wire ? 'd0 : la
 assign later_data_spad_read_idx_en 			= (READ_LATER_ADDRESS_wire) & later_data_first_read_reg 	& (~later_zero_col_wire);
 assign later_data_spad_read_idx_inc 		= (READ_LATER_ADDRESS_wire 	& (~later_zero_col_wire) 		& (~later_data_first_read_reg)) | 
 											  (write_back_advance_wire	& (~later_data_spad_idx_inc_wire));
+assign later_data_spad_write_back_read_en	= write_back_advance_wire;
 
 // state converted signals
 wire former_address_read_done_wire	= ~(former_data_spad_idx_inc_wire & former_zero_col_wire);
@@ -480,16 +483,16 @@ always@(*) begin
 `ifdef INT4_PACKED_SIMD2_FULL
 		WRITE_BACK 	        : next_PE_state = later_lane1_serial_valid_wire	? READ_LANE1_PSUM		:
 											  former_data_read_done_wire 	? IDLE 					: 
-											  ~later_data_read_done 		? READ_LATER_DATA_1 	: 
+											  ~later_data_read_done 		? READ_LATER_DATA_2 	: 
 											  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
 		READ_LANE1_PSUM		: next_PE_state = DO_MAC_LANE1;
 		DO_MAC_LANE1		: next_PE_state = WRITE_BACK_LANE1;
 		WRITE_BACK_LANE1	: next_PE_state = former_data_read_done_wire 	? IDLE 					: 
-											  ~later_data_read_done 		? READ_LATER_DATA_1 	: 
+											  ~later_data_read_done 		? READ_LATER_DATA_2 	: 
 											  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
 `else
 		WRITE_BACK 	        : next_PE_state = former_data_read_done_wire 	? IDLE 					: 
-											  ~later_data_read_done 		? READ_LATER_DATA_1 	: 
+											  ~later_data_read_done 		? READ_LATER_DATA_2 	: 
 											  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
 `endif
 		default				: next_PE_state = IDLE;
@@ -647,3 +650,4 @@ end
 
 
 endmodule
+

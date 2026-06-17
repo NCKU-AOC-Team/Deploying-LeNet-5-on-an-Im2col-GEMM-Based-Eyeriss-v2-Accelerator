@@ -28,6 +28,7 @@ module Later_Data_Spad(
 	input         		write_en,
 	output        		write_fin,
 	input         		read_en,
+	input         		write_back_read_en,
 	input  		[6:0]  	read_idx,
 	input         		index_inc,
 	input         		read_idx_en,
@@ -55,7 +56,7 @@ wire  data_in_shake = data_in_ready & data_in_valid & write_en;
 wire  read_fin   	= (data_out == 'd0) & index_inc;
 
 // RAM read delay 1 cycle for BRAM
-wire [6:0] next_data_read_addr = read_en ? column_num : spad_read_addr;
+wire [6:0] next_data_read_addr = write_back_read_en ? (column_num + 7'd1) : (read_en ? column_num : spad_read_addr);
 
 
 // ================================================	//

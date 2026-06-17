@@ -17,6 +17,7 @@ module Psum_Requantizer (
 	output					data_out_valid
 );
 
+
 `ifdef INT4_AS_INT8_REGEN
 `ifdef INT4_REQUANT_16_9
 assign data_out = data_in[16:9];
@@ -33,6 +34,7 @@ assign data_out = data_in[16:9];
 assign data_out = data_in[17:10];
 `endif
 assign data_out_valid = data_in_valid;
+
 
 
 endmodule
