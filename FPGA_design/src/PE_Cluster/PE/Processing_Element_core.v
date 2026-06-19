@@ -110,7 +110,6 @@ wire 			 		later_data_spad_read_idx_inc;
 wire 			 		later_data_spad_read_idx_en;
 wire 						later_data_spad_write_back_read_en;
 
-`ifdef INT4_PACKED_SIMD2_FULL
 wire					Psum_Spad_lane1_en;
 wire	signed [20:0]	Psum_Spad_psum_in_lane1;
 wire 			[4:0] 	Psum_Spad_read_idx_lane1; 
@@ -134,22 +133,6 @@ Psum_Spad_Banked Psum_Spad_inst (
 	.write_idx_lane1(Psum_Spad_write_idx_lane1	),
 	.psum_spad_clear(psum_spad_clear			)
 );
-`else
-assign Psum_Spad_psum_out_lane1 = 21'sd0;
-Psum_Spad Psum_Spad_inst ( 
-	.clock			(clock						),
-	.reset			(reset						),
-	.psum_in_ready	(Psum_Spad_psum_in_ready	),
-	.psum_in_valid	(Psum_Spad_psum_in_valid	),
-	.psum_in		(Psum_Spad_psum_in			),
-	.psum_out_ready	(Psum_Spad_psum_out_ready	),
-	.psum_out_vaild	(Psum_Spad_psum_out_valid	),
-	.psum_out		(Psum_Spad_psum_out			),
-	.read_idx		(Psum_Spad_read_idx			),
-	.write_idx		(Psum_Spad_write_idx		),
-	.psum_spad_clear(psum_spad_clear			)
-);
-`endif
 
 Former_Address_Spad Former_Address_Spad_inst ( 
 	.clock			(clock								),
@@ -268,7 +251,6 @@ wire 		[4:0] 	former_matrix_row_wire	= former_data_spad_data_out	[4:0];
 wire signed [7:0] 	former_matrix_data_wire	= int4_former_weight_mode ? {{4{former_data_spad_data_out[8]}}, former_data_spad_data_out[8:5]} :
 																	  former_data_spad_data_out[12:5];
 wire 		[3:0] 	later_matrix_row_wire	= later_data_spad_data_out	[3:0];  
-`ifdef INT4_PACKED_SIMD2_FULL
 wire				later_int4_simd2_full_wire	= int4_later_weight_mode;
 wire 		[3:0]	later_matrix_row_lane1_wire = later_data_spad_data_out[11:8];
 wire signed [7:0] 	later_matrix_data_wire	= later_int4_simd2_full_wire ? {{4{later_data_spad_data_out[7]}}, later_data_spad_data_out[7:4]} :
@@ -277,21 +259,6 @@ wire signed [7:0] 	later_matrix_data_lane1_wire = later_int4_simd2_full_wire ? {
 																				  8'sd0;
 wire				later_lane1_valid_wire = later_int4_simd2_full_wire & (later_matrix_data_lane1_wire != 8'sd0);
 wire				later_matrix_data_zero_wire = later_matrix_data_wire == 8'sd0;
-`elsif INT4_PACKED_SIMD2
-wire				later_int4_simd2_wire	= int4_later_weight_mode;
-wire signed [7:0]	later_matrix_data_lane0_wire = later_int4_simd2_wire ? {{4{later_data_spad_data_out[7]}}, later_data_spad_data_out[7:4]} :
-																	  later_data_spad_data_out[11:4];
-wire signed [7:0]	later_matrix_data_lane1_wire = later_int4_simd2_wire ? {{4{later_data_spad_data_out[11]}}, later_data_spad_data_out[11:8]} :
-																	  8'sd0;
-wire signed [7:0] 	later_matrix_data_wire	= later_matrix_data_lane0_wire;
-wire				later_lane1_valid_wire = 1'b0;
-wire				later_matrix_data_zero_wire = later_int4_simd2_wire ? ((later_matrix_data_lane0_wire == 8'sd0) & (later_matrix_data_lane1_wire == 8'sd0)) :
-																		 (later_matrix_data_wire == 8'sd0);
-`else
-wire signed [7:0] 	later_matrix_data_wire	= later_data_spad_data_out	[11:4];
-wire				later_lane1_valid_wire = 1'b0;
-wire				later_matrix_data_zero_wire = later_matrix_data_wire == 8'sd0;
-`endif
 
 
 // use the maximum value of the address to stand for current column is all zero to skip this column
@@ -304,45 +271,22 @@ wire later_matrix_read_first_col_wire 		= former_matrix_row_wire == 5'd0;
 
 // SPad control
 (* use_dsp = "yes" *) wire signed [20:0] product_mul_lane0_wire = later_matrix_data_wire * former_matrix_data_wire;
-`ifdef INT4_PACKED_SIMD2_FULL
 (* use_dsp = "yes" *) wire signed [20:0] product_mul_lane1_wire = later_matrix_data_lane1_wire * former_matrix_data_wire;
 wire signed [20:0] product_mul_wire = DO_MAC_LANE1_wire ? product_mul_lane1_wire : product_mul_lane0_wire;
-`elsif INT4_PACKED_SIMD2
-(* use_dsp = "yes" *) wire signed [20:0] product_mul_lane1_wire = later_matrix_data_lane1_wire * former_matrix_data_wire;
-wire signed [20:0] product_mul_wire = product_mul_lane0_wire + product_mul_lane1_wire;
-`else
-wire signed [20:0] product_mul_wire = product_mul_lane0_wire;
-`endif
-`ifdef INT4_PACKED_SIMD2_FULL
 wire				product_zero_count_wire = DO_MAC_LANE1_wire ? (later_matrix_row_lane1_wire == 'd15) : (later_matrix_row_wire == 'd15);
-`else
-wire				product_zero_count_wire = later_matrix_row_wire == 'd15;
-`endif
 wire signed [20:0]	product_wire 			= product_zero_count_wire ? 'sd0 : product_mul_wire;  // TODO 
-`ifdef INT4_PACKED_SIMD2_FULL
 wire signed [20:0]	product_lane1_wire 		= (later_matrix_row_lane1_wire == 'd15) ? 21'sd0 : product_mul_lane1_wire;
-`else
-wire signed [20:0]	product_lane1_wire 		= 21'sd0;
-`endif
 wire signed [20:0] 	psum_load_wire 		 	= Psum_Spad_psum_out;
 wire signed [20:0] 	psum_acc_result_wire 	= psum_load_state ? (psum_load_wire + psum_in) : (psum_load_reg + product_reg);
 wire signed [20:0] 	psum_acc_result_lane1_wire = psum_load_lane1_reg + product_lane1_reg;
 wire 		[3:0]  	former_matrix_col_minus_one_wire = former_matrix_col_reg - 4'd1;
 wire 		[4:0]  	psum_write_base_wire	= {former_matrix_col_minus_one_wire[2:0], 2'b00};
 wire 		[4:0]  	psum_write_idx_wire  	= psum_write_base_wire + later_matrix_row_wire[2:0]; 
-`ifdef INT4_PACKED_SIMD2_FULL
 wire 		[4:0]  	psum_write_idx_lane1_wire = psum_write_base_wire + later_matrix_row_lane1_wire[2:0];
 wire				later_lane1_bank_conflict_wire = later_lane1_valid_wire & (psum_write_idx_wire[0] == psum_write_idx_lane1_wire[0]);
 wire				later_lane1_parallel_valid_wire = later_lane1_valid_wire & ~later_lane1_bank_conflict_wire;
 wire				later_lane1_serial_valid_wire = later_lane1_valid_wire & later_lane1_bank_conflict_wire;
 wire				write_back_advance_wire = (WRITE_BACK_wire & ~later_lane1_serial_valid_wire) | WRITE_BACK_LANE1_wire;
-`else
-wire 		[4:0]  	psum_write_idx_lane1_wire = psum_write_idx_wire;
-wire				later_lane1_bank_conflict_wire = 1'b0;
-wire				later_lane1_parallel_valid_wire = 1'b0;
-wire				later_lane1_serial_valid_wire = 1'b0;
-wire				write_back_advance_wire = WRITE_BACK_wire;
-`endif
 wire				psum_read_fin_wire		= psum_read_idx_reg == PSUM_DEPTH;
 
 
@@ -358,12 +302,8 @@ wire Psum_Spad_read_idx_inc_wire 			= psum_out_ready & psum_out_valid;
 wire Psum_Spad_read_fin_wire 				= (READ_FORMER_DATA_wire 	& Iact_Data_Spad_read_fin_wire)	|
 											  (write_back_advance_wire 	& Iact_Data_Spad_read_fin_wire) | 
 											  (psum_read_fin_wire 		& Psum_Spad_read_idx_inc_wire);
-`ifdef INT4_PACKED_SIMD2_FULL
 wire lane1_pending_wire					= later_lane1_serial_valid_wire & (WRITE_BACK_wire | READ_LANE1_PSUM_wire | DO_MAC_LANE1_wire | WRITE_BACK_LANE1_wire);
 wire cal_fin_guard_wire					= ~lane1_pending_wire;
-`else
-wire cal_fin_guard_wire					= 1'b1;
-`endif
 
 `ifdef VERILATOR
 integer dbg_lane1_serial_cycles;
@@ -377,14 +317,12 @@ always @(posedge clock) begin
 		dbg_lane1_parallel_events <= 0;
 	end
 	else begin
-`ifdef INT4_PACKED_SIMD2_FULL
 		if (READ_LANE1_PSUM_wire | DO_MAC_LANE1_wire | WRITE_BACK_LANE1_wire)
 			dbg_lane1_serial_cycles <= dbg_lane1_serial_cycles + 1;
 		if (WRITE_BACK_wire & later_lane1_serial_valid_wire)
 			dbg_lane1_bank_conflict_events <= dbg_lane1_bank_conflict_events + 1;
 		if (WRITE_BACK_wire & later_lane1_parallel_valid_wire)
 			dbg_lane1_parallel_events <= dbg_lane1_parallel_events + 1;
-`endif
 	end
 end
 
@@ -423,12 +361,10 @@ assign Psum_Spad_psum_in 					= (WRITE_BACK_wire | WRITE_BACK_LANE1_wire) ? psum
 assign Psum_Spad_psum_out_ready 			= DO_MAC_wire | DO_MAC_LANE1_wire | Psum_Spad_read_valid_wire;
 assign Psum_Spad_read_idx 					= next_psum_read_idx;
 assign Psum_Spad_write_idx 					= WRITE_BACK_LANE1_wire ? psum_write_idx_lane1_wire : psum_write_idx_wire;
-`ifdef INT4_PACKED_SIMD2_FULL
 assign Psum_Spad_lane1_en					= later_lane1_parallel_valid_wire & (READ_LATER_DATA_2_wire | DO_MAC_wire | WRITE_BACK_wire);
 assign Psum_Spad_psum_in_lane1				= WRITE_BACK_wire ? psum_acc_result_lane1_wire : 21'sd0;
 assign Psum_Spad_read_idx_lane1				= psum_write_idx_lane1_wire;
 assign Psum_Spad_write_idx_lane1			= psum_write_idx_lane1_wire;
-`endif
 
 assign former_address_spad_data_in_valid	= former_address_in_valid;
 assign former_address_spad_data_in 			= former_address_in;
@@ -480,7 +416,6 @@ always@(*) begin
 		READ_LATER_DATA_1 	: next_PE_state = READ_LATER_DATA_2;
 		READ_LATER_DATA_2 	: next_PE_state = DO_MAC;
 		DO_MAC 				: next_PE_state = WRITE_BACK;
-`ifdef INT4_PACKED_SIMD2_FULL
 		WRITE_BACK 	        : next_PE_state = later_lane1_serial_valid_wire	? READ_LANE1_PSUM		:
 											  former_data_read_done_wire 	? IDLE 					: 
 											  ~later_data_read_done 		? READ_LATER_DATA_2 	: 
@@ -490,11 +425,6 @@ always@(*) begin
 		WRITE_BACK_LANE1	: next_PE_state = former_data_read_done_wire 	? IDLE 					: 
 											  ~later_data_read_done 		? READ_LATER_DATA_2 	: 
 											  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
-`else
-		WRITE_BACK 	        : next_PE_state = former_data_read_done_wire 	? IDLE 					: 
-											  ~later_data_read_done 		? READ_LATER_DATA_2 	: 
-											  former_one_col_read_done 		? READ_FORMER_ADDRESS 	: READ_FORMER_DATA;
-`endif
 		default				: next_PE_state = IDLE;
 	endcase
 end

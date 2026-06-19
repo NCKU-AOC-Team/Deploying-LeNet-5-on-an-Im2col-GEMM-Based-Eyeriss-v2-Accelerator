@@ -40,54 +40,46 @@ wire			[15:0]	ROM_read_addr;	// ~40000
 // weight end addr LUT
 parameter IACT_DATA_END 				= 'd784;
 
-`ifdef INT4_PACKED_SIMD2_FULL
-parameter ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
-parameter ROM_WEIGHT_DATA_1_END 		 = 'd91 	;
-parameter ROM_WEIGHT_ADDR_2_FORMER_END 	 = 'd145 	;
-parameter ROM_WEIGHT_DATA_2_FORMER_END 	 = 'd832 	;
-parameter ROM_WEIGHT_ADDR_2_LATER_END 	 = 'd886 	;
-parameter ROM_WEIGHT_DATA_2_LATER_END 	 = 'd1497 	;
-parameter ROM_WEIGHT_ADDR_3_END 		 = 'd9657 	;
-parameter ROM_WEIGHT_DATA_3_END 		 = 'd20276 	;
-parameter ROM_WEIGHT_ADDR_4_END 		 = 'd22922 	;
-parameter ROM_WEIGHT_DATA_4_END 		 = 'd26464 	;
-parameter ROM_WEIGHT_ADDR_5_END 		 = 'd26728 	;
-parameter ROM_WEIGHT_DATA_5_END 		 = 'd27060 	;
-`elsif INT4_AS_INT8_REGEN
-parameter ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
-parameter ROM_WEIGHT_DATA_1_END 		 = 'd149 	;
-parameter ROM_WEIGHT_ADDR_2_FORMER_END 	 = 'd203 	;
-parameter ROM_WEIGHT_DATA_2_FORMER_END 	 = 'd1300 	;
-parameter ROM_WEIGHT_ADDR_2_LATER_END 	 = 'd1354 	;
-parameter ROM_WEIGHT_DATA_2_LATER_END 	 = 'd2428 	;
-parameter ROM_WEIGHT_ADDR_3_END 		 = 'd10588 	;
-parameter ROM_WEIGHT_DATA_3_END 		 = 'd38449 	;
-parameter ROM_WEIGHT_ADDR_4_END 		 = 'd41095 	;
-parameter ROM_WEIGHT_DATA_4_END 		 = 'd50204 	;
-parameter ROM_WEIGHT_ADDR_5_END 		 = 'd50468 	;
-parameter ROM_WEIGHT_DATA_5_END 		 = 'd51263 	;
-`else
-parameter ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
-parameter ROM_WEIGHT_DATA_1_END 		 = 'd97 	;
-parameter ROM_WEIGHT_ADDR_2_FORMER_END 	 = 'd151 	;
-parameter ROM_WEIGHT_DATA_2_FORMER_END 	 = 'd760 	;
-parameter ROM_WEIGHT_ADDR_2_LATER_END 	 = 'd814 	;
-parameter ROM_WEIGHT_DATA_2_LATER_END 	 = 'd1351 	;
-parameter ROM_WEIGHT_ADDR_3_END 		 = 'd9511 	;
-parameter ROM_WEIGHT_DATA_3_END 		 = 'd25090 	;
-parameter ROM_WEIGHT_ADDR_4_END 		 = 'd27736 	;
-parameter ROM_WEIGHT_DATA_4_END 		 = 'd32974 	;
-parameter ROM_WEIGHT_ADDR_5_END 		 = 'd33238 	;
-parameter ROM_WEIGHT_DATA_5_END 		 = 'd33722 	;
-`endif
+localparam INT8_ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
+localparam INT8_ROM_WEIGHT_DATA_1_END 		 = 'd97 	;
+localparam INT8_ROM_WEIGHT_ADDR_2_FORMER_END = 'd151 	;
+localparam INT8_ROM_WEIGHT_DATA_2_FORMER_END = 'd760 	;
+localparam INT8_ROM_WEIGHT_ADDR_2_LATER_END  = 'd814 	;
+localparam INT8_ROM_WEIGHT_DATA_2_LATER_END  = 'd1351 	;
+localparam INT8_ROM_WEIGHT_ADDR_3_END 		 = 'd9511 	;
+localparam INT8_ROM_WEIGHT_DATA_3_END 		 = 'd25090 	;
+localparam INT8_ROM_WEIGHT_ADDR_4_END 		 = 'd27736 	;
+localparam INT8_ROM_WEIGHT_DATA_4_END 		 = 'd32974 	;
+localparam INT8_ROM_WEIGHT_ADDR_5_END 		 = 'd33238 	;
+localparam INT8_ROM_WEIGHT_DATA_5_END 		 = 'd33722 	;
 
+localparam INT4_ROM_WEIGHT_ADDR_1_END 		 = 'd7		;
+localparam INT4_ROM_WEIGHT_DATA_1_END 		 = 'd91 	;
+localparam INT4_ROM_WEIGHT_ADDR_2_FORMER_END = 'd145 	;
+localparam INT4_ROM_WEIGHT_DATA_2_FORMER_END = 'd832 	;
+localparam INT4_ROM_WEIGHT_ADDR_2_LATER_END  = 'd886 	;
+localparam INT4_ROM_WEIGHT_DATA_2_LATER_END  = 'd1497 	;
+localparam INT4_ROM_WEIGHT_ADDR_3_END 		 = 'd9657 	;
+localparam INT4_ROM_WEIGHT_DATA_3_END 		 = 'd20276 	;
+localparam INT4_ROM_WEIGHT_ADDR_4_END 		 = 'd22922 	;
+localparam INT4_ROM_WEIGHT_DATA_4_END 		 = 'd26464 	;
+localparam INT4_ROM_WEIGHT_ADDR_5_END 		 = 'd26728 	;
+localparam INT4_ROM_WEIGHT_DATA_5_END 		 = 'd27060 	;
 
-TOP_eyeriss # (
-	.WEIGHT_DATA_3_END(ROM_WEIGHT_DATA_3_END + 'd784),
-	.WEIGHT_DATA_4_END(ROM_WEIGHT_DATA_4_END + 'd784),
-	.WEIGHT_DATA_5_END(ROM_WEIGHT_DATA_5_END + 'd784)
-) 
-TOP_inst(
+wire [15:0] ROM_WEIGHT_ADDR_1_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_ADDR_1_END 		 : INT8_ROM_WEIGHT_ADDR_1_END;
+wire [15:0] ROM_WEIGHT_DATA_1_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_DATA_1_END 		 : INT8_ROM_WEIGHT_DATA_1_END;
+wire [15:0] ROM_WEIGHT_ADDR_2_FORMER_END 	= int4_weight_mode ? INT4_ROM_WEIGHT_ADDR_2_FORMER_END : INT8_ROM_WEIGHT_ADDR_2_FORMER_END;
+wire [15:0] ROM_WEIGHT_DATA_2_FORMER_END 	= int4_weight_mode ? INT4_ROM_WEIGHT_DATA_2_FORMER_END : INT8_ROM_WEIGHT_DATA_2_FORMER_END;
+wire [15:0] ROM_WEIGHT_ADDR_2_LATER_END 	= int4_weight_mode ? INT4_ROM_WEIGHT_ADDR_2_LATER_END  : INT8_ROM_WEIGHT_ADDR_2_LATER_END;
+wire [15:0] ROM_WEIGHT_DATA_2_LATER_END 	= int4_weight_mode ? INT4_ROM_WEIGHT_DATA_2_LATER_END  : INT8_ROM_WEIGHT_DATA_2_LATER_END;
+wire [15:0] ROM_WEIGHT_ADDR_3_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_ADDR_3_END 		 : INT8_ROM_WEIGHT_ADDR_3_END;
+wire [15:0] ROM_WEIGHT_DATA_3_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_DATA_3_END 		 : INT8_ROM_WEIGHT_DATA_3_END;
+wire [15:0] ROM_WEIGHT_ADDR_4_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_ADDR_4_END 		 : INT8_ROM_WEIGHT_ADDR_4_END;
+wire [15:0] ROM_WEIGHT_DATA_4_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_DATA_4_END 		 : INT8_ROM_WEIGHT_DATA_4_END;
+wire [15:0] ROM_WEIGHT_ADDR_5_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_ADDR_5_END 		 : INT8_ROM_WEIGHT_ADDR_5_END;
+wire [15:0] ROM_WEIGHT_DATA_5_END 			= int4_weight_mode ? INT4_ROM_WEIGHT_DATA_5_END 		 : INT8_ROM_WEIGHT_DATA_5_END;
+
+TOP_eyeriss TOP_inst(
 	.clock					(clock					),
 	.reset                  (reset                  ),
 	.iact_in                (iact_in                ),
@@ -97,6 +89,9 @@ TOP_inst(
 	.weight_data_in         (weight_data_in         ),
 	.weight_data_in_valid   (weight_data_in_valid   ),
 	.int4_weight_mode		(int4_weight_mode		),
+	.weight_data_3_end_runtime(ROM_WEIGHT_DATA_3_END + 'd784),
+	.weight_data_4_end_runtime(ROM_WEIGHT_DATA_4_END + 'd784),
+	.weight_data_5_end_runtime(ROM_WEIGHT_DATA_5_END + 'd784),
 	.system_enable          (system_enable          ),
 	//.state					(state					),
 	.final_out              (final_out              ),
@@ -134,41 +129,14 @@ wire ROM_weight_data_flag = ROM_weight_addr_1 | ROM_weight_addr_2_former | ROM_w
 wire ROM_weight_addr_flag = ROM_weight_data_1 | ROM_weight_data_2_former | ROM_weight_data_2_later | ROM_weight_data_3 | ROM_weight_data_4 | ROM_weight_data_5;
 wire ROM_weight_conv_data_flag = ROM_weight_data_1 | ROM_weight_data_2_former | ROM_weight_data_2_later;
 
-`ifdef INT4_PACKED_SIMD2_FULL
-wire [7:0] ROM_weight_conv_data_unpacked = {{4{ROM_data_out[8]}}, ROM_data_out[8:5]};
-wire ROM_weight_full_former_data_flag = ROM_weight_data_1 | ROM_weight_data_2_former | ROM_weight_data_2_later;
-wire [`BOYU_TOP_WEIGHT_STREAM_RANGE] ROM_weight_data_unpacked = ROM_weight_full_former_data_flag ? {3'b000, ROM_weight_conv_data_unpacked, ROM_data_out[4:0]} :
-                                                                                                  ROM_data_out[15:0];
-`elsif INT4_PACKED_SIMD2
-wire [7:0] ROM_weight_conv_data_unpacked = {{4{ROM_data_out[8]}}, ROM_data_out[8:5]};
-wire [11:0] ROM_weight_fc_simd2_packed   = {ROM_data_out[15:12], ROM_data_out[7:4], ROM_data_out[3:0]};
-wire [12:0] ROM_weight_data_unpacked     = ROM_weight_conv_data_flag ? {ROM_weight_conv_data_unpacked, ROM_data_out[4:0]} :
-                                                                       {1'b0, ROM_weight_fc_simd2_packed};
-`elsif INT4_PACKED_TWO_LANE
-wire [7:0] ROM_weight_conv_data_unpacked = {{4{ROM_data_out[8]}}, ROM_data_out[8:5]};
-wire [7:0] ROM_weight_fc_lane0_data       = {{4{ROM_data_out[7]}}, ROM_data_out[7:4]};
-wire [7:0] ROM_weight_fc_lane1_data       = {{4{ROM_data_out[15]}}, ROM_data_out[15:12]};
-wire [3:0] ROM_weight_fc_lane0_count      = ROM_data_out[3:0];
-wire [3:0] ROM_weight_fc_lane1_count      = ROM_data_out[11:8];
-`ifdef INT4_LANE1
-wire [7:0] ROM_weight_fc_data_unpacked    = ROM_weight_fc_lane1_data;
-wire [3:0] ROM_weight_fc_count_unpacked   = ROM_weight_fc_lane1_count;
-`else
-wire [7:0] ROM_weight_fc_data_unpacked    = ROM_weight_fc_lane0_data;
-wire [3:0] ROM_weight_fc_count_unpacked   = ROM_weight_fc_lane0_count;
-`endif
-wire [12:0] ROM_weight_data_unpacked      = ROM_weight_conv_data_flag ? {ROM_weight_conv_data_unpacked, ROM_data_out[4:0]} :
-                                                                        {1'b0, ROM_weight_fc_data_unpacked, ROM_weight_fc_count_unpacked};
-`elsif INT4_PACKED_SINGLE_LANE
-wire [7:0] ROM_weight_conv_data_unpacked = {{4{ROM_data_out[8]}}, ROM_data_out[8:5]};
-wire [7:0] ROM_weight_fc_data_unpacked   = {{4{ROM_data_out[7]}}, ROM_data_out[7:4]};
-wire [12:0] ROM_weight_data_unpacked     = ROM_weight_conv_data_flag ? {ROM_weight_conv_data_unpacked, ROM_data_out[4:0]} :
-                                                                       {1'b0, ROM_weight_fc_data_unpacked, ROM_data_out[3:0]};
-`else
 wire ROM_weight_default_former_data_flag = ROM_weight_data_1 | ROM_weight_data_2_former | ROM_weight_data_2_later;
-wire [`BOYU_TOP_WEIGHT_STREAM_RANGE] ROM_weight_data_unpacked = ROM_weight_default_former_data_flag ? {3'b000, ROM_data_out[12:0]} :
-                                                                                                      {4'b0000, ROM_data_out[11:0]};
-`endif
+wire [7:0] ROM_weight_int4_former_data_unpacked = {{4{ROM_data_out[8]}}, ROM_data_out[8:5]};
+wire [`BOYU_TOP_WEIGHT_STREAM_RANGE] ROM_weight_int8_unpacked =
+	ROM_weight_default_former_data_flag ? {3'b000, ROM_data_out[12:0]} : {4'b0000, ROM_data_out[11:0]};
+wire [`BOYU_TOP_WEIGHT_STREAM_RANGE] ROM_weight_int4_unpacked =
+	ROM_weight_default_former_data_flag ? {3'b000, ROM_weight_int4_former_data_unpacked, ROM_data_out[4:0]} : ROM_data_out[15:0];
+wire [`BOYU_TOP_WEIGHT_STREAM_RANGE] ROM_weight_data_unpacked =
+	int4_weight_mode ? ROM_weight_int4_unpacked : ROM_weight_int8_unpacked;
 
 assign DRAM_read_en 	= MEM_read_en & (MEM_read_addr < IACT_DATA_END);
 assign ROM_read_en 		= MEM_read_en & (MEM_read_addr >= IACT_DATA_END);

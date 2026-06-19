@@ -22,6 +22,9 @@ module TOP_controller # (
 	
 	output				MEM_read_en,
 	output	reg	[15:0]	MEM_read_addr,
+	input		[15:0]	weight_data_3_end_runtime,
+	input		[15:0]	weight_data_4_end_runtime,
+	input		[15:0]	weight_data_5_end_runtime,
 	
 	input				weight_addr_end,
 	input				weight_data_end,
@@ -655,9 +658,9 @@ wire 		GLB_weight_load_end 		= (layer0_flag & weight_data_end) | (layer1_flag & 
 // wait 12 psums accumulated to 3 psums, for more than 4 channels need to accumulated
 wire 		fc_psum_read_en 			= (fc_channel_acc_count == 'd8 | fc_channel_acc_count == 'd9 | fc_channel_acc_count == 'd10 | fc_channel_acc_count == 'd11);
 		
-wire 		MEM_fc1_read_done 			= (MEM_read_addr == WEIGHT_DATA_3_END) & layer2_flag;
-wire 		MEM_fc2_read_done 			= (MEM_read_addr == WEIGHT_DATA_4_END) & layer3_flag;
-wire 		MEM_fc3_read_done 			= (MEM_read_addr == WEIGHT_DATA_5_END) & layer4_flag;
+wire 		MEM_fc1_read_done 			= (MEM_read_addr == weight_data_3_end_runtime) & layer2_flag;
+wire 		MEM_fc2_read_done 			= (MEM_read_addr == weight_data_4_end_runtime) & layer3_flag;
+wire 		MEM_fc3_read_done 			= (MEM_read_addr == weight_data_5_end_runtime) & layer4_flag;
 
 // pipeline : flow control
 wire 		load_PE_start 				= (layer0_flag & GLB_iact_en_sel 	 == 'd8 	& third_iter_read_GLB_iact) | 

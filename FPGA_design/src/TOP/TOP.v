@@ -21,6 +21,9 @@ module TOP_eyeriss # (
 	input	signed		[`BOYU_TOP_WEIGHT_STREAM_RANGE]	weight_data_in,
 	input						weight_data_in_valid,
 	input						int4_weight_mode,
+	input			[15:0]		weight_data_3_end_runtime,
+	input			[15:0]		weight_data_4_end_runtime,
+	input			[15:0]		weight_data_5_end_runtime,
 	
 	input						system_enable,
 	//output				[5:0]	state,
@@ -984,6 +987,7 @@ psum_rearrange	psum_rearrange (
 Psum_Requantizer	Psum_Requantizer(
 	.data_in		(quant_data_in			),
 	.data_in_valid  (quant_data_in_valid  	),
+	.int4_weight_mode(int4_weight_mode_wire	),
 	.data_out       (quant_data_out       	),
 	.data_out_valid (quant_data_out_valid 	)
 );
@@ -1055,6 +1059,9 @@ TOP_controller (
 	//.state										(state),
 	.MEM_read_en								(MEM_read_en									),
 	.MEM_read_addr								(MEM_read_addr									),
+	.weight_data_3_end_runtime					(weight_data_3_end_runtime						),
+	.weight_data_4_end_runtime					(weight_data_4_end_runtime						),
+	.weight_data_5_end_runtime					(weight_data_5_end_runtime						),
 	.weight_addr_end							(weight_addr_end								),
 	.weight_data_end							(weight_data_end								),
 	.csc_addr_end								(csc_addr_end									),

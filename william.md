@@ -1,4 +1,4 @@
-這份是基於 BOYU 去改的
+﻿這份是基於 BOYU 去改的
 改了 Makefile 可以秀出 最大、平均、最小 cycle 以及 優化了 Processing_Element_core.v &　Later_data_Spad.v
 (有時間再更新細節...)
 
@@ -55,3 +55,57 @@ make: *** [Makefile:153: sim] Error 1
 
 未來會嘗試把tool folder 下的 python code 修好 使我們可以用自己的weight 用在SIMD format 上面 
 以及去解決TIMEOUT問題
+
+
+### Willam v2(結合版)
+### INT8 runtime
+
+指令：
+
+```bash
+make clean
+make sim ITERS=1000
+```
+
+結果：
+
+```text
+=== Summary: 938/1000 passed (93.8%) ===
+
+========== Cycle Statistics (1000 patterns) ==========
+  Avg    : 79256.99 cycles
+  Min    : 75239 cycles
+  Max    : 82265 cycles
+  StdDev : 1216.17 cycles
+====================================================
+```
+
+### INT4 runtime
+
+指令：
+
+```bash
+make sim ITERS=1000 RUNTIME_INT4=1 INT4_REQUANT=14_7
+```
+
+結果：
+
+```text
+=== Summary: 965/1000 passed (96.5%) ===
+
+========== Cycle Statistics (1000 patterns) ==========
+  Avg    : 71780.87 cycles
+  Min    : 67281 cycles
+  Max    : 250000 cycles
+  StdDev : 5765.45 cycles
+====================================================
+```
+
+### 簡短比較
+
+| Mode | Accuracy | Avg cycles | Min cycles | Max cycles | StdDev |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| INT8 runtime | 93.8% | 79256.99 | 75239 | 82265 | 1216.17 |
+| INT4 runtime | 96.5% | 71780.87 | 67281 | 250000 | 5765.45 |
+
+備註：INT4 runtime 的 max cycle 出現 `250000`，代表 1000 筆中至少有 pattern hit 到 timeout 上限；因此平均值與標準差會被 timeout 拉高。
