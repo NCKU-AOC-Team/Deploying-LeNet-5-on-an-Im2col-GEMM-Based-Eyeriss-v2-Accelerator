@@ -187,7 +187,7 @@ assign dina 	= clear_flag ? 'd0 : data_in;
 
 assign data_out = douta;
 
-reg [`BOYU_LATER_STREAM_RANGE] full_spad [0:127];
+(* ram_style = "distributed" *) reg [`BOYU_LATER_STREAM_RANGE] full_spad [0:127];
 reg [`BOYU_LATER_STREAM_RANGE] full_dout;
 
 always @(posedge clk) begin
