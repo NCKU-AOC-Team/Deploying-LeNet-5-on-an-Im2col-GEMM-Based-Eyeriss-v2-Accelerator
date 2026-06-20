@@ -1,0 +1,214 @@
+
+*** Running vivado
+    with args -log TOP_integration_uart.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source TOP_integration_uart.tcl -notrace
+
+
+****** Vivado v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source TOP_integration_uart.tcl -notrace
+Command: link_design -top TOP_integration_uart -part xc7z020clg400-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Project 1-454] Reading design checkpoint 'c:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/ROM_sparse_weight/ROM_sparse_weight.dcp' for cell 'TOP_interface_inst/ROM_weight_inst'
+INFO: [Project 1-454] Reading design checkpoint 'c:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/IP_Iact_Addr_SRAM_BRAM/IP_Iact_Addr_SRAM_BRAM.dcp' for cell 'TOP_interface_inst/TOP_inst/ClusterGroup_array/ClusterGroup_0_0/GLB_Cluster_inst/IACT_BANK_R[0].IACT_BANK[0].u/iact_addr_SRAM_inst/Iact_Addr_SRAM_BRAM_inst/u0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/IP_Psum_Data_SRAM_BRAM/IP_Psum_Data_SRAM_BRAM.dcp' for cell 'TOP_interface_inst/TOP_inst/ClusterGroup_array/ClusterGroup_0_0/GLB_Cluster_inst/PSUM_BANK[0].u/Psum_Data_SRAM_BRAM_inst/u0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/IP_Psum_DATA_Spad_BRAM/IP_Psum_DATA_Spad_BRAM.dcp' for cell 'TOP_interface_inst/TOP_inst/ClusterGroup_array/ClusterGroup_0_0/PE_Cluster_inst/PE_INST_R[0].PE_INST_C[0].pe/Processing_Element_core_inst/Psum_Spad_inst/bank0/u0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/IP_Psum_Rearrange_BRAM/IP_Psum_Rearrange_BRAM.dcp' for cell 'TOP_interface_inst/TOP_inst/psum_rearrange/Psum_Rearrange_BRAM_inst/u0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/IP_ifmap_BRAM/IP_ifmap_BRAM.dcp' for cell 'uart_module_inst/u0'
+INFO: [Netlist 29-17] Analyzing 5853 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2019.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/constraints/constraints.xdc]
+Finished Parsing XDC File [C:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/constraints/constraints.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 951.551 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 6 instances were transformed.
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 6 instances
+
+13 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 951.551 ; gain = 658.832
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.894 . Memory (MB): peak = 956.598 ; gain = 5.047
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: da94f7af
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:11 . Memory (MB): peak = 1553.223 ; gain = 596.625
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 36 inverter(s) to 72 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: 128328afb
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1710.164 ; gain = 0.477
+INFO: [Opt 31-389] Phase Retarget created 12 cells and removed 59 cells
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: e1c6f46c
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1710.164 ; gain = 0.477
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 1079c9dad
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1710.164 ; gain = 0.477
+INFO: [Opt 31-389] Phase Sweep created 4 cells and removed 742 cells
+
+Phase 4 BUFG optimization
+INFO: [Opt 31-129] Inserted BUFG to drive high-fanout reset|set|enable net. BUFG cell: interrupt_gen_inst/interrupt_reg_1_BUFG_inst, Net: interrupt_gen_inst/interrupt_reg_1
+Phase 4 BUFG optimization | Checksum: 16f488b4d
+
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:09 . Memory (MB): peak = 1710.164 ; gain = 0.477
+INFO: [Opt 31-662] Phase BUFG optimization created 2 cells of which 1 are BUFGs and removed 0 cells.
+
+Phase 5 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 5 Shift Register Optimization | Checksum: 16f488b4d
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1710.164 ; gain = 0.477
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 6 Post Processing Netlist
+Phase 6 Post Processing Netlist | Checksum: 17a89c10f
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:11 . Memory (MB): peak = 1710.164 ; gain = 0.477
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |              12  |              59  |                                              0  |
+|  Constant propagation         |               0  |               0  |                                              0  |
+|  Sweep                        |               4  |             742  |                                              0  |
+|  BUFG optimization            |               2  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.266 . Memory (MB): peak = 1710.164 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: b0918917
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:14 . Memory (MB): peak = 1710.164 ; gain = 0.477
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=6.315 | TNS=0.000 |
+INFO: [Pwropt 34-9] Applying IDT optimizations ...
+INFO: [Pwropt 34-10] Applying ODC optimizations ...
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+
+
+Starting PowerOpt Patch Enables Task
+INFO: [Pwropt 34-162] WRITE_MODE attribute of 1 BRAM(s) out of a total of 250 has been updated to save power. Run report_power_opt to get a complete listing of the BRAMs updated.
+INFO: [Pwropt 34-201] Structural ODC has moved 0 WE to EN ports
+Number of BRAM Ports augmented: 0 newly gated: 0 Total Ports: 500
+Ending PowerOpt Patch Enables Task | Checksum: b0918917
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.892 . Memory (MB): peak = 2776.227 ; gain = 0.000
+Ending Power Optimization Task | Checksum: b0918917
+
+Time (s): cpu = 00:01:08 ; elapsed = 00:00:35 . Memory (MB): peak = 2776.227 ; gain = 1066.062
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: b0918917
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2776.227 ; gain = 0.000
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 2776.227 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: b0918917
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 2776.227 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+37 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:01:40 ; elapsed = 00:01:04 . Memory (MB): peak = 2776.227 ; gain = 1824.676
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 2776.227 ; gain = 0.000
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.040 . Memory (MB): peak = 2776.227 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/NCKU_AOC_Team/build/eyeriss_develop.runs/impl_1/TOP_integration_uart_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:19 ; elapsed = 00:00:14 . Memory (MB): peak = 2776.227 ; gain = 0.000
+INFO: [runtcl-4] Executing : report_drc -file TOP_integration_uart_drc_opted.rpt -pb TOP_integration_uart_drc_opted.pb -rpx TOP_integration_uart_drc_opted.rpx
+Command: report_drc -file TOP_integration_uart_drc_opted.rpt -pb TOP_integration_uart_drc_opted.pb -rpx TOP_integration_uart_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Coretcl 2-168] The results of DRC are in file C:/vivado_workspace/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/FPGA_design/Vivado/NCKU_AOC_Team/build/eyeriss_develop.runs/impl_1/TOP_integration_uart_drc_opted.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:15 ; elapsed = 00:00:08 . Memory (MB): peak = 2776.227 ; gain = 0.000
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 2 CPUs
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.036 . Memory (MB): peak = 2776.227 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 9d39d79f
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.046 . Memory (MB): peak = 2776.227 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 2776.227 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+ERROR: [Place 30-640] Place Check : This design requires more RAMB18 and RAMB36/FIFO cells than are available in the target device. This design requires 305 of such cell types but only 280 compatible sites are available in the target device. Please analyze your synthesis results and constraints to ensure the design is mapped to Xilinx primitives as expected. If so, please consider targeting a larger device.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 10f660f65
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:09 . Memory (MB): peak = 2776.227 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 10f660f65
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:09 . Memory (MB): peak = 2776.227 ; gain = 0.000
+ERROR: [Place 30-99] Placer failed with error: 'Implementation Feasibility check failed, Please see the previously displayed individual error or warning messages for more details.'
+Please review all ERROR, CRITICAL WARNING, and WARNING messages during placement to understand the cause for failure.
+Ending Placer Task | Checksum: 10f660f65
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:09 . Memory (MB): peak = 2776.227 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+53 Infos, 0 Warnings, 0 Critical Warnings and 3 Errors encountered.
+place_design failed
+ERROR: [Common 17-69] Command failed: Placer could not place all instances
+INFO: [Common 17-206] Exiting Vivado at Sat Jun 20 20:31:48 2026...

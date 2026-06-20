@@ -24,6 +24,10 @@ types but only 280 compatible sites are available in the target device.
 xc7z020 共 140 個 Block RAM tile（= 280 個 RAMB18 等效 site）。william_v2 比舊版
 （develop / shunwei/fpga-bringup）多吃了 BRAM，超出約 9%。
 
+> 此 before 結果為**實際重跑驗證**（把 SPad 還原成無 attribute 版本，重跑 synth +
+> impl），證據存於 `before_ram_style/`：synth 可過（72 RAMB18），但 impl 在 place
+> 階段以上述 `Place 30-640` 失敗——「before 連 implementation 都過不了」。
+
 **BRAM 用量來源（synth Block RAM mapping）**：
 
 | 推斷記憶體 | 大小 | 數量 | 來源 |
@@ -59,21 +63,30 @@ Verilator 會忽略此 attribute，功能模擬不受影響）：
 
 ## 3. 前後資源對照
 
-| 資源 | 改之前 | 改之後 | Δ | 原因 |
-|---|---|---|---:|---|
-| **Place 結果** | ❌ 失敗（需 305 > 280） | ✅ 成功 | — | BRAM 需求降到容量內 |
-| BRAM 需求（RAMB18-site） | 305 | **233** | −72 | SPad 移出 BRAM |
-| RAMB18（SPad 推斷） | 72 | **0** | −72 | SPad 不再用 BRAM |
-| Block RAM Tile | （>140 需求） | **116.5 / 140（83%）** | — | RAMB36×55 + RAMB18×123 |
-| LUT as Distributed RAM | 24 | **3192（18%）** | +3168 | SPad 改塞 LUTRAM |
-| Slice LUTs（總） | ~73% | **79.75%** | +~6% | LUTRAM 占 LUT |
-| LUT as Logic | 73.45% | **73.29%** | ≈0 | 不受影響 |
-| Slice Registers | 50.44% | **50.44%** | 0 | attribute 不動暫存器 |
-| DSP48E1 | 36 | **36** | 0 | 不受影響 |
-| Bonded IOB | 14 | **14** | 0 | 不受影響 |
+> **兩版都實際重跑驗證過**（before = 無 attribute、after = 加 attribute）。
+> before 欄是 **synth-level utilization**（因為 before 的 impl 在 place 階段就失敗，
+> 產不出 placed 報告）；after 欄是 **placed/routed** 權威數字。
+> 注意：synth-level 的 Block RAM Tile 只統計頂層直接推斷的記憶體（72），但 place
+> 還要加上 BRAM IP 核，總需求才是 **305**——這正是 before 連 place 都過不了的原因。
 
-> LUT-as-Logic / Registers / DSP / IOB 四項前後完全一致 → 證明改動範圍正確，
-> 只搬動了 SPad 的記憶體實作，沒碰任何運算邏輯。
+| 資源 | 改之前（measured, synth） | 改之後（measured, placed） | Δ | 原因 |
+|---|---|---|---:|---|
+| **Place 結果** | ❌ **失敗**（需 305 > 280 site） | ✅ **成功** | — | BRAM 需求降到容量內 |
+| Place BRAM 需求（cell） | **305** | **233** | −72 | SPad 移出 BRAM |
+| Block RAM Tile（synth 頂層） | 72（51.43%） | — | — | before 視角 |
+| Block RAM Tile（placed） | （無法產出） | **116.5 / 140（83.21%）** | — | RAMB36×55 + RAMB18×123 |
+| RAMB18（SPad 推斷） | **72** | **0** | −72 | SPad 不再用 BRAM |
+| RAMB36 | 36 | 55 | — | GLB SRAM + IP |
+| LUT as Distributed RAM | **24**（0.14%） | **3192**（18%） | +3168 | SPad 改塞 LUTRAM |
+| Slice LUTs（總） | **39077**（73.45%） | **42427**（79.75%） | +3350 / +6.3pp | LUTRAM 占 LUT |
+| LUT as Logic | **39053**（73.41%） | **38992**（73.29%） | ≈0 | 不受影響 |
+| Slice Registers | （synth 未列） | 53667（50.44%） | 0* | attribute 不動暫存器 |
+| DSP48E1 | — | 36 | 0* | 不受影響 |
+| Bonded IOB | — | 14 | 0* | 不受影響 |
+
+\* Registers / DSP / IOB 由運算邏輯決定，與記憶體實作方式無關，前後不變。
+LUT-as-Logic 兩版 measured 幾乎相同（39053 → 38992）→ 證明改動範圍正確，
+只搬動了 SPad 的記憶體實作，沒碰任何運算邏輯。
 
 ### Timing（改之後，routed）
 | 指標 | 值 | 判定 |
@@ -122,8 +135,19 @@ synth 頂層只見 36 顆（GLB SRAM），impl 達 116.5 tile，差額都在 BRA
 
 ---
 
-## 6. 佐證檔案（同目錄 `after_ram_style/`）
+## 6. 佐證檔案
+
+**`before_ram_style/`**（無 attribute，impl place 失敗的版本）
+- `utilization_synth.rpt` — synth 資源（72 RAMB18、LUT 73.45%）
+- `impl_place_fail.log` — impl log，含 `Place 30-640`（305 > 280）失敗訊息
+
+**`after_ram_style/`**（加 `ram_style="distributed"`，place/route 成功）
 - `utilization_synth.rpt` — 合成資源用量
 - `utilization_placed.rpt` — 實作資源用量（權威）
 - `timing_summary_routed.rpt` — routed timing（WNS/WHS）
 - `route_status.rpt` — 繞線狀態（0 errors）
+
+> 重現方式：`git checkout HEAD~1 -- .../Former_data_Spad.v .../Later_data_Spad.v`
+> 還原為無 attribute 版（before），Vivado Reset + 重跑；驗畢以 `git checkout HEAD --`
+> 回到 after 版。`build/` 為 gitignored 生成物，每次重跑會被覆蓋，故里程碑報告須
+> 主動拷入本 `Reports/` 目錄。
