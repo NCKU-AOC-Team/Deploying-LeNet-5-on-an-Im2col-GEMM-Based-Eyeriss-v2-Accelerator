@@ -94,6 +94,26 @@ add_files -fileset constrs_1 -norecurse $XDC
 set_property top $TOP [current_fileset]
 update_compile_order -fileset sources_1
 
+# ---- 5.5 合成/實作優化（解 7z020 ~99.9% Slice 邊緣的擁塞、收斂問題）-----------
+#   背景：本設計 LUT 只用 ~69% 但 Slice 佔到 99.86%，瓶頸在「control set 太碎
+#         (5663 組) → slice 塞不滿又佔滿」。預設 synth/impl 在這種邊緣很容易
+#         route 卡死（曾凍結 2h+）。下列設定壓面積 + 合併 control set + 抗擁塞。
+#   注意：這些是設在 run 的「策略/參數」上，GUI 按 Run Synthesis/Implementation
+#         會自動沿用；headless 的 build_bitstream.tcl 也會沿用。
+if {[llength [get_runs -quiet synth_1]]} {
+    # 合成：面積優先 directive；提高 control_set 合併門檻以降低 unique control sets
+    set_property STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE AreaOptimized_high      [get_runs synth_1]
+    set_property STEPS.SYNTH_DESIGN.ARGS.CONTROL_SET_OPT_THRESHOLD 16      [get_runs synth_1]
+    set_property STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY rebuilt         [get_runs synth_1]
+    puts "== synth_1：已套用 AreaOptimized_high + control_set_opt_threshold=16 =="
+}
+if {[llength [get_runs -quiet impl_1]]} {
+    # 實作：抗擁塞策略（place=AltSpreadLogic_high、route=Explore 等）+ 開 phys_opt
+    set_property strategy Congestion_SpreadLogic_high                      [get_runs impl_1]
+    set_property STEPS.PHYS_OPT_DESIGN.IS_ENABLED true                     [get_runs impl_1]
+    puts "== impl_1：已套用 Congestion_SpreadLogic_high + phys_opt =="
+}
+
 puts "==================================================================="
 puts " 專案已就緒：$PROJ_DIR/$PROJ.xpr   top = $TOP"
 puts " 接下來用 Flow Navigator：Run Synthesis -> Run Implementation"
