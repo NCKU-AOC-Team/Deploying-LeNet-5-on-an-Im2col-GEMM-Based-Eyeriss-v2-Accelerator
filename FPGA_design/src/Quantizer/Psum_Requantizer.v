@@ -19,7 +19,11 @@ module Psum_Requantizer (
 );
 
 
-assign data_out = int4_weight_mode ? data_in[14:7] : data_in[17:10];
+wire signed [20:0] requant_shifted = int4_weight_mode ? (data_in + 21'sd32  >>> 6) : (data_in + 21'sd512  >>> 10);
+
+assign data_out = (requant_shifted > 21'sd127)   ? 8'sd127  :
+				  (requant_shifted < -21'sd128) ? -8'sd128 :
+				  requant_shifted[7:0];
 assign data_out_valid = data_in_valid;
 
 
