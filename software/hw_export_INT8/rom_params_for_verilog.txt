@@ -1,0 +1,14 @@
+parameter IACT_DATA_END             = 'd784;
+
+localparam INT8_ROM_WEIGHT_ADDR_1_END        = 'd7;
+localparam INT8_ROM_WEIGHT_DATA_1_END        = 'd81;
+localparam INT8_ROM_WEIGHT_ADDR_2_FORMER_END = 'd135;
+localparam INT8_ROM_WEIGHT_DATA_2_FORMER_END = 'd706;
+localparam INT8_ROM_WEIGHT_ADDR_2_LATER_END  = 'd760;
+localparam INT8_ROM_WEIGHT_DATA_2_LATER_END  = 'd1280;
+localparam INT8_ROM_WEIGHT_ADDR_3_END        = 'd9440;
+localparam INT8_ROM_WEIGHT_DATA_3_END        = 'd23395;
+localparam INT8_ROM_WEIGHT_ADDR_4_END        = 'd26041;
+localparam INT8_ROM_WEIGHT_DATA_4_END        = 'd30724;
+localparam INT8_ROM_WEIGHT_ADDR_5_END        = 'd30988;
+localparam INT8_ROM_WEIGHT_DATA_5_END        = 'd31446;

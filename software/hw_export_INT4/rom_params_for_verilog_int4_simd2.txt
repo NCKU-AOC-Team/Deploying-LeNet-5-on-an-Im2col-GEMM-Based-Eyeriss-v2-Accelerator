@@ -1,0 +1,14 @@
+parameter IACT_DATA_END             = 'd784;
+
+localparam INT4_ROM_WEIGHT_ADDR_1_END        = 'd7;
+localparam INT4_ROM_WEIGHT_DATA_1_END        = 'd73;
+localparam INT4_ROM_WEIGHT_ADDR_2_FORMER_END = 'd127;
+localparam INT4_ROM_WEIGHT_DATA_2_FORMER_END = 'd553;
+localparam INT4_ROM_WEIGHT_ADDR_2_LATER_END  = 'd607;
+localparam INT4_ROM_WEIGHT_DATA_2_LATER_END  = 'd963;
+localparam INT4_ROM_WEIGHT_ADDR_3_END        = 'd9123;
+localparam INT4_ROM_WEIGHT_DATA_3_END        = 'd19024;
+localparam INT4_ROM_WEIGHT_ADDR_4_END        = 'd21670;
+localparam INT4_ROM_WEIGHT_DATA_4_END        = 'd25131;
+localparam INT4_ROM_WEIGHT_ADDR_5_END        = 'd25395;
+localparam INT4_ROM_WEIGHT_DATA_5_END        = 'd25687;
