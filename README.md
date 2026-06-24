@@ -16,11 +16,20 @@
 | `FPGA_design/sim/verilator/` | Verilator simulation flow，包含 `Makefile`、`sim_main.cpp`、behavioral BRAM model。 |
 | `FPGA_design/test/tb/TOP_test/` | TOP-level 測試資料、DRAM、golden label、layer data、ROM/COE。 |
 | `FPGA_design/tools/` | BOYU 分支新增的 INT4 / sparse ROM generator。 |
-| `FPGA_design/Vivado/PYNQ_Z2/` | 原本 Vivado project 與 PYNQ-Z2 相關檔案。 |
+| `FPGA_design/Vivado/NCKU_AOC_Team/` | **★ FPGA 重現 / 燒板看這裡。** 含建好的 bitstream、建專案腳本與重現指南。 |
+| `FPGA_design/Vivado/PYNQ_Z2/` | 原作者 legacy Vivado 專案(flat 結構,**勿用於重現**,詳見該資料夾 README)。 |
 | `docs/` | 架構、controller FSM、module reference 等文件。 |
 | `host_demo/` | Host demo 程式。 |
 
 原始 demo 影片：[YouTube](https://www.youtube.com/watch?v=wLz8Di9vdas&ab_channel=BOCHUNChen)
+
+## FPGA 板上重現 / 燒板
+
+要把設計燒到 PYNQ-Z2 驗證,請看 **[`FPGA_design/Vivado/NCKU_AOC_Team/README.md`](FPGA_design/Vivado/NCKU_AOC_Team/README.md)**。
+該指南提供兩條路徑:
+
+- **快速(推薦驗收)**：直接燒已附的 bitstream `build/eyeriss_develop.runs/impl_1/TOP_integration_uart.bit`,免重跑合成、與 Vivado 版本無關。
+- **完整重建**：用 `setup_project.tcl` 依 develop 現況重建專案後跑 synth/impl/bitstream(專案為 Vivado 2019.1,`xc7z020clg400`)。
 
 ## 原版 Verilator Flow 吃的資料
 
@@ -50,7 +59,7 @@ make sim ITERS=5
 | Behavioral BRAM | `FPGA_design/sim/verilator/bram_behavioral.v` | 取代 Vivado Block Memory Generator，讓 RTL 能在 Verilator 跑。 |
 | Iact / input image | `FPGA_design/test/tb/TOP_test/MEM/DRAM.txt` | 每筆 pattern 讀 784 bytes，透過 `ifmap_BRAM_wr_in` / `ifmap_BRAM_dina_in` 餵入 ifmap BRAM。 |
 | Golden label | `FPGA_design/test/tb/TOP_test/MEM/GOLDEN.txt` | 每筆 pattern 的 expected class label，用來比對 `dut->result`。 |
-| Weight COE source | `FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe` | 原版 sparse weight ROM 來源。 |
+| Weight COE source | `FPGA_design/test/tb/TOP_test/MEM/high_sparsity/ROM_sparse_COE.coe` | 原版 sparse weight ROM 來源(Makefile 預設 `COE_FILE`;與 IP `.xci` 引用同一份)。 |
 | Weight runtime mem | `FPGA_design/sim/verilator/rom_sparse_weight.mem` | Makefile 由 COE 轉出的 Verilator `$readmemh` 檔案，`make clean` 會刪掉後重建。 |
 | Weight ROM module | `ROM_sparse_weight` in `bram_behavioral.v` | Verilator 用的 sparse weight ROM，接到 `TOP_interface.v` 的 `ROM_weight_inst`。 |
 
