@@ -54,6 +54,13 @@ FPGA_design/sim/verilator/rom_sparse_weight.mem
 # To update a committed file after a rebuild use `git add -u` (or -f).
 FPGA_design/Vivado/NCKU_AOC_Team/build/
 
+# PYNQ_Z2 IP: keep only the .xci (IP source of truth); ignore all regenerable
+# output products (*.dcp / *_sim_netlist.* / *_stub.* / synth/ / hdl/ ...).
+# NCKU's setup_project.tcl references these IP in place, so in-place
+# regeneration during synth would otherwise dirty PYNQ_Z2 on every build.
+FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/*/**
+!FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/*/*.xci
+
 # ======================================================================
 #  Advanced / optional -- uncomment to save ~150MB more.
 #  Risk: Vivado must regenerate IP output products on project open
