@@ -1,8 +1,67 @@
+# ======================================================================
+#  .gitignore
+#  Goal: speed up `git status` and shrink the repo, while keeping the
+#  files a grader needs to reproduce results.
+#  Kept in VCS: *.xpr / .srcs sources / *.bit / *_routed.dcp / synth .dcp / *.rpt
+# ======================================================================
+
+# ---------- Existing rules ----------
 sim/
 !FPGA_design/sim/
 ASIC_design/
 
-# Verilator build artifacts and generated mem from .coe
+# ---------- Verilator build artifacts (regenerable) ----------
 FPGA_design/sim/verilator/obj_dir/
+FPGA_design/sim/verilator/obj_dir_*/
 FPGA_design/sim/verilator/*.vcd
 FPGA_design/sim/verilator/rom_sparse_weight.mem
+*.gch
+
+# ---------- Datasets (re-downloadable, keep out of VCS) ----------
+**/data/MNIST/
+**/data/mnist/
+*-idx3-ubyte
+*-idx1-ubyte
+
+# ======================================================================
+#  Vivado -- ignore only regenerable cache / intermediate artifacts
+# ======================================================================
+
+# Tool caches and runtime dirs (rebuilt on project open)
+**/*.cache/
+**/*.hw/
+**/*.ip_user_files/
+**/*.sim/
+**/.Xil/
+**/*.jou
+**/*.log
+**/*.str
+**/*.runs/**/.jobs/
+
+# Intermediate implementation checkpoints (regenerable from routed.dcp / synth)
+# routed.dcp and synth .dcp are intentionally KEPT.
+**/*_opt.dcp
+**/*_placed.dcp
+**/*_physopt.dcp
+
+# Binary report databases (text .rpt equivalents are kept, so ignore these)
+**/*.rpx
+**/*.pb
+
+# ======================================================================
+#  Advanced / optional -- uncomment to save ~150MB more.
+#  Risk: Vivado must regenerate IP output products on project open
+#  (usually automatic, occasionally needs a manual Generate).
+# ======================================================================
+# **/*.srcs/**/ip/**/hdl/blk_mem_gen_*.vhd
+# **/*.gen/
+
+# ======================================================================
+#  Explicitly KEPT (for reference; git needs no rules for these)
+#  - **/*.xpr            Vivado project file
+#  - **/*.srcs/          RTL / .xdc / .xci IP definitions (sources)
+#  - **/*.bit            bitstream
+#  - **/*_routed.dcp     post-route final checkpoint
+#  - **/synth_1/*.dcp    post-synthesis checkpoint
+#  - **/*.rpt            timing / utilization / power text reports
+# ======================================================================
