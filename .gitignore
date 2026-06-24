@@ -48,6 +48,12 @@ FPGA_design/sim/verilator/rom_sparse_weight.mem
 **/*.rpx
 **/*.pb
 
+# Generated Vivado project dir (created by setup_project.tcl). The deliverables
+# committed inside it (.bit / .xpr / *_routed.dcp / synth .dcp / *.rpt) are
+# already tracked and stay tracked; this only hides regenerable run junk.
+# To update a committed file after a rebuild use `git add -u` (or -f).
+FPGA_design/Vivado/NCKU_AOC_Team/build/
+
 # ======================================================================
 #  Advanced / optional -- uncomment to save ~150MB more.
 #  Risk: Vivado must regenerate IP output products on project open
