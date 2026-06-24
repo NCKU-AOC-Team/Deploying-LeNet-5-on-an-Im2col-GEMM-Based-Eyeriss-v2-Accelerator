@@ -7,6 +7,9 @@
 - **板上頂層**：`TOP_integration_uart`（`clock / reset / rx_pin_in` → `result[3:0] / seg_7[6:0]`）
 - **產物**：`build/eyeriss_develop.runs/impl_1/TOP_integration_uart.bit`
 
+> **資料夾歸屬**：`FPGA_design/Vivado/NCKU_AOC_Team/`（本資料夾）是**我們團隊**的重現流程、腳本與交付物，重現/燒板一律看這裡；
+> `FPGA_design/Vivado/PYNQ_Z2/` 是**原作者**的 legacy 專案，僅供參考、**請勿用於重現**（詳見該資料夾的 README）。
+
 ---
 
 ## 🚀 快速重現：直接燒已附的 bitstream（免重建，推薦給驗收）
@@ -20,7 +23,7 @@ implementation 階段固化進 bitstream 的 BRAM,燒錄階段不需要任何 `.
 3. **Program Device** → 選
    `FPGA_design/Vivado/NCKU_AOC_Team/build/eyeriss_develop.runs/impl_1/TOP_integration_uart.bit`
    → **Program**。
-4. 用 `host_demo/` 的 PC sender 經 UART 餵手寫數字 → 看板上 `result` / 七段顯示推論結果。
+4. 用 repo 根目錄的 `host_demo/fpga_uart_demo.py` 經 UART 餵手寫數字 → 看板上 `result` / 七段顯示推論結果。
    （PC 端請用修正版腳本；原始 demo 有 9600 baud / predict 不送出的 bug。）
 
 > 想從 RTL 從頭重建（改了 develop、或要驗證合成流程）才需要下面的完整步驟。
@@ -36,6 +39,9 @@ implementation 階段固化進 bitstream 的 BRAM,燒錄階段不需要任何 `.
 > 必須用下面的腳本，依 develop 現況重新組一個專案。
 
 腳本做的事：建新專案 → 遞迴收 `src/` 全部 `.v`（59 個）→ 就地引用作者的 10 顆 BRAM/ROM IP → 套正確的約束 → 設好頂層。**完全不動作者的 `PYNQ_Z2/`。**
+
+> 註：PYNQ_Z2 的 IP **只有 `.xci` 進版控**,其輸出產物(`*.dcp`/`_sim_netlist`/`_stub`/`synth/`/`hdl/`)已 gitignore;
+> 腳本的 `generate_target all` 會在建置時自動重生這些輸出,所以重現不受影響,且 synth 不會再弄髒 PYNQ_Z2。
 
 ---
 
@@ -71,7 +77,7 @@ implementation 階段固化進 bitstream 的 BRAM,燒錄階段不需要任何 `.
 7. 板子設 **JTAG 開機模式**、接 USB、上電。
 8. Flow Navigator **Open Hardware Manager** → **Open Target → Auto Connect**。
 9. **Program Device** → 選上面的 `.bit` → **Program**。
-10. 用 `host_demo/` 的 PC sender 經 UART 餵手寫數字 → 看板上 `result` / 七段顯示推論結果。
+10. 用 repo 根目錄的 `host_demo/fpga_uart_demo.py` 經 UART 餵手寫數字 → 看板上 `result` / 七段顯示推論結果。
     （PC 端請用修正版腳本；原始 demo 有 9600 baud / predict 不送出的 bug。）
 
 ---
