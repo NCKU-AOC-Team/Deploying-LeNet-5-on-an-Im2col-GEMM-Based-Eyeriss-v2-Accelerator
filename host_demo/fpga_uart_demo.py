@@ -10,8 +10,17 @@
   1. 下拉選 USB-UART 的 COM 埠 -> 按 Connect
   2. 在黑底畫布上手寫一個數字
   3. 按 "Predict (送到 FPGA)" -> 影像縮成 28x28、轉 784 bytes、用 115200 送出
-  4. 辨識結果「看板子上的 4 顆 LED (二進位) 或七段顯示器」, 本程式不會印出答案
-     (這版 bitstream 沒有 UART 回傳, 答案只在板子上)
+  4. 辨識結果「看板子上的 4 顆綠色 user LED (LD3 LD2 LD1 LD0 = 二進位)」, 本程式不印答案
+     (這版 bitstream 沒有 UART 回傳, 答案只在板子上; 例: 0111 -> 7)
+
+硬體接線 (PYNQ-Z2, 純 PL 設計, 不走 micro-USB):
+  - UART RX 腳位 = W6 = Raspberry Pi 40-pin header 實體 pin16; GND = RPi pin14
+  - USB-to-TTL 轉接板:  TX -> W6(pin16),  GND -> pin14
+    ★ 轉接板務必用 3.3V 邏輯 (W6 是 LVCMOS33, 接 5V 會燒腳; 切勿接 5V 紅線)
+  - reset = D19 = 板上按鈕 BTN0: 只在上電/卡住時按一下做初始化
+    每張數字之間「不需」手動 reset (interrupt_gen 約 128ms 自動 re-arm),
+    直接 Clear -> 重畫 -> Predict 即可
+  - result 閒置值 = 0xF (4 顆 LED 全亮) = 尚未有結果; 送圖後約 0.1s 內變成答案
 """
 
 import tkinter as tk
@@ -114,7 +123,9 @@ class App(tk.Tk):
         self.serial_port.flush()
         print("送出 28x28 影像 (0~127):")
         print(arr)
-        self.status.config(text="已送出 784 bytes -> 看板子上的 LED / 七段顯示器!")
+        print("看板子 4 顆綠 LED 讀二進位: LD3 LD2 LD1 LD0 (例 0111 -> 7)")
+        print("約 0.1s 內 LED 從 1111(閒置) 變成答案; 下一張直接 Clear->畫->Predict")
+        self.status.config(text="已送出 784 bytes -> 看板上 4 顆 LED 二進位 (約 0.1s 出結果)")
 
 
 if __name__ == '__main__':

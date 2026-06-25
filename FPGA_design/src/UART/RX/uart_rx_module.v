@@ -8,12 +8,14 @@ module uart_rx_module(
 );
     
 wire rx_pin_H2L;
+wire rx_pin_sync;
 wire rx_band_sig, clock_bps;
 
 H2L_detect rx_in_detect(
     .clock		(clock),
 	.reset		(reset),
     .pin_in		(rx_pin_in),
+    .pin_sync	(rx_pin_sync),
     .sig_H2L	(rx_pin_H2L)
 );
 
@@ -29,7 +31,7 @@ uart_rx_band_gen rx_band_gen(
 uart_rx_ctrl rx_ctrl(
     .clock			(clock),
 	.reset			(reset),
-    .rx_pin_in		(rx_pin_in),
+    .rx_pin_in		(rx_pin_sync),
     .rx_pin_H2L		(rx_pin_H2L),
     .rx_band_sig	(rx_band_sig),
     .rx_clock_bps	(clock_bps),
