@@ -79,7 +79,7 @@ CPP_SRCS   := sim_main.cpp
 
 # LeNet weight ROM: convert Vivado COE to $readmemh format at build time.
 # The behavioral ROM_sparse_weight module reads this on sim start.
-COE_FILE ?= $(if $(INT4_PACKED_SIMD2_FULL_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SIMD2_FULL.coe,$(if $(RUNTIME_INT4_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SIMD2_FULL.coe,$(if $(INT4_PACKED_SIMD2_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SAME_COUNT_SIMD2.coe,$(if $(INT4_PACKED_TWO_LANE_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_TWO_LANE_FC_SIDEBAND.coe,$(if $(INT4_PACKED_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SINGLE_LANE.coe,$(if $(INT4_REGEN_ON),../../test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe,../../Vivado/PYNQ_Z2/PYNQ_Z2.ip_user_files/mem_init_files/ROM_sparse_COE.coe))))))
+COE_FILE ?= $(if $(INT4_PACKED_SIMD2_FULL_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SIMD2_FULL.coe,$(if $(RUNTIME_INT4_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SIMD2_FULL.coe,$(if $(INT4_PACKED_SIMD2_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SAME_COUNT_SIMD2.coe,$(if $(INT4_PACKED_TWO_LANE_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_TWO_LANE_FC_SIDEBAND.coe,$(if $(INT4_PACKED_ON),../../test/tb/TOP_test/MEM/int4_packed/ROM_sparse_INT4_PACKED_SINGLE_LANE.coe,$(if $(INT4_REGEN_ON),../../test/tb/TOP_test/MEM/int4_as_int8_regen/ROM_sparse_INT4_SIGNEXT_AS_INT8.coe,../../test/tb/TOP_test/MEM/high_sparsity/ROM_sparse_COE.coe))))))
 MEM_FILE := rom_sparse_weight.mem
 
 VFLAGS := --cc --exe --build -j 0 \
