@@ -86,8 +86,9 @@ python fpga_uart_demo.py
 
 詳細接線與操作請參閱 [`host_demo/README.md`](host_demo/README.md)。
 
+### FPGA 上板驗證
 
-這是我們的FPGA demo [`Vivado/NCKU_AOC_Team`](https://github.com/NCKU-AOC-Team/Deploying-LeNet-5-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/tree/develop/FPGA_design/Vivado/NCKU_AOC_Team)
+FPGA 之部署與上板驗證於 `develop` 分支完成，可重建之 Vivado 專案位於該分支 [`FPGA_design/Vivado/NCKU_AOC_Team/`](https://github.com/NCKU-AOC-Team/Deploying-VGG-16-on-an-Im2col-GEMM-Based-Eyeriss-v2-Accelerator/tree/develop/FPGA_design/Vivado/NCKU_AOC_Team)，重現前請切換至 `develop`。環境需 Vivado 2019.1 與 PYNQ-Z2（`xc7z020clg400-1`），主機端需 Python 及 `pyserial`、`pillow`、`numpy`，並以 3.3V USB-to-UART 連接開發板。重現可直接以 Vivado Hardware Manager 燒錄預建 bitstream（`FPGA_design/Vivado/NCKU_AOC_Team/build/eyeriss_develop.runs/impl_1/TOP_integration_uart.bit`，LeNet-5 權重已固化於 ROM，燒錄不需 `.coe`），或以 `setup_project.tcl` 重建專案後依序執行 Synthesis、Implementation 與 Generate Bitstream。燒錄後執行 `host_demo/fpga_uart_demo.py`，選擇 COM 埠連線並送出手寫數字影像（UART 115200 baud、8N1，每次固定 784 bytes，28×28），辨識結果以開發板 LED（4-bit 二進位類別）呈現，應與 Demo 影片一致。
 
 ## Repository 結構
 
