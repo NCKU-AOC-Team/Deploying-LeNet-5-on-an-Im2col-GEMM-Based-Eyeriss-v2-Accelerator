@@ -70,24 +70,27 @@ localparam HORIZ	= 1'b1;
 // 						 		Wires  									//
 // ====================================================================	//
 // internal signals
-wire internal_address_ready 	= (data_out_sel == HOR_CAST) 	? horiz_address_out_ready 	: 1'b1; // PE interface is always ready
-wire internal_data_ready 		= (data_out_sel == HOR_CAST) 	? horiz_data_out_ready  	: 1'b1;
-	
-wire internal_address_valid 	= (data_in_sel == HORIZ) 		? horiz_address_in_valid 	: GLB_address_in_valid;
-wire internal_data_valid 		= (data_in_sel == HORIZ) 		? horiz_data_in_valid 		: GLB_data_in_valid;
+wire select_horiz_in_wire 	= data_in_sel == HORIZ;
+wire route_hor_cast_wire 	= data_out_sel == HOR_CAST;
 
-wire [7:0]	internal_address 	= (data_in_sel == HORIZ) 		? horiz_address_in 			: GLB_address_in;
-wire [12:0]	internal_data 		= (data_in_sel == HORIZ) 		? horiz_data_in 			: GLB_data_in;
+wire internal_address_ready 	= route_hor_cast_wire ? horiz_address_out_ready 	: 1'b1; // PE interface is always ready
+wire internal_data_ready 		= route_hor_cast_wire ? horiz_data_out_ready  	: 1'b1;
+	
+wire internal_address_valid 	= select_horiz_in_wire ? horiz_address_in_valid 	: GLB_address_in_valid;
+wire internal_data_valid 		= select_horiz_in_wire ? horiz_data_in_valid 		: GLB_data_in_valid;
+
+wire [7:0]	internal_address 	= select_horiz_in_wire ? horiz_address_in : GLB_address_in;
+wire [12:0]	internal_data 		= select_horiz_in_wire ? horiz_data_in 	: GLB_data_in;
 
 // ====================================================================	//
 // 						 		Combination  							//
 // ====================================================================	//
 // in ready switching
-assign GLB_address_in_ready 	= (data_in_sel == GLB)	 & internal_address_ready;
-assign GLB_data_in_ready 		= (data_in_sel == GLB)	 & internal_data_ready;
+assign GLB_address_in_ready 	= ~select_horiz_in_wire & internal_address_ready;
+assign GLB_data_in_ready 		= ~select_horiz_in_wire & internal_data_ready;
 														 
-assign horiz_address_in_ready 	= (data_in_sel == HORIZ) & internal_address_ready;
-assign horiz_data_in_ready 		= (data_in_sel == HORIZ) & internal_data_ready;
+assign horiz_address_in_ready 	= select_horiz_in_wire & internal_address_ready;
+assign horiz_data_in_ready 		= select_horiz_in_wire & internal_data_ready;
 
 // data out switching
 assign PE_address_out_valid 	= internal_address_valid;
@@ -96,10 +99,10 @@ assign PE_address_out 			= internal_address;
 assign PE_data_out_valid 		= internal_data_valid;
 assign PE_data_out 				= internal_data;
 
-assign horiz_address_out_valid 	= (data_out_sel == HOR_CAST) & internal_address_valid;
+assign horiz_address_out_valid 	= route_hor_cast_wire & internal_address_valid;
 assign horiz_address_out 		= internal_address;
 	
-assign horiz_data_out_valid 	= (data_out_sel == HOR_CAST) & internal_data_valid;
+assign horiz_data_out_valid 	= route_hor_cast_wire & internal_data_valid;
 assign horiz_data_out 			= internal_data;
 
 

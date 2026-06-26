@@ -29,7 +29,7 @@ localparam BUFFER_DEPTH = 4;
 // ================================================	//
 // 					 Registers  					//
 // ================================================	//
-reg [DATA_IN_WIDTH-1:0] buffer [0:BUFFER_DEPTH-1];
+(* ram_style = "distributed" *) reg [DATA_IN_WIDTH-1:0] buffer [0:BUFFER_DEPTH-1];
 reg maybe_full;
 
 reg [1:0] buffer_read_addr;

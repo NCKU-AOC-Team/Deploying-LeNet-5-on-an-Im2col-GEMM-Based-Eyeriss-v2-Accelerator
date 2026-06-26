@@ -79,6 +79,94 @@ Psum_DATA_Spad_BRAM Psum_DATA_Spad_BRAM_inst (
 
 endmodule
 
+module Psum_Spad_Banked (
+	input         			clock,
+	input         			reset,
+	// data signals
+	output        			psum_in_ready,
+	input         			psum_in_valid,
+	input 	signed 	[20:0] 	psum_in,
+	input         			psum_out_ready,
+	output        			psum_out_vaild,
+	output 	signed 	[20:0] 	psum_out,
+	// second lane, used only when two psum indices map to different banks
+	input					lane1_en,
+	input 	signed 	[20:0] 	psum_in_lane1,
+	output 	signed 	[20:0] 	psum_out_lane1,
+	// control signals
+	input  			[4:0]  	read_idx,
+	input  			[4:0]  	write_idx,
+	input  			[4:0]  	read_idx_lane1,
+	input  			[4:0]  	write_idx_lane1,
+	input					psum_spad_clear	
+);
+
+wire data_in_shake = psum_in_ready & psum_in_valid;
+wire lane0_bank = write_idx[0];
+wire lane1_bank = write_idx_lane1[0];
+wire lane1_safe_en = lane1_en & (lane0_bank != lane1_bank);
+
+assign psum_in_ready 	= ~psum_out_ready; 
+assign psum_out_vaild 	= ~psum_in_valid; 
+
+wire bank0_read_lane1 = lane1_safe_en & ~read_idx_lane1[0];
+wire bank1_read_lane1 = lane1_safe_en &  read_idx_lane1[0];
+wire [4:0] bank0_read_addr = bank0_read_lane1 ? {1'b0, read_idx_lane1[4:1]} : {1'b0, read_idx[4:1]};
+wire [4:0] bank1_read_addr = bank1_read_lane1 ? {1'b0, read_idx_lane1[4:1]} : {1'b0, read_idx[4:1]};
+
+wire bank0_write_lane1 = lane1_safe_en & ~write_idx_lane1[0];
+wire bank1_write_lane1 = lane1_safe_en &  write_idx_lane1[0];
+wire bank0_write_lane0 = data_in_shake & ~write_idx[0];
+wire bank1_write_lane0 = data_in_shake &  write_idx[0];
+
+wire bank0_write_en = bank0_write_lane0 | (data_in_shake & bank0_write_lane1);
+wire bank1_write_en = bank1_write_lane0 | (data_in_shake & bank1_write_lane1);
+wire [4:0] bank0_write_addr = bank0_write_lane1 ? {1'b0, write_idx_lane1[4:1]} : {1'b0, write_idx[4:1]};
+wire [4:0] bank1_write_addr = bank1_write_lane1 ? {1'b0, write_idx_lane1[4:1]} : {1'b0, write_idx[4:1]};
+wire signed [20:0] bank0_data_in = bank0_write_lane1 ? psum_in_lane1 : psum_in;
+wire signed [20:0] bank1_data_in = bank1_write_lane1 ? psum_in_lane1 : psum_in;
+
+wire signed [20:0] bank0_data_out;
+wire signed [20:0] bank1_data_out;
+reg read_idx_bank_reg;
+reg read_idx_lane1_bank_reg;
+
+always @(posedge clock) begin
+	if (reset) begin
+		read_idx_bank_reg <= 1'b0;
+		read_idx_lane1_bank_reg <= 1'b0;
+	end
+	else begin
+		read_idx_bank_reg <= read_idx[0];
+		read_idx_lane1_bank_reg <= read_idx_lane1[0];
+	end
+end
+
+assign psum_out = read_idx_bank_reg ? bank1_data_out : bank0_data_out;
+assign psum_out_lane1 = read_idx_lane1_bank_reg ? bank1_data_out : bank0_data_out;
+
+Psum_DATA_Spad_BRAM bank0 (
+	.clk			(clock					),
+	.reset			(reset | psum_spad_clear	),
+	.write_en       (bank0_write_en       	),
+	.write_addr     (bank0_write_addr     	),
+	.read_addr      (bank0_read_addr      	),
+	.data_in        (bank0_data_in        	),
+	.data_out       (bank0_data_out       	)
+);
+
+Psum_DATA_Spad_BRAM bank1 (
+	.clk			(clock					),
+	.reset			(reset | psum_spad_clear	),
+	.write_en       (bank1_write_en       	),
+	.write_addr     (bank1_write_addr     	),
+	.read_addr      (bank1_read_addr      	),
+	.data_in        (bank1_data_in        	),
+	.data_out       (bank1_data_out       	)
+);
+
+endmodule
+
 
 module Psum_DATA_Spad_BRAM (
     input 					clk,

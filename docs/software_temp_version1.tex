@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{amsmath}   % \text, \eqref, align, cases
+\usepackage{amssymb}   % \mathbb
+\usepackage{listings}  % lstlisting
+\usepackage{xcolor}    % listings color support
+\usepackage{float}
+
+\title{AOC Software}
+\date{June 2026}
+
+\begin{document}
+
+\renewcommand{\thesection}{\Roman{section}}
+
+\section{Problem definition}
+
+While Convolutional Neural Networks (CNNs) deliver high accuracy, they often contain a significant amount of zero values in their feature maps after applying ReLU activation functions or network pruning. Traditional dense hardware accelerators process these zeros sequentially, which leads to redundant Multiply-Accumulate (MAC) operations and excessive memory traffic.
+
+Furthermore, deploying neural networks on hardware accelerators is fundamentally bottlenecked by off-chip DRAM bandwidth and power consumption. Standard 32-bit floating-point (FP32) data formats are computationally expensive and inefficient for hardware inference. Therefore, there is a critical need to compress the model parameters and activations into low-bitwidth symmetric integers (e.g., INT8 and INT4) to maximize bandwidth efficiency.
+
+Finally, to fully leverage the computational power of a GEMM-based accelerator like Eyeriss v2, the standard convolution operations cannot be executed directly. The multi-dimensional feature maps must be algorithmically restructured (such as applying the Im2col transformation) to match the hardware's spatial array and dataflow requirements.
+
+\section{Quantization model}
+
+In low-precision quantization scenarios, such as INT4, applying standard Quantization-Aware Training (QAT) methods often causes the quantization range to stretch excessively due to the presence of outliers, thereby shrinking the resolution of the main data distribution. However, by utilizing PACT (Parameterized Clipping Activation for Quantized Neural Networks), we can discard these outliers and focus specifically on the regions where the data is densely distributed.
+
+\section{Proposed method}
+
+\subsection{Forward Pass}
+
+Given a post-ReLU activation tensor $X \in \mathbb{R}_{\ge 0}$, the PACT forward operation is:
+
+\begin{equation}
+X_{\text{clip}} = \min\!\big(\max(X,\,0),\; \alpha\big)
+\label{eq:clip}
+\end{equation}
+
+This constrains every activation value to the interval $[0,\, \alpha]$. The clipped tensor
+is then quantized to unsigned INT4 $[0,15]$:
+
+\begin{equation}
+\text{scale} = \frac{\alpha}{15}, \qquad
+X_{q} = \text{clamp}\!\left(\text{round}\!\left(\frac{X_{\text{clip}}}{\text{scale}}\right),\; 0,\; 15\right)
+\label{eq:quant}
+\end{equation}
+
+Notice that the quantization scale \textbf{depends on $\alpha$}. When $\alpha$ is small,
+the scale is fine-grained (high resolution over a narrow range). When $\alpha$ grows,
+the scale becomes coarser (covers a wider range with the same 16 bins). The fake-quantized
+output is:
+
+\begin{equation}
+\hat{X} = X_{q} \cdot \text{scale}
+\label{eq:dequant}
+\end{equation}
+
+\subsection{How $\alpha$ Learns: The Gradient Signal}
+
+The rounding operation is non-differentiable, so we use STE.
+
+\lstset{
+  language=Python,
+  breaklines=true,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+}
+
+
+
+\lstset{
+  breaklines=true,   % 加這行
+  basicstyle=\ttfamily\small,
+}
+\texttt{STE} cuts the gradient through $(X\_dq - X\_clip)$, leaving only the
+gradient through $X\_clip$:
+
+\begin{align}
+\frac{\partial \hat{X}}{\partial X} &= \mathbf{1}_{0 \le X \le \alpha} \label{eq:ste_x} \\[4pt]
+\frac{\partial \hat{X}}{\partial \alpha} &=
+\begin{cases}
+0, & X \le \alpha \\[2pt]
+1, & X > \alpha
+\end{cases} \label{eq:ste_alpha}
+\end{align}
+
+Equation~\eqref{eq:ste_alpha} is the core mechanism. It says: \textbf{if any activation
+in the batch exceeds $\alpha$, the gradient pushes $\alpha$ up}. If all activations
+stay below $\alpha$, $\alpha$ receives zero gradient and holds steady. This creates a
+natural equilibrium:
+
+\begin{itemize}
+  \item \textbf{Too small $\alpha$}: many activations exceed it $\to$ strong gradient $\to$
+    $\alpha$ grows rapidly.
+  \item \textbf{Too large $\alpha$}: all activations fit inside $\to$ zero gradient on
+    $\alpha$ $\to$ it stops growing (but the network feels coarse quantization and may
+    adjust weights to tighten the activation distribution, indirectly pulling
+    $\alpha$ down through the weight gradient).
+  \item \textbf{Optimal $\alpha$}: just large enough to contain the bulk of
+    activations, clipping only extreme outliers. The quantization scale
+    $\alpha/15$ is then maximally fine-grained for the given distribution.
+\end{itemize}
+
+Crucially, this happens \textbf{per layer, per training step}. Layer 1's $\alpha$
+converges to a value appropriate for Conv1's activation distribution; Layer 5's
+$\alpha$ converges to a (typically smaller) value appropriate for FC3's distribution.
+No manual tuning, no calibration dataset---$\alpha$ learns directly from the
+training loss.
+
+\section{Analysis}
+
+\subsection{Evaluate}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{img/roofline.png}
+\label{fig : roofline}
+\end{figure}
+
+The hardware used by Roofline is the EDP scoring function generated by EDP(Energy delay product), where EDP = E x D.
+
+Two hardware configurations are compared. Hardware0 represents the baseline desgin without SIMD, while 
+Hardware1 represents our proposed design with SIMD width of 2. As show in the roofline model, the convolutional layers (lenet.conv0, lenet.conv1) operate at high arithmetic intensity and are therefore compute-bound on the baseline hardware. However, after introducing SIMD=2, the inflection point doubles, causing the same layers to fall to the left of the ridge point and become memory-bound. This shift indicates that the SIMD extension has successfully saturated the memory bandwidth, and further performance improvement would require increasing off-chip bandwidth rather than adding more compute units.
+
+
+\subsection{Profiling}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{img/profiling.png}
+\label{fig : Profiling}
+\end{figure}
+
+As illustrated in the profiling of the model's inference time, the convolutional layers remain the primary bottleneck. Specifically, a single convolutional layer, highlighted within the red bounding box, accounts for approximately half of the total inference duration. Therefore, proposing a SIMD architecture to enhance the system's peak performance is highly justified and necessary.
+
+
+\end{document}

@@ -68,9 +68,12 @@ localparam TO_PE  	= 1'b1;
 // 						 		Wires  									//
 // ====================================================================	//
 // internal wire
-wire internal_ready = (data_out_sel == TO_PE) 	? PE_out_ready 	: south_out_ready;
-wire internal_valid = (data_in_sel == FROM_GLB) ? GLB_in_valid 	: north_in_valid;
-wire internal_data 	= (data_in_sel == FROM_GLB) ? GLB_in 		: north_in;
+wire select_from_glb_wire = data_in_sel == FROM_GLB;
+wire select_to_pe_wire 	= data_out_sel == TO_PE;
+
+wire internal_ready = select_to_pe_wire 		? PE_out_ready 	: south_out_ready;
+wire internal_valid = select_from_glb_wire 	? GLB_in_valid : north_in_valid;
+wire signed [20:0] internal_data = select_from_glb_wire ? GLB_in : north_in;
 
 
 // ====================================================================	//
@@ -81,13 +84,13 @@ assign PE_in_ready 		= GLB_out_ready;
 assign GLB_out_valid 	= PE_in_valid;
 assign GLB_out 			= PE_in;
 
-assign GLB_in_ready 	= (data_in_sel == FROM_GLB) & internal_ready;
-assign north_in_ready 	= (data_in_sel == FROM_NOR) & internal_ready;
+assign GLB_in_ready 	= select_from_glb_wire & internal_ready;
+assign north_in_ready 	= ~select_from_glb_wire & internal_ready;
 
-assign PE_out_valid 	= (data_out_sel == TO_PE) 	& internal_valid;
+assign PE_out_valid 	= select_to_pe_wire & internal_valid;
 assign PE_out 			= internal_data;
 
-assign south_out_valid 	= (data_out_sel == TO_SOU) 	& internal_valid;
+assign south_out_valid 	= ~select_to_pe_wire & internal_valid;
 assign south_out 		= internal_data;
 
 endmodule

@@ -1,2 +1,80 @@
+# ======================================================================
+#  .gitignore
+#  Goal: speed up `git status` and shrink the repo, while keeping the
+#  files a grader needs to reproduce results.
+#  Kept in VCS: *.xpr / .srcs sources / *.bit / *_routed.dcp / synth .dcp / *.rpt
+# ======================================================================
+
+# ---------- Existing rules ----------
 sim/
+!FPGA_design/sim/
 ASIC_design/
+
+# ---------- Verilator build artifacts (regenerable) ----------
+FPGA_design/sim/verilator/obj_dir/
+FPGA_design/sim/verilator/obj_dir_*/
+FPGA_design/sim/verilator/*.vcd
+FPGA_design/sim/verilator/rom_sparse_weight.mem
+*.gch
+
+# ---------- Datasets (re-downloadable, keep out of VCS) ----------
+**/data/MNIST/
+**/data/mnist/
+*-idx3-ubyte
+*-idx1-ubyte
+
+# ======================================================================
+#  Vivado -- ignore only regenerable cache / intermediate artifacts
+# ======================================================================
+
+# Tool caches and runtime dirs (rebuilt on project open)
+**/*.cache/
+**/*.hw/
+**/*.ip_user_files/
+**/*.sim/
+**/.Xil/
+**/*.jou
+**/*.log
+**/*.str
+**/*.runs/**/.jobs/
+
+# Intermediate implementation checkpoints (regenerable from routed.dcp / synth)
+# routed.dcp and synth .dcp are intentionally KEPT.
+**/*_opt.dcp
+**/*_placed.dcp
+**/*_physopt.dcp
+
+# Binary report databases (text .rpt equivalents are kept, so ignore these)
+**/*.rpx
+**/*.pb
+
+# Generated Vivado project dir (created by setup_project.tcl). The deliverables
+# committed inside it (.bit / .xpr / *_routed.dcp / synth .dcp / *.rpt) are
+# already tracked and stay tracked; this only hides regenerable run junk.
+# To update a committed file after a rebuild use `git add -u` (or -f).
+FPGA_design/Vivado/NCKU_AOC_Team/build/
+
+# PYNQ_Z2 IP: keep only the .xci (IP source of truth); ignore all regenerable
+# output products (*.dcp / *_sim_netlist.* / *_stub.* / synth/ / hdl/ ...).
+# NCKU's setup_project.tcl references these IP in place, so in-place
+# regeneration during synth would otherwise dirty PYNQ_Z2 on every build.
+FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/*/**
+!FPGA_design/Vivado/PYNQ_Z2/PYNQ_Z2.srcs/sources_1/ip/*/*.xci
+
+# ======================================================================
+#  Advanced / optional -- uncomment to save ~150MB more.
+#  Risk: Vivado must regenerate IP output products on project open
+#  (usually automatic, occasionally needs a manual Generate).
+# ======================================================================
+# **/*.srcs/**/ip/**/hdl/blk_mem_gen_*.vhd
+# **/*.gen/
+
+# ======================================================================
+#  Explicitly KEPT (for reference; git needs no rules for these)
+#  - **/*.xpr            Vivado project file
+#  - **/*.srcs/          RTL / .xdc / .xci IP definitions (sources)
+#  - **/*.bit            bitstream
+#  - **/*_routed.dcp     post-route final checkpoint
+#  - **/synth_1/*.dcp    post-synthesis checkpoint
+#  - **/*.rpt            timing / utilization / power text reports
+# ======================================================================

@@ -44,7 +44,7 @@ assign Buffer_write_en = empty ? (~data_out_ready & data_in_shake) : data_in_sha
 // write
 integer i;
 always @(posedge clock) begin
-	if (Buffer_write_en) begin
+	if (reset) begin
 		for(i=0; i<BUFFER_DEPTH; i=i+1) begin
 			Buffer[Buffer_write_addr] <= 'd0; 
 		end

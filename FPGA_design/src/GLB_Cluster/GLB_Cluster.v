@@ -4,586 +4,150 @@
 // 9 iact SRAM connect to 9 PE in PE clusteer (one-to-one).
 // 9 iact SRAM is used to support uni-cast in all layers.
 // 9 iact SRAM is mainly to supply sufficient bandwidth.
-// If SRAM BW is not a bottlenect for specific application, 9 iact SRAM can be scale down to 3. 
-// 
+// If SRAM BW is not a bottlenect for specific application, 9 iact SRAM can be scale down to 3.
+//
 // GLB cluster contains weight ports, but there is no SRAM to store weight data.
 // weight data in GLB cluster will be directly pass to PE cluster and store in PE SPad (SRAM)
+// ------------------------------------------------------------------------------------------------------ //
+// [Refactor ç¬¬ä??æ®µ] port ä»‹é¢?±æ”¤å¹³æ”¹??SystemVerilog unpacked arrayï¼?
+//   iact bank port -> [0:2][0:2]ï¼?x3ï¼‰ã€weight/psum bank port -> [0:2]ï¼?ï¼‰ã€?
+//   9+3 ??bank ?¹ç”¨ generate å¯¦ä??–ã€‚è?æ¨¡ç? Iact_SRAM_Bank / Psum_SRAM_Bank ?ªæ”¹??
+//   è¡Œç‚ºç­‰åƒ¹ï¼ˆç? port ?“å? + å¯¦ä??–æ”¶?‚ï??‚ä?å±?Cluster_Group ??GLB å¯¦ä??–é??Œæ­¥?¹ç‚º array??
+//   å¯¦ä??ï?inActSRAM_r_c -> IACT_BANK[r][c].uï¼›pSumSRAMi -> PSUM_BANK[i].u??
 // ====================================================================================================== //
 
 
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module GLB_Cluster (
 	input        			clock,
 	input        			reset,
-	
-	// iact SRAM Bank 0_0
-	output 			       	iact_SRAM_Bank_0_0_address_in_ready,
-	input  			       	iact_SRAM_Bank_0_0_address_in_valid,
-	input  			[6:0]  	iact_SRAM_Bank_0_0_address_in,
-	output 			       	iact_SRAM_Bank_0_0_data_in_ready,
-	input  			       	iact_SRAM_Bank_0_0_data_in_valid,
-	input  			[11:0] 	iact_SRAM_Bank_0_0_data_in,
-												
-	input  			       	iact_SRAM_Bank_0_0_address_out_ready,
-	output 			       	iact_SRAM_Bank_0_0_address_out_valid,
-	output 			[6:0]  	iact_SRAM_Bank_0_0_address_out,
-	input  			       	iact_SRAM_Bank_0_0_data_out_ready,
-	output 			       	iact_SRAM_Bank_0_0_data_out_valid,
-	output 			[11:0] 	iact_SRAM_Bank_0_0_data_out,
-												
-	input  			       	iact_SRAM_Bank_0_0_write_en,
-	output 			       	iact_SRAM_Bank_0_0_write_done,
-	input  			       	iact_SRAM_Bank_0_0_read_en,
-	input  			[9:0]  	iact_SRAM_Bank_0_0_read_addr,
-	output 			       	iact_SRAM_Bank_0_0_read_done,		
-	
-	// iact SRAM Bank 0_1
-	output 			      	iact_SRAM_Bank_0_1_address_in_ready,
-	input  			      	iact_SRAM_Bank_0_1_address_in_valid,
-	input  			[6:0] 	iact_SRAM_Bank_0_1_address_in,
-	output 			      	iact_SRAM_Bank_0_1_data_in_ready,
-	input  			      	iact_SRAM_Bank_0_1_data_in_valid,
-	input  			[11:0]	iact_SRAM_Bank_0_1_data_in,
-												
-	input  			      	iact_SRAM_Bank_0_1_address_out_ready,
-	output 			      	iact_SRAM_Bank_0_1_address_out_valid,
-	output 			[6:0] 	iact_SRAM_Bank_0_1_address_out,
-	input  			      	iact_SRAM_Bank_0_1_data_out_ready,
-	output 			      	iact_SRAM_Bank_0_1_data_out_valid,
-	output 			[11:0]	iact_SRAM_Bank_0_1_data_out,
-												
-	input  			      	iact_SRAM_Bank_0_1_write_en,
-	output 			      	iact_SRAM_Bank_0_1_write_done,
-	input  			      	iact_SRAM_Bank_0_1_read_en,
-	input  			[9:0] 	iact_SRAM_Bank_0_1_read_addr,
-	output 			      	iact_SRAM_Bank_0_1_read_done,		
-		
-	// iact SRAM Bank 0_2
-	output 			       	iact_SRAM_Bank_0_2_address_in_ready,
-	input  			       	iact_SRAM_Bank_0_2_address_in_valid,
-	input  			[6:0]  	iact_SRAM_Bank_0_2_address_in,
-	output 			       	iact_SRAM_Bank_0_2_data_in_ready,
-	input  			       	iact_SRAM_Bank_0_2_data_in_valid,
-	input  			[11:0] 	iact_SRAM_Bank_0_2_data_in,
-												
-	input  			       	iact_SRAM_Bank_0_2_address_out_ready,
-	output 			       	iact_SRAM_Bank_0_2_address_out_valid,
-	output 			[6:0]  	iact_SRAM_Bank_0_2_address_out,
-	input  			       	iact_SRAM_Bank_0_2_data_out_ready,
-	output 			       	iact_SRAM_Bank_0_2_data_out_valid,
-	output 			[11:0] 	iact_SRAM_Bank_0_2_data_out,
-												
-	input  			       	iact_SRAM_Bank_0_2_write_en,
-	output 			       	iact_SRAM_Bank_0_2_write_done,
-	input  			       	iact_SRAM_Bank_0_2_read_en,
-	input  			[9:0]  	iact_SRAM_Bank_0_2_read_addr,
-	output 			       	iact_SRAM_Bank_0_2_read_done,	
-	
-	// iact SRAM Bank 1_0
-	output			      	iact_SRAM_Bank_1_0_address_in_ready,
-	input 			      	iact_SRAM_Bank_1_0_address_in_valid,
-	input 			[6:0] 	iact_SRAM_Bank_1_0_address_in,
-	output			      	iact_SRAM_Bank_1_0_data_in_ready,
-	input 			      	iact_SRAM_Bank_1_0_data_in_valid,
-	input 			[11:0]	iact_SRAM_Bank_1_0_data_in,
-												
-	input 			      	iact_SRAM_Bank_1_0_address_out_ready,
-	output			      	iact_SRAM_Bank_1_0_address_out_valid,
-	output			[6:0] 	iact_SRAM_Bank_1_0_address_out,
-	input 			      	iact_SRAM_Bank_1_0_data_out_ready,
-	output			      	iact_SRAM_Bank_1_0_data_out_valid,
-	output			[11:0]	iact_SRAM_Bank_1_0_data_out,
-												
-	input 			      	iact_SRAM_Bank_1_0_write_en,
-	output			      	iact_SRAM_Bank_1_0_write_done,
-	input 			      	iact_SRAM_Bank_1_0_read_en,
-	input 			[9:0] 	iact_SRAM_Bank_1_0_read_addr,
-	output			      	iact_SRAM_Bank_1_0_read_done,		
-								
-	// iact SRAM Bank 1_1       
-	output			       	iact_SRAM_Bank_1_1_address_in_ready,
-	input 			       	iact_SRAM_Bank_1_1_address_in_valid,
-	input 			[6:0]  	iact_SRAM_Bank_1_1_address_in,
-	output			       	iact_SRAM_Bank_1_1_data_in_ready,
-	input 			       	iact_SRAM_Bank_1_1_data_in_valid,
-	input 			[11:0] 	iact_SRAM_Bank_1_1_data_in,
-												
-	input 			       	iact_SRAM_Bank_1_1_address_out_ready,
-	output			       	iact_SRAM_Bank_1_1_address_out_valid,
-	output			[6:0]  	iact_SRAM_Bank_1_1_address_out,
-	input 			       	iact_SRAM_Bank_1_1_data_out_ready,
-	output			       	iact_SRAM_Bank_1_1_data_out_valid,
-	output			[11:0] 	iact_SRAM_Bank_1_1_data_out,
-												
-	input 			       	iact_SRAM_Bank_1_1_write_en,
-	output			       	iact_SRAM_Bank_1_1_write_done,
-	input 			       	iact_SRAM_Bank_1_1_read_en,
-	input 			[9:0]  	iact_SRAM_Bank_1_1_read_addr,
-	output			       	iact_SRAM_Bank_1_1_read_done,		
-								 
-	// iact SRAM Bank 1_2        
-	output 			       	iact_SRAM_Bank_1_2_address_in_ready,
-	input  			       	iact_SRAM_Bank_1_2_address_in_valid,
-	input  			[6:0]  	iact_SRAM_Bank_1_2_address_in,
-	output 			       	iact_SRAM_Bank_1_2_data_in_ready,
-	input  			       	iact_SRAM_Bank_1_2_data_in_valid,
-	input  			[11:0] 	iact_SRAM_Bank_1_2_data_in,
-												
-	input  			       	iact_SRAM_Bank_1_2_address_out_ready,
-	output 			       	iact_SRAM_Bank_1_2_address_out_valid,
-	output 			[6:0]  	iact_SRAM_Bank_1_2_address_out,
-	input  			       	iact_SRAM_Bank_1_2_data_out_ready,
-	output 			       	iact_SRAM_Bank_1_2_data_out_valid,
-	output 			[11:0] 	iact_SRAM_Bank_1_2_data_out,
-												
-	input  			       	iact_SRAM_Bank_1_2_write_en,
-	output 			       	iact_SRAM_Bank_1_2_write_done,
-	input  			       	iact_SRAM_Bank_1_2_read_en,
-	input  			[9:0]  	iact_SRAM_Bank_1_2_read_addr,
-	output 			       	iact_SRAM_Bank_1_2_read_done,	
 
+	// ===== iact SRAM Bank [row][col] = [0:2][0:2] ===== //
+	output       			iact_SRAM_Bank_address_in_ready  [0:2][0:2],
+	input        			iact_SRAM_Bank_address_in_valid  [0:2][0:2],
+	input  [6:0]            iact_SRAM_Bank_address_in        [0:2][0:2],
+	output       			iact_SRAM_Bank_data_in_ready     [0:2][0:2],
+	input        			iact_SRAM_Bank_data_in_valid     [0:2][0:2],
+	input  [`BOYU_LATER_STREAM_RANGE]           iact_SRAM_Bank_data_in           [0:2][0:2],
 
-	// iact SRAM Bank 2_0
-	output 			       	iact_SRAM_Bank_2_0_address_in_ready,
-	input  			       	iact_SRAM_Bank_2_0_address_in_valid,
-	input  			[6:0]  	iact_SRAM_Bank_2_0_address_in,
-	output 			       	iact_SRAM_Bank_2_0_data_in_ready,
-	input  			       	iact_SRAM_Bank_2_0_data_in_valid,
-	input  			[11:0] 	iact_SRAM_Bank_2_0_data_in,
-												
-	input  			       	iact_SRAM_Bank_2_0_address_out_ready,
-	output 			       	iact_SRAM_Bank_2_0_address_out_valid,
-	output 			[6:0]  	iact_SRAM_Bank_2_0_address_out,
-	input  			       	iact_SRAM_Bank_2_0_data_out_ready,
-	output 			       	iact_SRAM_Bank_2_0_data_out_valid,
-	output 			[11:0] 	iact_SRAM_Bank_2_0_data_out,
-												
-	input  			       	iact_SRAM_Bank_2_0_write_en,
-	output 			       	iact_SRAM_Bank_2_0_write_done,
-	input  			       	iact_SRAM_Bank_2_0_read_en,
-	input  			[9:0]  	iact_SRAM_Bank_2_0_read_addr,
-	output 			       	iact_SRAM_Bank_2_0_read_done,		
-								 
-	// iact SRAM Bank 2_1        
-	output 			       	iact_SRAM_Bank_2_1_address_in_ready,
-	input  			       	iact_SRAM_Bank_2_1_address_in_valid,
-	input  			[6:0]  	iact_SRAM_Bank_2_1_address_in,
-	output 			       	iact_SRAM_Bank_2_1_data_in_ready,
-	input  			       	iact_SRAM_Bank_2_1_data_in_valid,
-	input  			[11:0] 	iact_SRAM_Bank_2_1_data_in,
-												
-	input  			       	iact_SRAM_Bank_2_1_address_out_ready,
-	output 			       	iact_SRAM_Bank_2_1_address_out_valid,
-	output 			[6:0]  	iact_SRAM_Bank_2_1_address_out,
-	input  			       	iact_SRAM_Bank_2_1_data_out_ready,
-	output 			       	iact_SRAM_Bank_2_1_data_out_valid,
-	output 			[11:0] 	iact_SRAM_Bank_2_1_data_out,
-												
-	input  			       	iact_SRAM_Bank_2_1_write_en,
-	output 			       	iact_SRAM_Bank_2_1_write_done,
-	input  			       	iact_SRAM_Bank_2_1_read_en,
-	input  			[9:0]  	iact_SRAM_Bank_2_1_read_addr,
-	output 			       	iact_SRAM_Bank_2_1_read_done,		
-								
-	// iact SRAM Bank 2_2        
-	output 			       	iact_SRAM_Bank_2_2_address_in_ready,
-	input  			       	iact_SRAM_Bank_2_2_address_in_valid,
-	input  			[6:0]  	iact_SRAM_Bank_2_2_address_in,
-	output 			       	iact_SRAM_Bank_2_2_data_in_ready,
-	input  			       	iact_SRAM_Bank_2_2_data_in_valid,
-	input  			[11:0] 	iact_SRAM_Bank_2_2_data_in,
-												
-	input  			       	iact_SRAM_Bank_2_2_address_out_ready,
-	output 			       	iact_SRAM_Bank_2_2_address_out_valid,
-	output 			[6:0]  	iact_SRAM_Bank_2_2_address_out,
-	input  			       	iact_SRAM_Bank_2_2_data_out_ready,
-	output 			       	iact_SRAM_Bank_2_2_data_out_valid,
-	output 			[11:0] 	iact_SRAM_Bank_2_2_data_out,
-												
-	input  			       	iact_SRAM_Bank_2_2_write_en,
-	output 			       	iact_SRAM_Bank_2_2_write_done,
-	input  			       	iact_SRAM_Bank_2_2_read_en,
-	input  			[9:0]  	iact_SRAM_Bank_2_2_read_addr,
-	output 			       	iact_SRAM_Bank_2_2_read_done,	
-	
-	
-	// There is no SRAM to store weights from TOP DRAM
-	// weights ares directly stored in PE spad
-	output 			       	weight_0_address_in_ready,
-	input  			       	weight_0_address_in_valid,
-	input  			[7:0]  	weight_0_address_in,
-	output 			       	weight_0_data_in_ready,
-	input  			       	weight_0_data_in_valid,
-	input  			[12:0] 	weight_0_data_in,
-					
-	input  			       	weight_0_address_out_ready,
-	output 			       	weight_0_address_out_valid,
-	output 			[7:0]  	weight_0_address_out,
-	input  			       	weight_0_data_out_ready,
-	output 			       	weight_0_data_out_valid,
-	output 			[12:0] 	weight_0_data_out,
-					
-	output 			       	weight_1_address_in_ready,
-	input  			       	weight_1_address_in_valid,
-	input  			[7:0]  	weight_1_address_in,
-	output 			       	weight_1_data_in_ready,
-	input  			       	weight_1_data_in_valid,
-	input  			[12:0] 	weight_1_data_in,
-										
-	input  			       	weight_1_address_out_ready,
-	output 			       	weight_1_address_out_valid,
-	output 			[7:0]  	weight_1_address_out,
-	input  			       	weight_1_data_out_ready,
-	output 			       	weight_1_data_out_valid,
-	output 			[12:0] 	weight_1_data_out,
-					
-	output 			       	weight_2_address_in_ready,
-	input  			       	weight_2_address_in_valid,
-	input  			[7:0]  	weight_2_address_in,
-	output 			       	weight_2_data_in_ready,
-	input  			       	weight_2_data_in_valid,
-	input  			[12:0] 	weight_2_data_in,
-										
-	input  			       	weight_2_address_out_ready,
-	output 			       	weight_2_address_out_valid,
-	output 			[7:0]  	weight_2_address_out,
-	input  			       	weight_2_data_out_ready,
-	output 			       	weight_2_data_out_valid,
-	output 			[12:0] 	weight_2_data_out,
-	
-	// psum SRAM Bank 0
-	output        			psum_SRAM_Bank_0_data_in_ready,        
-	input         			psum_SRAM_Bank_0_data_in_valid,        
-	input 	signed  [20:0] 	psum_SRAM_Bank_0_data_in,  
-	input         			psum_SRAM_Bank_0_data_out_ready,      
-	output        			psum_SRAM_Bank_0_data_out_valid,      
-	output 	signed	[20:0] 	psum_SRAM_Bank_0_data_out,    
-	
-	input 			       	psum_SRAM_Bank_0_write_en,     
-	input 			[9:0]  	psum_SRAM_Bank_0_write_addr,        
-	output			       	psum_SRAM_Bank_0_write_done,  
-	input 			       	psum_SRAM_Bank_0_read_out_en,   
-	input 			       	psum_SRAM_Bank_0_read_en,      
-	input 			[9:0]  	psum_SRAM_Bank_0_read_addr,     
-	
-	// psum SRAM Bank 1
-	output        			psum_SRAM_Bank_1_data_in_ready,      
-	input         			psum_SRAM_Bank_1_data_in_valid,      
-	input 	signed	[20:0] 	psum_SRAM_Bank_1_data_in,     
-	input         			psum_SRAM_Bank_1_data_out_ready,     
-	output        			psum_SRAM_Bank_1_data_out_valid,     
-	output 	signed	[20:0] 	psum_SRAM_Bank_1_data_out,    
-								 
-	input  			      	psum_SRAM_Bank_1_write_en,      
-	input  			[9:0] 	psum_SRAM_Bank_1_write_addr,
-	output 			      	psum_SRAM_Bank_1_write_done,
-	input  			       	psum_SRAM_Bank_1_read_out_en,  
-	input  			      	psum_SRAM_Bank_1_read_en,   
-	input  			[9:0] 	psum_SRAM_Bank_1_read_addr, 
-	
-	// psum SRAM Bank 2
-	output        			psum_SRAM_Bank_2_data_in_ready,      
-	input         			psum_SRAM_Bank_2_data_in_valid,      
-	input 	signed	[20:0]	psum_SRAM_Bank_2_data_in,     
-	input         			psum_SRAM_Bank_2_data_out_ready,     
-	output        			psum_SRAM_Bank_2_data_out_valid,     
-	output 	signed	[20:0]	psum_SRAM_Bank_2_data_out,    
-								 
-	input         			psum_SRAM_Bank_2_write_en,      
-	input  			[9:0]  	psum_SRAM_Bank_2_write_addr,
-	output 			       	psum_SRAM_Bank_2_write_done,
-	input         			psum_SRAM_Bank_2_read_out_en,  
-	input  			       	psum_SRAM_Bank_2_read_en,   
-	input  			[9:0]  	psum_SRAM_Bank_2_read_addr, 
-	
-	input			[4:0]	PSUM_DEPTH			
+	input        			iact_SRAM_Bank_address_out_ready [0:2][0:2],
+	output       			iact_SRAM_Bank_address_out_valid [0:2][0:2],
+	output [6:0]            iact_SRAM_Bank_address_out       [0:2][0:2],
+	input        			iact_SRAM_Bank_data_out_ready    [0:2][0:2],
+	output       			iact_SRAM_Bank_data_out_valid    [0:2][0:2],
+	output [`BOYU_LATER_STREAM_RANGE]           iact_SRAM_Bank_data_out          [0:2][0:2],
+
+	input        			iact_SRAM_Bank_write_en          [0:2][0:2],
+	output       			iact_SRAM_Bank_write_done        [0:2][0:2],
+	input        			iact_SRAM_Bank_read_en           [0:2][0:2],
+	input  [9:0]            iact_SRAM_Bank_read_addr         [0:2][0:2],
+	output       			iact_SRAM_Bank_read_done         [0:2][0:2],
+
+	// ===== weight pass-through [0:2]ï¼ˆç„¡ SRAMï¼Œç›´?¥ç©¿??GLB çµ?PE spadï¼?==== //
+	output       			weight_address_in_ready  [0:2],
+	input        			weight_address_in_valid  [0:2],
+	input  [7:0]            weight_address_in        [0:2],
+	output       			weight_data_in_ready     [0:2],
+	input        			weight_data_in_valid     [0:2],
+	input  [12:0]           weight_data_in           [0:2],
+
+	input        			weight_address_out_ready [0:2],
+	output       			weight_address_out_valid [0:2],
+	output [7:0]            weight_address_out       [0:2],
+	input        			weight_data_out_ready    [0:2],
+	output       			weight_data_out_valid    [0:2],
+	output [12:0]           weight_data_out          [0:2],
+
+	// ===== psum SRAM Bank [0:2] ===== //
+	output       			psum_SRAM_Bank_data_in_ready  [0:2],
+	input        			psum_SRAM_Bank_data_in_valid  [0:2],
+	input  signed [20:0]    psum_SRAM_Bank_data_in        [0:2],
+	input        			psum_SRAM_Bank_data_out_ready [0:2],
+	output       			psum_SRAM_Bank_data_out_valid [0:2],
+	output signed [20:0]    psum_SRAM_Bank_data_out       [0:2],
+
+	input        			psum_SRAM_Bank_write_en       [0:2],
+	input  [9:0]            psum_SRAM_Bank_write_addr     [0:2],
+	output       			psum_SRAM_Bank_write_done     [0:2],
+	input        			psum_SRAM_Bank_read_out_en    [0:2],
+	input        			psum_SRAM_Bank_read_en        [0:2],
+	input  [9:0]            psum_SRAM_Bank_read_addr      [0:2],
+
+	input  [4:0]            PSUM_DEPTH
 );
 
+genvar r, c, i;
 
 // ====================================================================	//
-// 						 		Combination  							//
+// 		weights directly pass through GLB cluster (3 æ¢ï?generate)		//
 // ====================================================================	//
-// weights directly pass throught GLB cluster
-assign weight_0_address_in_ready  = weight_0_address_out_ready;
-assign weight_0_data_in_ready     = weight_0_data_out_ready;
-assign weight_0_address_out       = weight_0_address_in;
-assign weight_0_address_out_valid = weight_0_address_in_valid;
-assign weight_0_data_out_valid    = weight_0_data_in_valid;
-assign weight_0_data_out          = weight_0_data_in;
-
-assign weight_1_address_in_ready  = weight_1_address_out_ready;
-assign weight_1_data_in_ready     = weight_1_data_out_ready;
-assign weight_1_address_out       = weight_1_address_in;
-assign weight_1_address_out_valid = weight_1_address_in_valid;
-assign weight_1_data_out_valid    = weight_1_data_in_valid;
-assign weight_1_data_out          = weight_1_data_in;
-
-assign weight_2_address_in_ready  = weight_2_address_out_ready;
-assign weight_2_data_in_ready     = weight_2_data_out_ready;
-assign weight_2_address_out       = weight_2_address_in;
-assign weight_2_address_out_valid = weight_2_address_in_valid;
-assign weight_2_data_out_valid    = weight_2_data_in_valid;
-assign weight_2_data_out          = weight_2_data_in;
-
+generate
+	for (i = 0; i < 3; i = i + 1) begin: WEIGHT_PASS
+		assign weight_address_in_ready [i] = weight_address_out_ready[i];
+		assign weight_data_in_ready    [i] = weight_data_out_ready   [i];
+		assign weight_address_out      [i] = weight_address_in       [i];
+		assign weight_address_out_valid[i] = weight_address_in_valid [i];
+		assign weight_data_out_valid   [i] = weight_data_in_valid    [i];
+		assign weight_data_out         [i] = weight_data_in          [i];
+	end
+endgenerate
 
 // ====================================================================	//
-// 						 		Instantiation  							//
+// 				9 ??iact SRAM bankï¼?x3ï¼Œgenerateï¼?					//
 // ====================================================================	//
-Iact_SRAM_Bank inActSRAM_0_0 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_0_0_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_0_0_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_0_0_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_0_0_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_0_0_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_0_0_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_0_0_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_0_0_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_0_0_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_0_0_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_0_0_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_0_0_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_0_0_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_0_0_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_0_0_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_0_0_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_0_0_read_done			) 
-);
+generate
+	for (r = 0; r < 3; r = r + 1) begin: IACT_BANK_R
+		for (c = 0; c < 3; c = c + 1) begin: IACT_BANK
+			Iact_SRAM_Bank u (
+				.clock                  (clock),
+				.reset                  (reset),
+				.iact_address_in_ready	(iact_SRAM_Bank_address_in_ready  [r][c]),
+				.iact_address_in_valid	(iact_SRAM_Bank_address_in_valid  [r][c]),
+				.iact_address_in		(iact_SRAM_Bank_address_in        [r][c]),
+				.iact_data_in_ready		(iact_SRAM_Bank_data_in_ready     [r][c]),
+				.iact_data_in_valid		(iact_SRAM_Bank_data_in_valid     [r][c]),
+				.iact_data_in		    (iact_SRAM_Bank_data_in           [r][c]),
+				.iact_address_out_ready	(iact_SRAM_Bank_address_out_ready [r][c]),
+				.iact_address_out_valid	(iact_SRAM_Bank_address_out_valid [r][c]),
+				.iact_address_out		(iact_SRAM_Bank_address_out       [r][c]),
+				.iact_data_out_ready	(iact_SRAM_Bank_data_out_ready    [r][c]),
+				.iact_data_out_valid	(iact_SRAM_Bank_data_out_valid    [r][c]),
+				.iact_data_out		    (iact_SRAM_Bank_data_out          [r][c]),
+				.iact_write_en   	    (iact_SRAM_Bank_write_en          [r][c]),
+				.iact_write_done      	(iact_SRAM_Bank_write_done        [r][c]),
+				.iact_read_en   	    (iact_SRAM_Bank_read_en           [r][c]),
+				.iact_read_addr      	(iact_SRAM_Bank_read_addr         [r][c]),
+				.iact_read_done      	(iact_SRAM_Bank_read_done         [r][c])
+			);
+		end
+	end
+endgenerate
 
+// ====================================================================	//
+// 				3 ??psum SRAM bankï¼ˆgenerateï¼?						//
+// ====================================================================	//
+generate
+	for (i = 0; i < 3; i = i + 1) begin: PSUM_BANK
+		Psum_SRAM_Bank u (
+			.clock          	(clock),
+			.reset          	(reset),
+			.psum_data_in_ready (psum_SRAM_Bank_data_in_ready [i]),
+			.psum_data_in_valid (psum_SRAM_Bank_data_in_valid [i]),
+			.psum_data_in       (psum_SRAM_Bank_data_in       [i]),
+			.psum_data_out_ready(psum_SRAM_Bank_data_out_ready[i]),
+			.psum_data_out_valid(psum_SRAM_Bank_data_out_valid[i]),
+			.psum_data_out      (psum_SRAM_Bank_data_out      [i]),
+			.psum_write_en      (psum_SRAM_Bank_write_en      [i]),
+			.psum_write_addr    (psum_SRAM_Bank_write_addr    [i]),
+			.psum_write_done    (psum_SRAM_Bank_write_done    [i]),
+			.psum_read_out_en	(psum_SRAM_Bank_read_out_en   [i]),
+			.psum_read_en       (psum_SRAM_Bank_read_en       [i]),
+			.psum_read_addr     (psum_SRAM_Bank_read_addr     [i]),
+			.PSUM_DEPTH			(PSUM_DEPTH)
+		);
+	end
+endgenerate
 
-Iact_SRAM_Bank inActSRAM_0_1 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_0_1_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_0_1_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_0_1_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_0_1_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_0_1_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_0_1_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_0_1_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_0_1_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_0_1_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_0_1_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_0_1_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_0_1_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_0_1_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_0_1_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_0_1_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_0_1_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_0_1_read_done			) 
-);
-
-
-Iact_SRAM_Bank inActSRAM_0_2 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_0_2_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_0_2_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_0_2_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_0_2_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_0_2_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_0_2_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_0_2_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_0_2_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_0_2_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_0_2_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_0_2_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_0_2_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_0_2_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_0_2_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_0_2_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_0_2_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_0_2_read_done			) 
-);
-
-Iact_SRAM_Bank inActSRAM_1_0 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_1_0_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_1_0_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_1_0_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_1_0_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_1_0_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_1_0_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_1_0_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_1_0_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_1_0_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_1_0_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_1_0_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_1_0_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_1_0_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_1_0_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_1_0_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_1_0_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_1_0_read_done			) 
-);
-
-Iact_SRAM_Bank inActSRAM_1_1 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_1_1_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_1_1_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_1_1_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_1_1_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_1_1_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_1_1_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_1_1_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_1_1_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_1_1_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_1_1_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_1_1_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_1_1_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_1_1_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_1_1_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_1_1_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_1_1_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_1_1_read_done			) 
-);
-
-Iact_SRAM_Bank inActSRAM_1_2 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_1_2_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_1_2_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_1_2_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_1_2_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_1_2_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_1_2_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_1_2_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_1_2_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_1_2_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_1_2_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_1_2_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_1_2_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_1_2_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_1_2_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_1_2_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_1_2_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_1_2_read_done			) 
-);
-
-Iact_SRAM_Bank inActSRAM_2_0 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_2_0_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_2_0_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_2_0_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_2_0_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_2_0_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_2_0_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_2_0_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_2_0_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_2_0_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_2_0_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_2_0_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_2_0_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_2_0_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_2_0_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_2_0_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_2_0_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_2_0_read_done			) 
-);
-
-
-Iact_SRAM_Bank inActSRAM_2_1 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_2_1_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_2_1_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_2_1_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_2_1_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_2_1_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_2_1_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_2_1_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_2_1_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_2_1_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_2_1_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_2_1_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_2_1_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_2_1_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_2_1_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_2_1_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_2_1_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_2_1_read_done			) 
-);
-
-
-Iact_SRAM_Bank inActSRAM_2_2 ( 
-	.clock                  (clock                  				),
-	.reset                  (reset                  				),
-	.iact_address_in_ready	(iact_SRAM_Bank_2_2_address_in_ready	),
-	.iact_address_in_valid	(iact_SRAM_Bank_2_2_address_in_valid	),
-	.iact_address_in		(iact_SRAM_Bank_2_2_address_in			),
-	.iact_data_in_ready		(iact_SRAM_Bank_2_2_data_in_ready		),
-	.iact_data_in_valid		(iact_SRAM_Bank_2_2_data_in_valid		),
-	.iact_data_in		    (iact_SRAM_Bank_2_2_data_in				),
-	.iact_address_out_ready	(iact_SRAM_Bank_2_2_address_out_ready	),
-	.iact_address_out_valid	(iact_SRAM_Bank_2_2_address_out_valid	),
-	.iact_address_out		(iact_SRAM_Bank_2_2_address_out   		),
-	.iact_data_out_ready	(iact_SRAM_Bank_2_2_data_out_ready		),
-	.iact_data_out_valid	(iact_SRAM_Bank_2_2_data_out_valid		),
-	.iact_data_out		    (iact_SRAM_Bank_2_2_data_out			),
-	.iact_write_en   	    (iact_SRAM_Bank_2_2_write_en			),
-	.iact_write_done      	(iact_SRAM_Bank_2_2_write_done			),
-	.iact_read_en   	    (iact_SRAM_Bank_2_2_read_en				),
-	.iact_read_addr      	(iact_SRAM_Bank_2_2_read_addr			),
-	.iact_read_done      	(iact_SRAM_Bank_2_2_read_done			) 
-);
-
-
-Psum_SRAM_Bank pSumSRAM0 ( 
-	.clock          	(clock         					),
-	.reset          	(reset         					),
-	.psum_data_in_ready (psum_SRAM_Bank_0_data_in_ready ),
-	.psum_data_in_valid (psum_SRAM_Bank_0_data_in_valid ),
-	.psum_data_in       (psum_SRAM_Bank_0_data_in       ),
-	.psum_data_out_ready(psum_SRAM_Bank_0_data_out_ready),
-	.psum_data_out_valid(psum_SRAM_Bank_0_data_out_valid),
-	.psum_data_out      (psum_SRAM_Bank_0_data_out      ),
-	.psum_write_en      (psum_SRAM_Bank_0_write_en      ),
-	.psum_write_addr    (psum_SRAM_Bank_0_write_addr    ),
-	.psum_write_done    (psum_SRAM_Bank_0_write_done    ),
-	.psum_read_out_en	(psum_SRAM_Bank_0_read_out_en	),
-	.psum_read_en       (psum_SRAM_Bank_0_read_en       ),
-	.psum_read_addr     (psum_SRAM_Bank_0_read_addr     ),
-	.PSUM_DEPTH			(PSUM_DEPTH						)
-);
-
-Psum_SRAM_Bank pSumSRAM1 ( 
-	.clock          	(clock         					),
-	.reset          	(reset         					),
-	.psum_data_in_ready (psum_SRAM_Bank_1_data_in_ready ),
-	.psum_data_in_valid (psum_SRAM_Bank_1_data_in_valid ),
-	.psum_data_in       (psum_SRAM_Bank_1_data_in       ),
-	.psum_data_out_ready(psum_SRAM_Bank_1_data_out_ready),
-	.psum_data_out_valid(psum_SRAM_Bank_1_data_out_valid),
-	.psum_data_out      (psum_SRAM_Bank_1_data_out      ),
-	.psum_write_en      (psum_SRAM_Bank_1_write_en      ),
-	.psum_write_addr    (psum_SRAM_Bank_1_write_addr    ),
-	.psum_write_done    (psum_SRAM_Bank_1_write_done    ),
-	.psum_read_out_en	(psum_SRAM_Bank_1_read_out_en	),
-	.psum_read_en       (psum_SRAM_Bank_1_read_en       ),
-	.psum_read_addr     (psum_SRAM_Bank_1_read_addr     ),
-	.PSUM_DEPTH			(PSUM_DEPTH						)
-);
-
-Psum_SRAM_Bank pSumSRAM2 ( 
-	.clock          	(clock         					),
-	.reset          	(reset         					),
-	.psum_data_in_ready (psum_SRAM_Bank_2_data_in_ready ),
-	.psum_data_in_valid (psum_SRAM_Bank_2_data_in_valid ),
-	.psum_data_in       (psum_SRAM_Bank_2_data_in       ),
-	.psum_data_out_ready(psum_SRAM_Bank_2_data_out_ready),
-	.psum_data_out_valid(psum_SRAM_Bank_2_data_out_valid),
-	.psum_data_out      (psum_SRAM_Bank_2_data_out      ),
-	.psum_write_en      (psum_SRAM_Bank_2_write_en      ),
-	.psum_write_addr    (psum_SRAM_Bank_2_write_addr    ),
-	.psum_write_done    (psum_SRAM_Bank_2_write_done    ),
-	.psum_read_out_en	(psum_SRAM_Bank_2_read_out_en	),
-	.psum_read_en       (psum_SRAM_Bank_2_read_en       ),
-	.psum_read_addr     (psum_SRAM_Bank_2_read_addr     ),
-	.PSUM_DEPTH			(PSUM_DEPTH						)
-);
-
-  
 endmodule

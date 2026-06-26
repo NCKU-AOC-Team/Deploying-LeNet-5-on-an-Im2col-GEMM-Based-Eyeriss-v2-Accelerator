@@ -18,20 +18,21 @@ module Former_Data_Spad(
 	// data signals
 	output        		data_in_ready,
 	input         		data_in_valid,
-	input  		[12:0] 	data_in,
-	output 		[12:0] 	data_out,		// 8b for data, 5b for count, there are 2^5=32 columns in this Spad at most
+	input  		[17:0] 	data_in,
+	output 		[17:0] 	data_out,		// fixed entry: INT8={5b unused, 8b data, 5b count}, INT4x2={w1,c1,w0,c0}
 	output 		[7:0]  	column_num,		// use the count to determine which column of later matrix should be read
 	// control signals
 	input        		write_en,
 	output        		write_fin,
-	input         		index_inc 		// combine read_en and index increase
+	input         		index_inc, 		// combine read_en and index increase
+	input				int4_weight_mode
 );
 
 // ================================================	//
 // 					 Parameters  					//
 // ================================================	//
 localparam SPAD_DEPTH = 200;
-localparam SPAD_WIDTH = 13;
+localparam SPAD_WIDTH = 18;
 
 
 // ================================================	//
@@ -97,8 +98,8 @@ wire 			IP_BRAM_write_en	= data_in_shake;
 wire			IP_BRAM_read_en		= 'd1;
 wire 	[7:0]	IP_BRAM_write_addr	= spad_write_addr;
 wire 	[7:0]	IP_BRAM_read_addr	= next_data_read_addr;
-wire	[12:0]	IP_BRAM_data_in		= data_in;
-wire	[12:0]	IP_BRAM_data_out;
+wire	[17:0]	IP_BRAM_data_in		= data_in;
+wire	[17:0]	IP_BRAM_data_out;
 
 assign data_out	= IP_BRAM_data_out;
 	
@@ -110,7 +111,8 @@ Iact_DATA_Spad_BRAM Iact_DATA_Spad_BRAM_inst (
 	.write_addr     (IP_BRAM_write_addr     ),
 	.read_addr      (IP_BRAM_read_addr      ),
 	.data_in        (IP_BRAM_data_in        ),
-	.data_out       (IP_BRAM_data_out       )
+	.data_out       (IP_BRAM_data_out       ),
+	.int4_weight_mode(int4_weight_mode      )
 );
 
 endmodule
@@ -125,33 +127,25 @@ module Iact_DATA_Spad_BRAM(
 	input 	[7:0]	write_addr,
 	input 	[7:0]	read_addr,
 	
-	input	[12:0]	data_in,
+	input	[17:0]	data_in,
+	input			int4_weight_mode,
 	
-	output	[12:0]	data_out
+	output	[17:0]	data_out
 );
 
 wire		wr;
 wire [7:0] 	addra;
-wire [12:0] dina;
-wire [12:0] douta;
-
-IP_Iact_DATA_Spad_BRAM u0 (   	
-  .clka		(clk	),    	
-  .rsta		(reset	),
-  .wea		(wr		),      	
-  .addra	(addra	),  	
-  .dina		(dina	),    	
-  .douta	(douta	)  	
-);
+wire [17:0] dina;
+wire [17:0] douta;
 
 // need 200 cycles to clear spad data
-reg	[6:0]	clear_count;
+reg	[7:0]	clear_count;
 reg 		clear_flag;
 always @(posedge clk) begin
 	if (reset) begin
 		clear_flag <= 'd1; 
 	end
-	else if(clear_count == 'd99) begin
+	else if(clear_count == 'd199) begin
 		clear_flag <= 'd0; 
 	end
 end
@@ -161,7 +155,7 @@ always @(posedge clk) begin
 		clear_count <= 'd0; 
 	end
 	else if(clear_flag) begin
-		clear_count <= (clear_count == 'd99) ? 'd0 : (clear_count + 'd1); 
+		clear_count <= (clear_count == 'd199) ? 'd0 : (clear_count + 'd1); 
 	end
 end
 
@@ -171,6 +165,23 @@ assign addra 	= write_en ? write_addr	: (clear_flag ? clear_count : read_addr);
 assign dina 	= write_en ? data_in 	: 'd0;
 
 assign data_out = ~write_en	? douta		: 'd0;
+
+(* ram_style = "distributed" *) reg [17:0] spad [0:255];
+reg [17:0] douta_reg;
+
+always @(posedge clk) begin
+	if (reset) begin
+		douta_reg <= 18'd0;
+	end
+	else begin
+		if (wr) begin
+			spad[addra] <= dina;
+		end
+		douta_reg <= spad[addra];
+	end
+end
+
+assign douta = douta_reg;
 
 
 endmodule

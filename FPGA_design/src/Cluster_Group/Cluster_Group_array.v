@@ -1,9 +1,14 @@
+`ifndef BOYU_LATER_STREAM_RANGE
+`define BOYU_LATER_STREAM_RANGE 15:0
+`endif
 module ClusterGroup_array(
 
 	input         			clock,
 	input         			reset,
 	
 	input					psum_acc_fin,
+	input					int4_former_weight_mode,
+	input					int4_later_weight_mode,
 	// -------------------- CG_0_0 -------------------- //
 	input 			     	CG_0_0_PE_cluster_iact_data_in_sel,
 	input 			[1:0]	CG_0_0_PE_cluster_iact_data_out_sel,
@@ -26,107 +31,27 @@ module ClusterGroup_array(
 	input					CG_0_0_psum_SRAM_Bank_1_read_out_en,
 	input					CG_0_0_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_0_0_PE_0_0_disable,
-	input					CG_0_0_PE_0_1_disable,
-	input					CG_0_0_PE_0_2_disable,
-	input					CG_0_0_PE_1_0_disable,
-	input					CG_0_0_PE_1_1_disable,
-	input					CG_0_0_PE_1_2_disable,
-	input					CG_0_0_PE_2_0_disable,
-	input					CG_0_0_PE_2_1_disable,
-	input					CG_0_0_PE_2_2_disable,	
+	input					CG_0_0_PE_disable [0:2][0:2],
 	
-	input			[9:0]	CG_0_0_GLB_iact_0_0_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_0_1_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_0_2_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_1_0_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_1_1_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_1_2_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_2_0_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_2_1_read_addr,
-	input			[9:0]	CG_0_0_GLB_iact_2_2_read_addr,
+	input			[9:0]	CG_0_0_GLB_iact_read_addr [0:2][0:2],
 				
 	input					CG_0_0_GLB_psum_write_en,
-	input			[9:0]	CG_0_0_GLB_psum_0_write_addr,
-	input			[9:0]	CG_0_0_GLB_psum_1_write_addr,
-	input			[9:0]	CG_0_0_GLB_psum_2_write_addr,
-	input			[9:0]	CG_0_0_GLB_psum_0_read_addr,
-	input			[9:0]	CG_0_0_GLB_psum_1_read_addr,
-	input			[9:0]	CG_0_0_GLB_psum_2_read_addr,
+	input			[9:0]	CG_0_0_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_0_0_GLB_psum_read_addr [0:2],
 				
-	output			      	CG_0_0_GLB_iact_0_0_address_in_ready,
-	input 			      	CG_0_0_GLB_iact_0_0_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_0_0_address_in,
-	output			      	CG_0_0_GLB_iact_0_0_data_in_ready,
-	input 			      	CG_0_0_GLB_iact_0_0_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_0_0_data_in,
-	output			      	CG_0_0_GLB_iact_0_1_address_in_ready,
-	input 			      	CG_0_0_GLB_iact_0_1_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_0_1_address_in,
-	output			      	CG_0_0_GLB_iact_0_1_data_in_ready,
-	input 			      	CG_0_0_GLB_iact_0_1_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_0_1_data_in,
-	output			       	CG_0_0_GLB_iact_0_2_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_0_2_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_0_2_address_in,
-	output			       	CG_0_0_GLB_iact_0_2_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_0_2_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_0_2_data_in,
-	output			       	CG_0_0_GLB_iact_1_0_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_1_0_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_1_0_address_in,
-	output			       	CG_0_0_GLB_iact_1_0_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_1_0_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_1_0_data_in,
-	output			       	CG_0_0_GLB_iact_1_1_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_1_1_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_1_1_address_in,
-	output			       	CG_0_0_GLB_iact_1_1_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_1_1_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_1_1_data_in,
-	output			       	CG_0_0_GLB_iact_1_2_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_1_2_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_1_2_address_in,
-	output			       	CG_0_0_GLB_iact_1_2_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_1_2_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_1_2_data_in,
-	output			       	CG_0_0_GLB_iact_2_0_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_2_0_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_2_0_address_in,
-	output			       	CG_0_0_GLB_iact_2_0_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_2_0_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_2_0_data_in,
-	output			       	CG_0_0_GLB_iact_2_1_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_2_1_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_2_1_address_in,
-	output			       	CG_0_0_GLB_iact_2_1_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_2_1_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_2_1_data_in,
-	output			       	CG_0_0_GLB_iact_2_2_address_in_ready,
-	input 			       	CG_0_0_GLB_iact_2_2_address_in_valid,
-	input 			[6:0]  	CG_0_0_GLB_iact_2_2_address_in,
-	output			       	CG_0_0_GLB_iact_2_2_data_in_ready,
-	input 			       	CG_0_0_GLB_iact_2_2_data_in_valid,
-	input 			[11:0] 	CG_0_0_GLB_iact_2_2_data_in,
+	output			      	CG_0_0_GLB_iact_address_in_ready [0:2][0:2],
+	input 			      	CG_0_0_GLB_iact_address_in_valid [0:2][0:2],
+	input 			[6:0]  	CG_0_0_GLB_iact_address_in [0:2][0:2],
+	output			      	CG_0_0_GLB_iact_data_in_ready [0:2][0:2],
+	input 			      	CG_0_0_GLB_iact_data_in_valid [0:2][0:2],
+	input 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_GLB_iact_data_in [0:2][0:2],
 				
-	output			       	CG_0_0_GLB_weight_0_address_in_ready,
-	input 			       	CG_0_0_GLB_weight_0_address_in_valid,
-	input 			[7:0]  	CG_0_0_GLB_weight_0_address_in,
-	output			       	CG_0_0_GLB_weight_0_data_in_ready,
-	input 			       	CG_0_0_GLB_weight_0_data_in_valid,
-	input 			[12:0] 	CG_0_0_GLB_weight_0_data_in,
-	output			       	CG_0_0_GLB_weight_1_address_in_ready,
-	input 			       	CG_0_0_GLB_weight_1_address_in_valid,
-	input 			[7:0]  	CG_0_0_GLB_weight_1_address_in,
-	output			       	CG_0_0_GLB_weight_1_data_in_ready,
-	input 			       	CG_0_0_GLB_weight_1_data_in_valid,
-	input 			[12:0] 	CG_0_0_GLB_weight_1_data_in,
-	output			       	CG_0_0_GLB_weight_2_address_in_ready,
-	input 			       	CG_0_0_GLB_weight_2_address_in_valid,
-	input 			[7:0]  	CG_0_0_GLB_weight_2_address_in,
-	output			       	CG_0_0_GLB_weight_2_data_in_ready,
-	input 			       	CG_0_0_GLB_weight_2_data_in_valid,
-	input 			[12:0] 	CG_0_0_GLB_weight_2_data_in,
+	output			       	CG_0_0_GLB_weight_address_in_ready [0:2],
+	input 			       	CG_0_0_GLB_weight_address_in_valid [0:2],
+	input 			[7:0]  	CG_0_0_GLB_weight_address_in [0:2],
+	output			       	CG_0_0_GLB_weight_data_in_ready [0:2],
+	input 			       	CG_0_0_GLB_weight_data_in_valid [0:2],
+	input 			[12:0] 	CG_0_0_GLB_weight_data_in [0:2],
 	
 	output        			CG_0_0_GLB_psum_0_data_in_ready,
 	input         			CG_0_0_GLB_psum_0_data_in_valid,
@@ -176,107 +101,27 @@ module ClusterGroup_array(
 	input					CG_0_1_psum_SRAM_Bank_1_read_out_en,
 	input					CG_0_1_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_0_1_PE_0_0_disable,
-	input					CG_0_1_PE_0_1_disable,
-	input					CG_0_1_PE_0_2_disable,
-	input					CG_0_1_PE_1_0_disable,
-	input					CG_0_1_PE_1_1_disable,
-	input					CG_0_1_PE_1_2_disable,
-	input					CG_0_1_PE_2_0_disable,
-	input					CG_0_1_PE_2_1_disable,
-	input					CG_0_1_PE_2_2_disable,
+	input					CG_0_1_PE_disable [0:2][0:2],
 	
-	input			[9:0]	CG_0_1_GLB_iact_0_0_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_0_1_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_0_2_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_1_0_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_1_1_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_1_2_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_2_0_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_2_1_read_addr,
-	input			[9:0]	CG_0_1_GLB_iact_2_2_read_addr,
+	input			[9:0]	CG_0_1_GLB_iact_read_addr [0:2][0:2],
 	
 	input					CG_0_1_GLB_psum_write_en,
-	input			[9:0]	CG_0_1_GLB_psum_0_write_addr,
-	input			[9:0]	CG_0_1_GLB_psum_1_write_addr,
-	input			[9:0]	CG_0_1_GLB_psum_2_write_addr,
-	input			[9:0]	CG_0_1_GLB_psum_0_read_addr,
-	input			[9:0]	CG_0_1_GLB_psum_1_read_addr,
-	input			[9:0]	CG_0_1_GLB_psum_2_read_addr,
+	input			[9:0]	CG_0_1_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_0_1_GLB_psum_read_addr [0:2],
 								 
-	output			      	CG_0_1_GLB_iact_0_0_address_in_ready,
-	input 			      	CG_0_1_GLB_iact_0_0_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_0_0_address_in,
-	output			      	CG_0_1_GLB_iact_0_0_data_in_ready,
-	input 			      	CG_0_1_GLB_iact_0_0_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_0_0_data_in,
-	output			      	CG_0_1_GLB_iact_0_1_address_in_ready,
-	input 			      	CG_0_1_GLB_iact_0_1_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_0_1_address_in,
-	output			      	CG_0_1_GLB_iact_0_1_data_in_ready,
-	input 			      	CG_0_1_GLB_iact_0_1_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_0_1_data_in,
-	output			       	CG_0_1_GLB_iact_0_2_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_0_2_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_0_2_address_in,
-	output			       	CG_0_1_GLB_iact_0_2_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_0_2_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_0_2_data_in,
-	output			       	CG_0_1_GLB_iact_1_0_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_1_0_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_1_0_address_in,
-	output			       	CG_0_1_GLB_iact_1_0_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_1_0_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_1_0_data_in,
-	output			       	CG_0_1_GLB_iact_1_1_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_1_1_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_1_1_address_in,
-	output			       	CG_0_1_GLB_iact_1_1_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_1_1_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_1_1_data_in,
-	output			       	CG_0_1_GLB_iact_1_2_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_1_2_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_1_2_address_in,
-	output			       	CG_0_1_GLB_iact_1_2_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_1_2_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_1_2_data_in,
-	output			       	CG_0_1_GLB_iact_2_0_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_2_0_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_2_0_address_in,
-	output			       	CG_0_1_GLB_iact_2_0_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_2_0_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_2_0_data_in,
-	output			       	CG_0_1_GLB_iact_2_1_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_2_1_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_2_1_address_in,
-	output			       	CG_0_1_GLB_iact_2_1_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_2_1_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_2_1_data_in,
-	output			       	CG_0_1_GLB_iact_2_2_address_in_ready,
-	input 			       	CG_0_1_GLB_iact_2_2_address_in_valid,
-	input 			[6:0]  	CG_0_1_GLB_iact_2_2_address_in,
-	output			       	CG_0_1_GLB_iact_2_2_data_in_ready,
-	input 			       	CG_0_1_GLB_iact_2_2_data_in_valid,
-	input 			[11:0] 	CG_0_1_GLB_iact_2_2_data_in,
+	output			      	CG_0_1_GLB_iact_address_in_ready [0:2][0:2],
+	input 			      	CG_0_1_GLB_iact_address_in_valid [0:2][0:2],
+	input 			[6:0]  	CG_0_1_GLB_iact_address_in [0:2][0:2],
+	output			      	CG_0_1_GLB_iact_data_in_ready [0:2][0:2],
+	input 			      	CG_0_1_GLB_iact_data_in_valid [0:2][0:2],
+	input 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_GLB_iact_data_in [0:2][0:2],
 								 
-	output			       	CG_0_1_GLB_weight_0_address_in_ready,
-	input 			       	CG_0_1_GLB_weight_0_address_in_valid,
-	input 			[7:0]  	CG_0_1_GLB_weight_0_address_in,
-	output			       	CG_0_1_GLB_weight_0_data_in_ready,
-	input 			       	CG_0_1_GLB_weight_0_data_in_valid,
-	input 			[12:0] 	CG_0_1_GLB_weight_0_data_in,
-	output			       	CG_0_1_GLB_weight_1_address_in_ready,
-	input 			       	CG_0_1_GLB_weight_1_address_in_valid,
-	input 			[7:0]  	CG_0_1_GLB_weight_1_address_in,
-	output			       	CG_0_1_GLB_weight_1_data_in_ready,
-	input 			       	CG_0_1_GLB_weight_1_data_in_valid,
-	input 			[12:0] 	CG_0_1_GLB_weight_1_data_in,
-	output			       	CG_0_1_GLB_weight_2_address_in_ready,
-	input 			       	CG_0_1_GLB_weight_2_address_in_valid,
-	input 			[7:0]  	CG_0_1_GLB_weight_2_address_in,
-	output			       	CG_0_1_GLB_weight_2_data_in_ready,
-	input 			       	CG_0_1_GLB_weight_2_data_in_valid,
-	input 			[12:0] 	CG_0_1_GLB_weight_2_data_in,
+	output			       	CG_0_1_GLB_weight_address_in_ready [0:2],
+	input 			       	CG_0_1_GLB_weight_address_in_valid [0:2],
+	input 			[7:0]  	CG_0_1_GLB_weight_address_in [0:2],
+	output			       	CG_0_1_GLB_weight_data_in_ready [0:2],
+	input 			       	CG_0_1_GLB_weight_data_in_valid [0:2],
+	input 			[12:0] 	CG_0_1_GLB_weight_data_in [0:2],
 								 
 	output        			CG_0_1_GLB_psum_0_data_in_ready,
 	input         			CG_0_1_GLB_psum_0_data_in_valid,
@@ -325,107 +170,27 @@ module ClusterGroup_array(
 	input					CG_1_0_psum_SRAM_Bank_1_read_out_en,
 	input					CG_1_0_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_1_0_PE_0_0_disable,
-	input					CG_1_0_PE_0_1_disable,
-	input					CG_1_0_PE_0_2_disable,
-	input					CG_1_0_PE_1_0_disable,
-	input					CG_1_0_PE_1_1_disable,
-	input					CG_1_0_PE_1_2_disable,
-	input					CG_1_0_PE_2_0_disable,
-	input					CG_1_0_PE_2_1_disable,
-	input					CG_1_0_PE_2_2_disable,
+	input					CG_1_0_PE_disable [0:2][0:2],
 							   
-	input			[9:0]	CG_1_0_GLB_iact_0_0_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_0_1_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_0_2_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_1_0_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_1_1_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_1_2_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_2_0_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_2_1_read_addr,
-	input			[9:0]	CG_1_0_GLB_iact_2_2_read_addr,
+	input			[9:0]	CG_1_0_GLB_iact_read_addr [0:2][0:2],
 	
 	input					CG_1_0_GLB_psum_write_en,
-	input			[9:0]	CG_1_0_GLB_psum_0_write_addr,
-	input			[9:0]	CG_1_0_GLB_psum_1_write_addr,
-	input			[9:0]	CG_1_0_GLB_psum_2_write_addr,
-	input			[9:0]	CG_1_0_GLB_psum_0_read_addr,
-	input			[9:0]	CG_1_0_GLB_psum_1_read_addr,
-	input			[9:0]	CG_1_0_GLB_psum_2_read_addr,
+	input			[9:0]	CG_1_0_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_1_0_GLB_psum_read_addr [0:2],
 							   
-	output			      	CG_1_0_GLB_iact_0_0_address_in_ready,
-	input 			      	CG_1_0_GLB_iact_0_0_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_0_0_address_in,
-	output			      	CG_1_0_GLB_iact_0_0_data_in_ready,
-	input 			      	CG_1_0_GLB_iact_0_0_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_0_0_data_in,
-	output			      	CG_1_0_GLB_iact_0_1_address_in_ready,
-	input 			      	CG_1_0_GLB_iact_0_1_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_0_1_address_in,
-	output			      	CG_1_0_GLB_iact_0_1_data_in_ready,
-	input 			      	CG_1_0_GLB_iact_0_1_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_0_1_data_in,
-	output			       	CG_1_0_GLB_iact_0_2_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_0_2_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_0_2_address_in,
-	output			       	CG_1_0_GLB_iact_0_2_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_0_2_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_0_2_data_in,
-	output			       	CG_1_0_GLB_iact_1_0_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_1_0_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_1_0_address_in,
-	output			       	CG_1_0_GLB_iact_1_0_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_1_0_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_1_0_data_in,
-	output			       	CG_1_0_GLB_iact_1_1_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_1_1_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_1_1_address_in,
-	output			       	CG_1_0_GLB_iact_1_1_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_1_1_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_1_1_data_in,
-	output			       	CG_1_0_GLB_iact_1_2_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_1_2_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_1_2_address_in,
-	output			       	CG_1_0_GLB_iact_1_2_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_1_2_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_1_2_data_in,
-	output			       	CG_1_0_GLB_iact_2_0_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_2_0_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_2_0_address_in,
-	output			       	CG_1_0_GLB_iact_2_0_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_2_0_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_2_0_data_in,
-	output			       	CG_1_0_GLB_iact_2_1_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_2_1_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_2_1_address_in,
-	output			       	CG_1_0_GLB_iact_2_1_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_2_1_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_2_1_data_in,
-	output			       	CG_1_0_GLB_iact_2_2_address_in_ready,
-	input 			       	CG_1_0_GLB_iact_2_2_address_in_valid,
-	input 			[6:0]  	CG_1_0_GLB_iact_2_2_address_in,
-	output			       	CG_1_0_GLB_iact_2_2_data_in_ready,
-	input 			       	CG_1_0_GLB_iact_2_2_data_in_valid,
-	input 			[11:0] 	CG_1_0_GLB_iact_2_2_data_in,
+	output			      	CG_1_0_GLB_iact_address_in_ready [0:2][0:2],
+	input 			      	CG_1_0_GLB_iact_address_in_valid [0:2][0:2],
+	input 			[6:0]  	CG_1_0_GLB_iact_address_in [0:2][0:2],
+	output			      	CG_1_0_GLB_iact_data_in_ready [0:2][0:2],
+	input 			      	CG_1_0_GLB_iact_data_in_valid [0:2][0:2],
+	input 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_GLB_iact_data_in [0:2][0:2],
 							   
-	output			       	CG_1_0_GLB_weight_0_address_in_ready,
-	input 			       	CG_1_0_GLB_weight_0_address_in_valid,
-	input 			[7:0]  	CG_1_0_GLB_weight_0_address_in,
-	output			       	CG_1_0_GLB_weight_0_data_in_ready,
-	input 			       	CG_1_0_GLB_weight_0_data_in_valid,
-	input 			[12:0] 	CG_1_0_GLB_weight_0_data_in,
-	output			       	CG_1_0_GLB_weight_1_address_in_ready,
-	input 			       	CG_1_0_GLB_weight_1_address_in_valid,
-	input 			[7:0]  	CG_1_0_GLB_weight_1_address_in,
-	output			       	CG_1_0_GLB_weight_1_data_in_ready,
-	input 			       	CG_1_0_GLB_weight_1_data_in_valid,
-	input 			[12:0] 	CG_1_0_GLB_weight_1_data_in,
-	output			       	CG_1_0_GLB_weight_2_address_in_ready,
-	input 			       	CG_1_0_GLB_weight_2_address_in_valid,
-	input 			[7:0]  	CG_1_0_GLB_weight_2_address_in,
-	output			       	CG_1_0_GLB_weight_2_data_in_ready,
-	input 			       	CG_1_0_GLB_weight_2_data_in_valid,
-	input 			[12:0] 	CG_1_0_GLB_weight_2_data_in,
+	output			       	CG_1_0_GLB_weight_address_in_ready [0:2],
+	input 			       	CG_1_0_GLB_weight_address_in_valid [0:2],
+	input 			[7:0]  	CG_1_0_GLB_weight_address_in [0:2],
+	output			       	CG_1_0_GLB_weight_data_in_ready [0:2],
+	input 			       	CG_1_0_GLB_weight_data_in_valid [0:2],
+	input 			[12:0] 	CG_1_0_GLB_weight_data_in [0:2],
 							   
 	output        			CG_1_0_GLB_psum_0_data_in_ready,
 	input         			CG_1_0_GLB_psum_0_data_in_valid,
@@ -475,107 +240,27 @@ module ClusterGroup_array(
 	input					CG_1_1_psum_SRAM_Bank_1_read_out_en,
 	input					CG_1_1_psum_SRAM_Bank_2_read_out_en,
 	
-	input					CG_1_1_PE_0_0_disable,
-	input					CG_1_1_PE_0_1_disable,
-	input					CG_1_1_PE_0_2_disable,
-	input					CG_1_1_PE_1_0_disable,
-	input					CG_1_1_PE_1_1_disable,
-	input					CG_1_1_PE_1_2_disable,
-	input					CG_1_1_PE_2_0_disable,
-	input					CG_1_1_PE_2_1_disable,
-	input					CG_1_1_PE_2_2_disable,
+	input					CG_1_1_PE_disable [0:2][0:2],
 	
-	input			[9:0]	CG_1_1_GLB_iact_0_0_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_0_1_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_0_2_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_1_0_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_1_1_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_1_2_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_2_0_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_2_1_read_addr,
-	input			[9:0]	CG_1_1_GLB_iact_2_2_read_addr,
+	input			[9:0]	CG_1_1_GLB_iact_read_addr [0:2][0:2],
 	
 	input					CG_1_1_GLB_psum_write_en,
-	input			[9:0]	CG_1_1_GLB_psum_0_write_addr,
-	input			[9:0]	CG_1_1_GLB_psum_1_write_addr,
-	input			[9:0]	CG_1_1_GLB_psum_2_write_addr,
-	input			[9:0]	CG_1_1_GLB_psum_0_read_addr,
-	input			[9:0]	CG_1_1_GLB_psum_1_read_addr,
-	input			[9:0]	CG_1_1_GLB_psum_2_read_addr,
+	input			[9:0]	CG_1_1_GLB_psum_write_addr [0:2],
+	input			[9:0]	CG_1_1_GLB_psum_read_addr [0:2],
 								
-	output			      	CG_1_1_GLB_iact_0_0_address_in_ready,
-	input 			      	CG_1_1_GLB_iact_0_0_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_0_0_address_in,
-	output			      	CG_1_1_GLB_iact_0_0_data_in_ready,
-	input 			      	CG_1_1_GLB_iact_0_0_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_0_0_data_in,
-	output			      	CG_1_1_GLB_iact_0_1_address_in_ready,
-	input 			      	CG_1_1_GLB_iact_0_1_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_0_1_address_in,
-	output			      	CG_1_1_GLB_iact_0_1_data_in_ready,
-	input 			      	CG_1_1_GLB_iact_0_1_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_0_1_data_in,
-	output			       	CG_1_1_GLB_iact_0_2_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_0_2_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_0_2_address_in,
-	output			       	CG_1_1_GLB_iact_0_2_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_0_2_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_0_2_data_in,
-	output			       	CG_1_1_GLB_iact_1_0_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_1_0_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_1_0_address_in,
-	output			       	CG_1_1_GLB_iact_1_0_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_1_0_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_1_0_data_in,
-	output			       	CG_1_1_GLB_iact_1_1_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_1_1_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_1_1_address_in,
-	output			       	CG_1_1_GLB_iact_1_1_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_1_1_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_1_1_data_in,
-	output			       	CG_1_1_GLB_iact_1_2_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_1_2_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_1_2_address_in,
-	output			       	CG_1_1_GLB_iact_1_2_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_1_2_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_1_2_data_in,
-	output			       	CG_1_1_GLB_iact_2_0_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_2_0_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_2_0_address_in,
-	output			       	CG_1_1_GLB_iact_2_0_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_2_0_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_2_0_data_in,
-	output			       	CG_1_1_GLB_iact_2_1_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_2_1_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_2_1_address_in,
-	output			       	CG_1_1_GLB_iact_2_1_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_2_1_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_2_1_data_in,
-	output			       	CG_1_1_GLB_iact_2_2_address_in_ready,
-	input 			       	CG_1_1_GLB_iact_2_2_address_in_valid,
-	input 			[6:0]  	CG_1_1_GLB_iact_2_2_address_in,
-	output			       	CG_1_1_GLB_iact_2_2_data_in_ready,
-	input 			       	CG_1_1_GLB_iact_2_2_data_in_valid,
-	input 			[11:0] 	CG_1_1_GLB_iact_2_2_data_in,
+	output			      	CG_1_1_GLB_iact_address_in_ready [0:2][0:2],
+	input 			      	CG_1_1_GLB_iact_address_in_valid [0:2][0:2],
+	input 			[6:0]  	CG_1_1_GLB_iact_address_in [0:2][0:2],
+	output			      	CG_1_1_GLB_iact_data_in_ready [0:2][0:2],
+	input 			      	CG_1_1_GLB_iact_data_in_valid [0:2][0:2],
+	input 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_GLB_iact_data_in [0:2][0:2],
 								
-	output			       	CG_1_1_GLB_weight_0_address_in_ready,
-	input 			       	CG_1_1_GLB_weight_0_address_in_valid,
-	input 			[7:0]  	CG_1_1_GLB_weight_0_address_in,
-	output			       	CG_1_1_GLB_weight_0_data_in_ready,
-	input 			       	CG_1_1_GLB_weight_0_data_in_valid,
-	input 			[12:0] 	CG_1_1_GLB_weight_0_data_in,
-	output			       	CG_1_1_GLB_weight_1_address_in_ready,
-	input 			       	CG_1_1_GLB_weight_1_address_in_valid,
-	input 			[7:0]  	CG_1_1_GLB_weight_1_address_in,
-	output			       	CG_1_1_GLB_weight_1_data_in_ready,
-	input 			       	CG_1_1_GLB_weight_1_data_in_valid,
-	input 			[12:0] 	CG_1_1_GLB_weight_1_data_in,
-	output			       	CG_1_1_GLB_weight_2_address_in_ready,
-	input 			       	CG_1_1_GLB_weight_2_address_in_valid,
-	input 			[7:0]  	CG_1_1_GLB_weight_2_address_in,
-	output			       	CG_1_1_GLB_weight_2_data_in_ready,
-	input 			       	CG_1_1_GLB_weight_2_data_in_valid,
-	input 			[12:0] 	CG_1_1_GLB_weight_2_data_in,
+	output			       	CG_1_1_GLB_weight_address_in_ready [0:2],
+	input 			       	CG_1_1_GLB_weight_address_in_valid [0:2],
+	input 			[7:0]  	CG_1_1_GLB_weight_address_in [0:2],
+	output			       	CG_1_1_GLB_weight_data_in_ready [0:2],
+	input 			       	CG_1_1_GLB_weight_data_in_valid [0:2],
+	input 			[12:0] 	CG_1_1_GLB_weight_data_in [0:2],
 								
 	output        			CG_1_1_GLB_psum_0_data_in_ready,
 	input         			CG_1_1_GLB_psum_0_data_in_valid,
@@ -615,325 +300,325 @@ wire 			       	CG_0_0_router_iact_0_0_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_0_north_address_in;
 wire 			       	CG_0_0_router_iact_0_0_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_0_north_data_in;
 wire 			       	CG_0_0_router_iact_0_0_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_0_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_0_south_address_in;
 wire 			       	CG_0_0_router_iact_0_0_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_0_south_data_in;
 wire 			       	CG_0_0_router_iact_0_0_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_0_horiz_address_in;
 wire 			       	CG_0_0_router_iact_0_0_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_0_horiz_data_in;
 wire 			       	CG_0_0_router_iact_0_0_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_0_0_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_0_north_address_out;
 wire 			       	CG_0_0_router_iact_0_0_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_0_north_data_out;
 wire 			       	CG_0_0_router_iact_0_0_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_0_0_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_0_south_address_out;
 wire 			       	CG_0_0_router_iact_0_0_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_0_south_data_out;
 wire 			       	CG_0_0_router_iact_0_0_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_0_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_0_horiz_address_out;
 wire 			       	CG_0_0_router_iact_0_0_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_0_horiz_data_out;
 wire 			       	CG_0_0_router_iact_0_1_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_1_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_1_north_address_in;
 wire 			       	CG_0_0_router_iact_0_1_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_1_north_data_in;
 wire 			       	CG_0_0_router_iact_0_1_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_1_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_1_south_address_in;
 wire 			       	CG_0_0_router_iact_0_1_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_1_south_data_in;
 wire 			       	CG_0_0_router_iact_0_1_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_1_horiz_address_in;
 wire 			       	CG_0_0_router_iact_0_1_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_1_horiz_data_in;
 wire 			       	CG_0_0_router_iact_0_1_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_0_1_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_1_north_address_out;
 wire 			       	CG_0_0_router_iact_0_1_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_1_north_data_out;
 wire 			       	CG_0_0_router_iact_0_1_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_0_1_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_1_south_address_out;
 wire 			       	CG_0_0_router_iact_0_1_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_1_south_data_out;
 wire 			       	CG_0_0_router_iact_0_1_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_0_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_1_horiz_address_out;
 wire 			       	CG_0_0_router_iact_0_1_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_1_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_1_horiz_data_out;
 wire 			       	CG_0_0_router_iact_0_2_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_2_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_2_north_address_in;
 wire 			       	CG_0_0_router_iact_0_2_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_2_north_data_in;
 wire 			       	CG_0_0_router_iact_0_2_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_2_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_2_south_address_in;
 wire 			       	CG_0_0_router_iact_0_2_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_2_south_data_in;
 wire 			       	CG_0_0_router_iact_0_2_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_0_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_2_horiz_address_in;
 wire 			       	CG_0_0_router_iact_0_2_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_2_horiz_data_in;
 wire 			       	CG_0_0_router_iact_0_2_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_0_2_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_2_north_address_out;
 wire 			       	CG_0_0_router_iact_0_2_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_2_north_data_out;
 wire 			       	CG_0_0_router_iact_0_2_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_0_2_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_2_south_address_out;
 wire 			       	CG_0_0_router_iact_0_2_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_2_south_data_out;
 wire 			       	CG_0_0_router_iact_0_2_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_0_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_0_2_horiz_address_out;
 wire 			       	CG_0_0_router_iact_0_2_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_0_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_0_2_horiz_data_out;
 wire 			       	CG_0_0_router_iact_1_0_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_0_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_0_north_address_in;
 wire 			       	CG_0_0_router_iact_1_0_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_0_north_data_in;
 wire 			       	CG_0_0_router_iact_1_0_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_0_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_0_south_address_in;
 wire 			       	CG_0_0_router_iact_1_0_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_0_south_data_in;
 wire 			       	CG_0_0_router_iact_1_0_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_0_horiz_address_in;
 wire 			       	CG_0_0_router_iact_1_0_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_0_horiz_data_in;
 wire 			       	CG_0_0_router_iact_1_0_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_1_0_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_0_north_address_out;
 wire 			       	CG_0_0_router_iact_1_0_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_0_north_data_out;
 wire 			       	CG_0_0_router_iact_1_0_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_1_0_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_0_south_address_out;
 wire 			       	CG_0_0_router_iact_1_0_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_0_south_data_out;
 wire 			       	CG_0_0_router_iact_1_0_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_1_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_0_horiz_address_out;
 wire 			       	CG_0_0_router_iact_1_0_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_0_horiz_data_out;
 wire 			       	CG_0_0_router_iact_1_1_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_1_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_1_north_address_in;
 wire 			       	CG_0_0_router_iact_1_1_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_1_north_data_in;
 wire 			       	CG_0_0_router_iact_1_1_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_1_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_1_south_address_in;
 wire 			       	CG_0_0_router_iact_1_1_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_1_south_data_in;
 wire 			       	CG_0_0_router_iact_1_1_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_1_horiz_address_in;
 wire 			       	CG_0_0_router_iact_1_1_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_1_horiz_data_in;
 wire 			       	CG_0_0_router_iact_1_1_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_1_1_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_1_north_address_out;
 wire 			       	CG_0_0_router_iact_1_1_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_1_north_data_out;
 wire 			       	CG_0_0_router_iact_1_1_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_1_1_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_1_south_address_out;
 wire 			       	CG_0_0_router_iact_1_1_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_1_south_data_out;
 wire 			       	CG_0_0_router_iact_1_1_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_1_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_1_horiz_address_out;
 wire 			       	CG_0_0_router_iact_1_1_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_1_horiz_data_out;  
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_1_horiz_data_out;  
 wire 			       	CG_0_0_router_iact_1_2_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_2_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_2_north_address_in;
 wire 			       	CG_0_0_router_iact_1_2_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_2_north_data_in;
 wire 			       	CG_0_0_router_iact_1_2_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_2_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_2_south_address_in;
 wire 			       	CG_0_0_router_iact_1_2_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_2_south_data_in;
 wire 			       	CG_0_0_router_iact_1_2_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_1_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_2_horiz_address_in;
 wire 			       	CG_0_0_router_iact_1_2_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_2_horiz_data_in;
 wire 			       	CG_0_0_router_iact_1_2_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_1_2_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_2_north_address_out;
 wire 			       	CG_0_0_router_iact_1_2_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_2_north_data_out;
 wire 			       	CG_0_0_router_iact_1_2_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_1_2_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_2_south_address_out;
 wire 			       	CG_0_0_router_iact_1_2_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_2_south_data_out;
 wire 			       	CG_0_0_router_iact_1_2_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_1_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_1_2_horiz_address_out;
 wire 			       	CG_0_0_router_iact_1_2_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_1_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_1_2_horiz_data_out;
 wire 			       	CG_0_0_router_iact_2_0_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_0_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_0_north_address_in;
 wire 			       	CG_0_0_router_iact_2_0_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_0_north_data_in;
 wire 			       	CG_0_0_router_iact_2_0_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_0_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_0_south_address_in;
 wire 			       	CG_0_0_router_iact_2_0_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_0_south_data_in;
 wire 			       	CG_0_0_router_iact_2_0_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_0_horiz_address_in;
 wire 			       	CG_0_0_router_iact_2_0_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_0_horiz_data_in;
 wire 			       	CG_0_0_router_iact_2_0_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_2_0_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_0_north_address_out;
 wire 			       	CG_0_0_router_iact_2_0_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_0_north_data_out;
 wire 			       	CG_0_0_router_iact_2_0_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_2_0_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_0_south_address_out;
 wire 			       	CG_0_0_router_iact_2_0_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_0_south_data_out;
 wire 			       	CG_0_0_router_iact_2_0_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_2_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_0_horiz_address_out;
 wire 			       	CG_0_0_router_iact_2_0_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_0_horiz_data_out;
 wire 			       	CG_0_0_router_iact_2_1_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_1_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_1_north_address_in;
 wire 			       	CG_0_0_router_iact_2_1_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_1_north_data_in;
 wire 			       	CG_0_0_router_iact_2_1_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_1_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_1_south_address_in;
 wire 			       	CG_0_0_router_iact_2_1_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_1_south_data_in;
 wire 			       	CG_0_0_router_iact_2_1_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_1_horiz_address_in;
 wire 			       	CG_0_0_router_iact_2_1_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_1_horiz_data_in;
 wire 			       	CG_0_0_router_iact_2_1_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_2_1_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_1_north_address_out;
 wire 			       	CG_0_0_router_iact_2_1_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_1_north_data_out;
 wire 			       	CG_0_0_router_iact_2_1_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_2_1_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_1_south_address_out;
 wire 			       	CG_0_0_router_iact_2_1_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_1_south_data_out;
 wire 			       	CG_0_0_router_iact_2_1_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_2_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_1_horiz_address_out;
 wire 			       	CG_0_0_router_iact_2_1_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_1_horiz_data_out;   
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_1_horiz_data_out;   
 wire 			       	CG_0_0_router_iact_2_2_north_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_2_north_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_2_north_address_in;
 wire 			       	CG_0_0_router_iact_2_2_north_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_2_north_data_in;
 wire 			       	CG_0_0_router_iact_2_2_south_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_2_south_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_2_south_address_in;
 wire 			       	CG_0_0_router_iact_2_2_south_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_2_south_data_in;
 wire 			       	CG_0_0_router_iact_2_2_horiz_address_in_ready;
 wire 			       	CG_0_0_router_iact_2_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_2_horiz_address_in;
 wire 			       	CG_0_0_router_iact_2_2_horiz_data_in_ready;
 wire 			       	CG_0_0_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_2_horiz_data_in;
 wire 			       	CG_0_0_router_iact_2_2_north_address_out_ready;	
 wire 			       	CG_0_0_router_iact_2_2_north_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_2_north_address_out;
 wire 			       	CG_0_0_router_iact_2_2_north_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_2_north_data_out;
 wire 			       	CG_0_0_router_iact_2_2_south_address_out_ready;
 wire 			       	CG_0_0_router_iact_2_2_south_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_2_south_address_out;
 wire 			       	CG_0_0_router_iact_2_2_south_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_2_south_data_out;
 wire 			       	CG_0_0_router_iact_2_2_horiz_address_out_ready;
 wire 			       	CG_0_0_router_iact_2_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_0_router_iact_2_2_horiz_address_out;
 wire 			       	CG_0_0_router_iact_2_2_horiz_data_out_ready;
 wire 			       	CG_0_0_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_0_router_iact_2_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_0_router_iact_2_2_horiz_data_out;
 			
 wire 			       	CG_0_0_router_weight_0_horiz_address_in_ready;
 wire 			       	CG_0_0_router_weight_0_horiz_address_in_valid;
@@ -1021,325 +706,325 @@ wire 			       	CG_0_1_router_iact_0_0_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_0_north_address_in;
 wire 			       	CG_0_1_router_iact_0_0_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_0_north_data_in;
 wire 			       	CG_0_1_router_iact_0_0_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_0_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_0_south_address_in;
 wire 			       	CG_0_1_router_iact_0_0_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_0_south_data_in;
 wire 			       	CG_0_1_router_iact_0_0_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_0_horiz_address_in;
 wire 			       	CG_0_1_router_iact_0_0_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_0_horiz_data_in;
 wire 			       	CG_0_1_router_iact_0_0_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_0_0_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_0_north_address_out;
 wire 			       	CG_0_1_router_iact_0_0_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_0_north_data_out;
 wire 			       	CG_0_1_router_iact_0_0_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_0_0_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_0_south_address_out;
 wire 			       	CG_0_1_router_iact_0_0_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_0_south_data_out;
 wire 			       	CG_0_1_router_iact_0_0_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_0_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_0_horiz_address_out;
 wire 			       	CG_0_1_router_iact_0_0_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_0_horiz_data_out;
 wire 			       	CG_0_1_router_iact_0_1_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_1_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_1_north_address_in;
 wire 			       	CG_0_1_router_iact_0_1_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_1_north_data_in;
 wire 			       	CG_0_1_router_iact_0_1_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_1_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_1_south_address_in;
 wire 			       	CG_0_1_router_iact_0_1_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_1_south_data_in;
 wire 			       	CG_0_1_router_iact_0_1_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_1_horiz_address_in;
 wire 			       	CG_0_1_router_iact_0_1_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_1_horiz_data_in;
 wire 			       	CG_0_1_router_iact_0_1_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_0_1_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_1_north_address_out;
 wire 			       	CG_0_1_router_iact_0_1_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_1_north_data_out;
 wire 			       	CG_0_1_router_iact_0_1_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_0_1_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_1_south_address_out;
 wire 			       	CG_0_1_router_iact_0_1_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_1_south_data_out;
 wire 			       	CG_0_1_router_iact_0_1_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_0_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_1_horiz_address_out;
 wire 			       	CG_0_1_router_iact_0_1_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_1_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_1_horiz_data_out;
 wire 			       	CG_0_1_router_iact_0_2_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_2_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_2_north_address_in;
 wire 			       	CG_0_1_router_iact_0_2_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_2_north_data_in;
 wire 			       	CG_0_1_router_iact_0_2_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_2_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_2_south_address_in;
 wire 			       	CG_0_1_router_iact_0_2_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_2_south_data_in;
 wire 			       	CG_0_1_router_iact_0_2_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_0_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_2_horiz_address_in;
 wire 			       	CG_0_1_router_iact_0_2_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_2_horiz_data_in;
 wire 			       	CG_0_1_router_iact_0_2_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_0_2_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_2_north_address_out;
 wire 			       	CG_0_1_router_iact_0_2_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_2_north_data_out;
 wire 			       	CG_0_1_router_iact_0_2_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_0_2_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_2_south_address_out;
 wire 			       	CG_0_1_router_iact_0_2_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_2_south_data_out;
 wire 			       	CG_0_1_router_iact_0_2_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_0_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_0_2_horiz_address_out;
 wire 			       	CG_0_1_router_iact_0_2_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_0_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_0_2_horiz_data_out;
 wire 			       	CG_0_1_router_iact_1_0_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_0_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_0_north_address_in;
 wire 			       	CG_0_1_router_iact_1_0_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_0_north_data_in;
 wire 			       	CG_0_1_router_iact_1_0_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_0_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_0_south_address_in;
 wire 			       	CG_0_1_router_iact_1_0_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_0_south_data_in;
 wire 			       	CG_0_1_router_iact_1_0_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_0_horiz_address_in;
 wire 			       	CG_0_1_router_iact_1_0_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_0_horiz_data_in;
 wire 			       	CG_0_1_router_iact_1_0_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_1_0_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_0_north_address_out;
 wire 			       	CG_0_1_router_iact_1_0_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_0_north_data_out;
 wire 			       	CG_0_1_router_iact_1_0_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_1_0_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_0_south_address_out;
 wire 			       	CG_0_1_router_iact_1_0_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_0_south_data_out;
 wire 			       	CG_0_1_router_iact_1_0_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_1_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_0_horiz_address_out;
 wire 			       	CG_0_1_router_iact_1_0_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_0_horiz_data_out;
 wire 			       	CG_0_1_router_iact_1_1_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_1_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_1_north_address_in;
 wire 			       	CG_0_1_router_iact_1_1_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_1_north_data_in;
 wire 			       	CG_0_1_router_iact_1_1_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_1_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_1_south_address_in;
 wire 			       	CG_0_1_router_iact_1_1_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_1_south_data_in;
 wire 			       	CG_0_1_router_iact_1_1_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_1_horiz_address_in;
 wire 			       	CG_0_1_router_iact_1_1_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_1_horiz_data_in;
 wire 			       	CG_0_1_router_iact_1_1_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_1_1_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_1_north_address_out;
 wire 			       	CG_0_1_router_iact_1_1_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_1_north_data_out;
 wire 			       	CG_0_1_router_iact_1_1_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_1_1_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_1_south_address_out;
 wire 			       	CG_0_1_router_iact_1_1_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_1_south_data_out;
 wire 			       	CG_0_1_router_iact_1_1_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_1_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_1_horiz_address_out;
 wire 			       	CG_0_1_router_iact_1_1_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_1_horiz_data_out;  
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_1_horiz_data_out;  
 wire 			       	CG_0_1_router_iact_1_2_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_2_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_2_north_address_in;
 wire 			       	CG_0_1_router_iact_1_2_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_2_north_data_in;
 wire 			       	CG_0_1_router_iact_1_2_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_2_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_2_south_address_in;
 wire 			       	CG_0_1_router_iact_1_2_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_2_south_data_in;
 wire 			       	CG_0_1_router_iact_1_2_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_1_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_2_horiz_address_in;
 wire 			       	CG_0_1_router_iact_1_2_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_2_horiz_data_in;
 wire 			       	CG_0_1_router_iact_1_2_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_1_2_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_2_north_address_out;
 wire 			       	CG_0_1_router_iact_1_2_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_2_north_data_out;
 wire 			       	CG_0_1_router_iact_1_2_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_1_2_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_2_south_address_out;
 wire 			       	CG_0_1_router_iact_1_2_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_2_south_data_out;
 wire 			       	CG_0_1_router_iact_1_2_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_1_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_1_2_horiz_address_out;
 wire 			       	CG_0_1_router_iact_1_2_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_1_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_1_2_horiz_data_out;
 wire 			       	CG_0_1_router_iact_2_0_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_0_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_0_north_address_in;
 wire 			       	CG_0_1_router_iact_2_0_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_0_north_data_in;
 wire 			       	CG_0_1_router_iact_2_0_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_0_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_0_south_address_in;
 wire 			       	CG_0_1_router_iact_2_0_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_0_south_data_in;
 wire 			       	CG_0_1_router_iact_2_0_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_0_horiz_address_in;
 wire 			       	CG_0_1_router_iact_2_0_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_0_horiz_data_in;
 wire 			       	CG_0_1_router_iact_2_0_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_2_0_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_0_north_address_out;
 wire 			       	CG_0_1_router_iact_2_0_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_0_north_data_out;
 wire 			       	CG_0_1_router_iact_2_0_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_2_0_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_0_south_address_out;
 wire 			       	CG_0_1_router_iact_2_0_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_0_south_data_out;
 wire 			       	CG_0_1_router_iact_2_0_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_2_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_0_horiz_address_out;
 wire 			       	CG_0_1_router_iact_2_0_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_0_horiz_data_out;
 wire 			       	CG_0_1_router_iact_2_1_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_1_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_1_north_address_in;
 wire 			       	CG_0_1_router_iact_2_1_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_1_north_data_in;
 wire 			       	CG_0_1_router_iact_2_1_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_1_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_1_south_address_in;
 wire 			       	CG_0_1_router_iact_2_1_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_1_south_data_in;
 wire 			       	CG_0_1_router_iact_2_1_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_1_horiz_address_in;
 wire 			       	CG_0_1_router_iact_2_1_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_1_horiz_data_in;
 wire 			       	CG_0_1_router_iact_2_1_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_2_1_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_1_north_address_out;
 wire 			       	CG_0_1_router_iact_2_1_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_1_north_data_out;
 wire 			       	CG_0_1_router_iact_2_1_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_2_1_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_1_south_address_out;
 wire 			       	CG_0_1_router_iact_2_1_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_1_south_data_out;
 wire 			       	CG_0_1_router_iact_2_1_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_2_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_1_horiz_address_out;
 wire 			       	CG_0_1_router_iact_2_1_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_1_horiz_data_out;   
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_1_horiz_data_out;   
 wire 			       	CG_0_1_router_iact_2_2_north_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_2_north_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_2_north_address_in;
 wire 			       	CG_0_1_router_iact_2_2_north_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_2_north_data_in;
 wire 			       	CG_0_1_router_iact_2_2_south_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_2_south_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_2_south_address_in;
 wire 			       	CG_0_1_router_iact_2_2_south_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_2_south_data_in;
 wire 			       	CG_0_1_router_iact_2_2_horiz_address_in_ready;
 wire 			       	CG_0_1_router_iact_2_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_2_horiz_address_in;
 wire 			       	CG_0_1_router_iact_2_2_horiz_data_in_ready;
 wire 			       	CG_0_1_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_2_horiz_data_in;
 wire 			       	CG_0_1_router_iact_2_2_north_address_out_ready;	
 wire 			       	CG_0_1_router_iact_2_2_north_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_2_north_address_out;
 wire 			       	CG_0_1_router_iact_2_2_north_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_2_north_data_out;
 wire 			       	CG_0_1_router_iact_2_2_south_address_out_ready;
 wire 			       	CG_0_1_router_iact_2_2_south_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_2_south_address_out;
 wire 			       	CG_0_1_router_iact_2_2_south_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_2_south_data_out;
 wire 			       	CG_0_1_router_iact_2_2_horiz_address_out_ready;
 wire 			       	CG_0_1_router_iact_2_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_0_1_router_iact_2_2_horiz_address_out;
 wire 			       	CG_0_1_router_iact_2_2_horiz_data_out_ready;
 wire 			       	CG_0_1_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_0_1_router_iact_2_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_0_1_router_iact_2_2_horiz_data_out;
 			
 wire 			       	CG_0_1_router_weight_0_horiz_address_in_ready;
 wire 			       	CG_0_1_router_weight_0_horiz_address_in_valid;
@@ -1426,325 +1111,325 @@ wire 			       	CG_1_0_router_iact_0_0_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_0_north_address_in;
 wire 			       	CG_1_0_router_iact_0_0_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_0_north_data_in;
 wire 			       	CG_1_0_router_iact_0_0_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_0_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_0_south_address_in;
 wire 			       	CG_1_0_router_iact_0_0_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_0_south_data_in;
 wire 			       	CG_1_0_router_iact_0_0_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_0_horiz_address_in;
 wire 			       	CG_1_0_router_iact_0_0_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_0_horiz_data_in;
 wire 			       	CG_1_0_router_iact_0_0_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_0_0_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_0_north_address_out;
 wire 			       	CG_1_0_router_iact_0_0_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_0_north_data_out;
 wire 			       	CG_1_0_router_iact_0_0_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_0_0_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_0_south_address_out;
 wire 			       	CG_1_0_router_iact_0_0_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_0_south_data_out;
 wire 			       	CG_1_0_router_iact_0_0_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_0_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_0_horiz_address_out;
 wire 			       	CG_1_0_router_iact_0_0_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_0_horiz_data_out;
 wire 			       	CG_1_0_router_iact_0_1_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_1_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_1_north_address_in;
 wire 			       	CG_1_0_router_iact_0_1_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_1_north_data_in;
 wire 			       	CG_1_0_router_iact_0_1_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_1_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_1_south_address_in;
 wire 			       	CG_1_0_router_iact_0_1_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_1_south_data_in;
 wire 			       	CG_1_0_router_iact_0_1_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_1_horiz_address_in;
 wire 			       	CG_1_0_router_iact_0_1_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_1_horiz_data_in;
 wire 			       	CG_1_0_router_iact_0_1_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_0_1_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_1_north_address_out;
 wire 			       	CG_1_0_router_iact_0_1_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_1_north_data_out;
 wire 			       	CG_1_0_router_iact_0_1_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_0_1_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_1_south_address_out;
 wire 			       	CG_1_0_router_iact_0_1_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_1_south_data_out;
 wire 			       	CG_1_0_router_iact_0_1_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_0_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_1_horiz_address_out;
 wire 			       	CG_1_0_router_iact_0_1_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_1_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_1_horiz_data_out;
 wire 			       	CG_1_0_router_iact_0_2_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_2_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_2_north_address_in;
 wire 			       	CG_1_0_router_iact_0_2_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_2_north_data_in;
 wire 			       	CG_1_0_router_iact_0_2_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_2_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_2_south_address_in;
 wire 			       	CG_1_0_router_iact_0_2_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_2_south_data_in;
 wire 			       	CG_1_0_router_iact_0_2_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_0_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_2_horiz_address_in;
 wire 			       	CG_1_0_router_iact_0_2_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_2_horiz_data_in;
 wire 			       	CG_1_0_router_iact_0_2_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_0_2_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_2_north_address_out;
 wire 			       	CG_1_0_router_iact_0_2_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_2_north_data_out;
 wire 			       	CG_1_0_router_iact_0_2_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_0_2_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_2_south_address_out;
 wire 			       	CG_1_0_router_iact_0_2_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_2_south_data_out;
 wire 			       	CG_1_0_router_iact_0_2_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_0_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_0_2_horiz_address_out;
 wire 			       	CG_1_0_router_iact_0_2_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_0_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_0_2_horiz_data_out;
 wire 			       	CG_1_0_router_iact_1_0_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_0_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_0_north_address_in;
 wire 			       	CG_1_0_router_iact_1_0_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_0_north_data_in;
 wire 			       	CG_1_0_router_iact_1_0_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_0_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_0_south_address_in;
 wire 			       	CG_1_0_router_iact_1_0_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_0_south_data_in;
 wire 			       	CG_1_0_router_iact_1_0_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_0_horiz_address_in;
 wire 			       	CG_1_0_router_iact_1_0_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_0_horiz_data_in;
 wire 			       	CG_1_0_router_iact_1_0_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_1_0_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_0_north_address_out;
 wire 			       	CG_1_0_router_iact_1_0_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_0_north_data_out;
 wire 			       	CG_1_0_router_iact_1_0_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_1_0_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_0_south_address_out;
 wire 			       	CG_1_0_router_iact_1_0_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_0_south_data_out;
 wire 			       	CG_1_0_router_iact_1_0_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_1_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_0_horiz_address_out;
 wire 			       	CG_1_0_router_iact_1_0_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_0_horiz_data_out;
 wire 			       	CG_1_0_router_iact_1_1_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_1_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_1_north_address_in;
 wire 			       	CG_1_0_router_iact_1_1_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_1_north_data_in;
 wire 			       	CG_1_0_router_iact_1_1_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_1_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_1_south_address_in;
 wire 			       	CG_1_0_router_iact_1_1_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_1_south_data_in;
 wire 			       	CG_1_0_router_iact_1_1_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_1_horiz_address_in;
 wire 			       	CG_1_0_router_iact_1_1_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_1_horiz_data_in;
 wire 			       	CG_1_0_router_iact_1_1_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_1_1_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_1_north_address_out;
 wire 			       	CG_1_0_router_iact_1_1_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_1_north_data_out;
 wire 			       	CG_1_0_router_iact_1_1_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_1_1_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_1_south_address_out;
 wire 			       	CG_1_0_router_iact_1_1_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_1_south_data_out;
 wire 			       	CG_1_0_router_iact_1_1_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_1_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_1_horiz_address_out;
 wire 			       	CG_1_0_router_iact_1_1_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_1_horiz_data_out;  
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_1_horiz_data_out;  
 wire 			       	CG_1_0_router_iact_1_2_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_2_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_2_north_address_in;
 wire 			       	CG_1_0_router_iact_1_2_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_2_north_data_in;
 wire 			       	CG_1_0_router_iact_1_2_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_2_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_2_south_address_in;
 wire 			       	CG_1_0_router_iact_1_2_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_2_south_data_in;
 wire 			       	CG_1_0_router_iact_1_2_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_1_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_2_horiz_address_in;
 wire 			       	CG_1_0_router_iact_1_2_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_2_horiz_data_in;
 wire 			       	CG_1_0_router_iact_1_2_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_1_2_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_2_north_address_out;
 wire 			       	CG_1_0_router_iact_1_2_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_2_north_data_out;
 wire 			       	CG_1_0_router_iact_1_2_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_1_2_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_2_south_address_out;
 wire 			       	CG_1_0_router_iact_1_2_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_2_south_data_out;
 wire 			       	CG_1_0_router_iact_1_2_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_1_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_1_2_horiz_address_out;
 wire 			       	CG_1_0_router_iact_1_2_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_1_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_1_2_horiz_data_out;
 wire 			       	CG_1_0_router_iact_2_0_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_0_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_0_north_address_in;
 wire 			       	CG_1_0_router_iact_2_0_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_0_north_data_in;
 wire 			       	CG_1_0_router_iact_2_0_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_0_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_0_south_address_in;
 wire 			       	CG_1_0_router_iact_2_0_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_0_south_data_in;
 wire 			       	CG_1_0_router_iact_2_0_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_0_horiz_address_in;
 wire 			       	CG_1_0_router_iact_2_0_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_0_horiz_data_in;
 wire 			       	CG_1_0_router_iact_2_0_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_2_0_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_0_north_address_out;
 wire 			       	CG_1_0_router_iact_2_0_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_0_north_data_out;
 wire 			       	CG_1_0_router_iact_2_0_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_2_0_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_0_south_address_out;
 wire 			       	CG_1_0_router_iact_2_0_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_0_south_data_out;
 wire 			       	CG_1_0_router_iact_2_0_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_2_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_0_horiz_address_out;
 wire 			       	CG_1_0_router_iact_2_0_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_0_horiz_data_out;
 wire 			       	CG_1_0_router_iact_2_1_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_1_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_1_north_address_in;
 wire 			       	CG_1_0_router_iact_2_1_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_1_north_data_in;
 wire 			       	CG_1_0_router_iact_2_1_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_1_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_1_south_address_in;
 wire 			       	CG_1_0_router_iact_2_1_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_1_south_data_in;
 wire 			       	CG_1_0_router_iact_2_1_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_1_horiz_address_in;
 wire 			       	CG_1_0_router_iact_2_1_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_1_horiz_data_in;
 wire 			       	CG_1_0_router_iact_2_1_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_2_1_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_1_north_address_out;
 wire 			       	CG_1_0_router_iact_2_1_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_1_north_data_out;
 wire 			       	CG_1_0_router_iact_2_1_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_2_1_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_1_south_address_out;
 wire 			       	CG_1_0_router_iact_2_1_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_1_south_data_out;
 wire 			       	CG_1_0_router_iact_2_1_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_2_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_1_horiz_address_out;
 wire 			       	CG_1_0_router_iact_2_1_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_1_horiz_data_out;   
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_1_horiz_data_out;   
 wire 			       	CG_1_0_router_iact_2_2_north_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_2_north_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_2_north_address_in;
 wire 			       	CG_1_0_router_iact_2_2_north_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_2_north_data_in;
 wire 			       	CG_1_0_router_iact_2_2_south_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_2_south_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_2_south_address_in;
 wire 			       	CG_1_0_router_iact_2_2_south_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_2_south_data_in;
 wire 			       	CG_1_0_router_iact_2_2_horiz_address_in_ready;
 wire 			       	CG_1_0_router_iact_2_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_2_horiz_address_in;
 wire 			       	CG_1_0_router_iact_2_2_horiz_data_in_ready;
 wire 			       	CG_1_0_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_2_horiz_data_in;
 wire 			       	CG_1_0_router_iact_2_2_north_address_out_ready;	
 wire 			       	CG_1_0_router_iact_2_2_north_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_2_north_address_out;
 wire 			       	CG_1_0_router_iact_2_2_north_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_2_north_data_out;
 wire 			       	CG_1_0_router_iact_2_2_south_address_out_ready;
 wire 			       	CG_1_0_router_iact_2_2_south_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_2_south_address_out;
 wire 			       	CG_1_0_router_iact_2_2_south_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_2_south_data_out;
 wire 			       	CG_1_0_router_iact_2_2_horiz_address_out_ready;
 wire 			       	CG_1_0_router_iact_2_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_0_router_iact_2_2_horiz_address_out;
 wire 			       	CG_1_0_router_iact_2_2_horiz_data_out_ready;
 wire 			       	CG_1_0_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_0_router_iact_2_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_0_router_iact_2_2_horiz_data_out;
 			
 wire 			       	CG_1_0_router_weight_0_horiz_address_in_ready;
 wire 			       	CG_1_0_router_weight_0_horiz_address_in_valid;
@@ -1831,325 +1516,325 @@ wire 			       	CG_1_1_router_iact_0_0_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_0_north_address_in;
 wire 			       	CG_1_1_router_iact_0_0_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_0_north_data_in;
 wire 			       	CG_1_1_router_iact_0_0_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_0_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_0_south_address_in;
 wire 			       	CG_1_1_router_iact_0_0_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_0_south_data_in;
 wire 			       	CG_1_1_router_iact_0_0_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_0_horiz_address_in;
 wire 			       	CG_1_1_router_iact_0_0_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_0_horiz_data_in;
 wire 			       	CG_1_1_router_iact_0_0_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_0_0_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_0_north_address_out;
 wire 			       	CG_1_1_router_iact_0_0_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_0_north_data_out;
 wire 			       	CG_1_1_router_iact_0_0_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_0_0_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_0_south_address_out;
 wire 			       	CG_1_1_router_iact_0_0_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_0_south_data_out;
 wire 			       	CG_1_1_router_iact_0_0_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_0_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_0_horiz_address_out;
 wire 			       	CG_1_1_router_iact_0_0_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_0_horiz_data_out;
 wire 			       	CG_1_1_router_iact_0_1_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_1_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_1_north_address_in;
 wire 			       	CG_1_1_router_iact_0_1_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_1_north_data_in;
 wire 			       	CG_1_1_router_iact_0_1_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_1_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_1_south_address_in;
 wire 			       	CG_1_1_router_iact_0_1_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_1_south_data_in;
 wire 			       	CG_1_1_router_iact_0_1_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_1_horiz_address_in;
 wire 			       	CG_1_1_router_iact_0_1_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_1_horiz_data_in;
 wire 			       	CG_1_1_router_iact_0_1_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_0_1_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_1_north_address_out;
 wire 			       	CG_1_1_router_iact_0_1_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_1_north_data_out;
 wire 			       	CG_1_1_router_iact_0_1_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_0_1_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_1_south_address_out;
 wire 			       	CG_1_1_router_iact_0_1_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_1_south_data_out;
 wire 			       	CG_1_1_router_iact_0_1_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_0_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_1_horiz_address_out;
 wire 			       	CG_1_1_router_iact_0_1_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_1_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_1_horiz_data_out;
 wire 			       	CG_1_1_router_iact_0_2_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_2_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_2_north_address_in;
 wire 			       	CG_1_1_router_iact_0_2_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_2_north_data_in;
 wire 			       	CG_1_1_router_iact_0_2_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_2_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_2_south_address_in;
 wire 			       	CG_1_1_router_iact_0_2_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_2_south_data_in;
 wire 			       	CG_1_1_router_iact_0_2_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_0_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_2_horiz_address_in;
 wire 			       	CG_1_1_router_iact_0_2_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_0_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_2_horiz_data_in;
 wire 			       	CG_1_1_router_iact_0_2_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_0_2_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_2_north_address_out;
 wire 			       	CG_1_1_router_iact_0_2_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_2_north_data_out;
 wire 			       	CG_1_1_router_iact_0_2_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_0_2_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_2_south_address_out;
 wire 			       	CG_1_1_router_iact_0_2_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_2_south_data_out;
 wire 			       	CG_1_1_router_iact_0_2_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_0_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_0_2_horiz_address_out;
 wire 			       	CG_1_1_router_iact_0_2_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_0_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_0_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_0_2_horiz_data_out;
 wire 			       	CG_1_1_router_iact_1_0_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_0_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_0_north_address_in;
 wire 			       	CG_1_1_router_iact_1_0_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_0_north_data_in;
 wire 			       	CG_1_1_router_iact_1_0_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_0_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_0_south_address_in;
 wire 			       	CG_1_1_router_iact_1_0_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_0_south_data_in;
 wire 			       	CG_1_1_router_iact_1_0_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_0_horiz_address_in;
 wire 			       	CG_1_1_router_iact_1_0_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_0_horiz_data_in;
 wire 			       	CG_1_1_router_iact_1_0_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_1_0_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_0_north_address_out;
 wire 			       	CG_1_1_router_iact_1_0_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_0_north_data_out;
 wire 			       	CG_1_1_router_iact_1_0_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_1_0_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_0_south_address_out;
 wire 			       	CG_1_1_router_iact_1_0_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_0_south_data_out;
 wire 			       	CG_1_1_router_iact_1_0_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_1_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_0_horiz_address_out;
 wire 			       	CG_1_1_router_iact_1_0_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_0_horiz_data_out;
 wire 			       	CG_1_1_router_iact_1_1_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_1_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_1_north_address_in;
 wire 			       	CG_1_1_router_iact_1_1_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_1_north_data_in;
 wire 			       	CG_1_1_router_iact_1_1_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_1_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_1_south_address_in;
 wire 			       	CG_1_1_router_iact_1_1_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_1_south_data_in;
 wire 			       	CG_1_1_router_iact_1_1_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_1_horiz_address_in;
 wire 			       	CG_1_1_router_iact_1_1_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_1_horiz_data_in;
 wire 			       	CG_1_1_router_iact_1_1_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_1_1_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_1_north_address_out;
 wire 			       	CG_1_1_router_iact_1_1_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_1_north_data_out;
 wire 			       	CG_1_1_router_iact_1_1_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_1_1_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_1_south_address_out;
 wire 			       	CG_1_1_router_iact_1_1_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_1_south_data_out;
 wire 			       	CG_1_1_router_iact_1_1_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_1_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_1_horiz_address_out;
 wire 			       	CG_1_1_router_iact_1_1_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_1_horiz_data_out;  
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_1_horiz_data_out;  
 wire 			       	CG_1_1_router_iact_1_2_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_2_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_2_north_address_in;
 wire 			       	CG_1_1_router_iact_1_2_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_2_north_data_in;
 wire 			       	CG_1_1_router_iact_1_2_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_2_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_2_south_address_in;
 wire 			       	CG_1_1_router_iact_1_2_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_2_south_data_in;
 wire 			       	CG_1_1_router_iact_1_2_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_1_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_2_horiz_address_in;
 wire 			       	CG_1_1_router_iact_1_2_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_1_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_2_horiz_data_in;
 wire 			       	CG_1_1_router_iact_1_2_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_1_2_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_2_north_address_out;
 wire 			       	CG_1_1_router_iact_1_2_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_2_north_data_out;
 wire 			       	CG_1_1_router_iact_1_2_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_1_2_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_2_south_address_out;
 wire 			       	CG_1_1_router_iact_1_2_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_2_south_data_out;
 wire 			       	CG_1_1_router_iact_1_2_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_1_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_1_2_horiz_address_out;
 wire 			       	CG_1_1_router_iact_1_2_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_1_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_1_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_1_2_horiz_data_out;
 wire 			       	CG_1_1_router_iact_2_0_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_0_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_0_north_address_in;
 wire 			       	CG_1_1_router_iact_2_0_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_0_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_0_north_data_in;
 wire 			       	CG_1_1_router_iact_2_0_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_0_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_0_south_address_in;
 wire 			       	CG_1_1_router_iact_2_0_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_0_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_0_south_data_in;
 wire 			       	CG_1_1_router_iact_2_0_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_0_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_0_horiz_address_in;
 wire 			       	CG_1_1_router_iact_2_0_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_0_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_0_horiz_data_in;
 wire 			       	CG_1_1_router_iact_2_0_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_2_0_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_0_north_address_out;
 wire 			       	CG_1_1_router_iact_2_0_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_0_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_0_north_data_out;
 wire 			       	CG_1_1_router_iact_2_0_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_2_0_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_0_south_address_out;
 wire 			       	CG_1_1_router_iact_2_0_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_0_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_0_south_data_out;
 wire 			       	CG_1_1_router_iact_2_0_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_2_0_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_0_horiz_address_out;
 wire 			       	CG_1_1_router_iact_2_0_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_0_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_0_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_0_horiz_data_out;
 wire 			       	CG_1_1_router_iact_2_1_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_1_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_1_north_address_in;
 wire 			       	CG_1_1_router_iact_2_1_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_1_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_1_north_data_in;
 wire 			       	CG_1_1_router_iact_2_1_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_1_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_1_south_address_in;
 wire 			       	CG_1_1_router_iact_2_1_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_1_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_1_south_data_in;
 wire 			       	CG_1_1_router_iact_2_1_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_1_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_1_horiz_address_in;
 wire 			       	CG_1_1_router_iact_2_1_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_1_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_1_horiz_data_in;
 wire 			       	CG_1_1_router_iact_2_1_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_2_1_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_1_north_address_out;
 wire 			       	CG_1_1_router_iact_2_1_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_1_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_1_north_data_out;
 wire 			       	CG_1_1_router_iact_2_1_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_2_1_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_1_south_address_out;
 wire 			       	CG_1_1_router_iact_2_1_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_1_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_1_south_data_out;
 wire 			       	CG_1_1_router_iact_2_1_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_2_1_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_1_horiz_address_out;
 wire 			       	CG_1_1_router_iact_2_1_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_1_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_1_horiz_data_out;   
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_1_horiz_data_out;   
 wire 			       	CG_1_1_router_iact_2_2_north_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_2_north_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_2_north_address_in;
 wire 			       	CG_1_1_router_iact_2_2_north_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_2_north_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_north_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_2_north_data_in;
 wire 			       	CG_1_1_router_iact_2_2_south_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_2_south_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_2_south_address_in;
 wire 			       	CG_1_1_router_iact_2_2_south_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_2_south_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_south_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_2_south_data_in;
 wire 			       	CG_1_1_router_iact_2_2_horiz_address_in_ready;
 wire 			       	CG_1_1_router_iact_2_2_horiz_address_in_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_2_horiz_address_in;
 wire 			       	CG_1_1_router_iact_2_2_horiz_data_in_ready;
 wire 			       	CG_1_1_router_iact_2_2_horiz_data_in_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_horiz_data_in;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_2_horiz_data_in;
 wire 			       	CG_1_1_router_iact_2_2_north_address_out_ready;	
 wire 			       	CG_1_1_router_iact_2_2_north_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_2_north_address_out;
 wire 			       	CG_1_1_router_iact_2_2_north_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_2_north_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_north_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_2_north_data_out;
 wire 			       	CG_1_1_router_iact_2_2_south_address_out_ready;
 wire 			       	CG_1_1_router_iact_2_2_south_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_2_south_address_out;
 wire 			       	CG_1_1_router_iact_2_2_south_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_2_south_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_south_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_2_south_data_out;
 wire 			       	CG_1_1_router_iact_2_2_horiz_address_out_ready;
 wire 			       	CG_1_1_router_iact_2_2_horiz_address_out_valid;
 wire 			[6:0]  	CG_1_1_router_iact_2_2_horiz_address_out;
 wire 			       	CG_1_1_router_iact_2_2_horiz_data_out_ready;
 wire 			       	CG_1_1_router_iact_2_2_horiz_data_out_valid;
-wire 			[11:0] 	CG_1_1_router_iact_2_2_horiz_data_out;
+wire 			[`BOYU_LATER_STREAM_RANGE] 	CG_1_1_router_iact_2_2_horiz_data_out;
 			
 wire 			       	CG_1_1_router_weight_0_horiz_address_in_ready;
 wire 			       	CG_1_1_router_weight_0_horiz_address_in_valid;
@@ -2271,106 +1956,26 @@ ClusterGroup ClusterGroup_0_0 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_0_0_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_0_0_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_0_0_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_0_0_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_0_0_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_0_0_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_0_0_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_0_0_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_0_0_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_0_0_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_0_0_PE_2_2_disable							),
+	.PE_disable(CG_0_0_PE_disable),
 			                   
-	.GLB_iact_0_0_read_addr                     (CG_0_0_GLB_iact_0_0_read_addr                  ),
-	.GLB_iact_0_1_read_addr                     (CG_0_0_GLB_iact_0_1_read_addr                  ),
-	.GLB_iact_0_2_read_addr                     (CG_0_0_GLB_iact_0_2_read_addr                  ),
-	.GLB_iact_1_0_read_addr                     (CG_0_0_GLB_iact_1_0_read_addr                  ),
-	.GLB_iact_1_1_read_addr                     (CG_0_0_GLB_iact_1_1_read_addr                  ),
-	.GLB_iact_1_2_read_addr                     (CG_0_0_GLB_iact_1_2_read_addr                  ),
-	.GLB_iact_2_0_read_addr                     (CG_0_0_GLB_iact_2_0_read_addr                  ),
-	.GLB_iact_2_1_read_addr                     (CG_0_0_GLB_iact_2_1_read_addr                  ),
-	.GLB_iact_2_2_read_addr                     (CG_0_0_GLB_iact_2_2_read_addr                  ),
+	.GLB_iact_read_addr(CG_0_0_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_0_0_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_0_0_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_0_0_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_0_0_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_0_0_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_0_0_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_0_0_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_0_0_GLB_psum_read_addr),
 								               
-	.GLB_iact_0_0_address_in_ready              (CG_0_0_GLB_iact_0_0_address_in_ready           ),
-	.GLB_iact_0_0_address_in_valid              (CG_0_0_GLB_iact_0_0_address_in_valid           ),
-	.GLB_iact_0_0_address_in                    (CG_0_0_GLB_iact_0_0_address_in                 ),
-	.GLB_iact_0_0_data_in_ready                 (CG_0_0_GLB_iact_0_0_data_in_ready              ),
-	.GLB_iact_0_0_data_in_valid                 (CG_0_0_GLB_iact_0_0_data_in_valid              ),
-	.GLB_iact_0_0_data_in                       (CG_0_0_GLB_iact_0_0_data_in                    ),
-	.GLB_iact_0_1_address_in_ready              (CG_0_0_GLB_iact_0_1_address_in_ready           ),
-	.GLB_iact_0_1_address_in_valid              (CG_0_0_GLB_iact_0_1_address_in_valid           ),
-	.GLB_iact_0_1_address_in                    (CG_0_0_GLB_iact_0_1_address_in                 ),
-	.GLB_iact_0_1_data_in_ready                 (CG_0_0_GLB_iact_0_1_data_in_ready              ),
-	.GLB_iact_0_1_data_in_valid                 (CG_0_0_GLB_iact_0_1_data_in_valid              ),
-	.GLB_iact_0_1_data_in                       (CG_0_0_GLB_iact_0_1_data_in                    ),
-	.GLB_iact_0_2_address_in_ready              (CG_0_0_GLB_iact_0_2_address_in_ready           ),
-	.GLB_iact_0_2_address_in_valid              (CG_0_0_GLB_iact_0_2_address_in_valid           ),
-	.GLB_iact_0_2_address_in                    (CG_0_0_GLB_iact_0_2_address_in                 ),
-	.GLB_iact_0_2_data_in_ready                 (CG_0_0_GLB_iact_0_2_data_in_ready              ),
-	.GLB_iact_0_2_data_in_valid                 (CG_0_0_GLB_iact_0_2_data_in_valid              ),
-	.GLB_iact_0_2_data_in                       (CG_0_0_GLB_iact_0_2_data_in                    ),
-	.GLB_iact_1_0_address_in_ready              (CG_0_0_GLB_iact_1_0_address_in_ready           ),
-	.GLB_iact_1_0_address_in_valid              (CG_0_0_GLB_iact_1_0_address_in_valid           ),
-	.GLB_iact_1_0_address_in                    (CG_0_0_GLB_iact_1_0_address_in                 ),
-	.GLB_iact_1_0_data_in_ready                 (CG_0_0_GLB_iact_1_0_data_in_ready              ),
-	.GLB_iact_1_0_data_in_valid                 (CG_0_0_GLB_iact_1_0_data_in_valid              ),
-	.GLB_iact_1_0_data_in                       (CG_0_0_GLB_iact_1_0_data_in                    ),
-	.GLB_iact_1_1_address_in_ready              (CG_0_0_GLB_iact_1_1_address_in_ready           ),
-	.GLB_iact_1_1_address_in_valid              (CG_0_0_GLB_iact_1_1_address_in_valid           ),
-	.GLB_iact_1_1_address_in                    (CG_0_0_GLB_iact_1_1_address_in                 ),
-	.GLB_iact_1_1_data_in_ready                 (CG_0_0_GLB_iact_1_1_data_in_ready              ),
-	.GLB_iact_1_1_data_in_valid                 (CG_0_0_GLB_iact_1_1_data_in_valid              ),
-	.GLB_iact_1_1_data_in                       (CG_0_0_GLB_iact_1_1_data_in                    ),
-	.GLB_iact_1_2_address_in_ready              (CG_0_0_GLB_iact_1_2_address_in_ready           ),
-	.GLB_iact_1_2_address_in_valid              (CG_0_0_GLB_iact_1_2_address_in_valid           ),
-	.GLB_iact_1_2_address_in                    (CG_0_0_GLB_iact_1_2_address_in                 ),
-	.GLB_iact_1_2_data_in_ready                 (CG_0_0_GLB_iact_1_2_data_in_ready              ),
-	.GLB_iact_1_2_data_in_valid                 (CG_0_0_GLB_iact_1_2_data_in_valid              ),
-	.GLB_iact_1_2_data_in                       (CG_0_0_GLB_iact_1_2_data_in                    ),
-	.GLB_iact_2_0_address_in_ready              (CG_0_0_GLB_iact_2_0_address_in_ready           ),
-	.GLB_iact_2_0_address_in_valid              (CG_0_0_GLB_iact_2_0_address_in_valid           ),
-	.GLB_iact_2_0_address_in                    (CG_0_0_GLB_iact_2_0_address_in                 ),
-	.GLB_iact_2_0_data_in_ready                 (CG_0_0_GLB_iact_2_0_data_in_ready              ),
-	.GLB_iact_2_0_data_in_valid                 (CG_0_0_GLB_iact_2_0_data_in_valid              ),
-	.GLB_iact_2_0_data_in                       (CG_0_0_GLB_iact_2_0_data_in                    ),
-	.GLB_iact_2_1_address_in_ready              (CG_0_0_GLB_iact_2_1_address_in_ready           ),
-	.GLB_iact_2_1_address_in_valid              (CG_0_0_GLB_iact_2_1_address_in_valid           ),
-	.GLB_iact_2_1_address_in                    (CG_0_0_GLB_iact_2_1_address_in                 ),
-	.GLB_iact_2_1_data_in_ready                 (CG_0_0_GLB_iact_2_1_data_in_ready              ),
-	.GLB_iact_2_1_data_in_valid                 (CG_0_0_GLB_iact_2_1_data_in_valid              ),
-	.GLB_iact_2_1_data_in                       (CG_0_0_GLB_iact_2_1_data_in                    ),
-	.GLB_iact_2_2_address_in_ready              (CG_0_0_GLB_iact_2_2_address_in_ready           ),
-	.GLB_iact_2_2_address_in_valid              (CG_0_0_GLB_iact_2_2_address_in_valid           ),
-	.GLB_iact_2_2_address_in                    (CG_0_0_GLB_iact_2_2_address_in                 ),
-	.GLB_iact_2_2_data_in_ready                 (CG_0_0_GLB_iact_2_2_data_in_ready              ),
-	.GLB_iact_2_2_data_in_valid                 (CG_0_0_GLB_iact_2_2_data_in_valid              ),
-	.GLB_iact_2_2_data_in                       (CG_0_0_GLB_iact_2_2_data_in                    ),
+	.GLB_iact_address_in_ready(CG_0_0_GLB_iact_address_in_ready),
+	.GLB_iact_address_in_valid(CG_0_0_GLB_iact_address_in_valid),
+	.GLB_iact_address_in(CG_0_0_GLB_iact_address_in),
+	.GLB_iact_data_in_ready(CG_0_0_GLB_iact_data_in_ready),
+	.GLB_iact_data_in_valid(CG_0_0_GLB_iact_data_in_valid),
+	.GLB_iact_data_in(CG_0_0_GLB_iact_data_in),
 										    						
-	.GLB_weight_0_address_in_ready              (CG_0_0_GLB_weight_0_address_in_ready           ),
-	.GLB_weight_0_address_in_valid              (CG_0_0_GLB_weight_0_address_in_valid           ),
-	.GLB_weight_0_address_in                    (CG_0_0_GLB_weight_0_address_in                 ),
-	.GLB_weight_0_data_in_ready                 (CG_0_0_GLB_weight_0_data_in_ready              ),
-	.GLB_weight_0_data_in_valid                 (CG_0_0_GLB_weight_0_data_in_valid              ),
-	.GLB_weight_0_data_in                       (CG_0_0_GLB_weight_0_data_in                    ),
-	.GLB_weight_1_address_in_ready              (CG_0_0_GLB_weight_1_address_in_ready           ),
-	.GLB_weight_1_address_in_valid	            (CG_0_0_GLB_weight_1_address_in_valid	     	),
-	.GLB_weight_1_address_in                    (CG_0_0_GLB_weight_1_address_in                 ),
-	.GLB_weight_1_data_in_ready                 (CG_0_0_GLB_weight_1_data_in_ready              ),
-	.GLB_weight_1_data_in_valid                 (CG_0_0_GLB_weight_1_data_in_valid              ),
-	.GLB_weight_1_data_in                       (CG_0_0_GLB_weight_1_data_in                    ),
-	.GLB_weight_2_address_in_ready              (CG_0_0_GLB_weight_2_address_in_ready           ),
-	.GLB_weight_2_address_in_valid              (CG_0_0_GLB_weight_2_address_in_valid           ),
-	.GLB_weight_2_address_in                    (CG_0_0_GLB_weight_2_address_in                 ),
-	.GLB_weight_2_data_in_ready                 (CG_0_0_GLB_weight_2_data_in_ready              ),
-	.GLB_weight_2_data_in_valid                 (CG_0_0_GLB_weight_2_data_in_valid              ),
-	.GLB_weight_2_data_in                       (CG_0_0_GLB_weight_2_data_in                    ),
+	.GLB_weight_address_in_ready(CG_0_0_GLB_weight_address_in_ready),
+	.GLB_weight_address_in_valid(CG_0_0_GLB_weight_address_in_valid),
+	.GLB_weight_address_in(CG_0_0_GLB_weight_address_in),
+	.GLB_weight_data_in_ready(CG_0_0_GLB_weight_data_in_ready),
+	.GLB_weight_data_in_valid(CG_0_0_GLB_weight_data_in_valid),
+	.GLB_weight_data_in(CG_0_0_GLB_weight_data_in),
 										     
 	.GLB_psum_0_data_in_ready                   (CG_0_0_GLB_psum_0_data_in_ready                ),
 	.GLB_psum_0_data_in_valid                   (CG_0_0_GLB_psum_0_data_in_valid                ),
@@ -2793,6 +2398,8 @@ ClusterGroup ClusterGroup_0_0 (
 									         
 	.PSUM_DEPTH                                 (CG_0_0_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_0_0_psum_spad_clear                         ),
+	.int4_former_weight_mode                    (int4_former_weight_mode                        ),
+	.int4_later_weight_mode                     (int4_later_weight_mode                         ),
 											
 	.iact_write_fin_clear                       (CG_0_0_iact_write_fin_clear                	),
 	.weight_write_fin_clear						(CG_0_0_weight_write_fin_clear					)
@@ -2829,106 +2436,26 @@ ClusterGroup ClusterGroup_0_1 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_0_1_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_0_1_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_0_1_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_0_1_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_0_1_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_0_1_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_0_1_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_0_1_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_0_1_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_0_1_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_0_1_PE_2_2_disable							),
+	.PE_disable(CG_0_1_PE_disable),
 							                   
-	.GLB_iact_0_0_read_addr                     (CG_0_1_GLB_iact_0_0_read_addr                  ),
-	.GLB_iact_0_1_read_addr                     (CG_0_1_GLB_iact_0_1_read_addr                  ),
-	.GLB_iact_0_2_read_addr                     (CG_0_1_GLB_iact_0_2_read_addr                  ),
-	.GLB_iact_1_0_read_addr                     (CG_0_1_GLB_iact_1_0_read_addr                  ),
-	.GLB_iact_1_1_read_addr                     (CG_0_1_GLB_iact_1_1_read_addr                  ),
-	.GLB_iact_1_2_read_addr                     (CG_0_1_GLB_iact_1_2_read_addr                  ),
-	.GLB_iact_2_0_read_addr                     (CG_0_1_GLB_iact_2_0_read_addr                  ),
-	.GLB_iact_2_1_read_addr                     (CG_0_1_GLB_iact_2_1_read_addr                  ),
-	.GLB_iact_2_2_read_addr                     (CG_0_1_GLB_iact_2_2_read_addr                  ),
+	.GLB_iact_read_addr(CG_0_1_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_0_1_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_0_1_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_0_1_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_0_1_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_0_1_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_0_1_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_0_1_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_0_1_GLB_psum_read_addr),
 								               
-	.GLB_iact_0_0_address_in_ready              (CG_0_1_GLB_iact_0_0_address_in_ready           ),
-	.GLB_iact_0_0_address_in_valid              (CG_0_1_GLB_iact_0_0_address_in_valid           ),
-	.GLB_iact_0_0_address_in                    (CG_0_1_GLB_iact_0_0_address_in                 ),
-	.GLB_iact_0_0_data_in_ready                 (CG_0_1_GLB_iact_0_0_data_in_ready              ),
-	.GLB_iact_0_0_data_in_valid                 (CG_0_1_GLB_iact_0_0_data_in_valid              ),
-	.GLB_iact_0_0_data_in                       (CG_0_1_GLB_iact_0_0_data_in                    ),
-	.GLB_iact_0_1_address_in_ready              (CG_0_1_GLB_iact_0_1_address_in_ready           ),
-	.GLB_iact_0_1_address_in_valid              (CG_0_1_GLB_iact_0_1_address_in_valid           ),
-	.GLB_iact_0_1_address_in                    (CG_0_1_GLB_iact_0_1_address_in                 ),
-	.GLB_iact_0_1_data_in_ready                 (CG_0_1_GLB_iact_0_1_data_in_ready              ),
-	.GLB_iact_0_1_data_in_valid                 (CG_0_1_GLB_iact_0_1_data_in_valid              ),
-	.GLB_iact_0_1_data_in                       (CG_0_1_GLB_iact_0_1_data_in                    ),
-	.GLB_iact_0_2_address_in_ready              (CG_0_1_GLB_iact_0_2_address_in_ready           ),
-	.GLB_iact_0_2_address_in_valid              (CG_0_1_GLB_iact_0_2_address_in_valid           ),
-	.GLB_iact_0_2_address_in                    (CG_0_1_GLB_iact_0_2_address_in                 ),
-	.GLB_iact_0_2_data_in_ready                 (CG_0_1_GLB_iact_0_2_data_in_ready              ),
-	.GLB_iact_0_2_data_in_valid                 (CG_0_1_GLB_iact_0_2_data_in_valid              ),
-	.GLB_iact_0_2_data_in                       (CG_0_1_GLB_iact_0_2_data_in                    ),
-	.GLB_iact_1_0_address_in_ready              (CG_0_1_GLB_iact_1_0_address_in_ready           ),
-	.GLB_iact_1_0_address_in_valid              (CG_0_1_GLB_iact_1_0_address_in_valid           ),
-	.GLB_iact_1_0_address_in                    (CG_0_1_GLB_iact_1_0_address_in                 ),
-	.GLB_iact_1_0_data_in_ready                 (CG_0_1_GLB_iact_1_0_data_in_ready              ),
-	.GLB_iact_1_0_data_in_valid                 (CG_0_1_GLB_iact_1_0_data_in_valid              ),
-	.GLB_iact_1_0_data_in                       (CG_0_1_GLB_iact_1_0_data_in                    ),
-	.GLB_iact_1_1_address_in_ready              (CG_0_1_GLB_iact_1_1_address_in_ready           ),
-	.GLB_iact_1_1_address_in_valid              (CG_0_1_GLB_iact_1_1_address_in_valid           ),
-	.GLB_iact_1_1_address_in                    (CG_0_1_GLB_iact_1_1_address_in                 ),
-	.GLB_iact_1_1_data_in_ready                 (CG_0_1_GLB_iact_1_1_data_in_ready              ),
-	.GLB_iact_1_1_data_in_valid                 (CG_0_1_GLB_iact_1_1_data_in_valid              ),
-	.GLB_iact_1_1_data_in                       (CG_0_1_GLB_iact_1_1_data_in                    ),
-	.GLB_iact_1_2_address_in_ready              (CG_0_1_GLB_iact_1_2_address_in_ready           ),
-	.GLB_iact_1_2_address_in_valid              (CG_0_1_GLB_iact_1_2_address_in_valid           ),
-	.GLB_iact_1_2_address_in                    (CG_0_1_GLB_iact_1_2_address_in                 ),
-	.GLB_iact_1_2_data_in_ready                 (CG_0_1_GLB_iact_1_2_data_in_ready              ),
-	.GLB_iact_1_2_data_in_valid                 (CG_0_1_GLB_iact_1_2_data_in_valid              ),
-	.GLB_iact_1_2_data_in                       (CG_0_1_GLB_iact_1_2_data_in                    ),
-	.GLB_iact_2_0_address_in_ready              (CG_0_1_GLB_iact_2_0_address_in_ready           ),
-	.GLB_iact_2_0_address_in_valid              (CG_0_1_GLB_iact_2_0_address_in_valid           ),
-	.GLB_iact_2_0_address_in                    (CG_0_1_GLB_iact_2_0_address_in                 ),
-	.GLB_iact_2_0_data_in_ready                 (CG_0_1_GLB_iact_2_0_data_in_ready              ),
-	.GLB_iact_2_0_data_in_valid                 (CG_0_1_GLB_iact_2_0_data_in_valid              ),
-	.GLB_iact_2_0_data_in                       (CG_0_1_GLB_iact_2_0_data_in                    ),
-	.GLB_iact_2_1_address_in_ready              (CG_0_1_GLB_iact_2_1_address_in_ready           ),
-	.GLB_iact_2_1_address_in_valid              (CG_0_1_GLB_iact_2_1_address_in_valid           ),
-	.GLB_iact_2_1_address_in                    (CG_0_1_GLB_iact_2_1_address_in                 ),
-	.GLB_iact_2_1_data_in_ready                 (CG_0_1_GLB_iact_2_1_data_in_ready              ),
-	.GLB_iact_2_1_data_in_valid                 (CG_0_1_GLB_iact_2_1_data_in_valid              ),
-	.GLB_iact_2_1_data_in                       (CG_0_1_GLB_iact_2_1_data_in                    ),
-	.GLB_iact_2_2_address_in_ready              (CG_0_1_GLB_iact_2_2_address_in_ready           ),
-	.GLB_iact_2_2_address_in_valid              (CG_0_1_GLB_iact_2_2_address_in_valid           ),
-	.GLB_iact_2_2_address_in                    (CG_0_1_GLB_iact_2_2_address_in                 ),
-	.GLB_iact_2_2_data_in_ready                 (CG_0_1_GLB_iact_2_2_data_in_ready              ),
-	.GLB_iact_2_2_data_in_valid                 (CG_0_1_GLB_iact_2_2_data_in_valid              ),
-	.GLB_iact_2_2_data_in                       (CG_0_1_GLB_iact_2_2_data_in                    ),
+	.GLB_iact_address_in_ready(CG_0_1_GLB_iact_address_in_ready),
+	.GLB_iact_address_in_valid(CG_0_1_GLB_iact_address_in_valid),
+	.GLB_iact_address_in(CG_0_1_GLB_iact_address_in),
+	.GLB_iact_data_in_ready(CG_0_1_GLB_iact_data_in_ready),
+	.GLB_iact_data_in_valid(CG_0_1_GLB_iact_data_in_valid),
+	.GLB_iact_data_in(CG_0_1_GLB_iact_data_in),
 										    						
-	.GLB_weight_0_address_in_ready              (CG_0_1_GLB_weight_0_address_in_ready           ),
-	.GLB_weight_0_address_in_valid              (CG_0_1_GLB_weight_0_address_in_valid           ),
-	.GLB_weight_0_address_in                    (CG_0_1_GLB_weight_0_address_in                 ),
-	.GLB_weight_0_data_in_ready                 (CG_0_1_GLB_weight_0_data_in_ready              ),
-	.GLB_weight_0_data_in_valid                 (CG_0_1_GLB_weight_0_data_in_valid              ),
-	.GLB_weight_0_data_in                       (CG_0_1_GLB_weight_0_data_in                    ),
-	.GLB_weight_1_address_in_ready              (CG_0_1_GLB_weight_1_address_in_ready           ),
-	.GLB_weight_1_address_in_valid	            (CG_0_1_GLB_weight_1_address_in_valid	     	),
-	.GLB_weight_1_address_in                    (CG_0_1_GLB_weight_1_address_in                 ),
-	.GLB_weight_1_data_in_ready                 (CG_0_1_GLB_weight_1_data_in_ready              ),
-	.GLB_weight_1_data_in_valid                 (CG_0_1_GLB_weight_1_data_in_valid              ),
-	.GLB_weight_1_data_in                       (CG_0_1_GLB_weight_1_data_in                    ),
-	.GLB_weight_2_address_in_ready              (CG_0_1_GLB_weight_2_address_in_ready           ),
-	.GLB_weight_2_address_in_valid              (CG_0_1_GLB_weight_2_address_in_valid           ),
-	.GLB_weight_2_address_in                    (CG_0_1_GLB_weight_2_address_in                 ),
-	.GLB_weight_2_data_in_ready                 (CG_0_1_GLB_weight_2_data_in_ready              ),
-	.GLB_weight_2_data_in_valid                 (CG_0_1_GLB_weight_2_data_in_valid              ),
-	.GLB_weight_2_data_in                       (CG_0_1_GLB_weight_2_data_in                    ),
+	.GLB_weight_address_in_ready(CG_0_1_GLB_weight_address_in_ready),
+	.GLB_weight_address_in_valid(CG_0_1_GLB_weight_address_in_valid),
+	.GLB_weight_address_in(CG_0_1_GLB_weight_address_in),
+	.GLB_weight_data_in_ready(CG_0_1_GLB_weight_data_in_ready),
+	.GLB_weight_data_in_valid(CG_0_1_GLB_weight_data_in_valid),
+	.GLB_weight_data_in(CG_0_1_GLB_weight_data_in),
 										     
 	.GLB_psum_0_data_in_ready                   (CG_0_1_GLB_psum_0_data_in_ready                ),
 	.GLB_psum_0_data_in_valid                   (CG_0_1_GLB_psum_0_data_in_valid                ),
@@ -3351,6 +2878,8 @@ ClusterGroup ClusterGroup_0_1 (
 									         
 	.PSUM_DEPTH                                 (CG_0_1_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_0_1_psum_spad_clear                         ),
+	.int4_former_weight_mode                    (int4_former_weight_mode                        ),
+	.int4_later_weight_mode                     (int4_later_weight_mode                         ),
 											
 	.iact_write_fin_clear                       (CG_0_1_iact_write_fin_clear                	),
 	.weight_write_fin_clear						(CG_0_1_weight_write_fin_clear					)
@@ -3387,106 +2916,26 @@ ClusterGroup ClusterGroup_1_0 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_1_0_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_1_0_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_1_0_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_1_0_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_1_0_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_1_0_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_1_0_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_1_0_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_1_0_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_1_0_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_1_0_PE_2_2_disable							),
+	.PE_disable(CG_1_0_PE_disable),
 							                   
-	.GLB_iact_0_0_read_addr                     (CG_1_0_GLB_iact_0_0_read_addr                  ),
-	.GLB_iact_0_1_read_addr                     (CG_1_0_GLB_iact_0_1_read_addr                  ),
-	.GLB_iact_0_2_read_addr                     (CG_1_0_GLB_iact_0_2_read_addr                  ),
-	.GLB_iact_1_0_read_addr                     (CG_1_0_GLB_iact_1_0_read_addr                  ),
-	.GLB_iact_1_1_read_addr                     (CG_1_0_GLB_iact_1_1_read_addr                  ),
-	.GLB_iact_1_2_read_addr                     (CG_1_0_GLB_iact_1_2_read_addr                  ),
-	.GLB_iact_2_0_read_addr                     (CG_1_0_GLB_iact_2_0_read_addr                  ),
-	.GLB_iact_2_1_read_addr                     (CG_1_0_GLB_iact_2_1_read_addr                  ),
-	.GLB_iact_2_2_read_addr                     (CG_1_0_GLB_iact_2_2_read_addr                  ),
+	.GLB_iact_read_addr(CG_1_0_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_1_0_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_1_0_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_1_0_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_1_0_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_1_0_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_1_0_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_1_0_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_1_0_GLB_psum_read_addr),
 								               
-	.GLB_iact_0_0_address_in_ready              (CG_1_0_GLB_iact_0_0_address_in_ready           ),
-	.GLB_iact_0_0_address_in_valid              (CG_1_0_GLB_iact_0_0_address_in_valid           ),
-	.GLB_iact_0_0_address_in                    (CG_1_0_GLB_iact_0_0_address_in                 ),
-	.GLB_iact_0_0_data_in_ready                 (CG_1_0_GLB_iact_0_0_data_in_ready              ),
-	.GLB_iact_0_0_data_in_valid                 (CG_1_0_GLB_iact_0_0_data_in_valid              ),
-	.GLB_iact_0_0_data_in                       (CG_1_0_GLB_iact_0_0_data_in                    ),
-	.GLB_iact_0_1_address_in_ready              (CG_1_0_GLB_iact_0_1_address_in_ready           ),
-	.GLB_iact_0_1_address_in_valid              (CG_1_0_GLB_iact_0_1_address_in_valid           ),
-	.GLB_iact_0_1_address_in                    (CG_1_0_GLB_iact_0_1_address_in                 ),
-	.GLB_iact_0_1_data_in_ready                 (CG_1_0_GLB_iact_0_1_data_in_ready              ),
-	.GLB_iact_0_1_data_in_valid                 (CG_1_0_GLB_iact_0_1_data_in_valid              ),
-	.GLB_iact_0_1_data_in                       (CG_1_0_GLB_iact_0_1_data_in                    ),
-	.GLB_iact_0_2_address_in_ready              (CG_1_0_GLB_iact_0_2_address_in_ready           ),
-	.GLB_iact_0_2_address_in_valid              (CG_1_0_GLB_iact_0_2_address_in_valid           ),
-	.GLB_iact_0_2_address_in                    (CG_1_0_GLB_iact_0_2_address_in                 ),
-	.GLB_iact_0_2_data_in_ready                 (CG_1_0_GLB_iact_0_2_data_in_ready              ),
-	.GLB_iact_0_2_data_in_valid                 (CG_1_0_GLB_iact_0_2_data_in_valid              ),
-	.GLB_iact_0_2_data_in                       (CG_1_0_GLB_iact_0_2_data_in                    ),
-	.GLB_iact_1_0_address_in_ready              (CG_1_0_GLB_iact_1_0_address_in_ready           ),
-	.GLB_iact_1_0_address_in_valid              (CG_1_0_GLB_iact_1_0_address_in_valid           ),
-	.GLB_iact_1_0_address_in                    (CG_1_0_GLB_iact_1_0_address_in                 ),
-	.GLB_iact_1_0_data_in_ready                 (CG_1_0_GLB_iact_1_0_data_in_ready              ),
-	.GLB_iact_1_0_data_in_valid                 (CG_1_0_GLB_iact_1_0_data_in_valid              ),
-	.GLB_iact_1_0_data_in                       (CG_1_0_GLB_iact_1_0_data_in                    ),
-	.GLB_iact_1_1_address_in_ready              (CG_1_0_GLB_iact_1_1_address_in_ready           ),
-	.GLB_iact_1_1_address_in_valid              (CG_1_0_GLB_iact_1_1_address_in_valid           ),
-	.GLB_iact_1_1_address_in                    (CG_1_0_GLB_iact_1_1_address_in                 ),
-	.GLB_iact_1_1_data_in_ready                 (CG_1_0_GLB_iact_1_1_data_in_ready              ),
-	.GLB_iact_1_1_data_in_valid                 (CG_1_0_GLB_iact_1_1_data_in_valid              ),
-	.GLB_iact_1_1_data_in                       (CG_1_0_GLB_iact_1_1_data_in                    ),
-	.GLB_iact_1_2_address_in_ready              (CG_1_0_GLB_iact_1_2_address_in_ready           ),
-	.GLB_iact_1_2_address_in_valid              (CG_1_0_GLB_iact_1_2_address_in_valid           ),
-	.GLB_iact_1_2_address_in                    (CG_1_0_GLB_iact_1_2_address_in                 ),
-	.GLB_iact_1_2_data_in_ready                 (CG_1_0_GLB_iact_1_2_data_in_ready              ),
-	.GLB_iact_1_2_data_in_valid                 (CG_1_0_GLB_iact_1_2_data_in_valid              ),
-	.GLB_iact_1_2_data_in                       (CG_1_0_GLB_iact_1_2_data_in                    ),
-	.GLB_iact_2_0_address_in_ready              (CG_1_0_GLB_iact_2_0_address_in_ready           ),
-	.GLB_iact_2_0_address_in_valid              (CG_1_0_GLB_iact_2_0_address_in_valid           ),
-	.GLB_iact_2_0_address_in                    (CG_1_0_GLB_iact_2_0_address_in                 ),
-	.GLB_iact_2_0_data_in_ready                 (CG_1_0_GLB_iact_2_0_data_in_ready              ),
-	.GLB_iact_2_0_data_in_valid                 (CG_1_0_GLB_iact_2_0_data_in_valid              ),
-	.GLB_iact_2_0_data_in                       (CG_1_0_GLB_iact_2_0_data_in                    ),
-	.GLB_iact_2_1_address_in_ready              (CG_1_0_GLB_iact_2_1_address_in_ready           ),
-	.GLB_iact_2_1_address_in_valid              (CG_1_0_GLB_iact_2_1_address_in_valid           ),
-	.GLB_iact_2_1_address_in                    (CG_1_0_GLB_iact_2_1_address_in                 ),
-	.GLB_iact_2_1_data_in_ready                 (CG_1_0_GLB_iact_2_1_data_in_ready              ),
-	.GLB_iact_2_1_data_in_valid                 (CG_1_0_GLB_iact_2_1_data_in_valid              ),
-	.GLB_iact_2_1_data_in                       (CG_1_0_GLB_iact_2_1_data_in                    ),
-	.GLB_iact_2_2_address_in_ready              (CG_1_0_GLB_iact_2_2_address_in_ready           ),
-	.GLB_iact_2_2_address_in_valid              (CG_1_0_GLB_iact_2_2_address_in_valid           ),
-	.GLB_iact_2_2_address_in                    (CG_1_0_GLB_iact_2_2_address_in                 ),
-	.GLB_iact_2_2_data_in_ready                 (CG_1_0_GLB_iact_2_2_data_in_ready              ),
-	.GLB_iact_2_2_data_in_valid                 (CG_1_0_GLB_iact_2_2_data_in_valid              ),
-	.GLB_iact_2_2_data_in                       (CG_1_0_GLB_iact_2_2_data_in                    ),
+	.GLB_iact_address_in_ready(CG_1_0_GLB_iact_address_in_ready),
+	.GLB_iact_address_in_valid(CG_1_0_GLB_iact_address_in_valid),
+	.GLB_iact_address_in(CG_1_0_GLB_iact_address_in),
+	.GLB_iact_data_in_ready(CG_1_0_GLB_iact_data_in_ready),
+	.GLB_iact_data_in_valid(CG_1_0_GLB_iact_data_in_valid),
+	.GLB_iact_data_in(CG_1_0_GLB_iact_data_in),
 										    						
-	.GLB_weight_0_address_in_ready              (CG_1_0_GLB_weight_0_address_in_ready           ),
-	.GLB_weight_0_address_in_valid              (CG_1_0_GLB_weight_0_address_in_valid           ),
-	.GLB_weight_0_address_in                    (CG_1_0_GLB_weight_0_address_in                 ),
-	.GLB_weight_0_data_in_ready                 (CG_1_0_GLB_weight_0_data_in_ready              ),
-	.GLB_weight_0_data_in_valid                 (CG_1_0_GLB_weight_0_data_in_valid              ),
-	.GLB_weight_0_data_in                       (CG_1_0_GLB_weight_0_data_in                    ),
-	.GLB_weight_1_address_in_ready              (CG_1_0_GLB_weight_1_address_in_ready           ),
-	.GLB_weight_1_address_in_valid	            (CG_1_0_GLB_weight_1_address_in_valid	     	),
-	.GLB_weight_1_address_in                    (CG_1_0_GLB_weight_1_address_in                 ),
-	.GLB_weight_1_data_in_ready                 (CG_1_0_GLB_weight_1_data_in_ready              ),
-	.GLB_weight_1_data_in_valid                 (CG_1_0_GLB_weight_1_data_in_valid              ),
-	.GLB_weight_1_data_in                       (CG_1_0_GLB_weight_1_data_in                    ),
-	.GLB_weight_2_address_in_ready              (CG_1_0_GLB_weight_2_address_in_ready           ),
-	.GLB_weight_2_address_in_valid              (CG_1_0_GLB_weight_2_address_in_valid           ),
-	.GLB_weight_2_address_in                    (CG_1_0_GLB_weight_2_address_in                 ),
-	.GLB_weight_2_data_in_ready                 (CG_1_0_GLB_weight_2_data_in_ready              ),
-	.GLB_weight_2_data_in_valid                 (CG_1_0_GLB_weight_2_data_in_valid              ),
-	.GLB_weight_2_data_in                       (CG_1_0_GLB_weight_2_data_in                    ),
+	.GLB_weight_address_in_ready(CG_1_0_GLB_weight_address_in_ready),
+	.GLB_weight_address_in_valid(CG_1_0_GLB_weight_address_in_valid),
+	.GLB_weight_address_in(CG_1_0_GLB_weight_address_in),
+	.GLB_weight_data_in_ready(CG_1_0_GLB_weight_data_in_ready),
+	.GLB_weight_data_in_valid(CG_1_0_GLB_weight_data_in_valid),
+	.GLB_weight_data_in(CG_1_0_GLB_weight_data_in),
 										     
 	.GLB_psum_0_data_in_ready                   (CG_1_0_GLB_psum_0_data_in_ready                ),
 	.GLB_psum_0_data_in_valid                   (CG_1_0_GLB_psum_0_data_in_valid                ),
@@ -3909,6 +3358,8 @@ ClusterGroup ClusterGroup_1_0 (
 									         
 	.PSUM_DEPTH                                 (CG_1_0_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_1_0_psum_spad_clear                         ),
+	.int4_former_weight_mode                    (int4_former_weight_mode                        ),
+	.int4_later_weight_mode                     (int4_later_weight_mode                         ),
 											
 	.iact_write_fin_clear                       (CG_1_0_iact_write_fin_clear                	),
 	.weight_write_fin_clear						(CG_1_0_weight_write_fin_clear					)
@@ -3945,106 +3396,26 @@ ClusterGroup ClusterGroup_1_1 (
 	.psum_SRAM_Bank_1_read_out_en				(CG_1_1_psum_SRAM_Bank_1_read_out_en			),
 	.psum_SRAM_Bank_2_read_out_en				(CG_1_1_psum_SRAM_Bank_2_read_out_en			),
 	
-	.PE_0_0_disable								(CG_1_1_PE_0_0_disable							),
-	.PE_0_1_disable								(CG_1_1_PE_0_1_disable							),
-	.PE_0_2_disable								(CG_1_1_PE_0_2_disable							),
-	.PE_1_0_disable								(CG_1_1_PE_1_0_disable							),
-	.PE_1_1_disable								(CG_1_1_PE_1_1_disable							),
-	.PE_1_2_disable								(CG_1_1_PE_1_2_disable							),
-	.PE_2_0_disable								(CG_1_1_PE_2_0_disable							),
-	.PE_2_1_disable								(CG_1_1_PE_2_1_disable							),
-	.PE_2_2_disable								(CG_1_1_PE_2_2_disable							),
+	.PE_disable(CG_1_1_PE_disable),
 							                   
-	.GLB_iact_0_0_read_addr                     (CG_1_1_GLB_iact_0_0_read_addr                  ),
-	.GLB_iact_0_1_read_addr                     (CG_1_1_GLB_iact_0_1_read_addr                  ),
-	.GLB_iact_0_2_read_addr                     (CG_1_1_GLB_iact_0_2_read_addr                  ),
-	.GLB_iact_1_0_read_addr                     (CG_1_1_GLB_iact_1_0_read_addr                  ),
-	.GLB_iact_1_1_read_addr                     (CG_1_1_GLB_iact_1_1_read_addr                  ),
-	.GLB_iact_1_2_read_addr                     (CG_1_1_GLB_iact_1_2_read_addr                  ),
-	.GLB_iact_2_0_read_addr                     (CG_1_1_GLB_iact_2_0_read_addr                  ),
-	.GLB_iact_2_1_read_addr                     (CG_1_1_GLB_iact_2_1_read_addr                  ),
-	.GLB_iact_2_2_read_addr                     (CG_1_1_GLB_iact_2_2_read_addr                  ),
+	.GLB_iact_read_addr(CG_1_1_GLB_iact_read_addr),
 							                    
-	.GLB_psum_0_write_addr                      (CG_1_1_GLB_psum_0_write_addr                   ),
-	.GLB_psum_1_write_addr                      (CG_1_1_GLB_psum_1_write_addr                   ),
-	.GLB_psum_2_write_addr                      (CG_1_1_GLB_psum_2_write_addr                   ),
-	.GLB_psum_0_read_addr                       (CG_1_1_GLB_psum_0_read_addr                    ),
-	.GLB_psum_1_read_addr                       (CG_1_1_GLB_psum_1_read_addr                    ),
-	.GLB_psum_2_read_addr                       (CG_1_1_GLB_psum_2_read_addr                    ),
+	.GLB_psum_write_addr(CG_1_1_GLB_psum_write_addr),
+	.GLB_psum_read_addr(CG_1_1_GLB_psum_read_addr),
 								               
-	.GLB_iact_0_0_address_in_ready              (CG_1_1_GLB_iact_0_0_address_in_ready           ),
-	.GLB_iact_0_0_address_in_valid              (CG_1_1_GLB_iact_0_0_address_in_valid           ),
-	.GLB_iact_0_0_address_in                    (CG_1_1_GLB_iact_0_0_address_in                 ),
-	.GLB_iact_0_0_data_in_ready                 (CG_1_1_GLB_iact_0_0_data_in_ready              ),
-	.GLB_iact_0_0_data_in_valid                 (CG_1_1_GLB_iact_0_0_data_in_valid              ),
-	.GLB_iact_0_0_data_in                       (CG_1_1_GLB_iact_0_0_data_in                    ),
-	.GLB_iact_0_1_address_in_ready              (CG_1_1_GLB_iact_0_1_address_in_ready           ),
-	.GLB_iact_0_1_address_in_valid              (CG_1_1_GLB_iact_0_1_address_in_valid           ),
-	.GLB_iact_0_1_address_in                    (CG_1_1_GLB_iact_0_1_address_in                 ),
-	.GLB_iact_0_1_data_in_ready                 (CG_1_1_GLB_iact_0_1_data_in_ready              ),
-	.GLB_iact_0_1_data_in_valid                 (CG_1_1_GLB_iact_0_1_data_in_valid              ),
-	.GLB_iact_0_1_data_in                       (CG_1_1_GLB_iact_0_1_data_in                    ),
-	.GLB_iact_0_2_address_in_ready              (CG_1_1_GLB_iact_0_2_address_in_ready           ),
-	.GLB_iact_0_2_address_in_valid              (CG_1_1_GLB_iact_0_2_address_in_valid           ),
-	.GLB_iact_0_2_address_in                    (CG_1_1_GLB_iact_0_2_address_in                 ),
-	.GLB_iact_0_2_data_in_ready                 (CG_1_1_GLB_iact_0_2_data_in_ready              ),
-	.GLB_iact_0_2_data_in_valid                 (CG_1_1_GLB_iact_0_2_data_in_valid              ),
-	.GLB_iact_0_2_data_in                       (CG_1_1_GLB_iact_0_2_data_in                    ),
-	.GLB_iact_1_0_address_in_ready              (CG_1_1_GLB_iact_1_0_address_in_ready           ),
-	.GLB_iact_1_0_address_in_valid              (CG_1_1_GLB_iact_1_0_address_in_valid           ),
-	.GLB_iact_1_0_address_in                    (CG_1_1_GLB_iact_1_0_address_in                 ),
-	.GLB_iact_1_0_data_in_ready                 (CG_1_1_GLB_iact_1_0_data_in_ready              ),
-	.GLB_iact_1_0_data_in_valid                 (CG_1_1_GLB_iact_1_0_data_in_valid              ),
-	.GLB_iact_1_0_data_in                       (CG_1_1_GLB_iact_1_0_data_in                    ),
-	.GLB_iact_1_1_address_in_ready              (CG_1_1_GLB_iact_1_1_address_in_ready           ),
-	.GLB_iact_1_1_address_in_valid              (CG_1_1_GLB_iact_1_1_address_in_valid           ),
-	.GLB_iact_1_1_address_in                    (CG_1_1_GLB_iact_1_1_address_in                 ),
-	.GLB_iact_1_1_data_in_ready                 (CG_1_1_GLB_iact_1_1_data_in_ready              ),
-	.GLB_iact_1_1_data_in_valid                 (CG_1_1_GLB_iact_1_1_data_in_valid              ),
-	.GLB_iact_1_1_data_in                       (CG_1_1_GLB_iact_1_1_data_in                    ),
-	.GLB_iact_1_2_address_in_ready              (CG_1_1_GLB_iact_1_2_address_in_ready           ),
-	.GLB_iact_1_2_address_in_valid              (CG_1_1_GLB_iact_1_2_address_in_valid           ),
-	.GLB_iact_1_2_address_in                    (CG_1_1_GLB_iact_1_2_address_in                 ),
-	.GLB_iact_1_2_data_in_ready                 (CG_1_1_GLB_iact_1_2_data_in_ready              ),
-	.GLB_iact_1_2_data_in_valid                 (CG_1_1_GLB_iact_1_2_data_in_valid              ),
-	.GLB_iact_1_2_data_in                       (CG_1_1_GLB_iact_1_2_data_in                    ),
-	.GLB_iact_2_0_address_in_ready              (CG_1_1_GLB_iact_2_0_address_in_ready           ),
-	.GLB_iact_2_0_address_in_valid              (CG_1_1_GLB_iact_2_0_address_in_valid           ),
-	.GLB_iact_2_0_address_in                    (CG_1_1_GLB_iact_2_0_address_in                 ),
-	.GLB_iact_2_0_data_in_ready                 (CG_1_1_GLB_iact_2_0_data_in_ready              ),
-	.GLB_iact_2_0_data_in_valid                 (CG_1_1_GLB_iact_2_0_data_in_valid              ),
-	.GLB_iact_2_0_data_in                       (CG_1_1_GLB_iact_2_0_data_in                    ),
-	.GLB_iact_2_1_address_in_ready              (CG_1_1_GLB_iact_2_1_address_in_ready           ),
-	.GLB_iact_2_1_address_in_valid              (CG_1_1_GLB_iact_2_1_address_in_valid           ),
-	.GLB_iact_2_1_address_in                    (CG_1_1_GLB_iact_2_1_address_in                 ),
-	.GLB_iact_2_1_data_in_ready                 (CG_1_1_GLB_iact_2_1_data_in_ready              ),
-	.GLB_iact_2_1_data_in_valid                 (CG_1_1_GLB_iact_2_1_data_in_valid              ),
-	.GLB_iact_2_1_data_in                       (CG_1_1_GLB_iact_2_1_data_in                    ),
-	.GLB_iact_2_2_address_in_ready              (CG_1_1_GLB_iact_2_2_address_in_ready           ),
-	.GLB_iact_2_2_address_in_valid              (CG_1_1_GLB_iact_2_2_address_in_valid           ),
-	.GLB_iact_2_2_address_in                    (CG_1_1_GLB_iact_2_2_address_in                 ),
-	.GLB_iact_2_2_data_in_ready                 (CG_1_1_GLB_iact_2_2_data_in_ready              ),
-	.GLB_iact_2_2_data_in_valid                 (CG_1_1_GLB_iact_2_2_data_in_valid              ),
-	.GLB_iact_2_2_data_in                       (CG_1_1_GLB_iact_2_2_data_in                    ),
+	.GLB_iact_address_in_ready(CG_1_1_GLB_iact_address_in_ready),
+	.GLB_iact_address_in_valid(CG_1_1_GLB_iact_address_in_valid),
+	.GLB_iact_address_in(CG_1_1_GLB_iact_address_in),
+	.GLB_iact_data_in_ready(CG_1_1_GLB_iact_data_in_ready),
+	.GLB_iact_data_in_valid(CG_1_1_GLB_iact_data_in_valid),
+	.GLB_iact_data_in(CG_1_1_GLB_iact_data_in),
 										    						
-	.GLB_weight_0_address_in_ready              (CG_1_1_GLB_weight_0_address_in_ready           ),
-	.GLB_weight_0_address_in_valid              (CG_1_1_GLB_weight_0_address_in_valid           ),
-	.GLB_weight_0_address_in                    (CG_1_1_GLB_weight_0_address_in                 ),
-	.GLB_weight_0_data_in_ready                 (CG_1_1_GLB_weight_0_data_in_ready              ),
-	.GLB_weight_0_data_in_valid                 (CG_1_1_GLB_weight_0_data_in_valid              ),
-	.GLB_weight_0_data_in                       (CG_1_1_GLB_weight_0_data_in                    ),
-	.GLB_weight_1_address_in_ready              (CG_1_1_GLB_weight_1_address_in_ready           ),
-	.GLB_weight_1_address_in_valid	            (CG_1_1_GLB_weight_1_address_in_valid	     	),
-	.GLB_weight_1_address_in                    (CG_1_1_GLB_weight_1_address_in                 ),
-	.GLB_weight_1_data_in_ready                 (CG_1_1_GLB_weight_1_data_in_ready              ),
-	.GLB_weight_1_data_in_valid                 (CG_1_1_GLB_weight_1_data_in_valid              ),
-	.GLB_weight_1_data_in                       (CG_1_1_GLB_weight_1_data_in                    ),
-	.GLB_weight_2_address_in_ready              (CG_1_1_GLB_weight_2_address_in_ready           ),
-	.GLB_weight_2_address_in_valid              (CG_1_1_GLB_weight_2_address_in_valid           ),
-	.GLB_weight_2_address_in                    (CG_1_1_GLB_weight_2_address_in                 ),
-	.GLB_weight_2_data_in_ready                 (CG_1_1_GLB_weight_2_data_in_ready              ),
-	.GLB_weight_2_data_in_valid                 (CG_1_1_GLB_weight_2_data_in_valid              ),
-	.GLB_weight_2_data_in                       (CG_1_1_GLB_weight_2_data_in                    ),
+	.GLB_weight_address_in_ready(CG_1_1_GLB_weight_address_in_ready),
+	.GLB_weight_address_in_valid(CG_1_1_GLB_weight_address_in_valid),
+	.GLB_weight_address_in(CG_1_1_GLB_weight_address_in),
+	.GLB_weight_data_in_ready(CG_1_1_GLB_weight_data_in_ready),
+	.GLB_weight_data_in_valid(CG_1_1_GLB_weight_data_in_valid),
+	.GLB_weight_data_in(CG_1_1_GLB_weight_data_in),
 										     
 	.GLB_psum_0_data_in_ready                   (CG_1_1_GLB_psum_0_data_in_ready                ),
 	.GLB_psum_0_data_in_valid                   (CG_1_1_GLB_psum_0_data_in_valid                ),
@@ -4467,6 +3838,8 @@ ClusterGroup ClusterGroup_1_1 (
 									         
 	.PSUM_DEPTH                                 (CG_1_1_PSUM_DEPTH                              ),
 	.psum_spad_clear                            (CG_1_1_psum_spad_clear                         ),
+	.int4_former_weight_mode                    (int4_former_weight_mode                        ),
+	.int4_later_weight_mode                     (int4_later_weight_mode                         ),
 											
 	.iact_write_fin_clear                       (CG_1_1_iact_write_fin_clear                	),
 	.weight_write_fin_clear						(CG_1_1_weight_write_fin_clear					)
