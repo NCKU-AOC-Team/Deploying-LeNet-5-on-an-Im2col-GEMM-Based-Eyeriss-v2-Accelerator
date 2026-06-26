@@ -166,7 +166,7 @@ assign dina 	= write_en ? data_in 	: 'd0;
 
 assign data_out = ~write_en	? douta		: 'd0;
 
-reg [17:0] spad [0:255];
+(* ram_style = "distributed" *) reg [17:0] spad [0:255];
 reg [17:0] douta_reg;
 
 always @(posedge clk) begin
