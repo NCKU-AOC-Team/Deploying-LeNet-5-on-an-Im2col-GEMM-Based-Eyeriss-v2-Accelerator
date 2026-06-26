@@ -1,3 +1,6 @@
+# 換行碼正規化:不管什麼系統，進 repo 一律 LF，工作目錄也統一 LF
+* text=auto eol=lf
+
 *.html linguist-detectable=false
 *.vhdl linguist-detectable=false
 *.vhd linguist-detectable=false
