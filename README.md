@@ -21,7 +21,9 @@ a) Docker container
   - matplotlib
   - seaborn
   - pandas
-
+  - tqdm
+  - scikit-learn
+  - pillow
 
 b) FPGA 
 - Vivado 2019.1
