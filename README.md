@@ -30,6 +30,14 @@ b) FPGA
 - Xilinx PYNQ-Z2
 
 
+
+## 安裝所需的 Python libraries
+```
+pip install Pillow
+pip install tqdm
+pip install scikit-learn
+```
+
 ## Workflow
 
 
